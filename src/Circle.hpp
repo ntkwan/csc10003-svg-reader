@@ -3,8 +3,7 @@
 #define CIRCLE_H_
 #define SCALE 1000000
 
-class Circle : public sf::Shape
-{
+class Circle : public sf::Shape {
 private:
     float radius;
 
