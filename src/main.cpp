@@ -9,7 +9,7 @@ int main() {
     constexpr int screen_width = 1600;
     constexpr int screen_height = 900;
 
-    std::vector< sf::Shape* > shapes = parser::parseSVG();
+    std::vector< sf::Shape* > shapes = parser::parseSVG("../sample/sample.svg");
     sf::ContextSettings settings;
     settings.antialiasingLevel = 16;
     sf::RenderWindow window(sf::VideoMode(screen_width, screen_height),
@@ -29,5 +29,7 @@ int main() {
         }
         window.display();
     }
+
+    parser::deleteShapes(shapes);
     return 0;
 }
