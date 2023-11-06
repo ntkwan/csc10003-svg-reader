@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
-option(BUILD_SHARED_LIBS "Build shared libraries" ON)
+option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 
 find_package(sfml QUIET)
 if (NOT sfml_FOUND)
@@ -14,7 +14,7 @@ if (NOT sfml_FOUND)
 	FetchContent_Declare(
 		SFML
 		GIT_REPOSITORY https://github.com/SFML/SFML.git
-		GIT_TAG 2.6.x
+		GIT_TAG 2.6.1
 	)
 	FetchContent_MakeAvailable(SFML)
 endif()
@@ -24,5 +24,5 @@ include_directories(src)
 file(GLOB_RECURSE cpp_files CONFIGURE_DEPENDS "src/*.*pp")
 add_executable(${PROJECT_NAME} ${cpp_files})
 
-target_link_libraries(${PROJECT_NAME} PUBLIC sfml-graphics)
-target_link_libraries(${PROJECT_NAME} PUBLIC pugixml)
+target_link_libraries(${PROJECT_NAME} PRIVATE sfml-graphics)
+target_link_libraries(${PROJECT_NAME} PRIVATE pugixml)
