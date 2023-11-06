@@ -3,8 +3,8 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-#include "Circle.hpp"
-#include "Ellipse.hpp"
+#include "graphics/Circle.hpp"
+#include "graphics/Ellipse.hpp"
 #include "pugixml.hpp"
 
 namespace parser {
@@ -72,9 +72,10 @@ namespace parser {
         }
     }
 
-    std::vector< sf::Shape* > parseSVG(std::string path) {
+    std::vector< Shape* > parseSVG(std::string path) {
         pugi::xml_node svg = loadFile(path);
-        std::vector< sf::Shape* > shapes;
+        std::vector< Shape* > shapes;
+
         for (pugi::xml_node tool = svg.first_child(); tool;
              tool = tool.next_sibling()) {
             sf::Color stroke_color = parseColor(tool, "stroke");
@@ -107,7 +108,7 @@ namespace parser {
         return shapes;
     }
 
-    void deleteShapes(std::vector< sf::Shape* >& shapes) {
+    void deleteShapes(std::vector< Shape* >& shapes) {
         for (auto shape : shapes) {
             delete shape;
         }

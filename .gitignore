@@ -33,3 +33,4 @@
 *.bat
 build
 svg-reader
+*.json

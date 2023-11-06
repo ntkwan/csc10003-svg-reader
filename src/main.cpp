@@ -1,7 +1,5 @@
 #include <SFML/Graphics.hpp>
 
-#include "Circle.hpp"
-#include "Ellipse.hpp"
 #include "Parser.hpp"
 #include "pugixml.hpp"
 
@@ -9,7 +7,8 @@ int main() {
     constexpr int screen_width = 1600;
     constexpr int screen_height = 900;
 
-    std::vector< sf::Shape* > shapes = parser::parseSVG("../sample/sample.svg");
+    std::vector< Shape* > shapes = parser::parseSVG("./sample/sample.svg");
+
     sf::ContextSettings settings;
     settings.antialiasingLevel = 16;
     sf::RenderWindow window(sf::VideoMode(screen_width, screen_height),
@@ -24,12 +23,14 @@ int main() {
         }
 
         window.clear(sf::Color::White);
+
         for (auto shape : shapes) {
             window.draw(*shape);
         }
+
         window.display();
     }
 
-    parser::deleteShapes(shapes);
+    // parser::deleteShapes(shapes);
     return 0;
 }

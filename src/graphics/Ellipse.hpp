@@ -1,6 +1,7 @@
-#include "Circle.hpp"
 #ifndef ELLIPSE_H_
 #define ELLIPSE_H_
+
+#include "Circle.hpp"
 
 class Ellipse : public Circle {
 private:

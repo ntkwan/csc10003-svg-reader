@@ -1,9 +1,10 @@
-#include <SFML/Graphics.hpp>
-#ifndef CIRCLE_H_
-#define CIRCLE_H_
+#ifndef CIRCLE_HPP_
+#define CIRCLE_HPP_
+
+#include "Shape.hpp"
 #define SCALE 1000000
 
-class Circle : public sf::Shape {
+class Circle : public Shape {
 private:
     float radius;
 
