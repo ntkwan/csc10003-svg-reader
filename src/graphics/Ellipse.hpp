@@ -1,5 +1,5 @@
-#ifndef ELLIPSE_H_
-#define ELLIPSE_H_
+#ifndef ELLIPSE_HPP_
+#define ELLIPSE_HPP_
 
 #include "Circle.hpp"
 
@@ -8,7 +8,7 @@ private:
     sf::Vector2f radius;
 
 public:
-    Ellipse(const sf::Vector2f &radius, float center_x, float center_y,
+    Ellipse(const sf::Vector2f &radius, const sf::Vector2f &center,
             sf::Color fill, sf::Color stroke, float stroke_thickness);
     virtual sf::Vector2f getPoint(std::size_t index) const override;
 };

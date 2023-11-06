@@ -2,10 +2,9 @@
 
 #include <cmath>
 
-Ellipse::Ellipse(const sf::Vector2f &radius, float center_x, float center_y,
+Ellipse::Ellipse(const sf::Vector2f &radius, const sf::Vector2f &center,
                  sf::Color fill, sf::Color stroke, float stroke_thickness)
-    : Circle(1.f, center_x, center_y, fill, stroke, stroke_thickness),
-      radius(radius) {
+    : Circle(1.f, center, fill, stroke, stroke_thickness), radius(radius) {
     update();
 }
 

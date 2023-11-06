@@ -2,10 +2,10 @@
 
 #include <cmath>
 
-Circle::Circle(float radius, float center_x, float center_y, sf::Color fill,
+Circle::Circle(float radius, const sf::Vector2f &center, sf::Color fill,
                sf::Color stroke, float stroke_thickness)
     : radius(radius) {
-    setPosition(center_x, center_y);
+    setPosition(center);
     setFillColor(fill);
     setOutlineColor(stroke);
     setOutlineThickness(stroke_thickness);

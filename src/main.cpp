@@ -1,19 +1,17 @@
-#include <SFML/Graphics.hpp>
-
 #include "Parser.hpp"
-#include "pugixml.hpp"
 
 int main() {
     constexpr int screen_width = 1600;
     constexpr int screen_height = 900;
-
-    std::vector< Shape* > shapes = parser::parseSVG("./sample/sample.svg");
 
     sf::ContextSettings settings;
     settings.antialiasingLevel = 16;
     sf::RenderWindow window(sf::VideoMode(screen_width, screen_height),
                             "svg-reader-version-0.1", sf::Style::Default,
                             settings);
+
+    Parser parser("../sample/sample.svg");
+    parser.parseSVG();
 
     while (window.isOpen()) {
         sf::Event event;
@@ -23,14 +21,9 @@ int main() {
         }
 
         window.clear(sf::Color::White);
-
-        for (auto shape : shapes) {
-            window.draw(*shape);
-        }
-
+        parser.renderSVG(window);
         window.display();
     }
 
-    // parser::deleteShapes(shapes);
     return 0;
 }
