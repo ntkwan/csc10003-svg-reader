@@ -29,15 +29,18 @@ sf::Color Parser::parseColor(pugi::xml_node node, std::string name) {
     for (auto& c : color) c = tolower(c);
     if (color == "none")
         return sf::Color::Transparent;
-    else if (color.find("rgb") == std::string::npos) {
-        auto color_code = color_map.find(color);
-        if (color_code == color_map.end()) exit(-1);
-        return color_code->second;
-    } else {
-        unsigned int r = 0, g = 0, b = 0, a;
-        sscanf(color.c_str(), "rgb(%u,%u,%u)", &r, &g, &b);
-        a = stof(getAttribute(node, name + "-opacity")) * 255;
-        return sf::Color(r, g, b, a);
+    else {
+        sf::Color result;
+        if (color.find("rgb") == std::string::npos) {
+            auto color_code = color_map.find(color);
+            if (color_code == color_map.end()) exit(-1);
+            result = color_code->second;
+        } else
+            sscanf(color.c_str(), "rgb(%u,%u,%u)", &result.r, &result.g,
+                   &result.b);
+
+        result.a = stof(getAttribute(node, name + "-opacity")) * 255;
+        return result;
     }
 }
 

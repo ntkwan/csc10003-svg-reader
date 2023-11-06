@@ -2,7 +2,7 @@
 #define CIRCLE_HPP_
 
 #include "Shape.hpp"
-#define SCALE 1000000
+#define SCALE 100000
 
 class Circle : public Shape {
 private:
