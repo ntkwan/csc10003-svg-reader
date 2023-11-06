@@ -15,8 +15,6 @@ namespace {
     }
 }  // namespace
 
-Shape::~Shape() {}
-
 void Shape::setTexture(const sf::Texture* texture, bool resetRect) {
     if (texture) {
         // Recompute the texture area if requested, or if there was no

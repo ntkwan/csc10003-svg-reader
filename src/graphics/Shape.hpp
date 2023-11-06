@@ -12,7 +12,7 @@
 
 class Shape : public sf::Drawable, public sf::Transformable {
 public:
-    virtual ~Shape();
+    virtual ~Shape() = default;
 
     void setTexture(const sf::Texture* texture, bool resetRect = false);
 

@@ -6,5 +6,6 @@
 #include "graphics/Circle.hpp"
 #include "graphics/Color.hpp"
 #include "graphics/Ellipse.hpp"
+#include "graphics/Rect.hpp"
 
 #endif
