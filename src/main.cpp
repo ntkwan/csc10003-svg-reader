@@ -10,7 +10,7 @@ int main() {
                             "svg-reader-version-0.1", sf::Style::Default,
                             settings);
 
-    Parser parser("../sample/sample.svg");
+    Parser parser("sample/sample.svg");
     parser.parseSVG();
 
     while (window.isOpen()) {

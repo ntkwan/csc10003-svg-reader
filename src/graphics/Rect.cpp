@@ -17,7 +17,7 @@ void Rect::setSize(const sf::Vector2f& size) {
     update();
 }
 
-const sf::Vector2f& Rect::getSize() const { return m_size; }
+const sf::Vector2f& Rect::getSize() const { return this->rect_size; }
 
 std::size_t Rect::getPointCount() const { return 4; }
 

@@ -121,6 +121,8 @@ void Shape::draw(sf::RenderTarget& target, sf::RenderStates states) const {
     }
 }
 
+void Shape::draw(sf::RenderWindow& window) { window.draw(*this); }
+
 void Shape::updateFillColors() {
     for (std::size_t i = 0; i < m_vertices.getVertexCount(); ++i)
         m_vertices[i].color = m_fillColor;

@@ -4,6 +4,7 @@
 #include <SFML/Graphics/Drawable.hpp>
 #include <SFML/Graphics/Export.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
+#include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Shape.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Transformable.hpp>
@@ -49,6 +50,7 @@ protected:
 
 private:
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+    void draw(sf::RenderWindow& window);
 
     void updateFillColors();
 

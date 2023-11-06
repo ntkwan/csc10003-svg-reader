@@ -1,5 +1,7 @@
 #include "Parser.hpp"
 
+#include <vector>
+
 Parser::Parser(const std::string& file_name) {
     pugi::xml_document doc;
     pugi::xml_parse_result result = doc.load_file(file_name.c_str());
@@ -25,6 +27,26 @@ std::string Parser::getAttribute(pugi::xml_node node, std::string name) {
 };
 
 sf::Color Parser::parseColor(pugi::xml_node node, std::string name) {
+    auto getAtribColor = [](std::string color) -> sf::Color {
+        int lst_pos = 4;
+        std::string c = "";
+        std::vector< int > rgb;
+        for (int i = 4; i < (int)color.size(); ++i) {
+            if ('0' <= color[i] && color[i] <= '9') {
+                c += color[i];
+            } else {
+                if (c.size() > 0) {
+                    rgb.push_back(std::stoi(c));
+                    c.clear();
+                }
+            }
+        }
+
+        sf::Color result = sf::Color(rgb[0], rgb[1], rgb[2]);
+
+        return result;
+    };
+
     std::string color = getAttribute(node, name);
     for (auto& c : color) c = tolower(c);
     if (color == "none")
@@ -36,10 +58,9 @@ sf::Color Parser::parseColor(pugi::xml_node node, std::string name) {
             if (color_code == color_map.end()) exit(-1);
             result = color_code->second;
         } else
-            sscanf(color.c_str(), "rgb(%u,%u,%u)", &result.r, &result.g,
-                   &result.b);
+            result = getAtribColor(color);
 
-        result.a = stof(getAttribute(node, name + "-opacity")) * 255;
+        result.a = std::stof(getAttribute(node, name + "-opacity")) * 255;
         return result;
     }
 }
@@ -49,7 +70,8 @@ void Parser::parseSVG() {
          tool = tool.next_sibling()) {
         sf::Color stroke_color = parseColor(tool, "stroke");
         sf::Color fill_color = parseColor(tool, "fill");
-        float stroke_width = stof(getAttribute(tool, "stroke-width"));
+
+        float stroke_width = std::stof(getAttribute(tool, "stroke-width"));
 
         if (tool.name() == std::string("rect")) {
             /*
@@ -71,17 +93,17 @@ void Parser::parseSVG() {
             */
         } else if (tool.name() == std::string("circle")) {
             Circle* shape =
-                new Circle(stof(getAttribute(tool, "r")),
-                           sf::Vector2f(stof(getAttribute(tool, "cx")),
-                                        stof(getAttribute(tool, "cy"))),
+                new Circle(std::stof(getAttribute(tool, "r")),
+                           sf::Vector2f(std::stof(getAttribute(tool, "cx")),
+                                        std::stof(getAttribute(tool, "cy"))),
                            fill_color, stroke_color, stroke_width);
             shapes.push_back(shape);
         } else if (tool.name() == std::string("ellipse")) {
             Ellipse* shape =
-                new Ellipse(sf::Vector2f(stof(getAttribute(tool, "rx")),
-                                         stof(getAttribute(tool, "ry"))),
-                            sf::Vector2f(stof(getAttribute(tool, "cx")),
-                                         stof(getAttribute(tool, "cy"))),
+                new Ellipse(sf::Vector2f(std::stof(getAttribute(tool, "rx")),
+                                         std::stof(getAttribute(tool, "ry"))),
+                            sf::Vector2f(std::stof(getAttribute(tool, "cx")),
+                                         std::stof(getAttribute(tool, "cy"))),
                             fill_color, stroke_color, stroke_width);
             shapes.push_back(shape);
         } else if (tool.name() == std::string("polygon")) {
