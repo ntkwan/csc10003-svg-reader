@@ -28,7 +28,6 @@ std::string Parser::getAttribute(pugi::xml_node node, std::string name) {
 
 sf::Color Parser::parseColor(pugi::xml_node node, std::string name) {
     auto getAtribColor = [](std::string color) -> sf::Color {
-        int lst_pos = 4;
         std::string c = "";
         std::vector< int > rgb;
         for (int i = 4; i < (int)color.size(); ++i) {
@@ -43,7 +42,6 @@ sf::Color Parser::parseColor(pugi::xml_node node, std::string name) {
         }
 
         sf::Color result = sf::Color(rgb[0], rgb[1], rgb[2]);
-
         return result;
     };
 
@@ -74,11 +72,12 @@ void Parser::parseSVG() {
         float stroke_width = std::stof(getAttribute(tool, "stroke-width"));
 
         if (tool.name() == std::string("rect")) {
-            /*
-
-            RECTANGLE
-
-             */
+            Rect* shape = new Rect(std::stof(getAttribute(tool, "width")),
+                                   std::stof(getAttribute(tool, "height")),
+                                   std::stof(getAttribute(tool, "x")),
+                                   std::stof(getAttribute(tool, "y")),
+                                   fill_color, stroke_color, stroke_width);
+            shapes.push_back(shape);
         } else if (tool.name() == std::string("line")) {
             /*
 

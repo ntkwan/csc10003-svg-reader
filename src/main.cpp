@@ -1,6 +1,5 @@
 #include "Parser.hpp"
 
-
 int main() {
     constexpr int screen_width = 1600;
     constexpr int screen_height = 900;
