@@ -9,7 +9,6 @@
 class Polygon : public Shape {
 private:
     std::vector< sf::Vector2f > points;
-    const int scale = 100000;
 
 public:
     Polygon(sf::Color fill = sf::Color::Transparent,
