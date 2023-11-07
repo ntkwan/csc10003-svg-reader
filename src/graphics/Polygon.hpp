@@ -9,15 +9,15 @@
 class Polygon : public Shape {
 private:
     std::vector< sf::Vector2f > points;
-    int scale;
+    const int scale = 100000;
 
 public:
     Polygon(sf::Color fill = sf::Color::Transparent,
-            sf::Color stroke = sf::Color::White, float stroke_thickness = 0,
-            int _scale = 1000);
+            sf::Color stroke = sf::Color::White, float stroke_thickness = 0);
     virtual std::size_t getPointCount() const;
     virtual sf::Vector2f getPoint(std::size_t index) const;
     void addPoint(const sf::Vector2f& point);
+    void polygonUpdate();
 };
 
 #endif

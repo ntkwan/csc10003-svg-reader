@@ -1,12 +1,9 @@
 #include "Polygon.hpp"
 
-Polygon::Polygon(sf::Color fill, sf::Color stroke, float stroke_thickness,
-                 int _scale)
-    : scale(_scale) {
+Polygon::Polygon(sf::Color fill, sf::Color stroke, float stroke_thickness) {
     setFillColor(fill);
     setOutlineColor(stroke);
     setOutlineThickness(stroke_thickness);
-    update();
 }
 
 std::size_t Polygon::getPointCount() const {
@@ -30,7 +27,6 @@ sf::Vector2f Polygon::getPoint(std::size_t index) const {
     return point;
 }
 
-void Polygon::addPoint(const sf::Vector2f& point) {
-    points.push_back(point);
-    update();
-}
+void Polygon::addPoint(const sf::Vector2f& point) { points.push_back(point); }
+
+void Polygon::polygonUpdate() { update(); }

@@ -5,10 +5,11 @@ PolyLine::PolyLine(float stroke_Width, const sf::Color& stroke_color,
     setOutlineThickness(stroke_Width);
     setOutlineColor(stroke_color);
     setFillColor(fill);
-    update();
 }
 
 void PolyLine::addPoint(const sf::Vector2f& point) { points.push_back(point); }
+
+void PolyLine::polylineUpdate() { update(); }
 
 sf::Vector2f PolyLine::getPoint(std::size_t index) const {
     if (index < points.size()) {

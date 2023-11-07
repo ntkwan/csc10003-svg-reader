@@ -20,7 +20,9 @@ public:
     void draw(sf::RenderWindow& window);
     sf::Vector2f getPoint(std::size_t index) const override;
     std::size_t getPointCount() const override;
+    void polylineUpdate();
 };
+
 namespace {
     struct Edge {
         sf::Vector2f start, end;

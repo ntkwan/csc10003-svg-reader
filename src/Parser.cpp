@@ -141,11 +141,12 @@ void Parser::parseSVG() {
             shapes.push_back(shape);
         } else if (tool.name() == std::string("polygon")) {
             Polygon* shape =
-                new Polygon(fill_color, stroke_color, stroke_width, SCALE);
+                new Polygon(fill_color, stroke_color, stroke_width);
             std::vector< sf::Vector2f > points = parsePoints(tool);
             for (auto point : points) {
                 shape->addPoint(point);
             }
+            shape->polygonUpdate();
             shapes.push_back(shape);
         } else if (tool.name() == std::string("polyline")) {
             PolyLine* shape =
@@ -154,6 +155,7 @@ void Parser::parseSVG() {
             for (auto point : points) {
                 shape->addPoint(point);
             }
+            shape->polylineUpdate();
             shapes.push_back(shape);
         } else if (tool.name() == std::string("path")) {
             /*
