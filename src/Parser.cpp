@@ -1,5 +1,6 @@
 #include "Parser.hpp"
 
+#include <iostream>
 #include <vector>
 
 Parser::Parser(const std::string& file_name) {
@@ -71,19 +72,25 @@ std::vector< sf::Vector2f > Parser::parsePoints(pugi::xml_node node) {
     float x = 0, y = 0;
     for (int i = 0; i < (int)points_string.size(); i++) {
         if (points_string[i] == ' ') {
-            pos = point.find(',');
-            x = std::stof(point.substr(0, pos));
-            y = std::stof(point.substr(pos + 1, point.size()));
-            points.push_back(sf::Vector2f(x, y));
-            point.clear();
+            if (point.size() > 0) {
+                pos = point.find(',');
+                x = std::stof(point.substr(0, pos));
+                y = std::stof(point.substr(pos + 1));
+                points.push_back(sf::Vector2f(x, y));
+                point.clear();
+            }
         } else {
             point += points_string[i];
         }
     }
-    pos = point.find(',');
-    x = std::stof(point.substr(0, pos));
-    y = std::stof(point.substr(pos + 1, point.size()));
-    points.push_back(sf::Vector2f(x, y));
+
+    if (point.size() > 0) {
+        pos = point.find(',');
+        x = std::stof(point.substr(0, pos));
+        y = std::stof(point.substr(pos + 1));
+        points.push_back(sf::Vector2f(x, y));
+    }
+
     return points;
 }
 
