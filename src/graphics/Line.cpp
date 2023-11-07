@@ -9,10 +9,7 @@ Line::Line(const sf::Vector2f& point1, const sf::Vector2f& point2,
     update();
 }
 
-void Line::setThickness(float thickness) {
-    m_thickness = thickness;
-    update();
-}
+void Line::setThickness(float thickness) { m_thickness = thickness; }
 
 float Line::getThickness() const { return m_thickness; }
 
