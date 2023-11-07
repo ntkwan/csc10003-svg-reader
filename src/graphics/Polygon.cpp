@@ -14,21 +14,22 @@ std::size_t Polygon::getPointCount() const {
 }
 
 sf::Vector2f Polygon::getPoint(std::size_t index) const {
-    if (index < static_cast< std::size_t >(points.size() * scale)) {
-        std::size_t i = index / static_cast< int >(scale);
-        std::size_t j = index % static_cast< int >(scale);
-
-        sf::Vector2f p1 = points[i];
-        sf::Vector2f p2 = points[(i + 1) % points.size()];
-
-        float scaleFloat = static_cast< float >(scale);
-        sf::Vector2f point =
-            p1 + (p2 - p1) * static_cast< float >(j) / scaleFloat;
-
-        return point;
+    if (points.size() < 2) {
+        return sf::Vector2f();
     }
-    return sf::Vector2f();
+
+    std::size_t i = index / scale;
+    std::size_t j = index % scale;
+
+    sf::Vector2f p1 = points[i];
+    sf::Vector2f p2 = points[(i + 1) % points.size()];
+
+    float t = static_cast< float >(j) / scale;
+    sf::Vector2f point = p1 + (p2 - p1) * t;
+
+    return point;
 }
+
 void Polygon::addPoint(const sf::Vector2f& point) {
     points.push_back(point);
     update();

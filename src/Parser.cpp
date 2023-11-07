@@ -115,8 +115,6 @@ void Parser::parseSVG() {
             float y = std::stof(getAttribute(tool, "y"));
             float font_size = std::stof(getAttribute(tool, "font-size"));
             std::string text = tool.text().get();
-            std::cout << x << " " << y << " " << font_size << " " << text
-                      << "\n";
         } else if (tool.name() == std::string("circle")) {
             float radius = std::stof(getAttribute(tool, "r"));
             Circle* shape = new Circle(
