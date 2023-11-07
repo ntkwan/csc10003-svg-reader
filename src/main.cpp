@@ -5,7 +5,7 @@ int main() {
     constexpr int screen_height = 900;
 
     sf::ContextSettings settings;
-    settings.antialiasingLevel = 16;
+    settings.antialiasingLevel = 8;
     sf::RenderWindow window(sf::VideoMode(screen_width, screen_height),
                             "svg-reader-version-0.1", sf::Style::Default,
                             settings);

@@ -12,10 +12,7 @@ Rect::Rect(float width, float height, float x, float y, sf::Color fill,
     update();
 }
 
-void Rect::setSize(const sf::Vector2f& size) {
-    this->rect_size = size;
-    update();
-}
+void Rect::setSize(const sf::Vector2f& size) { this->rect_size = size; }
 
 const sf::Vector2f& Rect::getSize() const { return this->rect_size; }
 

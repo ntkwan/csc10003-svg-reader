@@ -2,10 +2,10 @@
 #define CIRCLE_HPP_
 
 #include "Shape.hpp"
-const int SCALE = 100000;
 
 class Circle : public Shape {
 private:
+    const int SCALE = 100000;
     float radius;
 
 public:

@@ -9,6 +9,7 @@ public:
     Parser(const std::string& file_name);
     std::string getAttribute(pugi::xml_node node, std::string name);
     sf::Color parseColor(pugi::xml_node node, std::string name);
+    std::vector< sf::Vector2f > parsePoints(pugi::xml_node node);
     void parseSVG();
     void renderSVG(sf::RenderWindow& window);
     ~Parser();
