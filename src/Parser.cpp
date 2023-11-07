@@ -1,6 +1,5 @@
 #include "Parser.hpp"
 
-#include <iostream>
 #include <vector>
 
 Parser::Parser(const std::string& file_name) {
@@ -64,6 +63,30 @@ sf::Color Parser::parseColor(pugi::xml_node node, std::string name) {
     }
 }
 
+std::vector< sf::Vector2f > Parser::parsePoints(pugi::xml_node node) {
+    std::vector< sf::Vector2f > points;
+    std::string points_string = getAttribute(node, "points");
+    std::string point = "";
+    int pos = 0;
+    float x = 0, y = 0;
+    for (int i = 0; i < (int)points_string.size(); i++) {
+        if (points_string[i] == ' ') {
+            pos = point.find(',');
+            x = std::stof(point.substr(0, pos));
+            y = std::stof(point.substr(pos + 1, point.size()));
+            points.push_back(sf::Vector2f(x, y));
+            point.clear();
+        } else {
+            point += points_string[i];
+        }
+    }
+    pos = point.find(',');
+    x = std::stof(point.substr(0, pos));
+    y = std::stof(point.substr(pos + 1, point.size()));
+    points.push_back(sf::Vector2f(x, y));
+    return points;
+}
+
 void Parser::parseSVG() {
     for (pugi::xml_node tool = svg.first_child(); tool;
          tool = tool.next_sibling()) {
@@ -95,33 +118,38 @@ void Parser::parseSVG() {
             std::cout << x << " " << y << " " << font_size << " " << text
                       << "\n";
         } else if (tool.name() == std::string("circle")) {
-            Circle* shape =
-                new Circle(std::stof(getAttribute(tool, "r")),
-                           sf::Vector2f(std::stof(getAttribute(tool, "cx")),
-                                        std::stof(getAttribute(tool, "cy"))),
-                           fill_color, stroke_color, stroke_width);
+            float radius = std::stof(getAttribute(tool, "r"));
+            Circle* shape = new Circle(
+                radius,
+                sf::Vector2f(std::stof(getAttribute(tool, "cx")) - radius,
+                             std::stof(getAttribute(tool, "cy")) - radius),
+                fill_color, stroke_color, stroke_width);
             shapes.push_back(shape);
         } else if (tool.name() == std::string("ellipse")) {
-            Ellipse* shape =
-                new Ellipse(sf::Vector2f(std::stof(getAttribute(tool, "rx")),
-                                         std::stof(getAttribute(tool, "ry"))),
-                            sf::Vector2f(std::stof(getAttribute(tool, "cx")),
-                                         std::stof(getAttribute(tool, "cy"))),
-                            fill_color, stroke_color, stroke_width);
+            float radius_x = std::stof(getAttribute(tool, "rx"));
+            float radius_y = std::stof(getAttribute(tool, "ry"));
+            Ellipse* shape = new Ellipse(
+                sf::Vector2f(radius_x, radius_y),
+                sf::Vector2f(std::stof(getAttribute(tool, "cx")) - radius_x,
+                             std::stof(getAttribute(tool, "cy")) - radius_y),
+                fill_color, stroke_color, stroke_width);
             shapes.push_back(shape);
         } else if (tool.name() == std::string("polygon")) {
-            /*
-
-            POLYGON
-
-            */
-
+            Polygon* shape =
+                new Polygon(fill_color, stroke_color, stroke_width, SCALE);
+            std::vector< sf::Vector2f > points = parsePoints(tool);
+            for (auto point : points) {
+                shape->addPoint(point);
+            }
+            shapes.push_back(shape);
         } else if (tool.name() == std::string("polyline")) {
-            /*
-
-            POLYLINE
-
-            */
+            PolyLine* shape =
+                new PolyLine(stroke_width, stroke_color, fill_color);
+            std::vector< sf::Vector2f > points = parsePoints(tool);
+            for (auto point : points) {
+                shape->addPoint(point);
+            }
+            shapes.push_back(shape);
         } else if (tool.name() == std::string("path")) {
             /*
 
@@ -136,7 +164,7 @@ void Parser::parseSVG() {
 
 void Parser::renderSVG(sf::RenderWindow& window) {
     for (auto shape : shapes) {
-        window.draw(*shape);
+        shape->draw(window);
     }
 }
 
