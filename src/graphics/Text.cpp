@@ -1,9 +1,11 @@
 #include "Text.hpp"
 
+#include <SFML/Graphics.hpp>
+
 sf::Font Text::font;
 
 Text::Text(sf::Vector2f pos, sf::String TEXT, sf::Color fill_color,
-           unsigned int font_size) {
+           float font_size) {
     text.setPosition(pos);
     text.setFont(font);
     text.setCharacterSize(font_size);

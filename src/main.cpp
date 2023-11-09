@@ -12,6 +12,9 @@ int main() {
 
     Parser parser("sample/sample.svg");
     parser.parseSVG();
+    if (!Text::font.loadFromFile("external/font/Arial.ttf")) {
+        return EXIT_FAILURE;
+    }
 
     while (window.isOpen()) {
         sf::Event event;
