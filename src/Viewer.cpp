@@ -8,15 +8,20 @@ void ZoomableDraggableView::handleEvents(sf::Event event) {
     if (event.type == sf::Event::Closed) window.close();
 
     // Zoom in by +
-    if (event.type == sf::Event::KeyPressed &&
-        event.key.code == sf::Keyboard::Add) {
+    if ((event.type == sf::Event::KeyPressed &&
+         event.key.code == sf::Keyboard::Add) ||
+        (event.type == sf::Event::KeyPressed &&
+         event.key.code == sf::Keyboard::Equal)) {  // Add condition for '=' key
         zoom(0.9f);
         window.setView(view);
     }
 
     // Zoom out by -
-    if (event.type == sf::Event::KeyPressed &&
-        event.key.code == sf::Keyboard::Subtract) {
+    if ((event.type == sf::Event::KeyPressed &&
+         event.key.code == sf::Keyboard::Subtract) ||
+        (event.type == sf::Event::KeyPressed &&
+         event.key.code ==
+             sf::Keyboard::Hyphen)) {  // Add condition for '-' key
         zoom(1.1f);
         window.setView(view);
     }
