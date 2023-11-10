@@ -1,8 +1,6 @@
 #ifndef TEXT_HPP_
 #define TEXT_HPP_
 
-#include <SFML/Graphics.hpp>
-
 #include "Shape.hpp"
 
 class Text : public Shape {

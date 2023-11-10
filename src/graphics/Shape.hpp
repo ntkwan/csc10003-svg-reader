@@ -1,6 +1,7 @@
 #ifndef SHAPE_HPP_
 #define SHAPE_HPP_
 
+#include <SFML/Graphics.hpp>
 #include <SFML/Graphics/Drawable.hpp>
 #include <SFML/Graphics/Export.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>

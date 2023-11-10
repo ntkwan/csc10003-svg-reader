@@ -1,5 +1,5 @@
-#ifndef ZOOMABLE_DRAGGABLE_VIEW_HPP
-#define ZOOMABLE_DRAGGABLE_VIEW_HPP
+#ifndef VIEWER_HPP_
+#define VIEWER_HPP_
 
 #include <SFML/Graphics.hpp>
 
@@ -24,4 +24,4 @@ private:
     void moveView(const sf::Vector2f& offset);
 };
 
-#endif  // ZOOMABLE_DRAGGABLE_VIEW_H
+#endif  // VIEWER_HPP_

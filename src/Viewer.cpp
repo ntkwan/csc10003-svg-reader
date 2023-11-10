@@ -1,4 +1,4 @@
-#include "ZoomableDraggableView.hpp"
+#include "Viewer.hpp"
 
 ZoomableDraggableView::ZoomableDraggableView(sf::RenderWindow& Window,
                                              sf::View& View)
