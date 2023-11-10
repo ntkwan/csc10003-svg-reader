@@ -12,7 +12,7 @@ int main() {
                             settings);
     sf::View view(sf::FloatRect(0.f, 0.f, static_cast< float >(screen_width),
                                 static_cast< float >(screen_height)));
-    ZoomableDraggableView zoomableView(window, view);
+    Viewer zoomableView(window, view);
     Parser parser("sample/sample.svg");
     parser.parseSVG();
     if (!Text::font.loadFromFile("external/font/Arial.ttf")) {

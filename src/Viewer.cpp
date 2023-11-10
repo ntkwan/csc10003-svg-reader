@@ -1,10 +1,9 @@
 #include "Viewer.hpp"
 
-ZoomableDraggableView::ZoomableDraggableView(sf::RenderWindow& Window,
-                                             sf::View& View)
+Viewer::Viewer(sf::RenderWindow& Window, sf::View& View)
     : window(Window), view(View) {}
 
-void ZoomableDraggableView::handleEvents(sf::Event event) {
+void Viewer::handleEvents(sf::Event event) {
     if (event.type == sf::Event::Closed) {
         window.close();
     }
@@ -24,6 +23,20 @@ void ZoomableDraggableView::handleEvents(sf::Event event) {
         (event.type == sf::Event::KeyPressed &&
          event.key.code == sf::Keyboard::Hyphen)) {
         zoom(1.1f);
+        window.setView(view);
+    }
+
+    // Rotate clockwise by 'R' key
+    if (event.type == sf::Event::KeyPressed &&
+        event.key.code == sf::Keyboard::R) {
+        rotate(1.0f);
+        window.setView(view);
+    }
+
+    // Rotate anti-clockwise by 'E' key
+    if (event.type == sf::Event::KeyPressed &&
+        event.key.code == sf::Keyboard::E) {
+        rotate(-1.0f);
         window.setView(view);
     }
 
@@ -64,7 +77,7 @@ void ZoomableDraggableView::handleEvents(sf::Event event) {
     }
 }
 
-void ZoomableDraggableView::handleDragging() {
+void Viewer::handleDragging() {
     if (isMouseDragging) {
         sf::Vector2i currentMousePosition = sf::Mouse::getPosition(window);
         sf::Vector2f offset =
@@ -75,19 +88,24 @@ void ZoomableDraggableView::handleDragging() {
     }
 }
 
-void ZoomableDraggableView::zoom(float factor) {
+void Viewer::zoom(float factor) {
     view.zoom(factor);
     window.setView(view);
 }
 
-void ZoomableDraggableView::startDragging() {
+void Viewer::rotate(float angle) {
+    view.rotate(angle);
+    window.setView(view);
+}
+
+void Viewer::startDragging() {
     isMouseDragging = true;
     lastMousePosition = sf::Mouse::getPosition(window);
 }
 
-void ZoomableDraggableView::stopDragging() { isMouseDragging = false; }
+void Viewer::stopDragging() { isMouseDragging = false; }
 
-void ZoomableDraggableView::moveView(const sf::Vector2f& offset) {
+void Viewer::moveView(const sf::Vector2f& offset) {
     view.move(-offset);
     window.setView(view);
 }

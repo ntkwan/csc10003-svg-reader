@@ -3,9 +3,9 @@
 
 #include <SFML/Graphics.hpp>
 
-class ZoomableDraggableView {
+class Viewer {
 public:
-    ZoomableDraggableView(sf::RenderWindow& Window, sf::View& View);
+    Viewer(sf::RenderWindow& Window, sf::View& View);
     void handleEvents(sf::Event event);
     void handleDragging();
 
@@ -16,6 +16,8 @@ private:
     bool isMouseDragging = false;
 
     void zoom(float factor);
+
+    void rotate(float angle);
 
     void startDragging();
 
