@@ -29,14 +29,14 @@ void Viewer::handleEvents(sf::Event event) {
     // Rotate clockwise by 'R' key
     if (event.type == sf::Event::KeyPressed &&
         event.key.code == sf::Keyboard::R) {
-        rotate(1.0f);
+        rotate(90.0f);
         window.setView(view);
     }
 
     // Rotate anti-clockwise by 'E' key
     if (event.type == sf::Event::KeyPressed &&
         event.key.code == sf::Keyboard::E) {
-        rotate(-1.0f);
+        rotate(-90.0f);
         window.setView(view);
     }
 
