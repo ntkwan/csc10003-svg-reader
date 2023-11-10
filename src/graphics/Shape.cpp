@@ -181,9 +181,9 @@ void Shape::updateOutline() {
         sf::Vector2f normal = (n1 + n2) / factor;
 
         // Update the outline points
-        m_outlineVertices[i * 2 + 0].position = p1;
-        m_outlineVertices[i * 2 + 1].position =
-            p1 + normal * m_outlineThickness;
+        sf::Vector2f offset = normal * (m_outlineThickness / 2.f);
+        m_outlineVertices[i * 2 + 0].position = p1 - offset;
+        m_outlineVertices[i * 2 + 1].position = p1 + offset;
     }
 
     // Duplicate the first point at the end, to close the outline
