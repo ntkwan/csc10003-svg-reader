@@ -5,24 +5,49 @@ ZoomableDraggableView::ZoomableDraggableView(sf::RenderWindow& Window,
     : window(Window), view(View) {}
 
 void ZoomableDraggableView::handleEvents(sf::Event event) {
-    if (event.type == sf::Event::Closed) window.close();
+    if (event.type == sf::Event::Closed) {
+        window.close();
+    }
 
-    // Zoom in by +
+    // Zoom in by + (including '=' key)
     if ((event.type == sf::Event::KeyPressed &&
          event.key.code == sf::Keyboard::Add) ||
         (event.type == sf::Event::KeyPressed &&
-         event.key.code == sf::Keyboard::Equal)) {  // Add condition for '=' key
+         event.key.code == sf::Keyboard::Equal)) {
         zoom(0.9f);
         window.setView(view);
     }
 
-    // Zoom out by -
+    // Zoom out by - (including '-' key)
     if ((event.type == sf::Event::KeyPressed &&
          event.key.code == sf::Keyboard::Subtract) ||
         (event.type == sf::Event::KeyPressed &&
-         event.key.code ==
-             sf::Keyboard::Hyphen)) {  // Add condition for '-' key
+         event.key.code == sf::Keyboard::Hyphen)) {
         zoom(1.1f);
+        window.setView(view);
+    }
+
+    // Zoom in/out with mouse scroll
+    if (event.type == sf::Event::MouseWheelScrolled) {
+        if (event.mouseWheelScroll.wheel == sf::Mouse::VerticalWheel) {
+            if (event.mouseWheelScroll.delta > 0) {
+                zoom(0.9f);
+            } else {
+                zoom(1.1f);
+            }
+            window.setView(view);
+        }
+    }
+
+    // Zoom in/out with touchpad (control pad)
+    if (event.type == sf::Event::TouchMoved) {
+        // Assuming that touchpad input scales the zoom based on movement
+        float delta = event.touch.y;
+        if (delta > 0) {
+            zoom(0.9f);
+        } else {
+            zoom(1.1f);
+        }
         window.setView(view);
     }
 
