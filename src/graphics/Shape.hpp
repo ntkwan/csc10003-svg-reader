@@ -2,17 +2,15 @@
 #define SHAPE_HPP_
 
 #include <SFML/Graphics.hpp>
-#include <SFML/Graphics/Drawable.hpp>
 #include <SFML/Graphics/Export.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/Graphics/Shape.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Transformable.hpp>
 #include <SFML/Graphics/VertexArray.hpp>
 #include <SFML/System/Vector2.hpp>
 
-class Shape : public sf::Drawable, public sf::Transformable {
+class Shape : public sf::Transformable {
 public:
     virtual ~Shape() = default;
 
@@ -44,7 +42,7 @@ public:
 
     sf::FloatRect getGlobalBounds() const;
 
-    virtual void draw(sf::RenderWindow& window);
+    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 protected:
     Shape();
@@ -52,8 +50,6 @@ protected:
     void update();
 
 private:
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-
     void updateFillColors();
 
     void updateTexCoords();
