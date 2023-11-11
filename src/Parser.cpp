@@ -175,7 +175,7 @@ void Parser::parseSVG() {
 
 void Parser::renderSVG(sf::RenderWindow& window) {
     for (auto shape : shapes) {
-        shape->draw(window, sf::RenderStates::Default);
+        shape->draw(window);
     }
 }
 

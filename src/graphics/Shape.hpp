@@ -2,15 +2,12 @@
 #define SHAPE_HPP_
 
 #include <SFML/Graphics.hpp>
-#include <SFML/Graphics/Export.hpp>
-#include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Texture.hpp>
-#include <SFML/Graphics/Transformable.hpp>
 #include <SFML/Graphics/VertexArray.hpp>
 #include <SFML/System/Vector2.hpp>
 
-class Shape : public sf::Transformable {
+class Shape {
 public:
     virtual ~Shape() = default;
 
@@ -42,7 +39,15 @@ public:
 
     sf::FloatRect getGlobalBounds() const;
 
-    virtual void draw(sf::RenderWindow& target, sf::RenderStates states) const;
+    void setPosition(float x, float y);
+    void setPosition(const sf::Vector2f& position);
+
+    virtual void draw(
+        sf::RenderWindow& target,
+        sf::RenderStates states = sf::RenderStates::Default) const;
+
+    const sf::Transform& getTransform() const;
+    const sf::Transform& getInverseTransform() const;
 
 protected:
     Shape();
@@ -71,6 +76,20 @@ private:
     sf::FloatRect m_insideBounds;  //!< Bounding rectangle of the inside (fill)
     sf::FloatRect m_bounds;  //!< Bounding rectangle of the whole shape (outline
                              //!< + fill)
+
+    sf::Vector2f
+        m_origin;  //!< Origin of translation/rotation/scaling of the object
+    sf::Vector2f m_position;  //!< Position of the object in the 2D world
+    float m_rotation;         //!< Orientation of the object, in degrees
+    sf::Vector2f m_scale;     //!< Scale of the object
+    mutable sf::Transform
+        m_transform;  //!< Combined transformation of the object
+    mutable bool
+        m_transformNeedUpdate;  //!< Does the transform need to be recomputed?
+    mutable sf::Transform
+        m_inverseTransform;  //!< Combined transformation of the object
+    mutable bool m_inverseTransformNeedUpdate;  //!< Does the transform need to
+                                                //!< be recomputed?
 };
 
 #endif  // SHAPE_HPP_

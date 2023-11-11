@@ -17,7 +17,8 @@ public:
              const sf::Color& stroke_color = sf::Color::White,
              const sf::Color& fill = sf::Color::Transparent);
     void addPoint(const sf::Vector2f& point);
-    void draw(sf::RenderWindow& target, sf::RenderStates states) const;
+    void draw(sf::RenderWindow& target,
+              sf::RenderStates states = sf::RenderStates::Default) const;
     sf::Vector2f getPoint(std::size_t index) const override;
     std::size_t getPointCount() const override;
     void polylineUpdate();
