@@ -42,7 +42,7 @@ public:
 
     sf::FloatRect getGlobalBounds() const;
 
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+    virtual void draw(sf::RenderWindow& target, sf::RenderStates states) const;
 
 protected:
     Shape();

@@ -107,7 +107,7 @@ void Shape::update() {
     updateOutline();
 }
 
-void Shape::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+void Shape::draw(sf::RenderWindow& target, sf::RenderStates states) const {
     states.transform *= getTransform();
 
     // Render the inside

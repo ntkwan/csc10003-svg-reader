@@ -19,7 +19,7 @@ sf::Vector2f PolyLine::getPoint(std::size_t index) const {
 }
 
 std::size_t PolyLine::getPointCount() const { return points.size(); }
-void PolyLine::draw(sf::RenderWindow& window) {
+void PolyLine::draw(sf::RenderWindow& target, sf::RenderStates states) const {
     if (points.size() < 2) return;
     sf::VertexArray lineStrip(sf::PrimitiveType::Quads);
     sf::Vector2f p1a, p1b, p2a, p2b;
@@ -67,9 +67,9 @@ void PolyLine::draw(sf::RenderWindow& window) {
                     fillShape.setPoint(j, polygon.cP[j]);
                 }
 
-                window.draw(fillShape);
+                target.draw(fillShape);
             }
         }
-        window.draw(lineStrip);
+        target.draw(lineStrip);
     }
 }
