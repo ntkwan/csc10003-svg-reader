@@ -23,35 +23,7 @@ namespace {
         }
         return edges;
     }
-    // check the intersection between two edge
-    bool isIntersection(const Edge& edge1, const Edge& edge2) {
-        float x1 = edge1.start.x;
-        float y1 = edge1.start.y;
-        float x2 = edge1.end.x;
-        float y2 = edge1.end.y;
 
-        float x3 = edge2.start.x;
-        float y3 = edge2.start.y;
-        float x4 = edge2.end.x;
-        float y4 = edge2.end.y;
-
-        float det = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
-
-        if (det == 0) {
-            // The lines are coincident
-            return 0;
-        } else {
-            float t = ((x1 - x3) * (y3 - y4) - (y1 - y3) * (x3 - x4)) / det;
-            float u = -((x1 - x2) * (y1 - y3) - (y1 - y2) * (x1 - x3)) / det;
-
-            if (t >= 0 && t <= 1 && u >= 0 && u <= 1) {
-                // The lines are intersecting
-                return 1;
-            }
-        }
-        // The lines are not intersecting
-        return 0;
-    }
     int findPointPosition(const std::vector< PolygonPoint >& points,
                           const sf::Vector2f& point) {
         int n = points.size();
@@ -60,6 +32,17 @@ namespace {
                 return i;
         }
         return -1;
+    }
+    bool notExisted(const std::vector< PolygonPoint >& points,
+                    const PolygonPoint& point) {
+        int n = points.size();
+        for (int i = 0; i < n; i++) {
+            if (points[i].point.x == point.point.x &&
+                points[i].point.y == point.point.y &&
+                points[i].fill == point.fill)
+                return 0;
+        }
+        return 1;
     }
     // merge the intersection points between the virtual edge and polyline edges
     std::vector< PolygonPoint > mergeIntersectionPoints(
@@ -71,64 +54,34 @@ namespace {
         for (int i = 0; i < points.size(); i++) {
             _points.push_back({points[i], 0});
         }
-
         for (int i = 0; i < n - 1; i++) {
-            if (isIntersection(edges[i], edges[n - 1])) {
-                float x1 = edges[i].start.x;
-                float y1 = edges[i].start.y;
-                float x2 = edges[i].end.x;
-                float y2 = edges[i].end.y;
+            float x1 = edges[i].start.x;
+            float y1 = edges[i].start.y;
+            float x2 = edges[i].end.x;
+            float y2 = edges[i].end.y;
 
-                float x3 = edges[n - 1].start.x;
-                float y3 = edges[n - 1].start.y;
-                float x4 = edges[n - 1].end.x;
-                float y4 = edges[n - 1].end.y;
+            float x3 = edges[n - 1].start.x;
+            float y3 = edges[n - 1].start.y;
+            float x4 = edges[n - 1].end.x;
+            float y4 = edges[n - 1].end.y;
 
-                float t = ((x1 - x3) * (y3 - y4) - (y1 - y3) * (x3 - x4)) /
-                          ((x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4));
-                float intersectionX = x1 + t * (x2 - x1);
-                float intersectionY = y1 + t * (y2 - y1);
+            float det = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
 
-                sf::Vector2f intersectionPoint{intersectionX, intersectionY};
-                PolygonPoint intersectionPolygonPoint{intersectionPoint, 1};
+            if (det == 0) continue;
 
-                int posInsert = findPointPosition(_points, edges[i].start);
-                if (posInsert != -1)
-                    _points.emplace(_points.begin() + posInsert + 1,
-                                    intersectionPolygonPoint);
-            }
-        }
-        return _points;
-    }
-    // find the intersection points between the virtual edge and polyline edges
-    std::vector< sf::Vector2f > findIntersectionPoints(
-        const std::vector< sf::Vector2f >& points) {
-        std::vector< Edge > edges = pointToEdge(points);
-        int n = edges.size();
+            float t = ((x1 - x3) * (y3 - y4) - (y1 - y3) * (x3 - x4)) /
+                      ((x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4));
+            float intersectionX = x1 + t * (x2 - x1);
+            float intersectionY = y1 + t * (y2 - y1);
 
-        std::vector< sf::Vector2f > _points;
+            sf::Vector2f intersectionPoint{intersectionX, intersectionY};
+            PolygonPoint intersectionPolygonPoint{intersectionPoint, 1};
 
-        for (int i = 0; i < n - 1; i++) {
-            if (isIntersection(edges[i], edges[n - 1])) {
-                float x1 = edges[i].start.x;
-                float y1 = edges[i].start.y;
-                float x2 = edges[i].end.x;
-                float y2 = edges[i].end.y;
-
-                float x3 = edges[n - 1].start.x;
-                float y3 = edges[n - 1].start.y;
-                float x4 = edges[n - 1].end.x;
-                float y4 = edges[n - 1].end.y;
-
-                float t = ((x1 - x3) * (y3 - y4) - (y1 - y3) * (x3 - x4)) /
-                          ((x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4));
-                float intersectionX = x1 + t * (x2 - x1);
-                float intersectionY = y1 + t * (y2 - y1);
-
-                sf::Vector2f intersectionPoint{intersectionX, intersectionY};
-
-                _points.push_back(intersectionPoint);
-            }
+            int posInsert = findPointPosition(_points, edges[i].start);
+            if (posInsert != -1 &&
+                notExisted(_points, intersectionPolygonPoint))
+                _points.emplace(_points.begin() + posInsert + 1,
+                                intersectionPolygonPoint);
         }
         return _points;
     }
