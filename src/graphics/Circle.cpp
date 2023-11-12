@@ -15,7 +15,7 @@ Circle::Circle(float radius, const sf::Vector2f &center, sf::Color fill,
 std::size_t Circle::getPointCount() const { return SCALE; }
 
 sf::Vector2f Circle::getPoint(std::size_t index) const {
-    static const float pi = 3.141592654f;
+    static const float pi = acos(-1);
 
     float angle = index * 2 * pi / getPointCount() - pi / 2;
     float x = std::cos(angle) * radius;

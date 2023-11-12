@@ -12,9 +12,8 @@ int main() {
                             settings);
     sf::View view(sf::FloatRect(0.f, 0.f, static_cast< float >(screen_width),
                                 static_cast< float >(screen_height)));
-    Viewer zoomableView(window, view);
-    Parser parser("sample/sample.svg");
-    parser.parseSVG();
+    Viewer *viewer = Viewer::getInstance(window, view);
+    Parser *parser = Parser::getInstance("sample/sample.svg");
     if (!Text::font.loadFromFile("external/font/Arial.ttf")) {
         return EXIT_FAILURE;
     }
@@ -24,13 +23,13 @@ int main() {
 
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) window.close();
-            zoomableView.handleEvents(event);
+            viewer->handleEvents(event);
         }
 
         window.clear(sf::Color::White);
-        parser.renderSVG(window);
+        parser->renderSVG(window);
         window.display();
-        zoomableView.handleDragging();
+        viewer->handleDragging();
     }
     return 0;
 }

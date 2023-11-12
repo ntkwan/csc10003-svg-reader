@@ -5,15 +5,19 @@
 
 class Viewer {
 public:
-    Viewer(sf::RenderWindow& Window, sf::View& View);
     void handleEvents(sf::Event event);
     void handleDragging();
+    void operator=(const Viewer&) = delete;
+    static Viewer* getInstance(sf::RenderWindow& Window, sf::View& View);
+    Viewer(const Viewer&) = delete;
 
 private:
+    Viewer(sf::RenderWindow& Window, sf::View& View);
+    static Viewer* instance;
     sf::RenderWindow& window;
     sf::View& view;
-    sf::Vector2i lastMousePosition;
-    bool isMouseDragging = false;
+    sf::Vector2i last_mouse_position;
+    bool is_mouse_dragging = false;
 
     void zoom(float factor);
 

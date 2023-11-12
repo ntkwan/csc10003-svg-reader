@@ -1,5 +1,14 @@
 #include "Viewer.hpp"
 
+Viewer* Viewer::instance = nullptr;
+
+Viewer* Viewer::getInstance(sf::RenderWindow& Window, sf::View& View) {
+    if (instance == nullptr) {
+        instance = new Viewer(Window, View);
+    }
+    return instance;
+}
+
 Viewer::Viewer(sf::RenderWindow& Window, sf::View& View)
     : window(Window), view(View) {}
 
@@ -78,13 +87,13 @@ void Viewer::handleEvents(sf::Event event) {
 }
 
 void Viewer::handleDragging() {
-    if (isMouseDragging) {
+    if (is_mouse_dragging) {
         sf::Vector2i currentMousePosition = sf::Mouse::getPosition(window);
         sf::Vector2f offset =
-            sf::Vector2f(currentMousePosition - lastMousePosition);
+            sf::Vector2f(currentMousePosition - last_mouse_position);
         view.move(-offset);
         window.setView(view);
-        lastMousePosition = currentMousePosition;
+        last_mouse_position = currentMousePosition;
     }
 }
 
@@ -99,11 +108,11 @@ void Viewer::rotate(float angle) {
 }
 
 void Viewer::startDragging() {
-    isMouseDragging = true;
-    lastMousePosition = sf::Mouse::getPosition(window);
+    is_mouse_dragging = true;
+    last_mouse_position = sf::Mouse::getPosition(window);
 }
 
-void Viewer::stopDragging() { isMouseDragging = false; }
+void Viewer::stopDragging() { is_mouse_dragging = false; }
 
 void Viewer::moveView(const sf::Vector2f& offset) {
     view.move(-offset);

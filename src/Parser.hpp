@@ -6,7 +6,8 @@
 
 class Parser {
 public:
-    Parser(const std::string& file_name);
+    static Parser* getInstance(const std::string& file_name);
+    Parser(const Parser&) = delete;
     std::string getAttribute(pugi::xml_node node, std::string name);
     sf::Color parseColor(pugi::xml_node node, std::string name);
     std::vector< sf::Vector2f > parsePoints(pugi::xml_node node);
@@ -15,6 +16,8 @@ public:
     ~Parser();
 
 private:
+    Parser(const std::string& file_name);
+    static Parser* instance;
     pugi::xml_node svg;
     std::vector< Shape* > shapes;
 };
