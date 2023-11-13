@@ -9,7 +9,7 @@ Ellipse::Ellipse(const sf::Vector2f &radius, const sf::Vector2f &center,
 }
 
 sf::Vector2f Ellipse::getPoint(std::size_t index) const {
-    static const float pi = 3.141592654f;
+    static const float pi = acos(-1);
 
     float angle = index * 2 * pi / getPointCount() - pi / 2;
     float x = std::cos(angle) * radius.x;

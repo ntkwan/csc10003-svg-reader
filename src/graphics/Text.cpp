@@ -18,4 +18,6 @@ sf::Vector2f Text::getPoint(std::size_t index) const {
     return sf::Vector2f(0, 0);
 }
 
-void Text::draw(sf::RenderWindow& window) { window.draw(this->text); }
+void Text::draw(sf::RenderWindow& target, sf::RenderStates states) const {
+    target.draw(this->text);
+}

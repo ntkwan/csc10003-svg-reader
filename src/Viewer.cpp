@@ -1,10 +1,18 @@
 #include "Viewer.hpp"
 
-ZoomableDraggableView::ZoomableDraggableView(sf::RenderWindow& Window,
-                                             sf::View& View)
+Viewer* Viewer::instance = nullptr;
+
+Viewer* Viewer::getInstance(sf::RenderWindow& Window, sf::View& View) {
+    if (instance == nullptr) {
+        instance = new Viewer(Window, View);
+    }
+    return instance;
+}
+
+Viewer::Viewer(sf::RenderWindow& Window, sf::View& View)
     : window(Window), view(View) {}
 
-void ZoomableDraggableView::handleEvents(sf::Event event) {
+void Viewer::handleEvents(sf::Event event) {
     if (event.type == sf::Event::Closed) {
         window.close();
     }
@@ -24,6 +32,20 @@ void ZoomableDraggableView::handleEvents(sf::Event event) {
         (event.type == sf::Event::KeyPressed &&
          event.key.code == sf::Keyboard::Hyphen)) {
         zoom(1.1f);
+        window.setView(view);
+    }
+
+    // Rotate clockwise by 'R' key
+    if (event.type == sf::Event::KeyPressed &&
+        event.key.code == sf::Keyboard::R) {
+        rotate(90.0f);
+        window.setView(view);
+    }
+
+    // Rotate anti-clockwise by 'E' key
+    if (event.type == sf::Event::KeyPressed &&
+        event.key.code == sf::Keyboard::E) {
+        rotate(-90.0f);
         window.setView(view);
     }
 
@@ -64,30 +86,35 @@ void ZoomableDraggableView::handleEvents(sf::Event event) {
     }
 }
 
-void ZoomableDraggableView::handleDragging() {
-    if (isMouseDragging) {
+void Viewer::handleDragging() {
+    if (is_mouse_dragging) {
         sf::Vector2i currentMousePosition = sf::Mouse::getPosition(window);
         sf::Vector2f offset =
-            sf::Vector2f(currentMousePosition - lastMousePosition);
+            sf::Vector2f(currentMousePosition - last_mouse_position);
         view.move(-offset);
         window.setView(view);
-        lastMousePosition = currentMousePosition;
+        last_mouse_position = currentMousePosition;
     }
 }
 
-void ZoomableDraggableView::zoom(float factor) {
+void Viewer::zoom(float factor) {
     view.zoom(factor);
     window.setView(view);
 }
 
-void ZoomableDraggableView::startDragging() {
-    isMouseDragging = true;
-    lastMousePosition = sf::Mouse::getPosition(window);
+void Viewer::rotate(float angle) {
+    view.rotate(angle);
+    window.setView(view);
 }
 
-void ZoomableDraggableView::stopDragging() { isMouseDragging = false; }
+void Viewer::startDragging() {
+    is_mouse_dragging = true;
+    last_mouse_position = sf::Mouse::getPosition(window);
+}
 
-void ZoomableDraggableView::moveView(const sf::Vector2f& offset) {
+void Viewer::stopDragging() { is_mouse_dragging = false; }
+
+void Viewer::moveView(const sf::Vector2f& offset) {
     view.move(-offset);
     window.setView(view);
 }

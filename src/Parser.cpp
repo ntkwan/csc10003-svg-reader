@@ -3,10 +3,20 @@
 #include <iostream>
 #include <vector>
 
+Parser* Parser::instance = nullptr;
+
+Parser* Parser::getInstance(const std::string& file_name) {
+    if (instance == nullptr) {
+        instance = new Parser(file_name);
+        instance->parseSVG();
+    }
+    return instance;
+}
+
 Parser::Parser(const std::string& file_name) {
     pugi::xml_document doc;
     pugi::xml_parse_result result = doc.load_file(file_name.c_str());
-    if (!result) exit(-1);
+    if (!result) EXIT_FAILURE;
     svg = doc.child("svg");
 }
 
@@ -153,8 +163,8 @@ void Parser::parseSVG() {
             shape->polygonUpdate();
             shapes.push_back(shape);
         } else if (tool.name() == std::string("polyline")) {
-            PolyLine* shape =
-                new PolyLine(stroke_width, stroke_color, fill_color);
+            Polyline* shape =
+                new Polyline(stroke_width, stroke_color, fill_color);
             std::vector< sf::Vector2f > points = parsePoints(tool);
             for (auto point : points) {
                 shape->addPoint(point);
