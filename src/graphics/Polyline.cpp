@@ -23,7 +23,13 @@ namespace {
         }
         return edges;
     }
+    bool isPerpendicular(const Edge& edge1, const Edge& edge2) {
+        sf::Vector2f dir1 = edge1.end - edge1.start;
+        sf::Vector2f dir2 = edge2.end - edge2.start;
 
+        float dotProduct = dir1.x * dir2.x + dir1.y * dir2.y;
+        return dotProduct == 0;
+    }
     int findPointPosition(const std::vector< PolygonPoint >& points,
                           const sf::Vector2f& point) {
         int n = points.size();
@@ -109,6 +115,31 @@ namespace {
         }
         return _cP;
     }
+    sf::Vector2f findIntersection(const Edge& edge1, const Edge& edge2) {
+        float x1 = edge1.start.x;
+        float y1 = edge1.start.y;
+        float x2 = edge1.end.x;
+        float y2 = edge1.end.y;
+
+        float x3 = edge2.start.x;
+        float y3 = edge2.start.y;
+        float x4 = edge2.end.x;
+        float y4 = edge2.end.y;
+
+        float det = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
+
+        if (det == 0) {
+            return sf::Vector2f(-1, -1);
+        }
+
+        float t = ((x1 - x3) * (y3 - y4) - (y1 - y3) * (x3 - x4)) /
+                  ((x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4));
+
+        float intersectionX = x1 + t * (x2 - x1);
+        float intersectionY = y1 + t * (y2 - y1);
+
+        return sf::Vector2f(intersectionX, intersectionY);
+    }
 }  // namespace
 
 Polyline::Polyline(float stroke_width, const sf::Color& stroke_color,
@@ -134,6 +165,7 @@ void Polyline::draw(sf::RenderWindow& target, sf::RenderStates states) const {
     if (points.size() < 2) return;
     sf::VertexArray lineStrip(sf::PrimitiveType::Quads);
     sf::Vector2f p1a, p1b, p2a, p2b;
+    sf::Vector2f r_p1a, r_p1b, r_p2a, r_p2b;
     for (std::size_t i = 1; i < points.size(); i++) {
         sf::Vector2f p1 = points[i - 1];
         sf::Vector2f p2 = points[i];
@@ -150,14 +182,33 @@ void Polyline::draw(sf::RenderWindow& target, sf::RenderStates states) const {
 
         p1a = p1 - perpendicularDirection * (thickness / 2.0f);
         p1b = p1 + perpendicularDirection * (thickness / 2.0f);
-        if (i > 1 && thickness >= 2) {
-            lineStrip.append(sf::Vertex(p1a, stroke));
-            lineStrip.append(sf::Vertex(p1b, stroke));
-            lineStrip.append(sf::Vertex(p2b, stroke));
-            lineStrip.append(sf::Vertex(p2a, stroke));
-        }
         p2a = p2 - perpendicularDirection * (thickness / 2.0f);
         p2b = p2 + perpendicularDirection * (thickness / 2.0f);
+        if (i > 1) {
+            sf::VertexArray lS(sf::PrimitiveType::Quads);
+            if (isPerpendicular({points[i], points[i - 1]},
+                                {points[i - 1], points[i - 2]})) {
+                lS.append(sf::Vertex(
+                    findIntersection({r_p1a, r_p2a}, {p1a, p2a}), stroke));
+                lS.append(sf::Vertex(
+                    findIntersection({r_p1a, r_p2a}, {p1b, p2b}), stroke));
+                lS.append(sf::Vertex(
+                    findIntersection({r_p1b, r_p2b}, {p1b, p2b}), stroke));
+                lS.append(sf::Vertex(
+                    findIntersection({r_p1b, r_p2b}, {p1a, p2a}), stroke));
+
+            } else {
+                lS.append(sf::Vertex(p1a, stroke));
+                lS.append(sf::Vertex(r_p2a, stroke));
+                lS.append(sf::Vertex(p1b, stroke));
+                lS.append(sf::Vertex(r_p2b, stroke));
+            }
+            target.draw(lS);
+        }
+        r_p1a = p1a;
+        r_p1b = p1b;
+        r_p2a = p2a;
+        r_p2b = p2b;
         lineStrip.append(sf::Vertex(p1a, stroke));
         lineStrip.append(sf::Vertex(p1b, stroke));
         lineStrip.append(sf::Vertex(p2b, stroke));
