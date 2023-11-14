@@ -4,6 +4,11 @@
 #include <SFML/Graphics.hpp>
 #include <map>
 
+/**
+ * @brief Represents a set of named colors.
+ *
+ * The Color class provides a map of named colors using the SFML Color class.
+ */
 static const std::map< std::string, sf::Color > color_map = {
     {"aliceblue", sf::Color(240, 248, 255)},
     {"antiquewhite", sf::Color(250, 235, 215)},

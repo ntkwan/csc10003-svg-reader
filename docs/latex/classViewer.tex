@@ -1,0 +1,178 @@
+\hypertarget{classViewer}{}\doxysection{Viewer Class Reference}
+\label{classViewer}\index{Viewer@{Viewer}}
+
+
+Represents a viewer for handling events and interactions with an SFML window.  
+
+
+
+
+{\ttfamily \#include $<$Viewer.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classViewer_ae6cf7f652c5a65d39764a57e512129a8}{handle\+Events}} (sf\+::\+Event event)
+\begin{DoxyCompactList}\small\item\em Handles SFML events. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classViewer_ac84ecd752e288b72281f1686893982e2}\label{classViewer_ac84ecd752e288b72281f1686893982e2}} 
+void \mbox{\hyperlink{classViewer_ac84ecd752e288b72281f1686893982e2}{handle\+Dragging}} ()
+\begin{DoxyCompactList}\small\item\em Handles dragging interaction. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classViewer_a3d14cceacd94622e6b9d5d71bfb5b64f}\label{classViewer_a3d14cceacd94622e6b9d5d71bfb5b64f}} 
+void \mbox{\hyperlink{classViewer_a3d14cceacd94622e6b9d5d71bfb5b64f}{operator=}} (const \mbox{\hyperlink{classViewer}{Viewer}} \&)=delete
+\begin{DoxyCompactList}\small\item\em Deleted assignment operator to prevent copying of \mbox{\hyperlink{classViewer}{Viewer}} instances. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classViewer_abb8e49e83e5c574411bb9995665fd7eb}\label{classViewer_abb8e49e83e5c574411bb9995665fd7eb}} 
+\mbox{\hyperlink{classViewer_abb8e49e83e5c574411bb9995665fd7eb}{Viewer}} (const \mbox{\hyperlink{classViewer}{Viewer}} \&)=delete
+\begin{DoxyCompactList}\small\item\em Deleted copy constructor to prevent copying of \mbox{\hyperlink{classViewer}{Viewer}} instances. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classViewer}{Viewer}} $\ast$ \mbox{\hyperlink{classViewer_a890129c9676f7c590fe51567b0e2ed92}{get\+Instance}} (sf\+::\+Render\+Window \&Window, sf\+::\+View \&View)
+\begin{DoxyCompactList}\small\item\em Gets the singleton instance of \mbox{\hyperlink{classViewer}{Viewer}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a viewer for handling events and interactions with an SFML window. 
+
+The \mbox{\hyperlink{classViewer}{Viewer}} class is responsible for handling events, such as zooming, rotating, and dragging, to interact with an SFML window and view. 
+
+Definition at line 13 of file Viewer.\+hpp.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classViewer_a890129c9676f7c590fe51567b0e2ed92}\label{classViewer_a890129c9676f7c590fe51567b0e2ed92}} 
+\index{Viewer@{Viewer}!getInstance@{getInstance}}
+\index{getInstance@{getInstance}!Viewer@{Viewer}}
+\doxysubsubsection{\texorpdfstring{getInstance()}{getInstance()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classViewer}{Viewer}} $\ast$ Viewer\+::get\+Instance (\begin{DoxyParamCaption}\item[{sf\+::\+Render\+Window \&}]{Window,  }\item[{sf\+::\+View \&}]{View }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the singleton instance of \mbox{\hyperlink{classViewer}{Viewer}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Window} & The SFML window to associate with the viewer. \\
+\hline
+{\em View} & The SFML view to associate with the viewer. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The singleton instance of \mbox{\hyperlink{classViewer}{Viewer}}. 
+\end{DoxyReturn}
+
+
+Definition at line 5 of file Viewer.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{5                                                                 \{}
+\DoxyCodeLine{6     \textcolor{keywordflow}{if} (instance == \textcolor{keyword}{nullptr}) \{}
+\DoxyCodeLine{7         instance = \textcolor{keyword}{new} \mbox{\hyperlink{classViewer_abb8e49e83e5c574411bb9995665fd7eb}{Viewer}}(Window, View);}
+\DoxyCodeLine{8     \}}
+\DoxyCodeLine{9     \textcolor{keywordflow}{return} instance;}
+\DoxyCodeLine{10 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classViewer_ae6cf7f652c5a65d39764a57e512129a8}\label{classViewer_ae6cf7f652c5a65d39764a57e512129a8}} 
+\index{Viewer@{Viewer}!handleEvents@{handleEvents}}
+\index{handleEvents@{handleEvents}!Viewer@{Viewer}}
+\doxysubsubsection{\texorpdfstring{handleEvents()}{handleEvents()}}
+{\footnotesize\ttfamily void Viewer\+::handle\+Events (\begin{DoxyParamCaption}\item[{sf\+::\+Event}]{event }\end{DoxyParamCaption})}
+
+
+
+Handles SFML events. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & The SFML event to handle. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 15 of file Viewer.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{15                                        \{}
+\DoxyCodeLine{16     \textcolor{keywordflow}{if} (event.type == sf::Event::Closed) \{}
+\DoxyCodeLine{17         window.close();}
+\DoxyCodeLine{18     \}}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20     \textcolor{comment}{// Zoom in by + (including '=' key)}}
+\DoxyCodeLine{21     \textcolor{keywordflow}{if} ((event.type == sf::Event::KeyPressed \&\&}
+\DoxyCodeLine{22          event.key.code == sf::Keyboard::Add) ||}
+\DoxyCodeLine{23         (event.type == sf::Event::KeyPressed \&\&}
+\DoxyCodeLine{24          event.key.code == sf::Keyboard::Equal)) \{}
+\DoxyCodeLine{25         zoom(0.9f);}
+\DoxyCodeLine{26         window.setView(view);}
+\DoxyCodeLine{27     \}}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29     \textcolor{comment}{// Zoom out by -\/ (including '-\/' key)}}
+\DoxyCodeLine{30     \textcolor{keywordflow}{if} ((event.type == sf::Event::KeyPressed \&\&}
+\DoxyCodeLine{31          event.key.code == sf::Keyboard::Subtract) ||}
+\DoxyCodeLine{32         (event.type == sf::Event::KeyPressed \&\&}
+\DoxyCodeLine{33          event.key.code == sf::Keyboard::Hyphen)) \{}
+\DoxyCodeLine{34         zoom(1.1f);}
+\DoxyCodeLine{35         window.setView(view);}
+\DoxyCodeLine{36     \}}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38     \textcolor{comment}{// Rotate clockwise by 'R' key}}
+\DoxyCodeLine{39     \textcolor{keywordflow}{if} (event.type == sf::Event::KeyPressed \&\&}
+\DoxyCodeLine{40         event.key.code == sf::Keyboard::R) \{}
+\DoxyCodeLine{41         rotate(90.0f);}
+\DoxyCodeLine{42         window.setView(view);}
+\DoxyCodeLine{43     \}}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45     \textcolor{comment}{// Rotate anti-\/clockwise by 'E' key}}
+\DoxyCodeLine{46     \textcolor{keywordflow}{if} (event.type == sf::Event::KeyPressed \&\&}
+\DoxyCodeLine{47         event.key.code == sf::Keyboard::E) \{}
+\DoxyCodeLine{48         rotate(-\/90.0f);}
+\DoxyCodeLine{49         window.setView(view);}
+\DoxyCodeLine{50     \}}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52     \textcolor{comment}{// Zoom in/out with mouse scroll}}
+\DoxyCodeLine{53     \textcolor{keywordflow}{if} (event.type == sf::Event::MouseWheelScrolled) \{}
+\DoxyCodeLine{54         \textcolor{keywordflow}{if} (event.mouseWheelScroll.wheel == sf::Mouse::VerticalWheel) \{}
+\DoxyCodeLine{55             \textcolor{keywordflow}{if} (event.mouseWheelScroll.delta > 0) \{}
+\DoxyCodeLine{56                 zoom(0.9f);}
+\DoxyCodeLine{57             \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{58                 zoom(1.1f);}
+\DoxyCodeLine{59             \}}
+\DoxyCodeLine{60             window.setView(view);}
+\DoxyCodeLine{61         \}}
+\DoxyCodeLine{62     \}}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64     \textcolor{comment}{// Zoom in/out with touchpad (control pad)}}
+\DoxyCodeLine{65     \textcolor{keywordflow}{if} (event.type == sf::Event::TouchMoved) \{}
+\DoxyCodeLine{66         \textcolor{comment}{// Assuming that touchpad input scales the zoom based on movement}}
+\DoxyCodeLine{67         \textcolor{keywordtype}{float} delta = \textcolor{keyword}{event}.touch.y;}
+\DoxyCodeLine{68         \textcolor{keywordflow}{if} (delta > 0) \{}
+\DoxyCodeLine{69             zoom(0.9f);}
+\DoxyCodeLine{70         \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{71             zoom(1.1f);}
+\DoxyCodeLine{72         \}}
+\DoxyCodeLine{73         window.setView(view);}
+\DoxyCodeLine{74     \}}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{76     \textcolor{comment}{// Start dragging the left mouse button}}
+\DoxyCodeLine{77     \textcolor{keywordflow}{if} (event.type == sf::Event::MouseButtonPressed \&\&}
+\DoxyCodeLine{78         event.mouseButton.button == sf::Mouse::Left) \{}
+\DoxyCodeLine{79         startDragging();}
+\DoxyCodeLine{80     \}}
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82     \textcolor{comment}{// Finish dragging the left mouse button}}
+\DoxyCodeLine{83     \textcolor{keywordflow}{if} (event.type == sf::Event::MouseButtonReleased \&\&}
+\DoxyCodeLine{84         event.mouseButton.button == sf::Mouse::Left) \{}
+\DoxyCodeLine{85         stopDragging();}
+\DoxyCodeLine{86     \}}
+\DoxyCodeLine{87 \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/Viewer.\+hpp\item 
+src/Viewer.\+cpp\end{DoxyCompactItemize}
