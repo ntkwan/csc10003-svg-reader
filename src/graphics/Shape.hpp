@@ -184,8 +184,7 @@ private:
         outline_vertices;  ///< Vertex array containing the outline geometry
     sf::FloatRect inside_bounds;  ///< Bounding rectangle of the inside (fill)
     sf::FloatRect
-        bounds;  ///< Bounding rectangle of the whole shape (outline + fill)
-
+        bounds;  ///< Bounding rectangle of the outside (outline + fill)
 
     sf::Vector2f
         origin;  ///< Origin of translation/rotation/scaling of the object
