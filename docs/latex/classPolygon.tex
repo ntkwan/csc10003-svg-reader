@@ -1,0 +1,202 @@
+\hypertarget{classPolygon}{}\doxysection{Polygon Class Reference}
+\label{classPolygon}\index{Polygon@{Polygon}}
+
+
+Represents a polygon in 2D space.  
+
+
+
+
+{\ttfamily \#include $<$Polygon.\+hpp$>$}
+
+
+
+Inheritance diagram for Polygon\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=136pt]{classPolygon__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Polygon\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=136pt]{classPolygon__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classPolygon_a1629265ccbd1a9ef85fa5b571b6cb190}{Polygon}} (sf\+::\+Color fill=sf\+::\+Color\+::\+Transparent, sf\+::\+Color stroke=sf\+::\+Color\+::\+White, float stroke\+\_\+thickness=0)
+\begin{DoxyCompactList}\small\item\em Constructs a \mbox{\hyperlink{classPolygon}{Polygon}} object. \end{DoxyCompactList}\item 
+virtual std\+::size\+\_\+t \mbox{\hyperlink{classPolygon_a6c1f3e9a9e8cfee96aff7ba869fab0cd}{get\+Point\+Count}} () const
+\begin{DoxyCompactList}\small\item\em Gets the total number of vertices representing the polygon. \end{DoxyCompactList}\item 
+virtual sf\+::\+Vector2f \mbox{\hyperlink{classPolygon_a9d57aa7fa7ab6b51d6cca15f54dfbe5c}{get\+Point}} (std\+::size\+\_\+t index) const
+\begin{DoxyCompactList}\small\item\em Gets the position of a vertex in the polygon. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classPolygon_a16c13a9f119442aa490557a6740f962c}{add\+Point}} (const sf\+::\+Vector2f \&point)
+\begin{DoxyCompactList}\small\item\em Adds a vertex to the polygon. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classPolygon_a97f794bbe680e8bc6ca745ba00a4349a}{polygon\+Update}} ()
+\begin{DoxyCompactList}\small\item\em Updates the polygon. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Represents a polygon in 2D space. 
+
+The \mbox{\hyperlink{classPolygon}{Polygon}} class is derived from the \mbox{\hyperlink{classShape}{Shape}} class and defines a polygon with a variable number of vertices. 
+
+Definition at line 15 of file Polygon.\+hpp.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classPolygon_a1629265ccbd1a9ef85fa5b571b6cb190}\label{classPolygon_a1629265ccbd1a9ef85fa5b571b6cb190}} 
+\index{Polygon@{Polygon}!Polygon@{Polygon}}
+\index{Polygon@{Polygon}!Polygon@{Polygon}}
+\doxysubsubsection{\texorpdfstring{Polygon()}{Polygon()}}
+{\footnotesize\ttfamily Polygon\+::\+Polygon (\begin{DoxyParamCaption}\item[{sf\+::\+Color}]{fill = {\ttfamily sf\+:\+:Color\+:\+:Transparent},  }\item[{sf\+::\+Color}]{stroke = {\ttfamily sf\+:\+:Color\+:\+:White},  }\item[{float}]{stroke\+\_\+thickness = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Constructs a \mbox{\hyperlink{classPolygon}{Polygon}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fill} & Fill color of the polygon (default is sf\+::\+Color\+::\+Transparent). \\
+\hline
+{\em stroke} & Outline color of the polygon (default is sf\+::\+Color\+::\+White). \\
+\hline
+{\em stroke\+\_\+thickness} & Thickness of the polygon outline (default is 0). \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 3 of file Polygon.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{3                                                                      \{}
+\DoxyCodeLine{4     \mbox{\hyperlink{classShape_a730df53c07d9d33c6deebff222d290cd}{setFillColor}}(fill);}
+\DoxyCodeLine{5     \mbox{\hyperlink{classShape_afd28c6c9ea0bb3f135d39fb5f469f044}{setOutlineColor}}(stroke);}
+\DoxyCodeLine{6     \mbox{\hyperlink{classShape_a645b00f52096c4151e725384f3605c51}{setOutlineThickness}}(stroke\_thickness);}
+\DoxyCodeLine{7 \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classPolygon_a16c13a9f119442aa490557a6740f962c}\label{classPolygon_a16c13a9f119442aa490557a6740f962c}} 
+\index{Polygon@{Polygon}!addPoint@{addPoint}}
+\index{addPoint@{addPoint}!Polygon@{Polygon}}
+\doxysubsubsection{\texorpdfstring{addPoint()}{addPoint()}}
+{\footnotesize\ttfamily void Polygon\+::add\+Point (\begin{DoxyParamCaption}\item[{const sf\+::\+Vector2f \&}]{point }\end{DoxyParamCaption})}
+
+
+
+Adds a vertex to the polygon. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em point} & The position of the vertex to be added. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 19 of file Polygon.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{19 \{ points.push\_back(point); \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classPolygon_a9d57aa7fa7ab6b51d6cca15f54dfbe5c}\label{classPolygon_a9d57aa7fa7ab6b51d6cca15f54dfbe5c}} 
+\index{Polygon@{Polygon}!getPoint@{getPoint}}
+\index{getPoint@{getPoint}!Polygon@{Polygon}}
+\doxysubsubsection{\texorpdfstring{getPoint()}{getPoint()}}
+{\footnotesize\ttfamily sf\+::\+Vector2f Polygon\+::get\+Point (\begin{DoxyParamCaption}\item[{std\+::size\+\_\+t}]{index }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Gets the position of a vertex in the polygon. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the vertex. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The position of the specified vertex in the polygon. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classShape_a2a0aa8dc1440e2c2d6819e03b75fb862}{Shape}}.
+
+
+
+Definition at line 11 of file Polygon.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{11                                                   \{}
+\DoxyCodeLine{12     \textcolor{keywordflow}{if} (index < points.size()) \{}
+\DoxyCodeLine{13         \textcolor{keywordflow}{return} points[index];}
+\DoxyCodeLine{14     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{15         \textcolor{keywordflow}{return} points[index \% points.size()];}
+\DoxyCodeLine{16     \}}
+\DoxyCodeLine{17 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classPolygon_a6c1f3e9a9e8cfee96aff7ba869fab0cd}\label{classPolygon_a6c1f3e9a9e8cfee96aff7ba869fab0cd}} 
+\index{Polygon@{Polygon}!getPointCount@{getPointCount}}
+\index{getPointCount@{getPointCount}!Polygon@{Polygon}}
+\doxysubsubsection{\texorpdfstring{getPointCount()}{getPointCount()}}
+{\footnotesize\ttfamily std\+::size\+\_\+t Polygon\+::get\+Point\+Count (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Gets the total number of vertices representing the polygon. 
+
+\begin{DoxyReturn}{Returns}
+The number of vertices representing the polygon. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classShape_adff62582e9c9809b8f3e79202fd2dec4}{Shape}}.
+
+
+
+Definition at line 9 of file Polygon.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{9 \{ \textcolor{keywordflow}{return} points.size(); \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classPolygon_a97f794bbe680e8bc6ca745ba00a4349a}\label{classPolygon_a97f794bbe680e8bc6ca745ba00a4349a}} 
+\index{Polygon@{Polygon}!polygonUpdate@{polygonUpdate}}
+\index{polygonUpdate@{polygonUpdate}!Polygon@{Polygon}}
+\doxysubsubsection{\texorpdfstring{polygonUpdate()}{polygonUpdate()}}
+{\footnotesize\ttfamily void Polygon\+::polygon\+Update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Updates the polygon. 
+
+This method is provided for consistency with other shapes but does not introduce any additional behavior for polygons. 
+
+Definition at line 21 of file Polygon.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{21 \{ \mbox{\hyperlink{classShape_a2529ca668908be63f160a88dad62f42a}{update}}(); \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/graphics/Polygon.\+hpp\item 
+src/graphics/Polygon.\+cpp\end{DoxyCompactItemize}

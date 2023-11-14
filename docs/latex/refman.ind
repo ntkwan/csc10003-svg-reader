@@ -1,0 +1,174 @@
+\begin{theindex}
+
+  \item {addPoint}
+    \subitem {Polygon}, \hyperpage{22}
+    \subitem {Polyline}, \hyperpage{25}
+
+  \indexspace
+
+  \item {Circle}, \hyperpage{5}
+    \subitem {Circle}, \hyperpage{6}
+    \subitem {getPoint}, \hyperpage{7}
+    \subitem {getPointCount}, \hyperpage{7}
+
+  \indexspace
+
+  \item {draw}
+    \subitem {Polyline}, \hyperpage{26}
+    \subitem {Shape}, \hyperpage{33}
+    \subitem {Text}, \hyperpage{43}
+
+  \indexspace
+
+  \item {Ellipse}, \hyperpage{8}
+    \subitem {Ellipse}, \hyperpage{9}
+    \subitem {getPoint}, \hyperpage{10}
+
+  \indexspace
+
+  \item {getAttribute}
+    \subitem {Parser}, \hyperpage{15}
+  \item {getFillColor}
+    \subitem {Shape}, \hyperpage{34}
+  \item {getInstance}
+    \subitem {Parser}, \hyperpage{16}
+    \subitem {Viewer}, \hyperpage{45}
+  \item {getInverseTransform}
+    \subitem {Shape}, \hyperpage{34}
+  \item {getLength}
+    \subitem {Line}, \hyperpage{12}
+  \item {getOutlineColor}
+    \subitem {Shape}, \hyperpage{34}
+  \item {getOutlineThickness}
+    \subitem {Shape}, \hyperpage{35}
+  \item {getPoint}
+    \subitem {Circle}, \hyperpage{7}
+    \subitem {Ellipse}, \hyperpage{10}
+    \subitem {Line}, \hyperpage{13}
+    \subitem {Polygon}, \hyperpage{22}
+    \subitem {Polyline}, \hyperpage{27}
+    \subitem {Rect}, \hyperpage{30}
+    \subitem {Shape}, \hyperpage{35}
+    \subitem {Text}, \hyperpage{43}
+  \item {getPointCount}
+    \subitem {Circle}, \hyperpage{7}
+    \subitem {Line}, \hyperpage{13}
+    \subitem {Polygon}, \hyperpage{23}
+    \subitem {Polyline}, \hyperpage{27}
+    \subitem {Rect}, \hyperpage{30}
+    \subitem {Shape}, \hyperpage{36}
+    \subitem {Text}, \hyperpage{44}
+  \item {getSize}
+    \subitem {Rect}, \hyperpage{31}
+  \item {getTransform}
+    \subitem {Shape}, \hyperpage{36}
+
+  \indexspace
+
+  \item {handleEvents}
+    \subitem {Viewer}, \hyperpage{46}
+
+  \indexspace
+
+  \item {Line}, \hyperpage{11}
+    \subitem {getLength}, \hyperpage{12}
+    \subitem {getPoint}, \hyperpage{13}
+    \subitem {getPointCount}, \hyperpage{13}
+    \subitem {Line}, \hyperpage{12}
+    \subitem {setThickness}, \hyperpage{14}
+
+  \indexspace
+
+  \item {parseColor}
+    \subitem {Parser}, \hyperpage{16}
+  \item {parsePoints}
+    \subitem {Parser}, \hyperpage{17}
+  \item {Parser}, \hyperpage{14}
+    \subitem {getAttribute}, \hyperpage{15}
+    \subitem {getInstance}, \hyperpage{16}
+    \subitem {parseColor}, \hyperpage{16}
+    \subitem {parsePoints}, \hyperpage{17}
+    \subitem {Parser}, \hyperpage{15}
+    \subitem {parseSVG}, \hyperpage{18}
+    \subitem {renderSVG}, \hyperpage{19}
+  \item {parseSVG}
+    \subitem {Parser}, \hyperpage{18}
+  \item {Polygon}, \hyperpage{20}
+    \subitem {addPoint}, \hyperpage{22}
+    \subitem {getPoint}, \hyperpage{22}
+    \subitem {getPointCount}, \hyperpage{23}
+    \subitem {Polygon}, \hyperpage{21}
+    \subitem {polygonUpdate}, \hyperpage{23}
+  \item {polygonUpdate}
+    \subitem {Polygon}, \hyperpage{23}
+  \item {Polyline}, \hyperpage{24}
+    \subitem {addPoint}, \hyperpage{25}
+    \subitem {draw}, \hyperpage{26}
+    \subitem {getPoint}, \hyperpage{27}
+    \subitem {getPointCount}, \hyperpage{27}
+    \subitem {Polyline}, \hyperpage{25}
+    \subitem {polylineUpdate}, \hyperpage{28}
+  \item {polylineUpdate}
+    \subitem {Polyline}, \hyperpage{28}
+
+  \indexspace
+
+  \item {Rect}, \hyperpage{28}
+    \subitem {getPoint}, \hyperpage{30}
+    \subitem {getPointCount}, \hyperpage{30}
+    \subitem {getSize}, \hyperpage{31}
+    \subitem {Rect}, \hyperpage{29}
+    \subitem {setSize}, \hyperpage{31}
+  \item {renderSVG}
+    \subitem {Parser}, \hyperpage{19}
+
+  \indexspace
+
+  \item {setFillColor}
+    \subitem {Shape}, \hyperpage{37}
+  \item {setOutlineColor}
+    \subitem {Shape}, \hyperpage{37}
+  \item {setOutlineThickness}
+    \subitem {Shape}, \hyperpage{38}
+  \item {setPosition}
+    \subitem {Shape}, \hyperpage{38, 39}
+  \item {setSize}
+    \subitem {Rect}, \hyperpage{31}
+  \item {setThickness}
+    \subitem {Line}, \hyperpage{14}
+  \item {Shape}, \hyperpage{32}
+    \subitem {draw}, \hyperpage{33}
+    \subitem {getFillColor}, \hyperpage{34}
+    \subitem {getInverseTransform}, \hyperpage{34}
+    \subitem {getOutlineColor}, \hyperpage{34}
+    \subitem {getOutlineThickness}, \hyperpage{35}
+    \subitem {getPoint}, \hyperpage{35}
+    \subitem {getPointCount}, \hyperpage{36}
+    \subitem {getTransform}, \hyperpage{36}
+    \subitem {setFillColor}, \hyperpage{37}
+    \subitem {setOutlineColor}, \hyperpage{37}
+    \subitem {setOutlineThickness}, \hyperpage{38}
+    \subitem {setPosition}, \hyperpage{38, 39}
+    \subitem {Shape}, \hyperpage{33}
+    \subitem {update}, \hyperpage{39}
+
+  \indexspace
+
+  \item {Text}, \hyperpage{40}
+    \subitem {draw}, \hyperpage{43}
+    \subitem {getPoint}, \hyperpage{43}
+    \subitem {getPointCount}, \hyperpage{44}
+    \subitem {Text}, \hyperpage{41}
+
+  \indexspace
+
+  \item {update}
+    \subitem {Shape}, \hyperpage{39}
+
+  \indexspace
+
+  \item {Viewer}, \hyperpage{44}
+    \subitem {getInstance}, \hyperpage{45}
+    \subitem {handleEvents}, \hyperpage{46}
+
+\end{theindex}
