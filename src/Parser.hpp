@@ -95,9 +95,15 @@ public:
     ~Parser();
 
 private:
+    /**
+     * @brief Construct a new Parser object.
+     *
+     * @param file_name The name of the file to be parsed.
+     */
     Parser(const std::string& file_name);
-    static Parser* instance;
-    pugi::xml_node svg;
-    std::vector< Shape* > shapes;
+
+    static Parser* instance;       ///< The instance of the Parser.
+    pugi::xml_node svg;            ///< The node of the SVG.
+    std::vector< Shape* > shapes;  ///< The vector of the shapes.
 };
 #endif

@@ -23,7 +23,6 @@ void Viewer::handleEvents(sf::Event event) {
         (event.type == sf::Event::KeyPressed &&
          event.key.code == sf::Keyboard::Equal)) {
         zoom(0.9f);
-        window.setView(view);
     }
 
     // Zoom out by - (including '-' key)
@@ -32,21 +31,18 @@ void Viewer::handleEvents(sf::Event event) {
         (event.type == sf::Event::KeyPressed &&
          event.key.code == sf::Keyboard::Hyphen)) {
         zoom(1.1f);
-        window.setView(view);
     }
 
     // Rotate clockwise by 'R' key
     if (event.type == sf::Event::KeyPressed &&
         event.key.code == sf::Keyboard::R) {
         rotate(90.0f);
-        window.setView(view);
     }
 
     // Rotate anti-clockwise by 'E' key
     if (event.type == sf::Event::KeyPressed &&
         event.key.code == sf::Keyboard::E) {
         rotate(-90.0f);
-        window.setView(view);
     }
 
     // Zoom in/out with mouse scroll
@@ -57,7 +53,6 @@ void Viewer::handleEvents(sf::Event event) {
             } else {
                 zoom(1.1f);
             }
-            window.setView(view);
         }
     }
 
@@ -70,7 +65,6 @@ void Viewer::handleEvents(sf::Event event) {
         } else {
             zoom(1.1f);
         }
-        window.setView(view);
     }
 
     // Start dragging the left mouse button
@@ -91,8 +85,7 @@ void Viewer::handleDragging() {
         sf::Vector2i currentMousePosition = sf::Mouse::getPosition(window);
         sf::Vector2f offset =
             sf::Vector2f(currentMousePosition - last_mouse_position);
-        view.move(-offset);
-        window.setView(view);
+        moveView(offset);
         last_mouse_position = currentMousePosition;
     }
 }

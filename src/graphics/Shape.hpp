@@ -186,12 +186,14 @@ private:
     sf::FloatRect
         bounds;  ///< Bounding rectangle of the whole shape (outline + fill)
 
+
     sf::Vector2f
         origin;  ///< Origin of translation/rotation/scaling of the object
     sf::Vector2f position;  ///< Position of the object in the 2D world
     float rotation;         ///< Orientation of the object, in degrees
     sf::Vector2f scale;     ///< Scale of the object
-    mutable sf::Transform transform;  //!< Combined transformation of the object
+
+    mutable sf::Transform transform;  ///< Combined transformation of the object
     mutable bool
         transform_need_update;  ///< Does the transform need to be recomputed?
     mutable sf::Transform
