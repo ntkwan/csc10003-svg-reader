@@ -156,36 +156,48 @@ protected:
     void update();
 
 private:
+    /**
+     * @brief Updates the fill colors of the shape
+     * @note This method call the update() method.
+     */
     void updateFillColors();
 
+    /**
+     * @brief Updates the outline of the shape
+     * @note This method call the update() method.
+     */
     void updateOutline();
 
+    /**
+     * @brief Updates the outline colors of the shape
+     * @note This method call the update() method.
+     */
     void updateOutlineColors();
 
 private:
-    const sf::Texture* texture;  //!< Texture of the shape
-    sf::Color fill_color;        //!< Fill color
-    sf::Color outline_color;     //!< Outline color
-    float outline_thickness;     //!< Thickness of the shape's outline
-    sf::VertexArray vertices;    //!< Vertex array containing the fill geometry
-    sf::VertexArray outline_vertices;  //!< Vertex array containing the outline
-                                       //!< geometry
-    sf::FloatRect inside_bounds;  //!< Bounding rectangle of the inside (fill)
-    sf::FloatRect bounds;  //!< Bounding rectangle of the whole shape (outline
-                           //!< + fill)
+    const sf::Texture* texture;  ///< Texture of the shape
+    sf::Color fill_color;        ///< Fill color
+    sf::Color outline_color;     ///< Outline color
+    float outline_thickness;     ///< Thickness of the shape's outline
+    sf::VertexArray vertices;    ///< Vertex array containing the fill geometry
+    sf::VertexArray
+        outline_vertices;  ///< Vertex array containing the outline geometry
+    sf::FloatRect inside_bounds;  ///< Bounding rectangle of the inside (fill)
+    sf::FloatRect
+        bounds;  ///< Bounding rectangle of the whole shape (outline + fill)
 
     sf::Vector2f
-        origin;  //!< Origin of translation/rotation/scaling of the object
-    sf::Vector2f position;  //!< Position of the object in the 2D world
-    float rotation;         //!< Orientation of the object, in degrees
-    sf::Vector2f scale;     //!< Scale of the object
+        origin;  ///< Origin of translation/rotation/scaling of the object
+    sf::Vector2f position;  ///< Position of the object in the 2D world
+    float rotation;         ///< Orientation of the object, in degrees
+    sf::Vector2f scale;     ///< Scale of the object
     mutable sf::Transform transform;  //!< Combined transformation of the object
     mutable bool
-        transform_need_update;  //!< Does the transform need to be recomputed?
+        transform_need_update;  ///< Does the transform need to be recomputed?
     mutable sf::Transform
-        inverse_transform;  //!< Combined transformation of the object
-    mutable bool inverse_transform_need_update;  //!< Does the transform need to
-                                                 //!< be recomputed?
+        inverse_transform;  ///< Combined transformation of the object
+    mutable bool
+        inverse_transform_need_update;  ///< Same as transform but for inverse
 };
 
 #endif  // SHAPE_HPP_
