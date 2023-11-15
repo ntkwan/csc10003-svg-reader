@@ -4,9 +4,15 @@
 
 Ellipse::Ellipse(const sf::Vector2f &radius, const sf::Vector2f &center,
                  sf::Color fill, sf::Color stroke, float stroke_thickness)
-    : Circle(1.f, center, fill, stroke, stroke_thickness), radius(radius) {
+    : radius(radius) {
+    setPosition(center);
+    setFillColor(fill);
+    setOutlineColor(stroke);
+    setOutlineThickness(stroke_thickness);
     update();
 }
+
+std::size_t Ellipse::getPointCount() const { return SCALE; }
 
 sf::Vector2f Ellipse::getPoint(std::size_t index) const {
     static const float pi = acos(-1);
