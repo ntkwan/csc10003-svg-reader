@@ -1,0 +1,451 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<!-- BEGIN opengraph metadata -->
+<meta property="og:title" content="Doxygen Awesome" />
+<meta property="og:image" content="https://repository-images.githubusercontent.com/348492097/4f16df80-88fb-11eb-9d31-4015ff22c452" />
+<meta property="og:description" content="Custom CSS theme for doxygen html-documentation with lots of customization parameters." />
+<meta property="og:url" content="https://jothepro.github.io/doxygen-awesome-css/" />
+<!-- END opengraph metadata -->
+<!-- BEGIN twitter metadata -->
+<meta name="twitter:image:src" content="https://repository-images.githubusercontent.com/348492097/4f16df80-88fb-11eb-9d31-4015ff22c452" />
+<meta name="twitter:title" content="Doxygen Awesome" />
+<meta name="twitter:description" content="Custom CSS theme for doxygen html-documentation with lots of customization parameters." />
+<!-- END twitter metadata -->
+<title>svg-reader: Line Class Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link rel="icon" type="image/svg+xml" href="logo.drawio.svg"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript" src="toggle-alternative-theme.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeFragmentCopyButton.init()
+    DoxygenAwesomeDarkModeToggle.init()
+    DoxygenAwesomeParagraphLink.init()
+    DoxygenAwesomeInteractiveToc.init()
+    DoxygenAwesomeTabs.init()
+</script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="custom-alternative.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- https://tholman.com/github-corners/ -->
+<a href="https://github.com/ntkwan/csc10003-svg-reader" class="github-corner" title="View source on GitHub" target="_blank" rel="noopener noreferrer">
+    <svg viewBox="0 0 250 250" width="40" height="40" style="position: absolute; top: 0; border: 0; right: 0; z-index: 99;" aria-hidden="true">
+    <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">svg-reader
+   &#160;<span id="projectnumber">0.1</span>
+   </div>
+   <div id="projectbrief">Parse and render SVG files, handle user interactions.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('classLine.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="classLine-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">Line Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Represents a line in 2D space.  
+ <a href="classLine.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="Line_8hpp_source.html">Line.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for Line:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classLine__inherit__graph.svg" width="74" height="112"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for Line:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classLine__coll__graph.svg" width="74" height="112"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a71c9902d542a0a753382edf82571068d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLine.html#a71c9902d542a0a753382edf82571068d">Line</a> (const sf::Vector2f &amp;point1, const sf::Vector2f &amp;point2, sf::Color stroke=sf::Color::White, float stroke_width=1.f)</td></tr>
+<tr class="memdesc:a71c9902d542a0a753382edf82571068d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classLine.html" title="Represents a line in 2D space.">Line</a> object.  <a href="classLine.html#a71c9902d542a0a753382edf82571068d">More...</a><br /></td></tr>
+<tr class="separator:a71c9902d542a0a753382edf82571068d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33cf5b0af7aa6a488ca0ae2a33536538"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLine.html#a33cf5b0af7aa6a488ca0ae2a33536538">setThickness</a> (float <a class="el" href="classLine.html#a97d2192cc259a0513d60b5d170d75788">thickness</a>)</td></tr>
+<tr class="memdesc:a33cf5b0af7aa6a488ca0ae2a33536538"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the thickness of the line.  <a href="classLine.html#a33cf5b0af7aa6a488ca0ae2a33536538">More...</a><br /></td></tr>
+<tr class="separator:a33cf5b0af7aa6a488ca0ae2a33536538"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe6672bc7667cf45739c46f9fc8cb237"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLine.html#afe6672bc7667cf45739c46f9fc8cb237">getLength</a> () const</td></tr>
+<tr class="memdesc:afe6672bc7667cf45739c46f9fc8cb237"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates and returns the length of the line.  <a href="classLine.html#afe6672bc7667cf45739c46f9fc8cb237">More...</a><br /></td></tr>
+<tr class="separator:afe6672bc7667cf45739c46f9fc8cb237"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0b389aa6db6ed246e6fd6534bf5853c"><td class="memItemLeft" align="right" valign="top">virtual std::size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLine.html#aa0b389aa6db6ed246e6fd6534bf5853c">getPointCount</a> () const</td></tr>
+<tr class="memdesc:aa0b389aa6db6ed246e6fd6534bf5853c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the total number of points representing the line.  <a href="classLine.html#aa0b389aa6db6ed246e6fd6534bf5853c">More...</a><br /></td></tr>
+<tr class="separator:aa0b389aa6db6ed246e6fd6534bf5853c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45403bc4d7250a5409d64f4dcb5e592b"><td class="memItemLeft" align="right" valign="top">virtual sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLine.html#a45403bc4d7250a5409d64f4dcb5e592b">getPoint</a> (std::size_t index) const</td></tr>
+<tr class="memdesc:a45403bc4d7250a5409d64f4dcb5e592b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the position of a point on the line.  <a href="classLine.html#a45403bc4d7250a5409d64f4dcb5e592b">More...</a><br /></td></tr>
+<tr class="separator:a45403bc4d7250a5409d64f4dcb5e592b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classShape"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classShape')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classShape.html">Shape</a></td></tr>
+<tr class="memitem:ac8ad2fd02e1e94beeb98e65ab795cd56 inherit pub_methods_classShape"><td class="memItemLeft" align="right" valign="top"><a id="ac8ad2fd02e1e94beeb98e65ab795cd56"></a>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShape.html#ac8ad2fd02e1e94beeb98e65ab795cd56">~Shape</a> ()=default</td></tr>
+<tr class="memdesc:ac8ad2fd02e1e94beeb98e65ab795cd56 inherit pub_methods_classShape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual constructor. <br /></td></tr>
+<tr class="separator:ac8ad2fd02e1e94beeb98e65ab795cd56 inherit pub_methods_classShape"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a730df53c07d9d33c6deebff222d290cd inherit pub_methods_classShape"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShape.html#a730df53c07d9d33c6deebff222d290cd">setFillColor</a> (const sf::Color &amp;color)</td></tr>
+<tr class="memdesc:a730df53c07d9d33c6deebff222d290cd inherit pub_methods_classShape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the fill color of the shape.  <a href="classShape.html#a730df53c07d9d33c6deebff222d290cd">More...</a><br /></td></tr>
+<tr class="separator:a730df53c07d9d33c6deebff222d290cd inherit pub_methods_classShape"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd28c6c9ea0bb3f135d39fb5f469f044 inherit pub_methods_classShape"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShape.html#afd28c6c9ea0bb3f135d39fb5f469f044">setOutlineColor</a> (const sf::Color &amp;color)</td></tr>
+<tr class="memdesc:afd28c6c9ea0bb3f135d39fb5f469f044 inherit pub_methods_classShape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the outline color of the shape.  <a href="classShape.html#afd28c6c9ea0bb3f135d39fb5f469f044">More...</a><br /></td></tr>
+<tr class="separator:afd28c6c9ea0bb3f135d39fb5f469f044 inherit pub_methods_classShape"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a645b00f52096c4151e725384f3605c51 inherit pub_methods_classShape"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShape.html#a645b00f52096c4151e725384f3605c51">setOutlineThickness</a> (float thickness)</td></tr>
+<tr class="memdesc:a645b00f52096c4151e725384f3605c51 inherit pub_methods_classShape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the outline thickness of the shape.  <a href="classShape.html#a645b00f52096c4151e725384f3605c51">More...</a><br /></td></tr>
+<tr class="separator:a645b00f52096c4151e725384f3605c51 inherit pub_methods_classShape"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a3ff88d0ae444264484dc5ec385abdb inherit pub_methods_classShape"><td class="memItemLeft" align="right" valign="top">const sf::Color &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShape.html#a5a3ff88d0ae444264484dc5ec385abdb">getFillColor</a> () const</td></tr>
+<tr class="memdesc:a5a3ff88d0ae444264484dc5ec385abdb inherit pub_methods_classShape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the fill color of the shape.  <a href="classShape.html#a5a3ff88d0ae444264484dc5ec385abdb">More...</a><br /></td></tr>
+<tr class="separator:a5a3ff88d0ae444264484dc5ec385abdb inherit pub_methods_classShape"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55b14437d5cc692e6e9e3937c1d0a9c9 inherit pub_methods_classShape"><td class="memItemLeft" align="right" valign="top">const sf::Color &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShape.html#a55b14437d5cc692e6e9e3937c1d0a9c9">getOutlineColor</a> () const</td></tr>
+<tr class="memdesc:a55b14437d5cc692e6e9e3937c1d0a9c9 inherit pub_methods_classShape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the outline color of the shape.  <a href="classShape.html#a55b14437d5cc692e6e9e3937c1d0a9c9">More...</a><br /></td></tr>
+<tr class="separator:a55b14437d5cc692e6e9e3937c1d0a9c9 inherit pub_methods_classShape"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd40fc7476085e7884620b330d88f40c inherit pub_methods_classShape"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShape.html#afd40fc7476085e7884620b330d88f40c">getOutlineThickness</a> () const</td></tr>
+<tr class="memdesc:afd40fc7476085e7884620b330d88f40c inherit pub_methods_classShape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the outline thickness of the shape.  <a href="classShape.html#afd40fc7476085e7884620b330d88f40c">More...</a><br /></td></tr>
+<tr class="separator:afd40fc7476085e7884620b330d88f40c inherit pub_methods_classShape"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a802b22305bd3b191321ace4530dd55a4 inherit pub_methods_classShape"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShape.html#a802b22305bd3b191321ace4530dd55a4">setPosition</a> (float x, float y)</td></tr>
+<tr class="memdesc:a802b22305bd3b191321ace4530dd55a4 inherit pub_methods_classShape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the position of the shape.  <a href="classShape.html#a802b22305bd3b191321ace4530dd55a4">More...</a><br /></td></tr>
+<tr class="separator:a802b22305bd3b191321ace4530dd55a4 inherit pub_methods_classShape"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a986fb294ca2f4dd4b24f276a435938d6 inherit pub_methods_classShape"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShape.html#a986fb294ca2f4dd4b24f276a435938d6">setPosition</a> (const sf::Vector2f &amp;<a class="el" href="classShape.html#a1834123de7c78cb0ac9d04d1abb50368">position</a>)</td></tr>
+<tr class="memdesc:a986fb294ca2f4dd4b24f276a435938d6 inherit pub_methods_classShape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the position of the shape.  <a href="classShape.html#a986fb294ca2f4dd4b24f276a435938d6">More...</a><br /></td></tr>
+<tr class="separator:a986fb294ca2f4dd4b24f276a435938d6 inherit pub_methods_classShape"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab631b359d1147081e6133ac09f3f9251 inherit pub_methods_classShape"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShape.html#ab631b359d1147081e6133ac09f3f9251">draw</a> (sf::RenderWindow &amp;target, sf::RenderStates states=sf::RenderStates::Default) const</td></tr>
+<tr class="memdesc:ab631b359d1147081e6133ac09f3f9251 inherit pub_methods_classShape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual method: Draw the shape on the specified render target.  <a href="classShape.html#ab631b359d1147081e6133ac09f3f9251">More...</a><br /></td></tr>
+<tr class="separator:ab631b359d1147081e6133ac09f3f9251 inherit pub_methods_classShape"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b2fe550cfe87b7b470c5efb1d5b0912 inherit pub_methods_classShape"><td class="memItemLeft" align="right" valign="top">const sf::Transform &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShape.html#a6b2fe550cfe87b7b470c5efb1d5b0912">getTransform</a> () const</td></tr>
+<tr class="memdesc:a6b2fe550cfe87b7b470c5efb1d5b0912 inherit pub_methods_classShape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the shape transform.  <a href="classShape.html#a6b2fe550cfe87b7b470c5efb1d5b0912">More...</a><br /></td></tr>
+<tr class="separator:a6b2fe550cfe87b7b470c5efb1d5b0912 inherit pub_methods_classShape"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab526bdb80229640854ffb5204c96747c inherit pub_methods_classShape"><td class="memItemLeft" align="right" valign="top">const sf::Transform &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShape.html#ab526bdb80229640854ffb5204c96747c">getInverseTransform</a> () const</td></tr>
+<tr class="memdesc:ab526bdb80229640854ffb5204c96747c inherit pub_methods_classShape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the inverse shape transform.  <a href="classShape.html#ab526bdb80229640854ffb5204c96747c">More...</a><br /></td></tr>
+<tr class="separator:ab526bdb80229640854ffb5204c96747c inherit pub_methods_classShape"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a9d89caa48638fc813d168691cff5d57c"><td class="memItemLeft" align="right" valign="top"><a id="a9d89caa48638fc813d168691cff5d57c"></a>
+sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLine.html#a9d89caa48638fc813d168691cff5d57c">direction</a></td></tr>
+<tr class="memdesc:a9d89caa48638fc813d168691cff5d57c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Direction of the line. <br /></td></tr>
+<tr class="separator:a9d89caa48638fc813d168691cff5d57c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97d2192cc259a0513d60b5d170d75788"><td class="memItemLeft" align="right" valign="top"><a id="a97d2192cc259a0513d60b5d170d75788"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLine.html#a97d2192cc259a0513d60b5d170d75788">thickness</a></td></tr>
+<tr class="memdesc:a97d2192cc259a0513d60b5d170d75788"><td class="mdescLeft">&#160;</td><td class="mdescRight">Thickness of the line. <br /></td></tr>
+<tr class="separator:a97d2192cc259a0513d60b5d170d75788"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_methods_classShape"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classShape')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classShape.html">Shape</a></td></tr>
+<tr class="memitem:aaa8d87171e65e0d8ba3c5459978992a7 inherit pro_methods_classShape"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShape.html#aaa8d87171e65e0d8ba3c5459978992a7">Shape</a> ()</td></tr>
+<tr class="memdesc:aaa8d87171e65e0d8ba3c5459978992a7 inherit pro_methods_classShape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classShape.html" title="Represents a shape in 2D space.">Shape</a> object.  <a href="classShape.html#aaa8d87171e65e0d8ba3c5459978992a7">More...</a><br /></td></tr>
+<tr class="separator:aaa8d87171e65e0d8ba3c5459978992a7 inherit pro_methods_classShape"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2529ca668908be63f160a88dad62f42a inherit pro_methods_classShape"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classShape.html#a2529ca668908be63f160a88dad62f42a">update</a> ()</td></tr>
+<tr class="memdesc:a2529ca668908be63f160a88dad62f42a inherit pro_methods_classShape"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the texture of the shape.  <a href="classShape.html#a2529ca668908be63f160a88dad62f42a">More...</a><br /></td></tr>
+<tr class="separator:a2529ca668908be63f160a88dad62f42a inherit pro_methods_classShape"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Represents a line in 2D space. </p>
+<p>The <a class="el" href="classLine.html" title="Represents a line in 2D space.">Line</a> class is derived from the <a class="el" href="classShape.html" title="Represents a shape in 2D space.">Shape</a> class and defines a line segment with a specified direction and thickness. </p>
+
+<p class="definition">Definition at line <a class="el" href="Line_8hpp_source.html#l00014">14</a> of file <a class="el" href="Line_8hpp_source.html">Line.hpp</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a71c9902d542a0a753382edf82571068d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71c9902d542a0a753382edf82571068d">&#9670;&nbsp;</a></span>Line()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Line::Line </td>
+          <td>(</td>
+          <td class="paramtype">const sf::Vector2f &amp;&#160;</td>
+          <td class="paramname"><em>point1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const sf::Vector2f &amp;&#160;</td>
+          <td class="paramname"><em>point2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">sf::Color&#160;</td>
+          <td class="paramname"><em>stroke</em> = <code>sf::Color::White</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>stroke_width</em> = <code>1.f</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructs a <a class="el" href="classLine.html" title="Represents a line in 2D space.">Line</a> object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">point1</td><td>The starting point of the line. </td></tr>
+    <tr><td class="paramname">point2</td><td>The ending point of the line. </td></tr>
+    <tr><td class="paramname">stroke</td><td>The color of the line (default is sf::Color::White). </td></tr>
+    <tr><td class="paramname">stroke_width</td><td>The thickness of the line (default is 1.0). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="Line_8cpp_source.html#l00003">3</a> of file <a class="el" href="Line_8cpp_source.html">Line.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;    : <a class="code" href="classLine.html#a9d89caa48638fc813d168691cff5d57c">direction</a>(point2 - point1), <a class="code" href="classLine.html#a97d2192cc259a0513d60b5d170d75788">thickness</a>(stroke_width) {</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    <a class="code" href="classShape.html#a802b22305bd3b191321ace4530dd55a4">setPosition</a>(point1);</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    <a class="code" href="classLine.html#a33cf5b0af7aa6a488ca0ae2a33536538">setThickness</a>(stroke_width);</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <a class="code" href="classShape.html#a730df53c07d9d33c6deebff222d290cd">setFillColor</a>(stroke);</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <a class="code" href="classShape.html#a2529ca668908be63f160a88dad62f42a">update</a>();</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;}</div>
+<div class="ttc" id="aclassLine_html_a33cf5b0af7aa6a488ca0ae2a33536538"><div class="ttname"><a href="classLine.html#a33cf5b0af7aa6a488ca0ae2a33536538">Line::setThickness</a></div><div class="ttdeci">void setThickness(float thickness)</div><div class="ttdoc">Sets the thickness of the line.</div><div class="ttdef"><b>Definition:</b> <a href="Line_8cpp_source.html#l00012">Line.cpp:12</a></div></div>
+<div class="ttc" id="aclassLine_html_a97d2192cc259a0513d60b5d170d75788"><div class="ttname"><a href="classLine.html#a97d2192cc259a0513d60b5d170d75788">Line::thickness</a></div><div class="ttdeci">float thickness</div><div class="ttdoc">Thickness of the line.</div><div class="ttdef"><b>Definition:</b> <a href="Line_8hpp_source.html#l00017">Line.hpp:17</a></div></div>
+<div class="ttc" id="aclassLine_html_a9d89caa48638fc813d168691cff5d57c"><div class="ttname"><a href="classLine.html#a9d89caa48638fc813d168691cff5d57c">Line::direction</a></div><div class="ttdeci">sf::Vector2f direction</div><div class="ttdoc">Direction of the line.</div><div class="ttdef"><b>Definition:</b> <a href="Line_8hpp_source.html#l00016">Line.hpp:16</a></div></div>
+<div class="ttc" id="aclassShape_html_a2529ca668908be63f160a88dad62f42a"><div class="ttname"><a href="classShape.html#a2529ca668908be63f160a88dad62f42a">Shape::update</a></div><div class="ttdeci">void update()</div><div class="ttdoc">Sets the texture of the shape.</div><div class="ttdef"><b>Definition:</b> <a href="Shape_8cpp_source.html#l00048">Shape.cpp:48</a></div></div>
+<div class="ttc" id="aclassShape_html_a730df53c07d9d33c6deebff222d290cd"><div class="ttname"><a href="classShape.html#a730df53c07d9d33c6deebff222d290cd">Shape::setFillColor</a></div><div class="ttdeci">void setFillColor(const sf::Color &amp;color)</div><div class="ttdoc">Sets the fill color of the shape.</div><div class="ttdef"><b>Definition:</b> <a href="Shape_8cpp_source.html#l00018">Shape.cpp:18</a></div></div>
+<div class="ttc" id="aclassShape_html_a802b22305bd3b191321ace4530dd55a4"><div class="ttname"><a href="classShape.html#a802b22305bd3b191321ace4530dd55a4">Shape::setPosition</a></div><div class="ttdeci">void setPosition(float x, float y)</div><div class="ttdoc">Sets the position of the shape.</div><div class="ttdef"><b>Definition:</b> <a href="Shape_8cpp_source.html#l00183">Shape.cpp:183</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="afe6672bc7667cf45739c46f9fc8cb237"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe6672bc7667cf45739c46f9fc8cb237">&#9670;&nbsp;</a></span>getLength()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Line::getLength </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculates and returns the length of the line. </p>
+<dl class="section return"><dt>Returns</dt><dd>The length of the line. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="Line_8cpp_source.html#l00014">14</a> of file <a class="el" href="Line_8cpp_source.html">Line.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;                            {</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordflow">return</span> std::sqrt(<a class="code" href="classLine.html#a9d89caa48638fc813d168691cff5d57c">direction</a>.x * <a class="code" href="classLine.html#a9d89caa48638fc813d168691cff5d57c">direction</a>.x + <a class="code" href="classLine.html#a9d89caa48638fc813d168691cff5d57c">direction</a>.y * <a class="code" href="classLine.html#a9d89caa48638fc813d168691cff5d57c">direction</a>.y);</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a45403bc4d7250a5409d64f4dcb5e592b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45403bc4d7250a5409d64f4dcb5e592b">&#9670;&nbsp;</a></span>getPoint()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">sf::Vector2f Line::getPoint </td>
+          <td>(</td>
+          <td class="paramtype">std::size_t&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the position of a point on the line. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>The index of the point (0 for the starting point, 1 for the end point, 2 for the first additional point, 3 for the second additional point). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The position of the specified point on the line. </dd></dl>
+
+<p>Implements <a class="el" href="classShape.html#a2a0aa8dc1440e2c2d6819e03b75fb862">Shape</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="Line_8cpp_source.html#l00020">20</a> of file <a class="el" href="Line_8cpp_source.html">Line.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;                                               {</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    sf::Vector2f unitDirection = <a class="code" href="classLine.html#a9d89caa48638fc813d168691cff5d57c">direction</a> / <a class="code" href="classLine.html#afe6672bc7667cf45739c46f9fc8cb237">getLength</a>();</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    sf::Vector2f unitPerpendicular(-unitDirection.y, unitDirection.x);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    sf::Vector2f offset = (<a class="code" href="classLine.html#a97d2192cc259a0513d60b5d170d75788">thickness</a> / 2.f) * unitPerpendicular;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordflow">switch</span> (index) {</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keywordflow">case</span> 0:</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            <span class="keywordflow">return</span> offset;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keywordflow">case</span> 1:</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            <span class="keywordflow">return</span> (<a class="code" href="classLine.html#a9d89caa48638fc813d168691cff5d57c">direction</a> + offset);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="keywordflow">case</span> 2:</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            <span class="keywordflow">return</span> (<a class="code" href="classLine.html#a9d89caa48638fc813d168691cff5d57c">direction</a> - offset);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keywordflow">case</span> 3:</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            <span class="keywordflow">return</span> (-offset);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    }</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;}</div>
+<div class="ttc" id="aclassLine_html_afe6672bc7667cf45739c46f9fc8cb237"><div class="ttname"><a href="classLine.html#afe6672bc7667cf45739c46f9fc8cb237">Line::getLength</a></div><div class="ttdeci">float getLength() const</div><div class="ttdoc">Calculates and returns the length of the line.</div><div class="ttdef"><b>Definition:</b> <a href="Line_8cpp_source.html#l00014">Line.cpp:14</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aa0b389aa6db6ed246e6fd6534bf5853c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0b389aa6db6ed246e6fd6534bf5853c">&#9670;&nbsp;</a></span>getPointCount()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::size_t Line::getPointCount </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the total number of points representing the line. </p>
+<p>In this case, it always returns 4 since a line is represented by 4 points (start, end, and two additional points for thickness).</p>
+<dl class="section return"><dt>Returns</dt><dd>The number of points representing the line. </dd></dl>
+
+<p>Implements <a class="el" href="classShape.html#adff62582e9c9809b8f3e79202fd2dec4">Shape</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="Line_8cpp_source.html#l00018">18</a> of file <a class="el" href="Line_8cpp_source.html">Line.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;{ <span class="keywordflow">return</span> 4; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a33cf5b0af7aa6a488ca0ae2a33536538"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33cf5b0af7aa6a488ca0ae2a33536538">&#9670;&nbsp;</a></span>setThickness()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Line::setThickness </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>thickness</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the thickness of the line. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">thickness</td><td>The new thickness of the line. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="Line_8cpp_source.html#l00012">12</a> of file <a class="el" href="Line_8cpp_source.html">Line.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;{ <a class="code" href="classLine.html#a97d2192cc259a0513d60b5d170d75788">thickness</a> = <a class="code" href="classLine.html#a97d2192cc259a0513d60b5d170d75788">thickness</a>; }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>src/graphics/<a class="el" href="Line_8hpp_source.html">Line.hpp</a></li>
+<li>src/graphics/<a class="el" href="Line_8cpp_source.html">Line.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="nav-path" class="navpath">
+    <address>
+        Copyright © 2023-2023 the csc10003-svg-reader developers @ FIT-HCMUS.
+    </address>
+</div>
+</body>
+</html>
