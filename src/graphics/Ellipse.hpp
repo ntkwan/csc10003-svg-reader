@@ -1,7 +1,7 @@
 #ifndef ELLIPSE_HPP_
 #define ELLIPSE_HPP_
 
-#include "Circle.hpp"
+#include "Shape.hpp"
 
 /**
  * @brief Represents an ellipse in 2D space.
@@ -9,8 +9,10 @@
  * The Ellipse class is derived from the Circle class and defines an ellipse
  * with a variable radius in the x and y directions.
  */
-class Ellipse : public Circle {
-private:
+class Ellipse : public Shape {
+protected:
+    const int SCALE =
+        100000;           ///< Scale factor for determining the number of points
     sf::Vector2f radius;  ///< Radii of the ellipse in the x and y directions
 
 public:
@@ -25,6 +27,16 @@ public:
      */
     Ellipse(const sf::Vector2f &radius, const sf::Vector2f &center,
             sf::Color fill, sf::Color stroke, float stroke_thickness);
+
+    /**
+     * @brief Gets the total number of points representing the ellipse.
+     *
+     * In this case, it returns a large number (SCALE) to approximate a smooth
+     * ellipse.
+     *
+     * @return The number of points representing the ellipse.
+     */
+    virtual std::size_t getPointCount() const;
 
     /**
      * @brief Gets the position of a point on the ellipse.
