@@ -1,6 +1,7 @@
 #include "Parser.hpp"
 
 #include <iostream>
+#include <sstream>
 #include <vector>
 
 Parser* Parser::instance = nullptr;
@@ -38,22 +39,27 @@ std::string Parser::getAttribute(pugi::xml_node node, std::string name) {
 };
 
 sf::Color Parser::parseColor(pugi::xml_node node, std::string name) {
-    auto getAtribColor = [](std::string color) -> sf::Color {
-        std::string c = "";
-        std::vector< int > rgb;
-        for (int i = 4; i < (int)color.size(); ++i) {
-            if ('0' <= color[i] && color[i] <= '9') {
-                c += color[i];
-            } else {
-                if (c.size() > 0) {
-                    rgb.push_back(std::stoi(c));
-                    c.clear();
-                }
-            }
-        }
+    auto getRgbColor = [](std::string color) -> sf::Color {
+        int r, g, b;
+        float a = 1;
+        sscanf(color.c_str(), "rgb(%d,%d,%d,%f)", &r, &g, &b, &a);
+        return sf::Color(r, g, b, 255 * a);
+    };
 
-        sf::Color result = sf::Color(rgb[0], rgb[1], rgb[2]);
-        return result;
+    auto getHexColor = [](std::string color) -> sf::Color {
+        std::stringstream ss;
+        ss << std::hex << color.substr(1, 2) << " " << color.substr(3, 2) << " "
+           << color.substr(5, 2);
+        int r, g, b;
+        ss >> r >> g >> b;
+        if (color.size() > 7) {
+            std::stringstream ss;
+            ss << std::hex << color.substr(7, 2);
+            int a;
+            ss >> a;
+            return sf::Color(r, g, b, a);
+        }
+        return sf::Color(r, g, b, 255);
     };
 
     std::string color = getAttribute(node, name);
@@ -62,14 +68,17 @@ sf::Color Parser::parseColor(pugi::xml_node node, std::string name) {
         return sf::Color::Transparent;
     else {
         sf::Color result;
-        if (color.find("rgb") == std::string::npos) {
+        if (color[0] == '#') {
+            result = getHexColor(color);
+        } else if (color.find("rgb") == std::string::npos) {
             auto color_code = color_map.find(color);
             if (color_code == color_map.end()) exit(-1);
             result = color_code->second;
         } else
-            result = getAtribColor(color);
+            result = getRgbColor(color);
 
-        result.a = std::stof(getAttribute(node, name + "-opacity")) *
+        result.a = result.a / 255.f *
+                   std::stof(getAttribute(node, name + "-opacity")) *
                    std::stof(getAttribute(node, "opacity")) * 255;
         return result;
     }
