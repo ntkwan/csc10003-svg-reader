@@ -1,0 +1,23 @@
+@startuml
+class "Parser" as C_0001190833385181412596
+class C_0001190833385181412596 {
++Parser() = deleted : void
+-Parser() : void
++~Parser() : void
+..
++getAttribute() : std::string
+{static} +getInstance() : Parser *
++parseColor() : sf::Color
++parsePoints() : std::vector<sf::Vector2f>
++parseSVG() : void
++renderSVG() : void
+__
+{static} -instance : Parser *
+-shapes : std::vector<Shape *>
+-svg : pugi::xml_node
+}
+C_0001190833385181412596 --> C_0001190833385181412596 : -instance
+
+'Generated with clang-uml, version 0.4.1
+'LLVM version Ubuntu clang version 15.0.7
+@enduml

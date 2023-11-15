@@ -1,10 +1,10 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classShape.html" title="Represents a shape in 2D space." alt="" coords="5,132,68,159"/>
+<area shape="rect" id="node1" href="$classShape.html" title="Represents a shape in 2D space." alt="" coords="5,107,68,133"/>
 <area shape="rect" id="node2" href="$classCircle.html" title="Represents a circle in 2D space." alt="" coords="124,5,183,32"/>
 <area shape="rect" id="node4" href="$classLine.html" title="Represents a line in 2D space." alt="" coords="129,56,178,83"/>
 <area shape="rect" id="node5" href="$classPolygon.html" title="Represents a polygon in 2D space." alt="" coords="116,107,191,133"/>
-<area shape="rect" id="node6" href="$classPolyline.html" title="Represents a polyline in 2D space." alt="" coords="116,157,191,184"/>
-<area shape="rect" id="node7" href="$classRect.html" title="Represents a rectangle in 2D space." alt="" coords="128,208,179,235"/>
-<area shape="rect" id="node8" href="$classText.html" title="Represents text in 2D space." alt="" coords="129,259,178,285"/>
+<area shape="rect" id="node7" href="$classPolyline.html" title="Represents a polyline in 2D space." alt="" coords="116,157,191,184"/>
+<area shape="rect" id="node8" href="$classText.html" title="Represents text in 2D space." alt="" coords="129,208,178,235"/>
 <area shape="rect" id="node3" href="$classEllipse.html" title="Represents an ellipse in 2D space." alt="" coords="239,5,304,32"/>
+<area shape="rect" id="node6" href="$classRect.html" title="Represents a rectangle in 2D space." alt="" coords="246,107,297,133"/>
 </map>

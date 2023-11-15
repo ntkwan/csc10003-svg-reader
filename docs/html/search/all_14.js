@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['y_80',['y',['../classRect.html#a4ea33d8210fa0b8b0d6ef3f7e06e6b27',1,'Rect']]]
+  ['_7eparser_78',['~Parser',['../classParser.html#a3e658b5917a93a3ef648050d060e3a93',1,'Parser']]],
+  ['_7eshape_79',['~Shape',['../classShape.html#ac8ad2fd02e1e94beeb98e65ab795cd56',1,'Shape']]]
 ];
