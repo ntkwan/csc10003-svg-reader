@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['scale_50',['SCALE',['../classCircle.html#a09a5b2bd50c15d745b0e8dcb7b649a2e',1,'Circle']]],
+  ['scale_50',['SCALE',['../classEllipse.html#a44c415dbbb88538dc768175b53cd5076',1,'Ellipse']]],
   ['scale_51',['scale',['../classShape.html#af2eec928acf0ad3c7943f1115c3d43bf',1,'Shape']]],
   ['setfillcolor_52',['setFillColor',['../classShape.html#a730df53c07d9d33c6deebff222d290cd',1,'Shape']]],
   ['setoutlinecolor_53',['setOutlineColor',['../classShape.html#afd28c6c9ea0bb3f135d39fb5f469f044',1,'Shape']]],

@@ -2,8 +2,8 @@ var hierarchy =
 [
     [ "Parser", "classParser.html", null ],
     [ "Shape", "classShape.html", [
-      [ "Circle", "classCircle.html", [
-        [ "Ellipse", "classEllipse.html", null ]
+      [ "Ellipse", "classEllipse.html", [
+        [ "Circle", "classCircle.html", null ]
       ] ],
       [ "Line", "classLine.html", null ],
       [ "Polygon", "classPolygon.html", [

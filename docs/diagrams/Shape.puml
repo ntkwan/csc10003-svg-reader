@@ -39,23 +39,20 @@ __
 -transform_need_update : bool
 -vertices : sf::VertexArray
 }
-class "Circle" as C_0001034450863184659349
-class C_0001034450863184659349 {
-+Circle() : void
-..
-+getPoint() const : sf::Vector2f
-+getPointCount() const : std::size_t
-__
--SCALE : const int
--radius : float
-}
 class "Ellipse" as C_0000008382941311063885
 class C_0000008382941311063885 {
 +Ellipse() : void
 ..
 +getPoint() const : sf::Vector2f
++getPointCount() const : std::size_t
 __
--radius : sf::Vector2f
+#SCALE : const int
+#radius : sf::Vector2f
+}
+class "Circle" as C_0001034450863184659349
+class C_0001034450863184659349 {
++Circle() : void
+__
 }
 class "Line" as C_0000446862122271229469
 class C_0000446862122271229469 {
@@ -114,8 +111,8 @@ __
 {static} +font : sf::Font
 -text : sf::Text
 }
-C_0001672291103657734280 <|-- C_0001034450863184659349
-C_0001034450863184659349 <|-- C_0000008382941311063885
+C_0001672291103657734280 <|-- C_0000008382941311063885
+C_0000008382941311063885 <|-- C_0001034450863184659349
 C_0001672291103657734280 <|-- C_0000446862122271229469
 C_0001672291103657734280 <|-- C_0000359217836834441732
 C_0001672291103657734280 <|-- C_0001361390076764550325
