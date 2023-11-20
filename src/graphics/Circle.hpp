@@ -6,7 +6,7 @@
 /**
  * @brief Represents a circle in 2D space.
  *
- * The Circle class is derived from the Shape class and defines a circle
+ * The Circle class is derived from the Ellipse class and defines a circle
  * with a specified radius, center, fill color, stroke color, and stroke
  * thickness.
  */

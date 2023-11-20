@@ -192,9 +192,9 @@ void Parser::parseSVG() {
     }
 }
 
-void Parser::renderSVG(sf::RenderWindow& window) {
+void Parser::renderSVG(Renderer& renderer) {
     for (auto shape : shapes) {
-        shape->draw(window);
+        shape->draw(renderer);
     }
 }
 

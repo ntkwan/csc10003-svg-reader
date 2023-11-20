@@ -46,8 +46,7 @@ public:
      * @param states The render states to apply (default is
      * sf::RenderStates::Default).
      */
-    void draw(sf::RenderWindow& target,
-              sf::RenderStates states = sf::RenderStates::Default) const;
+    void draw(Renderer& target) const;
 
     /**
      * @brief Gets the position of a vertex in the polyline.

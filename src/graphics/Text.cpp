@@ -16,6 +16,4 @@ std::size_t Text::getPointCount() const { return 0; }
 
 Vector2Df Text::getPoint(std::size_t index) const { return Vector2Df(0, 0); }
 
-void Text::draw(sf::RenderWindow& target, sf::RenderStates states) const {
-    target.draw(this->text);
-}
+void Text::draw(Renderer& target) const { target.window.draw(this->text); }

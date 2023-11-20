@@ -6,7 +6,7 @@
 /**
  * @brief Represents an ellipse in 2D space.
  *
- * The Ellipse class is derived from the Circle class and defines an ellipse
+ * The Ellipse class is derived from the Shape class and defines an ellipse
  * with a variable radius in the x and y directions.
  */
 class Ellipse : public Shape {
