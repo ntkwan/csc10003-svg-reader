@@ -1,0 +1,124 @@
+@startuml
+abstract "Shape" as C_0001672291103657734280
+abstract C_0001672291103657734280 {
+#Shape() : void
++~Shape() = default : void
+..
++draw() const : void
++getFillColor() const : const sf::Color &
++getInverseTransform() const : const sf::Transform &
++getOutlineColor() const : const sf::Color &
++getOutlineThickness() const : float
+{abstract} +getPoint() const = 0 : sf::Vector2f
+{abstract} +getPointCount() const = 0 : std::size_t
++getTransform() const : const sf::Transform &
++setFillColor() : void
++setOutlineColor() : void
++setOutlineThickness() : void
++setPosition() : void
++setPosition() : void
+#update() : void
+-updateFillColors() : void
+-updateOutline() : void
+-updateOutlineColors() : void
+__
+-bounds : sf::FloatRect
+-fill_color : sf::Color
+-inside_bounds : sf::FloatRect
+-inverse_transform : sf::Transform
+-inverse_transform_need_update : bool
+-origin : sf::Vector2f
+-outline_color : sf::Color
+-outline_thickness : float
+-outline_vertices : sf::VertexArray
+-position : sf::Vector2f
+-rotation : float
+-scale : sf::Vector2f
+-texture : const sf::Texture *
+-transform : sf::Transform
+-transform_need_update : bool
+-vertices : sf::VertexArray
+}
+class "Ellipse" as C_0000008382941311063885
+class C_0000008382941311063885 {
++Ellipse() : void
+..
++getPoint() const : sf::Vector2f
++getPointCount() const : std::size_t
+__
+#SCALE : const int
+#radius : sf::Vector2f
+}
+class "Circle" as C_0001034450863184659349
+class C_0001034450863184659349 {
++Circle() : void
+__
+}
+class "Line" as C_0000446862122271229469
+class C_0000446862122271229469 {
++Line() : void
+..
++getLength() const : float
++getPoint() const : sf::Vector2f
++getPointCount() const : std::size_t
++setThickness() : void
+__
+-direction : sf::Vector2f
+-thickness : float
+}
+class "Polygon" as C_0000359217836834441732
+class C_0000359217836834441732 {
++Polygon() : void
+..
++addPoint() : void
++getPoint() const : sf::Vector2f
++getPointCount() const : std::size_t
++polygonUpdate() : void
+__
+-points : std::vector<sf::Vector2f>
+}
+class "Polyline" as C_0001361390076764550325
+class C_0001361390076764550325 {
++Polyline() : void
+..
++addPoint() : void
++draw() const : void
++getPoint() const : sf::Vector2f
++getPointCount() const : std::size_t
++polylineUpdate() : void
+__
+-points : std::vector<sf::Vector2f>
+}
+class "Rect" as C_0001903790827945341156
+class C_0001903790827945341156 {
++Rect() : void
+..
++getPoint() const : sf::Vector2f
++getPointCount() const : std::size_t
+__
+-height : float
+-rect_size : sf::Vector2f
+-width : float
+}
+class "Text" as C_0001430338048021739765
+class C_0001430338048021739765 {
++Text() : void
+..
++draw() const : void
++getPoint() const : sf::Vector2f
++getPointCount() const : std::size_t
+__
+{static} +font : sf::Font
+-text : sf::Text
+}
+C_0001672291103657734280 <|-- C_0000008382941311063885
+C_0000008382941311063885 <|-- C_0001034450863184659349
+C_0001672291103657734280 <|-- C_0000446862122271229469
+C_0001672291103657734280 <|-- C_0000359217836834441732
+C_0001672291103657734280 <|-- C_0001361390076764550325
+C_0000359217836834441732 <|-- C_0001903790827945341156
+C_0001672291103657734280 <|-- C_0001430338048021739765
+
+'Generated with clang-uml, version 0.4.1
+'LLVM version Ubuntu clang version 15.0.7
+@enduml

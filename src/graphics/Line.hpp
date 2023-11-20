@@ -13,8 +13,8 @@
  */
 class Line : public Shape {
 private:
-    sf::Vector2f direction;  ///< Direction of the line
-    float thickness;         ///< Thickness of the line
+    Vector2Df direction;  ///< Direction of the line
+    float thickness;      ///< Thickness of the line
 
 public:
     /**
@@ -25,7 +25,7 @@ public:
      * @param stroke The color of the line (default is sf::Color::White).
      * @param stroke_width The thickness of the line (default is 1.0).
      */
-    Line(const sf::Vector2f& point1, const sf::Vector2f& point2,
+    Line(const Vector2Df& point1, const Vector2Df& point2,
          sf::Color stroke = sf::Color::White, float stroke_width = 1.f);
 
     /**
@@ -60,7 +60,7 @@ public:
      * point).
      * @return The position of the specified point on the line.
      */
-    virtual sf::Vector2f getPoint(std::size_t index) const;
+    virtual Vector2Df getPoint(std::size_t index) const;
 };
 
 #endif

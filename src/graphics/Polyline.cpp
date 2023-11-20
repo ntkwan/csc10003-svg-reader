@@ -2,17 +2,17 @@
 
 namespace {
     struct Edge {
-        sf::Vector2f start, end;
+        Vector2Df start, end;
     };
     struct ClosedPolygon {
-        std::vector< sf::Vector2f > cP;
+        std::vector< Vector2Df > cP;
     };
     struct PolygonPoint {
-        sf::Vector2f point;
+        Vector2Df point;
         bool fill;
     };
     // point to edge follow the circle shape
-    std::vector< Edge > pointToEdge(const std::vector< sf::Vector2f >& points) {
+    std::vector< Edge > pointToEdge(const std::vector< Vector2Df >& points) {
         std::vector< Edge > edges;
         int n = points.size();
         for (int i = 0; i < n; i++) {
@@ -24,14 +24,14 @@ namespace {
         return edges;
     }
     bool isPerpendicular(const Edge& edge1, const Edge& edge2) {
-        sf::Vector2f dir1 = edge1.end - edge1.start;
-        sf::Vector2f dir2 = edge2.end - edge2.start;
+        Vector2Df dir1 = edge1.end - edge1.start;
+        Vector2Df dir2 = edge2.end - edge2.start;
 
         float dotProduct = dir1.x * dir2.x + dir1.y * dir2.y;
         return dotProduct == 0;
     }
     int findPointPosition(const std::vector< PolygonPoint >& points,
-                          const sf::Vector2f& point) {
+                          const Vector2Df& point) {
         int n = points.size();
         for (int i = 0; i < n; i++) {
             if (points[i].point.x == point.x && points[i].point.y == point.y)
@@ -52,7 +52,7 @@ namespace {
     }
     // merge the intersection points between the virtual edge and polyline edges
     std::vector< PolygonPoint > mergeIntersectionPoints(
-        const std::vector< sf::Vector2f >& points) {
+        const std::vector< Vector2Df >& points) {
         std::vector< Edge > edges = pointToEdge(points);
         int n = edges.size();
 
@@ -80,7 +80,7 @@ namespace {
             float intersectionX = x1 + t * (x2 - x1);
             float intersectionY = y1 + t * (y2 - y1);
 
-            sf::Vector2f intersectionPoint{intersectionX, intersectionY};
+            Vector2Df intersectionPoint{intersectionX, intersectionY};
             PolygonPoint intersectionPolygonPoint{intersectionPoint, 1};
 
             int posInsert = findPointPosition(_points, edges[i].start);
@@ -93,7 +93,7 @@ namespace {
     }
     // find closed polygon to fill color
     std::vector< ClosedPolygon > findClosedPolygons(
-        const std::vector< sf::Vector2f >& points) {
+        const std::vector< Vector2Df >& points) {
         std::vector< ClosedPolygon > _cP;
         std::vector< PolygonPoint > mPoints = mergeIntersectionPoints(points);
         int n = mPoints.size();
@@ -115,7 +115,7 @@ namespace {
         }
         return _cP;
     }
-    sf::Vector2f findIntersection(const Edge& edge1, const Edge& edge2) {
+    Vector2Df findIntersection(const Edge& edge1, const Edge& edge2) {
         float x1 = edge1.start.x;
         float y1 = edge1.start.y;
         float x2 = edge1.end.x;
@@ -129,7 +129,7 @@ namespace {
         float det = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
 
         if (det == 0) {
-            return sf::Vector2f(-1, -1);
+            return Vector2Df(-1, -1);
         }
 
         float t = ((x1 - x3) * (y3 - y4) - (y1 - y3) * (x3 - x4)) /
@@ -138,7 +138,7 @@ namespace {
         float intersectionX = x1 + t * (x2 - x1);
         float intersectionY = y1 + t * (y2 - y1);
 
-        return sf::Vector2f(intersectionX, intersectionY);
+        return Vector2Df(intersectionX, intersectionY);
     }
 }  // namespace
 
@@ -149,33 +149,33 @@ Polyline::Polyline(float stroke_width, const sf::Color& stroke_color,
     setFillColor(fill);
 }
 
-void Polyline::addPoint(const sf::Vector2f& point) { points.push_back(point); }
+void Polyline::addPoint(const Vector2Df& point) { points.push_back(point); }
 
 void Polyline::polylineUpdate() { update(); }
 
-sf::Vector2f Polyline::getPoint(std::size_t index) const {
+Vector2Df Polyline::getPoint(std::size_t index) const {
     if (index < points.size()) {
         return points[index];
     }
-    return sf::Vector2f(0, 0);
+    return Vector2Df(0, 0);
 }
 
 std::size_t Polyline::getPointCount() const { return points.size(); }
 void Polyline::draw(sf::RenderWindow& target, sf::RenderStates states) const {
     if (points.size() < 2) return;
     sf::VertexArray lineStrip(sf::PrimitiveType::Quads);
-    sf::Vector2f p1a, p1b, p2a, p2b;
-    sf::Vector2f r_p1a, r_p1b, r_p2a, r_p2b;
+    Vector2Df p1a, p1b, p2a, p2b;
+    Vector2Df r_p1a, r_p1b, r_p2a, r_p2b;
     for (std::size_t i = 1; i < points.size(); i++) {
-        sf::Vector2f p1 = points[i - 1];
-        sf::Vector2f p2 = points[i];
+        Vector2Df p1 = points[i - 1];
+        Vector2Df p2 = points[i];
 
-        sf::Vector2f delta = p2 - p1;
+        Vector2Df delta = p2 - p1;
         float length = std::sqrt(delta.x * delta.x + delta.y * delta.y);
 
-        sf::Vector2f unitDirection = delta / length;
+        Vector2Df unitDirection = delta / length;
 
-        sf::Vector2f perpendicularDirection(-unitDirection.y, unitDirection.x);
+        Vector2Df perpendicularDirection(-unitDirection.y, unitDirection.x);
 
         float thickness = getOutlineThickness();
         sf::Color stroke = getOutlineColor();
@@ -188,20 +188,29 @@ void Polyline::draw(sf::RenderWindow& target, sf::RenderStates states) const {
             sf::VertexArray lS(sf::PrimitiveType::Quads);
             if (isPerpendicular({points[i], points[i - 1]},
                                 {points[i - 1], points[i - 2]})) {
-                lS.append(sf::Vertex(
-                    findIntersection({r_p1a, r_p2a}, {p1a, p2a}), stroke));
-                lS.append(sf::Vertex(
-                    findIntersection({r_p1a, r_p2a}, {p1b, p2b}), stroke));
-                lS.append(sf::Vertex(
-                    findIntersection({r_p1b, r_p2b}, {p1b, p2b}), stroke));
-                lS.append(sf::Vertex(
-                    findIntersection({r_p1b, r_p2b}, {p1a, p2a}), stroke));
+                Vector2Df point_1 =
+                    findIntersection({r_p1a, r_p2a}, {p1a, p2a});
+                Vector2Df point_2 =
+                    findIntersection({r_p1a, r_p2a}, {p1b, p2b});
+                Vector2Df point_3 =
+                    findIntersection({r_p1b, r_p2b}, {p1b, p2b});
+                Vector2Df point_4 =
+                    findIntersection({r_p1b, r_p2b}, {p1a, p2a});
+
+                lS.append(
+                    sf::Vertex(sf::Vector2f(point_1.x, point_1.y), stroke));
+                lS.append(
+                    sf::Vertex(sf::Vector2f(point_2.x, point_2.y), stroke));
+                lS.append(
+                    sf::Vertex(sf::Vector2f(point_3.x, point_3.y), stroke));
+                lS.append(
+                    sf::Vertex(sf::Vector2f(point_4.x, point_4.y), stroke));
 
             } else {
-                lS.append(sf::Vertex(p1a, stroke));
-                lS.append(sf::Vertex(r_p2a, stroke));
-                lS.append(sf::Vertex(p1b, stroke));
-                lS.append(sf::Vertex(r_p2b, stroke));
+                lS.append(sf::Vertex(sf::Vector2f(p1a.x, p1a.y), stroke));
+                lS.append(sf::Vertex(sf::Vector2f(r_p2a.x, r_p2a.y), stroke));
+                lS.append(sf::Vertex(sf::Vector2f(p1b.x, p1b.y), stroke));
+                lS.append(sf::Vertex(sf::Vector2f(r_p2b.x, r_p2b.y), stroke));
             }
             target.draw(lS);
         }
@@ -209,10 +218,10 @@ void Polyline::draw(sf::RenderWindow& target, sf::RenderStates states) const {
         r_p1b = p1b;
         r_p2a = p2a;
         r_p2b = p2b;
-        lineStrip.append(sf::Vertex(p1a, stroke));
-        lineStrip.append(sf::Vertex(p1b, stroke));
-        lineStrip.append(sf::Vertex(p2b, stroke));
-        lineStrip.append(sf::Vertex(p2a, stroke));
+        lineStrip.append(sf::Vertex(sf::Vector2f(p1a.x, p1a.y), stroke));
+        lineStrip.append(sf::Vertex(sf::Vector2f(p1b.x, p1b.y), stroke));
+        lineStrip.append(sf::Vertex(sf::Vector2f(p2b.x, p2b.y), stroke));
+        lineStrip.append(sf::Vertex(sf::Vector2f(p2a.x, p2a.y), stroke));
     }
     std::vector< ClosedPolygon > cP = findClosedPolygons(points);
     if (cP.size() > 0) {
@@ -226,7 +235,8 @@ void Polyline::draw(sf::RenderWindow& target, sf::RenderStates states) const {
 
                 // Set the points of the shape based on the polygon
                 for (std::size_t j = 0; j < polygon.cP.size(); j++) {
-                    fillShape.setPoint(j, polygon.cP[j]);
+                    fillShape.setPoint(
+                        j, sf::Vector2f(polygon.cP[j].x, polygon.cP[j].y));
                 }
 
                 target.draw(fillShape);

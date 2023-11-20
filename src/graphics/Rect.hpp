@@ -12,9 +12,9 @@
  */
 class Rect : public Polygon {
 private:
-    float width;             ///< Width of the rectangle
-    float height;            ///< Height of the rectangle
-    sf::Vector2f rect_size;  ///< Size of the rectangle
+    float width;          ///< Width of the rectangle
+    float height;         ///< Height of the rectangle
+    Vector2Df rect_size;  ///< Size of the rectangle
 
 public:
     /**
@@ -47,7 +47,7 @@ public:
      * for bottom-right, 3 for bottom-left).
      * @return The position of the specified vertex in the rectangle.
      */
-    virtual sf::Vector2f getPoint(std::size_t index) const override;
+    virtual Vector2Df getPoint(std::size_t index) const override;
 };
 
 #endif  // RECT_HPP_

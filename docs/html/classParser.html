@@ -1,0 +1,711 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<!-- BEGIN opengraph metadata -->
+<meta property="og:title" content="Doxygen Awesome" />
+<meta property="og:image" content="https://repository-images.githubusercontent.com/348492097/4f16df80-88fb-11eb-9d31-4015ff22c452" />
+<meta property="og:description" content="Custom CSS theme for doxygen html-documentation with lots of customization parameters." />
+<meta property="og:url" content="https://jothepro.github.io/doxygen-awesome-css/" />
+<!-- END opengraph metadata -->
+<!-- BEGIN twitter metadata -->
+<meta name="twitter:image:src" content="https://repository-images.githubusercontent.com/348492097/4f16df80-88fb-11eb-9d31-4015ff22c452" />
+<meta name="twitter:title" content="Doxygen Awesome" />
+<meta name="twitter:description" content="Custom CSS theme for doxygen html-documentation with lots of customization parameters." />
+<!-- END twitter metadata -->
+<title>svg-reader: Parser Class Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link rel="icon" type="image/svg+xml" href="logo.drawio.svg"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript" src="toggle-alternative-theme.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeFragmentCopyButton.init()
+    DoxygenAwesomeDarkModeToggle.init()
+    DoxygenAwesomeParagraphLink.init()
+    DoxygenAwesomeInteractiveToc.init()
+    DoxygenAwesomeTabs.init()
+</script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="custom-alternative.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- https://tholman.com/github-corners/ -->
+<a href="https://github.com/ntkwan/csc10003-svg-reader" class="github-corner" title="View source on GitHub" target="_blank" rel="noopener noreferrer">
+    <svg viewBox="0 0 250 250" width="40" height="40" style="position: absolute; top: 0; border: 0; right: 0; z-index: 99;" aria-hidden="true">
+    <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">svg-reader
+   &#160;<span id="projectnumber">0.1</span>
+   </div>
+   <div id="projectbrief">Parse and render SVG files, handle user interactions.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('classParser.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="#pri-static-attribs">Static Private Attributes</a> &#124;
+<a href="classParser-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">Parser Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Represents a parser for SVG files.  
+ <a href="classParser.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="Parser_8hpp_source.html">Parser.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for Parser:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classParser__coll__graph.svg" width="158" height="38"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a48044a8caa14a251cb4dad9fb363658e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParser.html#a48044a8caa14a251cb4dad9fb363658e">Parser</a> (const <a class="el" href="classParser.html">Parser</a> &amp;)=delete</td></tr>
+<tr class="memdesc:a48044a8caa14a251cb4dad9fb363658e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deleted assignment operator to prevent copying of <a class="el" href="classParser.html" title="Represents a parser for SVG files.">Parser</a> instances.  <a href="classParser.html#a48044a8caa14a251cb4dad9fb363658e">More...</a><br /></td></tr>
+<tr class="separator:a48044a8caa14a251cb4dad9fb363658e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e1837d3a4b60eec5b50258ea3bc1788"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParser.html#a0e1837d3a4b60eec5b50258ea3bc1788">getAttribute</a> (pugi::xml_node node, std::string name)</td></tr>
+<tr class="memdesc:a0e1837d3a4b60eec5b50258ea3bc1788"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the Attribute object which is parsed from the XML file.  <a href="classParser.html#a0e1837d3a4b60eec5b50258ea3bc1788">More...</a><br /></td></tr>
+<tr class="separator:a0e1837d3a4b60eec5b50258ea3bc1788"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f5c01f3bf35f19f689ecaffc0cc18ee"><td class="memItemLeft" align="right" valign="top">sf::Color&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParser.html#a8f5c01f3bf35f19f689ecaffc0cc18ee">parseColor</a> (pugi::xml_node node, std::string name)</td></tr>
+<tr class="memdesc:a8f5c01f3bf35f19f689ecaffc0cc18ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse the color from the XML file.  <a href="classParser.html#a8f5c01f3bf35f19f689ecaffc0cc18ee">More...</a><br /></td></tr>
+<tr class="separator:a8f5c01f3bf35f19f689ecaffc0cc18ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad0aaf108fefc153a48223d30f14e5fcb"><td class="memItemLeft" align="right" valign="top">std::vector&lt; sf::Vector2f &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParser.html#ad0aaf108fefc153a48223d30f14e5fcb">parsePoints</a> (pugi::xml_node node)</td></tr>
+<tr class="memdesc:ad0aaf108fefc153a48223d30f14e5fcb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse the points from the XML file.  <a href="classParser.html#ad0aaf108fefc153a48223d30f14e5fcb">More...</a><br /></td></tr>
+<tr class="separator:ad0aaf108fefc153a48223d30f14e5fcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d207dcf9bd2e79b83862de49cf76d84"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParser.html#a8d207dcf9bd2e79b83862de49cf76d84">parseSVG</a> ()</td></tr>
+<tr class="memdesc:a8d207dcf9bd2e79b83862de49cf76d84"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parse the XML file.  <a href="classParser.html#a8d207dcf9bd2e79b83862de49cf76d84">More...</a><br /></td></tr>
+<tr class="separator:a8d207dcf9bd2e79b83862de49cf76d84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad498cb7da315304eb0a84e1ecd6f647b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParser.html#ad498cb7da315304eb0a84e1ecd6f647b">renderSVG</a> (sf::RenderWindow &amp;window)</td></tr>
+<tr class="memdesc:ad498cb7da315304eb0a84e1ecd6f647b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Render the shapes on the window.  <a href="classParser.html#ad498cb7da315304eb0a84e1ecd6f647b">More...</a><br /></td></tr>
+<tr class="separator:ad498cb7da315304eb0a84e1ecd6f647b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e658b5917a93a3ef648050d060e3a93"><td class="memItemLeft" align="right" valign="top"><a id="a3e658b5917a93a3ef648050d060e3a93"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParser.html#a3e658b5917a93a3ef648050d060e3a93">~Parser</a> ()</td></tr>
+<tr class="memdesc:a3e658b5917a93a3ef648050d060e3a93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor of <a class="el" href="classParser.html" title="Represents a parser for SVG files.">Parser</a>. <br /></td></tr>
+<tr class="separator:a3e658b5917a93a3ef648050d060e3a93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a06952fa44f19fdb573c1355ac26454c5"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classParser.html">Parser</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParser.html#a06952fa44f19fdb573c1355ac26454c5">getInstance</a> (const std::string &amp;file_name)</td></tr>
+<tr class="memdesc:a06952fa44f19fdb573c1355ac26454c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the singleton instance of <a class="el" href="classParser.html" title="Represents a parser for SVG files.">Parser</a>.  <a href="classParser.html#a06952fa44f19fdb573c1355ac26454c5">More...</a><br /></td></tr>
+<tr class="separator:a06952fa44f19fdb573c1355ac26454c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a350fc3e35535c5891cd9e36e79ee546a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParser.html#a350fc3e35535c5891cd9e36e79ee546a">Parser</a> (const std::string &amp;file_name)</td></tr>
+<tr class="memdesc:a350fc3e35535c5891cd9e36e79ee546a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classParser.html" title="Represents a parser for SVG files.">Parser</a> object.  <a href="classParser.html#a350fc3e35535c5891cd9e36e79ee546a">More...</a><br /></td></tr>
+<tr class="separator:a350fc3e35535c5891cd9e36e79ee546a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a3d3fc587ac1c114b24f693dd32f5bd1c"><td class="memItemLeft" align="right" valign="top"><a id="a3d3fc587ac1c114b24f693dd32f5bd1c"></a>
+pugi::xml_node&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParser.html#a3d3fc587ac1c114b24f693dd32f5bd1c">svg</a></td></tr>
+<tr class="memdesc:a3d3fc587ac1c114b24f693dd32f5bd1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">The node of the SVG. <br /></td></tr>
+<tr class="separator:a3d3fc587ac1c114b24f693dd32f5bd1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad5db1c633aa8735d9fcd1dbb7b2c1032"><td class="memItemLeft" align="right" valign="top"><a id="ad5db1c633aa8735d9fcd1dbb7b2c1032"></a>
+std::vector&lt; <a class="el" href="classShape.html">Shape</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParser.html#ad5db1c633aa8735d9fcd1dbb7b2c1032">shapes</a></td></tr>
+<tr class="memdesc:ad5db1c633aa8735d9fcd1dbb7b2c1032"><td class="mdescLeft">&#160;</td><td class="mdescRight">The vector of the shapes. <br /></td></tr>
+<tr class="separator:ad5db1c633aa8735d9fcd1dbb7b2c1032"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
+Static Private Attributes</h2></td></tr>
+<tr class="memitem:ae3a28c02c18171f4e83fae54b9f21a90"><td class="memItemLeft" align="right" valign="top"><a id="ae3a28c02c18171f4e83fae54b9f21a90"></a>
+static <a class="el" href="classParser.html">Parser</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParser.html#ae3a28c02c18171f4e83fae54b9f21a90">instance</a> = nullptr</td></tr>
+<tr class="memdesc:ae3a28c02c18171f4e83fae54b9f21a90"><td class="mdescLeft">&#160;</td><td class="mdescRight">The instance of the <a class="el" href="classParser.html" title="Represents a parser for SVG files.">Parser</a>. <br /></td></tr>
+<tr class="separator:ae3a28c02c18171f4e83fae54b9f21a90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Represents a parser for SVG files. </p>
+<p>The parser class is responsible for parsing XML attributes (SVG files) and passing this information to create shapes and render them. </p>
+
+<p class="definition">Definition at line <a class="el" href="Parser_8hpp_source.html#l00013">13</a> of file <a class="el" href="Parser_8hpp_source.html">Parser.hpp</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a48044a8caa14a251cb4dad9fb363658e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48044a8caa14a251cb4dad9fb363658e">&#9670;&nbsp;</a></span>Parser() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Parser::Parser </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classParser.html">Parser</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Deleted assignment operator to prevent copying of <a class="el" href="classParser.html" title="Represents a parser for SVG files.">Parser</a> instances. </p>
+<dl class="section return"><dt>Returns</dt><dd>The <a class="el" href="classParser.html" title="Represents a parser for SVG files.">Parser</a> instance. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This function is deleted because <a class="el" href="classParser.html" title="Represents a parser for SVG files.">Parser</a> is a singleton class. </dd></dl>
+
+</div>
+</div>
+<a id="a350fc3e35535c5891cd9e36e79ee546a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a350fc3e35535c5891cd9e36e79ee546a">&#9670;&nbsp;</a></span>Parser() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Parser::Parser </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>file_name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Construct a new <a class="el" href="classParser.html" title="Represents a parser for SVG files.">Parser</a> object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">file_name</td><td>The name of the file to be parsed. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="Parser_8cpp_source.html#l00017">17</a> of file <a class="el" href="Parser_8cpp_source.html">Parser.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;                                         {</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    pugi::xml_document doc;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    pugi::xml_parse_result result = doc.load_file(file_name.c_str());</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordflow">if</span> (!result) EXIT_FAILURE;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="classParser.html#a3d3fc587ac1c114b24f693dd32f5bd1c">svg</a> = doc.child(<span class="stringliteral">&quot;svg&quot;</span>);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;}</div>
+<div class="ttc" id="aclassParser_html_a3d3fc587ac1c114b24f693dd32f5bd1c"><div class="ttname"><a href="classParser.html#a3d3fc587ac1c114b24f693dd32f5bd1c">Parser::svg</a></div><div class="ttdeci">pugi::xml_node svg</div><div class="ttdoc">The node of the SVG.</div><div class="ttdef"><b>Definition:</b> <a href="Parser_8hpp_source.html#l00106">Parser.hpp:106</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a0e1837d3a4b60eec5b50258ea3bc1788"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e1837d3a4b60eec5b50258ea3bc1788">&#9670;&nbsp;</a></span>getAttribute()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Parser::getAttribute </td>
+          <td>(</td>
+          <td class="paramtype">pugi::xml_node&#160;</td>
+          <td class="paramname"><em>node</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the Attribute object which is parsed from the XML file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">node</td><td>The node of the XML file (pugi::xml_node is a typedef of pugixml) </td></tr>
+    <tr><td class="paramname">name</td><td>The name of the attribute. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The attribute which is parsed from the XML file. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This function is private because it is only used by the <a class="el" href="classParser.html" title="Represents a parser for SVG files.">Parser</a> class. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="Parser_8cpp_source.html#l00024">24</a> of file <a class="el" href="Parser_8cpp_source.html">Parser.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;                                                                {</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    pugi::xml_attribute attr = node.attribute(name.c_str());</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordflow">if</span> (!attr) {</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="keywordflow">if</span> (name == <span class="stringliteral">&quot;fill&quot;</span>)</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;            <span class="keywordflow">return</span> <span class="stringliteral">&quot;black&quot;</span>;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (name == <span class="stringliteral">&quot;stroke&quot;</span>)</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            <span class="keywordflow">return</span> <span class="stringliteral">&quot;none&quot;</span>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (name == <span class="stringliteral">&quot;stroke-width&quot;</span> || name == <span class="stringliteral">&quot;stroke-opacity&quot;</span> ||</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                 name == <span class="stringliteral">&quot;fill-opacity&quot;</span> || name == <span class="stringliteral">&quot;opacity&quot;</span>)</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            <span class="keywordflow">return</span> <span class="stringliteral">&quot;1&quot;</span>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span> (name == <span class="stringliteral">&quot;r&quot;</span> || name == <span class="stringliteral">&quot;cx&quot;</span> || name == <span class="stringliteral">&quot;cy&quot;</span> || name == <span class="stringliteral">&quot;x&quot;</span> ||</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                 name == <span class="stringliteral">&quot;y&quot;</span> || name == <span class="stringliteral">&quot;width&quot;</span> || name == <span class="stringliteral">&quot;height&quot;</span>)</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            <span class="keywordflow">return</span> <span class="stringliteral">&quot;0&quot;</span>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    }</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordflow">return</span> attr.value();</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;};</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a06952fa44f19fdb573c1355ac26454c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06952fa44f19fdb573c1355ac26454c5">&#9670;&nbsp;</a></span>getInstance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classParser.html">Parser</a> * Parser::getInstance </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>file_name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the singleton instance of <a class="el" href="classParser.html" title="Represents a parser for SVG files.">Parser</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">file_name</td><td>The name of the SVG file to parse. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The singleton instance of <a class="el" href="classParser.html" title="Represents a parser for SVG files.">Parser</a>. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This function is thread-safe. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="Parser_8cpp_source.html#l00009">9</a> of file <a class="el" href="Parser_8cpp_source.html">Parser.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;                                                      {</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="classParser.html#ae3a28c02c18171f4e83fae54b9f21a90">instance</a> == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;        <a class="code" href="classParser.html#ae3a28c02c18171f4e83fae54b9f21a90">instance</a> = <span class="keyword">new</span> <a class="code" href="classParser.html#a48044a8caa14a251cb4dad9fb363658e">Parser</a>(file_name);</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        <a class="code" href="classParser.html#ae3a28c02c18171f4e83fae54b9f21a90">instance</a>-&gt;<a class="code" href="classParser.html#a8d207dcf9bd2e79b83862de49cf76d84">parseSVG</a>();</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    }</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classParser.html#ae3a28c02c18171f4e83fae54b9f21a90">instance</a>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;}</div>
+<div class="ttc" id="aclassParser_html_a48044a8caa14a251cb4dad9fb363658e"><div class="ttname"><a href="classParser.html#a48044a8caa14a251cb4dad9fb363658e">Parser::Parser</a></div><div class="ttdeci">Parser(const Parser &amp;)=delete</div><div class="ttdoc">Deleted assignment operator to prevent copying of Parser instances.</div></div>
+<div class="ttc" id="aclassParser_html_a8d207dcf9bd2e79b83862de49cf76d84"><div class="ttname"><a href="classParser.html#a8d207dcf9bd2e79b83862de49cf76d84">Parser::parseSVG</a></div><div class="ttdeci">void parseSVG()</div><div class="ttdoc">Parse the XML file.</div><div class="ttdef"><b>Definition:</b> <a href="Parser_8cpp_source.html#l00117">Parser.cpp:117</a></div></div>
+<div class="ttc" id="aclassParser_html_ae3a28c02c18171f4e83fae54b9f21a90"><div class="ttname"><a href="classParser.html#ae3a28c02c18171f4e83fae54b9f21a90">Parser::instance</a></div><div class="ttdeci">static Parser * instance</div><div class="ttdoc">The instance of the Parser.</div><div class="ttdef"><b>Definition:</b> <a href="Parser_8hpp_source.html#l00105">Parser.hpp:105</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a8f5c01f3bf35f19f689ecaffc0cc18ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f5c01f3bf35f19f689ecaffc0cc18ee">&#9670;&nbsp;</a></span>parseColor()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">sf::Color Parser::parseColor </td>
+          <td>(</td>
+          <td class="paramtype">pugi::xml_node&#160;</td>
+          <td class="paramname"><em>node</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Parse the color from the XML file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">node</td><td>The node of the XML file (pugi::xml_node is a typedef of pugixml) </td></tr>
+    <tr><td class="paramname">name</td><td>The name of the attribute. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The color which is parsed from the XML file. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This function is private because it is only used by the <a class="el" href="classParser.html" title="Represents a parser for SVG files.">Parser</a> class. </dd>
+<dd>
+The color is represented by sf::Color (SFML) </dd>
+<dd>
+The color is parsed from the XML file in the format of "rgb(r, g, b)". </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="Parser_8cpp_source.html#l00041">41</a> of file <a class="el" href="Parser_8cpp_source.html">Parser.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                                                            {</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keyword">auto</span> getRgbColor = [](std::string color) -&gt; sf::Color {</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        <span class="keywordtype">int</span> r, g, b;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordtype">float</span> a = 1;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        sscanf(color.c_str(), <span class="stringliteral">&quot;rgb(%d,%d,%d,%f)&quot;</span>, &amp;r, &amp;g, &amp;b, &amp;a);</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keywordflow">return</span> sf::Color(r, g, b, 255 * a);</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    };</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keyword">auto</span> getHexColor = [](std::string color) -&gt; sf::Color {</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        std::stringstream ss;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        ss &lt;&lt; std::hex &lt;&lt; color.substr(1, 2) &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; color.substr(3, 2) &lt;&lt; <span class="stringliteral">&quot; &quot;</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;           &lt;&lt; color.substr(5, 2);</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordtype">int</span> r, g, b;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        ss &gt;&gt; r &gt;&gt; g &gt;&gt; b;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keywordflow">if</span> (color.size() &gt; 7) {</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            std::stringstream ss;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            ss &lt;&lt; std::hex &lt;&lt; color.substr(7, 2);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="keywordtype">int</span> a;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            ss &gt;&gt; a;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            <span class="keywordflow">return</span> sf::Color(r, g, b, a);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        }</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <span class="keywordflow">return</span> sf::Color(r, g, b, 255);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    };</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    std::string color = <a class="code" href="classParser.html#a0e1837d3a4b60eec5b50258ea3bc1788">getAttribute</a>(node, name);</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; c : color) c = tolower(c);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordflow">if</span> (color == <span class="stringliteral">&quot;none&quot;</span>)</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keywordflow">return</span> sf::Color::Transparent;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        sf::Color result;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="keywordflow">if</span> (color[0] == <span class="charliteral">&#39;#&#39;</span>) {</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            result = getHexColor(color);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (color.find(<span class="stringliteral">&quot;rgb&quot;</span>) == std::string::npos) {</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            <span class="keyword">auto</span> color_code = color_map.find(color);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            <span class="keywordflow">if</span> (color_code == color_map.end()) exit(-1);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            result = color_code-&gt;second;</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        } <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            result = getRgbColor(color);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        result.a = result.a / 255.f *</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                   std::stof(<a class="code" href="classParser.html#a0e1837d3a4b60eec5b50258ea3bc1788">getAttribute</a>(node, name + <span class="stringliteral">&quot;-opacity&quot;</span>)) *</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                   std::stof(<a class="code" href="classParser.html#a0e1837d3a4b60eec5b50258ea3bc1788">getAttribute</a>(node, <span class="stringliteral">&quot;opacity&quot;</span>)) * 255;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    }</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;}</div>
+<div class="ttc" id="aclassParser_html_a0e1837d3a4b60eec5b50258ea3bc1788"><div class="ttname"><a href="classParser.html#a0e1837d3a4b60eec5b50258ea3bc1788">Parser::getAttribute</a></div><div class="ttdeci">std::string getAttribute(pugi::xml_node node, std::string name)</div><div class="ttdoc">Get the Attribute object which is parsed from the XML file.</div><div class="ttdef"><b>Definition:</b> <a href="Parser_8cpp_source.html#l00024">Parser.cpp:24</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ad0aaf108fefc153a48223d30f14e5fcb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0aaf108fefc153a48223d30f14e5fcb">&#9670;&nbsp;</a></span>parsePoints()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; sf::Vector2f &gt; Parser::parsePoints </td>
+          <td>(</td>
+          <td class="paramtype">pugi::xml_node&#160;</td>
+          <td class="paramname"><em>node</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Parse the points from the XML file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">node</td><td>The node of the XML file (pugi::xml_node is a typedef of pugixml) </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The points which are parsed from the XML file. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This function is private because it is only used by the <a class="el" href="classParser.html" title="Represents a parser for SVG files.">Parser</a> class. </dd>
+<dd>
+The points are represented by std::vector&lt; sf::Vector2f &gt; (SFML) </dd>
+<dd>
+The points are parsed from the XML file in the format of "x1,y1 x2,y2 x3,y3 ...". </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="Parser_8cpp_source.html#l00087">87</a> of file <a class="el" href="Parser_8cpp_source.html">Parser.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                                                             {</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    std::vector&lt; sf::Vector2f &gt; points;</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    std::string points_string = <a class="code" href="classParser.html#a0e1837d3a4b60eec5b50258ea3bc1788">getAttribute</a>(node, <span class="stringliteral">&quot;points&quot;</span>);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    std::string point = <span class="stringliteral">&quot;&quot;</span>;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordtype">int</span> pos = 0;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordtype">float</span> x = 0, y = 0;</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; (int)points_string.size(); i++) {</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <span class="keywordflow">if</span> (points_string[i] == <span class="charliteral">&#39; &#39;</span>) {</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            <span class="keywordflow">if</span> (point.size() &gt; 0) {</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                pos = point.find(<span class="charliteral">&#39;,&#39;</span>);</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                x = std::stof(point.substr(0, pos));</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                y = std::stof(point.substr(pos + 1));</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                points.push_back(sf::Vector2f(x, y));</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                point.clear();</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            }</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            point += points_string[i];</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        }</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    }</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keywordflow">if</span> (point.size() &gt; 0) {</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        pos = point.find(<span class="charliteral">&#39;,&#39;</span>);</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        x = std::stof(point.substr(0, pos));</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        y = std::stof(point.substr(pos + 1));</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        points.push_back(sf::Vector2f(x, y));</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    }</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keywordflow">return</span> points;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a8d207dcf9bd2e79b83862de49cf76d84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d207dcf9bd2e79b83862de49cf76d84">&#9670;&nbsp;</a></span>parseSVG()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Parser::parseSVG </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Parse the XML file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">window</td><td>The window to render the shapes on. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>This function is private because it is only used by the <a class="el" href="classParser.html" title="Represents a parser for SVG files.">Parser</a> class. </dd>
+<dd>
+The shapes are rendered on the window by calling the draw() method of the <a class="el" href="classShape.html" title="Represents a shape in 2D space.">Shape</a> class. </dd>
+<dd>
+The shapes are rendered on the window in the order of the XML file. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="Parser_8cpp_source.html#l00117">117</a> of file <a class="el" href="Parser_8cpp_source.html">Parser.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;                      {</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="keywordflow">for</span> (pugi::xml_node tool = <a class="code" href="classParser.html#a3d3fc587ac1c114b24f693dd32f5bd1c">svg</a>.first_child(); tool;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;         tool = tool.next_sibling()) {</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        sf::Color stroke_color = <a class="code" href="classParser.html#a8f5c01f3bf35f19f689ecaffc0cc18ee">parseColor</a>(tool, <span class="stringliteral">&quot;stroke&quot;</span>);</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        sf::Color fill_color = <a class="code" href="classParser.html#a8f5c01f3bf35f19f689ecaffc0cc18ee">parseColor</a>(tool, <span class="stringliteral">&quot;fill&quot;</span>);</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        <span class="keywordtype">float</span> stroke_width = std::stof(<a class="code" href="classParser.html#a0e1837d3a4b60eec5b50258ea3bc1788">getAttribute</a>(tool, <span class="stringliteral">&quot;stroke-width&quot;</span>));</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        <span class="keywordflow">if</span> (tool.name() == std::string(<span class="stringliteral">&quot;rect&quot;</span>)) {</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;            <a class="code" href="classRect.html">Rect</a>* shape = <span class="keyword">new</span> <a class="code" href="classRect.html">Rect</a>(std::stof(<a class="code" href="classParser.html#a0e1837d3a4b60eec5b50258ea3bc1788">getAttribute</a>(tool, <span class="stringliteral">&quot;width&quot;</span>)),</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;                                   std::stof(<a class="code" href="classParser.html#a0e1837d3a4b60eec5b50258ea3bc1788">getAttribute</a>(tool, <span class="stringliteral">&quot;height&quot;</span>)),</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;                                   std::stof(<a class="code" href="classParser.html#a0e1837d3a4b60eec5b50258ea3bc1788">getAttribute</a>(tool, <span class="stringliteral">&quot;x&quot;</span>)),</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                                   std::stof(<a class="code" href="classParser.html#a0e1837d3a4b60eec5b50258ea3bc1788">getAttribute</a>(tool, <span class="stringliteral">&quot;y&quot;</span>)),</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;                                   fill_color, stroke_color, stroke_width);</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;            <a class="code" href="classParser.html#ad5db1c633aa8735d9fcd1dbb7b2c1032">shapes</a>.push_back(shape);</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (tool.name() == std::string(<span class="stringliteral">&quot;line&quot;</span>)) {</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;            <a class="code" href="classLine.html">Line</a>* shape =</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;                <span class="keyword">new</span> <a class="code" href="classLine.html">Line</a>(sf::Vector2f(std::stof(<a class="code" href="classParser.html#a0e1837d3a4b60eec5b50258ea3bc1788">getAttribute</a>(tool, <span class="stringliteral">&quot;x1&quot;</span>)),</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                                      std::stof(<a class="code" href="classParser.html#a0e1837d3a4b60eec5b50258ea3bc1788">getAttribute</a>(tool, <span class="stringliteral">&quot;y1&quot;</span>))),</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;                         sf::Vector2f(std::stof(<a class="code" href="classParser.html#a0e1837d3a4b60eec5b50258ea3bc1788">getAttribute</a>(tool, <span class="stringliteral">&quot;x2&quot;</span>)),</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;                                      std::stof(<a class="code" href="classParser.html#a0e1837d3a4b60eec5b50258ea3bc1788">getAttribute</a>(tool, <span class="stringliteral">&quot;y2&quot;</span>))),</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;                         stroke_color, stroke_width);</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;            <a class="code" href="classParser.html#ad5db1c633aa8735d9fcd1dbb7b2c1032">shapes</a>.push_back(shape);</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (tool.name() == std::string(<span class="stringliteral">&quot;text&quot;</span>)) {</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;            <span class="keywordtype">float</span> x = std::stof(<a class="code" href="classParser.html#a0e1837d3a4b60eec5b50258ea3bc1788">getAttribute</a>(tool, <span class="stringliteral">&quot;x&quot;</span>));</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;            <span class="keywordtype">float</span> y = std::stof(<a class="code" href="classParser.html#a0e1837d3a4b60eec5b50258ea3bc1788">getAttribute</a>(tool, <span class="stringliteral">&quot;y&quot;</span>));</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;            <span class="keywordtype">float</span> font_size = std::stof(<a class="code" href="classParser.html#a0e1837d3a4b60eec5b50258ea3bc1788">getAttribute</a>(tool, <span class="stringliteral">&quot;font-size&quot;</span>));</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;            sf::String text = tool.text().get();</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;            <a class="code" href="classText.html">Text</a>* shape = <span class="keyword">new</span> <a class="code" href="classText.html">Text</a>(sf::Vector2f(x, y - font_size), text,</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;                                   fill_color, font_size);</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;            <a class="code" href="classParser.html#ad5db1c633aa8735d9fcd1dbb7b2c1032">shapes</a>.push_back(shape);</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (tool.name() == std::string(<span class="stringliteral">&quot;circle&quot;</span>)) {</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;            <span class="keywordtype">float</span> radius = std::stof(<a class="code" href="classParser.html#a0e1837d3a4b60eec5b50258ea3bc1788">getAttribute</a>(tool, <span class="stringliteral">&quot;r&quot;</span>));</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;            <a class="code" href="classCircle.html">Circle</a>* shape = <span class="keyword">new</span> <a class="code" href="classCircle.html">Circle</a>(</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;                radius,</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;                sf::Vector2f(std::stof(<a class="code" href="classParser.html#a0e1837d3a4b60eec5b50258ea3bc1788">getAttribute</a>(tool, <span class="stringliteral">&quot;cx&quot;</span>)) - radius,</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;                             std::stof(<a class="code" href="classParser.html#a0e1837d3a4b60eec5b50258ea3bc1788">getAttribute</a>(tool, <span class="stringliteral">&quot;cy&quot;</span>)) - radius),</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;                fill_color, stroke_color, stroke_width);</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;            <a class="code" href="classParser.html#ad5db1c633aa8735d9fcd1dbb7b2c1032">shapes</a>.push_back(shape);</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (tool.name() == std::string(<span class="stringliteral">&quot;ellipse&quot;</span>)) {</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;            <span class="keywordtype">float</span> radius_x = std::stof(<a class="code" href="classParser.html#a0e1837d3a4b60eec5b50258ea3bc1788">getAttribute</a>(tool, <span class="stringliteral">&quot;rx&quot;</span>));</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;            <span class="keywordtype">float</span> radius_y = std::stof(<a class="code" href="classParser.html#a0e1837d3a4b60eec5b50258ea3bc1788">getAttribute</a>(tool, <span class="stringliteral">&quot;ry&quot;</span>));</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;            <a class="code" href="classEllipse.html">Ellipse</a>* shape = <span class="keyword">new</span> <a class="code" href="classEllipse.html">Ellipse</a>(</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;                sf::Vector2f(radius_x, radius_y),</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;                sf::Vector2f(std::stof(<a class="code" href="classParser.html#a0e1837d3a4b60eec5b50258ea3bc1788">getAttribute</a>(tool, <span class="stringliteral">&quot;cx&quot;</span>)) - radius_x,</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;                             std::stof(<a class="code" href="classParser.html#a0e1837d3a4b60eec5b50258ea3bc1788">getAttribute</a>(tool, <span class="stringliteral">&quot;cy&quot;</span>)) - radius_y),</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;                fill_color, stroke_color, stroke_width);</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;            <a class="code" href="classParser.html#ad5db1c633aa8735d9fcd1dbb7b2c1032">shapes</a>.push_back(shape);</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (tool.name() == std::string(<span class="stringliteral">&quot;polygon&quot;</span>)) {</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;            <a class="code" href="classPolygon.html">Polygon</a>* shape =</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;                <span class="keyword">new</span> <a class="code" href="classPolygon.html">Polygon</a>(fill_color, stroke_color, stroke_width);</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;            std::vector&lt; sf::Vector2f &gt; points = <a class="code" href="classParser.html#ad0aaf108fefc153a48223d30f14e5fcb">parsePoints</a>(tool);</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;            <span class="keywordflow">for</span> (<span class="keyword">auto</span> point : points) {</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;                shape-&gt;<a class="code" href="classPolygon.html#a16c13a9f119442aa490557a6740f962c">addPoint</a>(point);</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;            }</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;            shape-&gt;<a class="code" href="classPolygon.html#a97f794bbe680e8bc6ca745ba00a4349a">polygonUpdate</a>();</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;            <a class="code" href="classParser.html#ad5db1c633aa8735d9fcd1dbb7b2c1032">shapes</a>.push_back(shape);</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (tool.name() == std::string(<span class="stringliteral">&quot;polyline&quot;</span>)) {</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;            <a class="code" href="classPolyline.html">Polyline</a>* shape =</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;                <span class="keyword">new</span> <a class="code" href="classPolyline.html">Polyline</a>(stroke_width, stroke_color, fill_color);</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;            std::vector&lt; sf::Vector2f &gt; points = <a class="code" href="classParser.html#ad0aaf108fefc153a48223d30f14e5fcb">parsePoints</a>(tool);</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;            <span class="keywordflow">for</span> (<span class="keyword">auto</span> point : points) {</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;                shape-&gt;<a class="code" href="classPolyline.html#a2fa81a13f3e3ec5ca3cce508501d3440">addPoint</a>(point);</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;            }</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;            shape-&gt;<a class="code" href="classPolyline.html#a1cd8e85b6d040c1e89ae71b35e76bcc3">polylineUpdate</a>();</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;            <a class="code" href="classParser.html#ad5db1c633aa8735d9fcd1dbb7b2c1032">shapes</a>.push_back(shape);</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;        } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (tool.name() == std::string(<span class="stringliteral">&quot;path&quot;</span>)) {</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;            <span class="comment">/*</span></div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;<span class="comment">            PATH</span></div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="comment"></span> </div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="comment">            */</span></div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;        }</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    }</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;}</div>
+<div class="ttc" id="aclassCircle_html"><div class="ttname"><a href="classCircle.html">Circle</a></div><div class="ttdoc">Represents a circle in 2D space.</div><div class="ttdef"><b>Definition:</b> <a href="Circle_8hpp_source.html#l00013">Circle.hpp:13</a></div></div>
+<div class="ttc" id="aclassEllipse_html"><div class="ttname"><a href="classEllipse.html">Ellipse</a></div><div class="ttdoc">Represents an ellipse in 2D space.</div><div class="ttdef"><b>Definition:</b> <a href="Ellipse_8hpp_source.html#l00012">Ellipse.hpp:12</a></div></div>
+<div class="ttc" id="aclassLine_html"><div class="ttname"><a href="classLine.html">Line</a></div><div class="ttdoc">Represents a line in 2D space.</div><div class="ttdef"><b>Definition:</b> <a href="Line_8hpp_source.html#l00014">Line.hpp:14</a></div></div>
+<div class="ttc" id="aclassParser_html_a8f5c01f3bf35f19f689ecaffc0cc18ee"><div class="ttname"><a href="classParser.html#a8f5c01f3bf35f19f689ecaffc0cc18ee">Parser::parseColor</a></div><div class="ttdeci">sf::Color parseColor(pugi::xml_node node, std::string name)</div><div class="ttdoc">Parse the color from the XML file.</div><div class="ttdef"><b>Definition:</b> <a href="Parser_8cpp_source.html#l00041">Parser.cpp:41</a></div></div>
+<div class="ttc" id="aclassParser_html_ad0aaf108fefc153a48223d30f14e5fcb"><div class="ttname"><a href="classParser.html#ad0aaf108fefc153a48223d30f14e5fcb">Parser::parsePoints</a></div><div class="ttdeci">std::vector&lt; sf::Vector2f &gt; parsePoints(pugi::xml_node node)</div><div class="ttdoc">Parse the points from the XML file.</div><div class="ttdef"><b>Definition:</b> <a href="Parser_8cpp_source.html#l00087">Parser.cpp:87</a></div></div>
+<div class="ttc" id="aclassParser_html_ad5db1c633aa8735d9fcd1dbb7b2c1032"><div class="ttname"><a href="classParser.html#ad5db1c633aa8735d9fcd1dbb7b2c1032">Parser::shapes</a></div><div class="ttdeci">std::vector&lt; Shape * &gt; shapes</div><div class="ttdoc">The vector of the shapes.</div><div class="ttdef"><b>Definition:</b> <a href="Parser_8hpp_source.html#l00107">Parser.hpp:107</a></div></div>
+<div class="ttc" id="aclassPolygon_html"><div class="ttname"><a href="classPolygon.html">Polygon</a></div><div class="ttdoc">Represents a polygon in 2D space.</div><div class="ttdef"><b>Definition:</b> <a href="Polygon_8hpp_source.html#l00015">Polygon.hpp:15</a></div></div>
+<div class="ttc" id="aclassPolygon_html_a16c13a9f119442aa490557a6740f962c"><div class="ttname"><a href="classPolygon.html#a16c13a9f119442aa490557a6740f962c">Polygon::addPoint</a></div><div class="ttdeci">void addPoint(const sf::Vector2f &amp;point)</div><div class="ttdoc">Adds a vertex to the polygon.</div><div class="ttdef"><b>Definition:</b> <a href="Polygon_8cpp_source.html#l00019">Polygon.cpp:19</a></div></div>
+<div class="ttc" id="aclassPolygon_html_a97f794bbe680e8bc6ca745ba00a4349a"><div class="ttname"><a href="classPolygon.html#a97f794bbe680e8bc6ca745ba00a4349a">Polygon::polygonUpdate</a></div><div class="ttdeci">void polygonUpdate()</div><div class="ttdoc">Updates the polygon.</div><div class="ttdef"><b>Definition:</b> <a href="Polygon_8cpp_source.html#l00021">Polygon.cpp:21</a></div></div>
+<div class="ttc" id="aclassPolyline_html"><div class="ttname"><a href="classPolyline.html">Polyline</a></div><div class="ttdoc">Represents a polyline in 2D space.</div><div class="ttdef"><b>Definition:</b> <a href="Polyline_8hpp_source.html#l00017">Polyline.hpp:17</a></div></div>
+<div class="ttc" id="aclassPolyline_html_a1cd8e85b6d040c1e89ae71b35e76bcc3"><div class="ttname"><a href="classPolyline.html#a1cd8e85b6d040c1e89ae71b35e76bcc3">Polyline::polylineUpdate</a></div><div class="ttdeci">void polylineUpdate()</div><div class="ttdoc">Updates the polyline.</div><div class="ttdef"><b>Definition:</b> <a href="Polyline_8cpp_source.html#l00154">Polyline.cpp:154</a></div></div>
+<div class="ttc" id="aclassPolyline_html_a2fa81a13f3e3ec5ca3cce508501d3440"><div class="ttname"><a href="classPolyline.html#a2fa81a13f3e3ec5ca3cce508501d3440">Polyline::addPoint</a></div><div class="ttdeci">void addPoint(const sf::Vector2f &amp;point)</div><div class="ttdoc">Adds a vertex to the polyline.</div><div class="ttdef"><b>Definition:</b> <a href="Polyline_8cpp_source.html#l00152">Polyline.cpp:152</a></div></div>
+<div class="ttc" id="aclassRect_html"><div class="ttname"><a href="classRect.html">Rect</a></div><div class="ttdoc">Represents a rectangle in 2D space.</div><div class="ttdef"><b>Definition:</b> <a href="Rect_8hpp_source.html#l00013">Rect.hpp:13</a></div></div>
+<div class="ttc" id="aclassText_html"><div class="ttname"><a href="classText.html">Text</a></div><div class="ttdoc">Represents text in 2D space.</div><div class="ttdef"><b>Definition:</b> <a href="Text_8hpp_source.html#l00012">Text.hpp:12</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ad498cb7da315304eb0a84e1ecd6f647b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad498cb7da315304eb0a84e1ecd6f647b">&#9670;&nbsp;</a></span>renderSVG()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Parser::renderSVG </td>
+          <td>(</td>
+          <td class="paramtype">sf::RenderWindow &amp;&#160;</td>
+          <td class="paramname"><em>window</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Render the shapes on the window. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">window</td><td>The window to render the shapes on. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>This function is private because it is only used by the <a class="el" href="classParser.html" title="Represents a parser for SVG files.">Parser</a> class. </dd>
+<dd>
+The shapes are rendered on the window by calling the draw() method of the <a class="el" href="classShape.html" title="Represents a shape in 2D space.">Shape</a> class. </dd>
+<dd>
+The shapes are rendered on the window in the order of the XML file. </dd>
+<dd>
+Apply Polymorphism to render the shapes on the window. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="Parser_8cpp_source.html#l00195">195</a> of file <a class="el" href="Parser_8cpp_source.html">Parser.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;                                             {</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    <span class="keywordflow">for</span> (<span class="keyword">auto</span> shape : <a class="code" href="classParser.html#ad5db1c633aa8735d9fcd1dbb7b2c1032">shapes</a>) {</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;        shape-&gt;draw(window);</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    }</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>src/<a class="el" href="Parser_8hpp_source.html">Parser.hpp</a></li>
+<li>src/<a class="el" href="Parser_8cpp_source.html">Parser.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="nav-path" class="navpath">
+    <address>
+        Copyright © 2023-2023 the csc10003-svg-reader developers @ FIT-HCMUS.
+    </address>
+</div>
+</body>
+</html>

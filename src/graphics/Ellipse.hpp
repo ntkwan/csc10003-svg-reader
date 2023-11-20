@@ -12,8 +12,8 @@
 class Ellipse : public Shape {
 protected:
     const int SCALE =
-        100000;           ///< Scale factor for determining the number of points
-    sf::Vector2f radius;  ///< Radii of the ellipse in the x and y directions
+        100000;        ///< Scale factor for determining the number of points
+    Vector2Df radius;  ///< Radii of the ellipse in the x and y directions
 
 public:
     /**
@@ -25,8 +25,8 @@ public:
      * @param stroke Outline color of the ellipse.
      * @param stroke_thickness Thickness of the ellipse outline.
      */
-    Ellipse(const sf::Vector2f &radius, const sf::Vector2f &center,
-            sf::Color fill, sf::Color stroke, float stroke_thickness);
+    Ellipse(const Vector2Df &radius, const Vector2Df &center, sf::Color fill,
+            sf::Color stroke, float stroke_thickness);
 
     /**
      * @brief Gets the total number of points representing the ellipse.
@@ -44,7 +44,7 @@ public:
      * @param index The index of the point.
      * @return The position of the specified point on the ellipse.
      */
-    virtual sf::Vector2f getPoint(std::size_t index) const override;
+    virtual Vector2Df getPoint(std::size_t index) const override;
 };
 
 #endif  // ELLIPSE_HPP_

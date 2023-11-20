@@ -33,4 +33,7 @@
 *.bat
 build
 svg-reader
+docs/latex/*
+!docs/latex/code_documentation.pdf
 *.json
+*.jar

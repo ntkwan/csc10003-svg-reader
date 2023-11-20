@@ -1,7 +1,7 @@
 #include "Line.hpp"
 
-Line::Line(const sf::Vector2f& point1, const sf::Vector2f& point2,
-           sf::Color stroke, float stroke_width)
+Line::Line(const Vector2Df& point1, const Vector2Df& point2, sf::Color stroke,
+           float stroke_width)
     : direction(point2 - point1), thickness(stroke_width) {
     setPosition(point1);
     setThickness(stroke_width);
@@ -17,11 +17,11 @@ float Line::getLength() const {
 
 std::size_t Line::getPointCount() const { return 4; }
 
-sf::Vector2f Line::getPoint(std::size_t index) const {
-    sf::Vector2f unitDirection = direction / getLength();
-    sf::Vector2f unitPerpendicular(-unitDirection.y, unitDirection.x);
+Vector2Df Line::getPoint(std::size_t index) const {
+    Vector2Df unitDirection = direction / getLength();
+    Vector2Df unitPerpendicular(-unitDirection.y, unitDirection.x);
 
-    sf::Vector2f offset = (thickness / 2.f) * unitPerpendicular;
+    Vector2Df offset = (thickness / 2.f) * unitPerpendicular;
 
     switch (index) {
         default:

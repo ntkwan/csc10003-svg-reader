@@ -8,7 +8,7 @@ Polygon::Polygon(sf::Color fill, sf::Color stroke, float stroke_thickness) {
 
 std::size_t Polygon::getPointCount() const { return points.size(); }
 
-sf::Vector2f Polygon::getPoint(std::size_t index) const {
+Vector2Df Polygon::getPoint(std::size_t index) const {
     if (index < points.size()) {
         return points[index];
     } else {
@@ -16,6 +16,6 @@ sf::Vector2f Polygon::getPoint(std::size_t index) const {
     }
 }
 
-void Polygon::addPoint(const sf::Vector2f& point) { points.push_back(point); }
+void Polygon::addPoint(const Vector2Df& point) { points.push_back(point); }
 
 void Polygon::polygonUpdate() { update(); }

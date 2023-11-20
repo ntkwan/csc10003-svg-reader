@@ -4,8 +4,8 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Texture.hpp>
-#include <SFML/Graphics/VertexArray.hpp>
-#include <SFML/System/Vector2.hpp>
+
+#include "Vector2D.hpp"
 
 /**
  * @brief Represents a shape in 2D space
@@ -13,6 +13,7 @@
  * @note This class is applied Abstract Factory design pattern and used as
  * interface for other shapes.
  */
+
 class Shape {
 public:
     /*! @brief Virtual constructor
@@ -78,12 +79,12 @@ public:
 
     /**
      * @brief Sets the position of the shape
-     * @param position The new position of the shape (sf::Vector2f is a typedef
-     * of coordination in SFML)
+     * @param position The new position of the shape (Vector2f is a typedef
+     * of coordination vector)
      * @note The default position of the shape is (0, 0).
      * @note The position of the shape is relative to its origin.
      */
-    void setPosition(const sf::Vector2f& position);
+    void setPosition(const Vector2Df& position);
 
     /**
      * @brief Virtual method: Get the number of point of the shape (for Polygon
@@ -109,7 +110,7 @@ public:
      * @note This is a pure virtual method, so it has to be implemented by the
      * derived class.
      */
-    virtual sf::Vector2f getPoint(std::size_t index) const = 0;
+    virtual Vector2Df getPoint(std::size_t index) const = 0;
 
     /**
      * @brief Virtual method: Draw the shape on the specified render target
@@ -156,10 +157,22 @@ protected:
     void update();
 
 private:
+    /**
+     * @brief Updates the fill colors of the shape
+     * @note This method call the update() method.
+     */
     void updateFillColors();
 
+    /**
+     * @brief Updates the outline of the shape
+     * @note This method call the update() method.
+     */
     void updateOutline();
 
+    /**
+     * @brief Updates the outline colors of the shape
+     * @note This method call the update() method.
+     */
     void updateOutlineColors();
 
 private:
@@ -168,24 +181,24 @@ private:
     sf::Color outline_color;     ///< Outline color
     float outline_thickness;     ///< Thickness of the shape's outline
     sf::VertexArray vertices;    ///< Vertex array containing the fill geometry
-    sf::VertexArray outline_vertices;  ///< Vertex array containing the outline
-                                       ///< geometry
+    sf::VertexArray
+        outline_vertices;  ///< Vertex array containing the outline geometry
     sf::FloatRect inside_bounds;  ///< Bounding rectangle of the inside (fill)
-    sf::FloatRect bounds;  ///< Bounding rectangle of the whole shape (outline
-                           ///< + fill)
+    sf::FloatRect
+        bounds;  ///< Bounding rectangle of the outside (outline + fill)
 
-    sf::Vector2f
-        origin;  ///< Origin of translation/rotation/scaling of the object
-    sf::Vector2f position;  ///< Position of the object in the 2D world
-    float rotation;         ///< Orientation of the object, in degrees
-    sf::Vector2f scale;     ///< Scale of the object
+    Vector2Df origin;  ///< Origin of translation/rotation/scaling of the object
+    Vector2Df position;  ///< Position of the object in the 2D world
+    float rotation;      ///< Orientation of the object, in degrees
+    Vector2Df scale;     ///< Scale of the object
+
     mutable sf::Transform transform;  ///< Combined transformation of the object
     mutable bool
         transform_need_update;  ///< Does the transform need to be recomputed?
     mutable sf::Transform
         inverse_transform;  ///< Combined transformation of the object
-    mutable bool inverse_transform_need_update;  ///< Does the transform need to
-                                                 ///< be recomputed?
+    mutable bool
+        inverse_transform_need_update;  ///< Same as transform but for inverse
 };
 
 #endif  // SHAPE_HPP_
