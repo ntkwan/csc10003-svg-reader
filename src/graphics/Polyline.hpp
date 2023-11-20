@@ -16,7 +16,7 @@
  */
 class Polyline : public Shape {
 private:
-    std::vector< sf::Vector2f > points;  ///< Vertices of the polyline
+    std::vector< Vector2Df > points;  ///< Vertices of the polyline
 
 public:
     /**
@@ -37,7 +37,7 @@ public:
      *
      * @param point The position of the vertex to be added.
      */
-    void addPoint(const sf::Vector2f& point);
+    void addPoint(const Vector2Df& point);
 
     /**
      * @brief Draws the polyline on the specified render target.
@@ -55,7 +55,7 @@ public:
      * @param index The index of the vertex.
      * @return The position of the specified vertex in the polyline.
      */
-    sf::Vector2f getPoint(std::size_t index) const override;
+    Vector2Df getPoint(std::size_t index) const override;
 
     /**
      * @brief Gets the total number of vertices representing the polyline.

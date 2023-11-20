@@ -84,8 +84,8 @@ sf::Color Parser::parseColor(pugi::xml_node node, std::string name) {
     }
 }
 
-std::vector< sf::Vector2f > Parser::parsePoints(pugi::xml_node node) {
-    std::vector< sf::Vector2f > points;
+std::vector< Vector2Df > Parser::parsePoints(pugi::xml_node node) {
+    std::vector< Vector2Df > points;
     std::string points_string = getAttribute(node, "points");
     std::string point = "";
     int pos = 0;
@@ -96,7 +96,7 @@ std::vector< sf::Vector2f > Parser::parsePoints(pugi::xml_node node) {
                 pos = point.find(',');
                 x = std::stof(point.substr(0, pos));
                 y = std::stof(point.substr(pos + 1));
-                points.push_back(sf::Vector2f(x, y));
+                points.push_back(Vector2Df(x, y));
                 point.clear();
             }
         } else {
@@ -108,7 +108,7 @@ std::vector< sf::Vector2f > Parser::parsePoints(pugi::xml_node node) {
         pos = point.find(',');
         x = std::stof(point.substr(0, pos));
         y = std::stof(point.substr(pos + 1));
-        points.push_back(sf::Vector2f(x, y));
+        points.push_back(Vector2Df(x, y));
     }
 
     return points;
@@ -131,10 +131,10 @@ void Parser::parseSVG() {
             shapes.push_back(shape);
         } else if (tool.name() == std::string("line")) {
             Line* shape =
-                new Line(sf::Vector2f(std::stof(getAttribute(tool, "x1")),
-                                      std::stof(getAttribute(tool, "y1"))),
-                         sf::Vector2f(std::stof(getAttribute(tool, "x2")),
-                                      std::stof(getAttribute(tool, "y2"))),
+                new Line(Vector2Df(std::stof(getAttribute(tool, "x1")),
+                                   std::stof(getAttribute(tool, "y1"))),
+                         Vector2Df(std::stof(getAttribute(tool, "x2")),
+                                   std::stof(getAttribute(tool, "y2"))),
                          stroke_color, stroke_width);
             shapes.push_back(shape);
         } else if (tool.name() == std::string("text")) {
@@ -142,30 +142,30 @@ void Parser::parseSVG() {
             float y = std::stof(getAttribute(tool, "y"));
             float font_size = std::stof(getAttribute(tool, "font-size"));
             sf::String text = tool.text().get();
-            Text* shape = new Text(sf::Vector2f(x, y - font_size), text,
+            Text* shape = new Text(Vector2Df(x, y - font_size), text,
                                    fill_color, font_size);
             shapes.push_back(shape);
         } else if (tool.name() == std::string("circle")) {
             float radius = std::stof(getAttribute(tool, "r"));
             Circle* shape = new Circle(
                 radius,
-                sf::Vector2f(std::stof(getAttribute(tool, "cx")) - radius,
-                             std::stof(getAttribute(tool, "cy")) - radius),
+                Vector2Df(std::stof(getAttribute(tool, "cx")) - radius,
+                          std::stof(getAttribute(tool, "cy")) - radius),
                 fill_color, stroke_color, stroke_width);
             shapes.push_back(shape);
         } else if (tool.name() == std::string("ellipse")) {
             float radius_x = std::stof(getAttribute(tool, "rx"));
             float radius_y = std::stof(getAttribute(tool, "ry"));
             Ellipse* shape = new Ellipse(
-                sf::Vector2f(radius_x, radius_y),
-                sf::Vector2f(std::stof(getAttribute(tool, "cx")) - radius_x,
-                             std::stof(getAttribute(tool, "cy")) - radius_y),
+                Vector2Df(radius_x, radius_y),
+                Vector2Df(std::stof(getAttribute(tool, "cx")) - radius_x,
+                          std::stof(getAttribute(tool, "cy")) - radius_y),
                 fill_color, stroke_color, stroke_width);
             shapes.push_back(shape);
         } else if (tool.name() == std::string("polygon")) {
             Polygon* shape =
                 new Polygon(fill_color, stroke_color, stroke_width);
-            std::vector< sf::Vector2f > points = parsePoints(tool);
+            std::vector< Vector2Df > points = parsePoints(tool);
             for (auto point : points) {
                 shape->addPoint(point);
             }
@@ -174,7 +174,7 @@ void Parser::parseSVG() {
         } else if (tool.name() == std::string("polyline")) {
             Polyline* shape =
                 new Polyline(stroke_width, stroke_color, fill_color);
-            std::vector< sf::Vector2f > points = parsePoints(tool);
+            std::vector< Vector2Df > points = parsePoints(tool);
             for (auto point : points) {
                 shape->addPoint(point);
             }

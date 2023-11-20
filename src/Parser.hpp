@@ -64,7 +64,7 @@ public:
      * @note The points are parsed from the XML file in the format of
      * "x1,y1 x2,y2 x3,y3 ...".
      */
-    std::vector< sf::Vector2f > parsePoints(pugi::xml_node node);
+    std::vector< Vector2Df > parsePoints(pugi::xml_node node);
 
     /**
      * @brief Parse the XML file.

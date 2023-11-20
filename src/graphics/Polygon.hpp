@@ -14,7 +14,7 @@
  */
 class Polygon : public Shape {
 private:
-    std::vector< sf::Vector2f > points;  ///< Vertices of the polygon
+    std::vector< Vector2Df > points;  ///< Vertices of the polygon
 
 public:
     /**
@@ -41,14 +41,14 @@ public:
      * @param index The index of the vertex.
      * @return The position of the specified vertex in the polygon.
      */
-    virtual sf::Vector2f getPoint(std::size_t index) const;
+    virtual Vector2Df getPoint(std::size_t index) const;
 
     /**
      * @brief Adds a vertex to the polygon.
      *
      * @param point The position of the vertex to be added.
      */
-    void addPoint(const sf::Vector2f& point);
+    void addPoint(const Vector2Df& point);
 
     /**
      * @brief Updates the polygon.

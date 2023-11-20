@@ -3,14 +3,14 @@
 #include <cmath>
 
 namespace {
-    sf::Vector2f computeNormal(const sf::Vector2f& p1, const sf::Vector2f& p2) {
-        sf::Vector2f normal(p1.y - p2.y, p2.x - p1.x);
+    Vector2Df computeNormal(const Vector2Df& p1, const Vector2Df& p2) {
+        Vector2Df normal(p1.y - p2.y, p2.x - p1.x);
         float length = std::sqrt(normal.x * normal.x + normal.y * normal.y);
         if (length != 0.f) normal /= length;
         return normal;
     }
 
-    float dotProduct(const sf::Vector2f& p1, const sf::Vector2f& p2) {
+    float dotProduct(const Vector2Df& p1, const Vector2Df& p2) {
         return p1.x * p2.x + p1.y * p2.y;
     }
 }  // namespace
@@ -38,7 +38,7 @@ void Shape::setOutlineThickness(float thickness) {
 float Shape::getOutlineThickness() const { return outline_thickness; }
 
 Shape::Shape()
-    : texture(nullptr), fill_color(255, 255, 255), outline_color(255, 255, 255),
+    : fill_color(255, 255, 255), outline_color(255, 255, 255),
       outline_thickness(0), vertices(sf::TriangleFan),
       outline_vertices(sf::TriangleStrip), inside_bounds(), bounds(),
       origin(0, 0), position(0, 0), rotation(0), scale(1, 1), transform(),
@@ -58,7 +58,7 @@ void Shape::update() {
 
     // Position
     for (std::size_t i = 0; i < count; ++i)
-        vertices[i + 1].position = getPoint(i);
+        vertices[i + 1].position = sf::Vector2f(getPoint(i).x, getPoint(i).y);
     vertices[count + 1].position = vertices[1].position;
 
     // Update the bounding rectangle
@@ -110,28 +110,40 @@ void Shape::updateOutline() {
         std::size_t index = i + 1;
 
         // Get the two segments shared by the current point
-        sf::Vector2f p0 =
-            (i == 0) ? vertices[count].position : vertices[index - 1].position;
-        sf::Vector2f p1 = vertices[index].position;
-        sf::Vector2f p2 = vertices[index + 1].position;
+        Vector2Df p0 = (i == 0) ? Vector2Df(vertices[count].position.x,
+                                            vertices[count].position.y)
+                                : Vector2Df(vertices[index - 1].position.x,
+                                            vertices[index - 1].position.y);
+        Vector2Df p1 =
+            Vector2Df(vertices[index].position.x, vertices[index].position.y);
+        Vector2Df p2 = Vector2Df(vertices[index + 1].position.x,
+                                 vertices[index + 1].position.y);
 
         // Compute their normal
-        sf::Vector2f n1 = computeNormal(p0, p1);
-        sf::Vector2f n2 = computeNormal(p1, p2);
+        Vector2Df n1 = computeNormal(p0, p1);
+        Vector2Df n2 = computeNormal(p1, p2);
 
         // Make sure that the normals point towards the outside of the shape
         // (this depends on the order in which the points were defined)
-        if (dotProduct(n1, vertices[0].position - p1) > 0) n1 = -n1;
-        if (dotProduct(n2, vertices[0].position - p1) > 0) n2 = -n2;
+        if (dotProduct(
+                n1, Vector2Df(vertices[0].position.x, vertices[0].position.y) -
+                        p1) > 0)
+            n1 = -n1;
+        if (dotProduct(
+                n2, Vector2Df(vertices[0].position.x, vertices[0].position.y) -
+                        p1) > 0)
+            n2 = -n2;
 
         // Combine them to get the extrusion direction
         float factor = 1.f + (n1.x * n2.x + n1.y * n2.y);
-        sf::Vector2f normal = (n1 + n2) / factor;
+        Vector2Df normal = (n1 + n2) / factor;
 
         // Update the outline points
-        sf::Vector2f offset = normal * (outline_thickness / 2.f);
-        outline_vertices[i * 2 + 0].position = p1 - offset;
-        outline_vertices[i * 2 + 1].position = p1 + offset;
+        Vector2Df offset = normal * (outline_thickness / 2.f);
+        Vector2Df result = p1 - offset;
+        outline_vertices[i * 2 + 0].position = sf::Vector2f(result.x, result.y);
+        result = p1 + offset;
+        outline_vertices[i * 2 + 1].position = sf::Vector2f(result.x, result.y);
     }
 
     // Duplicate the first point at the end, to close the outline
@@ -187,6 +199,6 @@ void Shape::setPosition(float x, float y) {
     inverse_transform_need_update = true;
 }
 
-void Shape::setPosition(const sf::Vector2f& position) {
+void Shape::setPosition(const Vector2Df& position) {
     setPosition(position.x, position.y);
 }

@@ -25,7 +25,7 @@ public:
      * sf::Color::Black).
      * @param font_size The font size of the text (default is 1).
      */
-    Text(sf::Vector2f pos, sf::String TEXT,
+    Text(Vector2Df pos, sf::String TEXT,
          sf::Color fill_color = sf::Color::Black, float font_size = 1);
 
     /**
@@ -46,7 +46,7 @@ public:
      * @param index The index of the dummy point (ignored).
      * @return A dummy point for compatibility.
      */
-    virtual sf::Vector2f getPoint(std::size_t index) const;
+    virtual Vector2Df getPoint(std::size_t index) const;
 
     /**
      * @brief Draws the text on the specified render target.
