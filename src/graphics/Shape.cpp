@@ -76,17 +76,13 @@ void Shape::update() {
     updateOutline();
 }
 
-void Shape::draw(sf::RenderWindow& target, sf::RenderStates states) const {
-    states.transform *= getTransform();
-
+void Shape::draw(Renderer& target) const {
     // Render the inside
-    states.texture = texture;
-    target.draw(vertices, states);
+    target.window.draw(vertices, getTransform());
 
     // Render the outline
     if (outline_thickness != 0) {
-        states.texture = nullptr;
-        target.draw(outline_vertices, states);
+        target.window.draw(outline_vertices, getTransform());
     }
 }
 

@@ -14,9 +14,7 @@ int main() {
                                 static_cast< float >(screen_height)));
     Viewer *viewer = Viewer::getInstance(window, view);
     Parser *parser = Parser::getInstance("sample/sample.svg");
-    if (!Text::font.loadFromFile("external/font/Arial.ttf")) {
-        return EXIT_FAILURE;
-    }
+    Renderer *renderer = Renderer::getInstance(window);
 
     while (window.isOpen()) {
         sf::Event event;
@@ -27,9 +25,13 @@ int main() {
         }
 
         window.clear(sf::Color::White);
-        parser->renderSVG(window);
+        parser->renderSVG(*renderer);
         window.display();
         viewer->handleDragging();
     }
+
+    delete viewer;
+    delete parser;
+    delete renderer;
     return 0;
 }

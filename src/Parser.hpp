@@ -2,6 +2,7 @@
 #define PARSER_HPP_
 
 #include "Graphics.hpp"
+#include "Renderer.hpp"
 #include "pugixml.hpp"
 
 /**
@@ -87,7 +88,7 @@ public:
      * @note The shapes are rendered on the window in the order of the XML file.
      * @note Apply Polymorphism to render the shapes on the window.
      */
-    void renderSVG(sf::RenderWindow& window);
+    void renderSVG(Renderer& renderer);
 
     /**
      * @brief Destructor of Parser.

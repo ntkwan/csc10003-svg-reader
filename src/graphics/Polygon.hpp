@@ -4,18 +4,16 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 
+#include "PolyShape.hpp"
 #include "Shape.hpp"
 
 /**
  * @brief Represents a polygon in 2D space.
  *
- * The Polygon class is derived from the Shape class and defines a polygon
+ * The Polygon class is derived from the PolyShape class and defines a polygon
  * with a variable number of vertices.
  */
-class Polygon : public Shape {
-private:
-    std::vector< Vector2Df > points;  ///< Vertices of the polygon
-
+class Polygon : public PolyShape {
 public:
     /**
      * @brief Constructs a Polygon object.
@@ -33,7 +31,7 @@ public:
      *
      * @return The number of vertices representing the polygon.
      */
-    virtual std::size_t getPointCount() const;
+    std::size_t getPointCount() const override;
 
     /**
      * @brief Gets the position of a vertex in the polygon.
@@ -41,14 +39,14 @@ public:
      * @param index The index of the vertex.
      * @return The position of the specified vertex in the polygon.
      */
-    virtual Vector2Df getPoint(std::size_t index) const;
+    Vector2Df getPoint(std::size_t index) const override;
 
     /**
      * @brief Adds a vertex to the polygon.
      *
      * @param point The position of the vertex to be added.
      */
-    void addPoint(const Vector2Df& point);
+    void addPoint(const Vector2Df& point) override;
 
     /**
      * @brief Updates the polygon.
@@ -56,7 +54,7 @@ public:
      * This method is provided for consistency with other shapes but
      * does not introduce any additional behavior for polygons.
      */
-    void polygonUpdate();
+    void updateShape() override;
 };
 
-#endif
+#endif  // POLYGON_HPP_

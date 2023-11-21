@@ -11,11 +11,10 @@
  */
 class Text : public Shape {
 private:
-    sf::Text text;  ///< Text element
+    std::string text;  ///< Text element
+    Vector2Df position;
 
 public:
-    static sf::Font font;  ///< Static font shared across all Text instances
-
     /**
      * @brief Constructs a Text object.
      *
@@ -25,7 +24,7 @@ public:
      * sf::Color::Black).
      * @param font_size The font size of the text (default is 1).
      */
-    Text(Vector2Df pos, sf::String TEXT,
+    Text(Vector2Df pos, std::string TEXT,
          sf::Color fill_color = sf::Color::Black, float font_size = 1);
 
     /**
@@ -55,8 +54,7 @@ public:
      * @param states The render states to apply (default is
      * sf::RenderStates::Default).
      */
-    void draw(sf::RenderWindow& target,
-              sf::RenderStates states = sf::RenderStates::Default) const;
+    void draw(Renderer& target) const;
 };
 
-#endif
+#endif  // TEXT_HPP_

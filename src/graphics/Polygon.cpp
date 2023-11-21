@@ -18,4 +18,4 @@ Vector2Df Polygon::getPoint(std::size_t index) const {
 
 void Polygon::addPoint(const Vector2Df& point) { points.push_back(point); }
 
-void Polygon::polygonUpdate() { update(); }
+void Polygon::updateShape() { update(); }

@@ -5,6 +5,7 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Texture.hpp>
 
+#include "Renderer.hpp"
 #include "Vector2D.hpp"
 
 /**
@@ -119,9 +120,7 @@ public:
      * @param states The render states to apply (default is
      * sf::RenderStates::Default)
      */
-    virtual void draw(
-        sf::RenderWindow& target,
-        sf::RenderStates states = sf::RenderStates::Default) const;
+    virtual void draw(Renderer& target) const;
 
     /**
      * @brief Gets the shape transform

@@ -7,7 +7,6 @@ Rect::Rect(float width, float height, float x, float y, sf::Color fill,
     addPoint(Vector2Df(width, 0));
     addPoint(Vector2Df(width, height));
     addPoint(Vector2Df(0, height));
-
     setPosition(x, y);
     update();
 }

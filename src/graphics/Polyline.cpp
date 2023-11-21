@@ -151,7 +151,7 @@ Polyline::Polyline(float stroke_width, const sf::Color& stroke_color,
 
 void Polyline::addPoint(const Vector2Df& point) { points.push_back(point); }
 
-void Polyline::polylineUpdate() { update(); }
+void Polyline::updateShape() { update(); }
 
 Vector2Df Polyline::getPoint(std::size_t index) const {
     if (index < points.size()) {
@@ -161,7 +161,7 @@ Vector2Df Polyline::getPoint(std::size_t index) const {
 }
 
 std::size_t Polyline::getPointCount() const { return points.size(); }
-void Polyline::draw(sf::RenderWindow& target, sf::RenderStates states) const {
+void Polyline::draw(Renderer& target) const {
     if (points.size() < 2) return;
     sf::VertexArray lineStrip(sf::PrimitiveType::Quads);
     Vector2Df p1a, p1b, p2a, p2b;
@@ -212,7 +212,7 @@ void Polyline::draw(sf::RenderWindow& target, sf::RenderStates states) const {
                 lS.append(sf::Vertex(sf::Vector2f(p1b.x, p1b.y), stroke));
                 lS.append(sf::Vertex(sf::Vector2f(r_p2b.x, r_p2b.y), stroke));
             }
-            target.draw(lS);
+            target.window.draw(lS);
         }
         r_p1a = p1a;
         r_p1b = p1b;
@@ -239,9 +239,9 @@ void Polyline::draw(sf::RenderWindow& target, sf::RenderStates states) const {
                         j, sf::Vector2f(polygon.cP[j].x, polygon.cP[j].y));
                 }
 
-                target.draw(fillShape);
+                target.window.draw(fillShape);
             }
         }
-        target.draw(lineStrip);
+        target.window.draw(lineStrip);
     }
 }
