@@ -158,12 +158,21 @@ void Shape::updateOutline() {
     bounds = outline_vertices.getBounds();
 }
 
+#include <iostream>
 void Shape::translate(float x, float y) {
-    position.x += x;
-    position.y += y;
+    position.x += x * std::cos(rotation * acos(-1) / 180.f) -
+                  y * std::sin(rotation * acos(-1) / 180.f);
+    position.y += x * std::sin(rotation * acos(-1) / 180.f) +
+                  y * std::cos(rotation * acos(-1) / 180.f);
+    transform_need_update = true;
+    inverse_transform_need_update = true;
 }
 
-void Shape::rotate(float angle) { rotation += angle; }
+void Shape::rotate(float angle) {
+    rotation += angle;
+    transform_need_update = true;
+    inverse_transform_need_update = true;
+}
 
 void Shape::updateOutlineColors() {
     for (std::size_t i = 0; i < outline_vertices.getVertexCount(); ++i)
