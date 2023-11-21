@@ -1,11 +1,9 @@
 #ifndef SHAPE_HPP_
 #define SHAPE_HPP_
 
-#include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/Graphics/Texture.hpp>
-
 #include "Color.hpp"
 #include "Renderer.hpp"
+#include "Transform.hpp"
 #include "Vector2D.hpp"
 
 /**
@@ -124,20 +122,20 @@ public:
 
     /**
      * @brief Gets the shape transform
-     * @return The shape transform (sf::Transform is a typedef of SFML)
+     * @return The shape transform
      * @note This function returns the combined transform of the object.
      * @note The transform is a combination of the position, rotation, and scale
      * of the object.
      */
-    const sf::Transform& getTransform() const;
+    const Transform& getTransform() const;
 
     /**
      * @brief Gets the inverse shape transform
-     * @return The inverse shape transform (sf::Transform is a typedef of SFML)
+     * @return The inverse shape transform
      * @note This function returns the inverse of the combined transform of the
      * object.
      */
-    const sf::Transform& getInverseTransform() const;
+    const Transform& getInverseTransform() const;
 
 protected:
     /**
@@ -190,10 +188,10 @@ private:
     float rotation;      ///< Orientation of the object, in degrees
     Vector2Df scale;     ///< Scale of the object
 
-    mutable sf::Transform transform;  ///< Combined transformation of the object
+    mutable Transform transform;  ///< Combined transformation of the object
     mutable bool
         transform_need_update;  ///< Does the transform need to be recomputed?
-    mutable sf::Transform
+    mutable Transform
         inverse_transform;  ///< Combined transformation of the object
     mutable bool
         inverse_transform_need_update;  ///< Same as transform but for inverse

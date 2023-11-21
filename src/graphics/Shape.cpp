@@ -77,12 +77,16 @@ void Shape::update() {
 }
 
 void Shape::draw(Renderer& target) const {
+    const float* mat = getTransform().getMatrix();
+    sf::Transform transform =
+        sf::Transform(mat[0], mat[4], mat[12], mat[1], mat[5], mat[13], mat[3],
+                      mat[7], mat[15]);
     // Render the inside
-    target.window.draw(vertices, getTransform());
+    target.window.draw(vertices, transform);
 
     // Render the outline
     if (outline_thickness != 0) {
-        target.window.draw(outline_vertices, getTransform());
+        target.window.draw(outline_vertices, transform);
     }
 }
 
@@ -160,7 +164,7 @@ void Shape::updateOutlineColors() {
                                               outline_color.b, outline_color.a);
 }
 
-const sf::Transform& Shape::getTransform() const {
+const Transform& Shape::getTransform() const {
     // Recompute the combined transform if needed
     if (transform_need_update) {
         float angle = -rotation * acos(-1) / 180.f;
@@ -173,14 +177,14 @@ const sf::Transform& Shape::getTransform() const {
         float tx = -origin.x * sxc - origin.y * sys + position.x;
         float ty = origin.x * sxs - origin.y * syc + position.y;
 
-        transform = sf::Transform(sxc, sys, tx, -sxs, syc, ty, 0.f, 0.f, 1.f);
+        transform = Transform(sxc, sys, tx, -sxs, syc, ty, 0.f, 0.f, 1.f);
         transform_need_update = false;
     }
 
     return transform;
 }
 
-const sf::Transform& Shape::getInverseTransform() const {
+const Transform& Shape::getInverseTransform() const {
     // Recompute the inverse transform if needed
     if (inverse_transform_need_update) {
         inverse_transform = getTransform().getInverse();

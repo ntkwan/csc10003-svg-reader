@@ -9,7 +9,6 @@ Ellipse::Ellipse(const Vector2Df &radius, const Vector2Df &center, Color fill,
     setFillColor(fill);
     setOutlineColor(stroke);
     setOutlineThickness(stroke_thickness);
-    update();
 }
 
 std::size_t Ellipse::getPointCount() const { return SCALE; }

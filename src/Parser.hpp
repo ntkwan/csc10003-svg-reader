@@ -91,6 +91,16 @@ public:
     void renderSVG(Renderer& renderer);
 
     /**
+     * @brief Get the Translate object which is parsed from the XML file.
+     *
+     * @param node The node of the XML file (pugi::xml_node is a typedef of
+     * pugixml)
+     * @param name The name of the attribute.
+     * @return The translate which is parsed from the XML file.
+     */
+    std::pair< float, float > getTranslate(pugi::xml_node node,
+                                           std::string name = "transform");
+    /**
      * @brief Destructor of Parser.
      */
     ~Parser();

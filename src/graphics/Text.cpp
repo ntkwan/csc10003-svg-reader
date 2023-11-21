@@ -6,7 +6,6 @@ Text::Text(Vector2Df pos, std::string TEXT, Color fill_color, float font_size)
     : text(TEXT), position(pos) {
     setOutlineColor(fill_color);
     setOutlineThickness(font_size);
-    update();
 }
 std::size_t Text::getPointCount() const { return 0; }
 

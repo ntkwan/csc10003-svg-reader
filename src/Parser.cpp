@@ -17,7 +17,7 @@ Parser* Parser::getInstance(const std::string& file_name) {
 Parser::Parser(const std::string& file_name) {
     pugi::xml_document doc;
     pugi::xml_parse_result result = doc.load_file(file_name.c_str());
-    if (!result) EXIT_FAILURE;
+    if (!result) exit(EXIT_FAILURE);
     svg = doc.child("svg");
 }
 
@@ -26,7 +26,7 @@ std::string Parser::getAttribute(pugi::xml_node node, std::string name) {
     if (!attr) {
         if (name == "fill")
             return "black";
-        else if (name == "stroke")
+        else if (name == "stroke" || name == "transform")
             return "none";
         else if (name == "stroke-width" || name == "stroke-opacity" ||
                  name == "fill-opacity" || name == "opacity")
@@ -114,6 +114,22 @@ std::vector< Vector2Df > Parser::parsePoints(pugi::xml_node node) {
     return points;
 }
 
+std::pair< float, float > Parser::getTranslate(pugi::xml_node node,
+                                               std::string name) {
+    std::string transform_tag = getAttribute(node, name);
+    float trans_x = 0, trans_y = 0;
+    if (transform_tag != "none") {
+        int y_beg = transform_tag.find(',');
+        int y_end = transform_tag.find(')');
+        trans_x = std::stof(transform_tag.substr(10, y_beg - 10));
+        trans_y =
+            (y_beg != std::string::npos)
+                ? std::stof(transform_tag.substr(y_beg + 1, y_end - y_beg - 1))
+                : 0;
+    }
+    return std::pair< float, float >(trans_x, trans_y);
+}
+
 void Parser::parseSVG() {
     for (pugi::xml_node tool = svg.first_child(); tool;
          tool = tool.next_sibling()) {
@@ -121,13 +137,15 @@ void Parser::parseSVG() {
         Color fill_color = parseColor(tool, "fill");
 
         float stroke_width = std::stof(getAttribute(tool, "stroke-width"));
+        float trans_x = getTranslate(tool).first,
+              trans_y = getTranslate(tool).second;
 
         if (tool.name() == std::string("rect")) {
+            float x = std::stof(getAttribute(tool, "x")) + trans_x;
+            float y = std::stof(getAttribute(tool, "y")) + trans_y;
             Rect* shape = new Rect(std::stof(getAttribute(tool, "width")),
-                                   std::stof(getAttribute(tool, "height")),
-                                   std::stof(getAttribute(tool, "x")),
-                                   std::stof(getAttribute(tool, "y")),
-                                   fill_color, stroke_color, stroke_width);
+                                   std::stof(getAttribute(tool, "height")), x,
+                                   y, fill_color, stroke_color, stroke_width);
             shapes.push_back(shape);
         } else if (tool.name() == std::string("line")) {
             Line* shape =
@@ -138,35 +156,38 @@ void Parser::parseSVG() {
                          stroke_color, stroke_width);
             shapes.push_back(shape);
         } else if (tool.name() == std::string("text")) {
-            float x = std::stof(getAttribute(tool, "x"));
-            float y = std::stof(getAttribute(tool, "y"));
+            float x = std::stof(getAttribute(tool, "x")) + trans_x;
+            float y = std::stof(getAttribute(tool, "y")) + trans_y;
             float font_size = std::stof(getAttribute(tool, "font-size"));
             std::string text = tool.text().get();
             Text* shape = new Text(Vector2Df(x, y - font_size), text,
                                    fill_color, font_size);
             shapes.push_back(shape);
         } else if (tool.name() == std::string("circle")) {
+            float cx = std::stof(getAttribute(tool, "cx")) + trans_x;
+            float cy = std::stof(getAttribute(tool, "cy")) + trans_y;
             float radius = std::stof(getAttribute(tool, "r"));
-            Circle* shape = new Circle(
-                radius,
-                Vector2Df(std::stof(getAttribute(tool, "cx")) - radius,
-                          std::stof(getAttribute(tool, "cy")) - radius),
-                fill_color, stroke_color, stroke_width);
+            Circle* shape =
+                new Circle(radius, Vector2Df(cx - radius, cy - radius),
+                           fill_color, stroke_color, stroke_width);
             shapes.push_back(shape);
         } else if (tool.name() == std::string("ellipse")) {
             float radius_x = std::stof(getAttribute(tool, "rx"));
             float radius_y = std::stof(getAttribute(tool, "ry"));
-            Ellipse* shape = new Ellipse(
-                Vector2Df(radius_x, radius_y),
-                Vector2Df(std::stof(getAttribute(tool, "cx")) - radius_x,
-                          std::stof(getAttribute(tool, "cy")) - radius_y),
-                fill_color, stroke_color, stroke_width);
+            float cx = std::stof(getAttribute(tool, "cx")) + trans_x;
+            float cy = std::stof(getAttribute(tool, "cy")) + trans_y;
+            Ellipse* shape =
+                new Ellipse(Vector2Df(radius_x, radius_y),
+                            Vector2Df(cx - radius_x, cy - radius_y), fill_color,
+                            stroke_color, stroke_width);
             shapes.push_back(shape);
         } else if (tool.name() == std::string("polygon")) {
             Polygon* shape =
                 new Polygon(fill_color, stroke_color, stroke_width);
             std::vector< Vector2Df > points = parsePoints(tool);
             for (auto point : points) {
+                point.x += trans_x;
+                point.y += trans_y;
                 shape->addPoint(point);
             }
             shape->updateShape();
@@ -176,9 +197,10 @@ void Parser::parseSVG() {
                 new Polyline(stroke_width, stroke_color, fill_color);
             std::vector< Vector2Df > points = parsePoints(tool);
             for (auto point : points) {
+                point.x += trans_x;
+                point.y += trans_y;
                 shape->addPoint(point);
             }
-            shape->updateShape();
             shapes.push_back(shape);
         } else if (tool.name() == std::string("path")) {
             /*
@@ -186,8 +208,6 @@ void Parser::parseSVG() {
             PATH
 
             */
-        } else {
-            continue;
         }
     }
 }

@@ -151,7 +151,7 @@ Polyline::Polyline(float stroke_width, const Color& stroke_color,
 
 void Polyline::addPoint(const Vector2Df& point) { points.push_back(point); }
 
-void Polyline::updateShape() { update(); }
+void Polyline::updateShape() {}
 
 Vector2Df Polyline::getPoint(std::size_t index) const {
     if (index < points.size()) {
