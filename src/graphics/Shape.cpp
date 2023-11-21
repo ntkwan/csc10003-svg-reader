@@ -158,6 +158,13 @@ void Shape::updateOutline() {
     bounds = outline_vertices.getBounds();
 }
 
+void Shape::translate(float x, float y) {
+    position.x += x;
+    position.y += y;
+}
+
+void Shape::rotate(float angle) { rotation += angle; }
+
 void Shape::updateOutlineColors() {
     for (std::size_t i = 0; i < outline_vertices.getVertexCount(); ++i)
         outline_vertices[i].color = sf::Color(outline_color.r, outline_color.g,

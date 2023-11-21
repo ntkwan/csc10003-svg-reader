@@ -112,6 +112,24 @@ public:
     virtual Vector2Df getPoint(std::size_t index) const = 0;
 
     /**
+     * @brief Translate the shape
+     *
+     * @param x The x coordinate of the translation
+     * @param y The y coordinate of the translation
+     * @note This function adds to the current position of the object, unlike
+     * setPosition which overwrites it.
+     *
+     */
+    void translate(float x, float y);
+
+    /**
+     * @brief Rotate the shape
+     *
+     * @param angle The angle of rotation, in degrees
+     */
+    void rotate(float angle);
+
+    /**
      * @brief Virtual method: Draw the shape on the specified render target
      * @param target The render target (sf::Renderwindow is a typedef of SFML
      * drawing window)

@@ -91,7 +91,8 @@ public:
     void renderSVG(Renderer& renderer);
 
     /**
-     * @brief Get the Translate object which is parsed from the XML file.
+     * @brief Get the Translate information (x, y) which is parsed from the XML
+     * file.
      *
      * @param node The node of the XML file (pugi::xml_node is a typedef of
      * pugixml)
@@ -100,6 +101,18 @@ public:
      */
     std::pair< float, float > getTranslate(pugi::xml_node node,
                                            std::string name = "transform");
+
+    /**
+     * @brief Get the Rotate information (degree) which is parsed from the XML
+     * file.
+     *
+     * @param node The node of the XML file (pugi::xml_node is a typedef of
+     * pugixml)
+     * @param name The name of the attribute.
+     * @return The rotate which is parsed from the XML file.
+     */
+    float getRotate(pugi::xml_node node, std::string name = "transform");
+
     /**
      * @brief Destructor of Parser.
      */

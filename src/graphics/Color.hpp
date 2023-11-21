@@ -2,6 +2,7 @@
 #define COLOR_HPP_
 
 #include <map>
+#include <string>
 
 /**
  * @brief Utility class for manipulating RGBA colors
