@@ -2,18 +2,25 @@
 
 #include <SFML/Graphics.hpp>
 
-sf::Font Text::font;
-
-Text::Text(Vector2Df pos, sf::String TEXT, sf::Color fill_color,
-           float font_size) {
-    text.setPosition(sf::Vector2f(pos.x, pos.y));
-    text.setFont(font);
-    text.setCharacterSize(font_size);
-    text.setFillColor(fill_color);
-    text.setString(TEXT);
+Text::Text(Vector2Df pos, std::string TEXT, sf::Color fill_color,
+           float font_size)
+    : text(TEXT), position(pos) {
+    setOutlineColor(fill_color);
+    setOutlineThickness(font_size);
+    update();
 }
 std::size_t Text::getPointCount() const { return 0; }
 
 Vector2Df Text::getPoint(std::size_t index) const { return Vector2Df(0, 0); }
 
-void Text::draw(Renderer& target) const { target.window.draw(this->text); }
+void Text::draw(Renderer& target) const {
+    sf::Text render_text;
+    sf::Font font;
+    font.loadFromFile("external/font/Arial.ttf");
+    render_text.setString(text);
+    render_text.setFont(font);
+    render_text.setPosition(position.x, position.y);
+    render_text.setCharacterSize(getOutlineThickness());
+    render_text.setFillColor(getOutlineColor());
+    target.window.draw(render_text);
+}

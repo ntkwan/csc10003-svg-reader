@@ -6,18 +6,16 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 
+#include "PolyShape.hpp"
 #include "Shape.hpp"
 
 /**
  * @brief Represents a polyline in 2D space.
  *
- * The Polyline class is derived from the Shape class and defines a polyline
+ * The Polyline class is derived from the PolyShape class and defines a polyline
  * with a variable number of vertices.
  */
-class Polyline : public Shape {
-private:
-    std::vector< Vector2Df > points;  ///< Vertices of the polyline
-
+class Polyline : public PolyShape {
 public:
     /**
      * @brief Constructs a Polyline object.
@@ -37,7 +35,7 @@ public:
      *
      * @param point The position of the vertex to be added.
      */
-    void addPoint(const Vector2Df& point);
+    void addPoint(const Vector2Df& point) override;
 
     /**
      * @brief Draws the polyline on the specified render target.
@@ -69,7 +67,7 @@ public:
      * This method is provided for consistency with other shapes but
      * does not introduce any additional behavior for polylines.
      */
-    void polylineUpdate();
+    void updateShape() override;
 };
 
 #endif  // POLYLINE_HPP_

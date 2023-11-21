@@ -141,7 +141,7 @@ void Parser::parseSVG() {
             float x = std::stof(getAttribute(tool, "x"));
             float y = std::stof(getAttribute(tool, "y"));
             float font_size = std::stof(getAttribute(tool, "font-size"));
-            sf::String text = tool.text().get();
+            std::string text = tool.text().get();
             Text* shape = new Text(Vector2Df(x, y - font_size), text,
                                    fill_color, font_size);
             shapes.push_back(shape);
@@ -169,7 +169,7 @@ void Parser::parseSVG() {
             for (auto point : points) {
                 shape->addPoint(point);
             }
-            shape->polygonUpdate();
+            shape->updateShape();
             shapes.push_back(shape);
         } else if (tool.name() == std::string("polyline")) {
             Polyline* shape =
@@ -178,7 +178,7 @@ void Parser::parseSVG() {
             for (auto point : points) {
                 shape->addPoint(point);
             }
-            shape->polylineUpdate();
+            shape->updateShape();
             shapes.push_back(shape);
         } else if (tool.name() == std::string("path")) {
             /*

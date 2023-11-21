@@ -15,9 +15,6 @@ int main() {
     Viewer *viewer = Viewer::getInstance(window, view);
     Parser *parser = Parser::getInstance("sample/sample.svg");
     Renderer *renderer = Renderer::getInstance(window);
-    if (!Text::font.loadFromFile("external/font/Arial.ttf")) {
-        return EXIT_FAILURE;
-    }
 
     while (window.isOpen()) {
         sf::Event event;
