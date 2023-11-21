@@ -52,7 +52,7 @@ public:
      * @note The color is parsed from the XML file in the format of
      * "rgb(r, g, b)".
      */
-    sf::Color parseColor(pugi::xml_node node, std::string name);
+    Color parseColor(pugi::xml_node node, std::string name);
 
     /**
      * @brief Parse the points from the XML file.

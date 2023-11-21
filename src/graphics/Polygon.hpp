@@ -23,8 +23,8 @@ public:
      * @param stroke Outline color of the polygon (default is sf::Color::White).
      * @param stroke_thickness Thickness of the polygon outline (default is 0).
      */
-    Polygon(sf::Color fill = sf::Color::Transparent,
-            sf::Color stroke = sf::Color::White, float stroke_thickness = 0);
+    Polygon(Color fill = Color::Transparent, Color stroke = Color::White,
+            float stroke_thickness = 0);
 
     /**
      * @brief Gets the total number of vertices representing the polygon.

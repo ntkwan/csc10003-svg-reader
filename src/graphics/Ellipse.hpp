@@ -25,8 +25,8 @@ public:
      * @param stroke Outline color of the ellipse.
      * @param stroke_thickness Thickness of the ellipse outline.
      */
-    Ellipse(const Vector2Df &radius, const Vector2Df &center, sf::Color fill,
-            sf::Color stroke, float stroke_thickness);
+    Ellipse(const Vector2Df &radius, const Vector2Df &center, Color fill,
+            Color stroke, float stroke_thickness);
 
     /**
      * @brief Gets the total number of points representing the ellipse.

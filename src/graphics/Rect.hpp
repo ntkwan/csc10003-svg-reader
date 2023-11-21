@@ -28,8 +28,8 @@ public:
      * @param stroke Outline color of the rectangle.
      * @param stroke_thickness Thickness of the rectangle outline.
      */
-    Rect(float width, float height, float x, float y, sf::Color fill,
-         sf::Color stroke, float stroke_thickness);
+    Rect(float width, float height, float x, float y, Color fill, Color stroke,
+         float stroke_thickness);
 
     /**
      * @brief Gets the total number of vertices representing the rectangle.

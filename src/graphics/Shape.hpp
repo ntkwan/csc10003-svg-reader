@@ -1,10 +1,10 @@
 #ifndef SHAPE_HPP_
 #define SHAPE_HPP_
 
-#include <SFML/Graphics.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Texture.hpp>
 
+#include "Color.hpp"
 #include "Renderer.hpp"
 #include "Vector2D.hpp"
 
@@ -27,14 +27,14 @@ public:
      *
      * @param color The new fill color of the shape.
      */
-    void setFillColor(const sf::Color& color);
+    void setFillColor(const Color& color);
 
     /**
      * @brief Sets the outline color of the shape.
      *
      * @param color The new outline color of the shape.
      */
-    void setOutlineColor(const sf::Color& color);
+    void setOutlineColor(const Color& color);
 
     /**
      * @brief Sets the outline thickness of the shape.
@@ -53,14 +53,14 @@ public:
      * @return The fill color of the shape.
      * @note The default fill color is white.
      */
-    const sf::Color& getFillColor() const;
+    const Color& getFillColor() const;
 
     /**
      * @brief Gets the outline color of the shape.
      * @return The outline color of the shape.
      * @note The default outline color is white.
      */
-    const sf::Color& getOutlineColor() const;
+    const Color& getOutlineColor() const;
 
     /**
      * @brief Gets the outline thickness of the shape.
@@ -175,11 +175,10 @@ private:
     void updateOutlineColors();
 
 private:
-    const sf::Texture* texture;  ///< Texture of the shape
-    sf::Color fill_color;        ///< Fill color
-    sf::Color outline_color;     ///< Outline color
-    float outline_thickness;     ///< Thickness of the shape's outline
-    sf::VertexArray vertices;    ///< Vertex array containing the fill geometry
+    Color fill_color;          ///< Fill color
+    Color outline_color;       ///< Outline color
+    float outline_thickness;   ///< Thickness of the shape's outline
+    sf::VertexArray vertices;  ///< Vertex array containing the fill geometry
     sf::VertexArray
         outline_vertices;  ///< Vertex array containing the outline geometry
     sf::FloatRect inside_bounds;  ///< Bounding rectangle of the inside (fill)

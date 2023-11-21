@@ -21,8 +21,8 @@ public:
      * @param stroke Outline color of the circle.
      * @param stroke_thickness Thickness of the circle outline.
      */
-    Circle(float radius, const Vector2Df &center, sf::Color fill,
-           sf::Color stroke, float stroke_thickness);
+    Circle(float radius, const Vector2Df &center, Color fill, Color stroke,
+           float stroke_thickness);
 };
 
 #endif  // CIRCLE_HPP_

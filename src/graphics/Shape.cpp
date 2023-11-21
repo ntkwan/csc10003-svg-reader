@@ -15,19 +15,19 @@ namespace {
     }
 }  // namespace
 
-void Shape::setFillColor(const sf::Color& color) {
+void Shape::setFillColor(const Color& color) {
     fill_color = color;
     updateFillColors();
 }
 
-const sf::Color& Shape::getFillColor() const { return fill_color; }
+const Color& Shape::getFillColor() const { return fill_color; }
 
-void Shape::setOutlineColor(const sf::Color& color) {
+void Shape::setOutlineColor(const Color& color) {
     outline_color = color;
     updateOutlineColors();
 }
 
-const sf::Color& Shape::getOutlineColor() const { return outline_color; }
+const Color& Shape::getOutlineColor() const { return outline_color; }
 
 void Shape::setOutlineThickness(float thickness) {
     outline_thickness = thickness;
@@ -88,7 +88,8 @@ void Shape::draw(Renderer& target) const {
 
 void Shape::updateFillColors() {
     for (std::size_t i = 0; i < vertices.getVertexCount(); ++i)
-        vertices[i].color = fill_color;
+        vertices[i].color =
+            sf::Color(fill_color.r, fill_color.g, fill_color.b, fill_color.a);
 }
 
 void Shape::updateOutline() {
@@ -155,7 +156,8 @@ void Shape::updateOutline() {
 
 void Shape::updateOutlineColors() {
     for (std::size_t i = 0; i < outline_vertices.getVertexCount(); ++i)
-        outline_vertices[i].color = outline_color;
+        outline_vertices[i].color = sf::Color(outline_color.r, outline_color.g,
+                                              outline_color.b, outline_color.a);
 }
 
 const sf::Transform& Shape::getTransform() const {

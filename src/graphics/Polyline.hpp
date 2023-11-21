@@ -26,9 +26,8 @@ public:
      * @param fill The fill color of the polyline (default is
      * sf::Color::Transparent).
      */
-    Polyline(float stroke_Width = 0,
-             const sf::Color& stroke_color = sf::Color::White,
-             const sf::Color& fill = sf::Color::Transparent);
+    Polyline(float stroke_Width = 0, const Color& stroke_color = Color::White,
+             const Color& fill = Color::Transparent);
 
     /**
      * @brief Adds a vertex to the polyline.

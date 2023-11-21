@@ -1,6 +1,6 @@
 #include "Polygon.hpp"
 
-Polygon::Polygon(sf::Color fill, sf::Color stroke, float stroke_thickness) {
+Polygon::Polygon(Color fill, Color stroke, float stroke_thickness) {
     setFillColor(fill);
     setOutlineColor(stroke);
     setOutlineThickness(stroke_thickness);

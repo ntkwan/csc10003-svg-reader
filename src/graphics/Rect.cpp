@@ -1,7 +1,7 @@
 #include "Rect.hpp"
 
-Rect::Rect(float width, float height, float x, float y, sf::Color fill,
-           sf::Color stroke, float stroke_thickness)
+Rect::Rect(float width, float height, float x, float y, Color fill,
+           Color stroke, float stroke_thickness)
     : Polygon(fill, stroke, stroke_thickness), width(width), height(height) {
     addPoint(Vector2Df(0, 0));
     addPoint(Vector2Df(width, 0));

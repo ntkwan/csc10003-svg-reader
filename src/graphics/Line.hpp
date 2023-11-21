@@ -26,7 +26,7 @@ public:
      * @param stroke_width The thickness of the line (default is 1.0).
      */
     Line(const Vector2Df& point1, const Vector2Df& point2,
-         sf::Color stroke = sf::Color::White, float stroke_width = 1.f);
+         Color stroke = Color::White, float stroke_width = 1.f);
 
     /**
      * @brief Sets the thickness of the line.

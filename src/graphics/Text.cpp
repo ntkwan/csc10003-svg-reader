@@ -2,8 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 
-Text::Text(Vector2Df pos, std::string TEXT, sf::Color fill_color,
-           float font_size)
+Text::Text(Vector2Df pos, std::string TEXT, Color fill_color, float font_size)
     : text(TEXT), position(pos) {
     setOutlineColor(fill_color);
     setOutlineThickness(font_size);
@@ -21,6 +20,8 @@ void Text::draw(Renderer& target) const {
     render_text.setFont(font);
     render_text.setPosition(position.x, position.y);
     render_text.setCharacterSize(getOutlineThickness());
-    render_text.setFillColor(getOutlineColor());
+    Color outline_color = getOutlineColor();
+    render_text.setFillColor(sf::Color(outline_color.r, outline_color.g,
+                                       outline_color.b, outline_color.a));
     target.window.draw(render_text);
 }

@@ -1,6 +1,6 @@
 #include "Line.hpp"
 
-Line::Line(const Vector2Df& point1, const Vector2Df& point2, sf::Color stroke,
+Line::Line(const Vector2Df& point1, const Vector2Df& point2, Color stroke,
            float stroke_width)
     : direction(point2 - point1), thickness(stroke_width) {
     setPosition(point1);

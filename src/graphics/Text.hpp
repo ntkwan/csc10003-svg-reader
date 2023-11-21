@@ -24,8 +24,8 @@ public:
      * sf::Color::Black).
      * @param font_size The font size of the text (default is 1).
      */
-    Text(Vector2Df pos, std::string TEXT,
-         sf::Color fill_color = sf::Color::Black, float font_size = 1);
+    Text(Vector2Df pos, std::string TEXT, Color fill_color = Color::Black,
+         float font_size = 1);
 
     /**
      * @brief Gets the total number of points representing the text.

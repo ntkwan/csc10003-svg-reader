@@ -2,8 +2,8 @@
 
 #include <cmath>
 
-Ellipse::Ellipse(const Vector2Df &radius, const Vector2Df &center,
-                 sf::Color fill, sf::Color stroke, float stroke_thickness)
+Ellipse::Ellipse(const Vector2Df &radius, const Vector2Df &center, Color fill,
+                 Color stroke, float stroke_thickness)
     : radius(radius) {
     setPosition(center);
     setFillColor(fill);

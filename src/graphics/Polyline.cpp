@@ -142,8 +142,8 @@ namespace {
     }
 }  // namespace
 
-Polyline::Polyline(float stroke_width, const sf::Color& stroke_color,
-                   const sf::Color& fill) {
+Polyline::Polyline(float stroke_width, const Color& stroke_color,
+                   const Color& fill) {
     setOutlineThickness(stroke_width);
     setOutlineColor(stroke_color);
     setFillColor(fill);
@@ -178,7 +178,7 @@ void Polyline::draw(Renderer& target) const {
         Vector2Df perpendicularDirection(-unitDirection.y, unitDirection.x);
 
         float thickness = getOutlineThickness();
-        sf::Color stroke = getOutlineColor();
+        Color stroke = getOutlineColor();
 
         p1a = p1 - perpendicularDirection * (thickness / 2.0f);
         p1b = p1 + perpendicularDirection * (thickness / 2.0f);
@@ -197,20 +197,32 @@ void Polyline::draw(Renderer& target) const {
                 Vector2Df point_4 =
                     findIntersection({r_p1b, r_p2b}, {p1a, p2a});
 
-                lS.append(
-                    sf::Vertex(sf::Vector2f(point_1.x, point_1.y), stroke));
-                lS.append(
-                    sf::Vertex(sf::Vector2f(point_2.x, point_2.y), stroke));
-                lS.append(
-                    sf::Vertex(sf::Vector2f(point_3.x, point_3.y), stroke));
-                lS.append(
-                    sf::Vertex(sf::Vector2f(point_4.x, point_4.y), stroke));
+                lS.append(sf::Vertex(
+                    sf::Vector2f(point_1.x, point_1.y),
+                    sf::Color(stroke.r, stroke.g, stroke.b, stroke.a)));
+                lS.append(sf::Vertex(
+                    sf::Vector2f(point_2.x, point_2.y),
+                    sf::Color(stroke.r, stroke.g, stroke.b, stroke.a)));
+                lS.append(sf::Vertex(
+                    sf::Vector2f(point_3.x, point_3.y),
+                    sf::Color(stroke.r, stroke.g, stroke.b, stroke.a)));
+                lS.append(sf::Vertex(
+                    sf::Vector2f(point_4.x, point_4.y),
+                    sf::Color(stroke.r, stroke.g, stroke.b, stroke.a)));
 
             } else {
-                lS.append(sf::Vertex(sf::Vector2f(p1a.x, p1a.y), stroke));
-                lS.append(sf::Vertex(sf::Vector2f(r_p2a.x, r_p2a.y), stroke));
-                lS.append(sf::Vertex(sf::Vector2f(p1b.x, p1b.y), stroke));
-                lS.append(sf::Vertex(sf::Vector2f(r_p2b.x, r_p2b.y), stroke));
+                lS.append(sf::Vertex(
+                    sf::Vector2f(p1a.x, p1a.y),
+                    sf::Color(stroke.r, stroke.g, stroke.b, stroke.a)));
+                lS.append(sf::Vertex(
+                    sf::Vector2f(r_p2a.x, r_p2a.y),
+                    sf::Color(stroke.r, stroke.g, stroke.b, stroke.a)));
+                lS.append(sf::Vertex(
+                    sf::Vector2f(p1b.x, p1b.y),
+                    sf::Color(stroke.r, stroke.g, stroke.b, stroke.a)));
+                lS.append(sf::Vertex(
+                    sf::Vector2f(r_p2b.x, r_p2b.y),
+                    sf::Color(stroke.r, stroke.g, stroke.b, stroke.a)));
             }
             target.window.draw(lS);
         }
@@ -218,18 +230,27 @@ void Polyline::draw(Renderer& target) const {
         r_p1b = p1b;
         r_p2a = p2a;
         r_p2b = p2b;
-        lineStrip.append(sf::Vertex(sf::Vector2f(p1a.x, p1a.y), stroke));
-        lineStrip.append(sf::Vertex(sf::Vector2f(p1b.x, p1b.y), stroke));
-        lineStrip.append(sf::Vertex(sf::Vector2f(p2b.x, p2b.y), stroke));
-        lineStrip.append(sf::Vertex(sf::Vector2f(p2a.x, p2a.y), stroke));
+        lineStrip.append(
+            sf::Vertex(sf::Vector2f(p1a.x, p1a.y),
+                       sf::Color(stroke.r, stroke.g, stroke.b, stroke.a)));
+        lineStrip.append(
+            sf::Vertex(sf::Vector2f(p1b.x, p1b.y),
+                       sf::Color(stroke.r, stroke.g, stroke.b, stroke.a)));
+        lineStrip.append(
+            sf::Vertex(sf::Vector2f(p2b.x, p2b.y),
+                       sf::Color(stroke.r, stroke.g, stroke.b, stroke.a)));
+        lineStrip.append(
+            sf::Vertex(sf::Vector2f(p2a.x, p2a.y),
+                       sf::Color(stroke.r, stroke.g, stroke.b, stroke.a)));
     }
     std::vector< ClosedPolygon > cP = findClosedPolygons(points);
     if (cP.size() > 0) {
-        sf::Color fillColor = getFillColor();
+        Color fillColor = getFillColor();
         for (const ClosedPolygon& polygon : cP) {
             if (polygon.cP.size() > 2) {  // Ensure it's a valid polygon
                 sf::ConvexShape fillShape;
-                fillShape.setFillColor(fillColor);
+                fillShape.setFillColor(sf::Color(fillColor.r, fillColor.g,
+                                                 fillColor.b, fillColor.a));
                 fillShape.setOutlineThickness(0);
                 fillShape.setPointCount(polygon.cP.size());
 

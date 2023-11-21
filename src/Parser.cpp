@@ -38,15 +38,15 @@ std::string Parser::getAttribute(pugi::xml_node node, std::string name) {
     return attr.value();
 };
 
-sf::Color Parser::parseColor(pugi::xml_node node, std::string name) {
-    auto getRgbColor = [](std::string color) -> sf::Color {
+Color Parser::parseColor(pugi::xml_node node, std::string name) {
+    auto getRgbColor = [](std::string color) -> Color {
         int r, g, b;
         float a = 1;
         sscanf(color.c_str(), "rgb(%d,%d,%d,%f)", &r, &g, &b, &a);
-        return sf::Color(r, g, b, 255 * a);
+        return Color(r, g, b, 255 * a);
     };
 
-    auto getHexColor = [](std::string color) -> sf::Color {
+    auto getHexColor = [](std::string color) -> Color {
         std::stringstream ss;
         ss << std::hex << color.substr(1, 2) << " " << color.substr(3, 2) << " "
            << color.substr(5, 2);
@@ -57,17 +57,17 @@ sf::Color Parser::parseColor(pugi::xml_node node, std::string name) {
             ss << std::hex << color.substr(7, 2);
             int a;
             ss >> a;
-            return sf::Color(r, g, b, a);
+            return Color(r, g, b, a);
         }
-        return sf::Color(r, g, b, 255);
+        return Color(r, g, b, 255);
     };
 
     std::string color = getAttribute(node, name);
     for (auto& c : color) c = tolower(c);
     if (color == "none")
-        return sf::Color::Transparent;
+        return Color::Transparent;
     else {
-        sf::Color result;
+        Color result;
         if (color[0] == '#') {
             result = getHexColor(color);
         } else if (color.find("rgb") == std::string::npos) {
@@ -117,8 +117,8 @@ std::vector< Vector2Df > Parser::parsePoints(pugi::xml_node node) {
 void Parser::parseSVG() {
     for (pugi::xml_node tool = svg.first_child(); tool;
          tool = tool.next_sibling()) {
-        sf::Color stroke_color = parseColor(tool, "stroke");
-        sf::Color fill_color = parseColor(tool, "fill");
+        Color stroke_color = parseColor(tool, "stroke");
+        Color fill_color = parseColor(tool, "fill");
 
         float stroke_width = std::stof(getAttribute(tool, "stroke-width"));
 
