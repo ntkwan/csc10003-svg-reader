@@ -10,3 +10,5 @@ std::size_t Text::getPointCount() const { return 0; }
 Vector2Df Text::getPoint(std::size_t index) const { return Vector2Df(0, 0); }
 
 std::string Text::getContent() const { return content; }
+
+Vector2Df Text::getPosition() const { return position; }

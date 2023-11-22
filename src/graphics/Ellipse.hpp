@@ -28,6 +28,7 @@ public:
     Ellipse(const Vector2Df &radius, const Vector2Df &center, Color fill,
             Color stroke, float stroke_thickness);
 
+    std::string getClass() const override { return "Ellipse"; }
     /**
      * @brief Gets the total number of points representing the ellipse.
      *

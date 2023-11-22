@@ -1,8 +1,6 @@
 #ifndef LINE_HPP_
 #define LINE_HPP_
 
-#include <cmath>
-
 #include "Shape.hpp"
 
 /**
@@ -28,6 +26,7 @@ public:
     Line(const Vector2Df& point1, const Vector2Df& point2,
          Color stroke = Color::White, float stroke_width = 1.f);
 
+    std::string getClass() const override { return "Line"; }
     /**
      * @brief Sets the thickness of the line.
      *

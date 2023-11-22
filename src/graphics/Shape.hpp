@@ -14,13 +14,14 @@
  * @note This class is applied Abstract Factory design pattern and used as
  * interface for other shapes.
  */
-
 class Shape {
 public:
-    /*! @brief Virtual constructor
+    /**
+     *  @brief Virtual constructor
      */
-
     virtual ~Shape() = default;
+
+    virtual std::string getClass() const = 0;
 
     /**
      * @brief Sets the fill color of the shape.
@@ -69,10 +70,26 @@ public:
      */
     float getOutlineThickness() const;
 
+    /**
+     * @brief Get the vertices of the shape
+     *
+     * @return The vertices of the shape
+     */
     std::vector< Vertex > getVertices() const;
 
+    /**
+     * @brief Get the outline vertices of the shape
+     *
+     * @return The outline vertices of the shape
+     */
     std::vector< Vertex > getOutlineVertices() const;
 
+    /**
+     * @brief Get the current position of the shape
+     *
+     * @return The current position of the shape
+     * @note The default position of the shape is (0, 0).
+     */
     Vector2Df getPosition() const;
 
     /**

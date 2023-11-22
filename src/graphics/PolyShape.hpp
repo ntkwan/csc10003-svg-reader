@@ -1,9 +1,6 @@
 #ifndef POLYSHAPE_HPP_
 #define POLYSHAPE_HPP_
 
-#include <SFML/Graphics.hpp>
-#include <vector>
-
 #include "Shape.hpp"
 
 /**
@@ -17,6 +14,7 @@ protected:
     std::vector< Vector2Df > points;  ///< Vertices of the polyshape
 
 public:
+    virtual std::string getClass() const = 0;
     /**
      * @brief Adds a vertex to the shape.
      *
@@ -36,6 +34,11 @@ public:
      */
     virtual void updateShape() = 0;
 
+    /**
+     * @brief Gets the total number of vertices representing the shape.
+     *
+     * @return The number of vertices representing the shape.
+     */
     std::vector< Vector2Df > getPoints() const { return points; }
 };
 

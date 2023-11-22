@@ -4,20 +4,6 @@
 #include <sstream>
 #include <vector>
 
-namespace {
-    std::vector< std::string > getTransformOrder(pugi::xml_node node) {
-        std::vector< std::string > order;
-        std::string transform_tag = node.attribute("transform").value();
-        std::stringstream ss(transform_tag);
-        std::string type = "";
-        while (ss >> type) {
-            order.push_back(type);
-        }
-
-        return order;
-    }
-}  // namespace
-
 Parser* Parser::instance = nullptr;
 
 Parser* Parser::getInstance(const std::string& file_name) {
@@ -145,10 +131,11 @@ std::pair< float, float > Parser::getTranslate(pugi::xml_node node,
                 int mid = translate_tag.find(',');
                 int end = translate_tag.find(')');
                 trans_x = std::stof(translate_tag.substr(0, mid));
-                trans_y = std::stof(translate_tag.substr(mid + 1, end - mid));
+                trans_y =
+                    std::stof(translate_tag.substr(mid + 1, end - mid - 1));
             } else {
                 int end = translate_tag.find(')');
-                trans_x = std::stof(translate_tag.substr(0, end));
+                trans_x = std::stof(translate_tag.substr(0, end - 1));
                 trans_y = 0;
             }
         }
@@ -177,38 +164,23 @@ float Parser::getRotate(pugi::xml_node node, std::string name) {
 }
 
 void Parser::parseSVG() {
-    auto doTransformTag =
-        [&](const pugi::xml_node& tool, Shape* shape,
-            const std::vector< std::string >& transform_order) {
-            float trans_x = getTranslate(tool).first,
-                  trans_y = getTranslate(tool).second;
-            float degree = getRotate(tool);
-            for (auto type : transform_order) {
-                if (type.find("translate") != std::string::npos) {
-                    shape->translate(trans_x, trans_y);
-                } else if (type.find("rotate") != std::string::npos) {
-                    shape->rotate(degree);
-                }
-            }
-        };
-
     for (pugi::xml_node tool = svg.first_child(); tool;
          tool = tool.next_sibling()) {
         Color stroke_color = parseColor(tool, "stroke");
         Color fill_color = parseColor(tool, "fill");
+
         float stroke_width = std::stof(getAttribute(tool, "stroke-width"));
-
-        std::vector< std::string > transform_order = getTransformOrder(tool);
-
+        float trans_x = getTranslate(tool).first,
+              trans_y = getTranslate(tool).second;
+        float degree = getRotate(tool);
         if (tool.name() == std::string("rect")) {
             float x = std::stof(getAttribute(tool, "x"));
             float y = std::stof(getAttribute(tool, "y"));
             Rect* shape = new Rect(std::stof(getAttribute(tool, "width")),
                                    std::stof(getAttribute(tool, "height")), x,
                                    y, fill_color, stroke_color, stroke_width);
-
-            doTransformTag(tool, shape, transform_order);
-
+            shape->translate(trans_x, trans_y);
+            shape->rotate(degree);
             shapes.push_back(shape);
         } else if (tool.name() == std::string("line")) {
             Line* shape =
@@ -217,9 +189,7 @@ void Parser::parseSVG() {
                          Vector2Df(std::stof(getAttribute(tool, "x2")),
                                    std::stof(getAttribute(tool, "y2"))),
                          stroke_color, stroke_width);
-
-            doTransformTag(tool, shape, transform_order);
-
+            shape->rotate(degree);
             shapes.push_back(shape);
         } else if (tool.name() == std::string("text")) {
             float x = std::stof(getAttribute(tool, "x"));
@@ -228,20 +198,17 @@ void Parser::parseSVG() {
             std::string text = tool.text().get();
             Text* shape = new Text(Vector2Df(x, y - font_size), text,
                                    fill_color, font_size);
-
-            doTransformTag(tool, shape, transform_order);
-
+            shape->translate(trans_x, trans_y);
+            shape->rotate(degree);
             shapes.push_back(shape);
         } else if (tool.name() == std::string("circle")) {
-            float cx = std::stof(getAttribute(tool, "cx"));
-            float cy = std::stof(getAttribute(tool, "cy"));
+            float cx = std::stof(getAttribute(tool, "cx")) + trans_x;
+            float cy = std::stof(getAttribute(tool, "cy")) + trans_y;
             float radius = std::stof(getAttribute(tool, "r"));
             Circle* shape =
                 new Circle(radius, Vector2Df(cx - radius, cy - radius),
                            fill_color, stroke_color, stroke_width);
-
-            doTransformTag(tool, shape, transform_order);
-
+            shape->translate(trans_x, trans_y);
             shapes.push_back(shape);
         } else if (tool.name() == std::string("ellipse")) {
             float radius_x = std::stof(getAttribute(tool, "rx"));
@@ -252,22 +219,19 @@ void Parser::parseSVG() {
                 new Ellipse(Vector2Df(radius_x, radius_y),
                             Vector2Df(cx - radius_x, cy - radius_y), fill_color,
                             stroke_color, stroke_width);
-
-            doTransformTag(tool, shape, transform_order);
-
+            shape->translate(trans_x, trans_y);
+            shape->rotate(degree);
             shapes.push_back(shape);
         } else if (tool.name() == std::string("polygon")) {
             Polygon* shape =
                 new Polygon(fill_color, stroke_color, stroke_width);
             std::vector< Vector2Df > points = parsePoints(tool);
             for (auto point : points) {
-                /* translate
                 point.x += trans_x;
                 point.y += trans_y;
-                */
                 shape->addPoint(point);
             }
-            // TBD: rotate
+            // translate
             shape->updateShape();
             shapes.push_back(shape);
         } else if (tool.name() == std::string("polyline")) {
@@ -275,18 +239,16 @@ void Parser::parseSVG() {
                 new Polyline(stroke_width, stroke_color, fill_color);
             std::vector< Vector2Df > points = parsePoints(tool);
             for (auto point : points) {
-                /* translate
                 point.x += trans_x;
                 point.y += trans_y;
-                */
                 shape->addPoint(point);
             }
-            // TBD: rotate
+            // translate
             shapes.push_back(shape);
         } else if (tool.name() == std::string("path")) {
             /*
 
-            TBD: PATH
+            PATH
 
             */
         }

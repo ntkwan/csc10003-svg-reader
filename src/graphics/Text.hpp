@@ -27,6 +27,7 @@ public:
     Text(Vector2Df pos, std::string TEXT, Color fill_color = Color::Black,
          float font_size = 1);
 
+    std::string getClass() const override { return "Text"; }
     /**
      * @brief Gets the total number of points representing the text.
      *
@@ -46,6 +47,8 @@ public:
      * @return A dummy point for compatibility.
      */
     virtual Vector2Df getPoint(std::size_t index) const;
+
+    Vector2Df getPosition() const;
 
     std::string getContent() const;
 };

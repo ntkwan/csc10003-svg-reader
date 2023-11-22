@@ -61,10 +61,8 @@ public:
     Vertex(const Vector2Df& thePosition, const Color& theColor,
            const Vector2Df& theTexCoords);
 
-    Vector2Df position;   ///< 2D position of the vertex
-    Color color;          ///< Color of the vertex
-    Vector2Df texCoords;  ///< Coordinates of the texture's pixel to map to
-                          ///< the vertex
+    Vector2Df position;  ///< 2D position of the vertex
+    Color color;         ///< Color of the vertex
 };
 
 #endif  // VERTEX_HPP

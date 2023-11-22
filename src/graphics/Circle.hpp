@@ -23,6 +23,8 @@ public:
      */
     Circle(float radius, const Vector2Df &center, Color fill, Color stroke,
            float stroke_thickness);
+
+    std::string getClass() const override { return "Circle"; }
 };
 
 #endif  // CIRCLE_HPP_

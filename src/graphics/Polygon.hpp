@@ -1,9 +1,6 @@
 #ifndef POLYGON_HPP_
 #define POLYGON_HPP_
 
-#include <SFML/Graphics.hpp>
-#include <vector>
-
 #include "PolyShape.hpp"
 #include "Shape.hpp"
 
@@ -33,6 +30,7 @@ public:
      */
     std::size_t getPointCount() const override;
 
+    std::string getClass() const override { return "Polygon"; }
     /**
      * @brief Gets the position of a vertex in the polygon.
      *

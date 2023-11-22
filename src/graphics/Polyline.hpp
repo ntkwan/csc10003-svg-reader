@@ -1,11 +1,6 @@
 #ifndef POLYLINE_HPP_
 #define POLYLINE_HPP_
 
-#include <math.h>
-
-#include <SFML/Graphics.hpp>
-#include <vector>
-
 #include "PolyShape.hpp"
 #include "Shape.hpp"
 
@@ -36,6 +31,7 @@ public:
      */
     void addPoint(const Vector2Df& point) override;
 
+    std::string getClass() const override { return "Polyline"; }
     /**
      * @brief Gets the position of a vertex in the polyline.
      *

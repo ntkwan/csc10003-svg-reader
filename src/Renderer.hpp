@@ -17,19 +17,7 @@ public:
      * @brief Draw the shape on the specified render target
      *
      */
-    void draw(Shape* shape);
-
-    /**
-     * @brief Draws the polyline on the specified render target.
-     *
-     */
-    void draw(Polyline* polyline);
-
-    /**
-     * @brief Draws the text on the specified render target.
-     *
-     */
-    void draw(Text* text);
+    void draw(Shape* shape) const;
 
 private:
     Renderer(sf::RenderWindow& window);

@@ -31,6 +31,7 @@ public:
     Rect(float width, float height, float x, float y, Color fill, Color stroke,
          float stroke_thickness);
 
+    std::string getClass() const override { return "Rect"; }
     /**
      * @brief Gets the total number of vertices representing the rectangle.
      *
