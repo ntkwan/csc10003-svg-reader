@@ -13,6 +13,36 @@ namespace {
     float dotProduct(const Vector2Df& p1, const Vector2Df& p2) {
         return p1.x * p2.x + p1.y * p2.y;
     }
+
+    sf::FloatRect getBounds(const std::vector< Vertex >& vertices) {
+        if (!vertices.empty()) {
+            float left = vertices[0].position.x;
+            float top = vertices[0].position.y;
+            float right = vertices[0].position.x;
+            float bottom = vertices[0].position.y;
+
+            for (std::size_t i = 1; i < vertices.size(); ++i) {
+                Vector2Df position = vertices[i].position;
+
+                // Update left and right
+                if (position.x < left)
+                    left = position.x;
+                else if (position.x > right)
+                    right = position.x;
+
+                // Update top and bottom
+                if (position.y < top)
+                    top = position.y;
+                else if (position.y > bottom)
+                    bottom = position.y;
+            }
+
+            return sf::FloatRect(left, top, right - left, bottom - top);
+        } else {
+            // Array is empty
+            return sf::FloatRect();
+        }
+    }
 }  // namespace
 
 void Shape::setFillColor(const Color& color) {
@@ -37,13 +67,19 @@ void Shape::setOutlineThickness(float thickness) {
 
 float Shape::getOutlineThickness() const { return outline_thickness; }
 
+std::vector< Vertex > Shape::getVertices() const { return vertices; }
+
+std::vector< Vertex > Shape::getOutlineVertices() const {
+    return outline_vertices;
+}
+
+Vector2Df Shape::getPosition() const { return position; }
+
 Shape::Shape()
     : fill_color(255, 255, 255), outline_color(255, 255, 255),
-      outline_thickness(0), vertices(sf::TriangleFan),
-      outline_vertices(sf::TriangleStrip), inside_bounds(), bounds(),
-      origin(0, 0), position(0, 0), rotation(0), scale(1, 1), transform(),
-      transform_need_update(true), inverse_transform(),
-      inverse_transform_need_update(true) {}
+      outline_thickness(0), origin(0, 0), position(0, 0), rotation(0),
+      scale(1, 1), transform(), transform_need_update(true),
+      inverse_transform(), inverse_transform_need_update(true) {}
 
 void Shape::update() {
     // Get the total number of points of the shape
@@ -58,12 +94,12 @@ void Shape::update() {
 
     // Position
     for (std::size_t i = 0; i < count; ++i)
-        vertices[i + 1].position = sf::Vector2f(getPoint(i).x, getPoint(i).y);
+        vertices[i + 1].position = getPoint(i);
     vertices[count + 1].position = vertices[1].position;
 
     // Update the bounding rectangle
     vertices[0] = vertices[1];  // so that the result of getBounds() is correct
-    inside_bounds = vertices.getBounds();
+    inside_bounds = getBounds(vertices);
 
     // Compute the center and make it the first vertex
     vertices[0].position.x = inside_bounds.left + inside_bounds.width / 2;
@@ -76,24 +112,9 @@ void Shape::update() {
     updateOutline();
 }
 
-void Shape::draw(Renderer& target) const {
-    const float* mat = getTransform().getMatrix();
-    sf::Transform transform =
-        sf::Transform(mat[0], mat[4], mat[12], mat[1], mat[5], mat[13], mat[3],
-                      mat[7], mat[15]);
-    // Render the inside
-    target.window.draw(vertices, transform);
-
-    // Render the outline
-    if (outline_thickness != 0) {
-        target.window.draw(outline_vertices, transform);
-    }
-}
-
 void Shape::updateFillColors() {
-    for (std::size_t i = 0; i < vertices.getVertexCount(); ++i)
-        vertices[i].color =
-            sf::Color(fill_color.r, fill_color.g, fill_color.b, fill_color.a);
+    for (std::size_t i = 0; i < vertices.size(); ++i)
+        vertices[i].color = fill_color;
 }
 
 void Shape::updateOutline() {
@@ -104,7 +125,7 @@ void Shape::updateOutline() {
         return;
     }
 
-    std::size_t count = vertices.getVertexCount() - 2;
+    std::size_t count = (int)vertices.size() - 2;
     outline_vertices.resize((count + 1) * 2);
 
     for (std::size_t i = 0; i < count; ++i) {
@@ -142,9 +163,9 @@ void Shape::updateOutline() {
         // Update the outline points
         Vector2Df offset = normal * (outline_thickness / 2.f);
         Vector2Df result = p1 - offset;
-        outline_vertices[i * 2 + 0].position = sf::Vector2f(result.x, result.y);
+        outline_vertices[i * 2 + 0].position = result;
         result = p1 + offset;
-        outline_vertices[i * 2 + 1].position = sf::Vector2f(result.x, result.y);
+        outline_vertices[i * 2 + 1].position = result;
     }
 
     // Duplicate the first point at the end, to close the outline
@@ -155,10 +176,9 @@ void Shape::updateOutline() {
     updateOutlineColors();
 
     // Update the shape's bounds
-    bounds = outline_vertices.getBounds();
+    bounds = getBounds(outline_vertices);
 }
 
-#include <iostream>
 void Shape::translate(float x, float y) {
     position.x += x * std::cos(rotation * acos(-1) / 180.f) -
                   y * std::sin(rotation * acos(-1) / 180.f);
@@ -175,9 +195,8 @@ void Shape::rotate(float angle) {
 }
 
 void Shape::updateOutlineColors() {
-    for (std::size_t i = 0; i < outline_vertices.getVertexCount(); ++i)
-        outline_vertices[i].color = sf::Color(outline_color.r, outline_color.g,
-                                              outline_color.b, outline_color.a);
+    for (std::size_t i = 0; i < outline_vertices.size(); ++i)
+        outline_vertices[i].color = outline_color;
 }
 
 const Transform& Shape::getTransform() const {

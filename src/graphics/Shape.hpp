@@ -1,10 +1,12 @@
 #ifndef SHAPE_HPP_
 #define SHAPE_HPP_
 
+#include <SFML/Graphics.hpp>
+
 #include "Color.hpp"
-#include "Renderer.hpp"
 #include "Transform.hpp"
 #include "Vector2D.hpp"
+#include "Vertex.hpp"
 
 /**
  * @brief Represents a shape in 2D space
@@ -66,6 +68,12 @@ public:
      * @note The default outline thickness is 0.
      */
     float getOutlineThickness() const;
+
+    std::vector< Vertex > getVertices() const;
+
+    std::vector< Vertex > getOutlineVertices() const;
+
+    Vector2Df getPosition() const;
 
     /**
      * @brief Sets the position of the shape
@@ -130,15 +138,6 @@ public:
     void rotate(float angle);
 
     /**
-     * @brief Virtual method: Draw the shape on the specified render target
-     * @param target The render target (sf::Renderwindow is a typedef of SFML
-     * drawing window)
-     * @param states The render states to apply (default is
-     * sf::RenderStates::Default)
-     */
-    virtual void draw(Renderer& target) const;
-
-    /**
      * @brief Gets the shape transform
      * @return The shape transform
      * @note This function returns the combined transform of the object.
@@ -191,11 +190,12 @@ private:
     void updateOutlineColors();
 
 private:
-    Color fill_color;          ///< Fill color
-    Color outline_color;       ///< Outline color
-    float outline_thickness;   ///< Thickness of the shape's outline
-    sf::VertexArray vertices;  ///< Vertex array containing the fill geometry
-    sf::VertexArray
+    Color fill_color;         ///< Fill color
+    Color outline_color;      ///< Outline color
+    float outline_thickness;  ///< Thickness of the shape's outline
+    std::vector< Vertex >
+        vertices;  ///< Vertex array containing the fill geometry
+    std::vector< Vertex >
         outline_vertices;  ///< Vertex array containing the outline geometry
     sf::FloatRect inside_bounds;  ///< Bounding rectangle of the inside (fill)
     sf::FloatRect

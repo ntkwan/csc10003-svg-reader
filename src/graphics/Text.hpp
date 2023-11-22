@@ -11,7 +11,7 @@
  */
 class Text : public Shape {
 private:
-    std::string text;  ///< Text element
+    std::string content;  ///< Text element
     Vector2Df position;
 
 public:
@@ -47,14 +47,7 @@ public:
      */
     virtual Vector2Df getPoint(std::size_t index) const;
 
-    /**
-     * @brief Draws the text on the specified render target.
-     *
-     * @param target The render target to draw on.
-     * @param states The render states to apply (default is
-     * sf::RenderStates::Default).
-     */
-    void draw(Renderer& target) const;
+    std::string getContent() const;
 };
 
 #endif  // TEXT_HPP_

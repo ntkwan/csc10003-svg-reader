@@ -37,15 +37,6 @@ public:
     void addPoint(const Vector2Df& point) override;
 
     /**
-     * @brief Draws the polyline on the specified render target.
-     *
-     * @param target The render target to draw on.
-     * @param states The render states to apply (default is
-     * sf::RenderStates::Default).
-     */
-    void draw(Renderer& target) const;
-
-    /**
      * @brief Gets the position of a vertex in the polyline.
      *
      * @param index The index of the vertex.

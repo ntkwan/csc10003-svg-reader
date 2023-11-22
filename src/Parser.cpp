@@ -295,7 +295,7 @@ void Parser::parseSVG() {
 
 void Parser::renderSVG(Renderer& renderer) {
     for (auto shape : shapes) {
-        shape->draw(renderer);
+        renderer.draw(shape);
     }
 }
 

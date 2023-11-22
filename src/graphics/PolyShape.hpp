@@ -35,6 +35,8 @@ public:
      * shapes but does not introduce any additional behavior for polygons.
      */
     virtual void updateShape() = 0;
+
+    std::vector< Vector2Df > getPoints() const { return points; }
 };
 
 #endif  // POLYSHAPE_HPP_
