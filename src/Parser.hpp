@@ -1,6 +1,8 @@
 #ifndef PARSER_HPP_
 #define PARSER_HPP_
 
+#include <iostream>
+
 #include "Graphics.hpp"
 #include "Renderer.hpp"
 #include "pugixml.hpp"
@@ -38,7 +40,7 @@ public:
      * @note This function is private because it is only used by the Parser
      * class.
      */
-    std::string getAttribute(pugi::xml_node node, std::string name);
+    std::string getAttribute(const pugi::xml_node& node, std::string name);
 
     /**
      * @brief Parse the color from the XML file.
@@ -52,7 +54,7 @@ public:
      * @note The color is parsed from the XML file in the format of
      * "rgb(r, g, b)".
      */
-    Color parseColor(pugi::xml_node node, std::string name);
+    Color parseColor(const pugi::xml_node& node, std::string name);
 
     /**
      * @brief Parse the points from the XML file.
@@ -65,7 +67,7 @@ public:
      * @note The points are parsed from the XML file in the format of
      * "x1,y1 x2,y2 x3,y3 ...".
      */
-    std::vector< Vector2Df > parsePoints(pugi::xml_node node);
+    std::vector< Vector2Df > parsePoints(const pugi::xml_node& node);
 
     /**
      * @brief Parse the XML file.
@@ -76,7 +78,7 @@ public:
      *  of the Shape class.
      * @note The shapes are rendered on the window in the order of the XML file.
      */
-    void parseSVG();
+    void parseSVG(const pugi::xml_node& node);
 
     /**
      * @brief Render the shapes on the window.
@@ -99,8 +101,7 @@ public:
      * @param name The name of the attribute.
      * @return The translate which is parsed from the XML file.
      */
-    std::pair< float, float > getTranslate(pugi::xml_node node,
-                                           std::string name = "transform");
+    std::pair< float, float > getTranslate(std::string transform_value);
 
     /**
      * @brief Get the Rotate information (degree) which is parsed from the XML
@@ -111,12 +112,40 @@ public:
      * @param name The name of the attribute.
      * @return The rotate which is parsed from the XML file.
      */
-    float getRotate(pugi::xml_node node, std::string name = "transform");
+    float getRotate(std::string transform_value);
 
     /**
      * @brief Destructor of Parser.
      */
     ~Parser();
+    void svgs() {
+        for (pugi::xml_node tool = instance->svg.first_child(); tool;
+             tool = tool.next_sibling()) {
+            std::cout << "Tool:" << tool.name() << std::endl;
+        }
+    }
+
+private:
+    void applyTransform(Shape* shape,
+                        const std::vector< std::string >& transform_order);
+
+    void parseLine(const pugi::xml_node& node);
+
+    void parseRect(const pugi::xml_node& node);
+
+    void parseCircle(const pugi::xml_node& node);
+
+    void parseEllipse(const pugi::xml_node& node);
+
+    void parseText(const pugi::xml_node& node);
+
+    void parsePolygon(const pugi::xml_node& node);
+
+    void parsePolyline(const pugi::xml_node& node);
+
+    void parsePath(const pugi::xml_node& node);
+
+    float getFloatAttribute(const pugi::xml_node& node, std::string name);
 
 private:
     /**
@@ -130,4 +159,5 @@ private:
     pugi::xml_node svg;            ///< The node of the SVG.
     std::vector< Shape* > shapes;  ///< The vector of the shapes.
 };
+
 #endif
