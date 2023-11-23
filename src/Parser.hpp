@@ -2,10 +2,10 @@
 #define PARSER_HPP_
 
 #include <iostream>
+#include <pugixml.hpp>
 
 #include "Graphics.hpp"
 #include "Renderer.hpp"
-#include "pugixml.hpp"
 
 /**
  * @brief Represents a parser for SVG files.

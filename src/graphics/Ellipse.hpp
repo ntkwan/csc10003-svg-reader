@@ -11,8 +11,6 @@
  */
 class Ellipse : public Shape {
 protected:
-    const int SCALE =
-        100000;        ///< Scale factor for determining the number of points
     Vector2Df radius;  ///< Radii of the ellipse in the x and y directions
 
 public:
@@ -46,6 +44,8 @@ public:
      * @return The position of the specified point on the ellipse.
      */
     virtual Vector2Df getPoint(std::size_t index) const override;
+
+    Vector2Df getRadius() const;
 };
 
 #endif  // ELLIPSE_HPP_

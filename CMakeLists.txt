@@ -22,7 +22,16 @@ if (NOT sfml_FOUND)
 	FetchContent_MakeAvailable(SFML)
 endif()
 
-add_subdirectory(external/pugixml)
+find_package(pugixml QUIET)
+if (NOT pugixml_FOUND)
+	include(FetchContent)
+	FetchContent_Declare(
+		pugixml
+		GIT_REPOSITORY https://github.com/zeux/pugixml.git
+	)
+	FetchContent_MakeAvailable(pugixml)
+endif()
+
 include_directories(src)
 file(GLOB_RECURSE cpp_files CONFIGURE_DEPENDS "src/*.*pp")
 add_executable(${PROJECT_NAME} ${cpp_files})

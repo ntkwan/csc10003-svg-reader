@@ -239,8 +239,8 @@ void Parser::parseCircle(const pugi::xml_node &node) {
     float cx = getFloatAttribute(node, "cx");
     float cy = getFloatAttribute(node, "cy");
     float radius = getFloatAttribute(node, "r");
-    Circle *shape = new Circle(radius, Vector2Df(cx - radius, cy - radius),
-                               fill_color, stroke_color, stroke_width);
+    Circle *shape = new Circle(radius, Vector2Df(cx, cy), fill_color,
+                               stroke_color, stroke_width);
     applyTransform(shape, transform_order);
     shapes.push_back(shape);
 }
@@ -254,9 +254,9 @@ void Parser::parseEllipse(const pugi::xml_node &node) {
     float radius_y = getFloatAttribute(node, "ry");
     float cx = getFloatAttribute(node, "cx");
     float cy = getFloatAttribute(node, "cy");
-    Ellipse *shape = new Ellipse(Vector2Df(radius_x, radius_y),
-                                 Vector2Df(cx - radius_x, cy - radius_y),
-                                 fill_color, stroke_color, stroke_width);
+    Ellipse *shape =
+        new Ellipse(Vector2Df(radius_x, radius_y), Vector2Df(cx, cy),
+                    fill_color, stroke_color, stroke_width);
     applyTransform(shape, transform_order);
     shapes.push_back(shape);
 }

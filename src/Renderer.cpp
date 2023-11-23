@@ -275,6 +275,29 @@ void Renderer::draw(Shape* shape) const {
         render_text.setFillColor(sf::Color(outline_color.r, outline_color.g,
                                            outline_color.b, outline_color.a));
         window.draw(render_text);
+    } else if (shape->getClass() == "Circle" ||
+               shape->getClass() == "Ellipse") {
+        sf::ConvexShape s;
+        s.setPosition(shape->getPosition().x, shape->getPosition().y);
+        s.setFillColor(
+            sf::Color(shape->getFillColor().r, shape->getFillColor().g,
+                      shape->getFillColor().b, shape->getFillColor().a));
+        s.setOutlineColor(
+            sf::Color(shape->getOutlineColor().r, shape->getOutlineColor().g,
+                      shape->getOutlineColor().b, shape->getOutlineColor().a));
+        s.setOutlineThickness(shape->getOutlineThickness());
+        const float SCALE = 100;
+        const float PI = 3.141592654f;
+        s.setPointCount(SCALE);
+        for (int i = 0; i < SCALE; i++) {
+            float angle = i * 2 * PI / SCALE - PI / 2;
+            float x =
+                static_cast< Ellipse* >(shape)->getRadius().x * cos(angle);
+            float y =
+                static_cast< Ellipse* >(shape)->getRadius().y * sin(angle);
+            s.setPoint(i, sf::Vector2f(x, y));
+        }
+        window.draw(s);
     } else {
         const float* mat = shape->getTransform().getMatrix();
         sf::Transform transform =

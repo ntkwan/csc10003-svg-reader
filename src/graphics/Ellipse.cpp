@@ -11,14 +11,8 @@ Ellipse::Ellipse(const Vector2Df &radius, const Vector2Df &center, Color fill,
     setOutlineThickness(stroke_thickness);
 }
 
-std::size_t Ellipse::getPointCount() const { return SCALE; }
+std::size_t Ellipse::getPointCount() const { return 0; }
 
-Vector2Df Ellipse::getPoint(std::size_t index) const {
-    static const float pi = acos(-1);
+Vector2Df Ellipse::getPoint(std::size_t index) const { return Vector2Df(0, 0); }
 
-    float angle = index * 2 * pi / getPointCount() - pi / 2;
-    float x = std::cos(angle) * radius.x;
-    float y = std::sin(angle) * radius.y;
-
-    return Vector2Df(radius.x + x, radius.y + y);
-}
+Vector2Df Ellipse::getRadius() const { return radius; }

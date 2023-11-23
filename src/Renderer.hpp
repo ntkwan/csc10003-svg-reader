@@ -3,8 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "graphics/Polyline.hpp"
-#include "graphics/Text.hpp"
+#include "Graphics.hpp"
 
 class Renderer {
 public:
