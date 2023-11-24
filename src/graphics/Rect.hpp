@@ -12,9 +12,9 @@
  */
 class Rect : public Polygon {
 private:
-    float width;          ///< Width of the rectangle
-    float height;         ///< Height of the rectangle
-    Vector2Df rect_size;  ///< Size of the rectangle
+    float width;       ///< Width of the rectangle
+    float height;      ///< Height of the rectangle
+    Vector2Df radius;  ///< Radii of the rectangle in the x and y directions
 
 public:
     /**
@@ -22,33 +22,68 @@ public:
      *
      * @param width The width of the rectangle.
      * @param height The height of the rectangle.
-     * @param x The X-coordinate of the position.
-     * @param y The Y-coordinate of the position.
+     * @param position The position of the rectangle.
+     * @param radius The radii of the rectangle in the x and y directions.
      * @param fill Fill color of the rectangle.
      * @param stroke Outline color of the rectangle.
-     * @param stroke_thickness Thickness of the rectangle outline.
+     * @param stroke_width Thickness of the rectangle outline.
      */
-    Rect(float width, float height, float x, float y, Color fill, Color stroke,
-         float stroke_thickness);
-
-    std::string getClass() const override { return "Rect"; }
-    /**
-     * @brief Gets the total number of vertices representing the rectangle.
-     *
-     * In this case, it always returns 4 since a rectangle has four corners.
-     *
-     * @return The number of vertices representing the rectangle.
-     */
-    virtual std::size_t getPointCount() const override;
+    Rect(float width, float height, Vector2Df position, Vector2Df radius,
+         const Color& fill, const Color& stroke, float stroke_width);
 
     /**
-     * @brief Gets the position of a vertex in the rectangle.
+     * @brief Gets the type of the shape.
      *
-     * @param index The index of the vertex (0 for top-left, 1 for top-right, 2
-     * for bottom-right, 3 for bottom-left).
-     * @return The position of the specified vertex in the rectangle.
+     * @return The string "Rect".
      */
-    virtual Vector2Df getPoint(std::size_t index) const override;
+    std::string getClass() const override;
+
+    /**
+     * @brief Sets the width of the rectangle.
+     *
+     * @param width The new width of the rectangle.
+     */
+    void setWidth(float width);
+
+    /**
+     * @brief Gets the width of the rectangle.
+     *
+     * @return The width of the rectangle.
+     */
+    float getWidth() const;
+
+    /**
+     * @brief Sets the height of the rectangle.
+     *
+     * @param height The new height of the rectangle.
+     */
+    void setHeight(float height);
+
+    /**
+     * @brief Gets the height of the rectangle.
+     *
+     * @return The height of the rectangle.
+     */
+    float getHeight() const;
+
+    /**
+     * @brief Sets the radii of the rectangle.
+     *
+     * @param radius The new radii of the rectangle.
+     */
+    void setRadius(const Vector2Df& radius);
+
+    /**
+     * @brief Gets the radii of the rectangle.
+     *
+     * @return The radii of the rectangle.
+     */
+    Vector2Df getRadius() const;
+
+    /**
+     * @brief Prints the data of the rectangle.
+     */
+    void printData() const override;
 };
 
 #endif  // RECT_HPP_

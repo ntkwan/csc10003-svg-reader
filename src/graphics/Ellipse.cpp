@@ -11,8 +11,8 @@ Ellipse::Ellipse(const Vector2Df &radius, const Vector2Df &center, Color fill,
     setOutlineThickness(stroke_thickness);
 }
 
-std::size_t Ellipse::getPointCount() const { return 0; }
+std::string Ellipse::getClass() const { return "Ellipse"; }
 
-Vector2Df Ellipse::getPoint(std::size_t index) const { return Vector2Df(0, 0); }
+void Ellipse::setRadius(const Vector2Df &radius) { this->radius = radius; }
 
 Vector2Df Ellipse::getRadius() const { return radius; }

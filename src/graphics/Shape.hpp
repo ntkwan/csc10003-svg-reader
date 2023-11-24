@@ -4,9 +4,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Color.hpp"
-#include "Transform.hpp"
 #include "Vector2D.hpp"
-#include "Vertex.hpp"
 
 /**
  * @brief Represents a shape in 2D space
@@ -21,6 +19,15 @@ public:
      */
     virtual ~Shape() = default;
 
+    /**
+     * @brief Gets the type of the shape
+     *
+     * @return The type of the shape
+     *
+     * @note This function is used for determining the type of the shape.
+     * @note This function is pure virtual and must be implemented by derived
+     * classes.
+     */
     virtual std::string getClass() const = 0;
 
     /**
@@ -50,6 +57,24 @@ public:
     void setOutlineThickness(float thickness);
 
     /**
+     * @brief Sets the position of the shape
+     * @param x The x coordinate of the new position
+     * @param y The y coordinate of the new position
+     * @note The default position of the shape is (0, 0).
+     * @note The position of the shape is relative to its origin.
+     */
+    void setPosition(float x, float y);
+
+    /**
+     * @brief Sets the position of the shape
+     * @param position The new position of the shape (Vector2f is a typedef
+     * of coordination vector)
+     * @note The default position of the shape is (0, 0).
+     * @note The position of the shape is relative to its origin.
+     */
+    void setPosition(const Vector2Df& position);
+
+    /**
      * @brief Gets the fill color of the shape.
      * @return The fill color of the shape.
      * @note The default fill color is white.
@@ -71,20 +96,6 @@ public:
     float getOutlineThickness() const;
 
     /**
-     * @brief Get the vertices of the shape
-     *
-     * @return The vertices of the shape
-     */
-    std::vector< Vertex > getVertices() const;
-
-    /**
-     * @brief Get the outline vertices of the shape
-     *
-     * @return The outline vertices of the shape
-     */
-    std::vector< Vertex > getOutlineVertices() const;
-
-    /**
      * @brief Get the current position of the shape
      *
      * @return The current position of the shape
@@ -92,84 +103,7 @@ public:
      */
     Vector2Df getPosition() const;
 
-    /**
-     * @brief Sets the position of the shape
-     * @param x The x coordinate of the new position
-     * @param y The y coordinate of the new position
-     * @note The default position of the shape is (0, 0).
-     * @note The position of the shape is relative to its origin.
-     */
-    void setPosition(float x, float y);
-
-    /**
-     * @brief Sets the position of the shape
-     * @param position The new position of the shape (Vector2f is a typedef
-     * of coordination vector)
-     * @note The default position of the shape is (0, 0).
-     * @note The position of the shape is relative to its origin.
-     */
-    void setPosition(const Vector2Df& position);
-
-    /**
-     * @brief Virtual method: Get the number of point of the shape (for Polygon
-     * shape)
-     * @return The number of points of the shape
-     * @note This is a pure virtual method, so it has to be implemented by the
-     * derived class to define how the shape should be drawn.
-     */
-    virtual std::size_t getPointCount() const = 0;
-
-    /**
-     * @brief Virtual method: Get the position of the point on the shape (for
-     * Polygon shape)
-     * @param index The index of the point
-     * @return The position of the specified point on the shape
-     * @note The returned point is in local coordinates, that is, the shape's
-     * transforms (position, rotation, scale) are not taken into account.
-     * @note The result is undefined if index is out of the valid range.
-     * @note The number of points of the shape is defined by the concrete
-     * implementation.
-     * @note The returned vector is constant, which means that you can't modify
-     * its coordinates when you retrieve it.
-     * @note This is a pure virtual method, so it has to be implemented by the
-     * derived class.
-     */
-    virtual Vector2Df getPoint(std::size_t index) const = 0;
-
-    /**
-     * @brief Translate the shape
-     *
-     * @param x The x coordinate of the translation
-     * @param y The y coordinate of the translation
-     * @note This function adds to the current position of the object, unlike
-     * setPosition which overwrites it.
-     *
-     */
-    void translate(float x, float y);
-
-    /**
-     * @brief Rotate the shape
-     *
-     * @param angle The angle of rotation, in degrees
-     */
-    void rotate(float angle);
-
-    /**
-     * @brief Gets the shape transform
-     * @return The shape transform
-     * @note This function returns the combined transform of the object.
-     * @note The transform is a combination of the position, rotation, and scale
-     * of the object.
-     */
-    const Transform& getTransform() const;
-
-    /**
-     * @brief Gets the inverse shape transform
-     * @return The inverse shape transform
-     * @note This function returns the inverse of the combined transform of the
-     * object.
-     */
-    const Transform& getInverseTransform() const;
+    virtual void printData() const;
 
 protected:
     /**
@@ -179,57 +113,14 @@ protected:
      */
     Shape();
 
-    /**
-     * @brief Sets the texture of the shape
-     * @param texture The new texture of the shape
-     * @note The texture is not copied, it is referenced by the shape.
-     * @note The default texture is NULL.
-     */
-    void update();
-
 private:
-    /**
-     * @brief Updates the fill colors of the shape
-     * @note This method call the update() method.
-     */
-    void updateFillColors();
-
-    /**
-     * @brief Updates the outline of the shape
-     * @note This method call the update() method.
-     */
-    void updateOutline();
-
-    /**
-     * @brief Updates the outline colors of the shape
-     * @note This method call the update() method.
-     */
-    void updateOutlineColors();
-
-private:
-    Color fill_color;         ///< Fill color
-    Color outline_color;      ///< Outline color
-    float outline_thickness;  ///< Thickness of the shape's outline
-    std::vector< Vertex >
-        vertices;  ///< Vertex array containing the fill geometry
-    std::vector< Vertex >
-        outline_vertices;  ///< Vertex array containing the outline geometry
-    sf::FloatRect inside_bounds;  ///< Bounding rectangle of the inside (fill)
-    sf::FloatRect
-        bounds;  ///< Bounding rectangle of the outside (outline + fill)
-
+    Color fill;          ///< Fill color
+    Color stroke;        ///< Outline color
+    float stroke_width;  ///< Thickness of the shape's outline
+    Vector2Df position;  ///< Position of the shape
     Vector2Df origin;  ///< Origin of translation/rotation/scaling of the object
-    Vector2Df position;  ///< Position of the object in the 2D world
-    float rotation;      ///< Orientation of the object, in degrees
-    Vector2Df scale;     ///< Scale of the object
-
-    mutable Transform transform;  ///< Combined transformation of the object
-    mutable bool
-        transform_need_update;  ///< Does the transform need to be recomputed?
-    mutable Transform
-        inverse_transform;  ///< Combined transformation of the object
-    mutable bool
-        inverse_transform_need_update;  ///< Same as transform but for inverse
+    float rotation;    ///< Orientation of the object, in degrees
+    Vector2Df scale;   ///< Scale of the object
 };
 
 #endif  // SHAPE_HPP_

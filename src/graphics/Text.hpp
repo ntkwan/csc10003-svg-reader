@@ -12,7 +12,7 @@
 class Text : public Shape {
 private:
     std::string content;  ///< Text element
-    Vector2Df position;
+    float font_size;      ///< Font size of the text
 
 public:
     /**
@@ -20,37 +20,50 @@ public:
      *
      * @param pos The position of the text.
      * @param TEXT The string of the text.
-     * @param fill_color The fill color of the text (default is
-     * sf::Color::Black).
+     * @param fill The fill color of the text
      * @param font_size The font size of the text (default is 1).
      */
-    Text(Vector2Df pos, std::string TEXT, Color fill_color = Color::Black,
-         float font_size = 1);
-
-    std::string getClass() const override { return "Text"; }
-    /**
-     * @brief Gets the total number of points representing the text.
-     *
-     * Since text is not represented by points, this method always returns 0.
-     *
-     * @return The number of points representing the text.
-     */
-    virtual std::size_t getPointCount() const;
+    Text(Vector2Df pos, std::string TEXT, const Color &fill, float font_size);
 
     /**
-     * @brief Gets a dummy point for compatibility with Shape interface.
+     * @brief Gets the type of the shape.
      *
-     * Since text is not represented by points, this method always returns (0,
-     * 0).
-     *
-     * @param index The index of the dummy point (ignored).
-     * @return A dummy point for compatibility.
+     * @return The string "Text".
      */
-    virtual Vector2Df getPoint(std::size_t index) const;
+    std::string getClass() const override;
 
-    Vector2Df getPosition() const;
+    /**
+     * @brief Sets the string of the text.
+     *
+     * @param content The new string of the text.
+     */
+    void setContent(std::string content);
 
+    /**
+     * @brief Gets the string of the text.
+     *
+     * @return The string of the text.
+     */
     std::string getContent() const;
+
+    /**
+     * @brief Sets the font size of the text.
+     *
+     * @param font_size The new font size of the text.
+     */
+    void setFontSize(float font_size);
+
+    /**
+     * @brief Gets the font size of the text.
+     *
+     * @return The font size of the text.
+     */
+    float getFontSize() const;
+
+    /**
+     * @brief Prints the data of the text.
+     */
+    void printData() const override;
 };
 
 #endif  // TEXT_HPP_

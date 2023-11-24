@@ -1,20 +1,42 @@
 #include "Rect.hpp"
 
-Rect::Rect(float width, float height, float x, float y, Color fill,
-           Color stroke, float stroke_thickness)
-    : Polygon(fill, stroke, stroke_thickness), width(width), height(height) {
+Rect::Rect(float width, float height, Vector2Df position, Vector2Df radius,
+           const Color &fill, const Color &stroke, float stroke_width)
+    : Polygon(fill, stroke, stroke_width), width(width), height(height),
+      radius(radius) {
     addPoint(Vector2Df(0, 0));
     addPoint(Vector2Df(width, 0));
     addPoint(Vector2Df(width, height));
     addPoint(Vector2Df(0, height));
-    setPosition(x, y);
-    update();
+    setPosition(position);
 }
 
-std::size_t Rect::getPointCount() const {
-    return Polygon::getPointCount();  // Inherited from Polygon
+std::string Rect::getClass() const { return "Rect"; }
+
+void Rect::setWidth(float width) {
+    this->width = width;
+    points[1].x = width;
+    points[2].x = width;
 }
 
-Vector2Df Rect::getPoint(std::size_t index) const {
-    return Polygon::getPoint(index);  // Inherited from Polygon
+float Rect::getWidth() const { return width; }
+
+void Rect::setHeight(float height) {
+    this->height = height;
+    points[2].y = height;
+    points[3].y = height;
+}
+
+float Rect::getHeight() const { return height; }
+
+void Rect::setRadius(const Vector2Df &radius) { this->radius = radius; }
+
+Vector2Df Rect::getRadius() const { return radius; }
+
+void Rect::printData() const {
+    Shape::printData();
+    std::cout << "Width: " << getWidth() << std::endl;
+    std::cout << "Height: " << getHeight() << std::endl;
+    std::cout << "Radius: " << getRadius().x << " " << getRadius().y
+              << std::endl;
 }

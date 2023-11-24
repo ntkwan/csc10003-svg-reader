@@ -1,6 +1,7 @@
 #ifndef COLOR_HPP_
 #define COLOR_HPP_
 
+#include <iostream>
 #include <map>
 #include <string>
 
@@ -33,6 +34,18 @@ public:
      * @param color Number containing the RGBA components (in that order)
      */
     explicit Color(int color);
+
+    /**
+     * @brief Prints the color
+     *
+     * @param os output stream
+     * @param color color to be printed
+     *
+     * @return output stream
+     *
+     * @note This function is used for printing the color.
+     */
+    friend std::ostream& operator<<(std::ostream& os, const Color& color);
 
     static const Color Black;        ///< Black predefined color
     static const Color White;        ///< White predefined color

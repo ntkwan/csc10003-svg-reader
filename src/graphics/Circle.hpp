@@ -15,16 +15,22 @@ public:
     /**
      * @brief Constructs a Circle object.
      *
-     * @param radius The radius of the circle.
+     * @param radius The radii of the circle.
      * @param center The center of the circle.
      * @param fill Fill color of the circle.
      * @param stroke Outline color of the circle.
-     * @param stroke_thickness Thickness of the circle outline.
+     * @param stroke_width Thickness of the circle outline.
      */
     Circle(float radius, const Vector2Df &center, Color fill, Color stroke,
-           float stroke_thickness);
+           float stroke_width);
 
-    std::string getClass() const override { return "Circle"; }
+    /**
+     * @brief Gets the type of the shape.
+     *
+     * @return The string "Circle".
+     *
+     */
+    std::string getClass() const override;
 };
 
 #endif  // CIRCLE_HPP_

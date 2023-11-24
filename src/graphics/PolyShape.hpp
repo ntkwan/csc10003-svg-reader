@@ -13,33 +13,39 @@ class PolyShape : public Shape {
 protected:
     std::vector< Vector2Df > points;  ///< Vertices of the polyshape
 
+    /**
+     * @brief Constructs a PolyShape object.
+     *
+     * @param fill Fill color of the polyshape (default is
+     * sf::Color::Transparent).
+     * @param stroke Outline color of the polyshape (default is
+     * sf::Color::White).
+     * @param stroke_width Thickness of the polyshape outline (default is 0).
+     */
+    PolyShape(const Color &fill, const Color &stroke, float stroke_width);
+
 public:
-    virtual std::string getClass() const = 0;
+    /**
+     * @brief Gets the type of the shape.
+     *
+     * @note This function is pure virtual and must be implemented by derived
+     * classes.
+     */
+    std::string getClass() const = 0;
+
     /**
      * @brief Adds a vertex to the shape.
      *
-     * This pure virtual function must be implemented by derived classes to add
-     * a vertex to the shape.
-     *
      * @param point The position of the vertex to be added.
      */
-    virtual void addPoint(const Vector2Df &point) = 0;
-
-    /**
-     * @brief Updates the shape.
-     *
-     * This pure virtual function must be implemented by derived classes to
-     * update the shape. This method is provided for consistency with other
-     * shapes but does not introduce any additional behavior for polygons.
-     */
-    virtual void updateShape() = 0;
+    virtual void addPoint(const Vector2Df &point);
 
     /**
      * @brief Gets the total number of vertices representing the shape.
      *
      * @return The number of vertices representing the shape.
      */
-    std::vector< Vector2Df > getPoints() const { return points; }
+    const std::vector< Vector2Df > &getPoints() const;
 };
 
 #endif  // POLYSHAPE_HPP_

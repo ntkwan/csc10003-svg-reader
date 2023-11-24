@@ -2,6 +2,7 @@
 
 #include <cmath>
 
+#define M_PI 3.14159265358979323846
 namespace {  // polyline
     struct Edge {
         Vector2Df start, end;
@@ -270,7 +271,7 @@ void Renderer::draw(Shape* shape) const {
         render_text.setString(text->getContent());
         render_text.setFont(font);
         render_text.setPosition(text->getPosition().x, text->getPosition().y);
-        render_text.setCharacterSize(text->getOutlineThickness());
+        render_text.setCharacterSize(text->getFontSize());
         Color outline_color = text->getOutlineColor();
         render_text.setFillColor(sf::Color(outline_color.r, outline_color.g,
                                            outline_color.b, outline_color.a));
@@ -299,38 +300,56 @@ void Renderer::draw(Shape* shape) const {
         }
         window.draw(s);
     } else {
-        const float* mat = shape->getTransform().getMatrix();
-        sf::Transform transform =
-            sf::Transform(mat[0], mat[4], mat[12], mat[1], mat[5], mat[13],
-                          mat[3], mat[7], mat[15]);
-        // Render the inside
-        sf::VertexArray vertices = sf::VertexArray(sf::TriangleFan);
-        std::vector< Vertex > m_vertices = shape->getVertices();
-        for (std::size_t i = 0; i < m_vertices.size(); ++i) {
-            Vertex vertex = m_vertices[i];
-            sf::Vector2f pos =
-                sf::Vector2f(vertex.position.x, vertex.position.y);
-            sf::Color col = sf::Color(vertex.color.r, vertex.color.g,
-                                      vertex.color.b, vertex.color.a);
-            vertices.append(sf::Vertex(pos, col));
-        }
-        window.draw(vertices, transform);
+        sf::ConvexShape shape_;
+        shape_.setFillColor(
+            sf::Color(shape->getFillColor().r, shape->getFillColor().g,
+                      shape->getFillColor().b, shape->getFillColor().a));
+        shape_.setOutlineThickness(shape->getOutlineThickness());
+        shape_.setPosition(
+            sf::Vector2f(shape->getPosition().x, shape->getPosition().y));
+        shape_.setOutlineColor(
+            sf::Color(shape->getOutlineColor().r, shape->getOutlineColor().g,
+                      shape->getOutlineColor().b, shape->getOutlineColor().a));
 
-        // Render the outline
-        if (shape->getOutlineThickness() != 0) {
-            sf::VertexArray outline_vertices =
-                sf::VertexArray(sf::TriangleStrip);
-            std::vector< Vertex > m_outline_vertices =
-                shape->getOutlineVertices();
-            for (std::size_t i = 0; i < m_outline_vertices.size(); ++i) {
-                Vertex vertex = m_outline_vertices[i];
-                sf::Vector2f pos =
-                    sf::Vector2f(vertex.position.x, vertex.position.y);
-                sf::Color col = sf::Color(vertex.color.r, vertex.color.g,
-                                          vertex.color.b, vertex.color.a);
-                outline_vertices.append(sf::Vertex(pos, col));
+        if (shape->getClass() == "Rect") {
+            Rect* rectangle = dynamic_cast< Rect* >(shape);
+            shape_.setPointCount(4);
+            shape_.setPoint(0, sf::Vector2f(0, 0));
+            shape_.setPoint(1, sf::Vector2f(rectangle->getWidth(), 0));
+            shape_.setPoint(
+                2, sf::Vector2f(rectangle->getWidth(), rectangle->getHeight()));
+            shape_.setPoint(3, sf::Vector2f(0, rectangle->getHeight()));
+        } else if (shape->getClass() == "Circle") {
+            Circle* circle = dynamic_cast< Circle* >(shape);
+            shape_.setPointCount(100);
+            for (int i = 0; i < 100; i++) {
+                float angle = i * 2 * M_PI / 100;
+                float x = circle->getRadius().x * cos(angle);
+                float y = circle->getRadius().y * sin(angle);
+                shape_.setPoint(i, sf::Vector2f(x, y));
             }
-            window.draw(outline_vertices, transform);
+        } else if (shape->getClass() == "Ellipse") {
+            Ellipse* ellipse = dynamic_cast< Ellipse* >(shape);
+            shape_.setPointCount(100);
+            for (int i = 0; i < 100; i++) {
+                float angle = i * 2 * M_PI / 100;
+                float x = ellipse->getRadius().x * cos(angle);
+                float y = ellipse->getRadius().y * sin(angle);
+                shape_.setPoint(i, sf::Vector2f(x, y));
+            }
+        } else if (shape->getClass() == "Line") {
+            Line* line = dynamic_cast< Line* >(shape);
+            shape_.setPointCount(2);
+            shape_.setPoint(0, sf::Vector2f(0, 0));
+            shape_.setPoint(1, sf::Vector2f(line->getLength(), 0));
+        } else if (shape->getClass() == "Polygon") {
+            Polygon* polygon = dynamic_cast< Polygon* >(shape);
+            std::vector< Vector2Df > points = polygon->getPoints();
+            shape_.setPointCount(points.size());
+            for (int i = 0; i < points.size(); i++) {
+                shape_.setPoint(i, sf::Vector2f(points[i].x, points[i].y));
+            }
         }
+        window.draw(shape_);
     }
 }

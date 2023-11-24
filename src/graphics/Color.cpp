@@ -19,3 +19,9 @@ Color::Color(int color)
     : r(static_cast< int >((color & 0xff000000) >> 24)),
       g(static_cast< int >((color & 0x00ff0000) >> 16)),
       b((color & 0x0000ff00) >> 8), a((color & 0x000000ff) >> 0) {}
+
+std::ostream& operator<<(std::ostream& os, const Color& color) {
+    os << "Color(" << color.r << ", " << color.g << ", " << color.b << ", "
+       << color.a << ")";
+    return os;
+}

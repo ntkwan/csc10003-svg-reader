@@ -1,21 +1,6 @@
 #include "Polyline.hpp"
 
-Polyline::Polyline(float stroke_width, const Color& stroke_color,
-                   const Color& fill) {
-    setOutlineThickness(stroke_width);
-    setOutlineColor(stroke_color);
-    setFillColor(fill);
-}
+Polyline::Polyline(const Color& fill, const Color& stroke, float stroke_width)
+    : PolyShape(fill, stroke, stroke_width) {}
 
-void Polyline::addPoint(const Vector2Df& point) { points.push_back(point); }
-
-void Polyline::updateShape() {}
-
-Vector2Df Polyline::getPoint(std::size_t index) const {
-    if (index < points.size()) {
-        return points[index];
-    }
-    return Vector2Df(0, 0);
-}
-
-std::size_t Polyline::getPointCount() const { return points.size(); }
+std::string Polyline::getClass() const { return "Polyline"; }
