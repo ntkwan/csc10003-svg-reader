@@ -1,151 +1,28 @@
-#ifndef PARSER_HPP_
-#define PARSER_HPP_
+#ifndef PARSER2_HPP_
+#define PARSER2_HPP_
 
-#include <iostream>
-#include <pugixml.hpp>
+#include <string>
+#include <vector>
 
 #include "Graphics.hpp"
 #include "Renderer.hpp"
 
-/**
- * @brief Represents a parser for SVG files.
- *
- * The parser class is responsible for parsing XML attributes (SVG files) and
- * passing this information to create shapes and render them.
- */
+typedef std::vector< std::pair< std::string, std::string > > Attributes, Tags;
+typedef std::vector< std::pair< std::string, Attributes > > Objects;
+
 class Parser {
 public:
-    /**
-     * @brief Gets the singleton instance of Parser.
-     * @param file_name The name of the SVG file to parse.
-     * @return The singleton instance of Parser.
-     * @note This function is thread-safe.
-     */
     static Parser* getInstance(const std::string& file_name);
 
-    /**
-     * @brief Deleted assignment operator to prevent copying of Parser
-     * instances.
-     * @return The Parser instance.
-     * @note This function is deleted because Parser is a singleton class.
-     */
     Parser(const Parser&) = delete;
 
-    /**
-     * @brief Get the Attribute object which is parsed from the XML file.
-     * @param node The node of the XML file (pugi::xml_node is a typedef of
-     * pugixml)
-     * @param name The name of the attribute.
-     * @return The attribute which is parsed from the XML file.
-     * @note This function is private because it is only used by the Parser
-     * class.
-     */
-    std::string getAttribute(const pugi::xml_node& node, std::string name);
+    ~Parser();
 
-    /**
-     * @brief Parse the color from the XML file.
-     * @param node The node of the XML file (pugi::xml_node is a typedef of
-     * pugixml)
-     * @param name The name of the attribute.
-     * @return The color which is parsed from the XML file.
-     * @note This function is private because it is only used by the Parser
-     * class.
-     * @note The color is represented by sf::Color (SFML)
-     * @note The color is parsed from the XML file in the format of
-     * "rgb(r, g, b)".
-     */
-    Color parseColor(const pugi::xml_node& node, std::string name);
+    void printObjects();
 
-    /**
-     * @brief Parse the points from the XML file.
-     * @param node The node of the XML file (pugi::xml_node is a typedef of
-     * pugixml)
-     * @return The points which are parsed from the XML file.
-     * @note This function is private because it is only used by the Parser
-     * class.
-     * @note The points are represented by std::vector< sf::Vector2f > (SFML)
-     * @note The points are parsed from the XML file in the format of
-     * "x1,y1 x2,y2 x3,y3 ...".
-     */
-    std::vector< Vector2Df > parsePoints(const pugi::xml_node& node);
-
-    /**
-     * @brief Parse the XML file.
-     * @param window The window to render the shapes on.
-     * @note This function is private because it is only used by the Parser
-     * class.
-     * @note The shapes are rendered on the window by calling the draw() method
-     *  of the Shape class.
-     * @note The shapes are rendered on the window in the order of the XML file.
-     */
-    void parseSVG(const pugi::xml_node& node);
-
-    /**
-     * @brief Render the shapes on the window.
-     * @param window The window to render the shapes on.
-     * @note This function is private because it is only used by the Parser
-     * class.
-     * @note The shapes are rendered on the window by calling the draw() method
-     * of the Shape class.
-     * @note The shapes are rendered on the window in the order of the XML file.
-     * @note Apply Polymorphism to render the shapes on the window.
-     */
     void renderSVG(Renderer& renderer);
 
-    /**
-     * @brief Get the Translate information (x, y) which is parsed from the XML
-     * file.
-     *
-     * @param node The node of the XML file (pugi::xml_node is a typedef of
-     * pugixml)
-     * @param name The name of the attribute.
-     * @return The translate which is parsed from the XML file.
-     */
-    std::pair< float, float > getTranslate(std::string transform_value);
-
-    /**
-     * @brief Get the Rotate information (degree) which is parsed from the XML
-     * file.
-     *
-     * @param node The node of the XML file (pugi::xml_node is a typedef of
-     * pugixml)
-     * @param name The name of the attribute.
-     * @return The rotate which is parsed from the XML file.
-     */
-    float getRotate(std::string transform_value);
-
-    /**
-     * @brief Destructor of Parser.
-     */
-    ~Parser();
-    void svgs() {
-        for (pugi::xml_node tool = instance->svg.first_child(); tool;
-             tool = tool.next_sibling()) {
-            std::cout << "Tool:" << tool.name() << std::endl;
-        }
-    }
-
-private:
-    void applyTransform(Shape* shape,
-                        const std::vector< std::string >& transform_order);
-
-    void parseLine(const pugi::xml_node& node);
-
-    void parseRect(const pugi::xml_node& node);
-
-    void parseCircle(const pugi::xml_node& node);
-
-    void parseEllipse(const pugi::xml_node& node);
-
-    void parseText(const pugi::xml_node& node);
-
-    void parsePolygon(const pugi::xml_node& node);
-
-    void parsePolyline(const pugi::xml_node& node);
-
-    void parsePath(const pugi::xml_node& node);
-
-    float getFloatAttribute(const pugi::xml_node& node, std::string name);
+    void printShapesData();
 
 private:
     /**
@@ -155,9 +32,53 @@ private:
      */
     Parser(const std::string& file_name);
 
-    static Parser* instance;       ///< The instance of the Parser.
-    pugi::xml_node svg;            ///< The node of the SVG.
-    std::vector< Shape* > shapes;  ///< The vector of the shapes.
+    std::string parseSVG(const std::string& filePath);
+
+    Attributes parseAttributes(std::string attributes);
+
+    Tags parseTags(std::string svg);
+
+    void parseObjects(std::string filePath);
+
+    std::string getAttribute(Attributes attributes, std::string name);
+
+    float getFloatAttribute(Attributes attributes, std::string name);
+
+    Color parseColor(Attributes attributes, std::string color);
+
+    std::vector< Vector2Df > parsePoints(Attributes attributes);
+
+    std::vector< std::string > getTransformOrder(Attributes attributes);
+
+    std::pair< float, float > getTranslate(std::string transform_value);
+
+    float getRotate(std::string transform_value);
+
+    void applyTransform(Shape* shape,
+                        const std::vector< std::string >& transform_order);
+
+    void parseLine(Attributes attributes);
+
+    void parseRect(Attributes attributes);
+
+    void parsePolyline(Attributes attributes);
+
+    void parsePolygon(Attributes attributes);
+
+    void parseCircle(Attributes attributes);
+
+    void parseEllipse(Attributes attributes);
+
+    void parsePath(Attributes attributes);
+
+    void parseText(Attributes attributes);
+
+    void parseSVG();
+
+private:
+    static Parser* instance;  ///< The instance of the Parser.
+    Objects objects;
+    std::vector< Shape* > shapes;
 };
 
-#endif
+#endif  // PARSER2_HPP_

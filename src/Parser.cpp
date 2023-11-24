@@ -1,34 +1,167 @@
 #include "Parser.hpp"
 
-#include <cstring>
+#include <algorithm>
+#include <fstream>
 #include <iostream>
+#include <queue>
 #include <sstream>
-#include <vector>
 
-namespace {
-    std::vector< std::string > getTransformOrder(const pugi::xml_node &node) {
-        std::string transform_tag = node.attribute("transform").value();
+Parser *Parser::instance = nullptr;
 
-        transform_tag.erase(std::remove_if(transform_tag.begin(),
-                                           transform_tag.end(), ::isspace),
-                            transform_tag.end());
+Parser *Parser::getInstance(const std::string &file_name) {
+    if (instance == nullptr) {
+        instance = new Parser(file_name);
+    }
+    return instance;
+}
 
-        size_t start_pos = transform_tag.find(")");
-        while (start_pos != std::string::npos) {
-            transform_tag.insert(start_pos + 1, " ");
-            start_pos = transform_tag.find(")", start_pos + 1);
+Parser::Parser(const std::string &file_name) {
+    parseObjects(file_name);
+    parseSVG();
+}
+
+std::string Parser::parseSVG(const std::string &filePath) {
+    std::ifstream file(filePath);
+    if (!file.is_open()) {
+        std::cerr << "Failed to open file: " << filePath << std::endl;
+        return "";
+    }
+    std::string line;
+    std::string svg;
+    bool svg_found = false;
+    while (std::getline(file, line)) {
+        if (line.find("</svg>") != std::string::npos) {
+            svg_found = false;
         }
-
-        std::vector< std::string > order;
-        std::stringstream ss(transform_tag);
-        std::string type;
-        while (ss >> type) {
-            order.push_back(type);
+        if (svg_found) {
+            svg += line + "\n";
         }
+        if (line.find("svg") != std::string::npos) {
+            svg_found = true;
+        }
+    }
+    file.close();
+    return svg;
+}
 
-        return order;
+Attributes Parser::parseAttributes(std::string attributes) {
+    std::vector< std::pair< std::string, std::string > > attributes_vector;
+    std::string name;
+    std::string value;
+    std::stringstream ss(attributes);
+    while (std::getline(ss, name, '=')) {
+        char c = '0';
+        ss >> c;
+        if (c != '"') {
+            break;
+        }
+        getline(ss, value, c);
+        name.erase(std::remove(name.begin(), name.end(), ' '), name.end());
+        attributes_vector.push_back(std::make_pair(name, value));
+    }
+    return attributes_vector;
+}
+
+Tags Parser::parseTags(std::string svg) {
+    std::vector< std::pair< std::string, std::string > > tags;
+    std::string line;
+    std::stringstream ss(svg);
+    while (std::getline(ss, line)) {
+        int start_pos = line.find("<");
+        int end_pos = line.find(">");
+        std::string tag = line.substr(start_pos + 1, end_pos - start_pos - 1);
+        if (tag.size() > 0) {
+            int space_pos = tag.find(" ");
+            std::string name = tag.substr(0, space_pos);
+            std::string attributes = tag.substr(space_pos + 1, tag.size() - 1);
+            if (attributes[attributes.size() - 1] == ' ' ||
+                attributes[attributes.size() - 1] == '/') {
+                attributes = attributes.substr(0, attributes.size() - 1);
+            }
+            if (name == "text") {
+                std::string text;
+                std::stringstream ss2(line);
+                std::getline(ss2, text, '>');
+                std::getline(ss2, text, '<');
+                attributes += " text=\"" + text + "\"";
+            }
+            tags.push_back(std::make_pair(name, attributes));
+        }
+    }
+    return tags;
+}
+
+void Parser::parseObjects(std::string filePath) {
+    std::string svg = parseSVG(filePath);
+    Tags tags = parseTags(svg);
+
+    for (auto tag : tags) {
+        std::vector< std::pair< std::string, std::string > > attributes =
+            parseAttributes(tag.second);
+        objects.push_back(std::make_pair(tag.first, attributes));
     }
 
+    int group = 0;
+    std::deque< Attributes > group_attributes;
+    for (auto &object : objects) {
+        std::string name = object.first;
+        if (name == "/g") {
+            group--;
+            group_attributes.pop_front();
+        }
+        if (group > 0 && name != "g" && name != "/g") {
+            for (Attributes attributes : group_attributes) {
+                for (auto attribute : attributes) {
+                    bool flag = false;
+                    for (auto object_attribute : object.second) {
+                        if (attribute.first == object_attribute.first) {
+                            flag = true;
+                            break;
+                        }
+                    }
+                    if (!flag) {
+                        object.second.push_back(attribute);
+                    } else {
+                        if (attribute.first == "transform") {
+                            for (auto &object_attribute : object.second) {
+                                if (object_attribute.first == "transform") {
+                                    object_attribute.second =
+                                        attribute.second + " " +
+                                        object_attribute.second;
+                                }
+                            }
+                        }
+                        if (attribute.first == "opacity") {
+                            for (auto &object_attribute : object.second) {
+                                if (object_attribute.first == "opacity") {
+                                    object_attribute.second = std::to_string(
+                                        std::stof(attribute.second) *
+                                        std::stof(object_attribute.second));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if (name == "g") {
+            group++;
+            group_attributes.push_back(object.second);
+        }
+    }
+}
+
+void Parser::printObjects() {
+    for (auto object : objects) {
+        std::cout << object.first << std::endl;
+        for (auto attribute : object.second) {
+            std::cout << "    " << attribute.first << " = " << attribute.second
+                      << std::endl;
+        }
+    }
+}
+
+namespace {
     auto getHexColor = [](std::string color) -> Color {
         std::stringstream ss;
         int pos = color.find("#");
@@ -54,46 +187,41 @@ namespace {
     };
 }  // namespace
 
-Parser *Parser::instance = nullptr;
-
-Parser *Parser::getInstance(const std::string &file_name) {
-    if (instance == nullptr) {
-        instance = new Parser(file_name);
-        instance->parseSVG(instance->svg);
+std::string Parser::getAttribute(Attributes attributes, std::string name) {
+    std::string result;
+    for (auto attribute : attributes) {
+        if (attribute.first == name) {
+            result = attribute.second;
+            break;
+        } else {
+            if (name == "fill")
+                result = "black";
+            else if (name == "stroke" || name == "transform" ||
+                     name == "rotate")
+                result = "none";
+        }
     }
-    return instance;
+    return result;
 }
 
-Parser::Parser(const std::string &file_name) {
-    pugi::xml_document doc;
-    pugi::xml_parse_result result = doc.load_file(file_name.c_str());
-    if (!result) exit(EXIT_FAILURE);
-    svg = doc.child("svg");
+float Parser::getFloatAttribute(Attributes attributes, std::string name) {
+    float result;
+    for (auto attribute : attributes) {
+        if (attribute.first == name) {
+            result = std::stof(attribute.second);
+            break;
+        } else {
+            if (name == "stroke-width" || name == "stroke-opacity" ||
+                name == "fill-opacity" || name == "opacity")
+                result = 1;
+        }
+    }
+    return result;
 }
 
-std::string Parser::getAttribute(const pugi::xml_node &node, std::string name) {
-    pugi::xml_attribute attr = node.attribute(name.c_str());
-    if (!attr) {
-        if (name == "fill")
-            return "black";
-        else if (name == "stroke" || name == "transform" || name == "rotate")
-            return "none";
-    }
-    return attr.as_string();
-};
-
-float Parser::getFloatAttribute(const pugi::xml_node &node, std::string name) {
-    pugi::xml_attribute attr = node.attribute(name.c_str());
-    if (!attr) {
-        if (name == "stroke-width" || name == "stroke-opacity" ||
-            name == "fill-opacity" || name == "opacity")
-            return 1;
-    }
-    return attr.as_float();
-}
-
-Color Parser::parseColor(const pugi::xml_node &node, std::string name) {
-    std::string color = getAttribute(node, name);
+Color Parser::parseColor(Attributes attributes, std::string name) {
+    std::string color = getAttribute(attributes, name);
+    color.erase(std::remove(color.begin(), color.end(), ' '), color.end());
     for (auto &c : color) c = tolower(c);
     if (color == "none")
         return Color::Transparent;
@@ -108,15 +236,15 @@ Color Parser::parseColor(const pugi::xml_node &node, std::string name) {
         } else
             result = getRgbColor(color);
 
-        result.a = result.a * getFloatAttribute(node, name + "-opacity") *
-                   getFloatAttribute(node, "opacity");
+        result.a = result.a * getFloatAttribute(attributes, name + "-opacity") *
+                   getFloatAttribute(attributes, "opacity");
         return result;
     }
 }
 
-std::vector< Vector2Df > Parser::parsePoints(const pugi::xml_node &node) {
+std::vector< Vector2Df > Parser::parsePoints(Attributes attributes) {
     std::vector< Vector2Df > points;
-    std::string points_string = getAttribute(node, "points");
+    std::string points_string = getAttribute(attributes, "points");
 
     std::stringstream ss(points_string);
     float x, y;
@@ -127,6 +255,29 @@ std::vector< Vector2Df > Parser::parsePoints(const pugi::xml_node &node) {
     }
 
     return points;
+}
+
+std::vector< std::string > Parser::getTransformOrder(Attributes attributes) {
+    std::string transform_tag = getAttribute(attributes, "transform");
+
+    transform_tag.erase(
+        std::remove(transform_tag.begin(), transform_tag.end(), ' '),
+        transform_tag.end());
+
+    size_t start_pos = transform_tag.find(")");
+    while (start_pos != std::string::npos) {
+        transform_tag.insert(start_pos + 1, " ");
+        start_pos = transform_tag.find(")", start_pos + 1);
+    }
+
+    std::vector< std::string > order;
+    std::stringstream ss(transform_tag);
+    std::string type;
+    while (ss >> type) {
+        order.push_back(type);
+    }
+
+    return order;
 }
 
 std::pair< float, float > Parser::getTranslate(std::string transform_value) {
@@ -143,117 +294,71 @@ float Parser::getRotate(std::string transform_value) {
 
 void Parser::applyTransform(Shape *shape,
                             const std::vector< std::string > &transform_order) {
-    for (auto type : transform_order) {
-        if (type.find("translate") != std::string::npos) {
-            float trans_x = getTranslate(type).first,
-                  trans_y = getTranslate(type).second;
-            shape->translate(trans_x, trans_y);
-        } else if (type.find("rotate") != std::string::npos) {
-            float degree = getRotate(type);
-            shape->rotate(degree);
-        }
-    }
-};
-
-void Parser::parseSVG(const pugi::xml_node &node) {
-    for (pugi::xml_node tool = node.first_child(); tool;
-         tool = tool.next_sibling()) {
-        std::cout << "Tool:" << tool.name() << std::endl;
-        if (tool.name() == std::string("g")) {
-            for (auto attr : tool.attributes()) {
-                for (pugi::xml_node child = tool.first_child(); child;
-                     child = child.next_sibling()) {
-                    bool flag = false;
-                    for (auto child_attr : child.attributes()) {
-                        if (strcmp(child_attr.name(), attr.name()) == 0) {
-                            flag = true;
-                            break;
-                        }
-                    }
-                    if (!flag)
-                        child.append_copy(attr);
-                    else {
-                        if (strcmp(attr.name(), "transform") == 0) {
-                            std::string new_transform =
-                                std::string(attr.value()) + " " +
-                                child.attribute("transform").value();
-                            child.attribute("transform")
-                                .set_value(new_transform.c_str());
-                        }
-                    }
-                }
-            }
-            parseSVG(tool);
-        } else if (tool.name() == std::string("line")) {
-            parseLine(tool);
-        } else if (tool.name() == std::string("rect")) {
-            parseRect(tool);
-        } else if (tool.name() == std::string("circle")) {
-            parseCircle(tool);
-        } else if (tool.name() == std::string("ellipse")) {
-            parseEllipse(tool);
-        } else if (tool.name() == std::string("polygon")) {
-            parsePolygon(tool);
-        } else if (tool.name() == std::string("polyline")) {
-            parsePolyline(tool);
-        } else if (tool.name() == std::string("text")) {
-            parseText(tool);
-        } else if (tool.name() == std::string("path")) {
-            parsePath(tool);
-        }
-    }
+    // for (auto type : transform_order) {
+    //     if (type.find("translate") != std::string::npos) {
+    //         float trans_x = getTranslate(type).first,
+    //               trans_y = getTranslate(type).second;
+    //         shape->translate(trans_x, trans_y);
+    //     } else if (type.find("rotate") != std::string::npos) {
+    //         float degree = getRotate(type);
+    //         shape->rotate(degree);
+    //     }
+    // }
 }
 
-void Parser::parseLine(const pugi::xml_node &node) {
-    std::vector< std::string > transform_order = getTransformOrder(node);
-    Color stroke_color = parseColor(node, "stroke");
-    float stroke_width = node.attribute("stroke-width").as_float();
-    Line *shape = new Line(Vector2Df(node.attribute("x1").as_float(),
-                                     node.attribute("y1").as_float()),
-                           Vector2Df(node.attribute("x2").as_float(),
-                                     node.attribute("y2").as_float()),
+void Parser::parseLine(Attributes attributes) {
+    std::vector< std::string > transform_order = getTransformOrder(attributes);
+    Color stroke_color = parseColor(attributes, "stroke");
+    float stroke_width = getFloatAttribute(attributes, "stroke-width");
+    Line *shape = new Line(Vector2Df(getFloatAttribute(attributes, "x1"),
+                                     getFloatAttribute(attributes, "y1")),
+                           Vector2Df(getFloatAttribute(attributes, "x2"),
+                                     getFloatAttribute(attributes, "y2")),
                            stroke_color, stroke_width);
     applyTransform(shape, transform_order);
     shapes.push_back(shape);
 }
 
-void Parser::parseRect(const pugi::xml_node &node) {
-    std::vector< std::string > transform_order = getTransformOrder(node);
-    Color stroke_color = parseColor(node, "stroke");
-    Color fill_color = parseColor(node, "fill");
-    float stroke_width = node.attribute("stroke-width").as_float();
-    float x = node.attribute("x").as_float();
-    float y = node.attribute("y").as_float();
-    Rect *shape = new Rect(node.attribute("width").as_float(),
-                           node.attribute("height").as_float(), x, y,
-                           fill_color, stroke_color, stroke_width);
+void Parser::parseRect(Attributes attributes) {
+    std::vector< std::string > transform_order = getTransformOrder(attributes);
+    Color stroke_color = parseColor(attributes, "stroke");
+    Color fill_color = parseColor(attributes, "fill");
+    float stroke_width = getFloatAttribute(attributes, "stroke-width");
+    float x = getFloatAttribute(attributes, "x");
+    float y = getFloatAttribute(attributes, "y");
+    float rx = getFloatAttribute(attributes, "rx");
+    float ry = getFloatAttribute(attributes, "ry");
+    Rect *shape =
+        new Rect(getFloatAttribute(attributes, "width"),
+                 getFloatAttribute(attributes, "height"), Vector2Df(x, y),
+                 Vector2Df(rx, ry), fill_color, stroke_color, stroke_width);
     applyTransform(shape, transform_order);
     shapes.push_back(shape);
 }
 
-void Parser::parseCircle(const pugi::xml_node &node) {
-    std::vector< std::string > transform_order = getTransformOrder(node);
-    Color stroke_color = parseColor(node, "stroke");
-    Color fill_color = parseColor(node, "fill");
-    float stroke_width = getFloatAttribute(node, "stroke-width");
-    float cx = getFloatAttribute(node, "cx");
-    float cy = getFloatAttribute(node, "cy");
-    float radius = getFloatAttribute(node, "r");
+void Parser::parseCircle(Attributes attributes) {
+    std::vector< std::string > transform_order = getTransformOrder(attributes);
+    Color stroke_color = parseColor(attributes, "stroke");
+    Color fill_color = parseColor(attributes, "fill");
+    float stroke_width = getFloatAttribute(attributes, "stroke-width");
+    float cx = getFloatAttribute(attributes, "cx");
+    float cy = getFloatAttribute(attributes, "cy");
+    float radius = getFloatAttribute(attributes, "r");
     Circle *shape = new Circle(radius, Vector2Df(cx, cy), fill_color,
                                stroke_color, stroke_width);
     applyTransform(shape, transform_order);
     shapes.push_back(shape);
 }
 
-void Parser::parseEllipse(const pugi::xml_node &node) {
-    std::vector< std::string > transform_order = getTransformOrder(node);
-    Color stroke_color = parseColor(node, "stroke");
-    Color fill_color = parseColor(node, "fill");
-    float stroke_width = getFloatAttribute(node, "stroke-width");
-    float radius_x = getFloatAttribute(node, "rx");
-    float radius_y = getFloatAttribute(node, "ry");
-    float cx = getFloatAttribute(node, "cx");
-    float cy = getFloatAttribute(node, "cy");
+void Parser::parseEllipse(Attributes attributes) {
+    std::vector< std::string > transform_order = getTransformOrder(attributes);
+    Color stroke_color = parseColor(attributes, "stroke");
+    Color fill_color = parseColor(attributes, "fill");
+    float stroke_width = getFloatAttribute(attributes, "stroke-width");
+    float radius_x = getFloatAttribute(attributes, "rx");
+    float radius_y = getFloatAttribute(attributes, "ry");
+    float cx = getFloatAttribute(attributes, "cx");
+    float cy = getFloatAttribute(attributes, "cy");
     Ellipse *shape =
         new Ellipse(Vector2Df(radius_x, radius_y), Vector2Df(cx, cy),
                     fill_color, stroke_color, stroke_width);
@@ -261,52 +366,73 @@ void Parser::parseEllipse(const pugi::xml_node &node) {
     shapes.push_back(shape);
 }
 
-void Parser::parsePolygon(const pugi::xml_node &node) {
-    Color stroke_color = parseColor(node, "stroke");
-    Color fill_color = parseColor(node, "fill");
-    float stroke_width = getFloatAttribute(node, "stroke-width");
+void Parser::parsePolygon(Attributes attributes) {
+    Color stroke_color = parseColor(attributes, "stroke");
+    Color fill_color = parseColor(attributes, "fill");
+    float stroke_width = getFloatAttribute(attributes, "stroke-width");
     Polygon *shape = new Polygon(fill_color, stroke_color, stroke_width);
-    std::vector< Vector2Df > points = parsePoints(node);
-    for (auto point : points) {
-        shape->addPoint(point);
-    }
-    shape->updateShape();
-    shapes.push_back(shape);
-}
-
-void Parser::parsePolyline(const pugi::xml_node &node) {
-    Color stroke_color = parseColor(node, "stroke");
-    Color fill_color = parseColor(node, "fill");
-    float stroke_width = getFloatAttribute(node, "stroke-width");
-    Polyline *shape = new Polyline(stroke_width, stroke_color, fill_color);
-    std::vector< Vector2Df > points = parsePoints(node);
+    std::vector< Vector2Df > points = parsePoints(attributes);
     for (auto point : points) {
         shape->addPoint(point);
     }
     shapes.push_back(shape);
 }
 
-void Parser::parseText(const pugi::xml_node &node) {
-    std::vector< std::string > transform_order = getTransformOrder(node);
-    Color fill_color = parseColor(node, "fill");
-    float x = getFloatAttribute(node, "x");
-    float y = getFloatAttribute(node, "y");
-    float font_size = getFloatAttribute(node, "font-size");
-    std::string text = node.text().get();
+void Parser::parsePolyline(Attributes attributes) {
+    Color stroke_color = parseColor(attributes, "stroke");
+    Color fill_color = parseColor(attributes, "fill");
+    float stroke_width = getFloatAttribute(attributes, "stroke-width");
+    Polyline *shape = new Polyline(fill_color, stroke_color, stroke_width);
+    std::vector< Vector2Df > points = parsePoints(attributes);
+    for (auto point : points) {
+        shape->addPoint(point);
+    }
+    shapes.push_back(shape);
+}
+
+void Parser::parseText(Attributes attributes) {
+    std::vector< std::string > transform_order = getTransformOrder(attributes);
+    Color fill_color = parseColor(attributes, "fill");
+    float x = getFloatAttribute(attributes, "x");
+    float y = getFloatAttribute(attributes, "y");
+    float font_size = getFloatAttribute(attributes, "font-size");
+    std::string text = getAttribute(attributes, "text");
     Text *shape =
         new Text(Vector2Df(x, y - font_size), text, fill_color, font_size);
     applyTransform(shape, transform_order);
-    std::cout << shape->getPosition().x << "," << shape->getPosition().y
-              << std::endl;
     shapes.push_back(shape);
 }
 
-void Parser::parsePath(const pugi::xml_node &node) {
+void Parser::parsePath(Attributes attributes) {
     /*
 
     TBD: PATH
 
     */
+}
+
+void Parser::parseSVG() {
+    for (auto object : objects) {
+        std::string name = object.first;
+        Attributes attributes = object.second;
+        if (name == "line") {
+            parseLine(attributes);
+        } else if (name == "rect") {
+            parseRect(attributes);
+        } else if (name == "circle") {
+            parseCircle(attributes);
+        } else if (name == "ellipse") {
+            parseEllipse(attributes);
+        } else if (name == "polygon") {
+            parsePolygon(attributes);
+        } else if (name == "polyline") {
+            parsePolyline(attributes);
+        } else if (name == "text") {
+            parseText(attributes);
+        } else if (name == "path") {
+            parsePath(attributes);
+        }
+    }
 }
 
 void Parser::renderSVG(Renderer &renderer) {
@@ -320,4 +446,18 @@ Parser::~Parser() {
         delete shape;
     }
     shapes.clear();
+
+    for (auto object : objects) {
+        object.second.clear();
+    }
+
+    objects.clear();
+
+    delete instance;
+}
+
+void Parser::printShapesData() {
+    for (auto shape : shapes) {
+        shape->printData();
+    }
 }
