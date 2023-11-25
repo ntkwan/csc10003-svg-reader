@@ -12,24 +12,6 @@ jobs:
           sudo apt-get upgrade
           sudo apt-get install cmake clang-format
           sudo apt-get install libpthread-stubs0-dev libgl1-mesa-dev libx11-dev libxrandr-dev libfreetype6-dev libjpeg8-dev libsndfile1-dev libopenal-dev libudev-dev libxinerama-dev libxcursor-dev libxi-dev
-      - name: Install SFML
-        run: |
-          git clone https://github.com/SFML/SFML.git SFML
-          cd SFML
-          mkdir build && cd build
-          cmake -DBUILD_SHARED_LIBS=ON ..
-          make
-          sudo make install
-          cd ../..
-      - name: Install pugixml
-        run: |
-          git clone https://github.com/zeux/pugixml.git pugixml
-          cd pugixml
-          mkdir build && cd build
-          cmake -DBUILD_SHARED_LIBS=ON ..
-          make
-          sudo make install
-          cd ../..
       - name: Run clang-format
         run: clang-format --dry-run --Werror src/**/*.*pp
       - name: Run CMake

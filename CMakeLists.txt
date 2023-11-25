@@ -15,6 +15,8 @@ find_package(sfml QUIET)
 
 add_subdirectory(external/SFML)
 include_directories(src)
+add_compile_options(-fsanitize=address)
+add_link_options(-fsanitize=address)
 file(GLOB_RECURSE cpp_files CONFIGURE_DEPENDS "src/*.*pp")
 add_executable(${PROJECT_NAME} ${cpp_files})
 
