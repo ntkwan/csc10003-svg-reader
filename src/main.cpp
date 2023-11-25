@@ -6,14 +6,14 @@ int main() {
     constexpr int screen_height = 900;
 
     sf::ContextSettings settings;
-    settings.antialiasingLevel = 8;
+    settings.antialiasingLevel = 16;
     sf::RenderWindow window(sf::VideoMode(screen_width, screen_height),
                             "svg-reader-version-0.1", sf::Style::Default,
                             settings);
     sf::View view(sf::FloatRect(0.f, 0.f, static_cast< float >(screen_width),
                                 static_cast< float >(screen_height)));
     Viewer *viewer = Viewer::getInstance(window, view);
-    Parser *parser = Parser::getInstance("sample/sample.svg");
+    Parser *parser = Parser::getInstance("external/samples/sample.svg");
     Renderer *renderer = Renderer::getInstance(window);
 
     while (window.isOpen()) {

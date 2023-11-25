@@ -11,8 +11,8 @@
  */
 class Text : public Shape {
 private:
-    std::string text;  ///< Text element
-    Vector2Df position;
+    std::string content;  ///< Text element
+    float font_size;      ///< Font size of the text
 
 public:
     /**
@@ -20,41 +20,50 @@ public:
      *
      * @param pos The position of the text.
      * @param TEXT The string of the text.
-     * @param fill_color The fill color of the text (default is
-     * sf::Color::Black).
+     * @param fill The fill color of the text
      * @param font_size The font size of the text (default is 1).
      */
-    Text(Vector2Df pos, std::string TEXT,
-         sf::Color fill_color = sf::Color::Black, float font_size = 1);
+    Text(Vector2Df pos, std::string TEXT, const Color &fill, float font_size);
 
     /**
-     * @brief Gets the total number of points representing the text.
+     * @brief Gets the type of the shape.
      *
-     * Since text is not represented by points, this method always returns 0.
-     *
-     * @return The number of points representing the text.
+     * @return The string "Text".
      */
-    virtual std::size_t getPointCount() const;
+    std::string getClass() const override;
 
     /**
-     * @brief Gets a dummy point for compatibility with Shape interface.
+     * @brief Sets the string of the text.
      *
-     * Since text is not represented by points, this method always returns (0,
-     * 0).
-     *
-     * @param index The index of the dummy point (ignored).
-     * @return A dummy point for compatibility.
+     * @param content The new string of the text.
      */
-    virtual Vector2Df getPoint(std::size_t index) const;
+    void setContent(std::string content);
 
     /**
-     * @brief Draws the text on the specified render target.
+     * @brief Gets the string of the text.
      *
-     * @param target The render target to draw on.
-     * @param states The render states to apply (default is
-     * sf::RenderStates::Default).
+     * @return The string of the text.
      */
-    void draw(Renderer& target) const;
+    std::string getContent() const;
+
+    /**
+     * @brief Sets the font size of the text.
+     *
+     * @param font_size The new font size of the text.
+     */
+    void setFontSize(float font_size);
+
+    /**
+     * @brief Gets the font size of the text.
+     *
+     * @return The font size of the text.
+     */
+    float getFontSize() const;
+
+    /**
+     * @brief Prints the data of the text.
+     */
+    void printData() const override;
 };
 
 #endif  // TEXT_HPP_

@@ -1,8 +1,6 @@
 #ifndef LINE_HPP_
 #define LINE_HPP_
 
-#include <cmath>
-
 #include "Shape.hpp"
 
 /**
@@ -14,7 +12,6 @@
 class Line : public Shape {
 private:
     Vector2Df direction;  ///< Direction of the line
-    float thickness;      ///< Thickness of the line
 
 public:
     /**
@@ -25,42 +22,36 @@ public:
      * @param stroke The color of the line (default is sf::Color::White).
      * @param stroke_width The thickness of the line (default is 1.0).
      */
-    Line(const Vector2Df& point1, const Vector2Df& point2,
-         sf::Color stroke = sf::Color::White, float stroke_width = 1.f);
+    Line(const Vector2Df& point1, const Vector2Df& point2, Color stroke,
+         float stroke_width);
 
     /**
-     * @brief Sets the thickness of the line.
+     * @brief Gets the type of the shape.
      *
-     * @param thickness The new thickness of the line.
+     * @return The string "Line".
      */
-    void setThickness(float thickness);
+    std::string getClass() const override;
 
     /**
-     * @brief Calculates and returns the length of the line.
+     * @brief Sets the direction of the line.
+     *
+     * @param direction The new direction of the line.
+     */
+    void setDirection(const Vector2Df& direction);
+
+    /**
+     * @brief Gets the direction of the line.
+     *
+     * @return The direction of the line.
+     */
+    Vector2Df getDirection() const;
+
+    /**
+     * @brief Gets the length of the line.
      *
      * @return The length of the line.
      */
     float getLength() const;
-
-    /**
-     * @brief Gets the total number of points representing the line.
-     *
-     * In this case, it always returns 4 since a line is represented by 4 points
-     * (start, end, and two additional points for thickness).
-     *
-     * @return The number of points representing the line.
-     */
-    virtual std::size_t getPointCount() const;
-
-    /**
-     * @brief Gets the position of a point on the line.
-     *
-     * @param index The index of the point (0 for the starting point, 1 for the
-     * end point, 2 for the first additional point, 3 for the second additional
-     * point).
-     * @return The position of the specified point on the line.
-     */
-    virtual Vector2Df getPoint(std::size_t index) const;
 };
 
 #endif

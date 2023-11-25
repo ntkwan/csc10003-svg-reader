@@ -10,9 +10,7 @@
  * with a variable radius in the x and y directions.
  */
 class Ellipse : public Shape {
-protected:
-    const int SCALE =
-        100000;        ///< Scale factor for determining the number of points
+private:
     Vector2Df radius;  ///< Radii of the ellipse in the x and y directions
 
 public:
@@ -23,28 +21,33 @@ public:
      * @param center The center of the ellipse.
      * @param fill Fill color of the ellipse.
      * @param stroke Outline color of the ellipse.
-     * @param stroke_thickness Thickness of the ellipse outline.
+     * @param stroke_width Thickness of the ellipse outline.
      */
-    Ellipse(const Vector2Df &radius, const Vector2Df &center, sf::Color fill,
-            sf::Color stroke, float stroke_thickness);
+    Ellipse(const Vector2Df &radius, const Vector2Df &center, Color fill,
+            Color stroke, float stroke_width);
 
     /**
-     * @brief Gets the total number of points representing the ellipse.
+     * @brief Gets the type of the shape.
      *
-     * In this case, it returns a large number (SCALE) to approximate a smooth
-     * ellipse.
+     * @return The string "Ellipse".
      *
-     * @return The number of points representing the ellipse.
+     * @note This function is used for determining the type of the shape.
      */
-    virtual std::size_t getPointCount() const;
+    std::string getClass() const override;
 
     /**
-     * @brief Gets the position of a point on the ellipse.
+     * @brief Sets the radius of the ellipse.
      *
-     * @param index The index of the point.
-     * @return The position of the specified point on the ellipse.
+     * @param radius The new radius of the ellipse.
      */
-    virtual Vector2Df getPoint(std::size_t index) const override;
+    void setRadius(const Vector2Df &radius);
+
+    /**
+     * @brief Gets the radius of the ellipse.
+     *
+     * @return The radius of the ellipse.
+     */
+    Vector2Df getRadius() const;
 };
 
 #endif  // ELLIPSE_HPP_

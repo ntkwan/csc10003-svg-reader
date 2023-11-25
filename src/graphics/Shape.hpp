@@ -2,10 +2,8 @@
 #define SHAPE_HPP_
 
 #include <SFML/Graphics.hpp>
-#include <SFML/Graphics/RenderWindow.hpp>
-#include <SFML/Graphics/Texture.hpp>
 
-#include "Renderer.hpp"
+#include "Color.hpp"
 #include "Vector2D.hpp"
 
 /**
@@ -14,27 +12,37 @@
  * @note This class is applied Abstract Factory design pattern and used as
  * interface for other shapes.
  */
-
 class Shape {
 public:
-    /*! @brief Virtual constructor
+    /**
+     *  @brief Virtual constructor
      */
-
     virtual ~Shape() = default;
+
+    /**
+     * @brief Gets the type of the shape
+     *
+     * @return The type of the shape
+     *
+     * @note This function is used for determining the type of the shape.
+     * @note This function is pure virtual and must be implemented by derived
+     * classes.
+     */
+    virtual std::string getClass() const = 0;
 
     /**
      * @brief Sets the fill color of the shape.
      *
      * @param color The new fill color of the shape.
      */
-    void setFillColor(const sf::Color& color);
+    void setFillColor(const Color& color);
 
     /**
      * @brief Sets the outline color of the shape.
      *
      * @param color The new outline color of the shape.
      */
-    void setOutlineColor(const sf::Color& color);
+    void setOutlineColor(const Color& color);
 
     /**
      * @brief Sets the outline thickness of the shape.
@@ -47,27 +55,6 @@ public:
      * shape.
      */
     void setOutlineThickness(float thickness);
-
-    /**
-     * @brief Gets the fill color of the shape.
-     * @return The fill color of the shape.
-     * @note The default fill color is white.
-     */
-    const sf::Color& getFillColor() const;
-
-    /**
-     * @brief Gets the outline color of the shape.
-     * @return The outline color of the shape.
-     * @note The default outline color is white.
-     */
-    const sf::Color& getOutlineColor() const;
-
-    /**
-     * @brief Gets the outline thickness of the shape.
-     * @return The outline thickness of the shape.
-     * @note The default outline thickness is 0.
-     */
-    float getOutlineThickness() const;
 
     /**
      * @brief Sets the position of the shape
@@ -88,56 +75,35 @@ public:
     void setPosition(const Vector2Df& position);
 
     /**
-     * @brief Virtual method: Get the number of point of the shape (for Polygon
-     * shape)
-     * @return The number of points of the shape
-     * @note This is a pure virtual method, so it has to be implemented by the
-     * derived class to define how the shape should be drawn.
+     * @brief Gets the fill color of the shape.
+     * @return The fill color of the shape.
+     * @note The default fill color is white.
      */
-    virtual std::size_t getPointCount() const = 0;
+    const Color& getFillColor() const;
 
     /**
-     * @brief Virtual method: Get the position of the point on the shape (for
-     * Polygon shape)
-     * @param index The index of the point
-     * @return The position of the specified point on the shape
-     * @note The returned point is in local coordinates, that is, the shape's
-     * transforms (position, rotation, scale) are not taken into account.
-     * @note The result is undefined if index is out of the valid range.
-     * @note The number of points of the shape is defined by the concrete
-     * implementation.
-     * @note The returned vector is constant, which means that you can't modify
-     * its coordinates when you retrieve it.
-     * @note This is a pure virtual method, so it has to be implemented by the
-     * derived class.
+     * @brief Gets the outline color of the shape.
+     * @return The outline color of the shape.
+     * @note The default outline color is white.
      */
-    virtual Vector2Df getPoint(std::size_t index) const = 0;
+    const Color& getOutlineColor() const;
 
     /**
-     * @brief Virtual method: Draw the shape on the specified render target
-     * @param target The render target (sf::Renderwindow is a typedef of SFML
-     * drawing window)
-     * @param states The render states to apply (default is
-     * sf::RenderStates::Default)
+     * @brief Gets the outline thickness of the shape.
+     * @return The outline thickness of the shape.
+     * @note The default outline thickness is 0.
      */
-    virtual void draw(Renderer& target) const;
+    float getOutlineThickness() const;
 
     /**
-     * @brief Gets the shape transform
-     * @return The shape transform (sf::Transform is a typedef of SFML)
-     * @note This function returns the combined transform of the object.
-     * @note The transform is a combination of the position, rotation, and scale
-     * of the object.
+     * @brief Get the current position of the shape
+     *
+     * @return The current position of the shape
+     * @note The default position of the shape is (0, 0).
      */
-    const sf::Transform& getTransform() const;
+    Vector2Df getPosition() const;
 
-    /**
-     * @brief Gets the inverse shape transform
-     * @return The inverse shape transform (sf::Transform is a typedef of SFML)
-     * @note This function returns the inverse of the combined transform of the
-     * object.
-     */
-    const sf::Transform& getInverseTransform() const;
+    virtual void printData() const;
 
 protected:
     /**
@@ -147,57 +113,14 @@ protected:
      */
     Shape();
 
-    /**
-     * @brief Sets the texture of the shape
-     * @param texture The new texture of the shape
-     * @note The texture is not copied, it is referenced by the shape.
-     * @note The default texture is NULL.
-     */
-    void update();
-
 private:
-    /**
-     * @brief Updates the fill colors of the shape
-     * @note This method call the update() method.
-     */
-    void updateFillColors();
-
-    /**
-     * @brief Updates the outline of the shape
-     * @note This method call the update() method.
-     */
-    void updateOutline();
-
-    /**
-     * @brief Updates the outline colors of the shape
-     * @note This method call the update() method.
-     */
-    void updateOutlineColors();
-
-private:
-    const sf::Texture* texture;  ///< Texture of the shape
-    sf::Color fill_color;        ///< Fill color
-    sf::Color outline_color;     ///< Outline color
-    float outline_thickness;     ///< Thickness of the shape's outline
-    sf::VertexArray vertices;    ///< Vertex array containing the fill geometry
-    sf::VertexArray
-        outline_vertices;  ///< Vertex array containing the outline geometry
-    sf::FloatRect inside_bounds;  ///< Bounding rectangle of the inside (fill)
-    sf::FloatRect
-        bounds;  ///< Bounding rectangle of the outside (outline + fill)
-
+    Color fill;          ///< Fill color
+    Color stroke;        ///< Outline color
+    float stroke_width;  ///< Thickness of the shape's outline
+    Vector2Df position;  ///< Position of the shape
     Vector2Df origin;  ///< Origin of translation/rotation/scaling of the object
-    Vector2Df position;  ///< Position of the object in the 2D world
-    float rotation;      ///< Orientation of the object, in degrees
-    Vector2Df scale;     ///< Scale of the object
-
-    mutable sf::Transform transform;  ///< Combined transformation of the object
-    mutable bool
-        transform_need_update;  ///< Does the transform need to be recomputed?
-    mutable sf::Transform
-        inverse_transform;  ///< Combined transformation of the object
-    mutable bool
-        inverse_transform_need_update;  ///< Same as transform but for inverse
+    float rotation;    ///< Orientation of the object, in degrees
+    Vector2Df scale;   ///< Scale of the object
 };
 
 #endif  // SHAPE_HPP_

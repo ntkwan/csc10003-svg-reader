@@ -2,24 +2,17 @@
 
 #include <cmath>
 
-Ellipse::Ellipse(const Vector2Df &radius, const Vector2Df &center,
-                 sf::Color fill, sf::Color stroke, float stroke_thickness)
+Ellipse::Ellipse(const Vector2Df &radius, const Vector2Df &center, Color fill,
+                 Color stroke, float stroke_thickness)
     : radius(radius) {
     setPosition(center);
     setFillColor(fill);
     setOutlineColor(stroke);
     setOutlineThickness(stroke_thickness);
-    update();
 }
 
-std::size_t Ellipse::getPointCount() const { return SCALE; }
+std::string Ellipse::getClass() const { return "Ellipse"; }
 
-Vector2Df Ellipse::getPoint(std::size_t index) const {
-    static const float pi = acos(-1);
+void Ellipse::setRadius(const Vector2Df &radius) { this->radius = radius; }
 
-    float angle = index * 2 * pi / getPointCount() - pi / 2;
-    float x = std::cos(angle) * radius.x;
-    float y = std::sin(angle) * radius.y;
-
-    return Vector2Df(radius.x + x, radius.y + y);
-}
+Vector2Df Ellipse::getRadius() const { return radius; }

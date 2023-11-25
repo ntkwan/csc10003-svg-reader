@@ -36,13 +36,13 @@ void Viewer::handleEvents(sf::Event event) {
     // Rotate clockwise by 'R' key
     if (event.type == sf::Event::KeyPressed &&
         event.key.code == sf::Keyboard::R) {
-        rotate(90.0f);
+        rotate(-1.0f);
     }
 
     // Rotate anti-clockwise by 'E' key
     if (event.type == sf::Event::KeyPressed &&
         event.key.code == sf::Keyboard::E) {
-        rotate(-90.0f);
+        rotate(1.0f);
     }
 
     // Zoom in/out with mouse scroll

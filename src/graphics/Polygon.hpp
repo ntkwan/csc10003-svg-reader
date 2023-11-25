@@ -1,11 +1,7 @@
 #ifndef POLYGON_HPP_
 #define POLYGON_HPP_
 
-#include <SFML/Graphics.hpp>
-#include <vector>
-
 #include "PolyShape.hpp"
-#include "Shape.hpp"
 
 /**
  * @brief Represents a polygon in 2D space.
@@ -21,40 +17,17 @@ public:
      * @param fill Fill color of the polygon (default is
      * sf::Color::Transparent).
      * @param stroke Outline color of the polygon (default is sf::Color::White).
-     * @param stroke_thickness Thickness of the polygon outline (default is 0).
+     * @param stroke_width Thickness of the polygon outline (default is 0).
      */
-    Polygon(sf::Color fill = sf::Color::Transparent,
-            sf::Color stroke = sf::Color::White, float stroke_thickness = 0);
+    Polygon(Color fill, Color stroke, float stroke_width);
 
     /**
-     * @brief Gets the total number of vertices representing the polygon.
+     * @brief Gets the type of the shape.
      *
-     * @return The number of vertices representing the polygon.
-     */
-    std::size_t getPointCount() const override;
+     * @return The string "Polygon".
 
-    /**
-     * @brief Gets the position of a vertex in the polygon.
-     *
-     * @param index The index of the vertex.
-     * @return The position of the specified vertex in the polygon.
      */
-    Vector2Df getPoint(std::size_t index) const override;
-
-    /**
-     * @brief Adds a vertex to the polygon.
-     *
-     * @param point The position of the vertex to be added.
-     */
-    void addPoint(const Vector2Df& point) override;
-
-    /**
-     * @brief Updates the polygon.
-     *
-     * This method is provided for consistency with other shapes but
-     * does not introduce any additional behavior for polygons.
-     */
-    void updateShape() override;
+    std::string getClass() const override;
 };
 
 #endif  // POLYGON_HPP_
