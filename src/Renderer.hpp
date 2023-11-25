@@ -19,6 +19,22 @@ public:
     void draw(Shape* shape) const;
 
 private:
+    void drawLine(Line* line) const;
+
+    void drawRectangle(Rect* rectangle) const;
+
+    void drawCircle(Circle* circle) const;
+
+    void drawEllipse(Ellipse* ellipse) const;
+
+    void drawPolygon(Polygon* polygon) const;
+
+    void drawPolyline(Polyline* polyline) const;
+
+    // void drawPath(Path* path) const;
+
+    void drawText(Text* text) const;
+
     Renderer(sf::RenderWindow& window);
     static Renderer* instance;
 };
