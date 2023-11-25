@@ -29,11 +29,13 @@ private:
 
     void drawPolygon(Polygon* polygon) const;
 
+    void drawText(Text* text) const;
+
     void drawPolyline(Polyline* polyline) const;
 
-    // void drawPath(Path* path) const;
+    void drawCurve(Curve curve) const;
 
-    void drawText(Text* text) const;
+    void drawPath(Path* path) const;
 
     Renderer(sf::RenderWindow& window);
     static Renderer* instance;

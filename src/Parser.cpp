@@ -257,6 +257,78 @@ std::vector< Vector2Df > Parser::parsePoints(Attributes attributes) {
     return points;
 }
 
+namespace {
+    void removeRedundantSpaces(std::string &svgPathString) {
+        int index = 0;
+        while (index < svgPathString.size()) {
+            if ((index == 0 || index == svgPathString.size() - 1) &&
+                svgPathString[index] == ' ') {
+                svgPathString.erase(index, 1);
+            } else if (svgPathString[index] == ' ' &&
+                       svgPathString[index - 1] == ' ') {
+                svgPathString.erase(index, 1);
+            } else {
+                index++;
+            }
+        }
+    }
+
+    void insertSpaceBeforeEachLetter(std::string &svgPathString) {
+        for (int index = 0; index < svgPathString.size() - 1; index++) {
+            if (std::isalpha(svgPathString[index])) {
+                svgPathString.insert(index + 1, " ");
+                index++;
+            }
+        }
+    }
+
+    void formatSvgPathString(std::string &svgPathString) {
+        insertSpaceBeforeEachLetter(svgPathString);
+        std::replace(svgPathString.begin(), svgPathString.end(), ',', ' ');
+        removeRedundantSpaces(svgPathString);
+    }
+}  // namespace
+
+std::vector< PathPoint > Parser::parsePathPoints(Attributes attributes) {
+    std::vector< PathPoint > points;
+    std::string path_string = getAttribute(attributes, "d");
+
+    formatSvgPathString(path_string);
+    std::stringstream ss(path_string);
+    std::string element;
+    PathPoint pPoint{{0, 0}, 'M'};
+
+    while (ss >> element) {
+        if (std::isalpha(element[0])) {
+            pPoint.TC = element[0];
+            if (tolower(pPoint.TC) == 'm' || tolower(pPoint.TC) == 'l' ||
+                tolower(pPoint.TC) == 'c')
+                ss >> pPoint.Point.x >> pPoint.Point.y;
+            else if (tolower(pPoint.TC) == 'h') {
+                ss >> pPoint.Point.x;
+                pPoint.Point.y = 0;
+            } else if (tolower(pPoint.TC) == 'v') {
+                ss >> pPoint.Point.y;
+                pPoint.Point.x = 0;
+            }
+        } else {
+            if (tolower(pPoint.TC) == 'm' || tolower(pPoint.TC) == 'l' ||
+                tolower(pPoint.TC) == 'c') {
+                pPoint.Point.x = std::stof(element);
+                ss >> pPoint.Point.y;
+            } else if (tolower(pPoint.TC) == 'h') {
+                pPoint.Point.x = std::stof(element);
+                pPoint.Point.y = 0;
+            } else if (tolower(pPoint.TC) == 'v') {
+                pPoint.Point.y = std::stof(element);
+                pPoint.Point.x = 0;
+            }
+        }
+        points.push_back(pPoint);
+    }
+    return points;
+}
+
 std::vector< std::string > Parser::getTransformOrder(Attributes attributes) {
     std::string transform_tag = getAttribute(attributes, "transform");
 
@@ -404,11 +476,17 @@ void Parser::parseText(Attributes attributes) {
 }
 
 void Parser::parsePath(Attributes attributes) {
-    /*
-
-    TBD: PATH
-
-    */
+    std::vector< std::string > transform_order = getTransformOrder(attributes);
+    Color stroke_color = parseColor(attributes, "stroke");
+    Color fill_color = parseColor(attributes, "fill");
+    float stroke_width = getFloatAttribute(attributes, "stroke-width");
+    Path *shape = new Path(fill_color, stroke_color, stroke_width);
+    std::vector< PathPoint > points = parsePathPoints(attributes);
+    for (auto point : points) {
+        shape->addPoint(point);
+    }
+    applyTransform(shape, transform_order);
+    shapes.push_back(shape);
 }
 
 void Parser::parseSVG() {

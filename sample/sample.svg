@@ -16,4 +16,6 @@
   <polygon fill="rgb(153, 204, 255)" fill-opacity="0.5" stroke-width="10" stroke="rgb(255, 0, 102)" stroke-opacity="0.7" points="850,75 958,137 958,262 850,325 742,262 742,137" />
   <polygon fill="rgb(255, 255, 0)" fill-opacity="0.6" stroke-width="10" stroke="rgb(255, 0, 0)" stroke-opacity="0.7" points="350,75 379,161 469,161 397,215 423,301 350,250 277,301 303,215 231,161 321,161" />
   <polyline points="0,40 40,40 40,80 80,80 80,120 120,120 120,140" fill-opacity="0.5" />
+  <path fill="none" stroke="rgb(0,0,255)" stroke-width="5" d="M100,200 C100,100 250,100 250,200 C250,300 400,300 400,200" />
+
 </svg>

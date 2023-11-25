@@ -48,6 +48,8 @@ private:
 
     std::vector< Vector2Df > parsePoints(Attributes attributes);
 
+    std::vector< PathPoint > parsePathPoints(Attributes attributes);
+
     std::vector< std::string > getTransformOrder(Attributes attributes);
 
     std::pair< float, float > getTranslate(std::string transform_value);
