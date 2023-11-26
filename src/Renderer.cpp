@@ -3,6 +3,137 @@
 #include <cmath>
 
 #define M_PI 3.14159265358979323846
+
+Renderer* Renderer::instance = nullptr;
+
+Renderer* Renderer::getInstance(sf::RenderWindow& window) {
+    if (instance == nullptr) {
+        instance = new Renderer(window);
+    }
+    return instance;
+}
+
+Renderer::Renderer(sf::RenderWindow& window) : window(window) {}
+
+void Renderer::draw(Shape* shape) const {
+    if (shape->getClass() == "Polyline") {
+        Polyline* polyline = dynamic_cast< Polyline* >(shape);
+        drawPolyline(polyline);
+    } else if (shape->getClass() == "Text") {
+        Text* text = dynamic_cast< Text* >(shape);
+        drawText(text);
+    } else if (shape->getClass() == "Rect") {
+        Rect* rectangle = dynamic_cast< Rect* >(shape);
+        drawRectangle(rectangle);
+    } else if (shape->getClass() == "Circle") {
+        Circle* circle = dynamic_cast< Circle* >(shape);
+        drawCircle(circle);
+    } else if (shape->getClass() == "Ellipse") {
+        Ellipse* ellipse = dynamic_cast< Ellipse* >(shape);
+        drawEllipse(ellipse);
+    } else if (shape->getClass() == "Line") {
+        Line* line = dynamic_cast< Line* >(shape);
+        drawLine(line);
+    } else if (shape->getClass() == "Polygon") {
+        Polygon* polygon = dynamic_cast< Polygon* >(shape);
+        drawPolygon(polygon);
+    } else if (shape->getClass() == "Path") {
+        Path* path = dynamic_cast< Path* >(shape);
+        drawPath(path);
+    }
+}
+
+sf::ConvexShape createShape(Shape* shape) {
+    sf::ConvexShape shape_;
+    shape_.setFillColor(
+        sf::Color(shape->getFillColor().r, shape->getFillColor().g,
+                  shape->getFillColor().b, shape->getFillColor().a));
+    shape_.setOutlineColor(
+        sf::Color(shape->getOutlineColor().r, shape->getOutlineColor().g,
+                  shape->getOutlineColor().b, shape->getOutlineColor().a));
+    shape_.setOutlineThickness(shape->getOutlineThickness());
+    shape_.setPosition(
+        sf::Vector2f(shape->getPosition().x, shape->getPosition().y));
+    return shape_;
+}
+
+void Renderer::drawLine(Line* line) const {
+    sf::ConvexShape shape_ = createShape(line);
+    shape_.setPointCount(4);
+    sf::Vector2f direction =
+        sf::Vector2f(line->getDirection().x, line->getDirection().y);
+    sf::Vector2f unitDirection = direction / line->getLength();
+    sf::Vector2f unitPerpendicular(-unitDirection.y, unitDirection.x);
+
+    sf::Vector2f offset =
+        (line->getOutlineThickness() / 2.f) * unitPerpendicular;
+
+    shape_.setPoint(0, offset);
+    shape_.setPoint(1, direction + offset);
+    shape_.setPoint(2, direction - offset);
+    shape_.setPoint(3, -offset);
+    window.draw(shape_);
+}
+
+void Renderer::drawRectangle(Rect* rectangle) const {
+    sf::ConvexShape shape_ = createShape(rectangle);
+    shape_.setPointCount(4);
+    shape_.setPoint(0, sf::Vector2f(0, 0));
+    shape_.setPoint(1, sf::Vector2f(rectangle->getWidth(), 0));
+    shape_.setPoint(
+        2, sf::Vector2f(rectangle->getWidth(), rectangle->getHeight()));
+    shape_.setPoint(3, sf::Vector2f(0, rectangle->getHeight()));
+    window.draw(shape_);
+}
+
+void Renderer::drawCircle(Circle* circle) const {
+    sf::ConvexShape shape_ = createShape(circle);
+    shape_.setPointCount(100);
+    for (int i = 0; i < 100; i++) {
+        float angle = i * 2 * M_PI / 100;
+        float x = circle->getRadius().x * cos(angle);
+        float y = circle->getRadius().y * sin(angle);
+        shape_.setPoint(i, sf::Vector2f(x, y));
+    }
+    window.draw(shape_);
+}
+
+void Renderer::drawEllipse(Ellipse* ellipse) const {
+    sf::ConvexShape shape_ = createShape(ellipse);
+    shape_.setPointCount(100);
+    for (int i = 0; i < 100; i++) {
+        float angle = i * 2 * M_PI / 100;
+        float x = ellipse->getRadius().x * cos(angle);
+        float y = ellipse->getRadius().y * sin(angle);
+        shape_.setPoint(i, sf::Vector2f(x, y));
+    }
+    window.draw(shape_);
+}
+
+void Renderer::drawPolygon(Polygon* polygon) const {
+    sf::ConvexShape shape_ = createShape(polygon);
+    std::vector< Vector2Df > points = polygon->getPoints();
+    shape_.setPointCount(points.size());
+    for (int i = 0; i < points.size(); i++) {
+        shape_.setPoint(i, sf::Vector2f(points[i].x, points[i].y));
+    }
+    window.draw(shape_);
+}
+
+void Renderer::drawText(Text* text) const {
+    sf::Text render_text;
+    sf::Font font;
+    font.loadFromFile("external/font/Arial.ttf");
+    render_text.setString(text->getContent());
+    render_text.setFont(font);
+    render_text.setPosition(text->getPosition().x, text->getPosition().y);
+    render_text.setCharacterSize(text->getFontSize());
+    Color outline_color = text->getOutlineColor();
+    render_text.setFillColor(sf::Color(outline_color.r, outline_color.g,
+                                       outline_color.b, outline_color.a));
+    window.draw(render_text);
+}
+
 namespace {  // polyline
     struct Edge {
         Vector2Df start, end;
@@ -145,119 +276,6 @@ namespace {  // polyline
     }
 }  // namespace
 
-Renderer* Renderer::instance = nullptr;
-
-Renderer* Renderer::getInstance(sf::RenderWindow& window) {
-    if (instance == nullptr) {
-        instance = new Renderer(window);
-    }
-    return instance;
-}
-
-Renderer::Renderer(sf::RenderWindow& window) : window(window) {}
-
-void Renderer::draw(Shape* shape) const {
-    if (shape->getClass() == "Polyline") {
-        Polyline* polyline = dynamic_cast< Polyline* >(shape);
-        drawPolyline(polyline);
-    } else if (shape->getClass() == "Text") {
-        Text* text = dynamic_cast< Text* >(shape);
-        drawText(text);
-    } else if (shape->getClass() == "Rect") {
-        Rect* rectangle = dynamic_cast< Rect* >(shape);
-        drawRectangle(rectangle);
-    } else if (shape->getClass() == "Circle") {
-        Circle* circle = dynamic_cast< Circle* >(shape);
-        drawCircle(circle);
-    } else if (shape->getClass() == "Ellipse") {
-        Ellipse* ellipse = dynamic_cast< Ellipse* >(shape);
-        drawEllipse(ellipse);
-    } else if (shape->getClass() == "Line") {
-        Line* line = dynamic_cast< Line* >(shape);
-        drawLine(line);
-    } else if (shape->getClass() == "Polygon") {
-        Polygon* polygon = dynamic_cast< Polygon* >(shape);
-        drawPolygon(polygon);
-    }
-}
-
-sf::ConvexShape createShape(Shape* shape) {
-    sf::ConvexShape shape_;
-    shape_.setFillColor(
-        sf::Color(shape->getFillColor().r, shape->getFillColor().g,
-                  shape->getFillColor().b, shape->getFillColor().a));
-    shape_.setOutlineColor(
-        sf::Color(shape->getOutlineColor().r, shape->getOutlineColor().g,
-                  shape->getOutlineColor().b, shape->getOutlineColor().a));
-    shape_.setOutlineThickness(shape->getOutlineThickness());
-    shape_.setPosition(
-        sf::Vector2f(shape->getPosition().x, shape->getPosition().y));
-    return shape_;
-}
-
-void Renderer::drawLine(Line* line) const {
-    sf::ConvexShape shape_ = createShape(line);
-    shape_.setPointCount(4);
-    sf::Vector2f direction =
-        sf::Vector2f(line->getDirection().x, line->getDirection().y);
-    sf::Vector2f unitDirection = direction / line->getLength();
-    sf::Vector2f unitPerpendicular(-unitDirection.y, unitDirection.x);
-
-    sf::Vector2f offset =
-        (line->getOutlineThickness() / 2.f) * unitPerpendicular;
-
-    shape_.setPoint(0, offset);
-    shape_.setPoint(1, direction + offset);
-    shape_.setPoint(2, direction - offset);
-    shape_.setPoint(3, -offset);
-    window.draw(shape_);
-}
-
-void Renderer::drawRectangle(Rect* rectangle) const {
-    sf::ConvexShape shape_ = createShape(rectangle);
-    shape_.setPointCount(4);
-    shape_.setPoint(0, sf::Vector2f(0, 0));
-    shape_.setPoint(1, sf::Vector2f(rectangle->getWidth(), 0));
-    shape_.setPoint(
-        2, sf::Vector2f(rectangle->getWidth(), rectangle->getHeight()));
-    shape_.setPoint(3, sf::Vector2f(0, rectangle->getHeight()));
-    window.draw(shape_);
-}
-
-void Renderer::drawCircle(Circle* circle) const {
-    sf::ConvexShape shape_ = createShape(circle);
-    shape_.setPointCount(100);
-    for (int i = 0; i < 100; i++) {
-        float angle = i * 2 * M_PI / 100;
-        float x = circle->getRadius().x * cos(angle);
-        float y = circle->getRadius().y * sin(angle);
-        shape_.setPoint(i, sf::Vector2f(x, y));
-    }
-    window.draw(shape_);
-}
-
-void Renderer::drawEllipse(Ellipse* ellipse) const {
-    sf::ConvexShape shape_ = createShape(ellipse);
-    shape_.setPointCount(100);
-    for (int i = 0; i < 100; i++) {
-        float angle = i * 2 * M_PI / 100;
-        float x = ellipse->getRadius().x * cos(angle);
-        float y = ellipse->getRadius().y * sin(angle);
-        shape_.setPoint(i, sf::Vector2f(x, y));
-    }
-    window.draw(shape_);
-}
-
-void Renderer::drawPolygon(Polygon* polygon) const {
-    sf::ConvexShape shape_ = createShape(polygon);
-    std::vector< Vector2Df > points = polygon->getPoints();
-    shape_.setPointCount(points.size());
-    for (int i = 0; i < points.size(); i++) {
-        shape_.setPoint(i, sf::Vector2f(points[i].x, points[i].y));
-    }
-    window.draw(shape_);
-}
-
 void Renderer::drawPolyline(Polyline* polyline) const {
     std::vector< Vector2Df > points = polyline->getPoints();
     if (points.size() < 2) return;
@@ -365,16 +383,139 @@ void Renderer::drawPolyline(Polyline* polyline) const {
     }
 }
 
-void Renderer::drawText(Text* text) const {
-    sf::Text render_text;
-    sf::Font font;
-    font.loadFromFile("external/font/Arial.ttf");
-    render_text.setString(text->getContent());
-    render_text.setFont(font);
-    render_text.setPosition(text->getPosition().x, text->getPosition().y);
-    render_text.setCharacterSize(text->getFontSize());
-    Color outline_color = text->getOutlineColor();
-    render_text.setFillColor(sf::Color(outline_color.r, outline_color.g,
-                                       outline_color.b, outline_color.a));
-    window.draw(render_text);
+namespace {
+    float computeBinomial(int n, int k) {
+        float value = 1.0;
+
+        for (int i = 1; i <= k; i++) {
+            value = value * (static_cast< float >(n + 1 - i) / i);
+        }
+
+        if (n == k) {
+            value = 1;
+        }
+        return value;
+    }
+    std::vector< Vector2Df > BezierCurveVertices(
+        const std::vector< Vector2Df >& controlPoints) {
+        std::vector< Vector2Df > curvePositions;
+
+        int n = controlPoints.size() - 1;
+        for (float t = 0.0; t <= 1.0; t += 0.001) {
+            Vector2Df curvePos = {0.0, 0.0};
+            for (int i = 0; i <= n; ++i) {
+                curvePos.x += computeBinomial(n, i) * pow((1 - t), (n - i)) *
+                              pow(t, i) * controlPoints[i].x;
+                curvePos.y += computeBinomial(n, i) * pow((1 - t), (n - i)) *
+                              pow(t, i) * controlPoints[i].y;
+            }
+            curvePositions.push_back(curvePos);
+        }
+
+        return curvePositions;
+    }
+}  // namespace
+
+void Renderer::drawCurve(Curve curve) const {
+    std::vector< Vector2Df > points = curve.getPoints();
+    std::vector< Vector2Df > curvePoints = BezierCurveVertices(points);
+    if (curvePoints.size() > 1) {
+        Polyline p(curve.getFillColor(), curve.getOutlineColor(),
+                   curve.getOutlineThickness());
+        for (const auto& point : curvePoints) {
+            p.addPoint(point);
+        }
+        drawPolyline(&p);
+    }
+}
+
+void Renderer::drawPath(Path* path) const {
+    Vector2Df firstPoint{0, 0}, curPoint{0, 0}, controlPoint1, controlPoint2;
+    std::vector< PathPoint > points = path->getPoints();
+
+    for (int i = 0; i < points.size(); i++) {
+        if (points[i].TC == 'M') {
+            firstPoint = points[i].Point;
+            curPoint = firstPoint;
+        } else if (points[i].TC == 'm') {
+            firstPoint.x = curPoint.x + points[i].Point.x;
+            firstPoint.y = curPoint.y + points[i].Point.y;
+            curPoint = firstPoint;
+        } else if (points[i].TC == 'L') {
+            Line lpath(curPoint, points[i].Point, path->getOutlineColor(),
+                       path->getOutlineThickness());
+            drawLine(&lpath);
+            curPoint = points[i].Point;
+        } else if (points[i].TC == 'l') {
+            Vector2Df endPoint{curPoint.x + points[i].Point.x,
+                               curPoint.y + points[i].Point.y};
+            Line lpath(curPoint, endPoint, path->getOutlineColor(),
+                       path->getOutlineThickness());
+            drawLine(&lpath);
+            curPoint = endPoint;
+        } else if (points[i].TC == 'H') {
+            Vector2Df endPoint{points[i].Point.x, curPoint.y};
+            Line lpath(curPoint, endPoint, path->getOutlineColor(),
+                       path->getOutlineThickness());
+            drawLine(&lpath);
+            curPoint = endPoint;
+        } else if (points[i].TC == 'h') {
+            Vector2Df endPoint{curPoint.x + points[i].Point.x, curPoint.y};
+            Line lpath(curPoint, endPoint, path->getOutlineColor(),
+                       path->getOutlineThickness());
+            drawLine(&lpath);
+            curPoint = endPoint;
+        } else if (points[i].TC == 'V') {
+            Vector2Df endPoint{curPoint.x, points[i].Point.y};
+            Line lpath(curPoint, endPoint, path->getOutlineColor(),
+                       path->getOutlineThickness());
+            drawLine(&lpath);
+            curPoint = endPoint;
+        } else if (points[i].TC == 'v') {
+            Vector2Df endPoint{curPoint.x, curPoint.y + points[i].Point.y};
+            Line lpath(curPoint, endPoint, path->getOutlineColor(),
+                       path->getOutlineThickness());
+            drawLine(&lpath);
+            curPoint = endPoint;
+        } else if (points[i].TC == 'C') {
+            Curve cPath(path->getFillColor(), path->getOutlineColor(),
+                        path->getOutlineThickness());
+            cPath.addPoint(curPoint);
+            cPath.addPoint(points[i].Point);
+            i++;
+            int j = 0;
+            while (i < points.size() && j < 2) {
+                cPath.addPoint(points[i].Point);
+                i++;
+                j++;
+            }
+            i--;
+            drawCurve(cPath);
+            curPoint = points[i].Point;
+        } else if (points[i].TC == 'c') {
+            Curve cPath(path->getFillColor(), path->getOutlineColor(),
+                        path->getOutlineThickness());
+            cPath.addPoint(curPoint);
+            cPath.addPoint(points[i].Point);
+            i++;
+            int j = 0;
+            Vector2Df endPoint;
+            while (i < points.size() && j < 2) {
+                endPoint =
+                    Vector2Df{curPoint.x + points[i].Point.x, curPoint.y};
+                cPath.addPoint(endPoint);
+                i++;
+                j++;
+            }
+            i--;
+            drawCurve(cPath);
+            curPoint = endPoint;
+        } else if (points[i].TC == 'Z' || points[i].TC == 'z') {
+            // Close path command
+            Line lpath(curPoint, firstPoint, path->getOutlineColor(),
+                       path->getOutlineThickness());
+            drawLine(&lpath);
+            curPoint = firstPoint;
+        }
+    }
 }

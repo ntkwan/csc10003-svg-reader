@@ -5,6 +5,7 @@
 #include "graphics/Color.hpp"
 #include "graphics/Ellipse.hpp"
 #include "graphics/Line.hpp"
+#include "graphics/Path.hpp"
 #include "graphics/Polygon.hpp"
 #include "graphics/Polyline.hpp"
 #include "graphics/Rect.hpp"
