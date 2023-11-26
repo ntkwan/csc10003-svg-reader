@@ -13,7 +13,7 @@ int main() {
     sf::View view(sf::FloatRect(0.f, 0.f, static_cast< float >(screen_width),
                                 static_cast< float >(screen_height)));
     Viewer *viewer = Viewer::getInstance(window, view);
-    Parser *parser = Parser::getInstance("sample/sample.svg");
+    Parser *parser = Parser::getInstance("external/samples/sample.svg");
     Renderer *renderer = Renderer::getInstance(window);
 
     while (window.isOpen()) {
