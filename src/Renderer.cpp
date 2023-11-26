@@ -401,7 +401,7 @@ namespace {
         std::vector< Vector2Df > curvePositions;
 
         int n = controlPoints.size() - 1;
-        for (float t = 0.0; t <= 1.0; t += 0.001) {
+        for (float t = 0.0; t <= 1.0; t += 0.01) {
             Vector2Df curvePos = {0.0, 0.0};
             for (int i = 0; i <= n; ++i) {
                 curvePos.x += computeBinomial(n, i) * pow((1 - t), (n - i)) *
@@ -419,7 +419,7 @@ namespace {
 void Renderer::drawCurve(Curve curve) const {
     std::vector< Vector2Df > points = curve.getPoints();
     std::vector< Vector2Df > curvePoints = BezierCurveVertices(points);
-    if (curvePoints.size() > 1) {
+    if (curvePoints.size() > 2) {
         Polyline p(curve.getFillColor(), curve.getOutlineColor(),
                    curve.getOutlineThickness());
         for (const auto& point : curvePoints) {
