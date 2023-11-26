@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300">
+    <g transform="translate(150, 150)">
+	<rect x="-50" y="-50" width="200" height="200" fill="lightpink" />
+ 	<circle cx="50" cy="50" r="90" fill="beige" />
+	<circle cx="50" cy="50" r="60" fill="gray" />
+        <rect x="-50" y="-50" width="100" height="100" fill="lightblue" />
+
+        <g transform="translate(30, 30)">
+            <rect x="-30" y="-30" width="60" height="60" fill="lightgreen" />
+            <circle cx="0" cy="0" r="20" fill="orange" />
+        </g>
+
+        <g transform="translate(-30, -30)">
+            <!-- Hình tam giác -->
+            <polygon points="0,30 -26,-15 26,-15" fill="yellow" />
+        </g>
+        <circle cx="0" cy="0" r="10" fill="red" />
+    </g>
+</svg>

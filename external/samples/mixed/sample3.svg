@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1500">
+    <g transform="translate(500, 500) rotate(-90)">
+        <circle cx="0" cy="0" r="40" stroke="black" stroke-width="2" fill="red" />
+        <circle cx="40" cy="0" r="35" stroke="blue" stroke-width="2" fill="green" />
+        <circle cx="80" cy="0" r="30" stroke="purple" stroke-width="2" fill="yellow" />
+ 	<circle cx="120" cy="0" r="25" stroke="purple" stroke-width="2" fill="pink" />
+	<circle cx="160" cy="0" r="20" stroke="purple" stroke-width="2" fill="blue" />
+        <line x1="-25" y1="0" x2="200" y2="0" stroke="brown" stroke-width="4" />
+    </g>
+</svg>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300">
+    <g transform="translate(50, 50)">
+       <rect x="0" y="0" width="100" height="80" fill="lightpink" />
+       <polygon points="0,0 100,0 50,-30" fill="brown" />
+       <rect x="30" y="60" width="40" height="20" fill="brown" />
+       <rect x="10" y="10" width="20" height="20" fill="yellow" />
+       <rect x="70" y="10" width="20" height="20" fill="yellow" />
+    </g>
+    <circle cx="250" cy="50" r="30" fill="yellow" />
+    <g transform="translate(150, 30)">
+        <circle cx="0" cy="0" r="20" fill="blue" />
+        <circle cx="30" cy="0" r="25" fill="blue" />
+        <circle cx="60" cy="0" r="20" fill="blue" />
+    </g>
+</svg>
