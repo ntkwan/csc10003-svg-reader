@@ -57,6 +57,7 @@ Attributes Parser::parseAttributes(std::string attributes) {
         }
         getline(ss, value, c);
         name.erase(std::remove(name.begin(), name.end(), ' '), name.end());
+        name.erase(std::remove(name.begin(), name.end(), '\t'), name.end());
         attributes_vector.push_back(std::make_pair(name, value));
     }
     return attributes_vector;
@@ -68,7 +69,16 @@ Tags Parser::parseTags(std::string svg) {
     std::stringstream ss(svg);
     while (std::getline(ss, line)) {
         int start_pos = line.find("<");
+        if (start_pos == std::string::npos) {
+            continue;
+        }
         int end_pos = line.find(">");
+        while (end_pos == std::string::npos) {
+            std::string next_line;
+            std::getline(ss, next_line);
+            line += " " + next_line;
+            end_pos = line.find(">");
+        }
         std::string tag = line.substr(start_pos + 1, end_pos - start_pos - 1);
         if (tag.size() > 0) {
             int space_pos = tag.find(" ");
@@ -364,18 +374,39 @@ float Parser::getRotate(std::string transform_value) {
     return degree;
 }
 
+float getScale(std::string transform_value) {
+    float scale = 0;
+    sscanf(transform_value.c_str(), "scale(%f)", &scale);
+    return scale;
+}
+
+std::pair< float, float > getScaleXY(std::string transform_value) {
+    float scale_x = 0, scale_y = 0;
+    sscanf(transform_value.c_str(), "scale(%f, %f)", &scale_x, &scale_y);
+    return std::pair< float, float >(scale_x, scale_y);
+}
+
 void Parser::applyTransform(Shape *shape,
                             const std::vector< std::string > &transform_order) {
-    // for (auto type : transform_order) {
-    //     if (type.find("translate") != std::string::npos) {
-    //         float trans_x = getTranslate(type).first,
-    //               trans_y = getTranslate(type).second;
-    //         shape->translate(trans_x, trans_y);
-    //     } else if (type.find("rotate") != std::string::npos) {
-    //         float degree = getRotate(type);
-    //         shape->rotate(degree);
-    //     }
-    // }
+    for (auto type : transform_order) {
+        if (type.find("translate") != std::string::npos) {
+            float trans_x = getTranslate(type).first,
+                  trans_y = getTranslate(type).second;
+            shape->translate(trans_x, trans_y);
+        } else if (type.find("rotate") != std::string::npos) {
+            float degree = getRotate(type);
+            shape->rotate(degree);
+        } else if (type.find("scale") != std::string::npos) {
+            if (type.find(",") != std::string::npos) {
+                float scale_x = getScaleXY(type).first,
+                      scale_y = getScaleXY(type).second;
+                shape->scale(scale_x, scale_y);
+            } else {
+                float scale = getScale(type);
+                shape->scale(scale);
+            }
+        }
+    }
 }
 
 void Parser::parseLine(Attributes attributes) {

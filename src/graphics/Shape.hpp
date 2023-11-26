@@ -105,6 +105,14 @@ public:
 
     virtual void printData() const;
 
+    void translate(float x, float y);
+
+    void rotate(float angle);
+
+    void scale(float x, float y);
+
+    void scale(float factor);
+
 protected:
     /**
      * @brief Constructs a Shape object
@@ -120,7 +128,7 @@ private:
     Vector2Df position;  ///< Position of the shape
     Vector2Df origin;  ///< Origin of translation/rotation/scaling of the object
     float rotation;    ///< Orientation of the object, in degrees
-    Vector2Df scale;   ///< Scale of the object
+    Vector2Df scale_;  ///< Scale of the object
 };
 
 #endif  // SHAPE_HPP_
