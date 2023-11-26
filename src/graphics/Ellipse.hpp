@@ -48,6 +48,8 @@ public:
      * @return The radius of the ellipse.
      */
     Vector2Df getRadius() const;
+
+    void printData() const override;
 };
 
 #endif  // ELLIPSE_HPP_

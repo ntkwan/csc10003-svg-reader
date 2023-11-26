@@ -16,3 +16,9 @@ std::string Ellipse::getClass() const { return "Ellipse"; }
 void Ellipse::setRadius(const Vector2Df &radius) { this->radius = radius; }
 
 Vector2Df Ellipse::getRadius() const { return radius; }
+
+void Ellipse::printData() const {
+    Shape::printData();
+    std::cout << "Radius: " << getRadius().x << " " << getRadius().y
+              << std::endl;
+}

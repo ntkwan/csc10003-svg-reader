@@ -36,3 +36,14 @@ void Shape::printData() const {
     std::cout << "Position: " << getPosition().x << " " << getPosition().y
               << std::endl;
 }
+
+void Shape::translate(float x, float y) {
+    position.x += x;
+    position.y += y;
+}
+
+void Shape::rotate(float angle) {}
+
+void Shape::scale(float x, float y) {}
+
+void Shape::scale(float factor) {}
