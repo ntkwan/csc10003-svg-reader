@@ -2,7 +2,7 @@
 
 Rect::Rect(float width, float height, Vector2Df position, Vector2Df radius,
            const Color &fill, const Color &stroke, float stroke_width)
-    : Polygon(fill, stroke, stroke_width), width(width), height(height),
+    : PolyShape(fill, stroke, stroke_width), width(width), height(height),
       radius(radius) {
     addPoint(Vector2Df(0, 0));
     addPoint(Vector2Df(width, 0));

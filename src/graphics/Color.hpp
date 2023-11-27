@@ -210,6 +210,7 @@ static const std::map< std::string, Color > color_map = {
     {"teal", Color(0, 128, 128)},
     {"thistle", Color(216, 191, 216)},
     {"tomato", Color(255, 99, 71)},
+    {"transparent", Color(0, 0, 0, 0)},
     {"turquoise", Color(64, 224, 208)},
     {"violet", Color(238, 130, 238)},
     {"wheat", Color(245, 222, 179)},

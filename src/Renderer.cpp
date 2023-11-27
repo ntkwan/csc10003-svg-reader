@@ -43,6 +43,55 @@ void Renderer::draw(Shape* shape) const {
     }
 }
 
+std::pair< float, float > getTranslate(std::string transform_value) {
+    float trans_x = 0, trans_y = 0;
+    sscanf(transform_value.c_str(), "translate(%f, %f)", &trans_x, &trans_y);
+    return std::pair< float, float >(trans_x, trans_y);
+}
+
+float getRotate(std::string transform_value) {
+    float degree = 0;
+    sscanf(transform_value.c_str(), "rotate(%f)", &degree);
+    return degree;
+}
+
+float getScale(std::string transform_value) {
+    float scale = 0;
+    sscanf(transform_value.c_str(), "scale(%f)", &scale);
+    return scale;
+}
+
+std::pair< float, float > getScaleXY(std::string transform_value) {
+    float scale_x = 0, scale_y = 0;
+    sscanf(transform_value.c_str(), "scale(%f, %f)", &scale_x, &scale_y);
+    return std::pair< float, float >(scale_x, scale_y);
+}
+
+sf::RenderStates applyTransform(Shape* shape) {
+    std::vector< std::string > transform_order = shape->getTransforms();
+    sf::RenderStates state;
+    for (auto type : transform_order) {
+        if (type.find("translate") != std::string::npos) {
+            float trans_x = getTranslate(type).first,
+                  trans_y = getTranslate(type).second;
+            state.transform.translate(trans_x, trans_y);
+        } else if (type.find("rotate") != std::string::npos) {
+            float degree = getRotate(type);
+            state.transform.rotate(degree);
+        } else if (type.find("scale") != std::string::npos) {
+            if (type.find(",") != std::string::npos) {
+                float scale_x = getScaleXY(type).first,
+                      scale_y = getScaleXY(type).second;
+                state.transform.scale(scale_x, scale_y);
+            } else {
+                float scale = getScale(type);
+                state.transform.scale(scale, scale);
+            }
+        }
+    }
+    return state;
+}
+
 sf::ConvexShape createShape(Shape* shape) {
     sf::ConvexShape shape_;
     shape_.setFillColor(
@@ -72,7 +121,8 @@ void Renderer::drawLine(Line* line) const {
     shape_.setPoint(1, direction + offset);
     shape_.setPoint(2, direction - offset);
     shape_.setPoint(3, -offset);
-    window.draw(shape_);
+    sf::RenderStates state = applyTransform(line);
+    window.draw(shape_, state);
 }
 
 void Renderer::drawRectangle(Rect* rectangle) const {
@@ -83,7 +133,8 @@ void Renderer::drawRectangle(Rect* rectangle) const {
     shape_.setPoint(
         2, sf::Vector2f(rectangle->getWidth(), rectangle->getHeight()));
     shape_.setPoint(3, sf::Vector2f(0, rectangle->getHeight()));
-    window.draw(shape_);
+    sf::RenderStates state = applyTransform(rectangle);
+    window.draw(shape_, state);
 }
 
 void Renderer::drawCircle(Circle* circle) const {
@@ -95,7 +146,8 @@ void Renderer::drawCircle(Circle* circle) const {
         float y = circle->getRadius().y * sin(angle);
         shape_.setPoint(i, sf::Vector2f(x, y));
     }
-    window.draw(shape_);
+    sf::RenderStates state = applyTransform(circle);
+    window.draw(shape_, state);
 }
 
 void Renderer::drawEllipse(Ellipse* ellipse) const {
@@ -107,7 +159,8 @@ void Renderer::drawEllipse(Ellipse* ellipse) const {
         float y = ellipse->getRadius().y * sin(angle);
         shape_.setPoint(i, sf::Vector2f(x, y));
     }
-    window.draw(shape_);
+    sf::RenderStates state = applyTransform(ellipse);
+    window.draw(shape_, state);
 }
 
 void Renderer::drawPolygon(Polygon* polygon) const {
@@ -117,7 +170,8 @@ void Renderer::drawPolygon(Polygon* polygon) const {
     for (int i = 0; i < points.size(); i++) {
         shape_.setPoint(i, sf::Vector2f(points[i].x, points[i].y));
     }
-    window.draw(shape_);
+    sf::RenderStates state = applyTransform(polygon);
+    window.draw(shape_, state);
 }
 
 void Renderer::drawText(Text* text) const {
@@ -128,10 +182,16 @@ void Renderer::drawText(Text* text) const {
     render_text.setFont(font);
     render_text.setPosition(text->getPosition().x, text->getPosition().y);
     render_text.setCharacterSize(text->getFontSize());
-    Color outline_color = text->getOutlineColor();
-    render_text.setFillColor(sf::Color(outline_color.r, outline_color.g,
-                                       outline_color.b, outline_color.a));
-    window.draw(render_text);
+    render_text.setFillColor(
+        sf::Color(text->getFillColor().r, text->getFillColor().g,
+                  text->getFillColor().b, text->getFillColor().a));
+    render_text.setOutlineColor(
+        sf::Color(text->getOutlineColor().r, text->getOutlineColor().g,
+                  text->getOutlineColor().b, text->getOutlineColor().a));
+    render_text.setOutlineThickness(text->getOutlineThickness());
+
+    sf::RenderStates state = applyTransform(text);
+    window.draw(render_text, state);
 }
 
 namespace {  // polyline
@@ -277,6 +337,7 @@ namespace {  // polyline
 }  // namespace
 
 void Renderer::drawPolyline(Polyline* polyline) const {
+    sf::RenderStates state = applyTransform(polyline);
     std::vector< Vector2Df > points = polyline->getPoints();
     if (points.size() < 2) return;
     sf::VertexArray lineStrip(sf::PrimitiveType::Quads);
@@ -340,7 +401,7 @@ void Renderer::drawPolyline(Polyline* polyline) const {
                     sf::Vector2f(r_p2b.x, r_p2b.y),
                     sf::Color(stroke.r, stroke.g, stroke.b, stroke.a)));
             }
-            window.draw(lS);
+            window.draw(lS, state);
         }
         r_p1a = p1a;
         r_p1b = p1b;
@@ -376,10 +437,10 @@ void Renderer::drawPolyline(Polyline* polyline) const {
                         j, sf::Vector2f(polygon.cP[j].x, polygon.cP[j].y));
                 }
 
-                window.draw(fillShape);
+                window.draw(fillShape, state);
             }
         }
-        window.draw(lineStrip);
+        window.draw(lineStrip, state);
     }
 }
 
@@ -401,7 +462,7 @@ namespace {
         std::vector< Vector2Df > curvePositions;
 
         int n = controlPoints.size() - 1;
-        for (float t = 0.0; t <= 1.0; t += 0.001) {
+        for (float t = 0.0; t <= 1.0; t += 0.01) {
             Vector2Df curvePos = {0.0, 0.0};
             for (int i = 0; i <= n; ++i) {
                 curvePos.x += computeBinomial(n, i) * pow((1 - t), (n - i)) *
@@ -419,7 +480,7 @@ namespace {
 void Renderer::drawCurve(Curve curve) const {
     std::vector< Vector2Df > points = curve.getPoints();
     std::vector< Vector2Df > curvePoints = BezierCurveVertices(points);
-    if (curvePoints.size() > 1) {
+    if (curvePoints.size() > 2) {
         Polyline p(curve.getFillColor(), curve.getOutlineColor(),
                    curve.getOutlineThickness());
         for (const auto& point : curvePoints) {

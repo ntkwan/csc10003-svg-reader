@@ -13,9 +13,9 @@ int main() {
     sf::View view(sf::FloatRect(0.f, 0.f, static_cast< float >(screen_width),
                                 static_cast< float >(screen_height)));
     Viewer *viewer = Viewer::getInstance(window, view);
-    Parser *parser = Parser::getInstance("external/samples/sample.svg");
+    Parser *parser = Parser::getInstance("external/samples/mixed/sample8.svg");
     Renderer *renderer = Renderer::getInstance(window);
-
+    parser->printObjects();
     while (window.isOpen()) {
         sf::Event event;
 

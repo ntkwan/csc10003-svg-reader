@@ -46,6 +46,8 @@ public:
      * @return The number of vertices representing the shape.
      */
     const std::vector< Vector2Df > &getPoints() const;
+
+    void printData() const override;
 };
 
 #endif  // POLYSHAPE_HPP_
