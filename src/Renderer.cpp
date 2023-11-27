@@ -483,6 +483,7 @@ void Renderer::drawCurve(Curve curve) const {
     if (curvePoints.size() > 2) {
         Polyline p(curve.getFillColor(), curve.getOutlineColor(),
                    curve.getOutlineThickness());
+        p.setTransforms(curve.getTransforms());
         for (const auto& point : curvePoints) {
             p.addPoint(point);
         }
@@ -505,6 +506,7 @@ void Renderer::drawPath(Path* path) const {
         } else if (points[i].TC == 'L') {
             Line lpath(curPoint, points[i].Point, path->getOutlineColor(),
                        path->getOutlineThickness());
+            lpath.setTransforms(path->getTransforms());
             drawLine(&lpath);
             curPoint = points[i].Point;
         } else if (points[i].TC == 'l') {
@@ -512,35 +514,41 @@ void Renderer::drawPath(Path* path) const {
                                curPoint.y + points[i].Point.y};
             Line lpath(curPoint, endPoint, path->getOutlineColor(),
                        path->getOutlineThickness());
+            lpath.setTransforms(path->getTransforms());
             drawLine(&lpath);
             curPoint = endPoint;
         } else if (points[i].TC == 'H') {
             Vector2Df endPoint{points[i].Point.x, curPoint.y};
             Line lpath(curPoint, endPoint, path->getOutlineColor(),
                        path->getOutlineThickness());
+            lpath.setTransforms(path->getTransforms());
             drawLine(&lpath);
             curPoint = endPoint;
         } else if (points[i].TC == 'h') {
             Vector2Df endPoint{curPoint.x + points[i].Point.x, curPoint.y};
             Line lpath(curPoint, endPoint, path->getOutlineColor(),
                        path->getOutlineThickness());
+            lpath.setTransforms(path->getTransforms());
             drawLine(&lpath);
             curPoint = endPoint;
         } else if (points[i].TC == 'V') {
             Vector2Df endPoint{curPoint.x, points[i].Point.y};
             Line lpath(curPoint, endPoint, path->getOutlineColor(),
                        path->getOutlineThickness());
+            lpath.setTransforms(path->getTransforms());
             drawLine(&lpath);
             curPoint = endPoint;
         } else if (points[i].TC == 'v') {
             Vector2Df endPoint{curPoint.x, curPoint.y + points[i].Point.y};
             Line lpath(curPoint, endPoint, path->getOutlineColor(),
                        path->getOutlineThickness());
+            lpath.setTransforms(path->getTransforms());
             drawLine(&lpath);
             curPoint = endPoint;
         } else if (points[i].TC == 'C') {
             Curve cPath(path->getFillColor(), path->getOutlineColor(),
                         path->getOutlineThickness());
+            cPath.setTransforms(path->getTransforms());
             cPath.addPoint(curPoint);
             cPath.addPoint(points[i].Point);
             i++;
@@ -556,6 +564,7 @@ void Renderer::drawPath(Path* path) const {
         } else if (points[i].TC == 'c') {
             Curve cPath(path->getFillColor(), path->getOutlineColor(),
                         path->getOutlineThickness());
+            cPath.setTransforms(path->getTransforms());
             cPath.addPoint(curPoint);
             cPath.addPoint(points[i].Point);
             i++;
@@ -576,6 +585,7 @@ void Renderer::drawPath(Path* path) const {
             Line lpath(curPoint, firstPoint, path->getOutlineColor(),
                        path->getOutlineThickness());
             drawLine(&lpath);
+            lpath.setTransforms(path->getTransforms());
             curPoint = firstPoint;
         }
     }
