@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300">
+<g transform="translate(50, 50)">
+    <circle cx="100" cy="100" r="80" fill="yellow" />
+    <circle cx="65" cy="80" r="15" fill="black" />
+    <circle cx="135" cy="80" r="15" fill="black" />
+    <path d="M60,130 Q100,170 140,130" fill="transparent" stroke="black" />
+</g>
+</svg>
