@@ -1,8 +1,36 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200">
-  <rect width="300" height="200" fill="#C60C30" />
-
-  <g transform="translate(0, -25)">
-  <path d="M50,80 L250,180" fill="none" stroke="#fff" stroke-width="20" />
-  <path d="M50,180 L250,80" fill="none" stroke="#fff" stroke-width="20" />
+<svg xmlns="http://www.w3.org/2000/svg">
+<g transform="translate(150, 150)">
+ <circle cx="270" cy="280" r="300" fill="pink" stroke="pink" stroke-width="5" />
+  <path fill="none" stroke="rgb(0,206,209)" stroke-width="5" 
+        d="M50,150 L150,50 L250,150 L150,250 z" />
+ <g transform="translate(50, 50)">
+   <path fill="none" stroke="rgb(0,206,209)" stroke-width="5" 
+        d="M50,150 L150,50 L250,150 L150,250 z" />
+ </g>
+ <g transform="translate(100, 100)">
+   <path fill="none" stroke="rgb(0,206,209)" stroke-width="5" 
+        d="M50,150 L150,50 L250,150 L150,250 z" />
+ </g>
+ <g transform="translate(150, 150)">
+   <path fill="none" stroke="rgb(0,206,209)" stroke-width="5" 
+        d="M50,150 L150,50 L250,150 L150,250 z" />
+ </g>
+<g transform="translate(150, 250)">
+<path fill="none" stroke="rgb(0,0,255)" stroke-width="5" 
+          d="M50,150 H250 V250 H50 Z" />
+</g>
+<g transform="translate(150, 150)">
+ <path fill="none" stroke="rgb(0,0,255)" stroke-width="5" 
+          d="M50,150 H250 V250 H50 Z" />
+<g transform="translate(-50, 100)">
+  <path fill="none" stroke="orange" stroke-width="5" 
+          d="M300,50 L200,150 L300,250 Z" />
+</g>
+<g transform="translate(-250, 100)">
+  <path fill="none" stroke="orange" stroke-width="5" 
+          d="M300,50 L400,150 L300,250 Z" />
+</g>
+</g>
 </g>
 </svg>
+
