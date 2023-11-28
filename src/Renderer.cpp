@@ -584,8 +584,8 @@ void Renderer::drawPath(Path* path) const {
             // Close path command
             Line lpath(curPoint, firstPoint, path->getOutlineColor(),
                        path->getOutlineThickness());
-            drawLine(&lpath);
             lpath.setTransforms(path->getTransforms());
+            drawLine(&lpath);
             curPoint = firstPoint;
         }
     }
