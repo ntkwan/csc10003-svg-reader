@@ -15,7 +15,7 @@ int main() {
     Viewer *viewer = Viewer::getInstance(window, view);
     Parser *parser = Parser::getInstance("external/samples/mixed/sample8.svg");
     Renderer *renderer = Renderer::getInstance(window);
-    parser->printObjects();
+
     while (window.isOpen()) {
         sf::Event event;
 

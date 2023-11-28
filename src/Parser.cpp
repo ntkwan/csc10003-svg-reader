@@ -175,9 +175,8 @@ void Parser::parseObjects(std::string file_name) {
                         if (attribute.first == "transform") {
                             for (auto &object_attribute : object.second) {
                                 if (object_attribute.first == "transform") {
-                                    object_attribute.second =
-                                        attribute.second + " " +
-                                        object_attribute.second;
+                                    object_attribute.second +=
+                                        " " + attribute.second;
                                 }
                             }
                         }
@@ -407,7 +406,6 @@ std::vector< std::string > Parser::getTransformOrder(Attributes attributes) {
 }
 
 void Parser::parseSVG() {
-    printObjects();
     for (auto object : objects) {
         std::string name = object.first;
         Attributes attributes = object.second;
@@ -509,6 +507,7 @@ void Parser::parsePolyline(Attributes attributes) {
     for (auto point : points) {
         shape->addPoint(point);
     }
+    shape->setTransforms(getTransformOrder(attributes));
     shapes.push_back(shape);
 }
 
@@ -535,6 +534,7 @@ void Parser::parsePath(Attributes attributes) {
     for (auto point : points) {
         shape->addPoint(point);
     }
+    shape->setTransforms(getTransformOrder(attributes));
     shapes.push_back(shape);
 }
 
