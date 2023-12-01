@@ -11,9 +11,7 @@ option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 find_package(Git)
 message(STATUS "GIT_EXECUTABLE='${GIT_EXECUTABLE}'")
 
-find_package(sfml QUIET)
-
-add_subdirectory(external/SFML)
+add_subdirectory(external/wxWidgets)
 include_directories(src)
 if (LINUX)
 	add_compile_options(-fsanitize=address)
@@ -22,4 +20,4 @@ endif()
 file(GLOB_RECURSE cpp_files CONFIGURE_DEPENDS "src/*.*pp")
 add_executable(${PROJECT_NAME} ${cpp_files})
 
-target_link_libraries(${PROJECT_NAME} PRIVATE sfml-graphics)
+target_link_libraries(${PROJECT_NAME} PRIVATE wxcore)
