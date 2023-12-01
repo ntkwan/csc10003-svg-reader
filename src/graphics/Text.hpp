@@ -19,11 +19,12 @@ public:
      * @brief Constructs a Text object.
      *
      * @param pos The position of the text.
-     * @param TEXT The string of the text.
+     * @param text The string of the text.
      * @param fill The fill color of the text
      * @param font_size The font size of the text (default is 1).
      */
-    Text(Vector2Df pos, std::string TEXT, const Color &fill, float font_size);
+    Text(Vector2Df pos, std::string text, float font_size, const Color &fill,
+         const Color &stroke, float stroke_width);
 
     /**
      * @brief Gets the type of the shape.

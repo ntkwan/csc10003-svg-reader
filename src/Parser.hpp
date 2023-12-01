@@ -32,13 +32,13 @@ private:
      */
     Parser(const std::string& file_name);
 
-    std::string parseSVG(const std::string& filePath);
+    std::string parseSVG(const std::string& file_name);
 
     Attributes parseAttributes(std::string attributes);
 
     Tags parseTags(std::string svg);
 
-    void parseObjects(std::string filePath);
+    void parseObjects(std::string file_name);
 
     std::string getAttribute(Attributes attributes, std::string name);
 
@@ -51,13 +51,6 @@ private:
     std::vector< PathPoint > parsePathPoints(Attributes attributes);
 
     std::vector< std::string > getTransformOrder(Attributes attributes);
-
-    std::pair< float, float > getTranslate(std::string transform_value);
-
-    float getRotate(std::string transform_value);
-
-    void applyTransform(Shape* shape,
-                        const std::vector< std::string >& transform_order);
 
     void parseLine(Attributes attributes);
 

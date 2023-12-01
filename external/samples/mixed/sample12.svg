@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+  <rect width="300" height="200" fill="red" />
+
+ <g transform="translate(0, -25)">
+  <path d="M50,80 L250,180" fill="white" stroke="white" stroke-width="20" />
+  <path d="M50,180 L250,80" fill="white" stroke="white" stroke-width="20" />
+</g>
+</svg>

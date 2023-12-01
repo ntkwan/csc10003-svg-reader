@@ -6,11 +6,11 @@
 /**
  * @brief Represents a rectangle in 2D space.
  *
- * The Rect class is derived from the Polygon class and defines a rectangle
+ * The Rect class is derived from the PolyShape class and defines a rectangle
  * with a specified width, height, position, fill color, stroke color, and
  * stroke thickness.
  */
-class Rect : public Polygon {
+class Rect : public PolyShape {
 private:
     float width;       ///< Width of the rectangle
     float height;      ///< Height of the rectangle

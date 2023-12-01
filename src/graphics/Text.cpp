@@ -1,8 +1,11 @@
 #include "Text.hpp"
 
-Text::Text(Vector2Df pos, std::string TEXT, const Color &fill, float font_size)
-    : content(TEXT), font_size(font_size) {
-    setOutlineColor(fill);
+Text::Text(Vector2Df pos, std::string text, float font_size, const Color &fill,
+           const Color &stroke, float stroke_width)
+    : content(text), font_size(font_size) {
+    setOutlineColor(stroke);
+    setOutlineThickness(stroke_width);
+    setFillColor(fill);
     setPosition(pos);
 }
 

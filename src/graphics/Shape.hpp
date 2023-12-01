@@ -105,13 +105,9 @@ public:
 
     virtual void printData() const;
 
-    void translate(float x, float y);
+    void setTransforms(const std::vector< std::string >& transforms);
 
-    void rotate(float angle);
-
-    void scale(float x, float y);
-
-    void scale(float factor);
+    std::vector< std::string > getTransforms() const;
 
 protected:
     /**
@@ -127,8 +123,7 @@ private:
     float stroke_width;  ///< Thickness of the shape's outline
     Vector2Df position;  ///< Position of the shape
     Vector2Df origin;  ///< Origin of translation/rotation/scaling of the object
-    float rotation;    ///< Orientation of the object, in degrees
-    Vector2Df scale_;  ///< Scale of the object
+    std::vector< std::string > transforms;  ///< List of transformations
 };
 
 #endif  // SHAPE_HPP_
