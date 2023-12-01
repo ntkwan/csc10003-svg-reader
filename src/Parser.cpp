@@ -304,6 +304,10 @@ std::vector< Vector2Df > Parser::parsePoints(Attributes attributes) {
     char comma;
 
     while (ss >> x >> comma >> y) {
+        if (comma != ',') {
+            std::string y_str = comma + std::to_string(y);
+            y = std::stof(y_str);
+        }
         points.push_back(Vector2Df(x, y));
     }
 
@@ -327,12 +331,17 @@ namespace {
     }
 
     void insertSpaceBeforeEachLetter(std::string &svgPathString) {
-        for (int index = 0; index < svgPathString.size() - 1; index++) {
+        std::string result;
+        for (int index = 0; index < svgPathString.size(); index++) {
             if (std::isalpha(svgPathString[index])) {
-                svgPathString.insert(index + 1, " ");
-                index++;
+                result += " ";
+                result += svgPathString[index];
+                result += " ";
+            } else {
+                result += svgPathString[index];
             }
         }
+        svgPathString = result;
     }
 
     void formatSvgPathString(std::string &svgPathString) {
@@ -347,6 +356,7 @@ std::vector< PathPoint > Parser::parsePathPoints(Attributes attributes) {
     std::string path_string = getAttribute(attributes, "d");
 
     formatSvgPathString(path_string);
+    std::cout << path_string << std::endl;
     std::stringstream ss(path_string);
     std::string element;
     PathPoint pPoint{{0, 0}, 'M'};
@@ -367,6 +377,7 @@ std::vector< PathPoint > Parser::parsePathPoints(Attributes attributes) {
         } else {
             if (tolower(pPoint.TC) == 'm' || tolower(pPoint.TC) == 'l' ||
                 tolower(pPoint.TC) == 'c') {
+                if (tolower(pPoint.TC) == 'm') pPoint.TC = 'L';
                 pPoint.Point.x = std::stof(element);
                 ss >> pPoint.Point.y;
             } else if (tolower(pPoint.TC) == 'h') {
@@ -379,6 +390,7 @@ std::vector< PathPoint > Parser::parsePathPoints(Attributes attributes) {
         }
         points.push_back(pPoint);
     }
+
     return points;
 }
 

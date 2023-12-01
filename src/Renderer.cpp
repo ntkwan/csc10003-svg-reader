@@ -481,7 +481,7 @@ void Renderer::drawCurve(Curve curve) const {
     std::vector< Vector2Df > points = curve.getPoints();
     std::vector< Vector2Df > curvePoints = BezierCurveVertices(points);
     if (curvePoints.size() > 2) {
-        Polyline p(curve.getFillColor(), curve.getOutlineColor(),
+        Polyline p(Color::Transparent, curve.getOutlineColor(),
                    curve.getOutlineThickness());
         p.setTransforms(curve.getTransforms());
         for (const auto& point : curvePoints) {

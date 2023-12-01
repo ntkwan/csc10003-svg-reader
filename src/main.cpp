@@ -1,7 +1,13 @@
 #include "Parser.hpp"
 #include "Viewer.hpp"
 
-int main() {
+int main(int argc, char *argv[]) {
+    if (argc != 2) {
+        std::cout << "Usage: " << argv[0] << " <svg file>" << std::endl;
+        return 1;
+    } else {
+        std::cout << "Parsing " << argv[1] << "..." << std::endl;
+    }
     constexpr int screen_width = 1600;
     constexpr int screen_height = 900;
 
@@ -13,9 +19,9 @@ int main() {
     sf::View view(sf::FloatRect(0.f, 0.f, static_cast< float >(screen_width),
                                 static_cast< float >(screen_height)));
     Viewer *viewer = Viewer::getInstance(window, view);
-    Parser *parser = Parser::getInstance("external/samples/mixed/sample8.svg");
+    Parser *parser = Parser::getInstance(argv[1]);
     Renderer *renderer = Renderer::getInstance(window);
-
+    parser->printObjects();
     while (window.isOpen()) {
         sf::Event event;
 
