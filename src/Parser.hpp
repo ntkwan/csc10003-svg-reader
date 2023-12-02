@@ -1,11 +1,10 @@
-#ifndef PARSER2_HPP_
-#define PARSER2_HPP_
+#ifndef PARSER_HPP_
+#define PARSER_HPP_
 
 #include <string>
 #include <vector>
 
 #include "Graphics.hpp"
-#include "Renderer.hpp"
 
 typedef std::vector< std::pair< std::string, std::string > > Attributes, Tags;
 typedef std::vector< std::pair< std::string, Attributes > > Objects;
@@ -20,9 +19,9 @@ public:
 
     void printObjects();
 
-    void renderSVG(Renderer& renderer);
-
     void printShapesData();
+
+    Group* getRoot();
 
 private:
     /**
@@ -38,7 +37,7 @@ private:
 
     Tags parseTags(std::string svg);
 
-    void parseObjects(std::string file_name);
+    SVGElement* parseElements(std::string file_name);
 
     std::string getAttribute(Attributes attributes, std::string name);
 
@@ -52,28 +51,28 @@ private:
 
     std::vector< std::string > getTransformOrder(Attributes attributes);
 
-    void parseLine(Attributes attributes);
+    Line* parseLine(Attributes attributes);
 
-    void parseRect(Attributes attributes);
+    Rect* parseRect(Attributes attributes);
 
-    void parsePolyline(Attributes attributes);
+    class Polyline* parsePolyline(Attributes attributes);
 
-    void parsePolygon(Attributes attributes);
+    class Polygon* parsePolygon(Attributes attributes);
 
-    void parseCircle(Attributes attributes);
+    Circle* parseCircle(Attributes attributes);
 
-    void parseEllipse(Attributes attributes);
+    class Ellipse* parseEllipse(Attributes attributes);
 
-    void parsePath(Attributes attributes);
+    Path* parsePath(Attributes attributes);
 
-    void parseText(Attributes attributes);
+    Text* parseText(Attributes attributes);
 
-    void parseSVG();
+    SVGElement* parseShape(std::string shape, Attributes attributes);
 
 private:
     static Parser* instance;  ///< The instance of the Parser.
-    Objects objects;
-    std::vector< Shape* > shapes;
+    Objects objects;          ///< The objects in the SVG file.
+    SVGElement* root;         ///< The root of the SVG file.
 };
 
-#endif  // PARSER2_HPP_
+#endif  // PARSER_HPP_

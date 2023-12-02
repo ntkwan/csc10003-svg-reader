@@ -1,15 +1,15 @@
 #ifndef ELLIPSE_HPP_
 #define ELLIPSE_HPP_
 
-#include "Shape.hpp"
+#include "SVGElement.hpp"
 
 /**
  * @brief Represents an ellipse in 2D space.
  *
- * The Ellipse class is derived from the Shape class and defines an ellipse
+ * The Ellipse class is derived from the SVGElement class and defines an ellipse
  * with a variable radius in the x and y directions.
  */
-class Ellipse : public Shape {
+class Ellipse : public SVGElement {
 private:
     Vector2Df radius;  ///< Radii of the ellipse in the x and y directions
 
@@ -34,6 +34,13 @@ public:
      * @note This function is used for determining the type of the shape.
      */
     std::string getClass() const override;
+
+    /**
+     * @brief Renders the shape using the given renderer.
+     *
+     * @param renderer The renderer to be used for rendering the shape.
+     */
+    void render(Renderer &renderer) const override;
 
     /**
      * @brief Sets the radius of the ellipse.

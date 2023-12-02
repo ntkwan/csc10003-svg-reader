@@ -1,5 +1,7 @@
 #include "Path.hpp"
 
+#include "Renderer.hpp"
+
 Path::Path(const Color& fill, const Color& stroke, float stroke_width) {
     setFillColor(fill);
     setOutlineColor(stroke);
@@ -7,6 +9,8 @@ Path::Path(const Color& fill, const Color& stroke, float stroke_width) {
 }
 
 std::string Path::getClass() const { return "Path"; }
+
+void Path::render(Renderer& renderer) const { renderer.renderPath(*this); }
 
 void Path::addPoint(PathPoint point) { points.push_back(point); }
 

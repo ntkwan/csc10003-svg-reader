@@ -3,10 +3,124 @@
 #include <algorithm>
 #include <fstream>
 #include <iostream>
-#include <queue>
 #include <sstream>
 
 Parser *Parser::instance = nullptr;
+
+namespace {
+    auto getHexColor = [](std::string color) -> Color {
+        std::stringstream ss;
+        int pos = color.find("#");
+        // handle 3 digit hex color
+        if (color.size() < 5 || color[pos + 4] == ' ') {
+            ss << std::hex << color.substr(pos + 1, 1) << " "
+               << color.substr(pos + 2, 1) << " " << color.substr(pos + 3, 1);
+            int r, g, b;
+            ss >> r >> g >> b;
+            r = r * 16 + r;
+            g = g * 16 + g;
+            b = b * 16 + b;
+            return Color(r, g, b, 255);
+        } else if (color.size() < 6 || color[pos + 5] == ' ') {
+            ss << std::hex << color.substr(pos + 1, 1) << " "
+               << color.substr(pos + 2, 1) << " " << color.substr(pos + 3, 1)
+               << color.substr(pos + 4, 1);
+            int r, g, b, a;
+            ss >> r >> g >> b >> a;
+            r = r * 16 + r;
+            g = g * 16 + g;
+            b = b * 16 + b;
+            a = a * 16 + a;
+            return Color(r, g, b, a);
+        } else {
+            ss << std::hex << color.substr(pos + 1, 2) << " "
+               << color.substr(pos + 3, 2) << " " << color.substr(pos + 5, 2);
+            int r, g, b;
+            ss >> r >> g >> b;
+            if (color[pos + 7] != '\0' && color[pos + 7] != ' ') {
+                std::stringstream ss;
+                ss << std::hex << color.substr(pos + 7, 2);
+                int a;
+                ss >> a;
+                return Color(r, g, b, a);
+            }
+            return Color(r, g, b, 255);
+        }
+    };
+
+    auto getRgbColor = [](std::string color) -> Color {
+        int r, g, b;
+        float a = 1;
+        sscanf(color.c_str(), "rgb(%d,%d,%d,%f)", &r, &g, &b, &a);
+        return Color(r, g, b, 255 * a);
+    };
+
+    std::string removeExtraSpaces(const std::string &input) {
+        std::string result;
+        bool spaceDetected = false;
+        bool firstSpace = true;
+        for (char ch : input) {
+            if (ch == ' ') {
+                if (!spaceDetected) {
+                    if (!firstSpace)
+                        result.push_back(ch);
+                    else
+                        firstSpace = false;
+                    spaceDetected = true;
+                }
+            } else {
+                result.push_back(ch);
+                spaceDetected = false;
+            }
+        }
+
+        if (!result.empty() && result.back() == ' ') {
+            result.pop_back();
+        }
+
+        return result;
+    }
+
+    void removeRedundantSpaces(std::string &svgPathString) {
+        int index = 0;
+        while (index < svgPathString.size()) {
+            if ((index == 0 || index == svgPathString.size() - 1) &&
+                svgPathString[index] == ' ') {
+                svgPathString.erase(index, 1);
+            } else if (svgPathString[index] == ' ' &&
+                       svgPathString[index - 1] == ' ') {
+                svgPathString.erase(index, 1);
+            } else {
+                index++;
+            }
+        }
+    }
+
+    void insertSpaceBeforeEachLetter(std::string &svgPathString) {
+        std::string result;
+        for (int index = 0; index < svgPathString.size(); index++) {
+            if (std::isalpha(svgPathString[index])) {
+                result += " ";
+                result += svgPathString[index];
+                result += " ";
+            } else if (svgPathString[index] == '-') {
+                result += " ";
+                result += svgPathString[index];
+            } else {
+                result += svgPathString[index];
+            }
+        }
+        svgPathString = result;
+    }
+
+    void formatSvgPathString(std::string &svgPathString) {
+        std::replace(svgPathString.begin(), svgPathString.end(), '\t', ' ');
+        std::replace(svgPathString.begin(), svgPathString.end(), '\n', ' ');
+        insertSpaceBeforeEachLetter(svgPathString);
+        std::replace(svgPathString.begin(), svgPathString.end(), ',', ' ');
+        removeRedundantSpaces(svgPathString);
+    }
+}  // namespace
 
 Parser *Parser::getInstance(const std::string &file_name) {
     if (instance == nullptr) {
@@ -16,8 +130,19 @@ Parser *Parser::getInstance(const std::string &file_name) {
 }
 
 Parser::Parser(const std::string &file_name) {
-    parseObjects(file_name);
-    parseSVG();
+    root = parseElements(file_name);
+}
+
+Group *Parser::getRoot() { return dynamic_cast< Group * >(root); }
+
+void Parser::printObjects() {
+    for (auto object : objects) {
+        std::cout << object.first << std::endl;
+        for (auto attribute : object.second) {
+            std::cout << "    " << attribute.first << " = " << attribute.second
+                      << std::endl;
+        }
+    }
 }
 
 std::string Parser::parseSVG(const std::string &file_name) {
@@ -61,32 +186,6 @@ Attributes Parser::parseAttributes(std::string attributes) {
         attributes_vector.push_back(std::make_pair(name, value));
     }
     return attributes_vector;
-}
-
-std::string removeExtraSpaces(const std::string &input) {
-    std::string result;
-    bool spaceDetected = false;
-    bool firstSpace = true;
-    for (char ch : input) {
-        if (ch == ' ') {
-            if (!spaceDetected) {
-                if (!firstSpace)
-                    result.push_back(ch);
-                else
-                    firstSpace = false;
-                spaceDetected = true;
-            }
-        } else {
-            result.push_back(ch);
-            spaceDetected = false;
-        }
-    }
-
-    if (!result.empty() && result.back() == ' ') {
-        result.pop_back();
-    }
-
-    return result;
 }
 
 Tags Parser::parseTags(std::string svg) {
@@ -141,7 +240,7 @@ Tags Parser::parseTags(std::string svg) {
     return tags;
 }
 
-void Parser::parseObjects(std::string file_name) {
+SVGElement *Parser::parseElements(std::string file_name) {
     std::string svg = parseSVG(file_name);
     Tags tags = parseTags(svg);
 
@@ -151,90 +250,88 @@ void Parser::parseObjects(std::string file_name) {
         objects.push_back(std::make_pair(tag.first, attributes));
     }
 
-    int group = 0;
-    std::deque< Attributes > group_attributes;
+    SVGElement *root = new Group();
+    SVGElement *current = root;
+
     for (auto &object : objects) {
         std::string name = object.first;
-        if (name == "/g") {
-            group--;
-            group_attributes.pop_back();
-        }
-        if (group > 0 && name != "g" && name != "/g") {
-            for (Attributes attributes : group_attributes) {
-                for (auto attribute : attributes) {
-                    bool flag = false;
-                    for (auto object_attribute : object.second) {
-                        if (attribute.first == object_attribute.first) {
-                            flag = true;
-                            break;
+        Attributes attributes = object.second;
+        if (name == "g") {
+            Group *group = dynamic_cast< Group * >(current);
+            for (auto group_attribute : group->getAttributes()) {
+                bool found = false;
+                for (auto &attribute : attributes) {
+                    if (attribute.first == group_attribute.first) {
+                        if (group_attribute.first == "opacity") {
+                            attribute.second = std::to_string(
+                                std::stof(attribute.second) *
+                                std::stof(group_attribute.second));
+                        } else if (group_attribute.first == "transform") {
+                            attribute.second =
+                                group_attribute.second + " " + attribute.second;
                         }
-                    }
-                    if (!flag) {
-                        object.second.push_back(attribute);
-                    } else {
-                        if (attribute.first == "transform") {
-                            for (auto &object_attribute : object.second) {
-                                if (object_attribute.first == "transform") {
-                                    object_attribute.second +=
-                                        " " + attribute.second;
-                                }
-                            }
-                        }
-                        if (attribute.first == "opacity") {
-                            for (auto &object_attribute : object.second) {
-                                if (object_attribute.first == "opacity") {
-                                    object_attribute.second = std::to_string(
-                                        std::stof(attribute.second) *
-                                        std::stof(object_attribute.second));
-                                }
-                            }
-                        }
+                        found = true;
+                        break;
                     }
                 }
+                if (!found) {
+                    attributes.push_back(group_attribute);
+                }
             }
-        }
-        if (name == "g") {
-            group++;
-            group_attributes.push_back(object.second);
+            Group *new_group = new Group(attributes);
+            current->addElement(new_group);
+            current = new_group;
+        } else if (name == "/g") {
+            current = current->getParent();
+        } else {
+            Group *group = dynamic_cast< Group * >(current);
+            for (auto group_attribute : group->getAttributes()) {
+                bool found = false;
+                for (auto &attribute : attributes) {
+                    if (attribute.first == group_attribute.first) {
+                        if (group_attribute.first == "opacity") {
+                            attribute.second = std::to_string(
+                                std::stof(attribute.second) *
+                                std::stof(group_attribute.second));
+                        } else if (group_attribute.first == "transform") {
+                            attribute.second =
+                                group_attribute.second + " " + attribute.second;
+                        }
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    attributes.push_back(group_attribute);
+                }
+            }
+            SVGElement *shape = parseShape(name, attributes);
+            current->addElement(shape);
         }
     }
+    return root;
 }
 
-void Parser::printObjects() {
-    for (auto object : objects) {
-        std::cout << object.first << std::endl;
-        for (auto attribute : object.second) {
-            std::cout << "    " << attribute.first << " = " << attribute.second
-                      << std::endl;
-        }
+SVGElement *Parser::parseShape(std::string shape, Attributes attributes) {
+    if (shape == "line") {
+        return parseLine(attributes);
+    } else if (shape == "rect") {
+        return parseRect(attributes);
+    } else if (shape == "circle") {
+        return parseCircle(attributes);
+    } else if (shape == "ellipse") {
+        return parseEllipse(attributes);
+    } else if (shape == "polygon") {
+        return parsePolygon(attributes);
+    } else if (shape == "polyline") {
+        return parsePolyline(attributes);
+    } else if (shape == "text") {
+        return parseText(attributes);
+    } else if (shape == "path") {
+        return parsePath(attributes);
     }
+    return NULL;
 }
-
-namespace {
-    auto getHexColor = [](std::string color) -> Color {
-        std::stringstream ss;
-        int pos = color.find("#");
-        ss << std::hex << color.substr(pos + 1, 2) << " "
-           << color.substr(pos + 3, 2) << " " << color.substr(pos + 5, 2);
-        int r, g, b;
-        ss >> r >> g >> b;
-        if (color[pos + 7] != '\0' && color[pos + 7] != ' ') {
-            std::stringstream ss;
-            ss << std::hex << color.substr(pos + 7, 2);
-            int a;
-            ss >> a;
-            return Color(r, g, b, a);
-        }
-        return Color(r, g, b, 255);
-    };
-
-    auto getRgbColor = [](std::string color) -> Color {
-        int r, g, b;
-        float a = 1;
-        sscanf(color.c_str(), "rgb(%d,%d,%d,%f)", &r, &g, &b, &a);
-        return Color(r, g, b, 255 * a);
-    };
-}  // namespace
 
 std::string Parser::getAttribute(Attributes attributes, std::string name) {
     std::string result;
@@ -314,49 +411,11 @@ std::vector< Vector2Df > Parser::parsePoints(Attributes attributes) {
     return points;
 }
 
-namespace {
-    void removeRedundantSpaces(std::string &svgPathString) {
-        int index = 0;
-        while (index < svgPathString.size()) {
-            if ((index == 0 || index == svgPathString.size() - 1) &&
-                svgPathString[index] == ' ') {
-                svgPathString.erase(index, 1);
-            } else if (svgPathString[index] == ' ' &&
-                       svgPathString[index - 1] == ' ') {
-                svgPathString.erase(index, 1);
-            } else {
-                index++;
-            }
-        }
-    }
-
-    void insertSpaceBeforeEachLetter(std::string &svgPathString) {
-        std::string result;
-        for (int index = 0; index < svgPathString.size(); index++) {
-            if (std::isalpha(svgPathString[index])) {
-                result += " ";
-                result += svgPathString[index];
-                result += " ";
-            } else {
-                result += svgPathString[index];
-            }
-        }
-        svgPathString = result;
-    }
-
-    void formatSvgPathString(std::string &svgPathString) {
-        insertSpaceBeforeEachLetter(svgPathString);
-        std::replace(svgPathString.begin(), svgPathString.end(), ',', ' ');
-        removeRedundantSpaces(svgPathString);
-    }
-}  // namespace
-
 std::vector< PathPoint > Parser::parsePathPoints(Attributes attributes) {
     std::vector< PathPoint > points;
     std::string path_string = getAttribute(attributes, "d");
 
     formatSvgPathString(path_string);
-    std::cout << path_string << std::endl;
     std::stringstream ss(path_string);
     std::string element;
     PathPoint pPoint{{0, 0}, 'M'};
@@ -417,31 +476,7 @@ std::vector< std::string > Parser::getTransformOrder(Attributes attributes) {
     return order;
 }
 
-void Parser::parseSVG() {
-    for (auto object : objects) {
-        std::string name = object.first;
-        Attributes attributes = object.second;
-        if (name == "line") {
-            parseLine(attributes);
-        } else if (name == "rect") {
-            parseRect(attributes);
-        } else if (name == "circle") {
-            parseCircle(attributes);
-        } else if (name == "ellipse") {
-            parseEllipse(attributes);
-        } else if (name == "polygon") {
-            parsePolygon(attributes);
-        } else if (name == "polyline") {
-            parsePolyline(attributes);
-        } else if (name == "text") {
-            parseText(attributes);
-        } else if (name == "path") {
-            parsePath(attributes);
-        }
-    }
-}
-
-void Parser::parseLine(Attributes attributes) {
+Line *Parser::parseLine(Attributes attributes) {
     Color stroke_color = parseColor(attributes, "stroke");
     float stroke_width = getFloatAttribute(attributes, "stroke-width");
     Line *shape = new Line(Vector2Df(getFloatAttribute(attributes, "x1"),
@@ -450,10 +485,10 @@ void Parser::parseLine(Attributes attributes) {
                                      getFloatAttribute(attributes, "y2")),
                            stroke_color, stroke_width);
     shape->setTransforms(getTransformOrder(attributes));
-    shapes.push_back(shape);
+    return shape;
 }
 
-void Parser::parseRect(Attributes attributes) {
+Rect *Parser::parseRect(Attributes attributes) {
     Color stroke_color = parseColor(attributes, "stroke");
     Color fill_color = parseColor(attributes, "fill");
     float stroke_width = getFloatAttribute(attributes, "stroke-width");
@@ -466,10 +501,10 @@ void Parser::parseRect(Attributes attributes) {
                  getFloatAttribute(attributes, "height"), Vector2Df(x, y),
                  Vector2Df(rx, ry), fill_color, stroke_color, stroke_width);
     shape->setTransforms(getTransformOrder(attributes));
-    shapes.push_back(shape);
+    return shape;
 }
 
-void Parser::parseCircle(Attributes attributes) {
+Circle *Parser::parseCircle(Attributes attributes) {
     Color stroke_color = parseColor(attributes, "stroke");
     Color fill_color = parseColor(attributes, "fill");
     float stroke_width = getFloatAttribute(attributes, "stroke-width");
@@ -479,10 +514,10 @@ void Parser::parseCircle(Attributes attributes) {
     Circle *shape = new Circle(radius, Vector2Df(cx, cy), fill_color,
                                stroke_color, stroke_width);
     shape->setTransforms(getTransformOrder(attributes));
-    shapes.push_back(shape);
+    return shape;
 }
 
-void Parser::parseEllipse(Attributes attributes) {
+Ellipse *Parser::parseEllipse(Attributes attributes) {
     Color stroke_color = parseColor(attributes, "stroke");
     Color fill_color = parseColor(attributes, "fill");
     float stroke_width = getFloatAttribute(attributes, "stroke-width");
@@ -494,10 +529,10 @@ void Parser::parseEllipse(Attributes attributes) {
         new Ellipse(Vector2Df(radius_x, radius_y), Vector2Df(cx, cy),
                     fill_color, stroke_color, stroke_width);
     shape->setTransforms(getTransformOrder(attributes));
-    shapes.push_back(shape);
+    return shape;
 }
 
-void Parser::parsePolygon(Attributes attributes) {
+Polygon *Parser::parsePolygon(Attributes attributes) {
     Color stroke_color = parseColor(attributes, "stroke");
     Color fill_color = parseColor(attributes, "fill");
     float stroke_width = getFloatAttribute(attributes, "stroke-width");
@@ -507,10 +542,10 @@ void Parser::parsePolygon(Attributes attributes) {
         shape->addPoint(point);
     }
     shape->setTransforms(getTransformOrder(attributes));
-    shapes.push_back(shape);
+    return shape;
 }
 
-void Parser::parsePolyline(Attributes attributes) {
+Polyline *Parser::parsePolyline(Attributes attributes) {
     Color stroke_color = parseColor(attributes, "stroke");
     Color fill_color = parseColor(attributes, "fill");
     float stroke_width = getFloatAttribute(attributes, "stroke-width");
@@ -520,10 +555,10 @@ void Parser::parsePolyline(Attributes attributes) {
         shape->addPoint(point);
     }
     shape->setTransforms(getTransformOrder(attributes));
-    shapes.push_back(shape);
+    return shape;
 }
 
-void Parser::parseText(Attributes attributes) {
+Text *Parser::parseText(Attributes attributes) {
     Color stroke_color = parseColor(attributes, "stroke");
     Color fill_color = parseColor(attributes, "fill");
     float stroke_width = getFloatAttribute(attributes, "stroke-width");
@@ -534,10 +569,10 @@ void Parser::parseText(Attributes attributes) {
     Text *shape = new Text(Vector2Df(x, y - font_size), text, font_size,
                            fill_color, stroke_color, stroke_width);
     shape->setTransforms(getTransformOrder(attributes));
-    shapes.push_back(shape);
+    return shape;
 }
 
-void Parser::parsePath(Attributes attributes) {
+Path *Parser::parsePath(Attributes attributes) {
     Color stroke_color = parseColor(attributes, "stroke");
     Color fill_color = parseColor(attributes, "fill");
     float stroke_width = getFloatAttribute(attributes, "stroke-width");
@@ -547,32 +582,16 @@ void Parser::parsePath(Attributes attributes) {
         shape->addPoint(point);
     }
     shape->setTransforms(getTransformOrder(attributes));
-    shapes.push_back(shape);
-}
-
-void Parser::renderSVG(Renderer &renderer) {
-    for (auto shape : shapes) {
-        renderer.draw(shape);
-    }
+    return shape;
 }
 
 Parser::~Parser() {
-    for (auto shape : shapes) {
-        delete shape;
-    }
-    shapes.clear();
-
     for (auto object : objects) {
         object.second.clear();
     }
-
     objects.clear();
-
-    delete instance;
+    delete root;
+    // delete instance;
 }
 
-void Parser::printShapesData() {
-    for (auto shape : shapes) {
-        shape->printData();
-    }
-}
+void Parser::printShapesData() { root->printData(); }

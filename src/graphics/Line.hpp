@@ -1,15 +1,15 @@
 #ifndef LINE_HPP_
 #define LINE_HPP_
 
-#include "Shape.hpp"
+#include "SVGElement.hpp"
 
 /**
  * @brief Represents a line in 2D space.
  *
- * The Line class is derived from the Shape class and defines a line segment
- * with a specified direction and thickness.
+ * The Line class is derived from the SVGElement class and defines a line
+ * segment with a specified direction and thickness.
  */
-class Line : public Shape {
+class Line : public SVGElement {
 private:
     Vector2Df direction;  ///< Direction of the line
 
@@ -31,6 +31,13 @@ public:
      * @return The string "Line".
      */
     std::string getClass() const override;
+
+    /**
+     * @brief Renders the shape using the given renderer.
+     *
+     * @param renderer The renderer to be used for rendering the shape.
+     */
+    void render(Renderer& renderer) const override;
 
     /**
      * @brief Sets the direction of the line.

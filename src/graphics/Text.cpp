@@ -1,5 +1,6 @@
 #include "Text.hpp"
 
+#include "Renderer.hpp"
 Text::Text(Vector2Df pos, std::string text, float font_size, const Color &fill,
            const Color &stroke, float stroke_width)
     : content(text), font_size(font_size) {
@@ -11,6 +12,8 @@ Text::Text(Vector2Df pos, std::string text, float font_size, const Color &fill,
 
 std::string Text::getClass() const { return "Text"; }
 
+void Text::render(Renderer &renderer) const { renderer.renderText(*this); }
+
 void Text::setFontSize(float font_size) { this->font_size = font_size; }
 
 float Text::getFontSize() const { return font_size; }
@@ -20,7 +23,7 @@ void Text::setContent(std::string content) { this->content = content; }
 std::string Text::getContent() const { return content; }
 
 void Text::printData() const {
-    Shape::printData();
+    SVGElement::printData();
     std::cout << "Content: " << getContent() << std::endl;
     std::cout << "Font size: " << getFontSize() << std::endl;
 }

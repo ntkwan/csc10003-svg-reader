@@ -1,7 +1,7 @@
 #ifndef TEXT_HPP_
 #define TEXT_HPP_
 
-#include "Shape.hpp"
+#include "SVGElement.hpp"
 
 /**
  * @brief Represents text in 2D space.
@@ -9,7 +9,7 @@
  * The Text class is derived from the Shape class and defines a text element
  * with a specified position, string, fill color, and font size.
  */
-class Text : public Shape {
+class Text : public SVGElement {
 private:
     std::string content;  ///< Text element
     float font_size;      ///< Font size of the text
@@ -32,6 +32,13 @@ public:
      * @return The string "Text".
      */
     std::string getClass() const override;
+
+    /**
+     * @brief Renders the shape using the given renderer.
+     *
+     * @param renderer The renderer to be used for rendering the shape.
+     */
+    void render(Renderer &renderer) const override;
 
     /**
      * @brief Sets the string of the text.
