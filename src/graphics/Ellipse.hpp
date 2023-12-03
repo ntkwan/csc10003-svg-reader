@@ -9,7 +9,7 @@
  * The Ellipse class is derived from the SVGElement class and defines an ellipse
  * with a variable radius in the x and y directions.
  */
-class Ellipse : public SVGElement {
+class Ell : public SVGElement {
 private:
     Vector2Df radius;  ///< Radii of the ellipse in the x and y directions
 
@@ -23,8 +23,8 @@ public:
      * @param stroke Outline color of the ellipse.
      * @param stroke_width Thickness of the ellipse outline.
      */
-    Ellipse(const Vector2Df &radius, const Vector2Df &center, Color fill,
-            Color stroke, float stroke_width);
+    Ell(const Vector2Df &radius, const Vector2Df &center, mColor fill,
+        mColor stroke, float stroke_width);
 
     /**
      * @brief Gets the type of the shape.

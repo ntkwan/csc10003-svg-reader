@@ -1,26 +1,24 @@
-#ifndef SVG_ELEMENT_HPP_
-#define SVG_ELEMENT_HPP_
+#ifndef SHAPE_HPP_
+#define SHAPE_HPP_
 
 #include <vector>
 
 #include "Color.hpp"
+#include "Graphics.hpp"
 #include "Vector2D.hpp"
-class Renderer;
 
 /**
- * @brief Represents an element in an SVG file.
+ * @brief Represents a shape in 2D space
  * @note This class is abstract and cannot be instantiated.
  * @note This class is applied Abstract Factory design pattern and used as
  * interface for other shapes.
- * @note This class is applied Composite design pattern and used as base class
- * for other shapes.
  */
-class SVGElement {
+class Shape {
 public:
     /**
      *  @brief Virtual constructor
      */
-    virtual ~SVGElement() = default;
+    virtual ~Shape() = default;
 
     /**
      * @brief Gets the type of the shape
@@ -32,16 +30,6 @@ public:
      * classes.
      */
     virtual std::string getClass() const = 0;
-
-    // /**
-    //  * @brief Renders the shape using the given renderer.
-    //  *
-    //  * @param renderer The renderer to be used for rendering the shape.
-    //  *
-    //  * @note This function is pure virtual and must be implemented by derived
-    //  * classes.
-    //  */
-    // virtual void render(Renderer& renderer) const = 0;
 
     /**
      * @brief Sets the fill color of the shape.
@@ -122,28 +110,21 @@ public:
 
     std::vector< std::string > getTransforms() const;
 
-    void setParent(SVGElement* parent);
-
-    SVGElement* getParent() const;
-
-    virtual void addElement(SVGElement* element);
-
 protected:
     /**
      * @brief Constructs a Shape object
      * @note This constructor is protected because Shape is an abstract class
      * that cannot be instantiated.
      */
-    SVGElement();
-
-    SVGElement* parent;  ///< Pointer to the group that contains the shape
+    Shape();
 
 private:
     mColor fill;         ///< Fill color
     mColor stroke;       ///< Outline color
     float stroke_width;  ///< Thickness of the shape's outline
     Vector2Df position;  ///< Position of the shape
+    Vector2Df origin;  ///< Origin of translation/rotation/scaling of the object
     std::vector< std::string > transforms;  ///< List of transformations
 };
 
-#endif  // SVG_ELEMENT_HPP_
+#endif  // SHAPE_HPP_

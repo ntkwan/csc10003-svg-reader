@@ -29,7 +29,7 @@ public:
      * @param stroke_width Thickness of the rectangle outline.
      */
     Rect(float width, float height, Vector2Df position, Vector2Df radius,
-         const Color& fill, const Color& stroke, float stroke_width);
+         const mColor& fill, const mColor& stroke, float stroke_width);
 
     /**
      * @brief Gets the type of the shape.

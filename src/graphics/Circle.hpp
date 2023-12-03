@@ -10,7 +10,7 @@
  * with a specified radius, center, fill color, stroke color, and stroke
  * thickness.
  */
-class Circle : public Ellipse {
+class Circle : public Ell {
 public:
     /**
      * @brief Constructs a Circle object.
@@ -21,7 +21,7 @@ public:
      * @param stroke Outline color of the circle.
      * @param stroke_width Thickness of the circle outline.
      */
-    Circle(float radius, const Vector2Df &center, Color fill, Color stroke,
+    Circle(float radius, const Vector2Df &center, mColor fill, mColor stroke,
            float stroke_width);
 
     /**

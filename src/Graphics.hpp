@@ -10,6 +10,7 @@
 #include "graphics/Polygon.hpp"
 #include "graphics/Polyline.hpp"
 #include "graphics/Rect.hpp"
+#include "graphics/Shape.hpp"
 #include "graphics/Text.hpp"
 
 #endif  // GRAPHICS_HPP_

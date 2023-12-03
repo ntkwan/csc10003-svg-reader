@@ -4,7 +4,7 @@
 
 // #include "Renderer.hpp"
 
-Line::Line(const Vector2Df& point1, const Vector2Df& point2, Color stroke,
+Line::Line(const Vector2Df& point1, const Vector2Df& point2, mColor stroke,
            float stroke_width)
     : direction(point2) {
     setPosition(point1);

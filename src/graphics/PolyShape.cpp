@@ -1,6 +1,6 @@
 #include "PolyShape.hpp"
 
-PolyShape::PolyShape(const Color& fill, const Color& stroke,
+PolyShape::PolyShape(const mColor& fill, const mColor& stroke,
                      float stroke_width) {
     setFillColor(fill);
     setOutlineColor(stroke);

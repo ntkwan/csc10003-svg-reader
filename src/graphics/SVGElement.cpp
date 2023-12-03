@@ -3,15 +3,15 @@
 #include <iostream>
 
 SVGElement::SVGElement()
-    : fill(Color::Black), stroke(Color::Transparent), stroke_width(1) {}
+    : fill(mColor::Black), stroke(mColor::Transparent), stroke_width(1) {}
 
-void SVGElement::setFillColor(const Color& color) { fill = color; }
+void SVGElement::setFillColor(const mColor& color) { fill = color; }
 
-const Color& SVGElement::getFillColor() const { return fill; }
+const mColor& SVGElement::getFillColor() const { return fill; }
 
-void SVGElement::setOutlineColor(const Color& color) { stroke = color; }
+void SVGElement::setOutlineColor(const mColor& color) { stroke = color; }
 
-const Color& SVGElement::getOutlineColor() const { return stroke; }
+const mColor& SVGElement::getOutlineColor() const { return stroke; }
 
 void SVGElement::setOutlineThickness(float thickness) {
     stroke_width = thickness;
