@@ -49,10 +49,76 @@ void Renderer::renderPath(const Path& path) const {
         wxBrush(wxColour(path.getFillColor().r, path.getFillColor().g,
                          path.getFillColor().b, path.getFillColor().a)));
     wxGraphicsPath wxPath = gc->CreatePath();
-    for (auto point : path.getPoints()) {
-        wxPath.AddLineToPoint(point.Point.x, point.Point.y);
+    std::vector< PathPoint > points = path.getPoints();
+    int n = points.size();
+    Vector2Df firstPoint{0, 0}, curPoint{0, 0};
+    for (int i = 0; i < n; i++) {
+        if (points[i].TC == 'M') {
+            firstPoint = points[i].Point;
+            wxPath.MoveToPoint(firstPoint.x, firstPoint.y);
+            curPoint = firstPoint;
+        } else if (points[i].TC == 'm') {
+            firstPoint.x = curPoint.x + points[i].Point.x;
+            firstPoint.y = curPoint.y + points[i].Point.y;
+            wxPath.MoveToPoint(firstPoint.x, firstPoint.y);
+            curPoint = firstPoint;
+        } else if (points[i].TC == 'L') {
+            wxPath.AddLineToPoint(points[i].Point.x, points[i].Point.y);
+            curPoint = points[i].Point;
+        } else if (points[i].TC == 'l') {
+            Vector2Df endPoint{curPoint.x + points[i].Point.x,
+                               curPoint.y + points[i].Point.y};
+            wxPath.AddLineToPoint(endPoint.x, endPoint.y);
+            curPoint = endPoint;
+        } else if (points[i].TC == 'H') {
+            Vector2Df endPoint{points[i].Point.x, curPoint.y};
+            wxPath.AddLineToPoint(endPoint.x, endPoint.y);
+            curPoint = endPoint;
+        } else if (points[i].TC == 'h') {
+            Vector2Df endPoint{curPoint.x + points[i].Point.x, curPoint.y};
+            wxPath.AddLineToPoint(endPoint.x, endPoint.y);
+            curPoint = endPoint;
+        } else if (points[i].TC == 'V') {
+            Vector2Df endPoint{curPoint.x, points[i].Point.y};
+            wxPath.AddLineToPoint(endPoint.x, endPoint.y);
+            curPoint = endPoint;
+        } else if (points[i].TC == 'v') {
+            Vector2Df endPoint{curPoint.x, curPoint.y + points[i].Point.y};
+            wxPath.AddLineToPoint(endPoint.x, endPoint.y);
+            curPoint = endPoint;
+        } else if (points[i].TC == 'C') {
+            if (i + 2 < n) {
+                Vector2Df controlPoint1 = points[i].Point;
+                Vector2Df controlPoint2 = points[i + 1].Point;
+                Vector2Df controlPoint3 = points[i + 2].Point;
+                wxPath.AddCurveToPoint(controlPoint1.x, controlPoint1.y,
+                                       controlPoint2.x, controlPoint2.y,
+                                       controlPoint3.x, controlPoint3.y);
+                i += 2;
+            }
+            curPoint = points[i].Point;
+        } else if (points[i].TC == 'c') {
+            if (i + 2 < n) {
+                Vector2Df controlPoint1 =
+                    Vector2Df{curPoint.x + points[i].Point.x,
+                              curPoint.y + points[i].Point.y};
+                Vector2Df controlPoint2 =
+                    Vector2Df{curPoint.x + points[i + 1].Point.x,
+                              curPoint.y + points[i + 1].Point.y};
+                Vector2Df controlPoint3 =
+                    Vector2Df{curPoint.x + points[i + 1].Point.x,
+                              curPoint.y + points[i + 1].Point.y};
+                wxPath.AddCurveToPoint(controlPoint1.x, controlPoint1.y,
+                                       controlPoint2.x, controlPoint2.y,
+                                       controlPoint3.x, controlPoint3.y);
+                i += 2;
+                curPoint = controlPoint3;
+            }
+        } else if (points[i].TC == 'Z' || points[i].TC == 'z') {
+            wxPath.CloseSubpath();
+            curPoint = firstPoint;
+        }
     }
-    wxPath.CloseSubpath();
     gc->DrawPath(wxPath);
 }
 
