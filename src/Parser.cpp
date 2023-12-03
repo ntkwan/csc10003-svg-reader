@@ -9,7 +9,7 @@
 Parser *Parser::instance = nullptr;
 
 namespace {
-    auto getHexColor = [](std::string color) -> Color {
+    auto getHexColor = [](std::string color) -> mColor {
         std::stringstream ss;
         int pos = color.find("#");
         // handle 3 digit hex color
@@ -21,7 +21,7 @@ namespace {
             r = r * 16 + r;
             g = g * 16 + g;
             b = b * 16 + b;
-            return Color(r, g, b, 255);
+            return mColor(r, g, b, 255);
         } else if (color.size() < 6 || color[pos + 5] == ' ') {
             ss << std::hex << color.substr(pos + 1, 1) << " "
                << color.substr(pos + 2, 1) << " " << color.substr(pos + 3, 1)
@@ -32,7 +32,7 @@ namespace {
             g = g * 16 + g;
             b = b * 16 + b;
             a = a * 16 + a;
-            return Color(r, g, b, a);
+            return mColor(r, g, b, a);
         } else {
             ss << std::hex << color.substr(pos + 1, 2) << " "
                << color.substr(pos + 3, 2) << " " << color.substr(pos + 5, 2);
@@ -43,17 +43,17 @@ namespace {
                 ss << std::hex << color.substr(pos + 7, 2);
                 int a;
                 ss >> a;
-                return Color(r, g, b, a);
+                return mColor(r, g, b, a);
             }
-            return Color(r, g, b, 255);
+            return mColor(r, g, b, 255);
         }
     };
 
-    auto getRgbColor = [](std::string color) -> Color {
+    auto getRgbColor = [](std::string color) -> mColor {
         int r, g, b;
         float a = 1;
         sscanf(color.c_str(), "rgb(%d,%d,%d,%f)", &r, &g, &b, &a);
-        return Color(r, g, b, 255 * a);
+        return mColor(r, g, b, 255 * a);
     };
 
     std::string removeExtraSpaces(std::string input) {
@@ -313,14 +313,14 @@ float Parser::getFloatAttribute(xml_node<> *node, std::string name) {
     return result;
 }
 
-Color Parser::parseColor(xml_node<> *node, std::string name) {
+mColor Parser::parseColor(xml_node<> *node, std::string name) {
     std::string color = getAttribute(node, name);
     color.erase(std::remove(color.begin(), color.end(), ' '), color.end());
     for (auto &c : color) c = tolower(c);
     if (color == "none")
-        return Color::Transparent;
+        return mColor::Transparent;
     else {
-        Color result;
+        mColor result;
         if (color.find("#") != std::string::npos) {
             result = getHexColor(color);
         } else if (color.find("rgb") != std::string::npos) {
@@ -424,7 +424,7 @@ std::vector< std::string > Parser::getTransformOrder(xml_node<> *node) {
 }
 
 Line *Parser::parseLine(xml_node<> *node) {
-    Color stroke_color = parseColor(node, "stroke");
+    mColor stroke_color = parseColor(node, "stroke");
     float stroke_width = getFloatAttribute(node, "stroke-width");
     Line *shape = new Line(
         Vector2Df(getFloatAttribute(node, "x1"), getFloatAttribute(node, "y1")),
@@ -435,8 +435,8 @@ Line *Parser::parseLine(xml_node<> *node) {
 }
 
 Rect *Parser::parseRect(xml_node<> *node) {
-    Color stroke_color = parseColor(node, "stroke");
-    Color fill_color = parseColor(node, "fill");
+    mColor stroke_color = parseColor(node, "stroke");
+    mColor fill_color = parseColor(node, "fill");
     float stroke_width = getFloatAttribute(node, "stroke-width");
     float x = getFloatAttribute(node, "x");
     float y = getFloatAttribute(node, "y");
@@ -451,8 +451,8 @@ Rect *Parser::parseRect(xml_node<> *node) {
 }
 
 Circle *Parser::parseCircle(xml_node<> *node) {
-    Color stroke_color = parseColor(node, "stroke");
-    Color fill_color = parseColor(node, "fill");
+    mColor stroke_color = parseColor(node, "stroke");
+    mColor fill_color = parseColor(node, "fill");
     float stroke_width = getFloatAttribute(node, "stroke-width");
     float cx = getFloatAttribute(node, "cx");
     float cy = getFloatAttribute(node, "cy");
@@ -463,26 +463,25 @@ Circle *Parser::parseCircle(xml_node<> *node) {
     return shape;
 }
 
-Ellipse *Parser::parseEllipse(xml_node<> *node) {
-    Color stroke_color = parseColor(node, "stroke");
-    Color fill_color = parseColor(node, "fill");
+Ell *Parser::parseEllipse(xml_node<> *node) {
+    mColor stroke_color = parseColor(node, "stroke");
+    mColor fill_color = parseColor(node, "fill");
     float stroke_width = getFloatAttribute(node, "stroke-width");
     float radius_x = getFloatAttribute(node, "rx");
     float radius_y = getFloatAttribute(node, "ry");
     float cx = getFloatAttribute(node, "cx");
     float cy = getFloatAttribute(node, "cy");
-    Ellipse *shape =
-        new Ellipse(Vector2Df(radius_x, radius_y), Vector2Df(cx, cy),
-                    fill_color, stroke_color, stroke_width);
+    Ell *shape = new Ell(Vector2Df(radius_x, radius_y), Vector2Df(cx, cy),
+                         fill_color, stroke_color, stroke_width);
     shape->setTransforms(getTransformOrder(node));
     return shape;
 }
 
-Polygon *Parser::parsePolygon(xml_node<> *node) {
-    Color stroke_color = parseColor(node, "stroke");
-    Color fill_color = parseColor(node, "fill");
+Plygon *Parser::parsePolygon(xml_node<> *node) {
+    mColor stroke_color = parseColor(node, "stroke");
+    mColor fill_color = parseColor(node, "fill");
     float stroke_width = getFloatAttribute(node, "stroke-width");
-    Polygon *shape = new Polygon(fill_color, stroke_color, stroke_width);
+    Plygon *shape = new Plygon(fill_color, stroke_color, stroke_width);
     std::vector< Vector2Df > points = parsePoints(node);
     for (auto point : points) {
         shape->addPoint(point);
@@ -491,11 +490,11 @@ Polygon *Parser::parsePolygon(xml_node<> *node) {
     return shape;
 }
 
-Polyline *Parser::parsePolyline(xml_node<> *node) {
-    Color stroke_color = parseColor(node, "stroke");
-    Color fill_color = parseColor(node, "fill");
+Plyline *Parser::parsePolyline(xml_node<> *node) {
+    mColor stroke_color = parseColor(node, "stroke");
+    mColor fill_color = parseColor(node, "fill");
     float stroke_width = getFloatAttribute(node, "stroke-width");
-    Polyline *shape = new Polyline(fill_color, stroke_color, stroke_width);
+    Plyline *shape = new Plyline(fill_color, stroke_color, stroke_width);
     std::vector< Vector2Df > points = parsePoints(node);
     for (auto point : points) {
         shape->addPoint(point);
@@ -505,8 +504,8 @@ Polyline *Parser::parsePolyline(xml_node<> *node) {
 }
 
 Text *Parser::parseText(xml_node<> *node) {
-    Color stroke_color = parseColor(node, "stroke");
-    Color fill_color = parseColor(node, "fill");
+    mColor stroke_color = parseColor(node, "stroke");
+    mColor fill_color = parseColor(node, "fill");
     float stroke_width = getFloatAttribute(node, "stroke-width");
     float x = getFloatAttribute(node, "x");
     float y = getFloatAttribute(node, "y");
@@ -519,8 +518,8 @@ Text *Parser::parseText(xml_node<> *node) {
 }
 
 Path *Parser::parsePath(xml_node<> *node) {
-    Color stroke_color = parseColor(node, "stroke");
-    Color fill_color = parseColor(node, "fill");
+    mColor stroke_color = parseColor(node, "stroke");
+    mColor fill_color = parseColor(node, "fill");
     float stroke_width = getFloatAttribute(node, "stroke-width");
     Path *shape = new Path(fill_color, stroke_color, stroke_width);
     std::vector< PathPoint > points = parsePathPoints(node);

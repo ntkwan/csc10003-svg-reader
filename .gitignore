@@ -31,7 +31,6 @@
 *.app
 *.bat
 build
-!external/wxWidgets/build
 svg-reader
 !docs/latex/code_documentation.pdf
 *.json

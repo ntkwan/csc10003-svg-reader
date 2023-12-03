@@ -19,3 +19,6 @@ if (LINUX)
 endif()
 file(GLOB_RECURSE cpp_files CONFIGURE_DEPENDS "src/*.*pp")
 add_executable(${PROJECT_NAME} ${cpp_files})
+
+target_link_libraries(${PROJECT_NAME} PUBLIC -lgdiplus)
+

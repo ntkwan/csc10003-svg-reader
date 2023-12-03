@@ -37,7 +37,7 @@ private:
 
     float getFloatAttribute(xml_node<>* node, std::string name);
 
-    Color parseColor(xml_node<>* node, std::string color);
+    mColor parseColor(xml_node<>* node, std::string color);
 
     std::vector< Vector2Df > parsePoints(xml_node<>* node);
 
@@ -49,13 +49,13 @@ private:
 
     Rect* parseRect(xml_node<>* node);
 
-    class Polyline* parsePolyline(xml_node<>* node);
+    class Plyline* parsePolyline(xml_node<>* node);
 
-    class Polygon* parsePolygon(xml_node<>* node);
+    class Plygon* parsePolygon(xml_node<>* node);
 
     Circle* parseCircle(xml_node<>* node);
 
-    class Ellipse* parseEllipse(xml_node<>* node);
+    class Ell* parseEllipse(xml_node<>* node);
 
     Path* parsePath(xml_node<>* node);
 
