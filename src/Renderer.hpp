@@ -7,7 +7,17 @@
 #include <gdiplus.h>
 
 //clang-format on
-#include "Graphics.hpp"
+
+#include "graphics/Circle.hpp"
+#include "graphics/Color.hpp"
+#include "graphics/Ellipse.hpp"
+#include "graphics/Group.hpp"
+#include "graphics/Line.hpp"
+#include "graphics/Path.hpp"
+#include "graphics/Polygon.hpp"
+#include "graphics/Polyline.hpp"
+#include "graphics/Rect.hpp"
+#include "graphics/Text.hpp"
 
 class Renderer {
 public:
@@ -16,7 +26,7 @@ public:
     void operator=(const Renderer&) = delete;
 
     Gdiplus::Graphics& graphics;
-    void draw(Shape* shape) const;
+    void draw(SVGElement* shape) const;
 
 private:
     void drawLine(Line* line) const;

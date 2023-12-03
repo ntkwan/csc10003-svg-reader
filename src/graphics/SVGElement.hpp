@@ -5,7 +5,6 @@
 
 #include "Color.hpp"
 #include "Vector2D.hpp"
-class Renderer;
 
 /**
  * @brief Represents an element in an SVG file.
@@ -32,16 +31,6 @@ public:
      * classes.
      */
     virtual std::string getClass() const = 0;
-
-    // /**
-    //  * @brief Renders the shape using the given renderer.
-    //  *
-    //  * @param renderer The renderer to be used for rendering the shape.
-    //  *
-    //  * @note This function is pure virtual and must be implemented by derived
-    //  * classes.
-    //  */
-    // virtual void render(Renderer& renderer) const = 0;
 
     /**
      * @brief Sets the fill color of the shape.

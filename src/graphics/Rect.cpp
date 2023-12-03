@@ -15,8 +15,6 @@ Rect::Rect(float width, float height, Vector2Df position, Vector2Df radius,
 
 std::string Rect::getClass() const { return "Rect"; }
 
-// void Rect::render(Renderer &renderer) const { renderer.renderRect(*this); }
-
 void Rect::setWidth(float width) {
     this->width = width;
     points[1].x = width;

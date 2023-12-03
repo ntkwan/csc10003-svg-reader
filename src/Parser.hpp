@@ -1,11 +1,25 @@
 #ifndef PARSER_HPP_
 #define PARSER_HPP_
 
+#include <algorithm>
+#include <cstring>
+#include <fstream>
+#include <iostream>
+#include <sstream>
 #include <string>
 #include <vector>
 
 #include "../external/rapidxml/rapidxml.hpp"
-#include "Graphics.hpp"
+#include "graphics/Circle.hpp"
+#include "graphics/Color.hpp"
+#include "graphics/Ellipse.hpp"
+#include "graphics/Group.hpp"
+#include "graphics/Line.hpp"
+#include "graphics/Path.hpp"
+#include "graphics/Polygon.hpp"
+#include "graphics/Polyline.hpp"
+#include "graphics/Rect.hpp"
+#include "graphics/Text.hpp"
 
 using namespace rapidxml;
 

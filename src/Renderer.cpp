@@ -11,8 +11,39 @@ Renderer* Renderer::getInstance(Gdiplus::Graphics& graphics) {
     return instance;
 }
 
-void Renderer::draw(Shape* shape) const {
-    if (shape->getClass() == "Polyline") {
+void Renderer::draw(SVGElement* shape) const {
+    std::cout << shape->getClass() << std::endl;
+    if (shape->getClass() == "Group") {
+        Group* group = dynamic_cast< Group* >(shape);
+        for (auto elem : group->getElements()) {
+            std::cout << elem->getClass() << std::endl;
+            if (elem->getClass() == "Polyline") {
+                Plyline* polyline = dynamic_cast< Plyline* >(elem);
+                drawPolyline(polyline);
+            } else if (elem->getClass() == "Text") {
+                Text* text = dynamic_cast< Text* >(elem);
+                drawText(text);
+            } else if (elem->getClass() == "Rect") {
+                Rect* rectangle = dynamic_cast< Rect* >(elem);
+                drawRectangle(rectangle);
+            } else if (elem->getClass() == "Circle") {
+                Circle* circle = dynamic_cast< Circle* >(elem);
+                drawCircle(circle);
+            } else if (elem->getClass() == "Ellipse") {
+                Ell* ellipse = dynamic_cast< Ell* >(elem);
+                drawEllipse(ellipse);
+            } else if (elem->getClass() == "Line") {
+                Line* line = dynamic_cast< Line* >(elem);
+                drawLine(line);
+            } else if (elem->getClass() == "Polygon") {
+                Plygon* polygon = dynamic_cast< Plygon* >(elem);
+                drawPolygon(polygon);
+            } else if (elem->getClass() == "Path") {
+                Path* path = dynamic_cast< Path* >(elem);
+                drawPath(path);
+            }
+        }
+    } else if (shape->getClass() == "Polyline") {
         Plyline* polyline = dynamic_cast< Plyline* >(shape);
         drawPolyline(polyline);
     } else if (shape->getClass() == "Text") {
@@ -50,45 +81,78 @@ void Renderer::drawLine(Line* line) const {
 
 void Renderer::drawRectangle(Rect* rectangle) const {
     mColor fill_color = rectangle->getFillColor();
-    Gdiplus::SolidBrush RectFill(
-        Gdiplus::Color(fill_color.a, fill_color.r, fill_color.g, fill_color.b));
-    graphics.FillRectangle(&RectFill, rectangle->getPosition().x,
-                           rectangle->getPosition().y, rectangle->getWidth(),
-                           rectangle->getHeight());
     mColor outline_color = rectangle->getOutlineColor();
+
     Gdiplus::Pen RectOutline(Gdiplus::Color(outline_color.a, outline_color.r,
                                             outline_color.g, outline_color.b),
                              rectangle->getOutlineThickness());
+    Gdiplus::SolidBrush RectFill(
+        Gdiplus::Color(fill_color.a, fill_color.r, fill_color.g, fill_color.b));
     graphics.DrawRectangle(&RectOutline, rectangle->getPosition().x,
+                           rectangle->getPosition().y, rectangle->getWidth(),
+                           rectangle->getHeight());
+    graphics.FillRectangle(&RectFill, rectangle->getPosition().x,
                            rectangle->getPosition().y, rectangle->getWidth(),
                            rectangle->getHeight());
 }
 
-void Renderer::drawCircle(Circle* circle) const {}
+void Renderer::drawCircle(Circle* circle) const {
+    mColor fill_color = circle->getFillColor();
+    mColor outline_color = circle->getOutlineColor();
+    Gdiplus::Pen circleOutline(Gdiplus::Color(outline_color.a, outline_color.r,
+                                              outline_color.g, outline_color.b),
+                               circle->getOutlineThickness());
+    Gdiplus::SolidBrush circleFill(
+        Gdiplus::Color(fill_color.a, fill_color.r, fill_color.g, fill_color.b));
+    graphics.DrawEllipse(&circleOutline,
+                         circle->getPosition().x - circle->getRadius().x,
+                         circle->getPosition().y - circle->getRadius().y,
+                         circle->getRadius().x * 2, circle->getRadius().x * 2);
+    graphics.FillEllipse(&circleFill,
+                         circle->getPosition().x - circle->getRadius().x,
+                         circle->getPosition().y - circle->getRadius().y,
+                         circle->getRadius().x * 2, circle->getRadius().y * 2);
+}
 
-void Renderer::drawEllipse(Ell* ellipse) const {}
+void Renderer::drawEllipse(Ell* ellipse) const {
+    mColor fill_color = ellipse->getFillColor();
+    mColor outline_color = ellipse->getOutlineColor();
+    Gdiplus::Pen ellipseOutline(
+        Gdiplus::Color(outline_color.a, outline_color.r, outline_color.g,
+                       outline_color.b),
+        ellipse->getOutlineThickness());
+    Gdiplus::SolidBrush ellipseFill(
+        Gdiplus::Color(fill_color.a, fill_color.r, fill_color.g, fill_color.b));
+
+    graphics.DrawEllipse(
+        &ellipseOutline, ellipse->getPosition().x - ellipse->getRadius().x,
+        ellipse->getPosition().y - ellipse->getRadius().y,
+        ellipse->getRadius().x * 2, ellipse->getRadius().y * 2);
+    graphics.FillEllipse(
+        &ellipseFill, ellipse->getPosition().x - ellipse->getRadius().x,
+        ellipse->getPosition().y - ellipse->getRadius().y,
+        ellipse->getRadius().x * 2, ellipse->getRadius().y * 2);
+}
 
 void Renderer::drawPolygon(Plygon* polygon) const {
     mColor fill_color = polygon->getFillColor();
-    Gdiplus::SolidBrush polygonFill(
-        Gdiplus::Color(fill_color.a, fill_color.r, fill_color.g, fill_color.b));
-
-    std::vector< Gdiplus::PointF > points;
-    const std::vector< Vector2Df >& vertices = polygon->getPoints();
-    for (const Vector2Df& vertex : vertices) {
-        points.push_back(Gdiplus::PointF(vertex.x, vertex.y));
-    }
-
-    graphics.FillPolygon(&polygonFill, &points[0],
-                         static_cast< int >(points.size()));
-
     mColor outline_color = polygon->getOutlineColor();
     Gdiplus::Pen polygonOutline(
         Gdiplus::Color(outline_color.a, outline_color.r, outline_color.g,
                        outline_color.b),
         polygon->getOutlineThickness());
-    graphics.DrawPolygon(&polygonOutline, &points[0],
-                         static_cast< int >(points.size()));
+    Gdiplus::SolidBrush polygonFill(
+        Gdiplus::Color(fill_color.a, fill_color.r, fill_color.g, fill_color.b));
+
+    Gdiplus::PointF* points = new Gdiplus::PointF[polygon->getPoints().size()];
+    int idx = 0;
+    const std::vector< Vector2Df >& vertices = polygon->getPoints();
+    for (const Vector2Df vertex : vertices) {
+        points[idx++] = Gdiplus::PointF(vertex.x, vertex.y);
+    }
+
+    graphics.DrawPolygon(&polygonOutline, points, idx);
+    graphics.FillPolygon(&polygonFill, points, idx);
 }
 
 void Renderer::drawText(Text* text) const {
