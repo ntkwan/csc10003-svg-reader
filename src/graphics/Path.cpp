@@ -15,3 +15,12 @@ std::string Path::getClass() const { return "Path"; }
 void Path::addPoint(PathPoint point) { points.push_back(point); }
 
 std::vector< PathPoint > Path::getPoints() const { return points; }
+
+void Path::printData() const {
+    SVGElement::printData();
+    std::cout << "Points: ";
+    for (auto point : points) {
+        std::cout << point.TC << " " << point.Point.x << " " << point.Point.y
+                  << " ";
+    }
+}

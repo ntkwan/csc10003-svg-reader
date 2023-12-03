@@ -4,10 +4,12 @@
 #include <string>
 #include <vector>
 
+#include "../external/rapidxml/rapidxml.hpp"
 #include "Graphics.hpp"
 
-typedef std::vector< std::pair< std::string, std::string > > Attributes, Tags;
-typedef std::vector< std::pair< std::string, Attributes > > Objects;
+using namespace rapidxml;
+
+typedef std::vector< std::pair< std::string, std::string > > Attributes;
 
 class Parser {
 public:
@@ -17,11 +19,9 @@ public:
 
     ~Parser();
 
-    void printObjects();
+    Group* getRoot();
 
     void printShapesData();
-
-    Group* getRoot();
 
 private:
     /**
@@ -31,47 +31,40 @@ private:
      */
     Parser(const std::string& file_name);
 
-    std::string parseSVG(const std::string& file_name);
-
-    Attributes parseAttributes(std::string attributes);
-
-    Tags parseTags(std::string svg);
-
     SVGElement* parseElements(std::string file_name);
 
-    std::string getAttribute(Attributes attributes, std::string name);
+    std::string getAttribute(xml_node<>* node, std::string name);
 
-    float getFloatAttribute(Attributes attributes, std::string name);
+    float getFloatAttribute(xml_node<>* node, std::string name);
 
-    Color parseColor(Attributes attributes, std::string color);
+    Color parseColor(xml_node<>* node, std::string color);
 
-    std::vector< Vector2Df > parsePoints(Attributes attributes);
+    std::vector< Vector2Df > parsePoints(xml_node<>* node);
 
-    std::vector< PathPoint > parsePathPoints(Attributes attributes);
+    std::vector< PathPoint > parsePathPoints(xml_node<>* node);
 
-    std::vector< std::string > getTransformOrder(Attributes attributes);
+    std::vector< std::string > getTransformOrder(xml_node<>* node);
 
-    Line* parseLine(Attributes attributes);
+    Line* parseLine(xml_node<>* node);
 
-    Rect* parseRect(Attributes attributes);
+    Rect* parseRect(xml_node<>* node);
 
-    class Polyline* parsePolyline(Attributes attributes);
+    class Polyline* parsePolyline(xml_node<>* node);
 
-    class Polygon* parsePolygon(Attributes attributes);
+    class Polygon* parsePolygon(xml_node<>* node);
 
-    Circle* parseCircle(Attributes attributes);
+    Circle* parseCircle(xml_node<>* node);
 
-    class Ellipse* parseEllipse(Attributes attributes);
+    class Ellipse* parseEllipse(xml_node<>* node);
 
-    Path* parsePath(Attributes attributes);
+    Path* parsePath(xml_node<>* node);
 
-    Text* parseText(Attributes attributes);
+    Text* parseText(xml_node<>* node);
 
-    SVGElement* parseShape(std::string shape, Attributes attributes);
+    SVGElement* parseShape(xml_node<>* node);
 
 private:
     static Parser* instance;  ///< The instance of the Parser.
-    Objects objects;          ///< The objects in the SVG file.
     SVGElement* root;         ///< The root of the SVG file.
 };
 

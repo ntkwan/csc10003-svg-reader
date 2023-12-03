@@ -22,6 +22,8 @@ public:
     void addPoint(PathPoint point);
 
     std::vector< PathPoint > getPoints() const;
+
+    void printData() const override;
 };
 
 #endif
