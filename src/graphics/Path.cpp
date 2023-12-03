@@ -2,7 +2,7 @@
 
 // #include "Renderer.hpp"
 
-Path::Path(const Color& fill, const Color& stroke, float stroke_width) {
+Path::Path(const mColor& fill, const mColor& stroke, float stroke_width) {
     setFillColor(fill);
     setOutlineColor(stroke);
     setOutlineThickness(stroke_width);

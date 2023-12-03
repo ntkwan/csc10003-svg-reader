@@ -13,7 +13,7 @@ private:
     std::vector< PathPoint > points;
 
 public:
-    Path(const Color& fill, const Color& stroke, float stroke_width);
+    Path(const mColor& fill, const mColor& stroke, float stroke_width);
 
     std::string getClass() const override;
 
