@@ -12,11 +12,11 @@ Group::~Group() {
 
 std::string Group::getClass() const { return "Group"; }
 
-void Group::render(Renderer& renderer) const {
-    for (auto shape : shapes) {
-        shape->render(renderer);
-    }
-}
+// void Group::render(Renderer& renderer) const {
+//     for (auto shape : shapes) {
+//         shape->render(renderer);
+//     }
+// }
 
 Attributes Group::getAttributes() const { return attributes; }
 

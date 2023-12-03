@@ -2,7 +2,7 @@
 
 #include <cmath>
 
-#include "Renderer.hpp"
+// #include "Renderer.hpp"
 
 Ellipse::Ellipse(const Vector2Df &radius, const Vector2Df &center, Color fill,
                  Color stroke, float stroke_thickness)
@@ -15,9 +15,9 @@ Ellipse::Ellipse(const Vector2Df &radius, const Vector2Df &center, Color fill,
 
 std::string Ellipse::getClass() const { return "Ellipse"; }
 
-void Ellipse::render(Renderer &renderer) const {
-    renderer.renderEllipse(*this);
-}
+// void Ellipse::render(Renderer &renderer) const {
+//     renderer.renderEllipse(*this);
+// }
 
 void Ellipse::setRadius(const Vector2Df &radius) { this->radius = radius; }
 

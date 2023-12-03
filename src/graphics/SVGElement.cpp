@@ -1,5 +1,7 @@
 #include "SVGElement.hpp"
 
+#include <iostream>
+
 SVGElement::SVGElement()
     : fill(Color::Black), stroke(Color::Transparent), stroke_width(1) {}
 
@@ -27,8 +29,6 @@ void SVGElement::setPosition(const Vector2Df& position) {
 }
 
 Vector2Df SVGElement::getPosition() const { return position; }
-
-#include <iostream>
 
 void SVGElement::printData() const {
     std::cout << "Shape: " << getClass() << std::endl;

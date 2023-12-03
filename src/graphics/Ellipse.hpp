@@ -35,12 +35,12 @@ public:
      */
     std::string getClass() const override;
 
-    /**
-     * @brief Renders the shape using the given renderer.
-     *
-     * @param renderer The renderer to be used for rendering the shape.
-     */
-    void render(Renderer &renderer) const override;
+    // /**
+    //  * @brief Renders the shape using the given renderer.
+    //  *
+    //  * @param renderer The renderer to be used for rendering the shape.
+    //  */
+    // void render(Renderer &renderer) const override;
 
     /**
      * @brief Sets the radius of the ellipse.

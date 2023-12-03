@@ -2,7 +2,7 @@
 
 #include <cmath>
 
-#include "Renderer.hpp"
+// #include "Renderer.hpp"
 
 Line::Line(const Vector2Df& point1, const Vector2Df& point2, Color stroke,
            float stroke_width)
@@ -14,7 +14,7 @@ Line::Line(const Vector2Df& point1, const Vector2Df& point2, Color stroke,
 
 std::string Line::getClass() const { return "Line"; }
 
-void Line::render(Renderer& renderer) const { renderer.renderLine(*this); }
+// void Line::render(Renderer& renderer) const { renderer.renderLine(*this); }
 
 void Line::setDirection(const Vector2Df& direction) {
     this->direction = direction;

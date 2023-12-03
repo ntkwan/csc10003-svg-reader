@@ -1,6 +1,6 @@
 #include "Rect.hpp"
 
-#include "Renderer.hpp"
+// #include "Renderer.hpp"
 
 Rect::Rect(float width, float height, Vector2Df position, Vector2Df radius,
            const Color &fill, const Color &stroke, float stroke_width)
@@ -15,7 +15,7 @@ Rect::Rect(float width, float height, Vector2Df position, Vector2Df radius,
 
 std::string Rect::getClass() const { return "Rect"; }
 
-void Rect::render(Renderer &renderer) const { renderer.renderRect(*this); }
+// void Rect::render(Renderer &renderer) const { renderer.renderRect(*this); }
 
 void Rect::setWidth(float width) {
     this->width = width;
