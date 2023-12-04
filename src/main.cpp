@@ -13,17 +13,15 @@ using namespace rapidxml;
 
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
-void OnPaint(HDC hdc) {
+void OnPaint(HDC hdc, const std::string& filePath) {
     Gdiplus::Graphics graphics(hdc);
 
-    std::string path = "external/samples/sample.svg";
-    Parser *parser = Parser::getInstance(path);
-    Renderer *renderer = Renderer::getInstance(graphics);
-    SVGElement *root = parser->getRoot();
-    root->printData();
-    Group *group = dynamic_cast< Group * >(root);
+    Parser* parser = Parser::getInstance(filePath);
+    Renderer* renderer = Renderer::getInstance(graphics);
+    SVGElement* root = parser->getRoot();
+    Group* group = dynamic_cast< Group* >(root);
     group->render(*renderer);
-    //  delete parser;
+    delete parser;
 }
 
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
@@ -56,8 +54,8 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, PSTR, INT iCmdShow) {
                         WS_OVERLAPPEDWINDOW,      // window style
                         CW_USEDEFAULT,            // initial x position
                         CW_USEDEFAULT,            // initial y position
-                        CW_USEDEFAULT,            // initial x size
-                        CW_USEDEFAULT,            // initial y size
+                        1600,                     // initial x size
+                        1200,                     // initial y size
                         NULL,                     // parent window handle
                         NULL,                     // window menu handle
                         hInstance,                // program instance handle
@@ -79,11 +77,15 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam,
                          LPARAM lParam) {
     HDC hdc;
     PAINTSTRUCT ps;
+    std::string filePath = "";
 
     switch (message) {
         case WM_PAINT:
             hdc = BeginPaint(hWnd, &ps);
-            OnPaint(hdc);
+            if (__argc > 1) {
+                filePath = __argv[1];
+            }
+            OnPaint(hdc, filePath);
             EndPaint(hWnd, &ps);
             return 0;
         case WM_DESTROY:

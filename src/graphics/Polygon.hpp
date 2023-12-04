@@ -35,6 +35,23 @@ public:
     //  * @param renderer The renderer to be used for rendering the shape.
     //  */
     // void render(Renderer& renderer) const override;
+
+    /**
+     * @brief Sets the fill rule of the polygon.
+     *
+     * @param fill_rule The new fill rule of the polygon.
+     */
+    void setFillRule(std::string fill_rule);
+
+    /**
+     * @brief Gets the fill rule of the polygon.
+     *
+     * @return The fill rule of the polygon.
+     */
+    std::string getFillRule() const;
+
+private:
+    std::string fill_rule;  ///< Fill rule of the polygon
 };
 
 #endif  // POLYGON_HPP_

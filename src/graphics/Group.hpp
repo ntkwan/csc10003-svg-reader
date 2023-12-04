@@ -19,7 +19,7 @@ public:
 
     std::string getClass() const override;
 
-    void render(Renderer& renderer) const;
+    void render(const Renderer& renderer) const;
 
     Attributes getAttributes() const;
 

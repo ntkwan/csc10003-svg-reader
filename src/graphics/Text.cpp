@@ -22,6 +22,14 @@ void Text::setContent(std::string content) { this->content = content; }
 
 std::string Text::getContent() const { return content; }
 
+void Text::setAnchor(std::string anchor) { this->anchor = anchor; }
+
+std::string Text::getAnchor() const { return anchor; }
+
+void Text::setFontStyle(std::string font_style) { this->style = font_style; }
+
+std::string Text::getFontStyle() const { return style; }
+
 void Text::printData() const {
     SVGElement::printData();
     std::cout << "Content: " << getContent() << std::endl;

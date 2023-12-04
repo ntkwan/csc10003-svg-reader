@@ -291,8 +291,13 @@ std::string Parser::getAttribute(xml_node<> *node, std::string name) {
     if (node->first_attribute(name.c_str()) == NULL) {
         if (name == "fill")
             result = "black";
-        else if (name == "stroke" || name == "transform" || name == "rotate")
+        else if (name == "stroke" || name == "transform" || name == "rotate" ||
+                 name == "font-style")
             result = "none";
+        else if (name == "text-anchor")
+            result = "start";
+        else if (name == "fill-rule")
+            result = "nonzero";
     } else {
         result = node->first_attribute(name.c_str())->value();
     }
@@ -403,23 +408,25 @@ std::vector< PathPoint > Parser::parsePathPoints(xml_node<> *node) {
 
 std::vector< std::string > Parser::getTransformOrder(xml_node<> *node) {
     std::string transform_tag = getAttribute(node, "transform");
-    transform_tag.erase(
-        std::remove(transform_tag.begin(), transform_tag.end(), ' '),
-        transform_tag.end());
-
-    size_t start_pos = transform_tag.find(")");
-    while (start_pos != std::string::npos) {
-        transform_tag.insert(start_pos + 1, " ");
-        start_pos = transform_tag.find(")", start_pos + 1);
-    }
-
     std::vector< std::string > order;
     std::stringstream ss(transform_tag);
     std::string type;
     while (ss >> type) {
-        order.push_back(type);
+        if (type.find("translate") != std::string::npos ||
+            type.find("scale") != std::string::npos ||
+            type.find("rotate") != std::string::npos) {
+            while (type.find(")") == std::string::npos) {
+                std::string temp;
+                ss >> temp;
+                type += " " + temp;
+            }
+            std::string temp = type.substr(0, type.find("(") + 1);
+            temp.erase(std::remove(temp.begin(), temp.end(), ' '), temp.end());
+            type.erase(0, type.find("(") + 1);
+            type = temp + type;
+            order.push_back(type);
+        }
     }
-
     return order;
 }
 
@@ -486,6 +493,10 @@ Plygon *Parser::parsePolygon(xml_node<> *node) {
     for (auto point : points) {
         shape->addPoint(point);
     }
+    std::string fill_rule = getAttribute(node, "fill-rule");
+    fill_rule.erase(std::remove(fill_rule.begin(), fill_rule.end(), ' '),
+                    fill_rule.end());
+    shape->setFillRule(fill_rule);
     shape->setTransforms(getTransformOrder(node));
     return shape;
 }
@@ -499,6 +510,10 @@ Plyline *Parser::parsePolyline(xml_node<> *node) {
     for (auto point : points) {
         shape->addPoint(point);
     }
+    std::string fill_rule = getAttribute(node, "fill-rule");
+    fill_rule.erase(std::remove(fill_rule.begin(), fill_rule.end(), ' '),
+                    fill_rule.end());
+    shape->setFillRule(fill_rule);
     shape->setTransforms(getTransformOrder(node));
     return shape;
 }
@@ -511,9 +526,21 @@ Text *Parser::parseText(xml_node<> *node) {
     float y = getFloatAttribute(node, "y");
     float font_size = getFloatAttribute(node, "font-size");
     std::string text = getAttribute(node, "text");
-    Text *shape = new Text(Vector2Df(x, y - font_size), text, font_size,
+    Text *shape = new Text(Vector2Df(x - 7, y - font_size + 5), text, font_size,
                            fill_color, stroke_color, stroke_width);
-    shape->setTransforms(getTransformOrder(node));
+    std::string anchor = getAttribute(node, "text-anchor");
+    anchor.erase(std::remove(anchor.begin(), anchor.end(), ' '), anchor.end());
+    shape->setAnchor(anchor);
+    std::string style = getAttribute(node, "font-style");
+    style.erase(std::remove(style.begin(), style.end(), ' '), style.end());
+    shape->setFontStyle(style);
+    float dx = getFloatAttribute(node, "dx");
+    float dy = getFloatAttribute(node, "dy");
+    std::string transform =
+        "translate(" + std::to_string(dx) + " " + std::to_string(dy) + ")";
+    std::vector< std::string > transform_order = getTransformOrder(node);
+    transform_order.push_back(transform);
+    shape->setTransforms(transform_order);
     return shape;
 }
 
@@ -526,6 +553,10 @@ Path *Parser::parsePath(xml_node<> *node) {
     for (auto point : points) {
         shape->addPoint(point);
     }
+    std::string fill_rule = getAttribute(node, "fill-rule");
+    fill_rule.erase(std::remove(fill_rule.begin(), fill_rule.end(), ' '),
+                    fill_rule.end());
+    shape->setFillRule(fill_rule);
     shape->setTransforms(getTransformOrder(node));
     return shape;
 }

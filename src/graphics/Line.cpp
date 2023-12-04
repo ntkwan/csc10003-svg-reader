@@ -9,7 +9,7 @@ Line::Line(const Vector2Df& point1, const Vector2Df& point2, mColor stroke,
     : direction(point2) {
     setPosition(point1);
     setOutlineThickness(stroke_width);
-    setFillColor(stroke);
+    setOutlineColor(stroke);
 }
 
 std::string Line::getClass() const { return "Line"; }

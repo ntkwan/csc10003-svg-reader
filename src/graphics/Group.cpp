@@ -12,7 +12,7 @@ Group::~Group() {
 
 std::string Group::getClass() const { return "Group"; }
 
-void Group::render(Renderer& renderer) const {
+void Group::render(const Renderer& renderer) const {
     for (auto shape : shapes) {
         renderer.draw(shape);
     }

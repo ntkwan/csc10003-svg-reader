@@ -13,6 +13,8 @@ class Text : public SVGElement {
 private:
     std::string content;  ///< Text element
     float font_size;      ///< Font size of the text
+    std::string anchor;   ///< Anchor of the text
+    std::string style;    ///< Style of the text
 
 public:
     /**
@@ -67,6 +69,34 @@ public:
      * @return The font size of the text.
      */
     float getFontSize() const;
+
+    /**
+     * @brief Sets the anchor of the text.
+     *
+     * @param anchor The new anchor of the text.
+     */
+    void setAnchor(std::string anchor);
+
+    /**
+     * @brief Gets the anchor of the text.
+     *
+     * @return The anchor of the text.
+     */
+    std::string getAnchor() const;
+
+    /**
+     * @brief Sets the style of the text.
+     *
+     * @param style The new style of the text.
+     */
+    void setFontStyle(std::string style);
+
+    /**
+     * @brief Gets the style of the text.
+     *
+     * @return The style of the text.
+     */
+    std::string getFontStyle() const;
 
     /**
      * @brief Prints the data of the text.

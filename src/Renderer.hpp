@@ -6,7 +6,7 @@
 #include <windows.h>
 #include <gdiplus.h>
 
-//clang-format on
+// clang-format on
 
 #include "graphics/Circle.hpp"
 #include "graphics/Color.hpp"
@@ -29,6 +29,7 @@ public:
     void draw(SVGElement* shape) const;
 
 private:
+    void applyTransform(std::vector< std::string > transform_order) const;
     void drawLine(Line* line) const;
     void drawRectangle(Rect* rectangle) const;
     void drawCircle(Circle* circle) const;

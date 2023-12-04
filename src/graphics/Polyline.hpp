@@ -35,6 +35,23 @@ public:
     //  * @param renderer The renderer to be used for rendering the shape.
     //  */
     // void render(Renderer& renderer) const override;
+
+    /**
+     * @brief Sets the fill rule of the polyline.
+     *
+     * @param fill_rule The new fill rule of the polyline.
+     */
+    void setFillRule(std::string fill_rule);
+
+    /**
+     * @brief Gets the fill rule of the polyline.
+     *
+     * @return The fill rule of the polyline.
+     */
+    std::string getFillRule() const;
+
+private:
+    std::string fill_rule;  ///< Fill rule of the polyline
 };
 
 #endif  // POLYLINE_HPP_

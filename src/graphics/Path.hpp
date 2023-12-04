@@ -9,9 +9,6 @@ struct PathPoint {
 };
 
 class Path : public SVGElement {
-private:
-    std::vector< PathPoint > points;
-
 public:
     Path(const mColor& fill, const mColor& stroke, float stroke_width);
 
@@ -23,7 +20,15 @@ public:
 
     std::vector< PathPoint > getPoints() const;
 
+    void setFillRule(std::string fill_rule);
+
+    std::string getFillRule() const;
+
     void printData() const override;
+
+private:
+    std::vector< PathPoint > points;
+    std::string fill_rule;
 };
 
 #endif
