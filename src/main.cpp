@@ -11,20 +11,20 @@
 
 using namespace rapidxml;
 
-LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+
+Parser* parser = nullptr;
 
 void OnPaint(HDC hdc, const std::string& filePath) {
     Gdiplus::Graphics graphics(hdc);
-
-    Parser* parser = Parser::getInstance(filePath);
+    if (!parser) {
+        parser = Parser::getInstance(filePath);
+    }
     Renderer* renderer = Renderer::getInstance(graphics);
     SVGElement* root = parser->getRoot();
     Group* group = dynamic_cast< Group* >(root);
     group->render(*renderer);
-    delete parser;
 }
-
-LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
 
 INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, PSTR, INT iCmdShow) {
     HWND hWnd;
@@ -69,6 +69,7 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, PSTR, INT iCmdShow) {
         DispatchMessage(&msg);
     }
 
+    if (parser) delete parser;
     Gdiplus::GdiplusShutdown(gdiplusToken);
     return msg.wParam;
 }
@@ -77,14 +78,14 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam,
                          LPARAM lParam) {
     HDC hdc;
     PAINTSTRUCT ps;
-    std::string filePath = "";
+    std::string filePath;
+    if (__argc > 1) {
+        filePath = __argv[1];
+    }
 
     switch (message) {
         case WM_PAINT:
             hdc = BeginPaint(hWnd, &ps);
-            if (__argc > 1) {
-                filePath = __argv[1];
-            }
             OnPaint(hdc, filePath);
             EndPaint(hWnd, &ps);
             return 0;

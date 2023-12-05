@@ -113,6 +113,10 @@ void Renderer::drawLine(Line* line) const {
 }
 
 void Renderer::drawRectangle(Rect* rectangle) const {
+    float x = rectangle->getPosition().x;
+    float y = rectangle->getPosition().y;
+    float width = rectangle->getWidth();
+    float height = rectangle->getHeight();
     mColor fill_color = rectangle->getFillColor();
     mColor outline_color = rectangle->getOutlineColor();
 
@@ -124,12 +128,21 @@ void Renderer::drawRectangle(Rect* rectangle) const {
     Gdiplus::Matrix original;
     graphics.GetTransform(&original);
     applyTransform(rectangle->getTransforms());
-    graphics.FillRectangle(&RectFill, rectangle->getPosition().x,
-                           rectangle->getPosition().y, rectangle->getWidth(),
-                           rectangle->getHeight());
-    graphics.DrawRectangle(&RectOutline, rectangle->getPosition().x,
-                           rectangle->getPosition().y, rectangle->getWidth(),
-                           rectangle->getHeight());
+    if (rectangle->getRadius().x != 0 || rectangle->getRadius().y != 0) {
+        float dx = rectangle->getRadius().x * 2;
+        float dy = rectangle->getRadius().y * 2;
+        Gdiplus::GraphicsPath path;
+        path.AddArc(x, y, dx, dy, 180, 90);
+        path.AddArc(x + width - dx, y, dx, dy, 270, 90);
+        path.AddArc(x + width - dx, y + height - dy, dx, dy, 0, 90);
+        path.AddArc(x, y + height - dy, dx, dy, 90, 90);
+        path.CloseFigure();
+        graphics.FillPath(&RectFill, &path);
+        graphics.DrawPath(&RectOutline, &path);
+    } else {
+        graphics.FillRectangle(&RectFill, x, y, width, height);
+        graphics.DrawRectangle(&RectOutline, x, y, width, height);
+    }
     graphics.SetTransform(&original);
 }
 
