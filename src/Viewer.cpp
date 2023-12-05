@@ -32,7 +32,6 @@ void Viewer::handleMouseEvent(UINT message, WPARAM wParam, LPARAM lParam) {
         case WM_MOUSEMOVE:
             if (wParam & MK_LBUTTON) {
                 handleMouseMove(lParam);
-                InvalidateRect(GetActiveWindow(), NULL, TRUE);
             }
 
         case WM_LBUTTONDOWN:
@@ -43,14 +42,9 @@ void Viewer::handleMouseEvent(UINT message, WPARAM wParam, LPARAM lParam) {
             handleLeftButtonUp();
             break;
     }
-
-    InvalidateRect(GetActiveWindow(), NULL, TRUE);
 }
 
-void Viewer::handleKeyEvent(WPARAM wParam) {
-    handleKeyDown(wParam);
-    InvalidateRect(GetActiveWindow(), NULL, TRUE);
-}
+void Viewer::handleKeyEvent(WPARAM wParam) { handleKeyDown(wParam); }
 
 void Viewer::handleMouseWheel(WPARAM wParam) {
     if (GET_WHEEL_DELTA_WPARAM(wParam) > 0) {
@@ -64,10 +58,15 @@ void Viewer::handleMouseMove(LPARAM lParam) {
     if (isDragging) {
         int x = static_cast< int >(LOWORD(lParam));
         int y = static_cast< int >(HIWORD(lParam));
-        offsetX += (x - lastMousePos.x) * zoomFactor;
-        offsetY += (y - lastMousePos.y) * zoomFactor;
-        lastMousePos.x = x;
-        lastMousePos.y = y;
+
+        // Kiểm tra sự thay đổi trước khi cập nhật vị trí và kích thước
+        if (x != lastMousePos.x || y != lastMousePos.y) {
+            offsetX += (x - lastMousePos.x) * zoomFactor;
+            offsetY += (y - lastMousePos.y) * zoomFactor;
+            lastMousePos.x = x;
+            lastMousePos.y = y;
+            needsRepaint = true;  // Set cờ để chỉ định có cần vẽ lại hay không
+        }
     }
 }
 
@@ -81,6 +80,10 @@ void Viewer::handleLeftButtonDown(LPARAM lParam) {
 void Viewer::handleLeftButtonUp() {
     isDragging = false;
     ReleaseCapture();
+
+    if (needsRepaint) {
+        needsRepaint = false;
+    }
 }
 
 void Viewer::handleKeyDown(WPARAM wParam) {

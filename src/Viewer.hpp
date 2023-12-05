@@ -9,7 +9,7 @@ public:
     float offsetY;
     float zoomFactor;
     float rotateAngle;
-
+    bool needsRepaint;
     static Viewer* getInstance();
     ~Viewer();
 

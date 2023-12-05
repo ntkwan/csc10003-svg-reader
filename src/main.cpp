@@ -20,7 +20,6 @@ void OnPaint(HDC hdc, const std::string& filePath, Viewer& viewer) {
     if (!parser) {
         parser = Parser::getInstance(filePath);
     }
-
     graphics.RotateTransform(viewer.rotateAngle);
     graphics.ScaleTransform(viewer.zoomFactor, viewer.zoomFactor);
     graphics.TranslateTransform(viewer.offsetX, viewer.offsetY);
@@ -33,18 +32,6 @@ void OnPaint(HDC hdc, const std::string& filePath, Viewer& viewer) {
     // SVGElement* root = parser->getRoot();
     // Group* group = dynamic_cast< Group* >(root);
     // group->render(*renderer);
-}
-
-void OnPaint1(HDC hdc, const std::string& filePath) {
-    Gdiplus::Graphics graphics(hdc);
-    if (!parser) {
-        parser = Parser::getInstance(filePath);
-    }
-    graphics.RotateTransform(40);
-    Renderer* renderer = Renderer::getInstance(graphics);
-    SVGElement* root = parser->getRoot();
-    Group* group = dynamic_cast< Group* >(root);
-    group->render(*renderer);
 }
 
 INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, PSTR, INT iCmdShow) {
@@ -103,6 +90,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam,
     if (__argc > 1) {
         filePath = __argv[1];
     }
+    if (!parser) {
+        parser = Parser::getInstance(filePath);
+    }
     Viewer* viewer = Viewer::getInstance();
     switch (message) {
         case WM_PAINT:
@@ -115,7 +105,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam,
         case WM_LBUTTONDOWN:
         case WM_LBUTTONUP:
             viewer->handleMouseEvent(message, wParam, lParam);
-            InvalidateRect(hWnd, NULL, TRUE);
+            if (viewer->needsRepaint) {
+                InvalidateRect(hWnd, NULL, TRUE);
+                viewer->needsRepaint = false;
+            }
             return 0;
         case WM_KEYDOWN:
             viewer->handleKeyEvent(wParam);
