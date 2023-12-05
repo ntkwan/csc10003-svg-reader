@@ -8,18 +8,39 @@
 #include <iostream>
 
 #include "Parser.hpp"
-
+#include "Viewer.hpp"
 using namespace rapidxml;
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 Parser* parser = nullptr;
 
-void OnPaint(HDC hdc, const std::string& filePath) {
+void OnPaint(HDC hdc, const std::string& filePath, Viewer& viewer) {
     Gdiplus::Graphics graphics(hdc);
     if (!parser) {
         parser = Parser::getInstance(filePath);
     }
+
+    graphics.RotateTransform(viewer.rotateAngle);
+    graphics.ScaleTransform(viewer.zoomFactor, viewer.zoomFactor);
+    graphics.TranslateTransform(viewer.offsetX, viewer.offsetY);
+    Gdiplus::Rect rectangle(50, 50, 200, 100);  // X, Y, Width, Height
+    Gdiplus::Rect rectangle1(20, 50, 20, 100);
+    Gdiplus::Pen pen(Gdiplus::Color(255, 0, 0, 0));  // Đen
+    graphics.DrawRectangle(&pen, rectangle);
+    graphics.DrawRectangle(&pen, rectangle1);
+    // Renderer* renderer = Renderer::getInstance(graphics);
+    // SVGElement* root = parser->getRoot();
+    // Group* group = dynamic_cast< Group* >(root);
+    // group->render(*renderer);
+}
+
+void OnPaint1(HDC hdc, const std::string& filePath) {
+    Gdiplus::Graphics graphics(hdc);
+    if (!parser) {
+        parser = Parser::getInstance(filePath);
+    }
+    graphics.RotateTransform(40);
     Renderer* renderer = Renderer::getInstance(graphics);
     SVGElement* root = parser->getRoot();
     Group* group = dynamic_cast< Group* >(root);
@@ -82,12 +103,23 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam,
     if (__argc > 1) {
         filePath = __argv[1];
     }
-
+    Viewer* viewer = Viewer::getInstance();
     switch (message) {
         case WM_PAINT:
             hdc = BeginPaint(hWnd, &ps);
-            OnPaint(hdc, filePath);
+            OnPaint(hdc, filePath, *viewer);
             EndPaint(hWnd, &ps);
+            return 0;
+        case WM_MOUSEWHEEL:
+        case WM_MOUSEMOVE:
+        case WM_LBUTTONDOWN:
+        case WM_LBUTTONUP:
+            viewer->handleMouseEvent(message, wParam, lParam);
+            InvalidateRect(hWnd, NULL, TRUE);
+            return 0;
+        case WM_KEYDOWN:
+            viewer->handleKeyEvent(wParam);
+            InvalidateRect(hWnd, NULL, TRUE);
             return 0;
         case WM_DESTROY:
             PostQuitMessage(0);
