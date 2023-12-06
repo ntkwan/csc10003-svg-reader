@@ -24,7 +24,6 @@ void OnPaint(HDC hdc, const std::string& filePath, Viewer& viewer) {
     graphics.ScaleTransform(viewer.zoomFactor, viewer.zoomFactor);
     graphics.TranslateTransform(viewer.offsetX, viewer.offsetY);
     graphics.SetSmoothingMode(Gdiplus::SmoothingModeAntiAlias);
-    graphics.SetTextRenderingHint(Gdiplus::TextRenderingHintAntiAlias);
     graphics.SetTextContrast(100);
     graphics.SetCompositingMode(Gdiplus::CompositingModeSourceOver);
     graphics.SetPixelOffsetMode(Gdiplus::PixelOffsetModeHighQuality);

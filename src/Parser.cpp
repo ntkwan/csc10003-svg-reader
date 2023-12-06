@@ -351,13 +351,10 @@ std::vector< Vector2Df > Parser::parsePoints(xml_node<> *node) {
 
     std::stringstream ss(points_string);
     float x, y;
-    char comma;
 
-    while (ss >> x >> comma >> y) {
-        if (comma != ',') {
-            std::string y_str = comma + std::to_string(y);
-            y = std::stof(y_str);
-        }
+    while (ss >> x) {
+        if (ss.peek() == ',') ss.ignore();
+        ss >> y;
         points.push_back(Vector2Df(x, y));
     }
 

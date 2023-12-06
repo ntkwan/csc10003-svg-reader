@@ -13,7 +13,13 @@ const mColor mColor::Transparent(0, 0, 0, 0);
 mColor::mColor() : r(0), g(0), b(0), a(255) {}
 
 mColor::mColor(int red, int green, int blue, int alpha)
-    : r(red), g(green), b(blue), a(alpha) {}
+    : r(red), g(green), b(blue), a(alpha) {
+    if (r < 0) {
+        r = 0;
+    } else if (r > 255) {
+        r = 255;
+    }
+}
 
 mColor::mColor(int color)
     : r(static_cast< int >((color & 0xff000000) >> 24)),
