@@ -19,7 +19,7 @@ public:
 
     std::string getClass() const override;
 
-    void render(const Renderer& renderer) const;
+    void render(Gdiplus::Graphics& graphics, const Renderer& renderer) const;
 
     Attributes getAttributes() const;
 

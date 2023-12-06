@@ -12,9 +12,10 @@ Group::~Group() {
 
 std::string Group::getClass() const { return "Group"; }
 
-void Group::render(const Renderer& renderer) const {
+void Group::render(Gdiplus::Graphics& graphics,
+                   const Renderer& renderer) const {
     for (auto shape : shapes) {
-        renderer.draw(shape);
+        renderer.draw(graphics, shape);
     }
 }
 

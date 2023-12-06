@@ -23,15 +23,16 @@ void OnPaint(HDC hdc, const std::string& filePath, Viewer& viewer) {
     graphics.RotateTransform(viewer.rotateAngle);
     graphics.ScaleTransform(viewer.zoomFactor, viewer.zoomFactor);
     graphics.TranslateTransform(viewer.offsetX, viewer.offsetY);
-    Gdiplus::Rect rectangle(50, 50, 200, 100);  // X, Y, Width, Height
-    Gdiplus::Rect rectangle1(20, 50, 20, 100);
-    Gdiplus::Pen pen(Gdiplus::Color(255, 0, 0, 0));  // Đen
-    graphics.DrawRectangle(&pen, rectangle);
-    graphics.DrawRectangle(&pen, rectangle1);
-    // Renderer* renderer = Renderer::getInstance(graphics);
-    // SVGElement* root = parser->getRoot();
-    // Group* group = dynamic_cast< Group* >(root);
-    // group->render(*renderer);
+    graphics.SetSmoothingMode(Gdiplus::SmoothingModeAntiAlias);
+    graphics.SetTextRenderingHint(Gdiplus::TextRenderingHintAntiAlias);
+    graphics.SetTextContrast(100);
+    graphics.SetCompositingMode(Gdiplus::CompositingModeSourceOver);
+    graphics.SetPixelOffsetMode(Gdiplus::PixelOffsetModeHighQuality);
+    graphics.SetInterpolationMode(Gdiplus::InterpolationModeHighQuality);
+    Renderer* renderer = Renderer::getInstance();
+    SVGElement* root = parser->getRoot();
+    Group* group = dynamic_cast< Group* >(root);
+    group->render(graphics, *renderer);
 }
 
 INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, PSTR, INT iCmdShow) {

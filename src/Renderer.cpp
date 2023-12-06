@@ -2,13 +2,11 @@
 
 Renderer* Renderer::instance = nullptr;
 
-Renderer::Renderer(Gdiplus::Graphics& graphics) : graphics(graphics) {
-    graphics.SetSmoothingMode(Gdiplus::SmoothingModeAntiAlias8x8);
-}
+Renderer::Renderer() {}
 
-Renderer* Renderer::getInstance(Gdiplus::Graphics& graphics) {
+Renderer* Renderer::getInstance() {
     if (instance == nullptr) {
-        instance = new Renderer(graphics);
+        instance = new Renderer();
     }
     return instance;
 }
@@ -45,8 +43,8 @@ std::pair< float, float > getScaleXY(std::string transform_value) {
     return std::pair< float, float >(scale_x, scale_y);
 }
 
-void Renderer::applyTransform(
-    std::vector< std::string > transform_order) const {
+void Renderer::applyTransform(std::vector< std::string > transform_order,
+                              Gdiplus::Graphics& graphics) const {
     for (auto type : transform_order) {
         if (type.find("translate") != std::string::npos) {
             float trans_x = getTranslate(type).first,
@@ -68,38 +66,38 @@ void Renderer::applyTransform(
     }
 }
 
-void Renderer::draw(SVGElement* shape) const {
+void Renderer::draw(Gdiplus::Graphics& graphics, SVGElement* shape) const {
     if (shape->getClass() == "Group") {
         Group* group = dynamic_cast< Group* >(shape);
-        group->render(*this);
+        group->render(graphics, *this);
     } else if (shape->getClass() == "Polyline") {
         Plyline* polyline = dynamic_cast< Plyline* >(shape);
-        drawPolyline(polyline);
+        drawPolyline(graphics, polyline);
     } else if (shape->getClass() == "Text") {
         Text* text = dynamic_cast< Text* >(shape);
-        drawText(text);
+        drawText(graphics, text);
     } else if (shape->getClass() == "Rect") {
         Rect* rectangle = dynamic_cast< Rect* >(shape);
-        drawRectangle(rectangle);
+        drawRectangle(graphics, rectangle);
     } else if (shape->getClass() == "Circle") {
         Circle* circle = dynamic_cast< Circle* >(shape);
-        drawCircle(circle);
+        drawCircle(graphics, circle);
     } else if (shape->getClass() == "Ellipse") {
         Ell* ellipse = dynamic_cast< Ell* >(shape);
-        drawEllipse(ellipse);
+        drawEllipse(graphics, ellipse);
     } else if (shape->getClass() == "Line") {
         Line* line = dynamic_cast< Line* >(shape);
-        drawLine(line);
+        drawLine(graphics, line);
     } else if (shape->getClass() == "Polygon") {
         Plygon* polygon = dynamic_cast< Plygon* >(shape);
-        drawPolygon(polygon);
+        drawPolygon(graphics, polygon);
     } else if (shape->getClass() == "Path") {
         Path* path = dynamic_cast< Path* >(shape);
-        drawPath(path);
+        drawPath(graphics, path);
     }
 }
 
-void Renderer::drawLine(Line* line) const {
+void Renderer::drawLine(Gdiplus::Graphics& graphics, Line* line) const {
     mColor color = line->getOutlineColor();
     Gdiplus::Pen linePen(Gdiplus::Color(color.a, color.r, color.g, color.b),
                          line->getOutlineThickness());
@@ -107,19 +105,19 @@ void Renderer::drawLine(Line* line) const {
     Gdiplus::PointF endPoint(line->getDirection().x, line->getDirection().y);
     Gdiplus::Matrix original;
     graphics.GetTransform(&original);
-    applyTransform(line->getTransforms());
+    applyTransform(line->getTransforms(), graphics);
     graphics.DrawLine(&linePen, startPoint, endPoint);
     graphics.SetTransform(&original);
 }
 
-void Renderer::drawRectangle(Rect* rectangle) const {
+void Renderer::drawRectangle(Gdiplus::Graphics& graphics,
+                             Rect* rectangle) const {
     float x = rectangle->getPosition().x;
     float y = rectangle->getPosition().y;
     float width = rectangle->getWidth();
     float height = rectangle->getHeight();
     mColor fill_color = rectangle->getFillColor();
     mColor outline_color = rectangle->getOutlineColor();
-
     Gdiplus::Pen RectOutline(Gdiplus::Color(outline_color.a, outline_color.r,
                                             outline_color.g, outline_color.b),
                              rectangle->getOutlineThickness());
@@ -127,7 +125,7 @@ void Renderer::drawRectangle(Rect* rectangle) const {
         Gdiplus::Color(fill_color.a, fill_color.r, fill_color.g, fill_color.b));
     Gdiplus::Matrix original;
     graphics.GetTransform(&original);
-    applyTransform(rectangle->getTransforms());
+    applyTransform(rectangle->getTransforms(), graphics);
     if (rectangle->getRadius().x != 0 || rectangle->getRadius().y != 0) {
         float dx = rectangle->getRadius().x * 2;
         float dy = rectangle->getRadius().y * 2;
@@ -146,7 +144,7 @@ void Renderer::drawRectangle(Rect* rectangle) const {
     graphics.SetTransform(&original);
 }
 
-void Renderer::drawCircle(Circle* circle) const {
+void Renderer::drawCircle(Gdiplus::Graphics& graphics, Circle* circle) const {
     mColor fill_color = circle->getFillColor();
     mColor outline_color = circle->getOutlineColor();
     Gdiplus::Pen circleOutline(Gdiplus::Color(outline_color.a, outline_color.r,
@@ -156,7 +154,7 @@ void Renderer::drawCircle(Circle* circle) const {
         Gdiplus::Color(fill_color.a, fill_color.r, fill_color.g, fill_color.b));
     Gdiplus::Matrix original;
     graphics.GetTransform(&original);
-    applyTransform(circle->getTransforms());
+    applyTransform(circle->getTransforms(), graphics);
     graphics.FillEllipse(&circleFill,
                          circle->getPosition().x - circle->getRadius().x,
                          circle->getPosition().y - circle->getRadius().y,
@@ -168,7 +166,7 @@ void Renderer::drawCircle(Circle* circle) const {
     graphics.SetTransform(&original);
 }
 
-void Renderer::drawEllipse(Ell* ellipse) const {
+void Renderer::drawEllipse(Gdiplus::Graphics& graphics, Ell* ellipse) const {
     mColor fill_color = ellipse->getFillColor();
     mColor outline_color = ellipse->getOutlineColor();
     Gdiplus::Pen ellipseOutline(
@@ -179,7 +177,7 @@ void Renderer::drawEllipse(Ell* ellipse) const {
         Gdiplus::Color(fill_color.a, fill_color.r, fill_color.g, fill_color.b));
     Gdiplus::Matrix original;
     graphics.GetTransform(&original);
-    applyTransform(ellipse->getTransforms());
+    applyTransform(ellipse->getTransforms(), graphics);
     graphics.FillEllipse(
         &ellipseFill, ellipse->getPosition().x - ellipse->getRadius().x,
         ellipse->getPosition().y - ellipse->getRadius().y,
@@ -191,7 +189,7 @@ void Renderer::drawEllipse(Ell* ellipse) const {
     graphics.SetTransform(&original);
 }
 
-void Renderer::drawPolygon(Plygon* polygon) const {
+void Renderer::drawPolygon(Gdiplus::Graphics& graphics, Plygon* polygon) const {
     mColor fill_color = polygon->getFillColor();
     mColor outline_color = polygon->getOutlineColor();
     Gdiplus::Pen polygonOutline(
@@ -216,7 +214,7 @@ void Renderer::drawPolygon(Plygon* polygon) const {
     }
     Gdiplus::Matrix original;
     graphics.GetTransform(&original);
-    applyTransform(polygon->getTransforms());
+    applyTransform(polygon->getTransforms(), graphics);
     graphics.FillPolygon(&polygonFill, points, idx, fillMode);
     graphics.DrawPolygon(&polygonOutline, points, idx);
     graphics.SetTransform(&original);
@@ -225,7 +223,7 @@ void Renderer::drawPolygon(Plygon* polygon) const {
 
 #include <codecvt>
 #include <locale>
-void Renderer::drawText(Text* text) const {
+void Renderer::drawText(Gdiplus::Graphics& graphics, Text* text) const {
     mColor outline_color = text->getOutlineColor();
     mColor fill_color = text->getFillColor();
 
@@ -265,13 +263,14 @@ void Renderer::drawText(Text* text) const {
                    fontStyle, text->getFontSize(), position, &stringFormat);
     Gdiplus::Matrix original;
     graphics.GetTransform(&original);
-    applyTransform(text->getTransforms());
+    applyTransform(text->getTransforms(), graphics);
     graphics.FillPath(&textFill, &path);
     graphics.DrawPath(&textOutline, &path);
     graphics.SetTransform(&original);
 }
 
-void Renderer::drawPolyline(Plyline* polyline) const {
+void Renderer::drawPolyline(Gdiplus::Graphics& graphics,
+                            Plyline* polyline) const {
     mColor outline_color = polyline->getOutlineColor();
     mColor fill_color = polyline->getFillColor();
     Gdiplus::Pen polylinePen(Gdiplus::Color(outline_color.a, outline_color.r,
@@ -300,13 +299,13 @@ void Renderer::drawPolyline(Plyline* polyline) const {
     }
     Gdiplus::Matrix original;
     graphics.GetTransform(&original);
-    applyTransform(polyline->getTransforms());
+    applyTransform(polyline->getTransforms(), graphics);
     graphics.FillPath(&polylineFill, &path);
     graphics.DrawPath(&polylinePen, &path);
     graphics.SetTransform(&original);
 }
 
-void Renderer::drawPath(Path* path) const {
+void Renderer::drawPath(Gdiplus::Graphics& graphics, Path* path) const {
     mColor outline_color = path->getOutlineColor();
     mColor fill_color = path->getFillColor();
     Gdiplus::Pen pathPen(Gdiplus::Color(outline_color.a, outline_color.r,
@@ -399,7 +398,7 @@ void Renderer::drawPath(Path* path) const {
     }
     Gdiplus::Matrix original;
     graphics.GetTransform(&original);
-    applyTransform(path->getTransforms());
+    applyTransform(path->getTransforms(), graphics);
     graphics.FillPath(&pathFill, &gdiPath);
     graphics.DrawPath(&pathPen, &gdiPath);
     graphics.SetTransform(&original);

@@ -21,25 +21,25 @@
 
 class Renderer {
 public:
-    static Renderer* getInstance(Gdiplus::Graphics& graphics);
+    static Renderer* getInstance();
     Renderer(const Renderer&) = delete;
     void operator=(const Renderer&) = delete;
 
-    Gdiplus::Graphics& graphics;
-    void draw(SVGElement* shape) const;
+    void draw(Gdiplus::Graphics& graphics, SVGElement* shape) const;
 
 private:
-    void applyTransform(std::vector< std::string > transform_order) const;
-    void drawLine(Line* line) const;
-    void drawRectangle(Rect* rectangle) const;
-    void drawCircle(Circle* circle) const;
-    void drawEllipse(Ell* ellipse) const;
-    void drawPolygon(Plygon* polygon) const;
-    void drawText(Text* text) const;
-    void drawPolyline(Plyline* polyline) const;
-    void drawPath(Path* path) const;
+    void applyTransform(std::vector< std::string > transform_order,
+                        Gdiplus::Graphics& graphics) const;
+    void drawLine(Gdiplus::Graphics& graphics, Line* line) const;
+    void drawRectangle(Gdiplus::Graphics& graphics, Rect* rectangle) const;
+    void drawCircle(Gdiplus::Graphics& graphics, Circle* circle) const;
+    void drawEllipse(Gdiplus::Graphics& graphics, Ell* ellipse) const;
+    void drawPolygon(Gdiplus::Graphics& graphics, Plygon* polygon) const;
+    void drawText(Gdiplus::Graphics& graphics, Text* text) const;
+    void drawPolyline(Gdiplus::Graphics& graphics, Plyline* polyline) const;
+    void drawPath(Gdiplus::Graphics& graphics, Path* path) const;
 
-    Renderer(Gdiplus::Graphics& graphics);
+    Renderer();
     static Renderer* instance;
 };
 

@@ -49,8 +49,10 @@ void Viewer::handleKeyEvent(WPARAM wParam) { handleKeyDown(wParam); }
 void Viewer::handleMouseWheel(WPARAM wParam) {
     if (GET_WHEEL_DELTA_WPARAM(wParam) > 0) {
         zoomFactor *= 1.1f;
+        needsRepaint = true;
     } else {
         zoomFactor /= 1.1f;
+        needsRepaint = true;
     }
 }
 
@@ -59,13 +61,12 @@ void Viewer::handleMouseMove(LPARAM lParam) {
         int x = static_cast< int >(LOWORD(lParam));
         int y = static_cast< int >(HIWORD(lParam));
 
-        // Kiểm tra sự thay đổi trước khi cập nhật vị trí và kích thước
         if (x != lastMousePos.x || y != lastMousePos.y) {
             offsetX += (x - lastMousePos.x) * zoomFactor;
             offsetY += (y - lastMousePos.y) * zoomFactor;
             lastMousePos.x = x;
             lastMousePos.y = y;
-            needsRepaint = true;  // Set cờ để chỉ định có cần vẽ lại hay không
+            needsRepaint = true;
         }
     }
 }
