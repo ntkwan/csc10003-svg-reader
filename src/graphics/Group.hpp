@@ -3,12 +3,10 @@
 
 #include <vector>
 
-#include "Renderer.hpp"
 #include "SVGElement.hpp"
 
 typedef std::vector< std::pair< std::string, std::string > > Attributes;
 
-class Renderer;
 class Group : public SVGElement {
 public:
     Group();
@@ -18,8 +16,6 @@ public:
     ~Group();
 
     std::string getClass() const override;
-
-    void render(Gdiplus::Graphics& graphics, const Renderer& renderer) const;
 
     Attributes getAttributes() const;
 

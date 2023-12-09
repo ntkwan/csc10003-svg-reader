@@ -1,5 +1,6 @@
 #include "Color.hpp"
 
+#include <algorithm>
 const mColor mColor::Black(0, 0, 0);
 const mColor mColor::White(255, 255, 255);
 const mColor mColor::Red(255, 0, 0);
@@ -14,11 +15,10 @@ mColor::mColor() : r(0), g(0), b(0), a(255) {}
 
 mColor::mColor(int red, int green, int blue, int alpha)
     : r(red), g(green), b(blue), a(alpha) {
-    if (r < 0) {
-        r = 0;
-    } else if (r > 255) {
-        r = 255;
-    }
+    r = std::clamp(r, 0, 255);
+    g = std::clamp(g, 0, 255);
+    b = std::clamp(b, 0, 255);
+    a = std::clamp(a, 0, 255);
 }
 
 mColor::mColor(int color)

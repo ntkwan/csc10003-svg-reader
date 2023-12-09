@@ -1,6 +1,5 @@
 #include "Text.hpp"
 
-// #include "Renderer.hpp"
 Text::Text(Vector2Df pos, std::string text, float font_size, const mColor &fill,
            const mColor &stroke, float stroke_width)
     : content(text), font_size(font_size) {
@@ -11,8 +10,6 @@ Text::Text(Vector2Df pos, std::string text, float font_size, const mColor &fill,
 }
 
 std::string Text::getClass() const { return "Text"; }
-
-// void Text::render(Renderer &renderer) const { renderer.renderText(*this); }
 
 void Text::setFontSize(float font_size) { this->font_size = font_size; }
 

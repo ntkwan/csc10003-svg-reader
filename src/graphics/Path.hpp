@@ -14,8 +14,6 @@ public:
 
     std::string getClass() const override;
 
-    // void render(Renderer& renderer) const override;
-
     void addPoint(PathPoint point);
 
     std::vector< PathPoint > getPoints() const;

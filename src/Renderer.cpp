@@ -66,34 +66,40 @@ void Renderer::applyTransform(std::vector< std::string > transform_order,
     }
 }
 
-void Renderer::draw(Gdiplus::Graphics& graphics, SVGElement* shape) const {
-    if (shape->getClass() == "Group") {
-        Group* group = dynamic_cast< Group* >(shape);
-        group->render(graphics, *this);
-    } else if (shape->getClass() == "Polyline") {
-        Plyline* polyline = dynamic_cast< Plyline* >(shape);
-        drawPolyline(graphics, polyline);
-    } else if (shape->getClass() == "Text") {
-        Text* text = dynamic_cast< Text* >(shape);
-        drawText(graphics, text);
-    } else if (shape->getClass() == "Rect") {
-        Rect* rectangle = dynamic_cast< Rect* >(shape);
-        drawRectangle(graphics, rectangle);
-    } else if (shape->getClass() == "Circle") {
-        Circle* circle = dynamic_cast< Circle* >(shape);
-        drawCircle(graphics, circle);
-    } else if (shape->getClass() == "Ellipse") {
-        Ell* ellipse = dynamic_cast< Ell* >(shape);
-        drawEllipse(graphics, ellipse);
-    } else if (shape->getClass() == "Line") {
-        Line* line = dynamic_cast< Line* >(shape);
-        drawLine(graphics, line);
-    } else if (shape->getClass() == "Polygon") {
-        Plygon* polygon = dynamic_cast< Plygon* >(shape);
-        drawPolygon(graphics, polygon);
-    } else if (shape->getClass() == "Path") {
-        Path* path = dynamic_cast< Path* >(shape);
-        drawPath(graphics, path);
+void Renderer::draw(Gdiplus::Graphics& graphics, Group* group) const {
+    for (auto shape : group->getElements()) {
+        Gdiplus::Matrix original;
+        graphics.GetTransform(&original);
+        applyTransform(shape->getTransforms(), graphics);
+        if (shape->getClass() == "Group") {
+            Group* group = dynamic_cast< Group* >(shape);
+            draw(graphics, group);
+        } else if (shape->getClass() == "Polyline") {
+            Plyline* polyline = dynamic_cast< Plyline* >(shape);
+            drawPolyline(graphics, polyline);
+        } else if (shape->getClass() == "Text") {
+            Text* text = dynamic_cast< Text* >(shape);
+            drawText(graphics, text);
+        } else if (shape->getClass() == "Rect") {
+            Rect* rectangle = dynamic_cast< Rect* >(shape);
+            drawRectangle(graphics, rectangle);
+        } else if (shape->getClass() == "Circle") {
+            Circle* circle = dynamic_cast< Circle* >(shape);
+            drawCircle(graphics, circle);
+        } else if (shape->getClass() == "Ellipse") {
+            Ell* ellipse = dynamic_cast< Ell* >(shape);
+            drawEllipse(graphics, ellipse);
+        } else if (shape->getClass() == "Line") {
+            Line* line = dynamic_cast< Line* >(shape);
+            drawLine(graphics, line);
+        } else if (shape->getClass() == "Polygon") {
+            Plygon* polygon = dynamic_cast< Plygon* >(shape);
+            drawPolygon(graphics, polygon);
+        } else if (shape->getClass() == "Path") {
+            Path* path = dynamic_cast< Path* >(shape);
+            drawPath(graphics, path);
+        }
+        graphics.SetTransform(&original);
     }
 }
 
@@ -103,11 +109,7 @@ void Renderer::drawLine(Gdiplus::Graphics& graphics, Line* line) const {
                          line->getOutlineThickness());
     Gdiplus::PointF startPoint(line->getPosition().x, line->getPosition().y);
     Gdiplus::PointF endPoint(line->getDirection().x, line->getDirection().y);
-    Gdiplus::Matrix original;
-    graphics.GetTransform(&original);
-    applyTransform(line->getTransforms(), graphics);
     graphics.DrawLine(&linePen, startPoint, endPoint);
-    graphics.SetTransform(&original);
 }
 
 void Renderer::drawRectangle(Gdiplus::Graphics& graphics,
@@ -123,9 +125,6 @@ void Renderer::drawRectangle(Gdiplus::Graphics& graphics,
                              rectangle->getOutlineThickness());
     Gdiplus::SolidBrush RectFill(
         Gdiplus::Color(fill_color.a, fill_color.r, fill_color.g, fill_color.b));
-    Gdiplus::Matrix original;
-    graphics.GetTransform(&original);
-    applyTransform(rectangle->getTransforms(), graphics);
     if (rectangle->getRadius().x != 0 || rectangle->getRadius().y != 0) {
         float dx = rectangle->getRadius().x * 2;
         float dy = rectangle->getRadius().y * 2;
@@ -141,7 +140,6 @@ void Renderer::drawRectangle(Gdiplus::Graphics& graphics,
         graphics.FillRectangle(&RectFill, x, y, width, height);
         graphics.DrawRectangle(&RectOutline, x, y, width, height);
     }
-    graphics.SetTransform(&original);
 }
 
 void Renderer::drawCircle(Gdiplus::Graphics& graphics, Circle* circle) const {
@@ -152,9 +150,6 @@ void Renderer::drawCircle(Gdiplus::Graphics& graphics, Circle* circle) const {
                                circle->getOutlineThickness());
     Gdiplus::SolidBrush circleFill(
         Gdiplus::Color(fill_color.a, fill_color.r, fill_color.g, fill_color.b));
-    Gdiplus::Matrix original;
-    graphics.GetTransform(&original);
-    applyTransform(circle->getTransforms(), graphics);
     graphics.FillEllipse(&circleFill,
                          circle->getPosition().x - circle->getRadius().x,
                          circle->getPosition().y - circle->getRadius().y,
@@ -163,7 +158,6 @@ void Renderer::drawCircle(Gdiplus::Graphics& graphics, Circle* circle) const {
                          circle->getPosition().x - circle->getRadius().x,
                          circle->getPosition().y - circle->getRadius().y,
                          circle->getRadius().x * 2, circle->getRadius().x * 2);
-    graphics.SetTransform(&original);
 }
 
 void Renderer::drawEllipse(Gdiplus::Graphics& graphics, Ell* ellipse) const {
@@ -175,9 +169,6 @@ void Renderer::drawEllipse(Gdiplus::Graphics& graphics, Ell* ellipse) const {
         ellipse->getOutlineThickness());
     Gdiplus::SolidBrush ellipseFill(
         Gdiplus::Color(fill_color.a, fill_color.r, fill_color.g, fill_color.b));
-    Gdiplus::Matrix original;
-    graphics.GetTransform(&original);
-    applyTransform(ellipse->getTransforms(), graphics);
     graphics.FillEllipse(
         &ellipseFill, ellipse->getPosition().x - ellipse->getRadius().x,
         ellipse->getPosition().y - ellipse->getRadius().y,
@@ -186,7 +177,6 @@ void Renderer::drawEllipse(Gdiplus::Graphics& graphics, Ell* ellipse) const {
         &ellipseOutline, ellipse->getPosition().x - ellipse->getRadius().x,
         ellipse->getPosition().y - ellipse->getRadius().y,
         ellipse->getRadius().x * 2, ellipse->getRadius().y * 2);
-    graphics.SetTransform(&original);
 }
 
 void Renderer::drawPolygon(Gdiplus::Graphics& graphics, Plygon* polygon) const {
@@ -212,12 +202,8 @@ void Renderer::drawPolygon(Gdiplus::Graphics& graphics, Plygon* polygon) const {
     } else if (polygon->getFillRule() == "nonzero") {
         fillMode = Gdiplus::FillModeWinding;
     }
-    Gdiplus::Matrix original;
-    graphics.GetTransform(&original);
-    applyTransform(polygon->getTransforms(), graphics);
     graphics.FillPolygon(&polygonFill, points, idx, fillMode);
     graphics.DrawPolygon(&polygonOutline, points, idx);
-    graphics.SetTransform(&original);
     delete[] points;
 }
 
@@ -261,12 +247,8 @@ void Renderer::drawText(Gdiplus::Graphics& graphics, Text* text) const {
 
     path.AddString(wideContent.c_str(), wideContent.size(), &fontFamily,
                    fontStyle, text->getFontSize(), position, &stringFormat);
-    Gdiplus::Matrix original;
-    graphics.GetTransform(&original);
-    applyTransform(text->getTransforms(), graphics);
     graphics.FillPath(&textFill, &path);
     graphics.DrawPath(&textOutline, &path);
-    graphics.SetTransform(&original);
 }
 
 void Renderer::drawPolyline(Gdiplus::Graphics& graphics,
@@ -297,12 +279,8 @@ void Renderer::drawPolyline(Gdiplus::Graphics& graphics,
         path.AddLine(points[i - 1].x, points[i - 1].y, points[i].x,
                      points[i].y);
     }
-    Gdiplus::Matrix original;
-    graphics.GetTransform(&original);
-    applyTransform(polyline->getTransforms(), graphics);
     graphics.FillPath(&polylineFill, &path);
     graphics.DrawPath(&polylinePen, &path);
-    graphics.SetTransform(&original);
 }
 
 void Renderer::drawPath(Gdiplus::Graphics& graphics, Path* path) const {
@@ -396,10 +374,6 @@ void Renderer::drawPath(Gdiplus::Graphics& graphics, Path* path) const {
             curPoint = firstPoint;
         }
     }
-    Gdiplus::Matrix original;
-    graphics.GetTransform(&original);
-    applyTransform(path->getTransforms(), graphics);
     graphics.FillPath(&pathFill, &gdiPath);
     graphics.DrawPath(&pathPen, &gdiPath);
-    graphics.SetTransform(&original);
 }

@@ -59,21 +59,30 @@ private:
 
     std::vector< std::string > getTransformOrder(xml_node<>* node);
 
-    Line* parseLine(xml_node<>* node);
+    Line* parseLine(xml_node<>* node, const mColor& stroke_color,
+                    float stroke_width);
 
-    Rect* parseRect(xml_node<>* node);
+    Rect* parseRect(xml_node<>* node, const mColor& fill_color,
+                    const mColor& stroke_color, float stroke_width);
 
-    class Plyline* parsePolyline(xml_node<>* node);
+    class Plyline* parsePolyline(xml_node<>* node, const mColor& fill_color,
+                                 const mColor& stroke_color,
+                                 float stroke_width);
 
-    class Plygon* parsePolygon(xml_node<>* node);
+    class Plygon* parsePolygon(xml_node<>* node, const mColor& fill_color,
+                               const mColor& stroke_color, float stroke_width);
 
-    Circle* parseCircle(xml_node<>* node);
+    Circle* parseCircle(xml_node<>* node, const mColor& fill_color,
+                        const mColor& stroke_color, float stroke_width);
 
-    class Ell* parseEllipse(xml_node<>* node);
+    class Ell* parseEllipse(xml_node<>* node, const mColor& fill_color,
+                            const mColor& stroke_color, float stroke_width);
 
-    Path* parsePath(xml_node<>* node);
+    Path* parsePath(xml_node<>* node, const mColor& fill_color,
+                    const mColor& stroke_color, float stroke_width);
 
-    Text* parseText(xml_node<>* node);
+    Text* parseText(xml_node<>* node, const mColor& fill_color,
+                    const mColor& stroke_color, float stroke_width);
 
     SVGElement* parseShape(xml_node<>* node);
 

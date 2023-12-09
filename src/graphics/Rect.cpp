@@ -1,6 +1,4 @@
-#include "Rect.hpp"
-
-// #include "Renderer.hpp"
+#include "Rect.hpp"s
 
 Rect::Rect(float width, float height, Vector2Df position, Vector2Df radius,
            const mColor &fill, const mColor &stroke, float stroke_width)

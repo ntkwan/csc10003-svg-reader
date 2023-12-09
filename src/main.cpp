@@ -5,11 +5,8 @@
 #include <gdiplus.h>
 // clang-format on
 
-#include <iostream>
-
 #include "Parser.hpp"
 #include "Viewer.hpp"
-using namespace rapidxml;
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
@@ -23,7 +20,7 @@ void OnPaint(HDC hdc, const std::string& filePath, Viewer& viewer) {
     graphics.RotateTransform(viewer.rotateAngle);
     graphics.ScaleTransform(viewer.zoomFactor, viewer.zoomFactor);
     graphics.TranslateTransform(viewer.offsetX, viewer.offsetY);
-    graphics.SetSmoothingMode(Gdiplus::SmoothingModeAntiAlias);
+    graphics.SetSmoothingMode(Gdiplus::SmoothingModeAntiAlias8x8);
     graphics.SetTextContrast(100);
     graphics.SetCompositingMode(Gdiplus::CompositingModeSourceOver);
     graphics.SetPixelOffsetMode(Gdiplus::PixelOffsetModeHighQuality);
@@ -31,7 +28,7 @@ void OnPaint(HDC hdc, const std::string& filePath, Viewer& viewer) {
     Renderer* renderer = Renderer::getInstance();
     SVGElement* root = parser->getRoot();
     Group* group = dynamic_cast< Group* >(root);
-    group->render(graphics, *renderer);
+    renderer->draw(graphics, group);
 }
 
 INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, PSTR, INT iCmdShow) {
@@ -57,17 +54,18 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, PSTR, INT iCmdShow) {
 
     RegisterClass(&wndClass);
 
-    hWnd = CreateWindow(TEXT("svg-reader-v0.2"),  // window class name
-                        TEXT("svg-reader-v0.2"),  // window caption
-                        WS_OVERLAPPEDWINDOW,      // window style
-                        CW_USEDEFAULT,            // initial x position
-                        CW_USEDEFAULT,            // initial y position
-                        1600,                     // initial x size
-                        1200,                     // initial y size
-                        NULL,                     // parent window handle
-                        NULL,                     // window menu handle
-                        hInstance,                // program instance handle
-                        NULL);                    // creation parameters
+    hWnd = CreateWindowEx(0,
+                          TEXT("svg-reader-v0.2"),  // window class name
+                          TEXT("svg-reader-v0.2"),  // window caption
+                          WS_OVERLAPPEDWINDOW,      // window style
+                          CW_USEDEFAULT,            // initial x position
+                          CW_USEDEFAULT,            // initial y position
+                          1600,                     // initial x size
+                          1200,                     // initial y size
+                          NULL,                     // parent window handle
+                          NULL,                     // window menu handle
+                          hInstance,                // program instance handle
+                          NULL);                    // creation parameters
 
     ShowWindow(hWnd, iCmdShow);
     UpdateWindow(hWnd);

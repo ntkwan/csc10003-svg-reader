@@ -7,17 +7,7 @@
 #include <gdiplus.h>
 
 // clang-format on
-
-#include "graphics/Circle.hpp"
-#include "graphics/Color.hpp"
-#include "graphics/Ellipse.hpp"
-#include "graphics/Group.hpp"
-#include "graphics/Line.hpp"
-#include "graphics/Path.hpp"
-#include "graphics/Polygon.hpp"
-#include "graphics/Polyline.hpp"
-#include "graphics/Rect.hpp"
-#include "graphics/Text.hpp"
+#include <Graphics.hpp>
 
 class Renderer {
 public:
@@ -25,7 +15,7 @@ public:
     Renderer(const Renderer&) = delete;
     void operator=(const Renderer&) = delete;
 
-    void draw(Gdiplus::Graphics& graphics, SVGElement* shape) const;
+    void draw(Gdiplus::Graphics& graphics, Group* group) const;
 
 private:
     void applyTransform(std::vector< std::string > transform_order,

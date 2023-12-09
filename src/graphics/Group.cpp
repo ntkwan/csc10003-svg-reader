@@ -12,13 +12,6 @@ Group::~Group() {
 
 std::string Group::getClass() const { return "Group"; }
 
-void Group::render(Gdiplus::Graphics& graphics,
-                   const Renderer& renderer) const {
-    for (auto shape : shapes) {
-        renderer.draw(graphics, shape);
-    }
-}
-
 Attributes Group::getAttributes() const { return attributes; }
 
 void Group::addElement(SVGElement* shape) {

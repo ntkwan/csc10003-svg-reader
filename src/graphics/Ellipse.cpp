@@ -2,8 +2,6 @@
 
 #include <cmath>
 
-// #include "Renderer.hpp"
-
 Ell::Ell(const Vector2Df &radius, const Vector2Df &center, mColor fill,
          mColor stroke, float stroke_thickness)
     : radius(radius) {
@@ -14,10 +12,6 @@ Ell::Ell(const Vector2Df &radius, const Vector2Df &center, mColor fill,
 }
 
 std::string Ell::getClass() const { return "Ellipse"; }
-
-// void Ellipse::render(Renderer &renderer) const {
-//     renderer.renderEllipse(*this);
-// }
 
 void Ell::setRadius(const Vector2Df &radius) { this->radius = radius; }
 
