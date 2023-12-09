@@ -1,4 +1,4 @@
-if (LINUX)
+if (UNIX)
 set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/windows.cmake CACHE STRING "Windows toolchain file")
 endif()
 
@@ -17,10 +17,15 @@ message(STATUS "GIT_EXECUTABLE='${GIT_EXECUTABLE}'")
 
 add_subdirectory(external/rapidxml)
 include_directories(src)
-if (LINUX)
+if (UNIX)
 	add_compile_options(-fsanitize=address)
 	add_link_options(-fsanitize=address)
 endif()
+
+add_compile_options(-static-libgcc)
+add_compile_options(-static-libstdc++)
+add_link_options(-static-libgcc)
+add_link_options(-static-libstdc++)
 file(GLOB_RECURSE cpp_files CONFIGURE_DEPENDS "src/*.*pp")
 add_executable(${PROJECT_NAME} ${cpp_files})
 
