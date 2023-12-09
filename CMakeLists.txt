@@ -1,3 +1,7 @@
+if (LINUX)
+set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/windows.cmake CACHE STRING "Windows toolchain file")
+endif()
+
 cmake_minimum_required(VERSION 3.14)
 project(svg-reader VERSION 0.2)
 
