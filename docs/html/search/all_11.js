@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['vertices_72',['vertices',['../classShape.html#a2b805bef7e92b165d297a2f28bd657a6',1,'Shape']]],
-  ['view_73',['view',['../classViewer.html#ab65f9d97ae3fc68e88d05230478ebf3b',1,'Viewer']]],
-  ['viewer_74',['Viewer',['../classViewer.html',1,'Viewer'],['../classViewer.html#abb8e49e83e5c574411bb9995665fd7eb',1,'Viewer::Viewer(const Viewer &amp;)=delete'],['../classViewer.html#aff01061de1c0805a0558c3647ab86a0a',1,'Viewer::Viewer(sf::RenderWindow &amp;Window, sf::View &amp;View)']]]
+  ['vector2d_127',['Vector2D',['../classVector2D.html',1,'Vector2D&lt; T &gt;'],['../classVector2D.html#a96580267fed7cd6686cbbf8e11048023',1,'Vector2D::Vector2D()'],['../classVector2D.html#a4f1bca1b63cd8b1323c85c9a5c597df4',1,'Vector2D::Vector2D(T X, T Y)'],['../classVector2D.html#af9cb4a6f06903844162f4c9d80d16b85',1,'Vector2D::Vector2D(const Vector2D&lt; U &gt; &amp;vector)']]],
+  ['vector2d_3c_20float_20_3e_128',['Vector2D&lt; float &gt;',['../classVector2D.html',1,'']]],
+  ['viewer_129',['Viewer',['../classViewer.html',1,'Viewer'],['../classViewer.html#aaedebacb31cba87de6e7d448ed8d6586',1,'Viewer::Viewer()'],['../classViewer.html#abb8e49e83e5c574411bb9995665fd7eb',1,'Viewer::Viewer(const Viewer &amp;)=delete']]]
 ];

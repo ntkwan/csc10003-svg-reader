@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['viewer_133',['Viewer',['../classViewer.html#abb8e49e83e5c574411bb9995665fd7eb',1,'Viewer::Viewer(const Viewer &amp;)=delete'],['../classViewer.html#aff01061de1c0805a0558c3647ab86a0a',1,'Viewer::Viewer(sf::RenderWindow &amp;Window, sf::View &amp;View)']]]
+  ['_7eparser_247',['~Parser',['../classParser.html#a3e658b5917a93a3ef648050d060e3a93',1,'Parser']]],
+  ['_7esvgelement_248',['~SVGElement',['../classSVGElement.html#a5087280fd4bbb637c3cde64e44e974f1',1,'SVGElement']]],
+  ['_7eviewer_249',['~Viewer',['../classViewer.html#a324e5a6a1532fe5eac3f3b0e4792b2da',1,'Viewer']]]
 ];

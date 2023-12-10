@@ -82,6 +82,8 @@ public:
 
     /**
      * @brief Prints the data of the rectangle.
+     *
+     * @note This function is used for debugging purposes.
      */
     void printData() const override;
 };

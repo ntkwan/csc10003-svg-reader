@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['points_152',['points',['../classPolygon.html#aeff48edccf187688e1cc77eede2ad73a',1,'Polygon::points()'],['../classPolyline.html#ab212d3747ddb85724d62d5208e360c34',1,'Polyline::points()']]],
-  ['position_153',['position',['../classShape.html#a1834123de7c78cb0ac9d04d1abb50368',1,'Shape']]]
+  ['instance_265',['instance',['../classParser.html#ae3a28c02c18171f4e83fae54b9f21a90',1,'Parser::instance()'],['../classRenderer.html#a7431a2f9b03f35752e034410ffebfbe1',1,'Renderer::instance()'],['../classViewer.html#a53c3dca921442983d13f335d0e8a7e20',1,'Viewer::instance()']]],
+  ['is_5fdragging_266',['is_dragging',['../classViewer.html#a452e9dd05638bf3da01d8f51dba009a5',1,'Viewer']]]
 ];

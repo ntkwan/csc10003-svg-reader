@@ -4,7 +4,7 @@
 /**
  * @brief Utility template class for manipulating 2-dimensional vectors
  *
- *  Vector2D is a simple class that defines a mathematical
+ * Vector2D is a simple class that defines a mathematical
  * vector with two coordinates (x and y). It can be used to
  * represent anything that has two dimensions: a size, a point,
  * a velocity, etc.

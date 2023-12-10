@@ -60,7 +60,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">svg-reader
-   &#160;<span id="projectnumber">0.1</span>
+   &#160;<span id="projectnumber">0.2</span>
    </div>
    <div id="projectbrief">Parse and render SVG files, handle user interactions.</div>
   </td>
@@ -122,133 +122,125 @@ $(document).ready(function(){initNavTree('Viewer_8cpp_source.html',''); initResi
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &quot;Viewer.hpp&quot;</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<a class="code" href="classViewer.html">Viewer</a>* <a class="code" href="classViewer.html#a53c3dca921442983d13f335d0e8a7e20">Viewer::instance</a> = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno"><a class="line" href="classViewer.html#a890129c9676f7c590fe51567b0e2ed92">    5</a></span>&#160;<a class="code" href="classViewer.html">Viewer</a>* <a class="code" href="classViewer.html#a890129c9676f7c590fe51567b0e2ed92">Viewer::getInstance</a>(sf::RenderWindow&amp; Window, sf::View&amp; View) {</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="classViewer.html#a53c3dca921442983d13f335d0e8a7e20">instance</a> == <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;        <a class="code" href="classViewer.html#a53c3dca921442983d13f335d0e8a7e20">instance</a> = <span class="keyword">new</span> <a class="code" href="classViewer.html#abb8e49e83e5c574411bb9995665fd7eb">Viewer</a>(Window, View);</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    }</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classViewer.html#a53c3dca921442983d13f335d0e8a7e20">instance</a>;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;}</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="classViewer.html#aff01061de1c0805a0558c3647ab86a0a">   12</a></span>&#160;<a class="code" href="classViewer.html#abb8e49e83e5c574411bb9995665fd7eb">Viewer::Viewer</a>(sf::RenderWindow&amp; Window, sf::View&amp; View)</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    : window(Window), view(View) {}</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
-<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classViewer.html#ae6cf7f652c5a65d39764a57e512129a8">   15</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classViewer.html#ae6cf7f652c5a65d39764a57e512129a8">Viewer::handleEvents</a>(sf::Event event) {</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <span class="keywordflow">if</span> (event.type == sf::Event::Closed) {</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        <a class="code" href="classViewer.html#a411cbe1fb5c968b8b53399ad31fa1230">window</a>.close();</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    }</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="comment">// Zoom in by + (including &#39;=&#39; key)</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordflow">if</span> ((event.type == sf::Event::KeyPressed &amp;&amp;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;         event.key.code == sf::Keyboard::Add) ||</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        (event.type == sf::Event::KeyPressed &amp;&amp;</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;         event.key.code == sf::Keyboard::Equal)) {</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <a class="code" href="classViewer.html#a8281e173d056b9841871acfa635ff5cc">zoom</a>(0.9f);</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    }</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="comment">// Zoom out by - (including &#39;-&#39; key)</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordflow">if</span> ((event.type == sf::Event::KeyPressed &amp;&amp;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;         event.key.code == sf::Keyboard::Subtract) ||</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        (event.type == sf::Event::KeyPressed &amp;&amp;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;         event.key.code == sf::Keyboard::Hyphen)) {</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <a class="code" href="classViewer.html#a8281e173d056b9841871acfa635ff5cc">zoom</a>(1.1f);</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    }</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="comment">// Rotate clockwise by &#39;R&#39; key</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordflow">if</span> (event.type == sf::Event::KeyPressed &amp;&amp;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        event.key.code == sf::Keyboard::R) {</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <a class="code" href="classViewer.html#ad608bfff3b536c8e02b72fa02097a8e6">rotate</a>(90.0f);</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    }</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="comment">// Rotate anti-clockwise by &#39;E&#39; key</span></div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordflow">if</span> (event.type == sf::Event::KeyPressed &amp;&amp;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        event.key.code == sf::Keyboard::E) {</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <a class="code" href="classViewer.html#ad608bfff3b536c8e02b72fa02097a8e6">rotate</a>(-90.0f);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    }</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="comment">// Zoom in/out with mouse scroll</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordflow">if</span> (event.type == sf::Event::MouseWheelScrolled) {</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keywordflow">if</span> (event.mouseWheelScroll.wheel == sf::Mouse::VerticalWheel) {</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            <span class="keywordflow">if</span> (event.mouseWheelScroll.delta &gt; 0) {</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                <a class="code" href="classViewer.html#a8281e173d056b9841871acfa635ff5cc">zoom</a>(0.9f);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                <a class="code" href="classViewer.html#a8281e173d056b9841871acfa635ff5cc">zoom</a>(1.1f);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            }</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        }</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    }</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<a class="code" href="classViewer.html">Viewer</a>* <a class="code" href="classViewer.html#a53c3dca921442983d13f335d0e8a7e20">Viewer::instance</a> = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno"><a class="line" href="classViewer.html#a8235c9da7e144d7139c91901c0051cd8">    4</a></span>&#160;<a class="code" href="classViewer.html">Viewer</a>* <a class="code" href="classViewer.html#a8235c9da7e144d7139c91901c0051cd8">Viewer::getInstance</a>() {</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;    <span class="keywordflow">if</span> (!<a class="code" href="classViewer.html#a53c3dca921442983d13f335d0e8a7e20">instance</a>) {</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;        <a class="code" href="classViewer.html#a53c3dca921442983d13f335d0e8a7e20">instance</a> = <span class="keyword">new</span> <a class="code" href="classViewer.html#aaedebacb31cba87de6e7d448ed8d6586">Viewer</a>();</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    }</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classViewer.html#a53c3dca921442983d13f335d0e8a7e20">instance</a>;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;}</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="classViewer.html#aaedebacb31cba87de6e7d448ed8d6586">   11</a></span>&#160;<a class="code" href="classViewer.html#aaedebacb31cba87de6e7d448ed8d6586">Viewer::Viewer</a>() {</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <a class="code" href="classViewer.html#a452e9dd05638bf3da01d8f51dba009a5">is_dragging</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <a class="code" href="classViewer.html#a46377febc22fd7f2cc38a73ddb66b8ad">zoom_factor</a> = 1.0f;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <a class="code" href="classViewer.html#a82dfd34668f986b72e51ee86d4029fc6">rotate_angle</a> = 0.0f;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <a class="code" href="classViewer.html#a3e16ebbf5c0ed98dc75fe2c4d46fe0d5">offset_x</a> = 0.0f;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <a class="code" href="classViewer.html#a30b0f57907c82de620339e105f9a3c5b">offset_y</a> = 0.0f;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;}</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classViewer.html#a324e5a6a1532fe5eac3f3b0e4792b2da">   19</a></span>&#160;<a class="code" href="classViewer.html#a324e5a6a1532fe5eac3f3b0e4792b2da">Viewer::~Viewer</a>() {</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="classViewer.html#a53c3dca921442983d13f335d0e8a7e20">instance</a>) {</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <span class="keyword">delete</span> <a class="code" href="classViewer.html#a53c3dca921442983d13f335d0e8a7e20">instance</a>;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <a class="code" href="classViewer.html#a53c3dca921442983d13f335d0e8a7e20">instance</a> = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    }</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;}</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classViewer.html#acb15ba2e5d3bab2ba58da0db724b3bd1">   26</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classViewer.html#acb15ba2e5d3bab2ba58da0db724b3bd1">Viewer::handleMouseEvent</a>(UINT message, WPARAM wParam, LPARAM lParam) {</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordflow">switch</span> (message) {</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keywordflow">case</span> WM_MOUSEWHEEL:</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            <a class="code" href="classViewer.html#a940c6147b33b273afdff6eef7309d500">handleMouseWheel</a>(wParam);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="keywordflow">case</span> WM_MOUSEMOVE:</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            <span class="keywordflow">if</span> (wParam &amp; MK_LBUTTON) {</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                <a class="code" href="classViewer.html#a81a24ea13ee1e7e8c83be60672a7a11e">handleMouseMove</a>(lParam);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            }</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keywordflow">case</span> WM_LBUTTONDOWN:</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            <a class="code" href="classViewer.html#a2b889c5d09c8577ad1580dd610ac5678">handleLeftButtonDown</a>(lParam);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keywordflow">case</span> WM_LBUTTONUP:</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            <a class="code" href="classViewer.html#ae0c94514f0897aa84732024855520e28">handleLeftButtonUp</a>();</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    }</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="classViewer.html#a643c2fc659f06f4d4bfcefbad22ebd75">   47</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classViewer.html#a643c2fc659f06f4d4bfcefbad22ebd75">Viewer::handleKeyEvent</a>(WPARAM wParam) { <a class="code" href="classViewer.html#a8bcd4fdeb5c26092d65fc14474afeb38">handleKeyDown</a>(wParam); }</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno"><a class="line" href="classViewer.html#a940c6147b33b273afdff6eef7309d500">   49</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classViewer.html#a940c6147b33b273afdff6eef7309d500">Viewer::handleMouseWheel</a>(WPARAM wParam) {</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">if</span> (GET_WHEEL_DELTA_WPARAM(wParam) &gt; 0) {</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <a class="code" href="classViewer.html#a46377febc22fd7f2cc38a73ddb66b8ad">zoom_factor</a> *= 1.1f;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <a class="code" href="classViewer.html#a59a507a835919e78114601d5bd1784e6">needs_repaint</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <a class="code" href="classViewer.html#a46377febc22fd7f2cc38a73ddb66b8ad">zoom_factor</a> /= 1.1f;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <a class="code" href="classViewer.html#a59a507a835919e78114601d5bd1784e6">needs_repaint</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    }</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;}</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="comment">// Zoom in/out with touchpad (control pad)</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordflow">if</span> (event.type == sf::Event::TouchMoved) {</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="comment">// Assuming that touchpad input scales the zoom based on movement</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <span class="keywordtype">float</span> delta = <span class="keyword">event</span>.touch.y;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keywordflow">if</span> (delta &gt; 0) {</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            <a class="code" href="classViewer.html#a8281e173d056b9841871acfa635ff5cc">zoom</a>(0.9f);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            <a class="code" href="classViewer.html#a8281e173d056b9841871acfa635ff5cc">zoom</a>(1.1f);</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        }</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    }</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="comment">// Start dragging the left mouse button</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordflow">if</span> (event.type == sf::Event::MouseButtonPressed &amp;&amp;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        event.mouseButton.button == sf::Mouse::Left) {</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <a class="code" href="classViewer.html#ab7d0cd9967f21baea22b052764021f28">startDragging</a>();</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    }</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="comment">// Finish dragging the left mouse button</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keywordflow">if</span> (event.type == sf::Event::MouseButtonReleased &amp;&amp;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        event.mouseButton.button == sf::Mouse::Left) {</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <a class="code" href="classViewer.html#adc6fb4d1e16062f2d85215dff6b09a1a">stopDragging</a>();</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    }</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;}</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno"><a class="line" href="classViewer.html#ac84ecd752e288b72281f1686893982e2">   83</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classViewer.html#ac84ecd752e288b72281f1686893982e2">Viewer::handleDragging</a>() {</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="classViewer.html#a080964135a175bfa4383fdc008447bea">is_mouse_dragging</a>) {</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        sf::Vector2i currentMousePosition = sf::Mouse::getPosition(<a class="code" href="classViewer.html#a411cbe1fb5c968b8b53399ad31fa1230">window</a>);</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        sf::Vector2f offset =</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            sf::Vector2f(currentMousePosition - <a class="code" href="classViewer.html#aa01287741b226a65c3b38dfa335cd1cf">last_mouse_position</a>);</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        <a class="code" href="classViewer.html#a304c26e9c433d05f253da866d8b9772d">moveView</a>(offset);</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <a class="code" href="classViewer.html#aa01287741b226a65c3b38dfa335cd1cf">last_mouse_position</a> = currentMousePosition;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    }</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;}</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno"><a class="line" href="classViewer.html#a8281e173d056b9841871acfa635ff5cc">   93</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classViewer.html#a8281e173d056b9841871acfa635ff5cc">Viewer::zoom</a>(<span class="keywordtype">float</span> factor) {</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <a class="code" href="classViewer.html#ab65f9d97ae3fc68e88d05230478ebf3b">view</a>.zoom(factor);</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <a class="code" href="classViewer.html#a411cbe1fb5c968b8b53399ad31fa1230">window</a>.setView(<a class="code" href="classViewer.html#ab65f9d97ae3fc68e88d05230478ebf3b">view</a>);</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;}</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
-<div class="line"><a name="l00098"></a><span class="lineno"><a class="line" href="classViewer.html#ad608bfff3b536c8e02b72fa02097a8e6">   98</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classViewer.html#ad608bfff3b536c8e02b72fa02097a8e6">Viewer::rotate</a>(<span class="keywordtype">float</span> angle) {</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <a class="code" href="classViewer.html#ab65f9d97ae3fc68e88d05230478ebf3b">view</a>.rotate(angle);</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <a class="code" href="classViewer.html#a411cbe1fb5c968b8b53399ad31fa1230">window</a>.setView(<a class="code" href="classViewer.html#ab65f9d97ae3fc68e88d05230478ebf3b">view</a>);</div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="classViewer.html#a81a24ea13ee1e7e8c83be60672a7a11e">   59</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classViewer.html#a81a24ea13ee1e7e8c83be60672a7a11e">Viewer::handleMouseMove</a>(LPARAM lParam) {</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="classViewer.html#a452e9dd05638bf3da01d8f51dba009a5">is_dragging</a>) {</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keywordtype">int</span> x = <span class="keyword">static_cast&lt;</span> <span class="keywordtype">int</span> <span class="keyword">&gt;</span>(LOWORD(lParam));</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <span class="keywordtype">int</span> y = <span class="keyword">static_cast&lt;</span> <span class="keywordtype">int</span> <span class="keyword">&gt;</span>(HIWORD(lParam));</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keywordflow">if</span> (x != <a class="code" href="classViewer.html#a77bc329e7ae0aecaf60a4de4f8dcc037">last_mouse_pos</a>.x || y != <a class="code" href="classViewer.html#a77bc329e7ae0aecaf60a4de4f8dcc037">last_mouse_pos</a>.y) {</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            <a class="code" href="classViewer.html#a3e16ebbf5c0ed98dc75fe2c4d46fe0d5">offset_x</a> += (x - <a class="code" href="classViewer.html#a77bc329e7ae0aecaf60a4de4f8dcc037">last_mouse_pos</a>.x) * <a class="code" href="classViewer.html#a46377febc22fd7f2cc38a73ddb66b8ad">zoom_factor</a>;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            <a class="code" href="classViewer.html#a30b0f57907c82de620339e105f9a3c5b">offset_y</a> += (y - <a class="code" href="classViewer.html#a77bc329e7ae0aecaf60a4de4f8dcc037">last_mouse_pos</a>.y) * <a class="code" href="classViewer.html#a46377febc22fd7f2cc38a73ddb66b8ad">zoom_factor</a>;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            <a class="code" href="classViewer.html#a77bc329e7ae0aecaf60a4de4f8dcc037">last_mouse_pos</a>.x = x;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            <a class="code" href="classViewer.html#a77bc329e7ae0aecaf60a4de4f8dcc037">last_mouse_pos</a>.y = y;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            <a class="code" href="classViewer.html#a59a507a835919e78114601d5bd1784e6">needs_repaint</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        }</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    }</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;}</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="classViewer.html#a2b889c5d09c8577ad1580dd610ac5678">   74</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classViewer.html#a2b889c5d09c8577ad1580dd610ac5678">Viewer::handleLeftButtonDown</a>(LPARAM lParam) {</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <a class="code" href="classViewer.html#a452e9dd05638bf3da01d8f51dba009a5">is_dragging</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <a class="code" href="classViewer.html#a77bc329e7ae0aecaf60a4de4f8dcc037">last_mouse_pos</a>.x = <span class="keyword">static_cast&lt;</span> <span class="keywordtype">int</span> <span class="keyword">&gt;</span>(LOWORD(lParam));</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <a class="code" href="classViewer.html#a77bc329e7ae0aecaf60a4de4f8dcc037">last_mouse_pos</a>.y = <span class="keyword">static_cast&lt;</span> <span class="keywordtype">int</span> <span class="keyword">&gt;</span>(HIWORD(lParam));</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    SetCapture(GetActiveWindow());</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;}</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00081"></a><span class="lineno"><a class="line" href="classViewer.html#ae0c94514f0897aa84732024855520e28">   81</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classViewer.html#ae0c94514f0897aa84732024855520e28">Viewer::handleLeftButtonUp</a>() {</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <a class="code" href="classViewer.html#a452e9dd05638bf3da01d8f51dba009a5">is_dragging</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    ReleaseCapture();</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="classViewer.html#a59a507a835919e78114601d5bd1784e6">needs_repaint</a>) {</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <a class="code" href="classViewer.html#a59a507a835919e78114601d5bd1784e6">needs_repaint</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    }</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;}</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno"><a class="line" href="classViewer.html#a8bcd4fdeb5c26092d65fc14474afeb38">   90</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classViewer.html#a8bcd4fdeb5c26092d65fc14474afeb38">Viewer::handleKeyDown</a>(WPARAM wParam) {</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordtype">char</span> key = <span class="keyword">static_cast&lt;</span> <span class="keywordtype">char</span> <span class="keyword">&gt;</span>(wParam);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordflow">switch</span> (tolower(key)) {</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <span class="keywordflow">case</span> <span class="charliteral">&#39;q&#39;</span>:</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            <a class="code" href="classViewer.html#a82dfd34668f986b72e51ee86d4029fc6">rotate_angle</a> -= 1.0f;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <span class="keywordflow">case</span> <span class="charliteral">&#39;e&#39;</span>:</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            <a class="code" href="classViewer.html#a82dfd34668f986b72e51ee86d4029fc6">rotate_angle</a> += 1.0f;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    }</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;}</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
-<div class="line"><a name="l00103"></a><span class="lineno"><a class="line" href="classViewer.html#ab7d0cd9967f21baea22b052764021f28">  103</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classViewer.html#ab7d0cd9967f21baea22b052764021f28">Viewer::startDragging</a>() {</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <a class="code" href="classViewer.html#a080964135a175bfa4383fdc008447bea">is_mouse_dragging</a> = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    <a class="code" href="classViewer.html#aa01287741b226a65c3b38dfa335cd1cf">last_mouse_position</a> = sf::Mouse::getPosition(<a class="code" href="classViewer.html#a411cbe1fb5c968b8b53399ad31fa1230">window</a>);</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;}</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160; </div>
-<div class="line"><a name="l00108"></a><span class="lineno"><a class="line" href="classViewer.html#adc6fb4d1e16062f2d85215dff6b09a1a">  108</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classViewer.html#adc6fb4d1e16062f2d85215dff6b09a1a">Viewer::stopDragging</a>() { <a class="code" href="classViewer.html#a080964135a175bfa4383fdc008447bea">is_mouse_dragging</a> = <span class="keyword">false</span>; }</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
-<div class="line"><a name="l00110"></a><span class="lineno"><a class="line" href="classViewer.html#a304c26e9c433d05f253da866d8b9772d">  110</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classViewer.html#a304c26e9c433d05f253da866d8b9772d">Viewer::moveView</a>(<span class="keyword">const</span> sf::Vector2f&amp; offset) {</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <a class="code" href="classViewer.html#ab65f9d97ae3fc68e88d05230478ebf3b">view</a>.move(-offset);</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <a class="code" href="classViewer.html#a411cbe1fb5c968b8b53399ad31fa1230">window</a>.setView(<a class="code" href="classViewer.html#ab65f9d97ae3fc68e88d05230478ebf3b">view</a>);</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;}</div>
-<div class="ttc" id="aclassViewer_html"><div class="ttname"><a href="classViewer.html">Viewer</a></div><div class="ttdoc">Represents a viewer for handling events and interactions with an SFML window.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8hpp_source.html#l00013">Viewer.hpp:13</a></div></div>
-<div class="ttc" id="aclassViewer_html_a080964135a175bfa4383fdc008447bea"><div class="ttname"><a href="classViewer.html#a080964135a175bfa4383fdc008447bea">Viewer::is_mouse_dragging</a></div><div class="ttdeci">bool is_mouse_dragging</div><div class="ttdoc">Flag indicating whether mouse dragging is active.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8hpp_source.html#l00060">Viewer.hpp:60</a></div></div>
-<div class="ttc" id="aclassViewer_html_a304c26e9c433d05f253da866d8b9772d"><div class="ttname"><a href="classViewer.html#a304c26e9c433d05f253da866d8b9772d">Viewer::moveView</a></div><div class="ttdeci">void moveView(const sf::Vector2f &amp;offset)</div><div class="ttdoc">Moves the view by the specified offset.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8cpp_source.html#l00110">Viewer.cpp:110</a></div></div>
-<div class="ttc" id="aclassViewer_html_a411cbe1fb5c968b8b53399ad31fa1230"><div class="ttname"><a href="classViewer.html#a411cbe1fb5c968b8b53399ad31fa1230">Viewer::window</a></div><div class="ttdeci">sf::RenderWindow &amp; window</div><div class="ttdoc">Reference to the SFML window.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8hpp_source.html#l00057">Viewer.hpp:57</a></div></div>
-<div class="ttc" id="aclassViewer_html_a53c3dca921442983d13f335d0e8a7e20"><div class="ttname"><a href="classViewer.html#a53c3dca921442983d13f335d0e8a7e20">Viewer::instance</a></div><div class="ttdeci">static Viewer * instance</div><div class="ttdoc">Singleton instance of Viewer.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8hpp_source.html#l00056">Viewer.hpp:56</a></div></div>
-<div class="ttc" id="aclassViewer_html_a8281e173d056b9841871acfa635ff5cc"><div class="ttname"><a href="classViewer.html#a8281e173d056b9841871acfa635ff5cc">Viewer::zoom</a></div><div class="ttdeci">void zoom(float factor)</div><div class="ttdoc">Zooms the view by the specified factor.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8cpp_source.html#l00093">Viewer.cpp:93</a></div></div>
-<div class="ttc" id="aclassViewer_html_a890129c9676f7c590fe51567b0e2ed92"><div class="ttname"><a href="classViewer.html#a890129c9676f7c590fe51567b0e2ed92">Viewer::getInstance</a></div><div class="ttdeci">static Viewer * getInstance(sf::RenderWindow &amp;Window, sf::View &amp;View)</div><div class="ttdoc">Gets the singleton instance of Viewer.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8cpp_source.html#l00005">Viewer.cpp:5</a></div></div>
-<div class="ttc" id="aclassViewer_html_aa01287741b226a65c3b38dfa335cd1cf"><div class="ttname"><a href="classViewer.html#aa01287741b226a65c3b38dfa335cd1cf">Viewer::last_mouse_position</a></div><div class="ttdeci">sf::Vector2i last_mouse_position</div><div class="ttdoc">Last recorded mouse position.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8hpp_source.html#l00059">Viewer.hpp:59</a></div></div>
-<div class="ttc" id="aclassViewer_html_ab65f9d97ae3fc68e88d05230478ebf3b"><div class="ttname"><a href="classViewer.html#ab65f9d97ae3fc68e88d05230478ebf3b">Viewer::view</a></div><div class="ttdeci">sf::View &amp; view</div><div class="ttdoc">Reference to the SFML view.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8hpp_source.html#l00058">Viewer.hpp:58</a></div></div>
-<div class="ttc" id="aclassViewer_html_ab7d0cd9967f21baea22b052764021f28"><div class="ttname"><a href="classViewer.html#ab7d0cd9967f21baea22b052764021f28">Viewer::startDragging</a></div><div class="ttdeci">void startDragging()</div><div class="ttdoc">Starts dragging the view.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8cpp_source.html#l00103">Viewer.cpp:103</a></div></div>
-<div class="ttc" id="aclassViewer_html_abb8e49e83e5c574411bb9995665fd7eb"><div class="ttname"><a href="classViewer.html#abb8e49e83e5c574411bb9995665fd7eb">Viewer::Viewer</a></div><div class="ttdeci">Viewer(const Viewer &amp;)=delete</div><div class="ttdoc">Deleted copy constructor to prevent copying of Viewer instances.</div></div>
-<div class="ttc" id="aclassViewer_html_ac84ecd752e288b72281f1686893982e2"><div class="ttname"><a href="classViewer.html#ac84ecd752e288b72281f1686893982e2">Viewer::handleDragging</a></div><div class="ttdeci">void handleDragging()</div><div class="ttdoc">Handles dragging interaction.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8cpp_source.html#l00083">Viewer.cpp:83</a></div></div>
-<div class="ttc" id="aclassViewer_html_ad608bfff3b536c8e02b72fa02097a8e6"><div class="ttname"><a href="classViewer.html#ad608bfff3b536c8e02b72fa02097a8e6">Viewer::rotate</a></div><div class="ttdeci">void rotate(float angle)</div><div class="ttdoc">Rotates the view by the specified angle.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8cpp_source.html#l00098">Viewer.cpp:98</a></div></div>
-<div class="ttc" id="aclassViewer_html_adc6fb4d1e16062f2d85215dff6b09a1a"><div class="ttname"><a href="classViewer.html#adc6fb4d1e16062f2d85215dff6b09a1a">Viewer::stopDragging</a></div><div class="ttdeci">void stopDragging()</div><div class="ttdoc">Stops dragging the view.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8cpp_source.html#l00108">Viewer.cpp:108</a></div></div>
-<div class="ttc" id="aclassViewer_html_ae6cf7f652c5a65d39764a57e512129a8"><div class="ttname"><a href="classViewer.html#ae6cf7f652c5a65d39764a57e512129a8">Viewer::handleEvents</a></div><div class="ttdeci">void handleEvents(sf::Event event)</div><div class="ttdoc">Handles SFML events.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8cpp_source.html#l00015">Viewer.cpp:15</a></div></div>
+<div class="ttc" id="aclassViewer_html"><div class="ttname"><a href="classViewer.html">Viewer</a></div><div class="ttdoc">Represents a viewer for rendering and interacting with a scene.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8hpp_source.html#l00016">Viewer.hpp:16</a></div></div>
+<div class="ttc" id="aclassViewer_html_a2b889c5d09c8577ad1580dd610ac5678"><div class="ttname"><a href="classViewer.html#a2b889c5d09c8577ad1580dd610ac5678">Viewer::handleLeftButtonDown</a></div><div class="ttdeci">void handleLeftButtonDown(LPARAM lParam)</div><div class="ttdoc">Handles the left button down event for initiating dragging.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8cpp_source.html#l00074">Viewer.cpp:74</a></div></div>
+<div class="ttc" id="aclassViewer_html_a30b0f57907c82de620339e105f9a3c5b"><div class="ttname"><a href="classViewer.html#a30b0f57907c82de620339e105f9a3c5b">Viewer::offset_y</a></div><div class="ttdeci">float offset_y</div><div class="ttdoc">Y-coordinate offset of the viewer.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8hpp_source.html#l00019">Viewer.hpp:19</a></div></div>
+<div class="ttc" id="aclassViewer_html_a324e5a6a1532fe5eac3f3b0e4792b2da"><div class="ttname"><a href="classViewer.html#a324e5a6a1532fe5eac3f3b0e4792b2da">Viewer::~Viewer</a></div><div class="ttdeci">~Viewer()</div><div class="ttdoc">Destructor for the Viewer class.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8cpp_source.html#l00019">Viewer.cpp:19</a></div></div>
+<div class="ttc" id="aclassViewer_html_a3e16ebbf5c0ed98dc75fe2c4d46fe0d5"><div class="ttname"><a href="classViewer.html#a3e16ebbf5c0ed98dc75fe2c4d46fe0d5">Viewer::offset_x</a></div><div class="ttdeci">float offset_x</div><div class="ttdoc">X-coordinate offset of the viewer.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8hpp_source.html#l00018">Viewer.hpp:18</a></div></div>
+<div class="ttc" id="aclassViewer_html_a452e9dd05638bf3da01d8f51dba009a5"><div class="ttname"><a href="classViewer.html#a452e9dd05638bf3da01d8f51dba009a5">Viewer::is_dragging</a></div><div class="ttdeci">bool is_dragging</div><div class="ttdoc">Flag indicating whether the mouse is being dragged.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8hpp_source.html#l00074">Viewer.hpp:74</a></div></div>
+<div class="ttc" id="aclassViewer_html_a46377febc22fd7f2cc38a73ddb66b8ad"><div class="ttname"><a href="classViewer.html#a46377febc22fd7f2cc38a73ddb66b8ad">Viewer::zoom_factor</a></div><div class="ttdeci">float zoom_factor</div><div class="ttdoc">Zoom factor for scaling the view.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8hpp_source.html#l00020">Viewer.hpp:20</a></div></div>
+<div class="ttc" id="aclassViewer_html_a53c3dca921442983d13f335d0e8a7e20"><div class="ttname"><a href="classViewer.html#a53c3dca921442983d13f335d0e8a7e20">Viewer::instance</a></div><div class="ttdeci">static Viewer * instance</div><div class="ttdoc">Singleton instance of the Viewer class.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8hpp_source.html#l00055">Viewer.hpp:55</a></div></div>
+<div class="ttc" id="aclassViewer_html_a59a507a835919e78114601d5bd1784e6"><div class="ttname"><a href="classViewer.html#a59a507a835919e78114601d5bd1784e6">Viewer::needs_repaint</a></div><div class="ttdeci">bool needs_repaint</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8hpp_source.html#l00022">Viewer.hpp:22</a></div></div>
+<div class="ttc" id="aclassViewer_html_a643c2fc659f06f4d4bfcefbad22ebd75"><div class="ttname"><a href="classViewer.html#a643c2fc659f06f4d4bfcefbad22ebd75">Viewer::handleKeyEvent</a></div><div class="ttdeci">void handleKeyEvent(WPARAM wParam)</div><div class="ttdoc">Handles keyboard events.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8cpp_source.html#l00047">Viewer.cpp:47</a></div></div>
+<div class="ttc" id="aclassViewer_html_a77bc329e7ae0aecaf60a4de4f8dcc037"><div class="ttname"><a href="classViewer.html#a77bc329e7ae0aecaf60a4de4f8dcc037">Viewer::last_mouse_pos</a></div><div class="ttdeci">POINT last_mouse_pos</div><div class="ttdoc">Last recorded mouse position.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8hpp_source.html#l00075">Viewer.hpp:75</a></div></div>
+<div class="ttc" id="aclassViewer_html_a81a24ea13ee1e7e8c83be60672a7a11e"><div class="ttname"><a href="classViewer.html#a81a24ea13ee1e7e8c83be60672a7a11e">Viewer::handleMouseMove</a></div><div class="ttdeci">void handleMouseMove(LPARAM lParam)</div><div class="ttdoc">Handles the mouse move event for panning.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8cpp_source.html#l00059">Viewer.cpp:59</a></div></div>
+<div class="ttc" id="aclassViewer_html_a8235c9da7e144d7139c91901c0051cd8"><div class="ttname"><a href="classViewer.html#a8235c9da7e144d7139c91901c0051cd8">Viewer::getInstance</a></div><div class="ttdeci">static Viewer * getInstance()</div><div class="ttdoc">Gets the singleton instance of the Viewer class.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8cpp_source.html#l00004">Viewer.cpp:4</a></div></div>
+<div class="ttc" id="aclassViewer_html_a82dfd34668f986b72e51ee86d4029fc6"><div class="ttname"><a href="classViewer.html#a82dfd34668f986b72e51ee86d4029fc6">Viewer::rotate_angle</a></div><div class="ttdeci">float rotate_angle</div><div class="ttdoc">Rotation angle of the view.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8hpp_source.html#l00021">Viewer.hpp:21</a></div></div>
+<div class="ttc" id="aclassViewer_html_a8bcd4fdeb5c26092d65fc14474afeb38"><div class="ttname"><a href="classViewer.html#a8bcd4fdeb5c26092d65fc14474afeb38">Viewer::handleKeyDown</a></div><div class="ttdeci">void handleKeyDown(WPARAM wParam)</div><div class="ttdoc">Handles the key down event for rotating.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8cpp_source.html#l00090">Viewer.cpp:90</a></div></div>
+<div class="ttc" id="aclassViewer_html_a940c6147b33b273afdff6eef7309d500"><div class="ttname"><a href="classViewer.html#a940c6147b33b273afdff6eef7309d500">Viewer::handleMouseWheel</a></div><div class="ttdeci">void handleMouseWheel(WPARAM wParam)</div><div class="ttdoc">Handles the mouse wheel event for zooming.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8cpp_source.html#l00049">Viewer.cpp:49</a></div></div>
+<div class="ttc" id="aclassViewer_html_aaedebacb31cba87de6e7d448ed8d6586"><div class="ttname"><a href="classViewer.html#aaedebacb31cba87de6e7d448ed8d6586">Viewer::Viewer</a></div><div class="ttdeci">Viewer()</div><div class="ttdoc">Private constructor for the Viewer class.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8cpp_source.html#l00011">Viewer.cpp:11</a></div></div>
+<div class="ttc" id="aclassViewer_html_acb15ba2e5d3bab2ba58da0db724b3bd1"><div class="ttname"><a href="classViewer.html#acb15ba2e5d3bab2ba58da0db724b3bd1">Viewer::handleMouseEvent</a></div><div class="ttdeci">void handleMouseEvent(UINT message, WPARAM wParam, LPARAM lParam)</div><div class="ttdoc">Handles mouse events, such as wheel, move, left button down, and left button up.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8cpp_source.html#l00026">Viewer.cpp:26</a></div></div>
+<div class="ttc" id="aclassViewer_html_ae0c94514f0897aa84732024855520e28"><div class="ttname"><a href="classViewer.html#ae0c94514f0897aa84732024855520e28">Viewer::handleLeftButtonUp</a></div><div class="ttdeci">void handleLeftButtonUp()</div><div class="ttdoc">Handles the left button up event for ending dragging.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8cpp_source.html#l00081">Viewer.cpp:81</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div id="nav-path" class="navpath">

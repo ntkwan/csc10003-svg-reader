@@ -5,6 +5,8 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
     [ "main.cpp", "main_8cpp_source.html", null ],
     [ "Parser.cpp", "Parser_8cpp_source.html", null ],
     [ "Parser.hpp", "Parser_8hpp_source.html", null ],
+    [ "Renderer.cpp", "Renderer_8cpp_source.html", null ],
+    [ "Renderer.hpp", "Renderer_8hpp_source.html", null ],
     [ "Viewer.cpp", "Viewer_8cpp_source.html", null ],
     [ "Viewer.hpp", "Viewer_8hpp_source.html", null ]
 ];

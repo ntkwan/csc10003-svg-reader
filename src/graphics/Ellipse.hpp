@@ -49,6 +49,11 @@ public:
      */
     Vector2Df getRadius() const;
 
+    /**
+     * @brief Prints the data of the shape.
+     *
+     * @note This function is used for debugging purposes.
+     */
     void printData() const override;
 };
 

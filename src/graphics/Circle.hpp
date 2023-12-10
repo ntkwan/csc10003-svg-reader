@@ -15,7 +15,7 @@ public:
     /**
      * @brief Constructs a Circle object.
      *
-     * @param radius The radii of the circle.
+     * @param radius The radius of the circle.
      * @param center The center of the circle.
      * @param fill Fill color of the circle.
      * @param stroke Outline color of the circle.

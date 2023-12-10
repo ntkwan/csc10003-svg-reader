@@ -1,5 +1,7 @@
 <map id="Rect" name="Rect">
-<area shape="rect" id="node1" title="Represents a rectangle in 2D space." alt="" coords="17,155,68,181"/>
-<area shape="rect" id="node2" href="$classPolygon.html" title="Represents a polygon in 2D space." alt="" coords="5,80,80,107"/>
-<area shape="rect" id="node3" href="$classShape.html" title="Represents a shape in 2D space." alt="" coords="11,5,74,32"/>
+<area shape="rect" id="node1" title="Represents a rectangle in 2D space." alt="" coords="78,380,129,407"/>
+<area shape="rect" id="node2" href="$classPolyShape.html" title="Abstract base class for polygon and polyline shapes in 2D space." alt="" coords="114,304,205,331"/>
+<area shape="rect" id="node3" href="$classSVGElement.html" title="Represents an element in an SVG file." alt="" coords="112,215,215,241"/>
+<area shape="rect" id="node4" href="$classVector2D.html" title=" " alt="" coords="5,58,145,85"/>
+<area shape="rect" id="node5" href="$classmColor.html" title="Utility class for manipulating RGBA mColors." alt="" coords="171,58,241,85"/>
 </map>

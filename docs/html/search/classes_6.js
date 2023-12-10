@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['text_88',['Text',['../classText.html',1,'']]]
+  ['rect_150',['Rect',['../classRect.html',1,'']]],
+  ['renderer_151',['Renderer',['../classRenderer.html',1,'']]]
 ];

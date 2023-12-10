@@ -105,16 +105,54 @@ public:
      */
     Vector2Df getPosition() const;
 
+    /**
+     * @brief Prints the data of the shape.
+     *
+     * @note This function is used for debugging purposes.
+     * @note This function is virtual and can be overridden by derived classes.
+     */
     virtual void printData() const;
 
+    /**
+     * @brief Sets the transformations of the shape.
+     *
+     * @param transforms The new transformations of the shape.
+     * @note The default transformations of the shape is empty.
+     * @note The transformations can be either "translate", "rotate", "scale",
+     */
     void setTransforms(const std::vector< std::string >& transforms);
 
+    /**
+     * @brief Gets the transformations of the shape.
+     *
+     * @return The transformations of the shape.
+     * @note The default transformations of the shape is empty.
+     * @note The transformations can be either "translate", "rotate", "scale",
+     */
     std::vector< std::string > getTransforms() const;
 
+    /**
+     * @brief Parent pointer setter to make the composite design pattern
+     *
+     * @param parent The parent pointer
+     * @note This function is used for composite design pattern
+     */
     void setParent(SVGElement* parent);
 
+    /**
+     * @brief Parent pointer getter
+     *
+     * @return The parent pointer
+     * @note This function is used for composite design pattern
+     */
     SVGElement* getParent() const;
 
+    /**
+     * @brief Adds a shape to the composite group.
+     * @param element The shape to be added to the composite group.
+     * @note This function is used for composite design pattern
+     * @note This function is virtual and can be overridden by derived classes.
+     */
     virtual void addElement(SVGElement* element);
 
 protected:

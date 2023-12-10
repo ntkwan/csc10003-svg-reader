@@ -60,7 +60,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">svg-reader
-   &#160;<span id="projectnumber">0.1</span>
+   &#160;<span id="projectnumber">0.2</span>
    </div>
    <div id="projectbrief">Parse and render SVG files, handle user interactions.</div>
   </td>
@@ -121,49 +121,141 @@ $(document).ready(function(){initNavTree('main_8cpp_source.html',''); initResiza
 <div class="title">main.cpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &quot;Parser.hpp&quot;</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &quot;Viewer.hpp&quot;</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="keywordtype">int</span> main() {</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;    constexpr <span class="keywordtype">int</span> screen_width = 1600;</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    constexpr <span class="keywordtype">int</span> screen_height = 900;</div>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// clang-format off</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include &lt;winsock2.h&gt;</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;objidl.h&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;windows.h&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;gdiplus.h&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">// clang-format on</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    sf::ContextSettings settings;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    settings.antialiasingLevel = 8;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    sf::RenderWindow window(sf::VideoMode(screen_width, screen_height),</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;                            <span class="stringliteral">&quot;svg-reader-version-0.1&quot;</span>, sf::Style::Default,</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;                            settings);</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    sf::View view(sf::FloatRect(0.f, 0.f, <span class="keyword">static_cast&lt;</span> <span class="keywordtype">float</span> <span class="keyword">&gt;</span>(screen_width),</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;                                <span class="keyword">static_cast&lt;</span> <span class="keywordtype">float</span> <span class="keyword">&gt;</span>(screen_height)));</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <a class="code" href="classViewer.html">Viewer</a> *viewer = <a class="code" href="classViewer.html#a890129c9676f7c590fe51567b0e2ed92">Viewer::getInstance</a>(window, view);</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    <a class="code" href="classParser.html">Parser</a> *parser = <a class="code" href="classParser.html#a06952fa44f19fdb573c1355ac26454c5">Parser::getInstance</a>(<span class="stringliteral">&quot;sample/sample.svg&quot;</span>);</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keywordflow">if</span> (!<a class="code" href="classText.html#a04c2ae991434d41249615e720c52c58f">Text::font</a>.loadFromFile(<span class="stringliteral">&quot;external/font/Arial.ttf&quot;</span>)) {</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="keywordflow">return</span> EXIT_FAILURE;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;Parser.hpp&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;Viewer.hpp&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<a class="code" href="classParser.html">Parser</a>* parser = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keywordtype">void</span> OnPaint(HDC hdc, <span class="keyword">const</span> std::string&amp; filePath, <a class="code" href="classViewer.html">Viewer</a>&amp; viewer) {</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    Gdiplus::Graphics graphics(hdc);</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keywordflow">if</span> (!parser) {</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        parser = <a class="code" href="classParser.html#a06952fa44f19fdb573c1355ac26454c5">Parser::getInstance</a>(filePath);</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    }</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordflow">while</span> (window.isOpen()) {</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        sf::Event event;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        <span class="keywordflow">while</span> (window.pollEvent(event)) {</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            <span class="keywordflow">if</span> (event.type == sf::Event::Closed) window.close();</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            viewer-&gt;<a class="code" href="classViewer.html#ae6cf7f652c5a65d39764a57e512129a8">handleEvents</a>(event);</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        }</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        window.clear(sf::Color::White);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        parser-&gt;<a class="code" href="classParser.html#ad498cb7da315304eb0a84e1ecd6f647b">renderSVG</a>(window);</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        window.display();</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        viewer-&gt;<a class="code" href="classViewer.html#ac84ecd752e288b72281f1686893982e2">handleDragging</a>();</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    }</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;}</div>
-<div class="ttc" id="aclassParser_html"><div class="ttname"><a href="classParser.html">Parser</a></div><div class="ttdoc">Represents a parser for SVG files.</div><div class="ttdef"><b>Definition:</b> <a href="Parser_8hpp_source.html#l00013">Parser.hpp:13</a></div></div>
-<div class="ttc" id="aclassParser_html_a06952fa44f19fdb573c1355ac26454c5"><div class="ttname"><a href="classParser.html#a06952fa44f19fdb573c1355ac26454c5">Parser::getInstance</a></div><div class="ttdeci">static Parser * getInstance(const std::string &amp;file_name)</div><div class="ttdoc">Gets the singleton instance of Parser.</div><div class="ttdef"><b>Definition:</b> <a href="Parser_8cpp_source.html#l00009">Parser.cpp:9</a></div></div>
-<div class="ttc" id="aclassParser_html_ad498cb7da315304eb0a84e1ecd6f647b"><div class="ttname"><a href="classParser.html#ad498cb7da315304eb0a84e1ecd6f647b">Parser::renderSVG</a></div><div class="ttdeci">void renderSVG(sf::RenderWindow &amp;window)</div><div class="ttdoc">Render the shapes on the window.</div><div class="ttdef"><b>Definition:</b> <a href="Parser_8cpp_source.html#l00195">Parser.cpp:195</a></div></div>
-<div class="ttc" id="aclassText_html_a04c2ae991434d41249615e720c52c58f"><div class="ttname"><a href="classText.html#a04c2ae991434d41249615e720c52c58f">Text::font</a></div><div class="ttdeci">static sf::Font font</div><div class="ttdoc">Static font shared across all Text instances.</div><div class="ttdef"><b>Definition:</b> <a href="Text_8hpp_source.html#l00017">Text.hpp:17</a></div></div>
-<div class="ttc" id="aclassViewer_html"><div class="ttname"><a href="classViewer.html">Viewer</a></div><div class="ttdoc">Represents a viewer for handling events and interactions with an SFML window.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8hpp_source.html#l00013">Viewer.hpp:13</a></div></div>
-<div class="ttc" id="aclassViewer_html_a890129c9676f7c590fe51567b0e2ed92"><div class="ttname"><a href="classViewer.html#a890129c9676f7c590fe51567b0e2ed92">Viewer::getInstance</a></div><div class="ttdeci">static Viewer * getInstance(sf::RenderWindow &amp;Window, sf::View &amp;View)</div><div class="ttdoc">Gets the singleton instance of Viewer.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8cpp_source.html#l00005">Viewer.cpp:5</a></div></div>
-<div class="ttc" id="aclassViewer_html_ac84ecd752e288b72281f1686893982e2"><div class="ttname"><a href="classViewer.html#ac84ecd752e288b72281f1686893982e2">Viewer::handleDragging</a></div><div class="ttdeci">void handleDragging()</div><div class="ttdoc">Handles dragging interaction.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8cpp_source.html#l00083">Viewer.cpp:83</a></div></div>
-<div class="ttc" id="aclassViewer_html_ae6cf7f652c5a65d39764a57e512129a8"><div class="ttname"><a href="classViewer.html#ae6cf7f652c5a65d39764a57e512129a8">Viewer::handleEvents</a></div><div class="ttdeci">void handleEvents(sf::Event event)</div><div class="ttdoc">Handles SFML events.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8cpp_source.html#l00015">Viewer.cpp:15</a></div></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    graphics.RotateTransform(viewer.<a class="code" href="classViewer.html#a82dfd34668f986b72e51ee86d4029fc6">rotate_angle</a>);</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    graphics.ScaleTransform(viewer.<a class="code" href="classViewer.html#a46377febc22fd7f2cc38a73ddb66b8ad">zoom_factor</a>, viewer.<a class="code" href="classViewer.html#a46377febc22fd7f2cc38a73ddb66b8ad">zoom_factor</a>);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    graphics.TranslateTransform(viewer.<a class="code" href="classViewer.html#a3e16ebbf5c0ed98dc75fe2c4d46fe0d5">offset_x</a>, viewer.<a class="code" href="classViewer.html#a30b0f57907c82de620339e105f9a3c5b">offset_y</a>);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    graphics.SetSmoothingMode(Gdiplus::SmoothingModeAntiAlias8x8);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    graphics.SetTextContrast(100);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    graphics.SetCompositingMode(Gdiplus::CompositingModeSourceOver);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    graphics.SetPixelOffsetMode(Gdiplus::PixelOffsetModeHighQuality);</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    graphics.SetInterpolationMode(Gdiplus::InterpolationModeHighQuality);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <a class="code" href="classRenderer.html">Renderer</a>* renderer = <a class="code" href="classRenderer.html#ac1bf10ff8b4f967f0d416a26d482abd6">Renderer::getInstance</a>();</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <a class="code" href="classSVGElement.html">SVGElement</a>* root = parser-&gt;<a class="code" href="classParser.html#a59ed4455eaec306cde11939785c4e71a">getRoot</a>();</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <a class="code" href="classGroup.html">Group</a>* group = <span class="keyword">dynamic_cast&lt;</span> <a class="code" href="classGroup.html">Group</a>* <span class="keyword">&gt;</span>(root);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    renderer-&gt;<a class="code" href="classRenderer.html#a1fac47f9b1c4c3fb1151f2b6ecb282f6">draw</a>(graphics, group);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;}</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, PSTR, INT iCmdShow) {</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    HWND hWnd;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    MSG msg;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    WNDCLASS wndClass;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    Gdiplus::GdiplusStartupInput gdiplusStartupInput;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    ULONG_PTR gdiplusToken;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="comment">// Initialize GDI+.</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    GdiplusStartup(&amp;gdiplusToken, &amp;gdiplusStartupInput, NULL);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    wndClass.style = CS_HREDRAW | CS_VREDRAW;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    wndClass.lpfnWndProc = WndProc;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    wndClass.cbClsExtra = 0;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    wndClass.cbWndExtra = 0;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    wndClass.hInstance = hInstance;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    wndClass.hIcon = LoadIcon(NULL, IDI_APPLICATION);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    wndClass.hCursor = LoadCursor(NULL, IDC_ARROW);</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    wndClass.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    wndClass.lpszMenuName = NULL;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    wndClass.lpszClassName = TEXT(<span class="stringliteral">&quot;svg-reader-v0.2&quot;</span>);</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    RegisterClass(&amp;wndClass);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    hWnd = CreateWindowEx(0,</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                          TEXT(<span class="stringliteral">&quot;svg-reader-v0.2&quot;</span>),  <span class="comment">// window class name</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                          TEXT(<span class="stringliteral">&quot;svg-reader-v0.2&quot;</span>),  <span class="comment">// window caption</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                          WS_OVERLAPPEDWINDOW,      <span class="comment">// window style</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                          CW_USEDEFAULT,            <span class="comment">// initial x position</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                          CW_USEDEFAULT,            <span class="comment">// initial y position</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                          1600,                     <span class="comment">// initial x size</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                          1200,                     <span class="comment">// initial y size</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                          NULL,                     <span class="comment">// parent window handle</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                          NULL,                     <span class="comment">// window menu handle</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                          hInstance,                <span class="comment">// program instance handle</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                          NULL);                    <span class="comment">// creation parameters</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    ShowWindow(hWnd, iCmdShow);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    UpdateWindow(hWnd);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">while</span> (GetMessage(&amp;msg, NULL, 0, 0)) {</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        TranslateMessage(&amp;msg);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        DispatchMessage(&amp;msg);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    }</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordflow">if</span> (parser) <span class="keyword">delete</span> parser;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    Gdiplus::GdiplusShutdown(gdiplusToken);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordflow">return</span> msg.wParam;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;}</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam,</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                         LPARAM lParam) {</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    HDC hdc;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    PAINTSTRUCT ps;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    std::string filePath;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <span class="keywordflow">if</span> (__argc &gt; 1) {</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        filePath = __argv[1];</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    }</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <a class="code" href="classViewer.html">Viewer</a>* viewer = <a class="code" href="classViewer.html#a8235c9da7e144d7139c91901c0051cd8">Viewer::getInstance</a>();</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordflow">switch</span> (message) {</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <span class="keywordflow">case</span> WM_PAINT:</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            hdc = BeginPaint(hWnd, &amp;ps);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            OnPaint(hdc, filePath, *viewer);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            EndPaint(hWnd, &amp;ps);</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="keywordflow">case</span> WM_MOUSEWHEEL:</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        <span class="keywordflow">case</span> WM_MOUSEMOVE:</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        <span class="keywordflow">case</span> WM_LBUTTONDOWN:</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        <span class="keywordflow">case</span> WM_LBUTTONUP:</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            viewer-&gt;<a class="code" href="classViewer.html#acb15ba2e5d3bab2ba58da0db724b3bd1">handleMouseEvent</a>(message, wParam, lParam);</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            <span class="keywordflow">if</span> (viewer-&gt;<a class="code" href="classViewer.html#a59a507a835919e78114601d5bd1784e6">needs_repaint</a>) {</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;                InvalidateRect(hWnd, NULL, TRUE);</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                viewer-&gt;<a class="code" href="classViewer.html#a59a507a835919e78114601d5bd1784e6">needs_repaint</a> = <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            }</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        <span class="keywordflow">case</span> WM_KEYDOWN:</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            viewer-&gt;<a class="code" href="classViewer.html#a643c2fc659f06f4d4bfcefbad22ebd75">handleKeyEvent</a>(wParam);</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            InvalidateRect(hWnd, NULL, TRUE);</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        <span class="keywordflow">case</span> WM_DESTROY:</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            PostQuitMessage(0);</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;            <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            <span class="keywordflow">return</span> DefWindowProc(hWnd, message, wParam, lParam);</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    }</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;}</div>
+<div class="ttc" id="aclassGroup_html"><div class="ttname"><a href="classGroup.html">Group</a></div><div class="ttdoc">A composite class that contains a vector of shape pointers (polymorphic).</div><div class="ttdef"><b>Definition:</b> <a href="Group_8hpp_source.html#l00019">Group.hpp:19</a></div></div>
+<div class="ttc" id="aclassParser_html"><div class="ttname"><a href="classParser.html">Parser</a></div><div class="ttdoc">To manipulate and parse an SVG file.</div><div class="ttdef"><b>Definition:</b> <a href="Parser_8hpp_source.html#l00034">Parser.hpp:34</a></div></div>
+<div class="ttc" id="aclassParser_html_a06952fa44f19fdb573c1355ac26454c5"><div class="ttname"><a href="classParser.html#a06952fa44f19fdb573c1355ac26454c5">Parser::getInstance</a></div><div class="ttdeci">static Parser * getInstance(const std::string &amp;file_name)</div><div class="ttdoc">Gets the singleton instance of the Parser class.</div><div class="ttdef"><b>Definition:</b> <a href="Parser_8cpp_source.html#l00129">Parser.cpp:129</a></div></div>
+<div class="ttc" id="aclassParser_html_a59ed4455eaec306cde11939785c4e71a"><div class="ttname"><a href="classParser.html#a59ed4455eaec306cde11939785c4e71a">Parser::getRoot</a></div><div class="ttdeci">Group * getRoot()</div><div class="ttdoc">Gets the root of the SVG file.</div><div class="ttdef"><b>Definition:</b> <a href="Parser_8cpp_source.html#l00140">Parser.cpp:140</a></div></div>
+<div class="ttc" id="aclassRenderer_html"><div class="ttname"><a href="classRenderer.html">Renderer</a></div><div class="ttdoc">Singleton class responsible for rendering shapes using GDI+.</div><div class="ttdef"><b>Definition:</b> <a href="Renderer_8hpp_source.html#l00024">Renderer.hpp:24</a></div></div>
+<div class="ttc" id="aclassRenderer_html_a1fac47f9b1c4c3fb1151f2b6ecb282f6"><div class="ttname"><a href="classRenderer.html#a1fac47f9b1c4c3fb1151f2b6ecb282f6">Renderer::draw</a></div><div class="ttdeci">void draw(Gdiplus::Graphics &amp;graphics, Group *group) const</div><div class="ttdoc">Draws a shape using Gdiplus::Graphics based on its type.</div><div class="ttdef"><b>Definition:</b> <a href="Renderer_8cpp_source.html#l00069">Renderer.cpp:69</a></div></div>
+<div class="ttc" id="aclassRenderer_html_ac1bf10ff8b4f967f0d416a26d482abd6"><div class="ttname"><a href="classRenderer.html#ac1bf10ff8b4f967f0d416a26d482abd6">Renderer::getInstance</a></div><div class="ttdeci">static Renderer * getInstance()</div><div class="ttdoc">Gets the singleton instance of the Renderer class.</div><div class="ttdef"><b>Definition:</b> <a href="Renderer_8cpp_source.html#l00007">Renderer.cpp:7</a></div></div>
+<div class="ttc" id="aclassSVGElement_html"><div class="ttname"><a href="classSVGElement.html">SVGElement</a></div><div class="ttdoc">Represents an element in an SVG file.</div><div class="ttdef"><b>Definition:</b> <a href="SVGElement_8hpp_source.html#l00017">SVGElement.hpp:17</a></div></div>
+<div class="ttc" id="aclassViewer_html"><div class="ttname"><a href="classViewer.html">Viewer</a></div><div class="ttdoc">Represents a viewer for rendering and interacting with a scene.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8hpp_source.html#l00016">Viewer.hpp:16</a></div></div>
+<div class="ttc" id="aclassViewer_html_a30b0f57907c82de620339e105f9a3c5b"><div class="ttname"><a href="classViewer.html#a30b0f57907c82de620339e105f9a3c5b">Viewer::offset_y</a></div><div class="ttdeci">float offset_y</div><div class="ttdoc">Y-coordinate offset of the viewer.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8hpp_source.html#l00019">Viewer.hpp:19</a></div></div>
+<div class="ttc" id="aclassViewer_html_a3e16ebbf5c0ed98dc75fe2c4d46fe0d5"><div class="ttname"><a href="classViewer.html#a3e16ebbf5c0ed98dc75fe2c4d46fe0d5">Viewer::offset_x</a></div><div class="ttdeci">float offset_x</div><div class="ttdoc">X-coordinate offset of the viewer.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8hpp_source.html#l00018">Viewer.hpp:18</a></div></div>
+<div class="ttc" id="aclassViewer_html_a46377febc22fd7f2cc38a73ddb66b8ad"><div class="ttname"><a href="classViewer.html#a46377febc22fd7f2cc38a73ddb66b8ad">Viewer::zoom_factor</a></div><div class="ttdeci">float zoom_factor</div><div class="ttdoc">Zoom factor for scaling the view.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8hpp_source.html#l00020">Viewer.hpp:20</a></div></div>
+<div class="ttc" id="aclassViewer_html_a59a507a835919e78114601d5bd1784e6"><div class="ttname"><a href="classViewer.html#a59a507a835919e78114601d5bd1784e6">Viewer::needs_repaint</a></div><div class="ttdeci">bool needs_repaint</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8hpp_source.html#l00022">Viewer.hpp:22</a></div></div>
+<div class="ttc" id="aclassViewer_html_a643c2fc659f06f4d4bfcefbad22ebd75"><div class="ttname"><a href="classViewer.html#a643c2fc659f06f4d4bfcefbad22ebd75">Viewer::handleKeyEvent</a></div><div class="ttdeci">void handleKeyEvent(WPARAM wParam)</div><div class="ttdoc">Handles keyboard events.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8cpp_source.html#l00047">Viewer.cpp:47</a></div></div>
+<div class="ttc" id="aclassViewer_html_a8235c9da7e144d7139c91901c0051cd8"><div class="ttname"><a href="classViewer.html#a8235c9da7e144d7139c91901c0051cd8">Viewer::getInstance</a></div><div class="ttdeci">static Viewer * getInstance()</div><div class="ttdoc">Gets the singleton instance of the Viewer class.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8cpp_source.html#l00004">Viewer.cpp:4</a></div></div>
+<div class="ttc" id="aclassViewer_html_a82dfd34668f986b72e51ee86d4029fc6"><div class="ttname"><a href="classViewer.html#a82dfd34668f986b72e51ee86d4029fc6">Viewer::rotate_angle</a></div><div class="ttdeci">float rotate_angle</div><div class="ttdoc">Rotation angle of the view.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8hpp_source.html#l00021">Viewer.hpp:21</a></div></div>
+<div class="ttc" id="aclassViewer_html_acb15ba2e5d3bab2ba58da0db724b3bd1"><div class="ttname"><a href="classViewer.html#acb15ba2e5d3bab2ba58da0db724b3bd1">Viewer::handleMouseEvent</a></div><div class="ttdeci">void handleMouseEvent(UINT message, WPARAM wParam, LPARAM lParam)</div><div class="ttdoc">Handles mouse events, such as wheel, move, left button down, and left button up.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8cpp_source.html#l00026">Viewer.cpp:26</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div id="nav-path" class="navpath">

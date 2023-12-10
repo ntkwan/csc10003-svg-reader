@@ -1,0 +1,27 @@
+var classSVGElement =
+[
+    [ "~SVGElement", "classSVGElement.html#a5087280fd4bbb637c3cde64e44e974f1", null ],
+    [ "SVGElement", "classSVGElement.html#ad30205005009d2ba4820d3ce372e81ea", null ],
+    [ "addElement", "classSVGElement.html#af699f9aa795572c2873e520849579881", null ],
+    [ "getClass", "classSVGElement.html#adc98ebac66965dd303283cbf7ff28f38", null ],
+    [ "getFillColor", "classSVGElement.html#abb012cad5d6e9ee7a413f46042f99429", null ],
+    [ "getOutlineColor", "classSVGElement.html#a9a243b2b8464d57df28f3f3e8c52511e", null ],
+    [ "getOutlineThickness", "classSVGElement.html#a2e4b1a48bfbc34a6a9f17bfd4b89eb51", null ],
+    [ "getParent", "classSVGElement.html#a1b075314d4cda4fa895688979fe462fd", null ],
+    [ "getPosition", "classSVGElement.html#a4e1ed8bb29fd4dbeb35471315976b3a2", null ],
+    [ "getTransforms", "classSVGElement.html#a5f111964efd20e98eafafb3d168a1e87", null ],
+    [ "printData", "classSVGElement.html#ad4bcd981ae7431161013811024b452e1", null ],
+    [ "setFillColor", "classSVGElement.html#abf7eef6d09fedba0d0f50a0f1a4be2fb", null ],
+    [ "setOutlineColor", "classSVGElement.html#ac0cc2f6d2e01d364a695bebaa7db18d2", null ],
+    [ "setOutlineThickness", "classSVGElement.html#a88653ebe8b92ec881ab436ea968375a8", null ],
+    [ "setParent", "classSVGElement.html#a43b3bf06fae88a1634a189272088d11d", null ],
+    [ "setPosition", "classSVGElement.html#aec8a2f582f21a559c05d791e017efbd5", null ],
+    [ "setPosition", "classSVGElement.html#a77aefe4b7e9dbf180cc531c969d0116d", null ],
+    [ "setTransforms", "classSVGElement.html#a00fef2ebc5df4838b3f9bd7111b117c5", null ],
+    [ "fill", "classSVGElement.html#a6d3a39e763d3273715ea11f8959f81b1", null ],
+    [ "parent", "classSVGElement.html#adee748c3014de1c1ebd20411a52e824a", null ],
+    [ "position", "classSVGElement.html#acf9b9906b6d0cba8bb5c0b38b032e40f", null ],
+    [ "stroke", "classSVGElement.html#aab937dcb566cd83d94d00d69b4083f13", null ],
+    [ "stroke_width", "classSVGElement.html#a88449b487a890e3765ae20e96ee95c06", null ],
+    [ "transforms", "classSVGElement.html#aefeee5c1de3e802d9f5f0a54078170e6", null ]
+];

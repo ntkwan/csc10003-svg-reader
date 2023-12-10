@@ -47,6 +47,11 @@ public:
      */
     const std::vector< Vector2Df > &getPoints() const;
 
+    /**
+     * @brief Prints the data of the shape.
+     *
+     * @note This function is used for debugging purposes.
+     */
     void printData() const override;
 };
 

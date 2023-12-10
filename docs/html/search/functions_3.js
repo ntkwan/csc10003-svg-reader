@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ellipse_93',['Ellipse',['../classEllipse.html#a0b9eb0d4fa4f27c0aae9a9d96ce03b46',1,'Ellipse']]]
+  ['ell_170',['Ell',['../classEll.html#a4a9956ca82cb9f957e993fa0c0faced6',1,'Ell']]]
 ];

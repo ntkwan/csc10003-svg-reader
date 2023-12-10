@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['zoom_81',['zoom',['../classViewer.html#a8281e173d056b9841871acfa635ff5cc',1,'Viewer']]]
+  ['zoom_5ffactor_135',['zoom_factor',['../classViewer.html#a46377febc22fd7f2cc38a73ddb66b8ad',1,'Viewer']]]
 ];
