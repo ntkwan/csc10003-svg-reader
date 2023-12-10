@@ -9,11 +9,11 @@ Viewer* Viewer::getInstance() {
 }
 
 Viewer::Viewer() {
-    isDragging = false;
-    zoomFactor = 1.0f;
-    rotateAngle = 0.0f;
-    offsetX = 0.0f;
-    offsetY = 0.0f;
+    is_dragging = false;
+    zoom_factor = 1.0f;
+    rotate_angle = 0.0f;
+    offset_x = 0.0f;
+    offset_y = 0.0f;
 }
 
 Viewer::~Viewer() {
@@ -48,42 +48,42 @@ void Viewer::handleKeyEvent(WPARAM wParam) { handleKeyDown(wParam); }
 
 void Viewer::handleMouseWheel(WPARAM wParam) {
     if (GET_WHEEL_DELTA_WPARAM(wParam) > 0) {
-        zoomFactor *= 1.1f;
-        needsRepaint = true;
+        zoom_factor *= 1.1f;
+        needs_repaint = true;
     } else {
-        zoomFactor /= 1.1f;
-        needsRepaint = true;
+        zoom_factor /= 1.1f;
+        needs_repaint = true;
     }
 }
 
 void Viewer::handleMouseMove(LPARAM lParam) {
-    if (isDragging) {
+    if (is_dragging) {
         int x = static_cast< int >(LOWORD(lParam));
         int y = static_cast< int >(HIWORD(lParam));
 
-        if (x != lastMousePos.x || y != lastMousePos.y) {
-            offsetX += (x - lastMousePos.x) * zoomFactor;
-            offsetY += (y - lastMousePos.y) * zoomFactor;
-            lastMousePos.x = x;
-            lastMousePos.y = y;
-            needsRepaint = true;
+        if (x != last_mouse_pos.x || y != last_mouse_pos.y) {
+            offset_x += (x - last_mouse_pos.x) * zoom_factor;
+            offset_y += (y - last_mouse_pos.y) * zoom_factor;
+            last_mouse_pos.x = x;
+            last_mouse_pos.y = y;
+            needs_repaint = true;
         }
     }
 }
 
 void Viewer::handleLeftButtonDown(LPARAM lParam) {
-    isDragging = true;
-    lastMousePos.x = static_cast< int >(LOWORD(lParam));
-    lastMousePos.y = static_cast< int >(HIWORD(lParam));
+    is_dragging = true;
+    last_mouse_pos.x = static_cast< int >(LOWORD(lParam));
+    last_mouse_pos.y = static_cast< int >(HIWORD(lParam));
     SetCapture(GetActiveWindow());
 }
 
 void Viewer::handleLeftButtonUp() {
-    isDragging = false;
+    is_dragging = false;
     ReleaseCapture();
 
-    if (needsRepaint) {
-        needsRepaint = false;
+    if (needs_repaint) {
+        needs_repaint = false;
     }
 }
 
@@ -91,11 +91,11 @@ void Viewer::handleKeyDown(WPARAM wParam) {
     char key = static_cast< char >(wParam);
     switch (tolower(key)) {
         case 'q':
-            rotateAngle -= 1.0f;
+            rotate_angle -= 1.0f;
             break;
 
         case 'e':
-            rotateAngle += 1.0f;
+            rotate_angle += 1.0f;
             break;
     }
 }

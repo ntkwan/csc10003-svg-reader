@@ -15,12 +15,12 @@
  */
 class Viewer {
 public:
-    float offsetX;      ///< X-coordinate offset of the viewer
-    float offsetY;      ///< Y-coordinate offset of the viewer
-    float zoomFactor;   ///< Zoom factor for scaling the view
-    float rotateAngle;  ///< Rotation angle of the view
-    bool needsRepaint;  ///< Flag indicating whether the view needs to be
-                        ///< repainted
+    float offset_x;      ///< X-coordinate offset of the viewer
+    float offset_y;      ///< Y-coordinate offset of the viewer
+    float zoom_factor;   ///< Zoom factor for scaling the view
+    float rotate_angle;  ///< Rotation angle of the view
+    bool needs_repaint;  ///< Flag indicating whether the view needs to be
+                         ///< repainted
 
     /**
      * @brief Gets the singleton instance of the Viewer class.
@@ -71,8 +71,8 @@ private:
      */
     void operator=(const Viewer&) = delete;
 
-    bool isDragging;     ///< Flag indicating whether the mouse is being dragged
-    POINT lastMousePos;  ///< Last recorded mouse position
+    bool is_dragging;  ///< Flag indicating whether the mouse is being dragged
+    POINT last_mouse_pos;  ///< Last recorded mouse position
 
     /**
      * @brief Handles the mouse wheel event for zooming.

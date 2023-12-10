@@ -17,9 +17,9 @@ void OnPaint(HDC hdc, const std::string& filePath, Viewer& viewer) {
     if (!parser) {
         parser = Parser::getInstance(filePath);
     }
-    graphics.RotateTransform(viewer.rotateAngle);
-    graphics.ScaleTransform(viewer.zoomFactor, viewer.zoomFactor);
-    graphics.TranslateTransform(viewer.offsetX, viewer.offsetY);
+    graphics.RotateTransform(viewer.rotate_angle);
+    graphics.ScaleTransform(viewer.zoom_factor, viewer.zoom_factor);
+    graphics.TranslateTransform(viewer.offset_x, viewer.offset_y);
     graphics.SetSmoothingMode(Gdiplus::SmoothingModeAntiAlias8x8);
     graphics.SetTextContrast(100);
     graphics.SetCompositingMode(Gdiplus::CompositingModeSourceOver);
@@ -100,9 +100,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam,
         case WM_LBUTTONDOWN:
         case WM_LBUTTONUP:
             viewer->handleMouseEvent(message, wParam, lParam);
-            if (viewer->needsRepaint) {
+            if (viewer->needs_repaint) {
                 InvalidateRect(hWnd, NULL, TRUE);
-                viewer->needsRepaint = false;
+                viewer->needs_repaint = false;
             }
             return 0;
         case WM_KEYDOWN:
