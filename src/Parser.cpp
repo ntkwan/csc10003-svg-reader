@@ -179,18 +179,12 @@ SVGElement *Parser::parseElements(std::string file_name) {
                                 std::stof(group_attribute.second));
                             char *value = doc.allocate_string(opacity.c_str());
                             attribute->value(value);
-                        } else if (group_attribute.first == "transform") {
-                            std::string transform = group_attribute.second +
-                                                    " " + attribute->value();
-                            char *value =
-                                doc.allocate_string(transform.c_str());
-                            attribute->value(value);
                         }
                         found = true;
                         break;
                     }
                 }
-                if (!found) {
+                if (!found && group_attribute.first != "transform") {
                     char *name =
                         doc.allocate_string(group_attribute.first.c_str());
                     char *value =
@@ -201,6 +195,7 @@ SVGElement *Parser::parseElements(std::string file_name) {
                 }
             }
             Group *new_group = new Group(xmlToString(node->first_attribute()));
+            new_group->setTransforms(getTransformOrder(node));
             current->addElement(new_group);
             current = new_group;
             prev = node;
@@ -219,18 +214,12 @@ SVGElement *Parser::parseElements(std::string file_name) {
                                 std::stof(group_attribute.second));
                             char *value = doc.allocate_string(opacity.c_str());
                             attribute->value(value);
-                        } else if (group_attribute.first == "transform") {
-                            std::string transform = group_attribute.second +
-                                                    " " + attribute->value();
-                            char *value =
-                                doc.allocate_string(transform.c_str());
-                            attribute->value(value);
                         }
                         found = true;
                         break;
                     }
                 }
-                if (!found) {
+                if (!found && group_attribute.first != "transform") {
                     char *name =
                         doc.allocate_string(group_attribute.first.c_str());
                     char *value =
@@ -428,7 +417,7 @@ SVGElement *Parser::parseShape(xml_node<> *node) {
     } else if (type == "text") {
         return parseText(node, fill_color, stroke_color, stroke_width);
     }
-    shape->setTransforms(getTransformOrder(node));
+    if (shape != NULL) shape->setTransforms(getTransformOrder(node));
     return shape;
 }
 

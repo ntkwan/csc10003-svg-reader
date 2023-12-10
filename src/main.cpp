@@ -88,9 +88,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam,
     if (__argc > 1) {
         filePath = __argv[1];
     }
-    if (!parser) {
-        parser = Parser::getInstance(filePath);
-    }
     Viewer* viewer = Viewer::getInstance();
     switch (message) {
         case WM_PAINT:
