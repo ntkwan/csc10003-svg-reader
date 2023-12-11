@@ -130,6 +130,23 @@ class Rect {
 }
 
 
+class Renderer {
+	-Renderer()
+	+{static} getInstance() : Renderer*
+	-{static} instance : static Renderer*
+	-applyTransform(std::vector<std::string> transform_order, Gdiplus::Graphics& graphics) : void {query}
+	+draw(Gdiplus::Graphics& graphics, Group* group) : void {query}
+	-drawCircle(Gdiplus::Graphics& graphics, Circle* circle) : void {query}
+	-drawEllipse(Gdiplus::Graphics& graphics, Ell* ellipse) : void {query}
+	-drawLine(Gdiplus::Graphics& graphics, Line* line) : void {query}
+	-drawPath(Gdiplus::Graphics& graphics, Path* path) : void {query}
+	-drawPolygon(Gdiplus::Graphics& graphics, Plygon* polygon) : void {query}
+	-drawPolyline(Gdiplus::Graphics& graphics, Plyline* polyline) : void {query}
+	-drawRectangle(Gdiplus::Graphics& graphics, Rect* rectangle) : void {query}
+	-drawText(Gdiplus::Graphics& graphics, Text* text) : void {query}
+}
+
+
 abstract class SVGElement {
 	#SVGElement()
 	+~SVGElement()
@@ -175,6 +192,38 @@ class Text {
 	+setFontSize(float font_size) : void
 	+setFontStyle(std::string style) : void
 }
+
+
+class Vector2D <template<typename T>> {
+	+Vector2D()
+	+Vector2D(T X, T Y)
+	+Vector2D(const Vector2D<U>& vector)
+	+x : T
+	+y : T
+}
+
+
+class Viewer {
+	-Viewer()
+	+~Viewer()
+	-last_mouse_pos : POINT
+	+{static} getInstance() : Viewer*
+	-is_dragging : bool
+	+needs_repaint : bool
+	+offset_x : float
+	+offset_y : float
+	+rotate_angle : float
+	+zoom_factor : float
+	-{static} instance : static Viewer*
+	-handleKeyDown(WPARAM wParam) : void
+	+handleKeyEvent(WPARAM wParam) : void
+	-handleLeftButtonDown(LPARAM lParam) : void
+	-handleLeftButtonUp() : void
+	+handleMouseEvent(UINT message, WPARAM wParam, LPARAM lParam) : void
+	-handleMouseMove(LPARAM lParam) : void
+	-handleMouseWheel(WPARAM wParam) : void
+}
+
 
 class mColor {
 	+mColor()
@@ -255,10 +304,16 @@ class PathPoint {
 .Path *-- .PathPoint
 
 
+.Renderer --> .Renderer : -instance
+
+
 .SVGElement --> .SVGElement : #parent
 
 
 .SVGElement "2" *-- .mColor
+
+
+.Viewer --> .Viewer : -instance
 
 
 .mColor "9" *-- .mColor

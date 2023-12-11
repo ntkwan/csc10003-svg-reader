@@ -1,0 +1,36 @@
+@startuml
+
+
+
+
+
+/' Objects '/
+
+class Vector2D <template<typename T>> {
+	+Vector2D()
+	+Vector2D(T X, T Y)
+	+Vector2D(const Vector2D<U>& vector)
+	+x : T
+	+y : T
+}
+
+
+
+
+
+/' Inheritance relationships '/
+
+
+
+
+/' Aggregation relationships '/
+
+
+
+
+
+/' Nested objects '/
+
+
+
+@enduml
