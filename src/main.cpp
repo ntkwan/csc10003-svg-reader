@@ -1,37 +1,118 @@
+// clang-format off
+#include <winsock2.h>
+#include <objidl.h>
+#include <windows.h>
+#include <gdiplus.h>
+// clang-format on
+
 #include "Parser.hpp"
 #include "Viewer.hpp"
 
-int main() {
-    constexpr int screen_width = 1600;
-    constexpr int screen_height = 900;
+LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
-    sf::ContextSettings settings;
-    settings.antialiasingLevel = 16;
-    sf::RenderWindow window(sf::VideoMode(screen_width, screen_height),
-                            "svg-reader-version-0.1", sf::Style::Default,
-                            settings);
-    sf::View view(sf::FloatRect(0.f, 0.f, static_cast< float >(screen_width),
-                                static_cast< float >(screen_height)));
-    Viewer *viewer = Viewer::getInstance(window, view);
-    Parser *parser = Parser::getInstance("external/samples/mixed/sample8.svg");
-    Renderer *renderer = Renderer::getInstance(window);
+Parser* parser = nullptr;
 
-    while (window.isOpen()) {
-        sf::Event event;
+void OnPaint(HDC hdc, const std::string& filePath, Viewer& viewer) {
+    Gdiplus::Graphics graphics(hdc);
+    if (!parser) {
+        parser = Parser::getInstance(filePath);
+    }
+    graphics.RotateTransform(viewer.rotate_angle);
+    graphics.ScaleTransform(viewer.zoom_factor, viewer.zoom_factor);
+    graphics.TranslateTransform(viewer.offset_x, viewer.offset_y);
+    graphics.SetSmoothingMode(Gdiplus::SmoothingModeAntiAlias8x8);
+    graphics.SetTextContrast(100);
+    graphics.SetCompositingMode(Gdiplus::CompositingModeSourceOver);
+    graphics.SetPixelOffsetMode(Gdiplus::PixelOffsetModeHighQuality);
+    graphics.SetInterpolationMode(Gdiplus::InterpolationModeHighQuality);
+    Renderer* renderer = Renderer::getInstance();
+    SVGElement* root = parser->getRoot();
+    Group* group = dynamic_cast< Group* >(root);
+    renderer->draw(graphics, group);
+}
 
-        while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed) window.close();
-            viewer->handleEvents(event);
-        }
+INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, PSTR, INT iCmdShow) {
+    HWND hWnd;
+    MSG msg;
+    WNDCLASS wndClass;
+    Gdiplus::GdiplusStartupInput gdiplusStartupInput;
+    ULONG_PTR gdiplusToken;
 
-        window.clear(sf::Color::White);
-        parser->renderSVG(*renderer);
-        window.display();
-        viewer->handleDragging();
+    // Initialize GDI+.
+    GdiplusStartup(&gdiplusToken, &gdiplusStartupInput, NULL);
+
+    wndClass.style = CS_HREDRAW | CS_VREDRAW;
+    wndClass.lpfnWndProc = WndProc;
+    wndClass.cbClsExtra = 0;
+    wndClass.cbWndExtra = 0;
+    wndClass.hInstance = hInstance;
+    wndClass.hIcon = LoadIcon(NULL, IDI_APPLICATION);
+    wndClass.hCursor = LoadCursor(NULL, IDC_ARROW);
+    wndClass.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
+    wndClass.lpszMenuName = NULL;
+    wndClass.lpszClassName = TEXT("svg-reader-v0.2");
+
+    RegisterClass(&wndClass);
+
+    hWnd = CreateWindowEx(0,
+                          TEXT("svg-reader-v0.2"),  // window class name
+                          TEXT("svg-reader-v0.2"),  // window caption
+                          WS_OVERLAPPEDWINDOW,      // window style
+                          CW_USEDEFAULT,            // initial x position
+                          CW_USEDEFAULT,            // initial y position
+                          1600,                     // initial x size
+                          1200,                     // initial y size
+                          NULL,                     // parent window handle
+                          NULL,                     // window menu handle
+                          hInstance,                // program instance handle
+                          NULL);                    // creation parameters
+
+    ShowWindow(hWnd, iCmdShow);
+    UpdateWindow(hWnd);
+
+    while (GetMessage(&msg, NULL, 0, 0)) {
+        TranslateMessage(&msg);
+        DispatchMessage(&msg);
     }
 
-    delete viewer;
-    delete parser;
-    delete renderer;
-    return 0;
+    if (parser) delete parser;
+    Gdiplus::GdiplusShutdown(gdiplusToken);
+    return msg.wParam;
+}
+
+LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam,
+                         LPARAM lParam) {
+    HDC hdc;
+    PAINTSTRUCT ps;
+    std::string filePath;
+    if (__argc > 1) {
+        filePath = __argv[1];
+    }
+    Viewer* viewer = Viewer::getInstance();
+    switch (message) {
+        case WM_PAINT:
+            hdc = BeginPaint(hWnd, &ps);
+            OnPaint(hdc, filePath, *viewer);
+            EndPaint(hWnd, &ps);
+            return 0;
+        case WM_MOUSEWHEEL:
+        case WM_MOUSEMOVE:
+        case WM_LBUTTONDOWN:
+        case WM_LBUTTONUP:
+            viewer->handleMouseEvent(message, wParam, lParam);
+            if (viewer->needs_repaint) {
+                InvalidateRect(hWnd, NULL, TRUE);
+                viewer->needs_repaint = false;
+            }
+            return 0;
+        case WM_KEYDOWN:
+            viewer->handleKeyEvent(wParam);
+            InvalidateRect(hWnd, NULL, TRUE);
+            return 0;
+        case WM_DESTROY:
+            PostQuitMessage(0);
+            return 0;
+        default:
+            return DefWindowProc(hWnd, message, wParam, lParam);
+    }
 }

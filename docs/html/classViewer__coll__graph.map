@@ -1,3 +1,3 @@
 <map id="Viewer" name="Viewer">
-<area shape="rect" id="node1" title="Represents a viewer for handling events and interactions with an SFML window." alt="" coords="5,5,72,32"/>
+<area shape="rect" id="node1" title="Represents a viewer for rendering and interacting with a scene." alt="" coords="5,5,72,32"/>
 </map>

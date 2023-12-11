@@ -1,316 +1,90 @@
 #include "Parser.hpp"
 
 #include <algorithm>
+#include <cstring>
 #include <fstream>
 #include <iostream>
-#include <queue>
 #include <sstream>
 
 Parser *Parser::instance = nullptr;
 
-Parser *Parser::getInstance(const std::string &file_name) {
-    if (instance == nullptr) {
-        instance = new Parser(file_name);
-    }
-    return instance;
-}
-
-Parser::Parser(const std::string &file_name) {
-    parseObjects(file_name);
-    parseSVG();
-}
-
-std::string Parser::parseSVG(const std::string &file_name) {
-    std::ifstream file(file_name);
-    if (!file.is_open()) {
-        std::cerr << "Failed to open file: " << file_name << std::endl;
-        return "";
-    }
-    std::string line;
-    std::string svg;
-    bool svg_found = false;
-    while (std::getline(file, line)) {
-        if (line.find("</svg>") != std::string::npos) {
-            svg_found = false;
-        }
-        if (svg_found) {
-            svg += line + "\n";
-        }
-        if (line.find("svg") != std::string::npos) {
-            svg_found = true;
-        }
-    }
-    file.close();
-    return svg;
-}
-
-Attributes Parser::parseAttributes(std::string attributes) {
-    std::vector< std::pair< std::string, std::string > > attributes_vector;
-    std::string name;
-    std::string value;
-    std::stringstream ss(attributes);
-    while (std::getline(ss, name, '=')) {
-        char c = '0';
-        ss >> c;
-        if (c != '"') {
-            break;
-        }
-        getline(ss, value, c);
-        name.erase(std::remove(name.begin(), name.end(), ' '), name.end());
-        name.erase(std::remove(name.begin(), name.end(), '\t'), name.end());
-        attributes_vector.push_back(std::make_pair(name, value));
-    }
-    return attributes_vector;
-}
-
-std::string removeExtraSpaces(const std::string &input) {
-    std::string result;
-    bool spaceDetected = false;
-    bool firstSpace = true;
-    for (char ch : input) {
-        if (ch == ' ') {
-            if (!spaceDetected) {
-                if (!firstSpace)
-                    result.push_back(ch);
-                else
-                    firstSpace = false;
-                spaceDetected = true;
-            }
-        } else {
-            result.push_back(ch);
-            spaceDetected = false;
-        }
-    }
-
-    if (!result.empty() && result.back() == ' ') {
-        result.pop_back();
-    }
-
-    return result;
-}
-
-Tags Parser::parseTags(std::string svg) {
-    std::vector< std::pair< std::string, std::string > > tags;
-    std::string line;
-    std::stringstream ss(svg);
-    while (std::getline(ss, line)) {
-        int start_pos = line.find("<");
-        if (start_pos == std::string::npos) {
-            continue;
-        }
-        if (line[start_pos + 1] == '!') {
-            while (line.find("-->") == std::string::npos) {
-                std::getline(ss, line);
-            }
-            continue;
-        }
-        if (line.find("text") != std::string::npos) {
-            while (line.find("/text") == std::string::npos) {
-                std::string next_line;
-                std::getline(ss, next_line);
-                line += " " + next_line;
-            }
-        }
-        int end_pos = line.find(">");
-        while (end_pos == std::string::npos) {
-            std::string next_line;
-            std::getline(ss, next_line);
-            line += " " + next_line;
-            end_pos = line.find(">");
-        }
-        std::string tag = line.substr(start_pos + 1, end_pos - start_pos - 1);
-        if (tag.size() > 0) {
-            int space_pos = tag.find(" ");
-            std::string name = tag.substr(0, space_pos);
-            std::string attributes = tag.substr(space_pos + 1, tag.size() - 1);
-            if (attributes[attributes.size() - 1] == ' ' ||
-                attributes[attributes.size() - 1] == '/') {
-                attributes = attributes.substr(0, attributes.size() - 1);
-            }
-            if (name == "text") {
-                std::string text;
-                std::stringstream ss2(line);
-                std::getline(ss2, text, '>');
-                std::getline(ss2, text, '<');
-                text = removeExtraSpaces(text);
-                attributes += " text=\"" + text + "\"";
-            }
-            tags.push_back(std::make_pair(name, attributes));
-        }
-    }
-    return tags;
-}
-
-void Parser::parseObjects(std::string file_name) {
-    std::string svg = parseSVG(file_name);
-    Tags tags = parseTags(svg);
-
-    for (auto tag : tags) {
-        std::vector< std::pair< std::string, std::string > > attributes =
-            parseAttributes(tag.second);
-        objects.push_back(std::make_pair(tag.first, attributes));
-    }
-
-    int group = 0;
-    std::deque< Attributes > group_attributes;
-    for (auto &object : objects) {
-        std::string name = object.first;
-        if (name == "/g") {
-            group--;
-            group_attributes.pop_back();
-        }
-        if (group > 0 && name != "g" && name != "/g") {
-            for (Attributes attributes : group_attributes) {
-                for (auto attribute : attributes) {
-                    bool flag = false;
-                    for (auto object_attribute : object.second) {
-                        if (attribute.first == object_attribute.first) {
-                            flag = true;
-                            break;
-                        }
-                    }
-                    if (!flag) {
-                        object.second.push_back(attribute);
-                    } else {
-                        if (attribute.first == "transform") {
-                            for (auto &object_attribute : object.second) {
-                                if (object_attribute.first == "transform") {
-                                    object_attribute.second +=
-                                        " " + attribute.second;
-                                }
-                            }
-                        }
-                        if (attribute.first == "opacity") {
-                            for (auto &object_attribute : object.second) {
-                                if (object_attribute.first == "opacity") {
-                                    object_attribute.second = std::to_string(
-                                        std::stof(attribute.second) *
-                                        std::stof(object_attribute.second));
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        if (name == "g") {
-            group++;
-            group_attributes.push_back(object.second);
-        }
-    }
-}
-
-void Parser::printObjects() {
-    for (auto object : objects) {
-        std::cout << object.first << std::endl;
-        for (auto attribute : object.second) {
-            std::cout << "    " << attribute.first << " = " << attribute.second
-                      << std::endl;
-        }
-    }
-}
-
 namespace {
-    auto getHexColor = [](std::string color) -> Color {
+    auto getHexColor = [](std::string color) -> mColor {
         std::stringstream ss;
         int pos = color.find("#");
-        ss << std::hex << color.substr(pos + 1, 2) << " "
-           << color.substr(pos + 3, 2) << " " << color.substr(pos + 5, 2);
-        int r, g, b;
-        ss >> r >> g >> b;
-        if (color[pos + 7] != '\0' && color[pos + 7] != ' ') {
-            std::stringstream ss;
-            ss << std::hex << color.substr(pos + 7, 2);
-            int a;
-            ss >> a;
-            return Color(r, g, b, a);
+        // handle 3 digit hex color
+        if (color.size() < 5 || color[pos + 4] == ' ') {
+            ss << std::hex << color.substr(pos + 1, 1) << " "
+               << color.substr(pos + 2, 1) << " " << color.substr(pos + 3, 1);
+            int r, g, b;
+            ss >> r >> g >> b;
+            r = r * 16 + r;
+            g = g * 16 + g;
+            b = b * 16 + b;
+            return mColor(r, g, b, 255);
+        } else if (color.size() < 6 || color[pos + 5] == ' ') {
+            ss << std::hex << color.substr(pos + 1, 1) << " "
+               << color.substr(pos + 2, 1) << " " << color.substr(pos + 3, 1)
+               << color.substr(pos + 4, 1);
+            int r, g, b, a;
+            ss >> r >> g >> b >> a;
+            r = r * 16 + r;
+            g = g * 16 + g;
+            b = b * 16 + b;
+            a = a * 16 + a;
+            return mColor(r, g, b, a);
+        } else {
+            ss << std::hex << color.substr(pos + 1, 2) << " "
+               << color.substr(pos + 3, 2) << " " << color.substr(pos + 5, 2);
+            int r, g, b;
+            ss >> r >> g >> b;
+            if (color[pos + 7] != '\0' && color[pos + 7] != ' ') {
+                std::stringstream ss;
+                ss << std::hex << color.substr(pos + 7, 2);
+                int a;
+                ss >> a;
+                return mColor(r, g, b, a);
+            }
+            return mColor(r, g, b, 255);
         }
-        return Color(r, g, b, 255);
     };
 
-    auto getRgbColor = [](std::string color) -> Color {
+    auto getRgbColor = [](std::string color) -> mColor {
         int r, g, b;
         float a = 1;
         sscanf(color.c_str(), "rgb(%d,%d,%d,%f)", &r, &g, &b, &a);
-        return Color(r, g, b, 255 * a);
+        return mColor(r, g, b, 255 * a);
     };
-}  // namespace
 
-std::string Parser::getAttribute(Attributes attributes, std::string name) {
-    std::string result;
-    for (auto attribute : attributes) {
-        if (attribute.first == name) {
-            result = attribute.second;
-            break;
-        } else {
-            if (name == "fill")
-                result = "black";
-            else if (name == "stroke" || name == "transform" ||
-                     name == "rotate")
-                result = "none";
-        }
-    }
-    return result;
-}
-
-float Parser::getFloatAttribute(Attributes attributes, std::string name) {
-    float result;
-    for (auto attribute : attributes) {
-        if (attribute.first == name) {
-            result = std::stof(attribute.second);
-            break;
-        } else {
-            if (name == "stroke-width" || name == "stroke-opacity" ||
-                name == "fill-opacity" || name == "opacity")
-                result = 1;
-        }
-    }
-    return result;
-}
-
-Color Parser::parseColor(Attributes attributes, std::string name) {
-    std::string color = getAttribute(attributes, name);
-    color.erase(std::remove(color.begin(), color.end(), ' '), color.end());
-    for (auto &c : color) c = tolower(c);
-    if (color == "none")
-        return Color::Transparent;
-    else {
-        Color result;
-        if (color.find("#") != std::string::npos) {
-            result = getHexColor(color);
-        } else if (color.find("rgb") != std::string::npos) {
-            result = getRgbColor(color);
-        } else {
-            auto color_code = color_map.find(color);
-            if (color_code == color_map.end()) {
-                std::cout << "Color " << color << " not found" << std::endl;
-                exit(-1);
+    std::string removeExtraSpaces(std::string input) {
+        input.erase(std::remove(input.begin(), input.end(), '\t'), input.end());
+        input.erase(std::remove(input.begin(), input.end(), '\n'), input.end());
+        std::string result;
+        bool spaceDetected = false;
+        bool firstSpace = true;
+        for (int i = 0; i < input.size(); i++) {
+            if (input[i] == ' ') {
+                if (!spaceDetected) {
+                    if (!firstSpace)
+                        result.push_back(input[i]);
+                    else
+                        firstSpace = false;
+                    spaceDetected = true;
+                }
+            } else {
+                result.push_back(input[i]);
+                firstSpace = false;
+                spaceDetected = false;
             }
-            result = color_code->second;
         }
 
-        result.a = result.a * getFloatAttribute(attributes, name + "-opacity") *
-                   getFloatAttribute(attributes, "opacity");
+        if (!result.empty() && result.back() == ' ') {
+            result.pop_back();
+        }
+
         return result;
     }
-}
 
-std::vector< Vector2Df > Parser::parsePoints(Attributes attributes) {
-    std::vector< Vector2Df > points;
-    std::string points_string = getAttribute(attributes, "points");
-
-    std::stringstream ss(points_string);
-    float x, y;
-    char comma;
-
-    while (ss >> x >> comma >> y) {
-        points.push_back(Vector2Df(x, y));
-    }
-
-    return points;
-}
-
-namespace {
     void removeRedundantSpaces(std::string &svgPathString) {
         int index = 0;
         while (index < svgPathString.size()) {
@@ -327,24 +101,236 @@ namespace {
     }
 
     void insertSpaceBeforeEachLetter(std::string &svgPathString) {
-        for (int index = 0; index < svgPathString.size() - 1; index++) {
+        std::string result;
+        for (int index = 0; index < svgPathString.size(); index++) {
             if (std::isalpha(svgPathString[index])) {
-                svgPathString.insert(index + 1, " ");
-                index++;
+                result += " ";
+                result += svgPathString[index];
+                result += " ";
+            } else if (svgPathString[index] == '-') {
+                result += " ";
+                result += svgPathString[index];
+            } else {
+                result += svgPathString[index];
             }
         }
+        svgPathString = result;
     }
 
     void formatSvgPathString(std::string &svgPathString) {
+        std::replace(svgPathString.begin(), svgPathString.end(), '\t', ' ');
+        std::replace(svgPathString.begin(), svgPathString.end(), '\n', ' ');
         insertSpaceBeforeEachLetter(svgPathString);
         std::replace(svgPathString.begin(), svgPathString.end(), ',', ' ');
         removeRedundantSpaces(svgPathString);
     }
 }  // namespace
 
-std::vector< PathPoint > Parser::parsePathPoints(Attributes attributes) {
+Parser *Parser::getInstance(const std::string &file_name) {
+    if (instance == nullptr) {
+        instance = new Parser(file_name);
+    }
+    return instance;
+}
+
+Parser::Parser(const std::string &file_name) {
+    root = parseElements(file_name);
+}
+
+Group *Parser::getRoot() { return dynamic_cast< Group * >(root); }
+
+Attributes xmlToString(xml_attribute<> *attribute) {
+    Attributes attributes;
+    while (attribute) {
+        attributes.push_back(
+            std::make_pair(attribute->name(), attribute->value()));
+        attribute = attribute->next_attribute();
+    }
+    return attributes;
+}
+
+SVGElement *Parser::parseElements(std::string file_name) {
+    xml_document<> doc;
+    std::ifstream file(file_name);
+    std::vector< char > buffer((std::istreambuf_iterator< char >(file)),
+                               std::istreambuf_iterator< char >());
+    buffer.push_back('\0');
+    doc.parse< 0 >(&buffer[0]);
+
+    xml_node<> *svg = doc.first_node();
+    xml_node<> *node = svg->first_node();
+    xml_node<> *prev = NULL;
+
+    SVGElement *root = new Group();
+    SVGElement *current = root;
+
+    while (node) {
+        if (std::string(node->name()) == "g") {
+            Group *group = dynamic_cast< Group * >(current);
+            for (auto group_attribute : group->getAttributes()) {
+                bool found = false;
+                for (auto attribute = node->first_attribute(); attribute;
+                     attribute = attribute->next_attribute()) {
+                    if (std::string(attribute->name()) ==
+                        group_attribute.first) {
+                        if (group_attribute.first == "opacity") {
+                            std::string opacity = std::to_string(
+                                std::stof(attribute->value()) *
+                                std::stof(group_attribute.second));
+                            char *value = doc.allocate_string(opacity.c_str());
+                            attribute->value(value);
+                        }
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found && group_attribute.first != "transform") {
+                    char *name =
+                        doc.allocate_string(group_attribute.first.c_str());
+                    char *value =
+                        doc.allocate_string(group_attribute.second.c_str());
+                    xml_attribute<> *new_attribute =
+                        doc.allocate_attribute(name, value);
+                    node->append_attribute(new_attribute);
+                }
+            }
+            Group *new_group = new Group(xmlToString(node->first_attribute()));
+            new_group->setTransforms(getTransformOrder(node));
+            current->addElement(new_group);
+            current = new_group;
+            prev = node;
+            node = node->first_node();
+        } else {
+            Group *group = dynamic_cast< Group * >(current);
+            for (auto group_attribute : group->getAttributes()) {
+                bool found = false;
+                for (auto attribute = node->first_attribute(); attribute;
+                     attribute = attribute->next_attribute()) {
+                    if (std::string(attribute->name()) ==
+                        group_attribute.first) {
+                        if (group_attribute.first == "opacity") {
+                            std::string opacity = std::to_string(
+                                std::stof(attribute->value()) *
+                                std::stof(group_attribute.second));
+                            char *value = doc.allocate_string(opacity.c_str());
+                            attribute->value(value);
+                        }
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found && group_attribute.first != "transform") {
+                    char *name =
+                        doc.allocate_string(group_attribute.first.c_str());
+                    char *value =
+                        doc.allocate_string(group_attribute.second.c_str());
+                    xml_attribute<> *new_attribute =
+                        doc.allocate_attribute(name, value);
+                    node->append_attribute(new_attribute);
+                }
+            }
+            SVGElement *shape = parseShape(node);
+            if (shape != NULL) current->addElement(shape);
+            prev = node;
+            node = node->next_sibling();
+        }
+        if (node == NULL && current != root) {
+            while (prev->parent()->next_sibling() == NULL) {
+                current = current->getParent();
+                prev = prev->parent();
+                if (prev == svg) {
+                    break;
+                }
+            }
+            if (prev == svg) {
+                break;
+            }
+            current = current->getParent();
+            node = prev->parent()->next_sibling();
+        }
+    }
+    return root;
+}
+
+std::string Parser::getAttribute(xml_node<> *node, std::string name) {
+    if (name == "text") return removeExtraSpaces(node->value());
+    std::string result;
+    if (node->first_attribute(name.c_str()) == NULL) {
+        if (name == "fill")
+            result = "black";
+        else if (name == "stroke" || name == "transform" || name == "rotate" ||
+                 name == "font-style")
+            result = "none";
+        else if (name == "text-anchor")
+            result = "start";
+        else if (name == "fill-rule")
+            result = "nonzero";
+    } else {
+        result = node->first_attribute(name.c_str())->value();
+    }
+    return result;
+}
+
+float Parser::getFloatAttribute(xml_node<> *node, std::string name) {
+    float result;
+    if (node->first_attribute(name.c_str()) == NULL) {
+        if (name == "stroke-width" || name == "stroke-opacity" ||
+            name == "fill-opacity" || name == "opacity")
+            result = 1;
+        else
+            result = 0;
+    } else {
+        result = std::stof(node->first_attribute(name.c_str())->value());
+    }
+    return result;
+}
+
+mColor Parser::parseColor(xml_node<> *node, std::string name) {
+    std::string color = getAttribute(node, name);
+    color.erase(std::remove(color.begin(), color.end(), ' '), color.end());
+    for (auto &c : color) c = tolower(c);
+    if (color == "none")
+        return mColor::Transparent;
+    else {
+        mColor result;
+        if (color.find("#") != std::string::npos) {
+            result = getHexColor(color);
+        } else if (color.find("rgb") != std::string::npos) {
+            result = getRgbColor(color);
+        } else {
+            auto color_code = color_map.find(color);
+            if (color_code == color_map.end()) {
+                std::cout << "Color " << color << " not found" << std::endl;
+                exit(-1);
+            }
+            result = color_code->second;
+        }
+
+        result.a = result.a * getFloatAttribute(node, name + "-opacity") *
+                   getFloatAttribute(node, "opacity");
+        return result;
+    }
+}
+
+std::vector< Vector2Df > Parser::parsePoints(xml_node<> *node) {
+    std::vector< Vector2Df > points;
+    std::string points_string = getAttribute(node, "points");
+
+    std::stringstream ss(points_string);
+    float x, y;
+
+    while (ss >> x) {
+        if (ss.peek() == ',') ss.ignore();
+        ss >> y;
+        points.push_back(Vector2Df(x, y));
+    }
+
+    return points;
+}
+
+std::vector< PathPoint > Parser::parsePathPoints(xml_node<> *node) {
     std::vector< PathPoint > points;
-    std::string path_string = getAttribute(attributes, "d");
+    std::string path_string = getAttribute(node, "d");
 
     formatSvgPathString(path_string);
     std::stringstream ss(path_string);
@@ -367,6 +353,7 @@ std::vector< PathPoint > Parser::parsePathPoints(Attributes attributes) {
         } else {
             if (tolower(pPoint.TC) == 'm' || tolower(pPoint.TC) == 'l' ||
                 tolower(pPoint.TC) == 'c') {
+                if (tolower(pPoint.TC) == 'm') pPoint.TC = 'L';
                 pPoint.Point.x = std::stof(element);
                 ss >> pPoint.Point.y;
             } else if (tolower(pPoint.TC) == 'h') {
@@ -379,188 +366,174 @@ std::vector< PathPoint > Parser::parsePathPoints(Attributes attributes) {
         }
         points.push_back(pPoint);
     }
+
     return points;
 }
 
-std::vector< std::string > Parser::getTransformOrder(Attributes attributes) {
-    std::string transform_tag = getAttribute(attributes, "transform");
-
-    transform_tag.erase(
-        std::remove(transform_tag.begin(), transform_tag.end(), ' '),
-        transform_tag.end());
-
-    size_t start_pos = transform_tag.find(")");
-    while (start_pos != std::string::npos) {
-        transform_tag.insert(start_pos + 1, " ");
-        start_pos = transform_tag.find(")", start_pos + 1);
-    }
-
+std::vector< std::string > Parser::getTransformOrder(xml_node<> *node) {
+    std::string transform_tag = getAttribute(node, "transform");
     std::vector< std::string > order;
     std::stringstream ss(transform_tag);
     std::string type;
     while (ss >> type) {
-        order.push_back(type);
+        if (type.find("translate") != std::string::npos ||
+            type.find("scale") != std::string::npos ||
+            type.find("rotate") != std::string::npos) {
+            while (type.find(")") == std::string::npos) {
+                std::string temp;
+                ss >> temp;
+                type += " " + temp;
+            }
+            std::string temp = type.substr(0, type.find("(") + 1);
+            temp.erase(std::remove(temp.begin(), temp.end(), ' '), temp.end());
+            type.erase(0, type.find("(") + 1);
+            type = temp + type;
+            order.push_back(type);
+        }
     }
-
     return order;
 }
 
-void Parser::parseSVG() {
-    for (auto object : objects) {
-        std::string name = object.first;
-        Attributes attributes = object.second;
-        if (name == "line") {
-            parseLine(attributes);
-        } else if (name == "rect") {
-            parseRect(attributes);
-        } else if (name == "circle") {
-            parseCircle(attributes);
-        } else if (name == "ellipse") {
-            parseEllipse(attributes);
-        } else if (name == "polygon") {
-            parsePolygon(attributes);
-        } else if (name == "polyline") {
-            parsePolyline(attributes);
-        } else if (name == "text") {
-            parseText(attributes);
-        } else if (name == "path") {
-            parsePath(attributes);
-        }
+SVGElement *Parser::parseShape(xml_node<> *node) {
+    SVGElement *shape = NULL;
+    std::string type = node->name();
+    mColor stroke_color = parseColor(node, "stroke");
+    mColor fill_color = parseColor(node, "fill");
+    float stroke_width = getFloatAttribute(node, "stroke-width");
+    if (type == "line") {
+        shape = parseLine(node, stroke_color, stroke_width);
+    } else if (type == "rect") {
+        shape = parseRect(node, fill_color, stroke_color, stroke_width);
+    } else if (type == "circle") {
+        shape = parseCircle(node, fill_color, stroke_color, stroke_width);
+    } else if (type == "ellipse") {
+        shape = parseEllipse(node, fill_color, stroke_color, stroke_width);
+    } else if (type == "polygon") {
+        shape = parsePolygon(node, fill_color, stroke_color, stroke_width);
+    } else if (type == "polyline") {
+        shape = parsePolyline(node, fill_color, stroke_color, stroke_width);
+    } else if (type == "path") {
+        shape = parsePath(node, fill_color, stroke_color, stroke_width);
+    } else if (type == "text") {
+        return parseText(node, fill_color, stroke_color, stroke_width);
     }
+    if (shape != NULL) shape->setTransforms(getTransformOrder(node));
+    return shape;
 }
 
-void Parser::parseLine(Attributes attributes) {
-    Color stroke_color = parseColor(attributes, "stroke");
-    float stroke_width = getFloatAttribute(attributes, "stroke-width");
-    Line *shape = new Line(Vector2Df(getFloatAttribute(attributes, "x1"),
-                                     getFloatAttribute(attributes, "y1")),
-                           Vector2Df(getFloatAttribute(attributes, "x2"),
-                                     getFloatAttribute(attributes, "y2")),
-                           stroke_color, stroke_width);
-    shape->setTransforms(getTransformOrder(attributes));
-    shapes.push_back(shape);
+Line *Parser::parseLine(xml_node<> *node, const mColor &stroke_color,
+                        float stroke_width) {
+    Line *shape = new Line(
+        Vector2Df(getFloatAttribute(node, "x1"), getFloatAttribute(node, "y1")),
+        Vector2Df(getFloatAttribute(node, "x2"), getFloatAttribute(node, "y2")),
+        stroke_color, stroke_width);
+    return shape;
 }
 
-void Parser::parseRect(Attributes attributes) {
-    Color stroke_color = parseColor(attributes, "stroke");
-    Color fill_color = parseColor(attributes, "fill");
-    float stroke_width = getFloatAttribute(attributes, "stroke-width");
-    float x = getFloatAttribute(attributes, "x");
-    float y = getFloatAttribute(attributes, "y");
-    float rx = getFloatAttribute(attributes, "rx");
-    float ry = getFloatAttribute(attributes, "ry");
+Rect *Parser::parseRect(xml_node<> *node, const mColor &fill_color,
+                        const mColor &stroke_color, float stroke_width) {
+    float x = getFloatAttribute(node, "x");
+    float y = getFloatAttribute(node, "y");
+    float rx = getFloatAttribute(node, "rx");
+    float ry = getFloatAttribute(node, "ry");
     Rect *shape =
-        new Rect(getFloatAttribute(attributes, "width"),
-                 getFloatAttribute(attributes, "height"), Vector2Df(x, y),
+        new Rect(getFloatAttribute(node, "width"),
+                 getFloatAttribute(node, "height"), Vector2Df(x, y),
                  Vector2Df(rx, ry), fill_color, stroke_color, stroke_width);
-    shape->setTransforms(getTransformOrder(attributes));
-    shapes.push_back(shape);
+    return shape;
 }
 
-void Parser::parseCircle(Attributes attributes) {
-    Color stroke_color = parseColor(attributes, "stroke");
-    Color fill_color = parseColor(attributes, "fill");
-    float stroke_width = getFloatAttribute(attributes, "stroke-width");
-    float cx = getFloatAttribute(attributes, "cx");
-    float cy = getFloatAttribute(attributes, "cy");
-    float radius = getFloatAttribute(attributes, "r");
+Circle *Parser::parseCircle(xml_node<> *node, const mColor &fill_color,
+                            const mColor &stroke_color, float stroke_width) {
+    float cx = getFloatAttribute(node, "cx");
+    float cy = getFloatAttribute(node, "cy");
+    float radius = getFloatAttribute(node, "r");
     Circle *shape = new Circle(radius, Vector2Df(cx, cy), fill_color,
                                stroke_color, stroke_width);
-    shape->setTransforms(getTransformOrder(attributes));
-    shapes.push_back(shape);
+    return shape;
 }
 
-void Parser::parseEllipse(Attributes attributes) {
-    Color stroke_color = parseColor(attributes, "stroke");
-    Color fill_color = parseColor(attributes, "fill");
-    float stroke_width = getFloatAttribute(attributes, "stroke-width");
-    float radius_x = getFloatAttribute(attributes, "rx");
-    float radius_y = getFloatAttribute(attributes, "ry");
-    float cx = getFloatAttribute(attributes, "cx");
-    float cy = getFloatAttribute(attributes, "cy");
-    Ellipse *shape =
-        new Ellipse(Vector2Df(radius_x, radius_y), Vector2Df(cx, cy),
-                    fill_color, stroke_color, stroke_width);
-    shape->setTransforms(getTransformOrder(attributes));
-    shapes.push_back(shape);
+Ell *Parser::parseEllipse(xml_node<> *node, const mColor &fill_color,
+                          const mColor &stroke_color, float stroke_width) {
+    float radius_x = getFloatAttribute(node, "rx");
+    float radius_y = getFloatAttribute(node, "ry");
+    float cx = getFloatAttribute(node, "cx");
+    float cy = getFloatAttribute(node, "cy");
+    Ell *shape = new Ell(Vector2Df(radius_x, radius_y), Vector2Df(cx, cy),
+                         fill_color, stroke_color, stroke_width);
+    return shape;
 }
 
-void Parser::parsePolygon(Attributes attributes) {
-    Color stroke_color = parseColor(attributes, "stroke");
-    Color fill_color = parseColor(attributes, "fill");
-    float stroke_width = getFloatAttribute(attributes, "stroke-width");
-    Polygon *shape = new Polygon(fill_color, stroke_color, stroke_width);
-    std::vector< Vector2Df > points = parsePoints(attributes);
+Plygon *Parser::parsePolygon(xml_node<> *node, const mColor &fill_color,
+                             const mColor &stroke_color, float stroke_width) {
+    Plygon *shape = new Plygon(fill_color, stroke_color, stroke_width);
+    std::vector< Vector2Df > points = parsePoints(node);
     for (auto point : points) {
         shape->addPoint(point);
     }
-    shape->setTransforms(getTransformOrder(attributes));
-    shapes.push_back(shape);
+    std::string fill_rule = getAttribute(node, "fill-rule");
+    fill_rule.erase(std::remove(fill_rule.begin(), fill_rule.end(), ' '),
+                    fill_rule.end());
+    shape->setFillRule(fill_rule);
+    return shape;
 }
 
-void Parser::parsePolyline(Attributes attributes) {
-    Color stroke_color = parseColor(attributes, "stroke");
-    Color fill_color = parseColor(attributes, "fill");
-    float stroke_width = getFloatAttribute(attributes, "stroke-width");
-    Polyline *shape = new Polyline(fill_color, stroke_color, stroke_width);
-    std::vector< Vector2Df > points = parsePoints(attributes);
+Plyline *Parser::parsePolyline(xml_node<> *node, const mColor &fill_color,
+                               const mColor &stroke_color, float stroke_width) {
+    Plyline *shape = new Plyline(fill_color, stroke_color, stroke_width);
+    std::vector< Vector2Df > points = parsePoints(node);
     for (auto point : points) {
         shape->addPoint(point);
     }
-    shape->setTransforms(getTransformOrder(attributes));
-    shapes.push_back(shape);
+    std::string fill_rule = getAttribute(node, "fill-rule");
+    fill_rule.erase(std::remove(fill_rule.begin(), fill_rule.end(), ' '),
+                    fill_rule.end());
+    shape->setFillRule(fill_rule);
+    return shape;
 }
 
-void Parser::parseText(Attributes attributes) {
-    Color stroke_color = parseColor(attributes, "stroke");
-    Color fill_color = parseColor(attributes, "fill");
-    float stroke_width = getFloatAttribute(attributes, "stroke-width");
-    float x = getFloatAttribute(attributes, "x");
-    float y = getFloatAttribute(attributes, "y");
-    float font_size = getFloatAttribute(attributes, "font-size");
-    std::string text = getAttribute(attributes, "text");
-    Text *shape = new Text(Vector2Df(x, y - font_size), text, font_size,
+Text *Parser::parseText(xml_node<> *node, const mColor &fill_color,
+                        const mColor &stroke_color, float stroke_width) {
+    float x = getFloatAttribute(node, "x");
+    float y = getFloatAttribute(node, "y");
+    float font_size = getFloatAttribute(node, "font-size");
+    std::string text = getAttribute(node, "text");
+
+    Text *shape = new Text(Vector2Df(x - 7, y - font_size + 5), text, font_size,
                            fill_color, stroke_color, stroke_width);
-    shape->setTransforms(getTransformOrder(attributes));
-    shapes.push_back(shape);
+
+    std::string anchor = getAttribute(node, "text-anchor");
+    anchor.erase(std::remove(anchor.begin(), anchor.end(), ' '), anchor.end());
+    shape->setAnchor(anchor);
+
+    std::string style = getAttribute(node, "font-style");
+    style.erase(std::remove(style.begin(), style.end(), ' '), style.end());
+    shape->setFontStyle(style);
+
+    float dx = getFloatAttribute(node, "dx");
+    float dy = getFloatAttribute(node, "dy");
+    std::string transform =
+        "translate(" + std::to_string(dx) + " " + std::to_string(dy) + ")";
+    std::vector< std::string > transform_order = getTransformOrder(node);
+    transform_order.push_back(transform);
+    shape->setTransforms(transform_order);
+    return shape;
 }
 
-void Parser::parsePath(Attributes attributes) {
-    Color stroke_color = parseColor(attributes, "stroke");
-    Color fill_color = parseColor(attributes, "fill");
-    float stroke_width = getFloatAttribute(attributes, "stroke-width");
+Path *Parser::parsePath(xml_node<> *node, const mColor &fill_color,
+                        const mColor &stroke_color, float stroke_width) {
     Path *shape = new Path(fill_color, stroke_color, stroke_width);
-    std::vector< PathPoint > points = parsePathPoints(attributes);
+    std::vector< PathPoint > points = parsePathPoints(node);
     for (auto point : points) {
         shape->addPoint(point);
     }
-    shape->setTransforms(getTransformOrder(attributes));
-    shapes.push_back(shape);
+    std::string fill_rule = getAttribute(node, "fill-rule");
+    fill_rule.erase(std::remove(fill_rule.begin(), fill_rule.end(), ' '),
+                    fill_rule.end());
+    shape->setFillRule(fill_rule);
+    return shape;
 }
 
-void Parser::renderSVG(Renderer &renderer) {
-    for (auto shape : shapes) {
-        renderer.draw(shape);
-    }
-}
+Parser::~Parser() { delete root; }
 
-Parser::~Parser() {
-    for (auto shape : shapes) {
-        delete shape;
-    }
-    shapes.clear();
-
-    for (auto object : objects) {
-        object.second.clear();
-    }
-
-    objects.clear();
-
-    delete instance;
-}
-
-void Parser::printShapesData() {
-    for (auto shape : shapes) {
-        shape->printData();
-    }
-}
+void Parser::printShapesData() { root->printData(); }

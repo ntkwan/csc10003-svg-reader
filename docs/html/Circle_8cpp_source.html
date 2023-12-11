@@ -60,7 +60,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">svg-reader
-   &#160;<span id="projectnumber">0.1</span>
+   &#160;<span id="projectnumber">0.2</span>
    </div>
    <div id="projectbrief">Parse and render SVG files, handle user interactions.</div>
   </td>
@@ -123,12 +123,16 @@ $(document).ready(function(){initNavTree('Circle_8cpp_source.html',''); initResi
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &quot;Circle.hpp&quot;</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno"><a class="line" href="classCircle.html#ad89ead8bfb9ca432d954fed00d62f325">    3</a></span>&#160;<a class="code" href="classCircle.html#ad89ead8bfb9ca432d954fed00d62f325">Circle::Circle</a>(<span class="keywordtype">float</span> radius, <span class="keyword">const</span> sf::Vector2f &amp;center, sf::Color fill,</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;               sf::Color stroke, <span class="keywordtype">float</span> stroke_thickness)</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;    : <a class="code" href="classEllipse.html">Ellipse</a>(sf::Vector2f(radius, radius), center, fill, stroke,</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;              stroke_thickness) {}</div>
-<div class="ttc" id="aclassCircle_html_ad89ead8bfb9ca432d954fed00d62f325"><div class="ttname"><a href="classCircle.html#ad89ead8bfb9ca432d954fed00d62f325">Circle::Circle</a></div><div class="ttdeci">Circle(float radius, const sf::Vector2f &amp;center, sf::Color fill, sf::Color stroke, float stroke_thickness)</div><div class="ttdoc">Constructs a Circle object.</div><div class="ttdef"><b>Definition:</b> <a href="Circle_8cpp_source.html#l00003">Circle.cpp:3</a></div></div>
-<div class="ttc" id="aclassEllipse_html"><div class="ttname"><a href="classEllipse.html">Ellipse</a></div><div class="ttdoc">Represents an ellipse in 2D space.</div><div class="ttdef"><b>Definition:</b> <a href="Ellipse_8hpp_source.html#l00012">Ellipse.hpp:12</a></div></div>
+<div class="line"><a name="l00003"></a><span class="lineno"><a class="line" href="classCircle.html#a5d018c51bfa1fa3d1081e3deef5eddc0">    3</a></span>&#160;<a class="code" href="classCircle.html#a5d018c51bfa1fa3d1081e3deef5eddc0">Circle::Circle</a>(<span class="keywordtype">float</span> radius, <span class="keyword">const</span> <a class="code" href="classVector2D.html">Vector2Df</a> &amp;center, <a class="code" href="classmColor.html">mColor</a> fill,</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;               <a class="code" href="classmColor.html">mColor</a> stroke, <span class="keywordtype">float</span> stroke_width)</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;    : <a class="code" href="classEll.html">Ell</a>(<a class="code" href="classVector2D.html">Vector2Df</a>(radius, radius), center, fill, stroke, stroke_width) {}</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="classCircle.html#a09523e46318092d42a5969a1da5613bb">    7</a></span>&#160;std::string <a class="code" href="classCircle.html#a09523e46318092d42a5969a1da5613bb">Circle::getClass</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <span class="stringliteral">&quot;Circle&quot;</span>; }</div>
+<div class="ttc" id="aclassCircle_html_a09523e46318092d42a5969a1da5613bb"><div class="ttname"><a href="classCircle.html#a09523e46318092d42a5969a1da5613bb">Circle::getClass</a></div><div class="ttdeci">std::string getClass() const override</div><div class="ttdoc">Gets the type of the shape.</div><div class="ttdef"><b>Definition:</b> <a href="Circle_8cpp_source.html#l00007">Circle.cpp:7</a></div></div>
+<div class="ttc" id="aclassCircle_html_a5d018c51bfa1fa3d1081e3deef5eddc0"><div class="ttname"><a href="classCircle.html#a5d018c51bfa1fa3d1081e3deef5eddc0">Circle::Circle</a></div><div class="ttdeci">Circle(float radius, const Vector2Df &amp;center, mColor fill, mColor stroke, float stroke_width)</div><div class="ttdoc">Constructs a Circle object.</div><div class="ttdef"><b>Definition:</b> <a href="Circle_8cpp_source.html#l00003">Circle.cpp:3</a></div></div>
+<div class="ttc" id="aclassEll_html"><div class="ttname"><a href="classEll.html">Ell</a></div><div class="ttdoc">Represents an ellipse in 2D space.</div><div class="ttdef"><b>Definition:</b> <a href="Ellipse_8hpp_source.html#l00012">Ellipse.hpp:12</a></div></div>
+<div class="ttc" id="aclassVector2D_html"><div class="ttname"><a href="classVector2D.html">Vector2D&lt; float &gt;</a></div></div>
+<div class="ttc" id="aclassmColor_html"><div class="ttname"><a href="classmColor.html">mColor</a></div><div class="ttdoc">Utility class for manipulating RGBA mColors.</div><div class="ttdef"><b>Definition:</b> <a href="Color_8hpp_source.html#l00011">Color.hpp:11</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div id="nav-path" class="navpath">

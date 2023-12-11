@@ -1,0 +1,4 @@
+<map id="PathPoint" name="PathPoint">
+<area shape="rect" id="node1" title="A struct that contains a point and a type of point." alt="" coords="34,95,117,121"/>
+<area shape="rect" id="node2" href="$classVector2D.html" title=" " alt="" coords="5,5,145,32"/>
+</map>

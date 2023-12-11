@@ -1,113 +1,101 @@
 #include "Viewer.hpp"
-
 Viewer* Viewer::instance = nullptr;
 
-Viewer* Viewer::getInstance(sf::RenderWindow& Window, sf::View& View) {
-    if (instance == nullptr) {
-        instance = new Viewer(Window, View);
+Viewer* Viewer::getInstance() {
+    if (!instance) {
+        instance = new Viewer();
     }
     return instance;
 }
 
-Viewer::Viewer(sf::RenderWindow& Window, sf::View& View)
-    : window(Window), view(View) {}
+Viewer::Viewer() {
+    is_dragging = false;
+    zoom_factor = 1.0f;
+    rotate_angle = 0.0f;
+    offset_x = 0.0f;
+    offset_y = 0.0f;
+}
 
-void Viewer::handleEvents(sf::Event event) {
-    if (event.type == sf::Event::Closed) {
-        window.close();
+Viewer::~Viewer() {
+    if (instance) {
+        delete instance;
+        instance = nullptr;
     }
+}
 
-    // Zoom in by + (including '=' key)
-    if ((event.type == sf::Event::KeyPressed &&
-         event.key.code == sf::Keyboard::Add) ||
-        (event.type == sf::Event::KeyPressed &&
-         event.key.code == sf::Keyboard::Equal)) {
-        zoom(0.9f);
-    }
+void Viewer::handleMouseEvent(UINT message, WPARAM wParam, LPARAM lParam) {
+    switch (message) {
+        case WM_MOUSEWHEEL:
+            handleMouseWheel(wParam);
+            break;
 
-    // Zoom out by - (including '-' key)
-    if ((event.type == sf::Event::KeyPressed &&
-         event.key.code == sf::Keyboard::Subtract) ||
-        (event.type == sf::Event::KeyPressed &&
-         event.key.code == sf::Keyboard::Hyphen)) {
-        zoom(1.1f);
-    }
-
-    // Rotate clockwise by 'R' key
-    if (event.type == sf::Event::KeyPressed &&
-        event.key.code == sf::Keyboard::R) {
-        rotate(-1.0f);
-    }
-
-    // Rotate anti-clockwise by 'E' key
-    if (event.type == sf::Event::KeyPressed &&
-        event.key.code == sf::Keyboard::E) {
-        rotate(1.0f);
-    }
-
-    // Zoom in/out with mouse scroll
-    if (event.type == sf::Event::MouseWheelScrolled) {
-        if (event.mouseWheelScroll.wheel == sf::Mouse::VerticalWheel) {
-            if (event.mouseWheelScroll.delta > 0) {
-                zoom(0.9f);
-            } else {
-                zoom(1.1f);
+        case WM_MOUSEMOVE:
+            if (wParam & MK_LBUTTON) {
+                handleMouseMove(lParam);
             }
+
+        case WM_LBUTTONDOWN:
+            handleLeftButtonDown(lParam);
+            break;
+
+        case WM_LBUTTONUP:
+            handleLeftButtonUp();
+            break;
+    }
+}
+
+void Viewer::handleKeyEvent(WPARAM wParam) { handleKeyDown(wParam); }
+
+void Viewer::handleMouseWheel(WPARAM wParam) {
+    if (GET_WHEEL_DELTA_WPARAM(wParam) > 0) {
+        zoom_factor *= 1.1f;
+        needs_repaint = true;
+    } else {
+        zoom_factor /= 1.1f;
+        needs_repaint = true;
+    }
+}
+
+void Viewer::handleMouseMove(LPARAM lParam) {
+    if (is_dragging) {
+        int x = static_cast< int >(LOWORD(lParam));
+        int y = static_cast< int >(HIWORD(lParam));
+
+        if (x != last_mouse_pos.x || y != last_mouse_pos.y) {
+            offset_x += (x - last_mouse_pos.x) * zoom_factor;
+            offset_y += (y - last_mouse_pos.y) * zoom_factor;
+            last_mouse_pos.x = x;
+            last_mouse_pos.y = y;
+            needs_repaint = true;
         }
     }
+}
 
-    // Zoom in/out with touchpad (control pad)
-    if (event.type == sf::Event::TouchMoved) {
-        // Assuming that touchpad input scales the zoom based on movement
-        float delta = event.touch.y;
-        if (delta > 0) {
-            zoom(0.9f);
-        } else {
-            zoom(1.1f);
-        }
-    }
+void Viewer::handleLeftButtonDown(LPARAM lParam) {
+    is_dragging = true;
+    last_mouse_pos.x = static_cast< int >(LOWORD(lParam));
+    last_mouse_pos.y = static_cast< int >(HIWORD(lParam));
+    SetCapture(GetActiveWindow());
+}
 
-    // Start dragging the left mouse button
-    if (event.type == sf::Event::MouseButtonPressed &&
-        event.mouseButton.button == sf::Mouse::Left) {
-        startDragging();
-    }
+void Viewer::handleLeftButtonUp() {
+    is_dragging = false;
+    ReleaseCapture();
 
-    // Finish dragging the left mouse button
-    if (event.type == sf::Event::MouseButtonReleased &&
-        event.mouseButton.button == sf::Mouse::Left) {
-        stopDragging();
+    if (needs_repaint) {
+        needs_repaint = false;
     }
 }
 
-void Viewer::handleDragging() {
-    if (is_mouse_dragging) {
-        sf::Vector2i currentMousePosition = sf::Mouse::getPosition(window);
-        sf::Vector2f offset =
-            sf::Vector2f(currentMousePosition - last_mouse_position);
-        moveView(offset);
-        last_mouse_position = currentMousePosition;
+void Viewer::handleKeyDown(WPARAM wParam) {
+    char key = static_cast< char >(wParam);
+    switch (tolower(key)) {
+        case 'q':
+            rotate_angle -= 1.0f;
+            break;
+
+        case 'e':
+            rotate_angle += 1.0f;
+            break;
     }
-}
-
-void Viewer::zoom(float factor) {
-    view.zoom(factor);
-    window.setView(view);
-}
-
-void Viewer::rotate(float angle) {
-    view.rotate(angle);
-    window.setView(view);
-}
-
-void Viewer::startDragging() {
-    is_mouse_dragging = true;
-    last_mouse_position = sf::Mouse::getPosition(window);
-}
-
-void Viewer::stopDragging() { is_mouse_dragging = false; }
-
-void Viewer::moveView(const sf::Vector2f& offset) {
-    view.move(-offset);
-    window.setView(view);
 }

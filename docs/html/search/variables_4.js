@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['inside_5fbounds_142',['inside_bounds',['../classShape.html#aec4fea4c833cb2b9d3c327cf09abe504',1,'Shape']]],
-  ['instance_143',['instance',['../classParser.html#ae3a28c02c18171f4e83fae54b9f21a90',1,'Parser::instance()'],['../classViewer.html#a53c3dca921442983d13f335d0e8a7e20',1,'Viewer::instance()']]],
-  ['inverse_5ftransform_144',['inverse_transform',['../classShape.html#ad81cfa2247514a9981ba0d91a4ad9625',1,'Shape']]],
-  ['inverse_5ftransform_5fneed_5fupdate_145',['inverse_transform_need_update',['../classShape.html#ae40234408f50cf837ef31f7ae0d951ac',1,'Shape']]],
-  ['is_5fmouse_5fdragging_146',['is_mouse_dragging',['../classViewer.html#a080964135a175bfa4383fdc008447bea',1,'Viewer']]]
+  ['fill_259',['fill',['../classSVGElement.html#a6d3a39e763d3273715ea11f8959f81b1',1,'SVGElement']]],
+  ['fill_5frule_260',['fill_rule',['../classPath.html#ac5abd8d5994a75cca56205c7e55a5b4f',1,'Path::fill_rule()'],['../classPlygon.html#a91c207c3142183a6714a700ee468a359',1,'Plygon::fill_rule()'],['../classPlyline.html#a71e8a6587d4656f6381e06925ad305d6',1,'Plyline::fill_rule()']]],
+  ['font_5fsize_261',['font_size',['../classText.html#a71158226b190f16477820e45b549133f',1,'Text']]]
 ];

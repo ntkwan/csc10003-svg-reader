@@ -1,95 +1,111 @@
 #ifndef VIEWER_HPP_
 #define VIEWER_HPP_
 
-#include <SFML/Graphics.hpp>
+#include "Renderer.hpp"
 
 /**
- * @brief Represents a viewer for handling events and interactions with an SFML
- * window.
+ * @brief Represents a viewer for rendering and interacting with a scene.
  *
- * The Viewer class is responsible for handling events, such as zooming,
- * rotating, and dragging, to interact with an SFML window and view.
+ *
+ * The viewer supports the following interactions:
+ * - Rotation: Press 'Q' to rotate the view counterclockwise and 'E' to rotate
+ * clockwise.
+ * - Zooming: Use the scroll wheel to zoom in and out of the scene.
+ * - Translation: Click and drag the left mouse button to translate the view.
  */
 class Viewer {
 public:
+    float offset_x;      ///< X-coordinate offset of the viewer
+    float offset_y;      ///< Y-coordinate offset of the viewer
+    float zoom_factor;   ///< Zoom factor for scaling the view
+    float rotate_angle;  ///< Rotation angle of the view
+    bool needs_repaint;  ///< Flag indicating whether the view needs to be
+                         ///< repainted
+
     /**
-     * @brief Handles SFML events.
+     * @brief Gets the singleton instance of the Viewer class.
      *
-     * @param event The SFML event to handle.
+     * @return The singleton instance of the Viewer class.
      */
-    void handleEvents(sf::Event event);
+    static Viewer* getInstance();
 
     /**
-     * @brief Handles dragging interaction.
+     * @brief Destructor for the Viewer class.
      */
-    void handleDragging();
+    ~Viewer();
 
     /**
-     * @brief Deleted assignment operator to prevent copying of Viewer
-     * instances.
-     */
-    void operator=(const Viewer&) = delete;
-
-    /**
-     * @brief Gets the singleton instance of Viewer.
+     * @brief Handles mouse events, such as wheel, move, left button down, and
+     * left button up.
      *
-     * @param Window The SFML window to associate with the viewer.
-     * @param View The SFML view to associate with the viewer.
-     * @return The singleton instance of Viewer.
+     * @param message The Windows message identifier.
+     * @param wParam The WPARAM parameter of the message.
+     * @param lParam The LPARAM parameter of the message.
      */
-    static Viewer* getInstance(sf::RenderWindow& Window, sf::View& View);
+    void handleMouseEvent(UINT message, WPARAM wParam, LPARAM lParam);
 
     /**
-     * @brief Deleted copy constructor to prevent copying of Viewer instances.
+     * @brief Handles keyboard events.
+     *
+     * @param wParam The WPARAM parameter of the message.
+     */
+    void handleKeyEvent(WPARAM wParam);
+
+private:
+    static Viewer* instance;  ///< Singleton instance of the Viewer class
+
+    /**
+     * @brief Private constructor for the Viewer class.
+     */
+    Viewer();
+
+    /**
+     * @brief Copy constructor for the Viewer class (deleted to enforce
+     * singleton pattern).
      */
     Viewer(const Viewer&) = delete;
 
-private:
     /**
-     * @brief Constructs a Viewer object.
+     * @brief Copy assignment operator for the Viewer class (deleted to enforce
+     * singleton pattern).
+     */
+    void operator=(const Viewer&) = delete;
+
+    bool is_dragging;  ///< Flag indicating whether the mouse is being dragged
+    POINT last_mouse_pos;  ///< Last recorded mouse position
+
+    /**
+     * @brief Handles the mouse wheel event for zooming.
      *
-     * @param Window The SFML window to associate with the viewer.
-     * @param View The SFML view to associate with the viewer.
+     * @param wParam The WPARAM parameter of the message.
      */
-    Viewer(sf::RenderWindow& Window, sf::View& View);
-
-    static Viewer* instance;           ///< Singleton instance of Viewer
-    sf::RenderWindow& window;          ///< Reference to the SFML window
-    sf::View& view;                    ///< Reference to the SFML view
-    sf::Vector2i last_mouse_position;  ///< Last recorded mouse position
-    bool is_mouse_dragging =
-        false;  ///< Flag indicating whether mouse dragging is active
+    void handleMouseWheel(WPARAM wParam);
 
     /**
-     * @brief Zooms the view by the specified factor.
+     * @brief Handles the mouse move event for panning.
      *
-     * @param factor The zoom factor.
+     * @param lParam The LPARAM parameter of the message.
      */
-    void zoom(float factor);
+    void handleMouseMove(LPARAM lParam);
 
     /**
-     * @brief Rotates the view by the specified angle.
+     * @brief Handles the left button down event for initiating dragging.
      *
-     * @param angle The rotation angle.
+     * @param lParam The LPARAM parameter of the message.
      */
-    void rotate(float angle);
+    void handleLeftButtonDown(LPARAM lParam);
 
     /**
-     * @brief Starts dragging the view.
+     * @brief Handles the left button up event for ending dragging.
      */
-    void startDragging();
+    void handleLeftButtonUp();
 
     /**
-     * @brief Stops dragging the view.
-     */
-    void stopDragging();
-
-    /**
-     * @brief Moves the view by the specified offset.
+     * @brief Handles the key down event for rotating.
      *
-     * @param offset The offset by which to move the view.
+     * @param wParam The WPARAM parameter of the message.
      */
-    void moveView(const sf::Vector2f& offset);
+    void handleKeyDown(WPARAM wParam);
 };
 
 #endif  // VIEWER_HPP_

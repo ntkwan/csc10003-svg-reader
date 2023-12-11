@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['rect_117',['Rect',['../classRect.html#ae352d50cb6b3002d82bbe8e49e8679ac',1,'Rect']]],
-  ['rendersvg_118',['renderSVG',['../classParser.html#ad498cb7da315304eb0a84e1ecd6f647b',1,'Parser']]],
-  ['rotate_119',['rotate',['../classViewer.html#ad608bfff3b536c8e02b72fa02097a8e6',1,'Viewer']]]
+  ['rect_226',['Rect',['../classRect.html#ad52d66e844d848d0e95f744b697e7beb',1,'Rect']]],
+  ['renderer_227',['Renderer',['../classRenderer.html#a8c6e15f666cb188a936004add75e6c6b',1,'Renderer::Renderer(const Renderer &amp;)=delete'],['../classRenderer.html#a7ebf46f54dab9905f79b80f7fddb76a6',1,'Renderer::Renderer()']]]
 ];

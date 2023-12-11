@@ -1,15 +1,15 @@
 #ifndef ELLIPSE_HPP_
 #define ELLIPSE_HPP_
 
-#include "Shape.hpp"
+#include "SVGElement.hpp"
 
 /**
  * @brief Represents an ellipse in 2D space.
  *
- * The Ellipse class is derived from the Shape class and defines an ellipse
+ * The Ellipse class is derived from the SVGElement class and defines an ellipse
  * with a variable radius in the x and y directions.
  */
-class Ellipse : public Shape {
+class Ell : public SVGElement {
 private:
     Vector2Df radius;  ///< Radii of the ellipse in the x and y directions
 
@@ -23,8 +23,8 @@ public:
      * @param stroke Outline color of the ellipse.
      * @param stroke_width Thickness of the ellipse outline.
      */
-    Ellipse(const Vector2Df &radius, const Vector2Df &center, Color fill,
-            Color stroke, float stroke_width);
+    Ell(const Vector2Df &radius, const Vector2Df &center, mColor fill,
+        mColor stroke, float stroke_width);
 
     /**
      * @brief Gets the type of the shape.
@@ -49,6 +49,11 @@ public:
      */
     Vector2Df getRadius() const;
 
+    /**
+     * @brief Prints the data of the shape.
+     *
+     * @note This function is used for debugging purposes.
+     */
     void printData() const override;
 };
 

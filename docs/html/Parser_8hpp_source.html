@@ -60,7 +60,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">svg-reader
-   &#160;<span id="projectnumber">0.1</span>
+   &#160;<span id="projectnumber">0.2</span>
    </div>
    <div id="projectbrief">Parse and render SVG files, handle user interactions.</div>
   </td>
@@ -124,47 +124,111 @@ $(document).ready(function(){initNavTree('Parser_8hpp_source.html',''); initResi
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef PARSER_HPP_</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define PARSER_HPP_</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;Graphics.hpp&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;pugixml.hpp&quot;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00013"></a><span class="lineno"><a class="line" href="classParser.html">   13</a></span>&#160;<span class="keyword">class </span><a class="code" href="classParser.html">Parser</a> {</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keyword">static</span> <a class="code" href="classParser.html">Parser</a>* <a class="code" href="classParser.html#a06952fa44f19fdb573c1355ac26454c5">getInstance</a>(<span class="keyword">const</span> std::string&amp; file_name);</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
-<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classParser.html#a48044a8caa14a251cb4dad9fb363658e">   29</a></span>&#160;    <a class="code" href="classParser.html#a48044a8caa14a251cb4dad9fb363658e">Parser</a>(<span class="keyword">const</span> <a class="code" href="classParser.html">Parser</a>&amp;) = <span class="keyword">delete</span>;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    std::string <a class="code" href="classParser.html#a0e1837d3a4b60eec5b50258ea3bc1788">getAttribute</a>(pugi::xml_node node, std::string name);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    sf::Color <a class="code" href="classParser.html#a8f5c01f3bf35f19f689ecaffc0cc18ee">parseColor</a>(pugi::xml_node node, std::string name);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    std::vector&lt; sf::Vector2f &gt; <a class="code" href="classParser.html#ad0aaf108fefc153a48223d30f14e5fcb">parsePoints</a>(pugi::xml_node node);</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classParser.html#a8d207dcf9bd2e79b83862de49cf76d84">parseSVG</a>();</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classParser.html#ad498cb7da315304eb0a84e1ecd6f647b">renderSVG</a>(sf::RenderWindow&amp; window);</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <a class="code" href="classParser.html#a3e658b5917a93a3ef648050d060e3a93">~Parser</a>();</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <a class="code" href="classParser.html#a48044a8caa14a251cb4dad9fb363658e">Parser</a>(<span class="keyword">const</span> std::string&amp; file_name);</div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
-<div class="line"><a name="l00105"></a><span class="lineno"><a class="line" href="classParser.html#ae3a28c02c18171f4e83fae54b9f21a90">  105</a></span>&#160;    <span class="keyword">static</span> <a class="code" href="classParser.html">Parser</a>* <a class="code" href="classParser.html#ae3a28c02c18171f4e83fae54b9f21a90">instance</a>;       </div>
-<div class="line"><a name="l00106"></a><span class="lineno"><a class="line" href="classParser.html#a3d3fc587ac1c114b24f693dd32f5bd1c">  106</a></span>&#160;    pugi::xml_node <a class="code" href="classParser.html#a3d3fc587ac1c114b24f693dd32f5bd1c">svg</a>;            </div>
-<div class="line"><a name="l00107"></a><span class="lineno"><a class="line" href="classParser.html#ad5db1c633aa8735d9fcd1dbb7b2c1032">  107</a></span>&#160;    std::vector&lt; Shape* &gt; <a class="code" href="classParser.html#ad5db1c633aa8735d9fcd1dbb7b2c1032">shapes</a>;  </div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;};</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aclassParser_html"><div class="ttname"><a href="classParser.html">Parser</a></div><div class="ttdoc">Represents a parser for SVG files.</div><div class="ttdef"><b>Definition:</b> <a href="Parser_8hpp_source.html#l00013">Parser.hpp:13</a></div></div>
-<div class="ttc" id="aclassParser_html_a06952fa44f19fdb573c1355ac26454c5"><div class="ttname"><a href="classParser.html#a06952fa44f19fdb573c1355ac26454c5">Parser::getInstance</a></div><div class="ttdeci">static Parser * getInstance(const std::string &amp;file_name)</div><div class="ttdoc">Gets the singleton instance of Parser.</div><div class="ttdef"><b>Definition:</b> <a href="Parser_8cpp_source.html#l00009">Parser.cpp:9</a></div></div>
-<div class="ttc" id="aclassParser_html_a0e1837d3a4b60eec5b50258ea3bc1788"><div class="ttname"><a href="classParser.html#a0e1837d3a4b60eec5b50258ea3bc1788">Parser::getAttribute</a></div><div class="ttdeci">std::string getAttribute(pugi::xml_node node, std::string name)</div><div class="ttdoc">Get the Attribute object which is parsed from the XML file.</div><div class="ttdef"><b>Definition:</b> <a href="Parser_8cpp_source.html#l00024">Parser.cpp:24</a></div></div>
-<div class="ttc" id="aclassParser_html_a3d3fc587ac1c114b24f693dd32f5bd1c"><div class="ttname"><a href="classParser.html#a3d3fc587ac1c114b24f693dd32f5bd1c">Parser::svg</a></div><div class="ttdeci">pugi::xml_node svg</div><div class="ttdoc">The node of the SVG.</div><div class="ttdef"><b>Definition:</b> <a href="Parser_8hpp_source.html#l00106">Parser.hpp:106</a></div></div>
-<div class="ttc" id="aclassParser_html_a3e658b5917a93a3ef648050d060e3a93"><div class="ttname"><a href="classParser.html#a3e658b5917a93a3ef648050d060e3a93">Parser::~Parser</a></div><div class="ttdeci">~Parser()</div><div class="ttdoc">Destructor of Parser.</div><div class="ttdef"><b>Definition:</b> <a href="Parser_8cpp_source.html#l00201">Parser.cpp:201</a></div></div>
-<div class="ttc" id="aclassParser_html_a48044a8caa14a251cb4dad9fb363658e"><div class="ttname"><a href="classParser.html#a48044a8caa14a251cb4dad9fb363658e">Parser::Parser</a></div><div class="ttdeci">Parser(const Parser &amp;)=delete</div><div class="ttdoc">Deleted assignment operator to prevent copying of Parser instances.</div></div>
-<div class="ttc" id="aclassParser_html_a8d207dcf9bd2e79b83862de49cf76d84"><div class="ttname"><a href="classParser.html#a8d207dcf9bd2e79b83862de49cf76d84">Parser::parseSVG</a></div><div class="ttdeci">void parseSVG()</div><div class="ttdoc">Parse the XML file.</div><div class="ttdef"><b>Definition:</b> <a href="Parser_8cpp_source.html#l00117">Parser.cpp:117</a></div></div>
-<div class="ttc" id="aclassParser_html_a8f5c01f3bf35f19f689ecaffc0cc18ee"><div class="ttname"><a href="classParser.html#a8f5c01f3bf35f19f689ecaffc0cc18ee">Parser::parseColor</a></div><div class="ttdeci">sf::Color parseColor(pugi::xml_node node, std::string name)</div><div class="ttdoc">Parse the color from the XML file.</div><div class="ttdef"><b>Definition:</b> <a href="Parser_8cpp_source.html#l00041">Parser.cpp:41</a></div></div>
-<div class="ttc" id="aclassParser_html_ad0aaf108fefc153a48223d30f14e5fcb"><div class="ttname"><a href="classParser.html#ad0aaf108fefc153a48223d30f14e5fcb">Parser::parsePoints</a></div><div class="ttdeci">std::vector&lt; sf::Vector2f &gt; parsePoints(pugi::xml_node node)</div><div class="ttdoc">Parse the points from the XML file.</div><div class="ttdef"><b>Definition:</b> <a href="Parser_8cpp_source.html#l00087">Parser.cpp:87</a></div></div>
-<div class="ttc" id="aclassParser_html_ad498cb7da315304eb0a84e1ecd6f647b"><div class="ttname"><a href="classParser.html#ad498cb7da315304eb0a84e1ecd6f647b">Parser::renderSVG</a></div><div class="ttdeci">void renderSVG(sf::RenderWindow &amp;window)</div><div class="ttdoc">Render the shapes on the window.</div><div class="ttdef"><b>Definition:</b> <a href="Parser_8cpp_source.html#l00195">Parser.cpp:195</a></div></div>
-<div class="ttc" id="aclassParser_html_ad5db1c633aa8735d9fcd1dbb7b2c1032"><div class="ttname"><a href="classParser.html#ad5db1c633aa8735d9fcd1dbb7b2c1032">Parser::shapes</a></div><div class="ttdeci">std::vector&lt; Shape * &gt; shapes</div><div class="ttdoc">The vector of the shapes.</div><div class="ttdef"><b>Definition:</b> <a href="Parser_8hpp_source.html#l00107">Parser.hpp:107</a></div></div>
-<div class="ttc" id="aclassParser_html_ae3a28c02c18171f4e83fae54b9f21a90"><div class="ttname"><a href="classParser.html#ae3a28c02c18171f4e83fae54b9f21a90">Parser::instance</a></div><div class="ttdeci">static Parser * instance</div><div class="ttdoc">The instance of the Parser.</div><div class="ttdef"><b>Definition:</b> <a href="Parser_8hpp_source.html#l00105">Parser.hpp:105</a></div></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;algorithm&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;cstring&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;fstream&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;sstream&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;../external/rapidxml/rapidxml.hpp&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;graphics/Circle.hpp&quot;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;graphics/Color.hpp&quot;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;graphics/Ellipse.hpp&quot;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;graphics/Group.hpp&quot;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#include &quot;graphics/Line.hpp&quot;</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#include &quot;graphics/Path.hpp&quot;</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#include &quot;graphics/Polygon.hpp&quot;</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &quot;graphics/Polyline.hpp&quot;</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;graphics/Rect.hpp&quot;</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;graphics/Text.hpp&quot;</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keyword">using namespace </span>rapidxml;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">typedef</span> std::vector&lt; std::pair&lt; std::string, std::string &gt; &gt; Attributes;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="classParser.html">   34</a></span>&#160;<span class="keyword">class </span><a class="code" href="classParser.html">Parser</a> {</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keyword">static</span> <a class="code" href="classParser.html">Parser</a>* getInstance(</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keyword">const</span> std::string&amp;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            file_name);  </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="classParser.html#a48044a8caa14a251cb4dad9fb363658e">   40</a></span>&#160;    <a class="code" href="classParser.html#a48044a8caa14a251cb4dad9fb363658e">Parser</a>(<span class="keyword">const</span> <a class="code" href="classParser.html">Parser</a>&amp;) =</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keyword">delete</span>;  </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    ~<a class="code" href="classParser.html">Parser</a>();  </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <a class="code" href="classGroup.html">Group</a>* getRoot();  </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordtype">void</span> printShapesData();</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <a class="code" href="classParser.html">Parser</a>(<span class="keyword">const</span> std::string&amp; file_name);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <a class="code" href="classSVGElement.html">SVGElement</a>* parseElements(std::string file_name);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    std::string getAttribute(xml_node&lt;&gt;* node, std::string name);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordtype">float</span> getFloatAttribute(xml_node&lt;&gt;* node, std::string name);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <a class="code" href="classmColor.html">mColor</a> parseColor(xml_node&lt;&gt;* node, std::string color);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    std::vector&lt; Vector2Df &gt; parsePoints(xml_node&lt;&gt;* node);</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    std::vector&lt; PathPoint &gt; parsePathPoints(xml_node&lt;&gt;* node);</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    std::vector&lt; std::string &gt; getTransformOrder(xml_node&lt;&gt;* node);</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    <a class="code" href="classLine.html">Line</a>* parseLine(xml_node&lt;&gt;* node, <span class="keyword">const</span> <a class="code" href="classmColor.html">mColor</a>&amp; stroke_color,</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;                    <span class="keywordtype">float</span> stroke_width);</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; </div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    <a class="code" href="classRect.html">Rect</a>* parseRect(xml_node&lt;&gt;* node, <span class="keyword">const</span> <a class="code" href="classmColor.html">mColor</a>&amp; fill_color,</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;                    <span class="keyword">const</span> <a class="code" href="classmColor.html">mColor</a>&amp; stroke_color, <span class="keywordtype">float</span> stroke_width);</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160; </div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    <span class="keyword">class </span><a class="code" href="classPlyline.html">Plyline</a>* parsePolyline(xml_node&lt;&gt;* node, <span class="keyword">const</span> <a class="code" href="classmColor.html">mColor</a>&amp; fill_color,</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;                                 <span class="keyword">const</span> <a class="code" href="classmColor.html">mColor</a>&amp; stroke_color,</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;                                 <span class="keywordtype">float</span> <a class="code" href="classSVGElement.html#a88449b487a890e3765ae20e96ee95c06">stroke_width</a>);</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; </div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    <span class="keyword">class </span><a class="code" href="classPlygon.html">Plygon</a>* parsePolygon(xml_node&lt;&gt;* node, <span class="keyword">const</span> <a class="code" href="classmColor.html">mColor</a>&amp; fill_color,</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;                               <span class="keyword">const</span> <a class="code" href="classmColor.html">mColor</a>&amp; stroke_color, <span class="keywordtype">float</span> <a class="code" href="classSVGElement.html#a88449b487a890e3765ae20e96ee95c06">stroke_width</a>);</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160; </div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    <a class="code" href="classCircle.html">Circle</a>* parseCircle(xml_node&lt;&gt;* node, <span class="keyword">const</span> <a class="code" href="classmColor.html">mColor</a>&amp; fill_color,</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;                        <span class="keyword">const</span> <a class="code" href="classmColor.html">mColor</a>&amp; stroke_color, <span class="keywordtype">float</span> <a class="code" href="classSVGElement.html#a88449b487a890e3765ae20e96ee95c06">stroke_width</a>);</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160; </div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    <span class="keyword">class </span><a class="code" href="classEll.html">Ell</a>* parseEllipse(xml_node&lt;&gt;* node, <span class="keyword">const</span> <a class="code" href="classmColor.html">mColor</a>&amp; fill_color,</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;                            <span class="keyword">const</span> <a class="code" href="classmColor.html">mColor</a>&amp; stroke_color, <span class="keywordtype">float</span> <a class="code" href="classSVGElement.html#a88449b487a890e3765ae20e96ee95c06">stroke_width</a>);</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160; </div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    <a class="code" href="classPath.html">Path</a>* parsePath(xml_node&lt;&gt;* node, <span class="keyword">const</span> <a class="code" href="classmColor.html">mColor</a>&amp; fill_color,</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;                    <span class="keyword">const</span> <a class="code" href="classmColor.html">mColor</a>&amp; stroke_color, <span class="keywordtype">float</span> <a class="code" href="classSVGElement.html#a88449b487a890e3765ae20e96ee95c06">stroke_width</a>);</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160; </div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    <a class="code" href="classText.html">Text</a>* parseText(xml_node&lt;&gt;* node, <span class="keyword">const</span> <a class="code" href="classmColor.html">mColor</a>&amp; fill_color,</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;                    <span class="keyword">const</span> <a class="code" href="classmColor.html">mColor</a>&amp; stroke_color, <span class="keywordtype">float</span> <a class="code" href="classSVGElement.html#a88449b487a890e3765ae20e96ee95c06">stroke_width</a>);</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160; </div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    <a class="code" href="classSVGElement.html">SVGElement</a>* parseShape(xml_node&lt;&gt;* node);</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160; </div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00229"></a><span class="lineno"><a class="line" href="classParser.html#ae3a28c02c18171f4e83fae54b9f21a90">  229</a></span>&#160;    <span class="keyword">static</span> <a class="code" href="classParser.html">Parser</a>* <a class="code" href="classParser.html#ae3a28c02c18171f4e83fae54b9f21a90">instance</a>;  </div>
+<div class="line"><a name="l00230"></a><span class="lineno"><a class="line" href="classParser.html#a13a5e2fdac62670c1584de1edbba77f2">  230</a></span>&#160;    <a class="code" href="classSVGElement.html">SVGElement</a>* <a class="code" href="classParser.html#a13a5e2fdac62670c1584de1edbba77f2">root</a>;         </div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;};</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160; </div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;<span class="preprocessor">#endif  </span><span class="comment">// PARSER_HPP_</span></div>
+<div class="ttc" id="aclassCircle_html"><div class="ttname"><a href="classCircle.html">Circle</a></div><div class="ttdoc">Represents a circle in 2D space.</div><div class="ttdef"><b>Definition:</b> <a href="Circle_8hpp_source.html#l00013">Circle.hpp:13</a></div></div>
+<div class="ttc" id="aclassEll_html"><div class="ttname"><a href="classEll.html">Ell</a></div><div class="ttdoc">Represents an ellipse in 2D space.</div><div class="ttdef"><b>Definition:</b> <a href="Ellipse_8hpp_source.html#l00012">Ellipse.hpp:12</a></div></div>
+<div class="ttc" id="aclassGroup_html"><div class="ttname"><a href="classGroup.html">Group</a></div><div class="ttdoc">A composite class that contains a vector of shape pointers (polymorphic).</div><div class="ttdef"><b>Definition:</b> <a href="Group_8hpp_source.html#l00019">Group.hpp:19</a></div></div>
+<div class="ttc" id="aclassLine_html"><div class="ttname"><a href="classLine.html">Line</a></div><div class="ttdoc">Represents a line in 2D space.</div><div class="ttdef"><b>Definition:</b> <a href="Line_8hpp_source.html#l00012">Line.hpp:12</a></div></div>
+<div class="ttc" id="aclassParser_html"><div class="ttname"><a href="classParser.html">Parser</a></div><div class="ttdoc">To manipulate and parse an SVG file.</div><div class="ttdef"><b>Definition:</b> <a href="Parser_8hpp_source.html#l00034">Parser.hpp:34</a></div></div>
+<div class="ttc" id="aclassParser_html_a13a5e2fdac62670c1584de1edbba77f2"><div class="ttname"><a href="classParser.html#a13a5e2fdac62670c1584de1edbba77f2">Parser::root</a></div><div class="ttdeci">SVGElement * root</div><div class="ttdoc">The root of the SVG file.</div><div class="ttdef"><b>Definition:</b> <a href="Parser_8hpp_source.html#l00230">Parser.hpp:230</a></div></div>
+<div class="ttc" id="aclassParser_html_a48044a8caa14a251cb4dad9fb363658e"><div class="ttname"><a href="classParser.html#a48044a8caa14a251cb4dad9fb363658e">Parser::Parser</a></div><div class="ttdeci">Parser(const Parser &amp;)=delete</div><div class="ttdoc">Deleted copy constructor to enforce the singleton pattern.</div></div>
+<div class="ttc" id="aclassParser_html_ae3a28c02c18171f4e83fae54b9f21a90"><div class="ttname"><a href="classParser.html#ae3a28c02c18171f4e83fae54b9f21a90">Parser::instance</a></div><div class="ttdeci">static Parser * instance</div><div class="ttdoc">The instance of the Parser.</div><div class="ttdef"><b>Definition:</b> <a href="Parser_8hpp_source.html#l00229">Parser.hpp:229</a></div></div>
+<div class="ttc" id="aclassPath_html"><div class="ttname"><a href="classPath.html">Path</a></div><div class="ttdoc">Represents a path element in 2D space.</div><div class="ttdef"><b>Definition:</b> <a href="Path_8hpp_source.html#l00024">Path.hpp:24</a></div></div>
+<div class="ttc" id="aclassPlygon_html"><div class="ttname"><a href="classPlygon.html">Plygon</a></div><div class="ttdoc">Represents a polygon in 2D space.</div><div class="ttdef"><b>Definition:</b> <a href="Polygon_8hpp_source.html#l00012">Polygon.hpp:12</a></div></div>
+<div class="ttc" id="aclassPlyline_html"><div class="ttname"><a href="classPlyline.html">Plyline</a></div><div class="ttdoc">Represents a polyline in 2D space.</div><div class="ttdef"><b>Definition:</b> <a href="Polyline_8hpp_source.html#l00012">Polyline.hpp:12</a></div></div>
+<div class="ttc" id="aclassRect_html"><div class="ttname"><a href="classRect.html">Rect</a></div><div class="ttdoc">Represents a rectangle in 2D space.</div><div class="ttdef"><b>Definition:</b> <a href="Rect_8hpp_source.html#l00013">Rect.hpp:13</a></div></div>
+<div class="ttc" id="aclassSVGElement_html"><div class="ttname"><a href="classSVGElement.html">SVGElement</a></div><div class="ttdoc">Represents an element in an SVG file.</div><div class="ttdef"><b>Definition:</b> <a href="SVGElement_8hpp_source.html#l00017">SVGElement.hpp:17</a></div></div>
+<div class="ttc" id="aclassSVGElement_html_a88449b487a890e3765ae20e96ee95c06"><div class="ttname"><a href="classSVGElement.html#a88449b487a890e3765ae20e96ee95c06">SVGElement::stroke_width</a></div><div class="ttdeci">float stroke_width</div><div class="ttdoc">Thickness of the shape's outline.</div><div class="ttdef"><b>Definition:</b> <a href="SVGElement_8hpp_source.html#l00171">SVGElement.hpp:171</a></div></div>
+<div class="ttc" id="aclassText_html"><div class="ttname"><a href="classText.html">Text</a></div><div class="ttdoc">Represents text in 2D space.</div><div class="ttdef"><b>Definition:</b> <a href="Text_8hpp_source.html#l00012">Text.hpp:12</a></div></div>
+<div class="ttc" id="aclassmColor_html"><div class="ttname"><a href="classmColor.html">mColor</a></div><div class="ttdoc">Utility class for manipulating RGBA mColors.</div><div class="ttdef"><b>Definition:</b> <a href="Color_8hpp_source.html#l00011">Color.hpp:11</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div id="nav-path" class="navpath">

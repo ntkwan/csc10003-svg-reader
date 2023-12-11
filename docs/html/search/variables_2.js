@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['fill_5fcolor_139',['fill_color',['../classShape.html#a636d2da361ce7a69cf1d8c9e8d956344',1,'Shape']]],
-  ['font_140',['font',['../classText.html#a04c2ae991434d41249615e720c52c58f',1,'Text']]]
+  ['content_256',['content',['../classText.html#a9336f13d0d4a26d41c2fd2e103ac5dde',1,'Text']]],
+  ['cyan_257',['Cyan',['../classmColor.html#a04a0d2485c1106ccc94d065a0e62ecfb',1,'mColor']]]
 ];

@@ -1,6 +1,6 @@
 #include "PolyShape.hpp"
 
-PolyShape::PolyShape(const Color& fill, const Color& stroke,
+PolyShape::PolyShape(const mColor& fill, const mColor& stroke,
                      float stroke_width) {
     setFillColor(fill);
     setOutlineColor(stroke);
@@ -12,7 +12,7 @@ void PolyShape::addPoint(const Vector2Df& point) { points.push_back(point); }
 const std::vector< Vector2Df >& PolyShape::getPoints() const { return points; }
 
 void PolyShape::printData() const {
-    Shape::printData();
+    SVGElement::printData();
     std::cout << "Points: ";
     for (auto& point : getPoints()) {
         std::cout << point.x << "," << point.y << " ";

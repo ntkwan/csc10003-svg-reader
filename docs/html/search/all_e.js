@@ -1,15 +1,10 @@
 var searchData=
 [
-  ['scale_50',['SCALE',['../classEllipse.html#a44c415dbbb88538dc768175b53cd5076',1,'Ellipse']]],
-  ['scale_51',['scale',['../classShape.html#af2eec928acf0ad3c7943f1115c3d43bf',1,'Shape']]],
-  ['setfillcolor_52',['setFillColor',['../classShape.html#a730df53c07d9d33c6deebff222d290cd',1,'Shape']]],
-  ['setoutlinecolor_53',['setOutlineColor',['../classShape.html#afd28c6c9ea0bb3f135d39fb5f469f044',1,'Shape']]],
-  ['setoutlinethickness_54',['setOutlineThickness',['../classShape.html#a645b00f52096c4151e725384f3605c51',1,'Shape']]],
-  ['setposition_55',['setPosition',['../classShape.html#a802b22305bd3b191321ace4530dd55a4',1,'Shape::setPosition(float x, float y)'],['../classShape.html#a986fb294ca2f4dd4b24f276a435938d6',1,'Shape::setPosition(const sf::Vector2f &amp;position)']]],
-  ['setthickness_56',['setThickness',['../classLine.html#a33cf5b0af7aa6a488ca0ae2a33536538',1,'Line']]],
-  ['shape_57',['Shape',['../classShape.html',1,'Shape'],['../classShape.html#aaa8d87171e65e0d8ba3c5459978992a7',1,'Shape::Shape()']]],
-  ['shapes_58',['shapes',['../classParser.html#ad5db1c633aa8735d9fcd1dbb7b2c1032',1,'Parser']]],
-  ['startdragging_59',['startDragging',['../classViewer.html#ab7d0cd9967f21baea22b052764021f28',1,'Viewer']]],
-  ['stopdragging_60',['stopDragging',['../classViewer.html#adc6fb4d1e16062f2d85215dff6b09a1a',1,'Viewer']]],
-  ['svg_61',['svg',['../classParser.html#a3d3fc587ac1c114b24f693dd32f5bd1c',1,'Parser']]]
+  ['r_97',['r',['../classmColor.html#a427453d377b30c62f7d25f47120959d6',1,'mColor']]],
+  ['radius_98',['radius',['../classEll.html#af57a48abe0e2bc8806e73dfa7762388f',1,'Ell::radius()'],['../classRect.html#a7857e3568d2a2a35bf0c6b28028005b5',1,'Rect::radius()']]],
+  ['rect_99',['Rect',['../classRect.html',1,'Rect'],['../classRect.html#ad52d66e844d848d0e95f744b697e7beb',1,'Rect::Rect()']]],
+  ['red_100',['Red',['../classmColor.html#aa0fc6fe3033f7ff2806c59e39c072dbc',1,'mColor']]],
+  ['renderer_101',['Renderer',['../classRenderer.html',1,'Renderer'],['../classRenderer.html#a8c6e15f666cb188a936004add75e6c6b',1,'Renderer::Renderer(const Renderer &amp;)=delete'],['../classRenderer.html#a7ebf46f54dab9905f79b80f7fddb76a6',1,'Renderer::Renderer()']]],
+  ['root_102',['root',['../classParser.html#a13a5e2fdac62670c1584de1edbba77f2',1,'Parser']]],
+  ['rotate_5fangle_103',['rotate_angle',['../classViewer.html#a82dfd34668f986b72e51ee86d4029fc6',1,'Viewer']]]
 ];

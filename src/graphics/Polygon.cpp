@@ -1,6 +1,10 @@
 #include "Polygon.hpp"
 
-Polygon::Polygon(Color fill, Color stroke, float stroke_width)
+Plygon::Plygon(mColor fill, mColor stroke, float stroke_width)
     : PolyShape(fill, stroke, stroke_width) {}
 
-std::string Polygon::getClass() const { return "Polygon"; }
+std::string Plygon::getClass() const { return "Polygon"; }
+
+void Plygon::setFillRule(std::string fill_rule) { this->fill_rule = fill_rule; }
+
+std::string Plygon::getFillRule() const { return fill_rule; }

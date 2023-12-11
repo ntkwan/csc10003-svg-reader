@@ -1,28 +1,52 @@
 @startuml
-class "Viewer" as C_0000222566171378319347
-class C_0000222566171378319347 {
-+Viewer() = deleted : void
--Viewer() : void
-..
-+operator=() = deleted : void
-..
-{static} +getInstance() : Viewer *
-+handleDragging() : void
-+handleEvents() : void
--moveView() : void
--rotate() : void
--startDragging() : void
--stopDragging() : void
--zoom() : void
-__
-{static} -instance : Viewer *
--is_mouse_dragging : bool
--last_mouse_position : sf::Vector2i
--view : sf::View &
--window : sf::RenderWindow &
-}
-C_0000222566171378319347 --> C_0000222566171378319347 : -instance
 
-'Generated with clang-uml, version 0.4.1
-'LLVM version Ubuntu clang version 15.0.7
+
+
+
+
+/' Objects '/
+
+class Viewer {
+	-Viewer()
+	+~Viewer()
+	-last_mouse_pos : POINT
+	+{static} getInstance() : Viewer*
+	-is_dragging : bool
+	+needs_repaint : bool
+	+offset_x : float
+	+offset_y : float
+	+rotate_angle : float
+	+zoom_factor : float
+	-{static} instance : static Viewer*
+	-handleKeyDown(WPARAM wParam) : void
+	+handleKeyEvent(WPARAM wParam) : void
+	-handleLeftButtonDown(LPARAM lParam) : void
+	-handleLeftButtonUp() : void
+	+handleMouseEvent(UINT message, WPARAM wParam, LPARAM lParam) : void
+	-handleMouseMove(LPARAM lParam) : void
+	-handleMouseWheel(WPARAM wParam) : void
+}
+
+
+
+
+
+/' Inheritance relationships '/
+
+
+
+
+/' Aggregation relationships '/
+
+.Viewer --> .Viewer : -instance
+
+
+
+
+
+
+/' Nested objects '/
+
+
+
 @enduml

@@ -2,8 +2,8 @@
 
 #include <cmath>
 
-Ellipse::Ellipse(const Vector2Df &radius, const Vector2Df &center, Color fill,
-                 Color stroke, float stroke_thickness)
+Ell::Ell(const Vector2Df &radius, const Vector2Df &center, mColor fill,
+         mColor stroke, float stroke_thickness)
     : radius(radius) {
     setPosition(center);
     setFillColor(fill);
@@ -11,14 +11,14 @@ Ellipse::Ellipse(const Vector2Df &radius, const Vector2Df &center, Color fill,
     setOutlineThickness(stroke_thickness);
 }
 
-std::string Ellipse::getClass() const { return "Ellipse"; }
+std::string Ell::getClass() const { return "Ellipse"; }
 
-void Ellipse::setRadius(const Vector2Df &radius) { this->radius = radius; }
+void Ell::setRadius(const Vector2Df &radius) { this->radius = radius; }
 
-Vector2Df Ellipse::getRadius() const { return radius; }
+Vector2Df Ell::getRadius() const { return radius; }
 
-void Ellipse::printData() const {
-    Shape::printData();
+void Ell::printData() const {
+    SVGElement::printData();
     std::cout << "Radius: " << getRadius().x << " " << getRadius().y
               << std::endl;
 }

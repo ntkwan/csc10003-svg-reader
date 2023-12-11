@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['vertices_166',['vertices',['../classShape.html#a2b805bef7e92b165d297a2f28bd657a6',1,'Shape']]],
-  ['view_167',['view',['../classViewer.html#ab65f9d97ae3fc68e88d05230478ebf3b',1,'Viewer']]]
+  ['offset_5fx_270',['offset_x',['../classViewer.html#a3e16ebbf5c0ed98dc75fe2c4d46fe0d5',1,'Viewer']]],
+  ['offset_5fy_271',['offset_y',['../classViewer.html#a30b0f57907c82de620339e105f9a3c5b',1,'Viewer']]]
 ];
