@@ -1,15 +1,15 @@
 #ifndef LINE_HPP_
 #define LINE_HPP_
 
-#include "Shape.hpp"
+#include "SVGElement.hpp"
 
 /**
  * @brief Represents a line in 2D space.
  *
- * The Line class is derived from the Shape class and defines a line segment
- * with a specified direction and thickness.
+ * The Line class is derived from the SVGElement class and defines a line
+ * segment with a specified direction and thickness.
  */
-class Line : public Shape {
+class Line : public SVGElement {
 private:
     Vector2Df direction;  ///< Direction of the line
 
@@ -22,7 +22,7 @@ public:
      * @param stroke The color of the line (default is sf::Color::White).
      * @param stroke_width The thickness of the line (default is 1.0).
      */
-    Line(const Vector2Df& point1, const Vector2Df& point2, Color stroke,
+    Line(const Vector2Df& point1, const Vector2Df& point2, mColor stroke,
          float stroke_width);
 
     /**

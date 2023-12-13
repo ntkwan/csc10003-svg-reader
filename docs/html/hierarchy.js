@@ -1,16 +1,24 @@
 var hierarchy =
 [
+    [ "mColor", "classmColor.html", null ],
     [ "Parser", "classParser.html", null ],
-    [ "Shape", "classShape.html", [
-      [ "Ellipse", "classEllipse.html", [
+    [ "PathPoint", "structPathPoint.html", null ],
+    [ "Renderer", "classRenderer.html", null ],
+    [ "SVGElement", "classSVGElement.html", [
+      [ "Ell", "classEll.html", [
         [ "Circle", "classCircle.html", null ]
       ] ],
+      [ "Group", "classGroup.html", null ],
       [ "Line", "classLine.html", null ],
-      [ "Polygon", "classPolygon.html", [
+      [ "Path", "classPath.html", null ],
+      [ "PolyShape", "classPolyShape.html", [
+        [ "Plygon", "classPlygon.html", null ],
+        [ "Plyline", "classPlyline.html", null ],
         [ "Rect", "classRect.html", null ]
       ] ],
-      [ "Polyline", "classPolyline.html", null ],
       [ "Text", "classText.html", null ]
     ] ],
+    [ "Vector2D< T >", "classVector2D.html", null ],
+    [ "Vector2D< float >", "classVector2D.html", null ],
     [ "Viewer", "classViewer.html", null ]
 ];

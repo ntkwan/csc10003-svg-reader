@@ -1,6 +1,12 @@
 #include "Polyline.hpp"
 
-Polyline::Polyline(const Color& fill, const Color& stroke, float stroke_width)
+Plyline::Plyline(const mColor& fill, const mColor& stroke, float stroke_width)
     : PolyShape(fill, stroke, stroke_width) {}
 
-std::string Polyline::getClass() const { return "Polyline"; }
+std::string Plyline::getClass() const { return "Polyline"; }
+
+void Plyline::setFillRule(std::string fill_rule) {
+    this->fill_rule = fill_rule;
+}
+
+std::string Plyline::getFillRule() const { return fill_rule; }

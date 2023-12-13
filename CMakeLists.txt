@@ -1,3 +1,7 @@
+if (UNIX)
+set(CMAKE_TOOLCHAIN_FILE ${CMAKE_CURRENT_SOURCE_DIR}/windows.cmake CACHE STRING "Windows toolchain file")
+endif()
+
 cmake_minimum_required(VERSION 3.14)
 project(svg-reader VERSION 0.2)
 
@@ -11,15 +15,19 @@ option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 find_package(Git)
 message(STATUS "GIT_EXECUTABLE='${GIT_EXECUTABLE}'")
 
-find_package(sfml QUIET)
-
-add_subdirectory(external/SFML)
+add_subdirectory(external/rapidxml)
 include_directories(src)
-if (LINUX)
+if (UNIX)
 	add_compile_options(-fsanitize=address)
 	add_link_options(-fsanitize=address)
 endif()
+
+add_compile_options(-static-libgcc)
+add_compile_options(-static-libstdc++)
+add_link_options(-static-libgcc)
+add_link_options(-static-libstdc++)
 file(GLOB_RECURSE cpp_files CONFIGURE_DEPENDS "src/*.*pp")
 add_executable(${PROJECT_NAME} ${cpp_files})
 
-target_link_libraries(${PROJECT_NAME} PRIVATE sfml-graphics)
+target_link_libraries(${PROJECT_NAME} PUBLIC -lgdiplus)
+

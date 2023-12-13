@@ -1,124 +1,275 @@
 @startuml
-abstract "Shape" as C_0001672291103657734280
-abstract C_0001672291103657734280 {
-#Shape() : void
-+~Shape() = default : void
-..
-+draw() const : void
-+getFillColor() const : const sf::Color &
-+getInverseTransform() const : const sf::Transform &
-+getOutlineColor() const : const sf::Color &
-+getOutlineThickness() const : float
-{abstract} +getPoint() const = 0 : sf::Vector2f
-{abstract} +getPointCount() const = 0 : std::size_t
-+getTransform() const : const sf::Transform &
-+setFillColor() : void
-+setOutlineColor() : void
-+setOutlineThickness() : void
-+setPosition() : void
-+setPosition() : void
-#update() : void
--updateFillColors() : void
--updateOutline() : void
--updateOutlineColors() : void
-__
--bounds : sf::FloatRect
--fill_color : sf::Color
--inside_bounds : sf::FloatRect
--inverse_transform : sf::Transform
--inverse_transform_need_update : bool
--origin : sf::Vector2f
--outline_color : sf::Color
--outline_thickness : float
--outline_vertices : sf::VertexArray
--position : sf::Vector2f
--rotation : float
--scale : sf::Vector2f
--texture : const sf::Texture *
--transform : sf::Transform
--transform_need_update : bool
--vertices : sf::VertexArray
-}
-class "Ellipse" as C_0000008382941311063885
-class C_0000008382941311063885 {
-+Ellipse() : void
-..
-+getPoint() const : sf::Vector2f
-+getPointCount() const : std::size_t
-__
-#SCALE : const int
-#radius : sf::Vector2f
-}
-class "Circle" as C_0001034450863184659349
-class C_0001034450863184659349 {
-+Circle() : void
-__
-}
-class "Line" as C_0000446862122271229469
-class C_0000446862122271229469 {
-+Line() : void
-..
-+getLength() const : float
-+getPoint() const : sf::Vector2f
-+getPointCount() const : std::size_t
-+setThickness() : void
-__
--direction : sf::Vector2f
--thickness : float
-}
-class "Polygon" as C_0000359217836834441732
-class C_0000359217836834441732 {
-+Polygon() : void
-..
-+addPoint() : void
-+getPoint() const : sf::Vector2f
-+getPointCount() const : std::size_t
-+polygonUpdate() : void
-__
--points : std::vector<sf::Vector2f>
-}
-class "Polyline" as C_0001361390076764550325
-class C_0001361390076764550325 {
-+Polyline() : void
-..
-+addPoint() : void
-+draw() const : void
-+getPoint() const : sf::Vector2f
-+getPointCount() const : std::size_t
-+polylineUpdate() : void
-__
--points : std::vector<sf::Vector2f>
-}
-class "Rect" as C_0001903790827945341156
-class C_0001903790827945341156 {
-+Rect() : void
-..
-+getPoint() const : sf::Vector2f
-+getPointCount() const : std::size_t
-__
--height : float
--rect_size : sf::Vector2f
--width : float
-}
-class "Text" as C_0001430338048021739765
-class C_0001430338048021739765 {
-+Text() : void
-..
-+draw() const : void
-+getPoint() const : sf::Vector2f
-+getPointCount() const : std::size_t
-__
-{static} +font : sf::Font
--text : sf::Text
-}
-C_0001672291103657734280 <|-- C_0000008382941311063885
-C_0000008382941311063885 <|-- C_0001034450863184659349
-C_0001672291103657734280 <|-- C_0000446862122271229469
-C_0001672291103657734280 <|-- C_0000359217836834441732
-C_0001672291103657734280 <|-- C_0001361390076764550325
-C_0000359217836834441732 <|-- C_0001903790827945341156
-C_0001672291103657734280 <|-- C_0001430338048021739765
 
-'Generated with clang-uml, version 0.4.1
-'LLVM version Ubuntu clang version 15.0.7
+
+
+
+
+/' Objects '/
+
+class Circle {
+	+Circle(float radius, const Vector2Df& center, mColor fill, mColor stroke, float stroke_width)
+	+getClass() : std::string {query}
+}
+
+
+class Ell {
+	+Ell(const Vector2Df& radius, const Vector2Df& center, mColor fill, mColor stroke, float stroke_width)
+	+getRadius() : Vector2Df {query}
+	-radius : Vector2Df
+	+getClass() : std::string {query}
+	+printData() : void {query}
+	+setRadius(const Vector2Df& radius) : void
+}
+
+
+class Group {
+	+Group()
+	+Group(Attributes attributes)
+	+~Group()
+	-attributes : Attributes
+	+getAttributes() : Attributes {query}
+	+getClass() : std::string {query}
+	+getElements() : std::vector<SVGElement*> {query}
+	-shapes : std::vector<SVGElement*>
+	+addElement(SVGElement* shape) : void
+	+printData() : void {query}
+}
+
+
+class Line {
+	+Line(const Vector2Df& point1, const Vector2Df& point2, mColor stroke, float stroke_width)
+	-direction : Vector2Df
+	+getDirection() : Vector2Df {query}
+	+getLength() : float {query}
+	+getClass() : std::string {query}
+	+setDirection(const Vector2Df& direction) : void
+}
+
+
+class Parser {
+	-Parser(const std::string& file_name)
+	+~Parser()
+	-parseCircle(xml_node<>* node, const mColor& fill_color, const mColor& stroke_color, float stroke_width) : Circle*
+	+getRoot() : Group*
+	-parseLine(xml_node<>* node, const mColor& stroke_color, float stroke_width) : Line*
+	+{static} getInstance(const std::string& file_name) : Parser*
+	-parsePath(xml_node<>* node, const mColor& fill_color, const mColor& stroke_color, float stroke_width) : Path*
+	-parseRect(xml_node<>* node, const mColor& fill_color, const mColor& stroke_color, float stroke_width) : Rect*
+	-parseElements(std::string file_name) : SVGElement*
+	-parseShape(xml_node<>* node) : SVGElement*
+	-root : SVGElement*
+	-parseText(xml_node<>* node, const mColor& fill_color, const mColor& stroke_color, float stroke_width) : Text*
+	-parseEllipse(xml_node<>* node, const mColor& fill_color, const mColor& stroke_color, float stroke_width) : class Ell*
+	-parsePolygon(xml_node<>* node, const mColor& fill_color, const mColor& stroke_color, float stroke_width) : class Plygon*
+	-parsePolyline(xml_node<>* node, const mColor& fill_color, const mColor& stroke_color, float stroke_width) : class Plyline*
+	-getFloatAttribute(xml_node<>* node, std::string name) : float
+	-parseColor(xml_node<>* node, std::string color) : mColor
+	-{static} instance : static Parser*
+	-getAttribute(xml_node<>* node, std::string name) : std::string
+	-parsePathPoints(xml_node<>* node) : std::vector<PathPoint>
+	-parsePoints(xml_node<>* node) : std::vector<Vector2Df>
+	-getTransformOrder(xml_node<>* node) : std::vector<std::string>
+	+printShapesData() : void
+}
+
+
+class Path {
+	+Path(const mColor& fill, const mColor& stroke, float stroke_width)
+	-fill_rule : std::string
+	+getClass() : std::string {query}
+	+getFillRule() : std::string {query}
+	+getPoints() : std::vector<PathPoint> {query}
+	-points : std::vector<PathPoint>
+	+addPoint(PathPoint point) : void
+	+printData() : void {query}
+	+setFillRule(std::string fill_rule) : void
+}
+
+
+class Plygon {
+	+Plygon(mColor fill, mColor stroke, float stroke_width)
+	-fill_rule : std::string
+	+getClass() : std::string {query}
+	+getFillRule() : std::string {query}
+	+setFillRule(std::string fill_rule) : void
+}
+
+
+class Plyline {
+	+Plyline(const mColor& fill, const mColor& stroke, float stroke_width)
+	-fill_rule : std::string
+	+getClass() : std::string {query}
+	+getFillRule() : std::string {query}
+	+setFillRule(std::string fill_rule) : void
+}
+
+
+abstract class PolyShape {
+	#PolyShape(const mColor& fill, const mColor& stroke, float stroke_width)
+	+{abstract} getClass() : std::string {query}
+	#points : std::vector<Vector2Df>
+	+getPoints() : std::vector<Vector2Df>& {query}
+	+addPoint(const Vector2Df& point) : void
+	+printData() : void {query}
+}
+
+
+class Rect {
+	+Rect(float width, float height, Vector2Df position, Vector2Df radius, const mColor& fill, const mColor& stroke, float stroke_width)
+	+getRadius() : Vector2Df {query}
+	-radius : Vector2Df
+	+getHeight() : float {query}
+	+getWidth() : float {query}
+	-height : float
+	-width : float
+	+getClass() : std::string {query}
+	+printData() : void {query}
+	+setHeight(float height) : void
+	+setRadius(const Vector2Df& radius) : void
+	+setWidth(float width) : void
+}
+
+
+abstract class SVGElement {
+	#SVGElement()
+	+~SVGElement()
+	+getParent() : SVGElement* {query}
+	#parent : SVGElement*
+	+getPosition() : Vector2Df {query}
+	-position : Vector2Df
+	+getOutlineThickness() : float {query}
+	-stroke_width : float
+	-fill : mColor
+	-stroke : mColor
+	+getFillColor() : mColor& {query}
+	+getOutlineColor() : mColor& {query}
+	+{abstract} getClass() : std::string {query}
+	+getTransforms() : std::vector<std::string> {query}
+	-transforms : std::vector<std::string>
+	+addElement(SVGElement* element) : void
+	+printData() : void {query}
+	+setFillColor(const mColor& color) : void
+	+setOutlineColor(const mColor& color) : void
+	+setOutlineThickness(float thickness) : void
+	+setParent(SVGElement* parent) : void
+	+setPosition(float x, float y) : void
+	+setPosition(const Vector2Df& position) : void
+	+setTransforms(const std::vector<std::string>& transforms) : void
+}
+
+
+class Text {
+	+Text(Vector2Df pos, std::string text, float font_size, const mColor& fill, const mColor& stroke, float stroke_width)
+	-font_size : float
+	+getFontSize() : float {query}
+	-anchor : std::string
+	-content : std::string
+	+getAnchor() : std::string {query}
+	+getClass() : std::string {query}
+	+getContent() : std::string {query}
+	+getFontStyle() : std::string {query}
+	-style : std::string
+	+printData() : void {query}
+	+setAnchor(std::string anchor) : void
+	+setContent(std::string content) : void
+	+setFontSize(float font_size) : void
+	+setFontStyle(std::string style) : void
+}
+
+class mColor {
+	+mColor()
+	+mColor(int red, int green, int blue, int alpha)
+	+mColor(int color)
+	+a : int
+	+b : int
+	+g : int
+	+r : int
+	+{static} Black : static const mColor
+	+{static} Blue : static const mColor
+	+{static} Cyan : static const mColor
+	+{static} Green : static const mColor
+	+{static} Magenta : static const mColor
+	+{static} Red : static const mColor
+	+{static} Transparent : static const mColor
+	+{static} White : static const mColor
+	+{static} Yellow : static const mColor
+	+operator<<(std::ostream& os, const mColor& color) : std :: ostream&
+}
+
+
+class PathPoint {
+	+Point : Vector2Df
+	+TC : char
+}
+
+
+
+
+
+/' Inheritance relationships '/
+
+.Ell <|-- .Circle
+
+
+.PolyShape <|-- .Plygon
+
+
+.PolyShape <|-- .Plyline
+
+
+.PolyShape <|-- .Rect
+
+
+.SVGElement <|-- .Ell
+
+
+.SVGElement <|-- .Group
+
+
+.SVGElement <|-- .Line
+
+
+.SVGElement <|-- .Path
+
+
+.SVGElement <|-- .PolyShape
+
+
+.SVGElement <|-- .Text
+
+
+
+
+
+/' Aggregation relationships '/
+
+.Group o-- .SVGElement
+
+
+.Parser --> .Parser : -instance
+
+
+.Parser o-- .SVGElement
+
+
+.Path *-- .PathPoint
+
+
+.SVGElement --> .SVGElement : #parent
+
+
+.SVGElement "2" *-- .mColor
+
+
+.mColor "9" *-- .mColor
+
+
+
+
+
+
+/' Nested objects '/
+
+
+
 @enduml

@@ -1,0 +1,5 @@
+<map id="Ell" name="Ell">
+<area shape="rect" id="node1" title="Represents an ellipse in 2D space." alt="" coords="37,80,76,107"/>
+<area shape="rect" id="node3" href="$classCircle.html" title="Represents a circle in 2D space." alt="" coords="27,155,86,181"/>
+<area shape="rect" id="node2" href="$classSVGElement.html" title="Represents an element in an SVG file." alt="" coords="5,5,108,32"/>
+</map>

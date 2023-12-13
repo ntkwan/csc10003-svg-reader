@@ -9,7 +9,7 @@
  * The Polyline class is derived from the PolyShape class and defines a polyline
  * with a variable number of vertices.
  */
-class Polyline : public PolyShape {
+class Plyline : public PolyShape {
 public:
     /**
      * @brief Constructs a Polyline object.
@@ -20,7 +20,7 @@ public:
      * @param fill The fill color of the polyline (default is
      * sf::Color::Transparent).
      */
-    Polyline(const Color& fill, const Color& stroke, float stroke_width);
+    Plyline(const mColor& fill, const mColor& stroke, float stroke_width);
 
     /**
      * @brief Gets the type of the shape.
@@ -28,6 +28,23 @@ public:
      * @return The string "Polyline".
      */
     std::string getClass() const override;
+
+    /**
+     * @brief Sets the fill rule of the polyline.
+     *
+     * @param fill_rule The new fill rule of the polyline.
+     */
+    void setFillRule(std::string fill_rule);
+
+    /**
+     * @brief Gets the fill rule of the polyline.
+     *
+     * @return The fill rule of the polyline.
+     */
+    std::string getFillRule() const;
+
+private:
+    std::string fill_rule;  ///< Fill rule of the polyline
 };
 
 #endif  // POLYLINE_HPP_

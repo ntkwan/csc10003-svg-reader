@@ -1,0 +1,51 @@
+@startuml
+
+
+
+
+
+/' Objects '/
+
+class mColor {
+	+mColor()
+	+mColor(int red, int green, int blue, int alpha)
+	+mColor(int color)
+	+a : int
+	+b : int
+	+g : int
+	+r : int
+	+{static} Black : static const mColor
+	+{static} Blue : static const mColor
+	+{static} Cyan : static const mColor
+	+{static} Green : static const mColor
+	+{static} Magenta : static const mColor
+	+{static} Red : static const mColor
+	+{static} Transparent : static const mColor
+	+{static} White : static const mColor
+	+{static} Yellow : static const mColor
+	+operator<<(std::ostream& os, const mColor& color) : std :: ostream&
+}
+
+
+
+
+
+/' Inheritance relationships '/
+
+
+
+
+/' Aggregation relationships '/
+
+.mColor "9" *-- .mColor
+
+
+
+
+
+
+/' Nested objects '/
+
+
+
+@enduml

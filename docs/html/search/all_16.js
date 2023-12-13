@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['_7eparser_82',['~Parser',['../classParser.html#a3e658b5917a93a3ef648050d060e3a93',1,'Parser']]],
-  ['_7eshape_83',['~Shape',['../classShape.html#ac8ad2fd02e1e94beeb98e65ab795cd56',1,'Shape']]]
+  ['_7eparser_136',['~Parser',['../classParser.html#a3e658b5917a93a3ef648050d060e3a93',1,'Parser']]],
+  ['_7esvgelement_137',['~SVGElement',['../classSVGElement.html#a5087280fd4bbb637c3cde64e44e974f1',1,'SVGElement']]],
+  ['_7eviewer_138',['~Viewer',['../classViewer.html#a324e5a6a1532fe5eac3f3b0e4792b2da',1,'Viewer']]]
 ];

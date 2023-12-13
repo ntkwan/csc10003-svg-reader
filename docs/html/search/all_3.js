@@ -1,5 +1,13 @@
 var searchData=
 [
-  ['direction_3',['direction',['../classLine.html#a9d89caa48638fc813d168691cff5d57c',1,'Line']]],
-  ['draw_4',['draw',['../classPolyline.html#a9736e96fdc2a2e9e05ed453ab7db1b3d',1,'Polyline::draw()'],['../classShape.html#ab631b359d1147081e6133ac09f3f9251',1,'Shape::draw()'],['../classText.html#a244e4508ed0f043e49d7f9a9513544dc',1,'Text::draw()']]]
+  ['direction_12',['direction',['../classLine.html#a3fe45077492213ef490739c6137200d1',1,'Line']]],
+  ['draw_13',['draw',['../classRenderer.html#a1fac47f9b1c4c3fb1151f2b6ecb282f6',1,'Renderer']]],
+  ['drawcircle_14',['drawCircle',['../classRenderer.html#a9b5ca422ec7f1328d854cc4bff269858',1,'Renderer']]],
+  ['drawellipse_15',['drawEllipse',['../classRenderer.html#af4d92e92abb79e4431f7331f792194d9',1,'Renderer']]],
+  ['drawline_16',['drawLine',['../classRenderer.html#ab68c9e02c7eadf1f18286c9ecf0d90ca',1,'Renderer']]],
+  ['drawpath_17',['drawPath',['../classRenderer.html#a6cbcbb11e386c26eacef0b97342fee77',1,'Renderer']]],
+  ['drawpolygon_18',['drawPolygon',['../classRenderer.html#a27b883787b8f38afd04924edc97b5a04',1,'Renderer']]],
+  ['drawpolyline_19',['drawPolyline',['../classRenderer.html#a4e73148b7da0f585084520d12c514344',1,'Renderer']]],
+  ['drawrectangle_20',['drawRectangle',['../classRenderer.html#abf163a7895594e0a4ee5662805b1b572',1,'Renderer']]],
+  ['drawtext_21',['drawText',['../classRenderer.html#a87ce996c3ed0f963de9ef6c293ee3aec',1,'Renderer']]]
 ];

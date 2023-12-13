@@ -1,7 +1,7 @@
 #ifndef TEXT_HPP_
 #define TEXT_HPP_
 
-#include "Shape.hpp"
+#include "SVGElement.hpp"
 
 /**
  * @brief Represents text in 2D space.
@@ -9,10 +9,12 @@
  * The Text class is derived from the Shape class and defines a text element
  * with a specified position, string, fill color, and font size.
  */
-class Text : public Shape {
+class Text : public SVGElement {
 private:
     std::string content;  ///< Text element
     float font_size;      ///< Font size of the text
+    std::string anchor;   ///< Anchor of the text
+    std::string style;    ///< Style of the text
 
 public:
     /**
@@ -23,8 +25,8 @@ public:
      * @param fill The fill color of the text
      * @param font_size The font size of the text (default is 1).
      */
-    Text(Vector2Df pos, std::string text, float font_size, const Color &fill,
-         const Color &stroke, float stroke_width);
+    Text(Vector2Df pos, std::string text, float font_size, const mColor &fill,
+         const mColor &stroke, float stroke_width);
 
     /**
      * @brief Gets the type of the shape.
@@ -32,6 +34,13 @@ public:
      * @return The string "Text".
      */
     std::string getClass() const override;
+
+    // /**
+    //  * @brief Renders the shape using the given renderer.
+    //  *
+    //  * @param renderer The renderer to be used for rendering the shape.
+    //  */
+    // void render(Renderer &renderer) const override;
 
     /**
      * @brief Sets the string of the text.
@@ -60,6 +69,34 @@ public:
      * @return The font size of the text.
      */
     float getFontSize() const;
+
+    /**
+     * @brief Sets the anchor of the text.
+     *
+     * @param anchor The new anchor of the text.
+     */
+    void setAnchor(std::string anchor);
+
+    /**
+     * @brief Gets the anchor of the text.
+     *
+     * @return The anchor of the text.
+     */
+    std::string getAnchor() const;
+
+    /**
+     * @brief Sets the style of the text.
+     *
+     * @param style The new style of the text.
+     */
+    void setFontStyle(std::string style);
+
+    /**
+     * @brief Gets the style of the text.
+     *
+     * @return The style of the text.
+     */
+    std::string getFontStyle() const;
 
     /**
      * @brief Prints the data of the text.
