@@ -163,6 +163,28 @@ protected:
      */
     SVGElement();
 
+    /**
+     * @brief Constructs a Shape object
+     * @param fill The fill color of the shape
+     * @param stroke The outline color of the shape
+     * @param stroke_width The outline thickness of the shape
+     * @note This constructor is protected because Shape is an abstract class
+     * that cannot be instantiated.
+     */
+    SVGElement(const mColor& fill, const mColor& stroke, float stroke_width);
+
+    /**
+     * @brief Constructs a Shape object
+     * @param fill The fill color of the shape
+     * @param stroke The outline color of the shape
+     * @param stroke_width The outline thickness of the shape
+     * @param position The position of the shape
+     * @note This constructor is protected because Shape is an abstract class
+     * that cannot be instantiated.
+     */
+    SVGElement(const mColor& fill, const mColor& stroke, float stroke_width,
+               const Vector2Df& position);
+
     SVGElement* parent;  ///< Pointer to the group that contains the shape
 
 private:

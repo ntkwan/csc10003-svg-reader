@@ -2,12 +2,8 @@
 
 Text::Text(Vector2Df pos, std::string text, float font_size, const mColor &fill,
            const mColor &stroke, float stroke_width)
-    : content(text), font_size(font_size) {
-    setOutlineColor(stroke);
-    setOutlineThickness(stroke_width);
-    setFillColor(fill);
-    setPosition(pos);
-}
+    : SVGElement(fill, stroke, stroke_width, pos), content(text),
+      font_size(font_size) {}
 
 std::string Text::getClass() const { return "Text"; }
 

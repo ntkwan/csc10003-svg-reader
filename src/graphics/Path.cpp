@@ -1,10 +1,7 @@
 #include "Path.hpp"
 
-Path::Path(const mColor& fill, const mColor& stroke, float stroke_width) {
-    setFillColor(fill);
-    setOutlineColor(stroke);
-    setOutlineThickness(stroke_width);
-}
+Path::Path(const mColor& fill, const mColor& stroke, float stroke_width)
+    : SVGElement(fill, stroke, stroke_width) {}
 
 std::string Path::getClass() const { return "Path"; }
 

@@ -1,16 +1,16 @@
 #ifndef RECT_HPP_
 #define RECT_HPP_
 
-#include "Polygon.hpp"
+#include "SVGElement.hpp"
 
 /**
  * @brief Represents a rectangle in 2D space.
  *
- * The Rect class is derived from the PolyShape class and defines a rectangle
+ * The Rect class is derived from the SVGElement class and defines a rectangle
  * with a specified width, height, position, fill color, stroke color, and
  * stroke thickness.
  */
-class Rect : public PolyShape {
+class Rect : public SVGElement {
 private:
     float width;       ///< Width of the rectangle
     float height;      ///< Height of the rectangle

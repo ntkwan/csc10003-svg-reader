@@ -4,12 +4,7 @@
 
 Ell::Ell(const Vector2Df &radius, const Vector2Df &center, mColor fill,
          mColor stroke, float stroke_thickness)
-    : radius(radius) {
-    setPosition(center);
-    setFillColor(fill);
-    setOutlineColor(stroke);
-    setOutlineThickness(stroke_thickness);
-}
+    : SVGElement(fill, stroke, stroke_thickness, center), radius(radius) {}
 
 std::string Ell::getClass() const { return "Ellipse"; }
 

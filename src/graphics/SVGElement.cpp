@@ -5,6 +5,15 @@
 SVGElement::SVGElement()
     : fill(mColor::Black), stroke(mColor::Transparent), stroke_width(1) {}
 
+SVGElement::SVGElement(const mColor& fill, const mColor& stroke,
+                       float stroke_width)
+    : fill(fill), stroke(stroke), stroke_width(stroke_width) {}
+
+SVGElement::SVGElement(const mColor& fill, const mColor& stroke,
+                       float stroke_width, const Vector2Df& position)
+    : fill(fill), stroke(stroke), stroke_width(stroke_width),
+      position(position) {}
+
 void SVGElement::setFillColor(const mColor& color) { fill = color; }
 
 const mColor& SVGElement::getFillColor() const { return fill; }
