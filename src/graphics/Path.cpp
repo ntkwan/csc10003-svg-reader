@@ -17,7 +17,7 @@ void Path::printData() const {
     SVGElement::printData();
     std::cout << "Points: ";
     for (auto point : points) {
-        std::cout << point.TC << " " << point.Point.x << " " << point.Point.y
+        std::cout << point.tc << " " << point.point.x << " " << point.point.y
                   << " ";
     }
 }

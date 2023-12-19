@@ -2,6 +2,7 @@
 #define PARSER_HPP_
 
 #include <algorithm>
+#include <cmath>
 #include <cstring>
 #include <fstream>
 #include <iostream>
@@ -10,16 +11,7 @@
 #include <vector>
 
 #include "../external/rapidxml/rapidxml.hpp"
-#include "graphics/Circle.hpp"
-#include "graphics/Color.hpp"
-#include "graphics/Ellipse.hpp"
-#include "graphics/Group.hpp"
-#include "graphics/Line.hpp"
-#include "graphics/Path.hpp"
-#include "graphics/Polygon.hpp"
-#include "graphics/Polyline.hpp"
-#include "graphics/Rect.hpp"
-#include "graphics/Text.hpp"
+#include "Graphics.hpp"
 
 using namespace rapidxml;
 
@@ -89,14 +81,37 @@ private:
     float getFloatAttribute(xml_node<>* node, std::string name);
 
     /**
+     * @brief Gets the gradient stops of a node.
+     *
+     * @param node The node to be parsed.
+     * @return The gradient stops of the node.
+     */
+    std::vector< Stop > getGradientStops(xml_node<>* node);
+
+    /**
+     * @brief Gets the gradients of a node.
+     *
+     * @param node The node to be parsed.
+     */
+    void GetGradients(xml_node<>* node);
+
+    /**
+     * @brief Gets the gradient of a node.
+     *
+     * @param id The id of the gradient to be parsed.
+     * @return The gradient of the node.
+     */
+    Gradient* parseGradient(std::string id);
+
+    /**
      * @brief Gets the color attributes of a node.
      *
      * @param node The node to be parsed.
      * @param color The name of the color tag to be parsed.
-     *
+     * @param id The id to check if the color is a reference.
      * @return The color attributes of the node.
      */
-    mColor parseColor(xml_node<>* node, std::string color);
+    mColor parseColor(xml_node<>* node, std::string color, std::string& id);
 
     /**
      * @brief Gets the points of the element
@@ -228,6 +243,10 @@ private:
 private:
     static Parser* instance;  ///< The instance of the Parser.
     SVGElement* root;         ///< The root of the SVG file.
+    std::map< std::string, Gradient* > gradients;  ///< The gradients of the SVG
+                                                   ///< file.
+    std::pair< Vector2Df, Vector2Df >
+        viewBox;  ///< The viewbox of the SVG file.
 };
 
 #endif  // PARSER_HPP_

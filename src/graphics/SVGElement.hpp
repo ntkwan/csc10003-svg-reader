@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "Color.hpp"
+#include "Gradient.hpp"
 #include "Vector2D.hpp"
 
 /**
@@ -148,6 +149,22 @@ public:
     SVGElement* getParent() const;
 
     /**
+     * @brief Sets the gradient of the shape.
+     *
+     * @param gradient The new gradient of the shape.
+     * @note The default gradient of the shape is NULL.
+     */
+    void setGradient(Gradient* gradient);
+
+    /**
+     * @brief Gets the gradient of the shape.
+     *
+     * @return The gradient of the shape.
+     * @note The default gradient of the shape is NULL.
+     */
+    Gradient* getGradient() const;
+
+    /**
      * @brief Adds a shape to the composite group.
      * @param element The shape to be added to the composite group.
      * @note This function is used for composite design pattern
@@ -193,6 +210,7 @@ private:
     float stroke_width;  ///< Thickness of the shape's outline
     Vector2Df position;  ///< Position of the shape
     std::vector< std::string > transforms;  ///< List of transformations
+    Gradient* gradient;  ///< Pointer to the gradient that contains the shape
 };
 
 #endif  // SVG_ELEMENT_HPP_

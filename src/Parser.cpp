@@ -1,18 +1,11 @@
 #include "Parser.hpp"
 
-#include <algorithm>
-#include <cstring>
-#include <fstream>
-#include <iostream>
-#include <sstream>
-
 Parser *Parser::instance = nullptr;
 
 namespace {
     auto getHexColor = [](std::string color) -> mColor {
         std::stringstream ss;
         int pos = color.find("#");
-        // handle 3 digit hex color
         if (color.size() < 5 || color[pos + 4] == ' ') {
             ss << std::hex << color.substr(pos + 1, 1) << " "
                << color.substr(pos + 2, 1) << " " << color.substr(pos + 3, 1);
@@ -85,44 +78,44 @@ namespace {
         return result;
     }
 
-    void removeRedundantSpaces(std::string &svgPathString) {
+    void removeRedundantSpaces(std::string &path_string) {
         int index = 0;
-        while (index < svgPathString.size()) {
-            if ((index == 0 || index == svgPathString.size() - 1) &&
-                svgPathString[index] == ' ') {
-                svgPathString.erase(index, 1);
-            } else if (svgPathString[index] == ' ' &&
-                       svgPathString[index - 1] == ' ') {
-                svgPathString.erase(index, 1);
+        while (index < path_string.size()) {
+            if ((index == 0 || index == path_string.size() - 1) &&
+                path_string[index] == ' ') {
+                path_string.erase(index, 1);
+            } else if (path_string[index] == ' ' &&
+                       path_string[index - 1] == ' ') {
+                path_string.erase(index, 1);
             } else {
                 index++;
             }
         }
     }
 
-    void insertSpaceBeforeEachLetter(std::string &svgPathString) {
+    void insertSpaceBeforeEachLetter(std::string &path_string) {
         std::string result;
-        for (int index = 0; index < svgPathString.size(); index++) {
-            if (std::isalpha(svgPathString[index])) {
+        for (int index = 0; index < path_string.size(); index++) {
+            if (std::isalpha(path_string[index])) {
                 result += " ";
-                result += svgPathString[index];
+                result += path_string[index];
                 result += " ";
-            } else if (svgPathString[index] == '-') {
+            } else if (path_string[index] == '-') {
                 result += " ";
-                result += svgPathString[index];
+                result += path_string[index];
             } else {
-                result += svgPathString[index];
+                result += path_string[index];
             }
         }
-        svgPathString = result;
+        path_string = result;
     }
 
-    void formatSvgPathString(std::string &svgPathString) {
-        std::replace(svgPathString.begin(), svgPathString.end(), '\t', ' ');
-        std::replace(svgPathString.begin(), svgPathString.end(), '\n', ' ');
-        insertSpaceBeforeEachLetter(svgPathString);
-        std::replace(svgPathString.begin(), svgPathString.end(), ',', ' ');
-        removeRedundantSpaces(svgPathString);
+    void formatSvgPathString(std::string &path_string) {
+        std::replace(path_string.begin(), path_string.end(), '\t', ' ');
+        std::replace(path_string.begin(), path_string.end(), '\n', ' ');
+        insertSpaceBeforeEachLetter(path_string);
+        std::replace(path_string.begin(), path_string.end(), ',', ' ');
+        removeRedundantSpaces(path_string);
     }
 }  // namespace
 
@@ -158,6 +151,10 @@ SVGElement *Parser::parseElements(std::string file_name) {
     doc.parse< 0 >(&buffer[0]);
 
     xml_node<> *svg = doc.first_node();
+    std::string viewBox = getAttribute(svg, "viewBox");
+    std::stringstream ss(viewBox);
+    ss >> this->viewBox.first.x >> this->viewBox.first.y >>
+        this->viewBox.second.x >> this->viewBox.second.y;
     xml_node<> *node = svg->first_node();
     xml_node<> *prev = NULL;
 
@@ -165,7 +162,11 @@ SVGElement *Parser::parseElements(std::string file_name) {
     SVGElement *current = root;
 
     while (node) {
-        if (std::string(node->name()) == "g") {
+        if (std::string(node->name()) == "defs") {
+            GetGradients(node);
+            prev = node;
+            node = node->next_sibling();
+        } else if (std::string(node->name()) == "g") {
             Group *group = dynamic_cast< Group * >(current);
             for (auto group_attribute : group->getAttributes()) {
                 bool found = false;
@@ -256,7 +257,7 @@ std::string Parser::getAttribute(xml_node<> *node, std::string name) {
     if (name == "text") return removeExtraSpaces(node->value());
     std::string result;
     if (node->first_attribute(name.c_str()) == NULL) {
-        if (name == "fill")
+        if (name == "fill" || name == "stop-color")
             result = "black";
         else if (name == "stroke" || name == "transform" || name == "rotate" ||
                  name == "font-style")
@@ -274,26 +275,56 @@ std::string Parser::getAttribute(xml_node<> *node, std::string name) {
 float Parser::getFloatAttribute(xml_node<> *node, std::string name) {
     float result;
     if (node->first_attribute(name.c_str()) == NULL) {
-        if (name == "stroke-width" || name == "stroke-opacity" ||
-            name == "fill-opacity" || name == "opacity")
-            result = 1;
-        else
-            result = 0;
+        if (std::string(node->name()).find("Gradient") != std::string::npos) {
+            if (name == "x1" || name == "y1" || name == "y2" || name == "fr")
+                result = 0;
+            else if (name == "cx" || name == "cy")
+                result = name == "cx" ? 0.5 * this->viewBox.second.x
+                                      : 0.5 * this->viewBox.second.y;
+            else if (name == "r")
+                result = sqrt((pow(this->viewBox.second.x, 2) +
+                               pow(this->viewBox.second.y, 2)) /
+                              2);
+            else if (name == "fx" || name == "fy")
+                result = name == "fx" ? getFloatAttribute(node, "cx")
+                                      : getFloatAttribute(node, "cy");
+            else
+                result = this->viewBox.second.x;
+        } else {
+            if (name == "stroke-width" || name == "stroke-opacity" ||
+                name == "fill-opacity" || name == "opacity" ||
+                name == "stop-opacity")
+                result = 1;
+            else
+                result = 0;
+        }
     } else {
         result = std::stof(node->first_attribute(name.c_str())->value());
     }
     return result;
 }
 
-mColor Parser::parseColor(xml_node<> *node, std::string name) {
+mColor Parser::parseColor(xml_node<> *node, std::string name, std::string &id) {
     std::string color = getAttribute(node, name);
     color.erase(std::remove(color.begin(), color.end(), ' '), color.end());
-    for (auto &c : color) c = tolower(c);
+    if (color.find("url") == std::string::npos) {
+        for (auto &c : color) c = tolower(c);
+    }
     if (color == "none")
         return mColor::Transparent;
     else {
         mColor result;
-        if (color.find("#") != std::string::npos) {
+        if (color.find("url") != std::string::npos) {
+            if (color.find("'") != std::string::npos) {
+                id = color.substr(color.find("'") + 1);
+                id.erase(id.find("'"));
+                id.erase(id.find("#"), 1);
+            } else {
+                id = color.substr(color.find("#") + 1);
+                id.erase(id.find(")"));
+            }
+            result = mColor::Transparent;
+        } else if (color.find("#") != std::string::npos) {
             result = getHexColor(color);
         } else if (color.find("rgb") != std::string::npos) {
             result = getRgbColor(color);
@@ -305,10 +336,71 @@ mColor Parser::parseColor(xml_node<> *node, std::string name) {
             }
             result = color_code->second;
         }
-
-        result.a = result.a * getFloatAttribute(node, name + "-opacity") *
-                   getFloatAttribute(node, "opacity");
+        if (name == "stop-color")
+            result.a = result.a * getFloatAttribute(node, "stop-opacity");
+        else
+            result.a = result.a * getFloatAttribute(node, name + "-opacity") *
+                       getFloatAttribute(node, "opacity");
         return result;
+    }
+}
+
+Gradient *Parser::parseGradient(std::string id) {
+    if (gradients.find(id) == gradients.end()) {
+        std::cout << "Gradient " << id << " not found" << std::endl;
+        exit(-1);
+    }
+    return gradients.at(id);
+}
+
+std::vector< Stop > Parser::getGradientStops(xml_node<> *node) {
+    std::vector< Stop > stops;
+    xml_node<> *stop_node = node->first_node();
+    while (stop_node) {
+        if (std::string(stop_node->name()) == "stop") {
+            std::string id = "";
+            mColor color = parseColor(stop_node, "stop-color", id);
+            float offset = getFloatAttribute(stop_node, "offset");
+            if (offset > 1) offset /= 100;
+            stops.push_back(Stop(color, offset));
+        }
+        stop_node = stop_node->next_sibling();
+    }
+    return stops;
+}
+
+void Parser::GetGradients(xml_node<> *node) {
+    xml_node<> *gradient_node = node->first_node();
+    while (gradient_node) {
+        if (std::string(gradient_node->name()) == "linearGradient") {
+            std::string id = getAttribute(gradient_node, "id");
+            float x1 = getFloatAttribute(gradient_node, "x1");
+            float y1 = getFloatAttribute(gradient_node, "y1");
+            float x2 = getFloatAttribute(gradient_node, "x2");
+            float y2 = getFloatAttribute(gradient_node, "y2");
+            std::vector< Stop > stops = getGradientStops(gradient_node);
+            std::pair< Vector2Df, Vector2Df > points = {{x1, y1}, {x2, y2}};
+            Gradient *gradient = new LinearGradient(stops, points);
+            gradient->setTransforms(getTransformOrder(gradient_node));
+            if (this->gradients.find(id) == this->gradients.end())
+                this->gradients[id] = gradient;
+        } else if (std::string(gradient_node->name()) == "radialGradient") {
+            std::string id = getAttribute(gradient_node, "id");
+            float cx = getFloatAttribute(gradient_node, "cx");
+            float cy = getFloatAttribute(gradient_node, "cy");
+            float fx = getFloatAttribute(gradient_node, "fx");
+            float fy = getFloatAttribute(gradient_node, "fy");
+            float r = getFloatAttribute(gradient_node, "r");
+            float fr = getFloatAttribute(gradient_node, "fr");
+            std::vector< Stop > stops = getGradientStops(gradient_node);
+            std::pair< Vector2Df, Vector2Df > points = {{cx, cy}, {fx, fy}};
+            Vector2Df radius(r, fr);
+            Gradient *gradient = new RadialGradient(stops, points, radius);
+            gradient->setTransforms(getTransformOrder(gradient_node));
+            if (this->gradients.find(id) == this->gradients.end())
+                this->gradients[id] = gradient;
+        }
+        gradient_node = gradient_node->next_sibling();
     }
 }
 
@@ -339,29 +431,29 @@ std::vector< PathPoint > Parser::parsePathPoints(xml_node<> *node) {
 
     while (ss >> element) {
         if (std::isalpha(element[0])) {
-            pPoint.TC = element[0];
-            if (tolower(pPoint.TC) == 'm' || tolower(pPoint.TC) == 'l' ||
-                tolower(pPoint.TC) == 'c')
-                ss >> pPoint.Point.x >> pPoint.Point.y;
-            else if (tolower(pPoint.TC) == 'h') {
-                ss >> pPoint.Point.x;
-                pPoint.Point.y = 0;
-            } else if (tolower(pPoint.TC) == 'v') {
-                ss >> pPoint.Point.y;
-                pPoint.Point.x = 0;
+            pPoint.tc = element[0];
+            if (tolower(pPoint.tc) == 'm' || tolower(pPoint.tc) == 'l' ||
+                tolower(pPoint.tc) == 'c')
+                ss >> pPoint.point.x >> pPoint.point.y;
+            else if (tolower(pPoint.tc) == 'h') {
+                ss >> pPoint.point.x;
+                pPoint.point.y = 0;
+            } else if (tolower(pPoint.tc) == 'v') {
+                ss >> pPoint.point.y;
+                pPoint.point.x = 0;
             }
         } else {
-            if (tolower(pPoint.TC) == 'm' || tolower(pPoint.TC) == 'l' ||
-                tolower(pPoint.TC) == 'c') {
-                if (tolower(pPoint.TC) == 'm') pPoint.TC = 'L';
-                pPoint.Point.x = std::stof(element);
-                ss >> pPoint.Point.y;
-            } else if (tolower(pPoint.TC) == 'h') {
-                pPoint.Point.x = std::stof(element);
-                pPoint.Point.y = 0;
-            } else if (tolower(pPoint.TC) == 'v') {
-                pPoint.Point.y = std::stof(element);
-                pPoint.Point.x = 0;
+            if (tolower(pPoint.tc) == 'm' || tolower(pPoint.tc) == 'l' ||
+                tolower(pPoint.tc) == 'c') {
+                if (tolower(pPoint.tc) == 'm') pPoint.tc = 'L';
+                pPoint.point.x = std::stof(element);
+                ss >> pPoint.point.y;
+            } else if (tolower(pPoint.tc) == 'h') {
+                pPoint.point.x = std::stof(element);
+                pPoint.point.y = 0;
+            } else if (tolower(pPoint.tc) == 'v') {
+                pPoint.point.y = std::stof(element);
+                pPoint.point.x = 0;
             }
         }
         points.push_back(pPoint);
@@ -371,7 +463,11 @@ std::vector< PathPoint > Parser::parsePathPoints(xml_node<> *node) {
 }
 
 std::vector< std::string > Parser::getTransformOrder(xml_node<> *node) {
-    std::string transform_tag = getAttribute(node, "transform");
+    std::string transform_tag;
+    if (std::string(node->name()).find("Gradient") != std::string::npos)
+        transform_tag = getAttribute(node, "gradientTransform");
+    else
+        transform_tag = getAttribute(node, "transform");
     std::vector< std::string > order;
     std::stringstream ss(transform_tag);
     std::string type;
@@ -397,8 +493,9 @@ std::vector< std::string > Parser::getTransformOrder(xml_node<> *node) {
 SVGElement *Parser::parseShape(xml_node<> *node) {
     SVGElement *shape = NULL;
     std::string type = node->name();
-    mColor stroke_color = parseColor(node, "stroke");
-    mColor fill_color = parseColor(node, "fill");
+    std::string id = "";
+    mColor stroke_color = parseColor(node, "stroke", id);
+    mColor fill_color = parseColor(node, "fill", id);
     float stroke_width = getFloatAttribute(node, "stroke-width");
     if (type == "line") {
         shape = parseLine(node, stroke_color, stroke_width);
@@ -417,7 +514,12 @@ SVGElement *Parser::parseShape(xml_node<> *node) {
     } else if (type == "text") {
         return parseText(node, fill_color, stroke_color, stroke_width);
     }
-    if (shape != NULL) shape->setTransforms(getTransformOrder(node));
+    if (shape != NULL) {
+        shape->setTransforms(getTransformOrder(node));
+        if (id != "") {
+            shape->setGradient(parseGradient(id));
+        }
+    }
     return shape;
 }
 
@@ -534,6 +636,11 @@ Path *Parser::parsePath(xml_node<> *node, const mColor &fill_color,
     return shape;
 }
 
-Parser::~Parser() { delete root; }
+Parser::~Parser() {
+    delete root;
+    for (auto gradient : gradients) {
+        delete gradient.second;
+    }
+}
 
 void Parser::printShapesData() { root->printData(); }

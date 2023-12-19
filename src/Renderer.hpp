@@ -126,6 +126,25 @@ private:
     void drawPath(Gdiplus::Graphics& graphics, Path* path) const;
 
     /**
+     * @brief Gets the Gdiplus::brush object for the shape fill.
+     *
+     * @param shape The SVGElement representing the shape.
+     * @return The Gdiplus::brush object for the shape fill.
+     */
+    Gdiplus::Brush* getBrush(SVGElement* shape) const;
+
+    /**
+     * @brief Utility function to apply a series of transformations to the brush
+     * object.
+     *
+     * @param transform_order The order in which transformations should be
+     * applied.
+     * @param brush The Gdiplus::brush object for the shape fill.
+     */
+    void applyTransformsOnBrush(std::vector< std::string > transform_order,
+                                Gdiplus::LinearGradientBrush*& brush) const;
+
+    /**
      * @brief Private constructor for the Renderer class.
      */
     Renderer();

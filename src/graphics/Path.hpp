@@ -8,8 +8,8 @@
  */
 
 struct PathPoint {
-    Vector2Df Point;
-    char TC;
+    Vector2Df point;
+    char tc;
 };
 
 /**
