@@ -489,7 +489,7 @@ std::vector< PathPoint > Parser::parsePathPoints(xml_node<> *node) {
                 endPoint = Vector2Df{points[i].point.x, curPoint.y};
             curPoint = endPoint;
             handle_points.push_back({endPoint, 'h'});
-        } else if (points[i].tc == 'v') {
+        } else if (tolower(points[i].tc) == 'v') {
             Vector2Df endPoint{curPoint.x, curPoint.y + points[i].point.y};
             if (points[i].tc == 'V')
                 endPoint = Vector2Df{curPoint.x, points[i].point.y};
