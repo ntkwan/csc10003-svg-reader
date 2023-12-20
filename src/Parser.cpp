@@ -424,6 +424,14 @@ std::vector< PathPoint > Parser::parsePathPoints(xml_node<> *node) {
     std::vector< PathPoint > points;
     std::string path_string = getAttribute(node, "d");
 
+    auto checkAbbreviation = [](const std::string &s) {
+        int cnt = 0;
+        for (auto c : s)
+            if (c == '.') ++cnt;
+        if (cnt == 2) return true;
+        return false;
+    };
+
     formatSvgPathString(path_string);
     std::stringstream ss(path_string);
     std::string element;
@@ -444,19 +452,46 @@ std::vector< PathPoint > Parser::parsePathPoints(xml_node<> *node) {
                 pPoint.point.x = 0;
             }
         } else {
+            std::string point_x = "";
+            std::string point_y = "";
+            if (checkAbbreviation(element)) {
+                for (int i = (int)element.size() - 1; i >= 0; --i) {
+                    if (element[i] == '.') {
+                        point_y = "0." + element.substr(i + 1);
+                        point_x = element.substr(0, i);
+                        break;
+                    }
+                }
+            }
+
             if (tolower(pPoint.tc) == 'm' || tolower(pPoint.tc) == 'l' ||
                 tolower(pPoint.tc) == 'c' || tolower(pPoint.tc) == 's' ||
                 tolower(pPoint.tc) == 'q' || tolower(pPoint.tc) == 't' ||
                 tolower(pPoint.tc) == 'a') {
                 if (tolower(pPoint.tc) == 'm') pPoint.tc = 'L';
-                pPoint.point.x = std::stof(element);
-                ss >> pPoint.point.y;
+                if (checkAbbreviation(element) == false) {
+                    pPoint.point.x = std::stof(element);
+                    ss >> pPoint.point.y;
+                } else {
+                    pPoint.point.y = std::stof(point_y);
+                    pPoint.point.x = std::stof(point_x);
+                }
             } else if (tolower(pPoint.tc) == 'h') {
-                pPoint.point.x = std::stof(element);
-                pPoint.point.y = 0;
+                if (checkAbbreviation(element) == false) {
+                    pPoint.point.x = std::stof(element);
+                    pPoint.point.y = 0;
+                } else {
+                    pPoint.point.y = 0;
+                    pPoint.point.x = std::stof(point_x);
+                }
             } else if (tolower(pPoint.tc) == 'v') {
-                pPoint.point.y = std::stof(element);
-                pPoint.point.x = 0;
+                if (checkAbbreviation(element) == false) {
+                    pPoint.point.y = std::stof(element);
+                    pPoint.point.x = 0;
+                } else {
+                    pPoint.point.x = 0;
+                    pPoint.point.y = std::stof(point_y);
+                }
             }
         }
         points.push_back(pPoint);
@@ -541,6 +576,7 @@ std::vector< PathPoint > Parser::parsePathPoints(xml_node<> *node) {
             }
         }
     }
+
     return handle_points;
 }
 
