@@ -318,7 +318,7 @@ void Renderer::drawPath(Gdiplus::Graphics& graphics, Path* path) const {
                 i += 2;
                 cur_point = control_point3;
             }
-        } else if (points[i].tc == 'Z' || points[i].tc == 'z') {
+        } else if (points[i].tc == 'z') {
             gdi_path.CloseFigure();
             cur_point = first_point;
         } else if (points[i].tc == 's') {
@@ -340,34 +340,19 @@ void Renderer::drawPath(Gdiplus::Graphics& graphics, Path* path) const {
                                    control_point2.x, control_point2.y,
                                    control_point3.x, control_point3.y);
                 i += 1;
-                cur_point = points[i + 1].point;
+                cur_point = control_point3;
             }
         } else if (points[i].tc == 'q') {
             if (i + 1 < n) {
-                Vector2Df control_point1{
-                    static_cast< float >(cur_point.x +
-                                         2.0 / 3.0 *
-                                             (points[i].point.x - cur_point.x)),
-                    static_cast< float >(
-                        cur_point.y +
-                        2.0 / 3.0 * (points[i].point.y - cur_point.y))};
-                Vector2Df control_point2{
-                    static_cast< float >(
-                        points[i + 1].point.x +
-                        2.0 / 3.0 *
-                            (points[i].point.x - points[i + 1].point.x)),
-                    static_cast< float >(
-                        points[i + 1].point.y +
-                        2.0 / 3.0 *
-                            (points[i].point.y - points[i + 1].point.y))};
-                Vector2Df endPoint{points[i + 1].point.x,
-                                   points[i + 1].point.y};
+                Vector2Df control_point = points[i].point;
+                Vector2Df end_point = points[i + 1].point;
 
-                gdi_path.AddBezier(cur_point.x, cur_point.y, control_point1.x,
-                                   control_point1.y, control_point2.x,
-                                   control_point2.y, endPoint.x, endPoint.y);
-
-                cur_point = endPoint;
+                Gdiplus::PointF q_points[3];
+                q_points[0] = Gdiplus::PointF{cur_point.x, cur_point.y};
+                q_points[1] = Gdiplus::PointF{control_point.x, control_point.y};
+                q_points[2] = Gdiplus::PointF{end_point.x, end_point.y};
+                gdi_path.AddCurve(q_points, 3);
+                cur_point = points[i + 1].point;
                 i += 1;
             }
         } else if (points[i].tc == 't') {
@@ -378,25 +363,14 @@ void Renderer::drawPath(Gdiplus::Graphics& graphics, Path* path) const {
             } else {
                 auto_control_point = cur_point;
             }
-            Vector2Df control_point1{
-                static_cast< float >(cur_point.x +
-                                     2.0 / 3.0 *
-                                         (auto_control_point.x - cur_point.x)),
-                static_cast< float >(cur_point.y +
-                                     2.0 / 3.0 *
-                                         (auto_control_point.y - cur_point.y))};
-            Vector2Df control_point2{
-                static_cast< float >(
-                    points[i].point.x +
-                    2.0 / 3.0 * (auto_control_point.x - points[i].point.x)),
-                static_cast< float >(
-                    points[i].point.y +
-                    2.0 / 3.0 * (auto_control_point.y - points[i].point.y))};
-            Vector2Df endPoint{points[i].point.x, points[i].point.y};
-            gdi_path.AddBezier(cur_point.x, cur_point.y, control_point1.x,
-                               control_point1.y, control_point2.x,
-                               control_point2.y, endPoint.x, endPoint.y);
-            cur_point = endPoint;
+            Vector2Df end_point = points[i].point;
+            Gdiplus::PointF t_points[3];
+            t_points[0] = Gdiplus::PointF{cur_point.x, cur_point.y};
+            t_points[1] =
+                Gdiplus::PointF{auto_control_point.x, auto_control_point.y};
+            t_points[2] = Gdiplus::PointF{end_point.x, end_point.y};
+            gdi_path.AddCurve(t_points, 3);
+            cur_point = points[i].point;
         }
     }
     graphics.FillPath(path_fill, &gdi_path);
