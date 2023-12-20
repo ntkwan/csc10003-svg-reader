@@ -428,12 +428,13 @@ std::vector< PathPoint > Parser::parsePathPoints(xml_node<> *node) {
     std::stringstream ss(path_string);
     std::string element;
     PathPoint pPoint{{0, 0}, 'M'};
-
     while (ss >> element) {
         if (std::isalpha(element[0])) {
             pPoint.tc = element[0];
             if (tolower(pPoint.tc) == 'm' || tolower(pPoint.tc) == 'l' ||
-                tolower(pPoint.tc) == 'c')
+                tolower(pPoint.tc) == 'c' || tolower(pPoint.tc) == 's' ||
+                tolower(pPoint.tc) == 'q' || tolower(pPoint.tc) == 't' ||
+                tolower(pPoint.tc) == 'a')
                 ss >> pPoint.point.x >> pPoint.point.y;
             else if (tolower(pPoint.tc) == 'h') {
                 ss >> pPoint.point.x;
@@ -444,7 +445,9 @@ std::vector< PathPoint > Parser::parsePathPoints(xml_node<> *node) {
             }
         } else {
             if (tolower(pPoint.tc) == 'm' || tolower(pPoint.tc) == 'l' ||
-                tolower(pPoint.tc) == 'c') {
+                tolower(pPoint.tc) == 'c' || tolower(pPoint.tc) == 's' ||
+                tolower(pPoint.tc) == 'q' || tolower(pPoint.tc) == 't' ||
+                tolower(pPoint.tc) == 'a') {
                 if (tolower(pPoint.tc) == 'm') pPoint.tc = 'L';
                 pPoint.point.x = std::stof(element);
                 ss >> pPoint.point.y;
@@ -458,8 +461,87 @@ std::vector< PathPoint > Parser::parsePathPoints(xml_node<> *node) {
         }
         points.push_back(pPoint);
     }
+    std::vector< PathPoint > handle_points;
 
-    return points;
+    Vector2Df firstPoint{0, 0}, curPoint{0, 0};
+    int n = points.size();
+    for (int i = 0; i < n; i++) {
+        if (tolower(points[i].tc) == 'm') {
+            firstPoint = points[i].point;
+            if (points[i].tc == 'm') {
+                firstPoint.x = curPoint.x + points[i].point.x;
+                firstPoint.y = curPoint.y + points[i].point.y;
+            }
+            curPoint = firstPoint;
+            handle_points.push_back({firstPoint, 'm'});
+        } else if (tolower(points[i].tc) == 'l' ||
+                   tolower(points[i].tc) == 't') {
+            Vector2Df endPoint{curPoint.x + points[i].point.x,
+                               curPoint.y + points[i].point.y};
+            if (points[i].tc == 'L' || points[i].tc == 'T')
+                endPoint = points[i].point;
+            curPoint = endPoint;
+            char TC = tolower(points[i].tc);
+            handle_points.push_back({endPoint, TC});
+        } else if (tolower(points[i].tc) == 'h') {
+            Vector2Df endPoint{curPoint.x + points[i].point.x, curPoint.y};
+            if (points[i].tc == 'H')
+                endPoint = Vector2Df{points[i].point.x, curPoint.y};
+            curPoint = endPoint;
+            handle_points.push_back({endPoint, 'h'});
+        } else if (points[i].tc == 'v') {
+            Vector2Df endPoint{curPoint.x, curPoint.y + points[i].point.y};
+            if (points[i].tc == 'V')
+                endPoint = Vector2Df{curPoint.x, points[i].point.y};
+            curPoint = endPoint;
+            handle_points.push_back({endPoint, 'v'});
+        } else if (tolower(points[i].tc) == 'c') {
+            if (i + 2 < n) {
+                Vector2Df controlPoint1 =
+                    Vector2Df{curPoint.x + points[i].point.x,
+                              curPoint.y + points[i].point.y};
+                Vector2Df controlPoint2 =
+                    Vector2Df{curPoint.x + points[i + 1].point.x,
+                              curPoint.y + points[i + 1].point.y};
+                Vector2Df controlPoint3 =
+                    Vector2Df{curPoint.x + points[i + 2].point.x,
+                              curPoint.y + points[i + 2].point.y};
+                if (points[i].tc == 'C') {
+                    controlPoint1 = points[i].point;
+                    controlPoint2 = points[i + 1].point;
+                    controlPoint3 = points[i + 2].point;
+                }
+                i += 2;
+                curPoint = controlPoint3;
+                handle_points.push_back({controlPoint1, 'c'});
+                handle_points.push_back({controlPoint2, 'c'});
+                handle_points.push_back({controlPoint3, 'c'});
+            }
+        } else if (tolower(points[i].tc) == 'z') {
+            curPoint = firstPoint;
+            handle_points.push_back({firstPoint, 'z'});
+        } else if (tolower(points[i].tc) == 's' ||
+                   tolower(points[i].tc) == 'q') {
+            if (i + 1 < n) {
+                Vector2Df controlPoint1 =
+                    Vector2Df{curPoint.x + points[i].point.x,
+                              curPoint.y + points[i].point.y};
+                Vector2Df controlPoint2 =
+                    Vector2Df{curPoint.x + points[i + 1].point.x,
+                              curPoint.y + points[i + 1].point.y};
+                if (points[i].tc == 'S' || points[i].tc == 'Q') {
+                    controlPoint1 = points[i].point;
+                    controlPoint2 = points[i + 1].point;
+                }
+                i += 1;
+                curPoint = controlPoint2;
+                char TC = tolower(points[i].tc);
+                handle_points.push_back({controlPoint1, TC});
+                handle_points.push_back({controlPoint2, TC});
+            }
+        }
+    }
+    return handle_points;
 }
 
 std::vector< std::string > Parser::getTransformOrder(xml_node<> *node) {
