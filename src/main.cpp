@@ -25,7 +25,6 @@ void OnPaint(HDC hdc, const std::string& filePath, Viewer& viewer) {
     graphics.SetCompositingMode(Gdiplus::CompositingModeSourceOver);
     graphics.SetPixelOffsetMode(Gdiplus::PixelOffsetModeHighQuality);
     graphics.SetInterpolationMode(Gdiplus::InterpolationModeHighQuality);
-    graphics.SetCompositingQuality(Gdiplus::CompositingQualityHighQuality);
     Renderer* renderer = Renderer::getInstance();
     SVGElement* root = parser->getRoot();
     Group* group = dynamic_cast< Group* >(root);
