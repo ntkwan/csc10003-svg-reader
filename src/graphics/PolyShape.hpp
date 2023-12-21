@@ -63,6 +63,20 @@ public:
     std::string getFillRule() const;
 
     /**
+     * @brief Gets the minimum bounding box of the shape.
+     *
+     * @return The minimum bounding box of the shape.
+     */
+    Vector2Df getMinBound() const override;
+
+    /**
+     * @brief Gets the maximum bounding box of the shape.
+     *
+     * @return The maximum bounding box of the shape.
+     */
+    Vector2Df getMaxBound() const override;
+
+    /**
      * @brief Prints the data of the shape.
      *
      * @note This function is used for debugging purposes.

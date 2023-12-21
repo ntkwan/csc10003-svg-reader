@@ -40,6 +40,10 @@ void SVGElement::setPosition(const Vector2Df& position) {
 
 Vector2Df SVGElement::getPosition() const { return position; }
 
+Vector2Df SVGElement::getMinBound() const { return Vector2Df(); }
+
+Vector2Df SVGElement::getMaxBound() const { return Vector2Df(); }
+
 void SVGElement::printData() const {
     std::cout << "Shape: " << getClass() << std::endl;
     std::cout << "Fill: " << getFillColor() << std::endl;

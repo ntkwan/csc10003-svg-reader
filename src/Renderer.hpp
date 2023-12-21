@@ -129,9 +129,10 @@ private:
      * @brief Gets the Gdiplus::brush object for the shape fill.
      *
      * @param shape The SVGElement representing the shape.
+     * @param bound The bounding box of the shape.
      * @return The Gdiplus::brush object for the shape fill.
      */
-    Gdiplus::Brush* getBrush(SVGElement* shape) const;
+    Gdiplus::Brush* getBrush(SVGElement* shape, Gdiplus::RectF bound) const;
 
     /**
      * @brief Utility function to apply a series of transformations to the brush

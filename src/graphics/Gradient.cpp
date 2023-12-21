@@ -1,8 +1,8 @@
 #include "Gradient.hpp"
 
 Gradient::Gradient(std::vector< Stop > stops,
-                   std::pair< Vector2Df, Vector2Df > points)
-    : stops(stops), points(points) {}
+                   std::pair< Vector2Df, Vector2Df > points, std::string units)
+    : stops(stops), points(points), units(units) {}
 
 std::vector< Stop > Gradient::getStops() const { return stops; }
 

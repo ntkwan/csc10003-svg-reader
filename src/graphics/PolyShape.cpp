@@ -14,6 +14,26 @@ void PolyShape::setFillRule(std::string fill_rule) {
 
 std::string PolyShape::getFillRule() const { return fill_rule; }
 
+Vector2Df PolyShape::getMinBound() const {
+    float min_x = points[0].x;
+    float min_y = points[0].y;
+    for (auto& point : points) {
+        min_x = std::min(min_x, point.x);
+        min_y = std::min(min_y, point.y);
+    }
+    return Vector2Df(min_x, min_y);
+}
+
+Vector2Df PolyShape::getMaxBound() const {
+    float max_x = points[0].x;
+    float max_y = points[0].y;
+    for (auto& point : points) {
+        max_x = std::max(max_x, point.x);
+        max_y = std::max(max_y, point.y);
+    }
+    return Vector2Df(max_x, max_y);
+}
+
 void PolyShape::printData() const {
     SVGElement::printData();
     std::cout << "Points: ";

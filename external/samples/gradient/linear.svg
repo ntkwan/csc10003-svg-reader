@@ -1,9 +1,9 @@
 <svg
-  viewBox="0 0 10 10"
+  viewBox="0 0 150 150"
   xmlns="http://www.w3.org/2000/svg"
   xmlns:xlink="http://www.w3.org/1999/xlink">
   <defs>
-    <linearGradient id="myGradient" gradientTransform="rotate(90)">
+    <linearGradient id="myGradient" gradientTransform="rotate(90)" gradientUnits="">
       <stop offset="5%" stop-color="gold" />
       <stop offset="50%" stop-color="green" />
       <stop offset="95%" stop-color="red" />
@@ -11,5 +11,15 @@
   </defs>
 
   <!-- using my linear gradient -->
-  <ellipse cx="5" cy="5" rx="5" ry="5" fill="url('#myGradient')" />
+  <ellipse cx="5" cy="5" rx="5" ry="2" fill="url('#myGradient')" />
+  
+  <polyline points="0,40 40,40 40,80 80,80 80,120 120,120 120,140" fill="url('#myGradient')" />
+  <rect fill="url('#myGradient')" x="130" y="130" width="10" height="10" />
+  <circle cx="10" cy="10" r="5" fill="url('#myGradient')" />
+  <text x="0" y="100" fill="url('#myGradient')" font-size="30">Nguyen Van A</text>
+  <!-- <path fill="url('#myGradient')" d="M52.9,28.1c-0.3-1-1.1-1.6-2.1-1.8l-11.3-1.6l-5.1-10.3c-0.4-0.9-1.4-1.5-2.4-1.5s-1.9,0.6-2.4,1.5
+				l-5.1,10.3l-11.3,1.6c-1,0.1-1.8,0.8-2.1,1.8c-0.3,1-0.1,2,0.7,2.7l8.2,8L18.1,50c-0.2,1,0.2,2,1,2.6c0.5,0.3,1,0.5,1.5,0.5
+				c0.4,0,0.8-0.1,1.2-0.3L32,47.5l10.1,5.3c0.4,0.2,0.8,0.3,1.2,0.3c0.5,0,1.1-0.2,1.5-0.5c0.8-0.6,1.2-1.6,1-2.6L44,38.7l8.2-8
+				C52.9,30.1,53.2,29,52.9,28.1z"/>
+  <polygon fill="url('#myGradient')" points="46.954,57.792 11,57.792 0,25.544 29.039,0.208 58,25.792 	"/> -->
 </svg>

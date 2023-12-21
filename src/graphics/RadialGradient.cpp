@@ -2,8 +2,8 @@
 
 RadialGradient::RadialGradient(std::vector< Stop > stops,
                                std::pair< Vector2Df, Vector2Df > points,
-                               Vector2Df radius)
-    : Gradient(stops, points) {
+                               Vector2Df radius, std::string units)
+    : Gradient(stops, points, units) {
     this->radius = radius;
 }
 

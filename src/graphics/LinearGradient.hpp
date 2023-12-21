@@ -18,9 +18,10 @@ public:
      *
      * @param stops The stops of the gradient.
      * @param points The start and end points of the gradient.
+     * @param units The units of the gradient.
      */
     LinearGradient(std::vector< Stop > stops,
-                   std::pair< Vector2Df, Vector2Df > points);
+                   std::pair< Vector2Df, Vector2Df > points, std::string units);
 
     /**
      * @brief Gets the type of the gradient.

@@ -107,6 +107,20 @@ public:
     Vector2Df getPosition() const;
 
     /**
+     * @brief Gets the minimum bound of the shape.
+     *
+     * @return The minimum bound of the shape.
+     */
+    virtual Vector2Df getMinBound() const;
+
+    /**
+     * @brief Gets the maximum bound of the shape.
+     *
+     * @return The maximum bound of the shape.
+     */
+    virtual Vector2Df getMaxBound() const;
+
+    /**
      * @brief Prints the data of the shape.
      *
      * @note This function is used for debugging purposes.

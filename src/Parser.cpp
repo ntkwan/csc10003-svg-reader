@@ -185,10 +185,14 @@ SVGElement *Parser::parseElements(std::string file_name) {
     doc.parse< 0 >(&buffer[0]);
 
     xml_node<> *svg = doc.first_node();
+    viewBox.second.x = getFloatAttribute(svg, "width");
+    viewBox.second.y = getFloatAttribute(svg, "height");
     std::string viewBox = getAttribute(svg, "viewBox");
-    std::stringstream ss(viewBox);
-    ss >> this->viewBox.first.x >> this->viewBox.first.y >>
-        this->viewBox.second.x >> this->viewBox.second.y;
+    if (viewBox != "") {
+        std::stringstream ss(viewBox);
+        ss >> this->viewBox.first.x >> this->viewBox.first.y >>
+            this->viewBox.second.x >> this->viewBox.second.y;
+    }
     xml_node<> *node = svg->first_node();
     xml_node<> *prev = NULL;
 
@@ -300,6 +304,8 @@ std::string Parser::getAttribute(xml_node<> *node, std::string name) {
             result = "start";
         else if (name == "fill-rule")
             result = "nonzero";
+        else if (name == "gradientUnits")
+            result = "objectBoundingBox";
     } else {
         result = node->first_attribute(name.c_str())->value();
     }
@@ -408,18 +414,20 @@ void Parser::GetGradients(xml_node<> *node) {
     while (gradient_node) {
         if (std::string(gradient_node->name()) == "linearGradient") {
             std::string id = getAttribute(gradient_node, "id");
+            std::string units = getAttribute(gradient_node, "gradientUnits");
             float x1 = getFloatAttribute(gradient_node, "x1");
             float y1 = getFloatAttribute(gradient_node, "y1");
             float x2 = getFloatAttribute(gradient_node, "x2");
             float y2 = getFloatAttribute(gradient_node, "y2");
             std::vector< Stop > stops = getGradientStops(gradient_node);
             std::pair< Vector2Df, Vector2Df > points = {{x1, y1}, {x2, y2}};
-            Gradient *gradient = new LinearGradient(stops, points);
+            Gradient *gradient = new LinearGradient(stops, points, units);
             gradient->setTransforms(getTransformOrder(gradient_node));
             if (this->gradients.find(id) == this->gradients.end())
                 this->gradients[id] = gradient;
         } else if (std::string(gradient_node->name()) == "radialGradient") {
             std::string id = getAttribute(gradient_node, "id");
+            std::string units = getAttribute(gradient_node, "gradientUnits");
             float cx = getFloatAttribute(gradient_node, "cx");
             float cy = getFloatAttribute(gradient_node, "cy");
             float fx = getFloatAttribute(gradient_node, "fx");
@@ -429,7 +437,8 @@ void Parser::GetGradients(xml_node<> *node) {
             std::vector< Stop > stops = getGradientStops(gradient_node);
             std::pair< Vector2Df, Vector2Df > points = {{cx, cy}, {fx, fy}};
             Vector2Df radius(r, fr);
-            Gradient *gradient = new RadialGradient(stops, points, radius);
+            Gradient *gradient =
+                new RadialGradient(stops, points, radius, units);
             gradient->setTransforms(getTransformOrder(gradient_node));
             if (this->gradients.find(id) == this->gradients.end())
                 this->gradients[id] = gradient;
@@ -639,10 +648,20 @@ SVGElement *Parser::parseShape(xml_node<> *node) {
     } else if (type == "path") {
         shape = parsePath(node, fill_color, stroke_color, stroke_width);
     } else if (type == "text") {
-        return parseText(node, fill_color, stroke_color, stroke_width);
+        shape = parseText(node, fill_color, stroke_color, stroke_width);
     }
     if (shape != NULL) {
-        shape->setTransforms(getTransformOrder(node));
+        if (type == "text") {
+            float dx = getFloatAttribute(node, "dx");
+            float dy = getFloatAttribute(node, "dy");
+            std::string transform = "translate(" + std::to_string(dx) + " " +
+                                    std::to_string(dy) + ")";
+            std::vector< std::string > transform_order =
+                getTransformOrder(node);
+            transform_order.push_back(transform);
+            shape->setTransforms(transform_order);
+        } else
+            shape->setTransforms(getTransformOrder(node));
         if (id != "") {
             shape->setGradient(parseGradient(id));
         }
@@ -728,8 +747,10 @@ Text *Parser::parseText(xml_node<> *node, const mColor &fill_color,
     float font_size = getFloatAttribute(node, "font-size");
     std::string text = getAttribute(node, "text");
 
-    Text *shape = new Text(Vector2Df(x - 7, y - font_size + 5), text, font_size,
-                           fill_color, stroke_color, stroke_width);
+    Text *shape =
+        new Text(Vector2Df(x - (font_size * 6.6 / 40),
+                           y - font_size + (font_size * 4.4 / 40)),
+                 text, font_size, fill_color, stroke_color, stroke_width);
 
     std::string anchor = getAttribute(node, "text-anchor");
     anchor.erase(std::remove(anchor.begin(), anchor.end(), ' '), anchor.end());
@@ -739,13 +760,6 @@ Text *Parser::parseText(xml_node<> *node, const mColor &fill_color,
     style.erase(std::remove(style.begin(), style.end(), ' '), style.end());
     shape->setFontStyle(style);
 
-    float dx = getFloatAttribute(node, "dx");
-    float dy = getFloatAttribute(node, "dy");
-    std::string transform =
-        "translate(" + std::to_string(dx) + " " + std::to_string(dy) + ")";
-    std::vector< std::string > transform_order = getTransformOrder(node);
-    transform_order.push_back(transform);
-    shape->setTransforms(transform_order);
     return shape;
 }
 
