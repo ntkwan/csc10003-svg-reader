@@ -460,8 +460,6 @@ std::vector< PathPoint > Parser::parsePathPoints(xml_node<> *node) {
 
     formatSvgPathString(path_string);
 
-    std::cout << path_string << '\n';
-
     std::stringstream ss(path_string);
     std::string element;
     PathPoint pPoint{{0, 0}, 'M'};
