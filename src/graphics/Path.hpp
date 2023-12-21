@@ -10,6 +10,10 @@
 struct PathPoint {
     Vector2Df point;
     char tc;
+    Vector2Df radius{0, 0};
+    float x_axis_rotation = 0.f;
+    bool large_arc_flag = false;
+    bool sweep_flag = false;
 };
 
 /**
