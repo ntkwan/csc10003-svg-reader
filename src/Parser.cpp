@@ -96,11 +96,13 @@ namespace {
     void insertSpaceBeforeEachLetter(std::string &path_string) {
         std::string result;
         for (int index = 0; index < path_string.size(); index++) {
-            if (std::isalpha(path_string[index])) {
+            if (std::isalpha(path_string[index]) &&
+                tolower(path_string[index]) != 'e') {
                 result += " ";
                 result += path_string[index];
                 result += " ";
-            } else if (path_string[index] == '-') {
+            } else if (path_string[index] == '-' && index - 1 >= 0 &&
+                       tolower(path_string[index - 1]) != 'e') {
                 result += " ";
                 result += path_string[index];
             } else if (path_string[index] == '.') {
@@ -603,7 +605,6 @@ std::vector< PathPoint > Parser::parsePathPoints(xml_node<> *node) {
             cur_point = end_point;
         }
     }
-
     return handle_points;
 }
 

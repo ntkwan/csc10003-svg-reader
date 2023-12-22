@@ -452,7 +452,6 @@ void Renderer::drawPath(Gdiplus::Graphics& graphics, Path* path) const {
                 fmod((long double)(startAngle * 180.0) / M_PI, 360),
                 fmod((long double)(deltaAngle * 180.0) / M_PI, 360));
 
-            if (i + 1 < n && points[i + 1].tc != 'z') gdi_path.StartFigure();
             cur_point = end_point;
         }
     }
