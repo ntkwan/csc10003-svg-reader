@@ -296,6 +296,7 @@ void Renderer::drawPolyline(Gdiplus::Graphics& graphics,
     delete polyline_fill;
 }
 
+#define M_PI 3.14159265358979323846
 void Renderer::drawPath(Gdiplus::Graphics& graphics, Path* path) const {
     mColor outline_color = path->getOutlineColor();
     Gdiplus::Pen path_outline(Gdiplus::Color(outline_color.a, outline_color.r,
@@ -389,8 +390,75 @@ void Renderer::drawPath(Gdiplus::Graphics& graphics, Path* path) const {
             t_points[2] = Gdiplus::PointF{end_point.x, end_point.y};
             gdi_path.AddCurve(t_points, 3);
             cur_point = points[i].point;
+        } else if (points[i].tc == 'a') {
+            float rx = points[i].radius.x;
+            float ry = points[i].radius.y;
+            float x_axis_rotation = points[i].x_axis_rotation;
+            bool large_arc_flag = points[i].large_arc_flag;
+            bool sweep_flag = points[i].sweep_flag;
+            Vector2Df end_point{points[i].point.x, points[i].point.y};
+
+            float angle = x_axis_rotation * static_cast< float >(M_PI) / 180.0;
+            float cosAngle = cos(angle);
+            float sinAngle = sin(angle);
+
+            Vector2Df point1;
+            float constant = cosAngle * cosAngle - (sinAngle * -sinAngle);
+            point1.x = constant * (cur_point.x - end_point.x) / 2.0;
+            point1.y = constant * (cur_point.y - end_point.y) / 2.0;
+
+            float radii_check = (point1.x * point1.x) / (rx * rx) +
+                                (point1.y * point1.y) / (ry * ry);
+            if (radii_check > 1.0) {
+                rx = std::sqrt(radii_check) * rx;
+                ry = std::sqrt(radii_check) * ry;
+            }
+
+            int sign = (large_arc_flag == sweep_flag ? -1 : 1);
+            Vector2Df point2;
+            float numo = (rx * rx) * (ry * ry) -
+                         (rx * rx) * (point1.y * point1.y) -
+                         (ry * ry) * (point1.x * point1.x);
+            float deno = (rx * rx) * (point1.y * point1.y) +
+                         (ry * ry) * (point1.x * point1.x);
+
+            if (numo < 0) {
+                numo = std::abs(numo);
+            }
+
+            point2.x = sign * std::sqrt(numo / deno) * (rx * point1.y / ry);
+            point2.y = sign * std::sqrt(numo / deno) * (-ry * point1.x / rx);
+
+            Vector2Df center;
+            constant = cosAngle * cosAngle - (sinAngle * -sinAngle);
+            center.x = constant * point2.x + (cur_point.x + end_point.x) / 2.0;
+            center.y = constant * point2.y + (cur_point.y + end_point.y) / 2.0;
+
+            float startAngle =
+                atan2((point1.y - point2.y) / ry, (point1.x - point2.x) / rx);
+            float endAngle =
+                atan2((-point1.y - point2.y) / ry, (-point1.x - point2.x) / rx);
+
+            float deltaAngle = endAngle - startAngle;
+
+            if (sweep_flag && deltaAngle < 0) {
+                deltaAngle += 2.0 * M_PI;
+            } else if (!sweep_flag && deltaAngle > 0) {
+                deltaAngle -= 2.0 * M_PI;
+            }
+
+            int startAngleDegree = (startAngle * 180.0) / M_PI;
+            int deltaAngleDegree = (deltaAngle * 180.0) / M_PI;
+
+            gdi_path.AddArc(
+                center.x - rx, center.y - ry, 2.0 * rx, 2.0 * ry,
+                fmod((long double)(startAngle * 180.0) / M_PI, 360),
+                fmod((long double)(deltaAngle * 180.0) / M_PI, 360));
+
+            cur_point = end_point;
         }
     }
+
     Gdiplus::RectF bound;
     gdi_path.GetBounds(&bound);
     Gdiplus::Brush* path_fill = getBrush(path, bound);

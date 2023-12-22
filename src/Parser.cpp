@@ -514,6 +514,7 @@ std::vector< PathPoint > Parser::parsePathPoints(xml_node<> *node) {
         }
         points.push_back(pPoint);
     }
+
     std::vector< PathPoint > handle_points;
 
     Vector2Df first_point{0, 0}, cur_point{0, 0};
@@ -592,6 +593,14 @@ std::vector< PathPoint > Parser::parsePathPoints(xml_node<> *node) {
                 handle_points.push_back({control_point1, TC});
                 handle_points.push_back({control_point2, TC});
             }
+        } else if (tolower(points[i].tc) == 'a') {
+            Vector2Df end_point{cur_point.x + points[i].point.x,
+                                cur_point.y + points[i].point.y};
+            if (points[i].tc == 'A') end_point = points[i].point;
+            handle_points.push_back(
+                {end_point, 'a', points[i].radius, points[i].x_axis_rotation,
+                 points[i].large_arc_flag, points[i].sweep_flag});
+            cur_point = end_point;
         }
     }
 
