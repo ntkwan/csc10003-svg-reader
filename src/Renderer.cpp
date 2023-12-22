@@ -447,14 +447,12 @@ void Renderer::drawPath(Gdiplus::Graphics& graphics, Path* path) const {
                 deltaAngle -= 2.0 * M_PI;
             }
 
-            int startAngleDegree = (startAngle * 180.0) / M_PI;
-            int deltaAngleDegree = (deltaAngle * 180.0) / M_PI;
-
             gdi_path.AddArc(
                 center.x - rx, center.y - ry, 2.0 * rx, 2.0 * ry,
                 fmod((long double)(startAngle * 180.0) / M_PI, 360),
                 fmod((long double)(deltaAngle * 180.0) / M_PI, 360));
 
+            if (i + 1 < n && points[i + 1].tc != 'z') gdi_path.StartFigure();
             cur_point = end_point;
         }
     }
