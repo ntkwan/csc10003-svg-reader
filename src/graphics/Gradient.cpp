@@ -19,3 +19,5 @@ void Gradient::setTransforms(std::vector< std::string > transforms) {
 std::vector< std::string > Gradient::getTransforms() const {
     return transforms;
 }
+
+void Gradient::addStop(Stop stop) { stops.push_back(stop); }

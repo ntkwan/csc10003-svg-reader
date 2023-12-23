@@ -33,6 +33,13 @@ public:
      */
     std::string getClass() const override;
 
+    /**
+     * @brief Gets the radius of the gradient.
+     *
+     * @return The radius of the gradient.
+     */
+    Vector2Df getRadius() const;
+
 private:
     Vector2Df radius;  ///< The radius of the gradient.
 };

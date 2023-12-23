@@ -81,6 +81,13 @@ public:
      */
     std::vector< std::string > getTransforms() const;
 
+    /**
+     * @brief Adds a stop to the gradient.
+     *
+     * @param stop The stop to be added to the gradient.
+     */
+    void addStop(Stop stop);
+
 private:
     std::vector< Stop > stops;  ///< Stops of the gradient
     std::pair< Vector2Df, Vector2Df >

@@ -8,3 +8,5 @@ RadialGradient::RadialGradient(std::vector< Stop > stops,
 }
 
 std::string RadialGradient::getClass() const { return "RadialGradient"; }
+
+Vector2Df RadialGradient::getRadius() const { return radius; }

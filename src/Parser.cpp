@@ -318,20 +318,22 @@ float Parser::getFloatAttribute(xml_node<> *node, std::string name) {
     float result;
     if (node->first_attribute(name.c_str()) == NULL) {
         if (std::string(node->name()).find("Gradient") != std::string::npos) {
-            if (name == "x1" || name == "y1" || name == "y2" || name == "fr")
+            if (name == "x1" || name == "y1" || name == "fr")
                 result = 0;
             else if (name == "cx" || name == "cy")
                 result = name == "cx" ? 0.5 * this->viewBox.second.x
                                       : 0.5 * this->viewBox.second.y;
-            else if (name == "r")
+            else if (name == "r") {
                 result = sqrt((pow(this->viewBox.second.x, 2) +
                                pow(this->viewBox.second.y, 2)) /
-                              2);
-            else if (name == "fx" || name == "fy")
+                              2) /
+                         2;
+            } else if (name == "fx" || name == "fy")
                 result = name == "fx" ? getFloatAttribute(node, "cx")
                                       : getFloatAttribute(node, "cy");
             else
-                result = this->viewBox.second.x;
+                result = name == "x2" ? this->viewBox.second.x
+                                      : this->viewBox.second.y;
         } else {
             if (name == "stroke-width" || name == "stroke-opacity" ||
                 name == "fill-opacity" || name == "opacity" ||
@@ -414,36 +416,48 @@ std::vector< Stop > Parser::getGradientStops(xml_node<> *node) {
 void Parser::GetGradients(xml_node<> *node) {
     xml_node<> *gradient_node = node->first_node();
     while (gradient_node) {
-        if (std::string(gradient_node->name()) == "linearGradient") {
+        if (std::string(gradient_node->name()).find("Gradient") !=
+            std::string::npos) {
+            Gradient *gradient;
             std::string id = getAttribute(gradient_node, "id");
             std::string units = getAttribute(gradient_node, "gradientUnits");
-            float x1 = getFloatAttribute(gradient_node, "x1");
-            float y1 = getFloatAttribute(gradient_node, "y1");
-            float x2 = getFloatAttribute(gradient_node, "x2");
-            float y2 = getFloatAttribute(gradient_node, "y2");
             std::vector< Stop > stops = getGradientStops(gradient_node);
-            std::pair< Vector2Df, Vector2Df > points = {{x1, y1}, {x2, y2}};
-            Gradient *gradient = new LinearGradient(stops, points, units);
-            gradient->setTransforms(getTransformOrder(gradient_node));
-            if (this->gradients.find(id) == this->gradients.end())
-                this->gradients[id] = gradient;
-        } else if (std::string(gradient_node->name()) == "radialGradient") {
-            std::string id = getAttribute(gradient_node, "id");
-            std::string units = getAttribute(gradient_node, "gradientUnits");
-            float cx = getFloatAttribute(gradient_node, "cx");
-            float cy = getFloatAttribute(gradient_node, "cy");
-            float fx = getFloatAttribute(gradient_node, "fx");
-            float fy = getFloatAttribute(gradient_node, "fy");
-            float r = getFloatAttribute(gradient_node, "r");
-            float fr = getFloatAttribute(gradient_node, "fr");
-            std::vector< Stop > stops = getGradientStops(gradient_node);
-            std::pair< Vector2Df, Vector2Df > points = {{cx, cy}, {fx, fy}};
-            Vector2Df radius(r, fr);
-            Gradient *gradient =
-                new RadialGradient(stops, points, radius, units);
-            gradient->setTransforms(getTransformOrder(gradient_node));
-            if (this->gradients.find(id) == this->gradients.end())
-                this->gradients[id] = gradient;
+            std::string href = getAttribute(gradient_node, "xlink:href");
+            int pos = href.find("#");
+            if (pos != std::string::npos) {
+                href = href.substr(pos + 1);
+            }
+            if (std::string(gradient_node->name()).find("linear") !=
+                std::string::npos) {
+                float x1 = getFloatAttribute(gradient_node, "x1");
+                float y1 = getFloatAttribute(gradient_node, "y1");
+                float x2 = getFloatAttribute(gradient_node, "x2");
+                float y2 = getFloatAttribute(gradient_node, "y2");
+                std::pair< Vector2Df, Vector2Df > points = {{x1, y1}, {x2, y2}};
+                gradient = new LinearGradient(stops, points, units);
+                if (this->gradients.find(id) == this->gradients.end())
+                    this->gradients[id] = gradient;
+            } else if (std::string(gradient_node->name()).find("radial") !=
+                       std::string::npos) {
+                float cx = getFloatAttribute(gradient_node, "cx");
+                float cy = getFloatAttribute(gradient_node, "cy");
+                float fx = getFloatAttribute(gradient_node, "fx");
+                float fy = getFloatAttribute(gradient_node, "fy");
+                float r = getFloatAttribute(gradient_node, "r");
+                float fr = getFloatAttribute(gradient_node, "fr");
+                std::pair< Vector2Df, Vector2Df > points = {{cx, cy}, {fx, fy}};
+                Vector2Df radius(r, fr);
+                gradient = new RadialGradient(stops, points, radius, units);
+                if (this->gradients.find(id) == this->gradients.end())
+                    this->gradients[id] = gradient;
+            }
+            if (href != "") {
+                for (auto stop : parseGradient(href)->getStops()) {
+                    gradient->addStop(stop);
+                }
+            }
+            if (gradient != NULL)
+                gradient->setTransforms(getTransformOrder(gradient_node));
         }
         gradient_node = gradient_node->next_sibling();
     }
@@ -620,7 +634,8 @@ std::vector< std::string > Parser::getTransformOrder(xml_node<> *node) {
     while (ss >> type) {
         if (type.find("translate") != std::string::npos ||
             type.find("scale") != std::string::npos ||
-            type.find("rotate") != std::string::npos) {
+            type.find("rotate") != std::string::npos ||
+            type.find("matrix") != std::string::npos) {
             while (type.find(")") == std::string::npos) {
                 std::string temp;
                 ss >> temp;
