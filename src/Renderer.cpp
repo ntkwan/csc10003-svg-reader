@@ -581,8 +581,6 @@ Gdiplus::Brush* Renderer::getBrush(SVGElement* shape,
                 bound.Y = points.first.y - radius.x;
                 bound.Width = radius.x * 2;
                 bound.Height = radius.x * 2;
-                std::cout << bound.X << " " << bound.Y << " " << bound.Width
-                          << " " << bound.Height << std::endl;
             }
             Gdiplus::GraphicsPath path;
             path.AddEllipse(bound);
@@ -604,12 +602,7 @@ Gdiplus::Brush* Renderer::getBrush(SVGElement* shape,
                                    stops[stop_size - 2 - i].getColor().r,
                                    stops[stop_size - 2 - i].getColor().g,
                                    stops[stop_size - 2 - i].getColor().b);
-                offsets[i] = stops[i - 1].getOffset();
-                std::cout << offsets[i] << " "
-                          << stops[stop_size - 2 - i].getColor().a << " "
-                          << stops[stop_size - 2 - i].getColor().r << " "
-                          << stops[stop_size - 2 - i].getColor().g << " "
-                          << stops[stop_size - 2 - i].getColor().b << std::endl;
+                offsets[i] = 1 - stops[stop_size - 2 - i].getOffset();
             }
             fill->SetInterpolationColors(colors, offsets, stop_size);
             applyTransformsOnBrush(gradient->getTransforms(), fill);
@@ -679,10 +672,6 @@ void Renderer::applyTransformsOnBrush(
             sscanf(type.c_str(), "matrix(%f %f %f %f %f %f)", &a, &b, &c, &d,
                    &e, &f);
             Gdiplus::Matrix matrix(a, b, c, d, e, f);
-            float m[6] = {0};
-            matrix.GetElements(m);
-            std::cout << m[0] << " " << m[1] << " " << m[2] << " " << m[3]
-                      << " " << m[4] << " " << m[5] << std::endl;
             brush->SetTransform(&matrix);
         }
     }
