@@ -32,6 +32,7 @@
 *.bat
 build
 svg-reader
+external/samples/gradient
 !docs/latex/code_documentation.pdf
 *.json
 *.jar

@@ -1,6 +1,8 @@
 #include "Renderer.hpp"
 
 #include <algorithm>
+#include <codecvt>
+#include <locale>
 
 Renderer* Renderer::instance = nullptr;
 
@@ -262,8 +264,6 @@ void Renderer::drawPolygon(Gdiplus::Graphics& graphics, Plygon* polygon) const {
     delete polygon_fill;
 }
 
-#include <codecvt>
-#include <locale>
 void Renderer::drawText(Gdiplus::Graphics& graphics, Text* text) const {
     mColor outline_color = text->getOutlineColor();
     graphics.SetTextRenderingHint(Gdiplus::TextRenderingHintAntiAliasGridFit);
@@ -343,13 +343,13 @@ void Renderer::drawPolyline(Gdiplus::Graphics& graphics,
     Gdiplus::RectF bound(min_bound.x, min_bound.y, max_bound.x - min_bound.x,
                          max_bound.y - min_bound.y);
     Gdiplus::Brush* polyline_fill = getBrush(polyline, bound);
-    // if (Gdiplus::PathGradientBrush* brush =
-    //         dynamic_cast< Gdiplus::PathGradientBrush* >(polyline_fill)) {
-    //     mColor color = polyline->getGradient()->getStops().back().getColor();
-    //     Gdiplus::SolidBrush corner_fill(
-    //         Gdiplus::Color(color.a, color.r, color.g, color.b));
-    //     graphics.FillPath(&corner_fill, &path);
-    // }
+    if (Gdiplus::PathGradientBrush* brush =
+            dynamic_cast< Gdiplus::PathGradientBrush* >(polyline_fill)) {
+        mColor color = polyline->getGradient()->getStops().back().getColor();
+        Gdiplus::SolidBrush corner_fill(
+            Gdiplus::Color(color.a, color.r, color.g, color.b));
+        graphics.FillPath(&corner_fill, &path);
+    }
     graphics.FillPath(polyline_fill, &path);
     graphics.DrawPath(&polyline_outline, &path);
     delete polyline_fill;
@@ -509,23 +509,23 @@ void Renderer::drawPath(Gdiplus::Graphics& graphics, Path* path) const {
             center.y =
                 (cosAngle * cosAngle + sinAngle * sinAngle) * point2.y + Y;
 
-            float startAngle =
+            float start_angle =
                 atan2((point1.y - point2.y) / ry, (point1.x - point2.x) / rx);
-            float endAngle =
+            float end_angle =
                 atan2((-point1.y - point2.y) / ry, (-point1.x - point2.x) / rx);
 
-            float deltaAngle = endAngle - startAngle;
+            float delta_angle = end_angle - start_angle;
 
-            if (sweep_flag && deltaAngle < 0) {
-                deltaAngle += 2.0 * acos(-1);
-            } else if (!sweep_flag && deltaAngle > 0) {
-                deltaAngle -= 2.0 * acos(-1);
+            if (sweep_flag && delta_angle < 0) {
+                delta_angle += 2.0 * acos(-1);
+            } else if (!sweep_flag && delta_angle > 0) {
+                delta_angle -= 2.0 * acos(-1);
             }
 
             float start_angle_degree =
-                std::fmod((startAngle * 180.0) / acos(-1), 360);
+                std::fmod((start_angle * 180.0) / acos(-1), 360);
             float delta_angle_degree =
-                std::fmod((deltaAngle * 180.0) / acos(-1), 360);
+                std::fmod((delta_angle * 180.0) / acos(-1), 360);
 
             gdi_path.AddArc(center.x - rx, center.y - ry, 2.0 * rx, 2.0 * ry,
                             start_angle_degree, delta_angle_degree);
@@ -635,7 +635,7 @@ Gdiplus::Brush* Renderer::getBrush(SVGElement* shape,
             Gdiplus::Color(color.a, color.r, color.g, color.b));
         return fill;
     }
-    return NULL;
+    return nullptr;
 }
 
 void Renderer::applyTransformsOnBrush(

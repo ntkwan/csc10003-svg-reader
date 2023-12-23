@@ -13,8 +13,6 @@
 #include "../external/rapidxml/rapidxml.hpp"
 #include "Graphics.hpp"
 
-using namespace rapidxml;
-
 typedef std::vector< std::pair< std::string, std::string > > Attributes;
 
 /**
@@ -68,7 +66,7 @@ private:
      *
      * @return The attributes of the node.
      */
-    std::string getAttribute(xml_node<>* node, std::string name);
+    std::string getAttribute(rapidxml::xml_node<>* node, std::string name);
 
     /**
      * @brief Gets the floating point attributes of a node.
@@ -78,7 +76,7 @@ private:
      *
      * @return The floating point attributes of the node.
      */
-    float getFloatAttribute(xml_node<>* node, std::string name);
+    float getFloatAttribute(rapidxml::xml_node<>* node, std::string name);
 
     /**
      * @brief Gets the gradient stops of a node.
@@ -86,14 +84,14 @@ private:
      * @param node The node to be parsed.
      * @return The gradient stops of the node.
      */
-    std::vector< Stop > getGradientStops(xml_node<>* node);
+    std::vector< Stop > getGradientStops(rapidxml::xml_node<>* node);
 
     /**
      * @brief Gets the gradients of a node.
      *
      * @param node The node to be parsed.
      */
-    void GetGradients(xml_node<>* node);
+    void GetGradients(rapidxml::xml_node<>* node);
 
     /**
      * @brief Gets the gradient of a node.
@@ -111,7 +109,8 @@ private:
      * @param id The id to check if the color is a reference.
      * @return The color attributes of the node.
      */
-    mColor parseColor(xml_node<>* node, std::string color, std::string& id);
+    mColor parseColor(rapidxml::xml_node<>* node, std::string color,
+                      std::string& id);
 
     /**
      * @brief Gets the points of the element
@@ -119,7 +118,7 @@ private:
      * @param node The node to be parsed.
      * @return The points of the element
      */
-    std::vector< Vector2Df > parsePoints(xml_node<>* node);
+    std::vector< Vector2Df > parsePoints(rapidxml::xml_node<>* node);
 
     /**
      * @brief Gets the points of the path element
@@ -127,7 +126,7 @@ private:
      * @param node The node to be parsed.
      * @return The points of the path element
      */
-    std::vector< PathPoint > parsePathPoints(xml_node<>* node);
+    std::vector< PathPoint > parsePathPoints(rapidxml::xml_node<>* node);
 
     /**
      * @brief Gets the transform order of the element
@@ -135,7 +134,7 @@ private:
      * @param node The node to be parsed.
      * @return The transform order of the element
      */
-    std::vector< std::string > getTransformOrder(xml_node<>* node);
+    std::vector< std::string > getTransformOrder(rapidxml::xml_node<>* node);
 
     /**
      * @brief Parses the line element
@@ -145,7 +144,7 @@ private:
      * @param stroke_width The width of the stroke
      * @return The line element
      */
-    Line* parseLine(xml_node<>* node, const mColor& stroke_color,
+    Line* parseLine(rapidxml::xml_node<>* node, const mColor& stroke_color,
                     float stroke_width);
 
     /**
@@ -157,7 +156,7 @@ private:
      * @param stroke_width The width of the stroke
      * @return The rect element
      */
-    Rect* parseRect(xml_node<>* node, const mColor& fill_color,
+    Rect* parseRect(rapidxml::xml_node<>* node, const mColor& fill_color,
                     const mColor& stroke_color, float stroke_width);
 
     /**
@@ -169,7 +168,8 @@ private:
      * @param stroke_width The width of the stroke
      * @return The polyline element
      */
-    class Plyline* parsePolyline(xml_node<>* node, const mColor& fill_color,
+    class Plyline* parsePolyline(rapidxml::xml_node<>* node,
+                                 const mColor& fill_color,
                                  const mColor& stroke_color,
                                  float stroke_width);
 
@@ -182,7 +182,8 @@ private:
      * @param stroke_width The width of the stroke
      * @return The polygon element
      */
-    class Plygon* parsePolygon(xml_node<>* node, const mColor& fill_color,
+    class Plygon* parsePolygon(rapidxml::xml_node<>* node,
+                               const mColor& fill_color,
                                const mColor& stroke_color, float stroke_width);
 
     /**
@@ -194,7 +195,7 @@ private:
      * @param stroke_width The width of the stroke
      * @return The circle element
      */
-    Circle* parseCircle(xml_node<>* node, const mColor& fill_color,
+    Circle* parseCircle(rapidxml::xml_node<>* node, const mColor& fill_color,
                         const mColor& stroke_color, float stroke_width);
 
     /**
@@ -206,7 +207,8 @@ private:
      * @param stroke_width The width of the stroke
      * @return The ellipse element
      */
-    class Ell* parseEllipse(xml_node<>* node, const mColor& fill_color,
+    class Ell* parseEllipse(rapidxml::xml_node<>* node,
+                            const mColor& fill_color,
                             const mColor& stroke_color, float stroke_width);
 
     /**
@@ -218,7 +220,7 @@ private:
      * @param stroke_width The width of the stroke
      * @return The path element
      */
-    Path* parsePath(xml_node<>* node, const mColor& fill_color,
+    Path* parsePath(rapidxml::xml_node<>* node, const mColor& fill_color,
                     const mColor& stroke_color, float stroke_width);
 
     /**
@@ -229,7 +231,7 @@ private:
      * @param stroke_width The width of the stroke
      * @return The text element
      */
-    Text* parseText(xml_node<>* node, const mColor& fill_color,
+    Text* parseText(rapidxml::xml_node<>* node, const mColor& fill_color,
                     const mColor& stroke_color, float stroke_width);
 
     /**
@@ -238,7 +240,7 @@ private:
      * @param node The node to be parsed.
      * @return The group of elements
      */
-    SVGElement* parseShape(xml_node<>* node);
+    SVGElement* parseShape(rapidxml::xml_node<>* node);
 
 private:
     static Parser* instance;  ///< The instance of the Parser.

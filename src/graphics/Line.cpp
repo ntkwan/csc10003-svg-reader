@@ -16,5 +16,5 @@ void Line::setDirection(const Vector2Df& direction) {
 Vector2Df Line::getDirection() const { return direction; }
 
 float Line::getLength() const {
-    return std::sqrt(std::pow(direction.x, 2) + std::pow(direction.y, 2));
+    return std::sqrt(direction.x * direction.x + direction.y * direction.y);
 }

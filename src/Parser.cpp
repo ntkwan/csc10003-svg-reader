@@ -168,7 +168,7 @@ Parser::Parser(const std::string &file_name) {
 
 Group *Parser::getRoot() { return dynamic_cast< Group * >(root); }
 
-Attributes xmlToString(xml_attribute<> *attribute) {
+Attributes xmlToString(rapidxml::xml_attribute<> *attribute) {
     Attributes attributes;
     while (attribute) {
         attributes.push_back(
@@ -179,14 +179,14 @@ Attributes xmlToString(xml_attribute<> *attribute) {
 }
 
 SVGElement *Parser::parseElements(std::string file_name) {
-    xml_document<> doc;
+    rapidxml::xml_document<> doc;
     std::ifstream file(file_name);
     std::vector< char > buffer((std::istreambuf_iterator< char >(file)),
                                std::istreambuf_iterator< char >());
     buffer.push_back('\0');
     doc.parse< 0 >(&buffer[0]);
 
-    xml_node<> *svg = doc.first_node();
+    rapidxml::xml_node<> *svg = doc.first_node();
     viewBox.second.x = getFloatAttribute(svg, "width");
     viewBox.second.y = getFloatAttribute(svg, "height");
     std::string viewBox = getAttribute(svg, "viewBox");
@@ -195,8 +195,8 @@ SVGElement *Parser::parseElements(std::string file_name) {
         ss >> this->viewBox.first.x >> this->viewBox.first.y >>
             this->viewBox.second.x >> this->viewBox.second.y;
     }
-    xml_node<> *node = svg->first_node();
-    xml_node<> *prev = NULL;
+    rapidxml::xml_node<> *node = svg->first_node();
+    rapidxml::xml_node<> *prev = NULL;
 
     SVGElement *root = new Group();
     SVGElement *current = root;
@@ -230,7 +230,7 @@ SVGElement *Parser::parseElements(std::string file_name) {
                         doc.allocate_string(group_attribute.first.c_str());
                     char *value =
                         doc.allocate_string(group_attribute.second.c_str());
-                    xml_attribute<> *new_attribute =
+                    rapidxml::xml_attribute<> *new_attribute =
                         doc.allocate_attribute(name, value);
                     node->append_attribute(new_attribute);
                 }
@@ -265,7 +265,7 @@ SVGElement *Parser::parseElements(std::string file_name) {
                         doc.allocate_string(group_attribute.first.c_str());
                     char *value =
                         doc.allocate_string(group_attribute.second.c_str());
-                    xml_attribute<> *new_attribute =
+                    rapidxml::xml_attribute<> *new_attribute =
                         doc.allocate_attribute(name, value);
                     node->append_attribute(new_attribute);
                 }
@@ -293,7 +293,7 @@ SVGElement *Parser::parseElements(std::string file_name) {
     return root;
 }
 
-std::string Parser::getAttribute(xml_node<> *node, std::string name) {
+std::string Parser::getAttribute(rapidxml::xml_node<> *node, std::string name) {
     if (name == "text") return removeExtraSpaces(node->value());
     std::string result;
     if (node->first_attribute(name.c_str()) == NULL) {
@@ -314,7 +314,7 @@ std::string Parser::getAttribute(xml_node<> *node, std::string name) {
     return result;
 }
 
-float Parser::getFloatAttribute(xml_node<> *node, std::string name) {
+float Parser::getFloatAttribute(rapidxml::xml_node<> *node, std::string name) {
     float result;
     if (node->first_attribute(name.c_str()) == NULL) {
         if (std::string(node->name()).find("Gradient") != std::string::npos) {
@@ -348,7 +348,8 @@ float Parser::getFloatAttribute(xml_node<> *node, std::string name) {
     return result;
 }
 
-mColor Parser::parseColor(xml_node<> *node, std::string name, std::string &id) {
+mColor Parser::parseColor(rapidxml::xml_node<> *node, std::string name,
+                          std::string &id) {
     std::string color = getAttribute(node, name);
     color.erase(std::remove(color.begin(), color.end(), ' '), color.end());
     if (color.find("url") == std::string::npos) {
@@ -397,9 +398,9 @@ Gradient *Parser::parseGradient(std::string id) {
     return gradients.at(id);
 }
 
-std::vector< Stop > Parser::getGradientStops(xml_node<> *node) {
+std::vector< Stop > Parser::getGradientStops(rapidxml::xml_node<> *node) {
     std::vector< Stop > stops;
-    xml_node<> *stop_node = node->first_node();
+    rapidxml::xml_node<> *stop_node = node->first_node();
     while (stop_node) {
         if (std::string(stop_node->name()) == "stop") {
             std::string id = "";
@@ -413,8 +414,8 @@ std::vector< Stop > Parser::getGradientStops(xml_node<> *node) {
     return stops;
 }
 
-void Parser::GetGradients(xml_node<> *node) {
-    xml_node<> *gradient_node = node->first_node();
+void Parser::GetGradients(rapidxml::xml_node<> *node) {
+    rapidxml::xml_node<> *gradient_node = node->first_node();
     while (gradient_node) {
         if (std::string(gradient_node->name()).find("Gradient") !=
             std::string::npos) {
@@ -463,7 +464,7 @@ void Parser::GetGradients(xml_node<> *node) {
     }
 }
 
-std::vector< Vector2Df > Parser::parsePoints(xml_node<> *node) {
+std::vector< Vector2Df > Parser::parsePoints(rapidxml::xml_node<> *node) {
     std::vector< Vector2Df > points;
     std::string points_string = getAttribute(node, "points");
 
@@ -479,7 +480,7 @@ std::vector< Vector2Df > Parser::parsePoints(xml_node<> *node) {
     return points;
 }
 
-std::vector< PathPoint > Parser::parsePathPoints(xml_node<> *node) {
+std::vector< PathPoint > Parser::parsePathPoints(rapidxml::xml_node<> *node) {
     std::vector< PathPoint > points;
     std::string path_string = getAttribute(node, "d");
 
@@ -622,7 +623,8 @@ std::vector< PathPoint > Parser::parsePathPoints(xml_node<> *node) {
     return handle_points;
 }
 
-std::vector< std::string > Parser::getTransformOrder(xml_node<> *node) {
+std::vector< std::string > Parser::getTransformOrder(
+    rapidxml::xml_node<> *node) {
     std::string transform_tag;
     if (std::string(node->name()).find("Gradient") != std::string::npos)
         transform_tag = getAttribute(node, "gradientTransform");
@@ -651,7 +653,7 @@ std::vector< std::string > Parser::getTransformOrder(xml_node<> *node) {
     return order;
 }
 
-SVGElement *Parser::parseShape(xml_node<> *node) {
+SVGElement *Parser::parseShape(rapidxml::xml_node<> *node) {
     SVGElement *shape = NULL;
     std::string type = node->name();
     std::string id = "";
@@ -694,7 +696,7 @@ SVGElement *Parser::parseShape(xml_node<> *node) {
     return shape;
 }
 
-Line *Parser::parseLine(xml_node<> *node, const mColor &stroke_color,
+Line *Parser::parseLine(rapidxml::xml_node<> *node, const mColor &stroke_color,
                         float stroke_width) {
     Line *shape = new Line(
         Vector2Df(getFloatAttribute(node, "x1"), getFloatAttribute(node, "y1")),
@@ -703,7 +705,7 @@ Line *Parser::parseLine(xml_node<> *node, const mColor &stroke_color,
     return shape;
 }
 
-Rect *Parser::parseRect(xml_node<> *node, const mColor &fill_color,
+Rect *Parser::parseRect(rapidxml::xml_node<> *node, const mColor &fill_color,
                         const mColor &stroke_color, float stroke_width) {
     float x = getFloatAttribute(node, "x");
     float y = getFloatAttribute(node, "y");
@@ -716,7 +718,8 @@ Rect *Parser::parseRect(xml_node<> *node, const mColor &fill_color,
     return shape;
 }
 
-Circle *Parser::parseCircle(xml_node<> *node, const mColor &fill_color,
+Circle *Parser::parseCircle(rapidxml::xml_node<> *node,
+                            const mColor &fill_color,
                             const mColor &stroke_color, float stroke_width) {
     float cx = getFloatAttribute(node, "cx");
     float cy = getFloatAttribute(node, "cy");
@@ -726,7 +729,7 @@ Circle *Parser::parseCircle(xml_node<> *node, const mColor &fill_color,
     return shape;
 }
 
-Ell *Parser::parseEllipse(xml_node<> *node, const mColor &fill_color,
+Ell *Parser::parseEllipse(rapidxml::xml_node<> *node, const mColor &fill_color,
                           const mColor &stroke_color, float stroke_width) {
     float radius_x = getFloatAttribute(node, "rx");
     float radius_y = getFloatAttribute(node, "ry");
@@ -737,7 +740,8 @@ Ell *Parser::parseEllipse(xml_node<> *node, const mColor &fill_color,
     return shape;
 }
 
-Plygon *Parser::parsePolygon(xml_node<> *node, const mColor &fill_color,
+Plygon *Parser::parsePolygon(rapidxml::xml_node<> *node,
+                             const mColor &fill_color,
                              const mColor &stroke_color, float stroke_width) {
     Plygon *shape = new Plygon(fill_color, stroke_color, stroke_width);
     std::vector< Vector2Df > points = parsePoints(node);
@@ -751,7 +755,8 @@ Plygon *Parser::parsePolygon(xml_node<> *node, const mColor &fill_color,
     return shape;
 }
 
-Plyline *Parser::parsePolyline(xml_node<> *node, const mColor &fill_color,
+Plyline *Parser::parsePolyline(rapidxml::xml_node<> *node,
+                               const mColor &fill_color,
                                const mColor &stroke_color, float stroke_width) {
     Plyline *shape = new Plyline(fill_color, stroke_color, stroke_width);
     std::vector< Vector2Df > points = parsePoints(node);
@@ -765,7 +770,7 @@ Plyline *Parser::parsePolyline(xml_node<> *node, const mColor &fill_color,
     return shape;
 }
 
-Text *Parser::parseText(xml_node<> *node, const mColor &fill_color,
+Text *Parser::parseText(rapidxml::xml_node<> *node, const mColor &fill_color,
                         const mColor &stroke_color, float stroke_width) {
     float x = getFloatAttribute(node, "x");
     float y = getFloatAttribute(node, "y");
@@ -788,7 +793,7 @@ Text *Parser::parseText(xml_node<> *node, const mColor &fill_color,
     return shape;
 }
 
-Path *Parser::parsePath(xml_node<> *node, const mColor &fill_color,
+Path *Parser::parsePath(rapidxml::xml_node<> *node, const mColor &fill_color,
                         const mColor &stroke_color, float stroke_width) {
     Path *shape = new Path(fill_color, stroke_color, stroke_width);
     std::vector< PathPoint > points = parsePathPoints(node);
