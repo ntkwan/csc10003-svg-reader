@@ -355,7 +355,6 @@ void Renderer::drawPolyline(Gdiplus::Graphics& graphics,
     delete polyline_fill;
 }
 
-#define M_PI 3.14159265358979323846
 void Renderer::drawPath(Gdiplus::Graphics& graphics, Path* path) const {
     mColor outline_color = path->getOutlineColor();
     Gdiplus::Pen path_outline(Gdiplus::Color(outline_color.a, outline_color.r,
@@ -452,19 +451,33 @@ void Renderer::drawPath(Gdiplus::Graphics& graphics, Path* path) const {
         } else if (points[i].tc == 'a') {
             float rx = points[i].radius.x;
             float ry = points[i].radius.y;
+            if (rx == 0 || ry == 0) {
+                gdi_path.AddLine(cur_point.x, cur_point.y, points[i].point.x,
+                                 points[i].point.y);
+                cur_point = points[i].point;
+                continue;
+            }
+            if (rx < 0) {
+                rx = std::fabs(rx);
+            }
+            if (ry < 0) {
+                ry = std::fabs(ry);
+            }
+
             float x_axis_rotation = points[i].x_axis_rotation;
             bool large_arc_flag = points[i].large_arc_flag;
             bool sweep_flag = points[i].sweep_flag;
             Vector2Df end_point{points[i].point.x, points[i].point.y};
 
-            float angle = x_axis_rotation * static_cast< float >(M_PI) / 180.0;
+            float angle = x_axis_rotation * acos(-1) / 180.0;
             float cosAngle = cos(angle);
             float sinAngle = sin(angle);
 
             Vector2Df point1;
-            float constant = cosAngle * cosAngle - (sinAngle * -sinAngle);
-            point1.x = constant * (cur_point.x - end_point.x) / 2.0;
-            point1.y = constant * (cur_point.y - end_point.y) / 2.0;
+            float X = (cur_point.x - end_point.x) / 2.0;
+            float Y = (cur_point.y - end_point.y) / 2.0;
+            point1.x = (cosAngle * cosAngle + sinAngle * sinAngle) * X;
+            point1.y = (cosAngle * cosAngle + sinAngle * sinAngle) * Y;
 
             float radii_check = (point1.x * point1.x) / (rx * rx) +
                                 (point1.y * point1.y) / (ry * ry);
@@ -473,7 +486,7 @@ void Renderer::drawPath(Gdiplus::Graphics& graphics, Path* path) const {
                 ry = std::sqrt(radii_check) * ry;
             }
 
-            int sign = (large_arc_flag == sweep_flag ? -1 : 1);
+            float sign = (large_arc_flag == sweep_flag ? -1.0 : 1.0);
             Vector2Df point2;
             float numo = (rx * rx) * (ry * ry) -
                          (rx * rx) * (point1.y * point1.y) -
@@ -482,16 +495,19 @@ void Renderer::drawPath(Gdiplus::Graphics& graphics, Path* path) const {
                          (ry * ry) * (point1.x * point1.x);
 
             if (numo < 0) {
-                numo = std::abs(numo);
+                numo = std::fabs(numo);
             }
 
-            point2.x = sign * std::sqrt(numo / deno) * (rx * point1.y / ry);
-            point2.y = sign * std::sqrt(numo / deno) * (-ry * point1.x / rx);
+            point2.x = sign * std::sqrt(numo / deno) * ((rx * point1.y) / ry);
+            point2.y = sign * std::sqrt(numo / deno) * ((-ry * point1.x) / rx);
 
             Vector2Df center;
-            constant = cosAngle * cosAngle - (sinAngle * -sinAngle);
-            center.x = constant * point2.x + (cur_point.x + end_point.x) / 2.0;
-            center.y = constant * point2.y + (cur_point.y + end_point.y) / 2.0;
+            X = (cur_point.x + end_point.x) / 2.0;
+            Y = (cur_point.y + end_point.y) / 2.0;
+            center.x =
+                (cosAngle * cosAngle + sinAngle * sinAngle) * point2.x + X;
+            center.y =
+                (cosAngle * cosAngle + sinAngle * sinAngle) * point2.y + Y;
 
             float startAngle =
                 atan2((point1.y - point2.y) / ry, (point1.x - point2.x) / rx);
@@ -501,15 +517,18 @@ void Renderer::drawPath(Gdiplus::Graphics& graphics, Path* path) const {
             float deltaAngle = endAngle - startAngle;
 
             if (sweep_flag && deltaAngle < 0) {
-                deltaAngle += 2.0 * M_PI;
+                deltaAngle += 2.0 * acos(-1);
             } else if (!sweep_flag && deltaAngle > 0) {
-                deltaAngle -= 2.0 * M_PI;
+                deltaAngle -= 2.0 * acos(-1);
             }
 
-            gdi_path.AddArc(
-                center.x - rx, center.y - ry, 2.0 * rx, 2.0 * ry,
-                fmod((long double)(startAngle * 180.0) / M_PI, 360),
-                fmod((long double)(deltaAngle * 180.0) / M_PI, 360));
+            float start_angle_degree =
+                std::fmod((startAngle * 180.0) / acos(-1), 360);
+            float delta_angle_degree =
+                std::fmod((deltaAngle * 180.0) / acos(-1), 360);
+
+            gdi_path.AddArc(center.x - rx, center.y - ry, 2.0 * rx, 2.0 * ry,
+                            start_angle_degree, delta_angle_degree);
 
             cur_point = end_point;
         }
