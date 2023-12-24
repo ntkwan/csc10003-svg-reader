@@ -15,12 +15,13 @@
  */
 class Viewer {
 public:
-    float offset_x;      ///< X-coordinate offset of the viewer
-    float offset_y;      ///< Y-coordinate offset of the viewer
-    float zoom_factor;   ///< Zoom factor for scaling the view
-    float rotate_angle;  ///< Rotation angle of the view
-    bool needs_repaint;  ///< Flag indicating whether the view needs to be
-                         ///< repainted
+    float offset_x;         ///< X-coordinate offset of the viewer
+    float offset_y;         ///< Y-coordinate offset of the viewer
+    float zoom_factor;      ///< Zoom factor for scaling the view
+    float rotate_angle;     ///< Rotation angle of the view
+    bool needs_repaint;     ///< Flag indicating whether the view needs to be
+                            ///< repainted
+    Vector2Df window_size;  ///< Size of the window
 
     /**
      * @brief Gets the singleton instance of the Viewer class.
@@ -50,6 +51,13 @@ public:
      * @param wParam The WPARAM parameter of the message.
      */
     void handleKeyEvent(WPARAM wParam);
+
+    /**
+     * @brief Get the current window size.
+     *
+     * @param hWnd The handle to the window.
+     */
+    void getWindowSize(HWND hWnd) const;
 
 private:
     static Viewer* instance;  ///< Singleton instance of the Viewer class

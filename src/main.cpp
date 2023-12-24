@@ -17,6 +17,13 @@ void OnPaint(HDC hdc, const std::string& filePath, Viewer& viewer) {
     if (!parser) {
         parser = Parser::getInstance(filePath);
     }
+    Vector2Df viewport = parser->getViewPort();
+    std::pair< Vector2Df, Vector2Df > viewbox = parser->getViewBox();
+    float scale_x = viewer.window_size.x / viewbox.second.x;
+    float scale_y = viewer.window_size.y / viewbox.second.y;
+    float scale = std::min(scale_x, scale_y);
+
+    graphics.ScaleTransform(scale, scale);
     graphics.RotateTransform(viewer.rotate_angle);
     graphics.ScaleTransform(viewer.zoom_factor, viewer.zoom_factor);
     graphics.TranslateTransform(viewer.offset_x, viewer.offset_y);
@@ -92,6 +99,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam,
     switch (message) {
         case WM_PAINT:
             hdc = BeginPaint(hWnd, &ps);
+            viewer->getWindowSize(hWnd);
             OnPaint(hdc, filePath, *viewer);
             EndPaint(hWnd, &ps);
             return 0;

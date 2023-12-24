@@ -187,13 +187,13 @@ SVGElement *Parser::parseElements(std::string file_name) {
     doc.parse< 0 >(&buffer[0]);
 
     rapidxml::xml_node<> *svg = doc.first_node();
-    viewBox.second.x = getFloatAttribute(svg, "width");
-    viewBox.second.y = getFloatAttribute(svg, "height");
-    std::string viewBox = getAttribute(svg, "viewBox");
-    if (viewBox != "") {
-        std::stringstream ss(viewBox);
-        ss >> this->viewBox.first.x >> this->viewBox.first.y >>
-            this->viewBox.second.x >> this->viewBox.second.y;
+    viewport.x = getFloatAttribute(svg, "width");
+    viewport.y = getFloatAttribute(svg, "height");
+    std::string viewbox = getAttribute(svg, "viewBox");
+    if (viewbox != "") {
+        std::stringstream ss(viewbox);
+        ss >> this->viewbox.first.x >> this->viewbox.first.y >>
+            this->viewbox.second.x >> this->viewbox.second.y;
     }
     rapidxml::xml_node<> *node = svg->first_node();
     rapidxml::xml_node<> *prev = NULL;
@@ -321,19 +321,19 @@ float Parser::getFloatAttribute(rapidxml::xml_node<> *node, std::string name) {
             if (name == "x1" || name == "y1" || name == "fr")
                 result = 0;
             else if (name == "cx" || name == "cy")
-                result = name == "cx" ? 0.5 * this->viewBox.second.x
-                                      : 0.5 * this->viewBox.second.y;
+                result = name == "cx" ? 0.5 * this->viewbox.second.x
+                                      : 0.5 * this->viewbox.second.y;
             else if (name == "r") {
-                result = sqrt((pow(this->viewBox.second.x, 2) +
-                               pow(this->viewBox.second.y, 2)) /
+                result = sqrt((pow(this->viewbox.second.x, 2) +
+                               pow(this->viewbox.second.y, 2)) /
                               2) /
                          2;
             } else if (name == "fx" || name == "fy")
                 result = name == "fx" ? getFloatAttribute(node, "cx")
                                       : getFloatAttribute(node, "cy");
             else
-                result = name == "x2" ? this->viewBox.second.x
-                                      : this->viewBox.second.y;
+                result = name == "x2" ? this->viewbox.second.x
+                                      : this->viewbox.second.y;
         } else {
             if (name == "stroke-width" || name == "stroke-opacity" ||
                 name == "fill-opacity" || name == "opacity" ||
@@ -815,3 +815,7 @@ Parser::~Parser() {
 }
 
 void Parser::printShapesData() { root->printData(); }
+
+std::pair< Vector2Df, Vector2Df > Parser::getViewBox() const { return viewbox; }
+
+Vector2Df Parser::getViewPort() const { return viewport; }

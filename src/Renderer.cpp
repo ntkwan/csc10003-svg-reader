@@ -308,6 +308,12 @@ void Renderer::drawText(Gdiplus::Graphics& graphics, Text* text) const {
         graphics.FillPath(&corner_fill, &path);
     }
     graphics.FillPath(text_fill, &path);
+    if (text->getOutlineColor().a == text->getFillColor().a) {
+        text_outline.SetColor(Gdiplus::Color(255, 255, 255, 255));
+        graphics.DrawPath(&text_outline, &path);
+        text_outline.SetColor(Gdiplus::Color(outline_color.a, outline_color.r,
+                                             outline_color.g, outline_color.b));
+    }
     graphics.DrawPath(&text_outline, &path);
     delete text_fill;
 }
@@ -586,7 +592,6 @@ Gdiplus::Brush* Renderer::getBrush(SVGElement* shape,
                     bound, colors[0], colors[stop_size - 1],
                     Gdiplus::LinearGradientMode::LinearGradientModeHorizontal);
             fill->SetInterpolationColors(colors, offsets, stop_size);
-            fill->SetWrapMode(Gdiplus::WrapModeTileFlipXY);
             applyTransformsOnBrush(gradient->getTransforms(), fill);
             delete[] colors;
             delete[] offsets;

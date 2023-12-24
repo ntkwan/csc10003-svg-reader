@@ -23,16 +23,31 @@ typedef std::vector< std::pair< std::string, std::string > > Attributes;
  */
 class Parser {
 public:
-    static Parser* getInstance(
-        const std::string&
-            file_name);  ///< Gets the singleton instance of the Parser class.
+    /**
+     * @brief Gets the singleton instance of the Parser class.
+     *
+     * @param file_name The name of the file to be parsed.
+     *
+     * @return The singleton instance of the Parser class.
+     */
+    static Parser* getInstance(const std::string& file_name);
 
-    Parser(const Parser&) =
-        delete;  ///< Deleted copy constructor to enforce the singleton pattern.
+    /**
+     * @brief Deleted copy constructor to enforce the singleton pattern.
+     */
+    Parser(const Parser&) = delete;
 
-    ~Parser();  ///< Destructor.
+    /**
+     * @brief Destructor for the Parser class.
+     */
+    ~Parser();
 
-    Group* getRoot();  ///< Gets the root of the SVG file.
+    /**
+     * @brief Gets the root of the tree of SVGElements.
+     *
+     * @return The root of the tree of SVGElements.
+     */
+    Group* getRoot();
 
     /**
      * @brief Prints the data of the shapes.
@@ -40,6 +55,20 @@ public:
      * @note This function is used for debugging.
      */
     void printShapesData();
+
+    /**
+     * @brief Gets the viewbox of the SVG file.
+     *
+     * @return The viewbox of the SVG file.
+     */
+    std::pair< Vector2Df, Vector2Df > getViewBox() const;
+
+    /**
+     * @brief Gets the viewport of the SVG file.
+     *
+     * @return The viewport of the SVG file.
+     */
+    Vector2Df getViewPort() const;
 
 private:
     /**
@@ -248,7 +277,8 @@ private:
     std::map< std::string, Gradient* > gradients;  ///< The gradients of the SVG
                                                    ///< file.
     std::pair< Vector2Df, Vector2Df >
-        viewBox;  ///< The viewbox of the SVG file.
+        viewbox;         ///< The viewbox of the SVG file.
+    Vector2Df viewport;  ///< The viewport of the SVG file.
 };
 
 #endif  // PARSER_HPP_
