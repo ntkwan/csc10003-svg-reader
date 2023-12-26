@@ -343,7 +343,18 @@ float Parser::getFloatAttribute(rapidxml::xml_node<> *node, std::string name) {
                 result = 0;
         }
     } else {
-        result = std::stof(node->first_attribute(name.c_str())->value());
+        if (name == "width" || name == "height") {
+            std::string value = node->first_attribute(name.c_str())->value();
+            if (value.find("%") != std::string::npos) {
+                result = std::stof(value.substr(0, value.find("%"))) *
+                         this->viewbox.second.x / 100;
+            } else if (value.find("pt") != std::string::npos) {
+                result = std::stof(value.substr(0, value.find("pt"))) * 1.33;
+            } else {
+                result = std::stof(value);
+            }
+        } else
+            result = std::stof(node->first_attribute(name.c_str())->value());
     }
     return result;
 }

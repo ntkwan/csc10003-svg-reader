@@ -308,7 +308,8 @@ void Renderer::drawText(Gdiplus::Graphics& graphics, Text* text) const {
         graphics.FillPath(&corner_fill, &path);
     }
     graphics.FillPath(text_fill, &path);
-    if (text->getOutlineColor().a == text->getFillColor().a) {
+    if (text->getOutlineColor().a != 0 &&
+        text->getOutlineColor().a == text->getFillColor().a) {
         text_outline.SetColor(Gdiplus::Color(255, 255, 255, 255));
         graphics.DrawPath(&text_outline, &path);
         text_outline.SetColor(Gdiplus::Color(outline_color.a, outline_color.r,
@@ -565,11 +566,11 @@ Gdiplus::Brush* Renderer::getBrush(SVGElement* shape,
         Gdiplus::Color* colors = new Gdiplus::Color[stop_size];
         float* offsets = new float[stop_size];
         if (gradient->getClass() == "LinearGradient") {
-            if (gradient->getUnits() == "userSpaceOnUse") {
-                bound.X = points.first.x;
-                bound.Y = points.first.y;
-                bound.Width = points.second.x;
-                bound.Height = points.second.y;
+            if (gradient->getUnits() == "objectBoundingBox") {
+                points.first.x = bound.X;
+                points.first.y = bound.Y;
+                points.second.x = bound.X + bound.Width;
+                points.second.y = bound.Y + bound.Height;
             }
             offsets[0] = 0;
             offsets[stop_size - 1] = 1;
@@ -589,8 +590,10 @@ Gdiplus::Brush* Renderer::getBrush(SVGElement* shape,
             }
             Gdiplus::LinearGradientBrush* fill =
                 new Gdiplus::LinearGradientBrush(
-                    bound, colors[0], colors[stop_size - 1],
-                    Gdiplus::LinearGradientMode::LinearGradientModeHorizontal);
+                    Gdiplus::PointF(points.first.x, points.first.y),
+                    Gdiplus::PointF(points.second.x, points.second.y),
+                    colors[0], colors[stop_size - 1]);
+            fill->SetWrapMode(Gdiplus::WrapModeClamp);
             fill->SetInterpolationColors(colors, offsets, stop_size);
             applyTransformsOnBrush(gradient->getTransforms(), fill);
             delete[] colors;
@@ -654,6 +657,7 @@ void Renderer::applyTransformsOnBrush(
         } else if (type.find("rotate") != std::string::npos) {
             float degree = getRotate(type);
             brush->RotateTranform(degree);
+            brush->TranslateTransform(degree, degree);
         } else if (type.find("scale") != std::string::npos) {
             if (type.find(",") != std::string::npos) {
                 float scale_x = getScaleXY(type).first,
@@ -663,6 +667,16 @@ void Renderer::applyTransformsOnBrush(
                 float scale = getScale(type);
                 brush->ScaleTransform(scale, scale);
             }
+        } else if (type.find("matrix") != std::string::npos) {
+            float a = 0, b = 0, c = 0, d = 0, e = 0, f = 0;
+            if (type.find(",") != std::string::npos) {
+                type.erase(std::remove(type.begin(), type.end(), ','),
+                           type.end());
+            }
+            sscanf(type.c_str(), "matrix(%f %f %f %f %f %f)", &a, &b, &c, &d,
+                   &e, &f);
+            Gdiplus::Matrix matrix(a, b, c, d, e, f);
+            brush->SetTransform(&matrix);
         }
     }
 }
