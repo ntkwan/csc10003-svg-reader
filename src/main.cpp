@@ -19,12 +19,11 @@ void OnPaint(HDC hdc, const std::string& filePath, Viewer& viewer) {
     }
     Vector2Df viewport = parser->getViewPort();
     std::pair< Vector2Df, Vector2Df > viewbox = parser->getViewBox();
-    graphics.SetClip(Gdiplus::Rect(0, 0, viewport.x, viewport.y));
-    Gdiplus::GraphicsState state = graphics.Save();
     if (viewport.x == 0 && viewport.y == 0) {
         viewport.x = viewer.window_size.x;
         viewport.y = viewer.window_size.y;
     }
+    graphics.SetClip(Gdiplus::Rect(0, 0, viewport.x, viewport.y));
     if ((viewport.x != viewbox.second.x || viewport.y != viewbox.second.y) &&
         viewbox.second.x != 0 && viewbox.second.y != 0) {
         float scale_x = viewport.x / viewbox.second.x;
@@ -43,27 +42,19 @@ void OnPaint(HDC hdc, const std::string& filePath, Viewer& viewer) {
         graphics.TranslateTransform(offset_x, offset_y);
     }
 
-    Gdiplus::Matrix matrix;
-    Gdiplus::Region region;
-    graphics.GetClip(&region);
-    graphics.RotateTransform(viewer.rotate_angle);
-    if (viewer.rotate_angle != 0) {
-        matrix.Rotate(viewer.rotate_angle);
-        region.Transform(&matrix);
-    }
-    graphics.ScaleTransform(viewer.zoom_factor, viewer.zoom_factor);
-    if (viewer.zoom_factor != 1) {
-        matrix.Scale(viewer.zoom_factor, viewer.zoom_factor);
-        region.Transform(&matrix);
-    }
-    graphics.SetClip(&region);
-    graphics.TranslateTransform(viewer.offset_x, viewer.offset_y);
-    graphics.TranslateClip(viewer.offset_x, viewer.offset_y);
     graphics.SetSmoothingMode(Gdiplus::SmoothingModeAntiAlias8x8);
     graphics.SetTextContrast(100);
     graphics.SetCompositingMode(Gdiplus::CompositingModeSourceOver);
     graphics.SetPixelOffsetMode(Gdiplus::PixelOffsetModeHighQuality);
     graphics.SetInterpolationMode(Gdiplus::InterpolationModeHighQuality);
+
+    Gdiplus::Matrix matrix;
+    Gdiplus::Region region;
+    graphics.GetClip(&region);
+    graphics.RotateTransform(viewer.rotate_angle);
+    graphics.ScaleTransform(viewer.zoom_factor, viewer.zoom_factor);
+    graphics.TranslateTransform(viewer.offset_x, viewer.offset_y);
+    graphics.SetClip(&region);
 
     Renderer* renderer = Renderer::getInstance();
     SVGElement* root = parser->getRoot();
