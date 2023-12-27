@@ -41,6 +41,7 @@ void OnPaint(HDC hdc, const std::string& filePath, Viewer& viewer) {
         }
         graphics.TranslateTransform(offset_x, offset_y);
     }
+    graphics.TranslateTransform(-viewbox.first.x, -viewbox.first.y);
 
     graphics.SetSmoothingMode(Gdiplus::SmoothingModeAntiAlias8x8);
     graphics.SetTextContrast(100);
