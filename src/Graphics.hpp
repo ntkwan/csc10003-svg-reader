@@ -6,9 +6,11 @@
 #include "graphics/Ellipse.hpp"
 #include "graphics/Group.hpp"
 #include "graphics/Line.hpp"
+#include "graphics/LinearGradient.hpp"
 #include "graphics/Path.hpp"
 #include "graphics/Polygon.hpp"
 #include "graphics/Polyline.hpp"
+#include "graphics/RadialGradient.hpp"
 #include "graphics/Rect.hpp"
 #include "graphics/Text.hpp"
 

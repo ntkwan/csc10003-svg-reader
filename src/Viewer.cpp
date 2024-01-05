@@ -99,3 +99,10 @@ void Viewer::handleKeyDown(WPARAM wParam) {
             break;
     }
 }
+
+void Viewer::getWindowSize(HWND hWnd) const {
+    RECT rect;
+    GetClientRect(hWnd, &rect);
+    instance->window_size.x = static_cast< float >(rect.right - rect.left);
+    instance->window_size.y = static_cast< float >(rect.bottom - rect.top);
+}

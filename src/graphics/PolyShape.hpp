@@ -12,6 +12,7 @@
 class PolyShape : public SVGElement {
 protected:
     std::vector< Vector2Df > points;  ///< Vertices of the polyshape
+    std::string fill_rule;            ///< Fill rule of the polyshape
 
     /**
      * @brief Constructs a PolyShape object.
@@ -46,6 +47,34 @@ public:
      * @return The number of vertices representing the shape.
      */
     const std::vector< Vector2Df > &getPoints() const;
+
+    /**
+     * @brief Sets the fill rule of the polyshape.
+     *
+     * @param fill_rule The new fill rule of the polyshape.
+     */
+    void setFillRule(std::string fill_rule);
+
+    /**
+     * @brief Gets the fill rule of the polyshape.
+     *
+     * @return The fill rule of the polyshape.
+     */
+    std::string getFillRule() const;
+
+    /**
+     * @brief Gets the minimum bounding box of the shape.
+     *
+     * @return The minimum bounding box of the shape.
+     */
+    Vector2Df getMinBound() const override;
+
+    /**
+     * @brief Gets the maximum bounding box of the shape.
+     *
+     * @return The maximum bounding box of the shape.
+     */
+    Vector2Df getMaxBound() const override;
 
     /**
      * @brief Prints the data of the shape.

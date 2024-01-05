@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "Color.hpp"
+#include "Gradient.hpp"
 #include "Vector2D.hpp"
 
 /**
@@ -106,6 +107,20 @@ public:
     Vector2Df getPosition() const;
 
     /**
+     * @brief Gets the minimum bound of the shape.
+     *
+     * @return The minimum bound of the shape.
+     */
+    virtual Vector2Df getMinBound() const;
+
+    /**
+     * @brief Gets the maximum bound of the shape.
+     *
+     * @return The maximum bound of the shape.
+     */
+    virtual Vector2Df getMaxBound() const;
+
+    /**
      * @brief Prints the data of the shape.
      *
      * @note This function is used for debugging purposes.
@@ -148,6 +163,22 @@ public:
     SVGElement* getParent() const;
 
     /**
+     * @brief Sets the gradient of the shape.
+     *
+     * @param gradient The new gradient of the shape.
+     * @note The default gradient of the shape is NULL.
+     */
+    void setGradient(Gradient* gradient);
+
+    /**
+     * @brief Gets the gradient of the shape.
+     *
+     * @return The gradient of the shape.
+     * @note The default gradient of the shape is NULL.
+     */
+    Gradient* getGradient() const;
+
+    /**
      * @brief Adds a shape to the composite group.
      * @param element The shape to be added to the composite group.
      * @note This function is used for composite design pattern
@@ -163,6 +194,28 @@ protected:
      */
     SVGElement();
 
+    /**
+     * @brief Constructs a Shape object
+     * @param fill The fill color of the shape
+     * @param stroke The outline color of the shape
+     * @param stroke_width The outline thickness of the shape
+     * @note This constructor is protected because Shape is an abstract class
+     * that cannot be instantiated.
+     */
+    SVGElement(const mColor& fill, const mColor& stroke, float stroke_width);
+
+    /**
+     * @brief Constructs a Shape object
+     * @param fill The fill color of the shape
+     * @param stroke The outline color of the shape
+     * @param stroke_width The outline thickness of the shape
+     * @param position The position of the shape
+     * @note This constructor is protected because Shape is an abstract class
+     * that cannot be instantiated.
+     */
+    SVGElement(const mColor& fill, const mColor& stroke, float stroke_width,
+               const Vector2Df& position);
+
     SVGElement* parent;  ///< Pointer to the group that contains the shape
 
 private:
@@ -171,6 +224,7 @@ private:
     float stroke_width;  ///< Thickness of the shape's outline
     Vector2Df position;  ///< Position of the shape
     std::vector< std::string > transforms;  ///< List of transformations
+    Gradient* gradient;  ///< Pointer to the gradient that contains the shape
 };
 
 #endif  // SVG_ELEMENT_HPP_

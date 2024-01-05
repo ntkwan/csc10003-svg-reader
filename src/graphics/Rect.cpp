@@ -2,30 +2,16 @@
 
 Rect::Rect(float width, float height, Vector2Df position, Vector2Df radius,
            const mColor &fill, const mColor &stroke, float stroke_width)
-    : PolyShape(fill, stroke, stroke_width), width(width), height(height),
-      radius(radius) {
-    addPoint(Vector2Df(0, 0));
-    addPoint(Vector2Df(width, 0));
-    addPoint(Vector2Df(width, height));
-    addPoint(Vector2Df(0, height));
-    setPosition(position);
-}
+    : SVGElement(fill, stroke, stroke_width, position), width(width),
+      height(height), radius(radius) {}
 
 std::string Rect::getClass() const { return "Rect"; }
 
-void Rect::setWidth(float width) {
-    this->width = width;
-    points[1].x = width;
-    points[2].x = width;
-}
+void Rect::setWidth(float width) { this->width = width; }
 
 float Rect::getWidth() const { return width; }
 
-void Rect::setHeight(float height) {
-    this->height = height;
-    points[2].y = height;
-    points[3].y = height;
-}
+void Rect::setHeight(float height) { this->height = height; }
 
 float Rect::getHeight() const { return height; }
 

@@ -3,7 +3,17 @@
 #include <iostream>
 
 SVGElement::SVGElement()
-    : fill(mColor::Black), stroke(mColor::Transparent), stroke_width(1) {}
+    : fill(mColor::Black), stroke(mColor::Transparent), stroke_width(1),
+      gradient(NULL) {}
+
+SVGElement::SVGElement(const mColor& fill, const mColor& stroke,
+                       float stroke_width)
+    : fill(fill), stroke(stroke), stroke_width(stroke_width), gradient(NULL) {}
+
+SVGElement::SVGElement(const mColor& fill, const mColor& stroke,
+                       float stroke_width, const Vector2Df& position)
+    : fill(fill), stroke(stroke), stroke_width(stroke_width),
+      position(position), gradient(NULL) {}
 
 void SVGElement::setFillColor(const mColor& color) { fill = color; }
 
@@ -30,6 +40,10 @@ void SVGElement::setPosition(const Vector2Df& position) {
 
 Vector2Df SVGElement::getPosition() const { return position; }
 
+Vector2Df SVGElement::getMinBound() const { return Vector2Df(); }
+
+Vector2Df SVGElement::getMaxBound() const { return Vector2Df(); }
+
 void SVGElement::printData() const {
     std::cout << "Shape: " << getClass() << std::endl;
     std::cout << "Fill: " << getFillColor() << std::endl;
@@ -42,6 +56,12 @@ void SVGElement::printData() const {
         std::cout << transform << " ";
     }
     std::cout << std::endl;
+    if (gradient != NULL)
+        std::cout << "Gradient: " << gradient->getClass() << " "
+                  << gradient->getPoints().first.x << " "
+                  << gradient->getPoints().first.y << " "
+                  << gradient->getPoints().second.x << " "
+                  << gradient->getPoints().second.y << std::endl;
 }
 
 void SVGElement::setTransforms(const std::vector< std::string >& transforms) {
@@ -55,5 +75,9 @@ std::vector< std::string > SVGElement::getTransforms() const {
 void SVGElement::setParent(SVGElement* parent) { this->parent = parent; }
 
 SVGElement* SVGElement::getParent() const { return parent; }
+
+void SVGElement::setGradient(Gradient* gradient) { this->gradient = gradient; }
+
+Gradient* SVGElement::getGradient() const { return gradient; }
 
 void SVGElement::addElement(SVGElement* element) {}

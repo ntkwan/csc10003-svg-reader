@@ -18,10 +18,21 @@ typedef std::vector< std::pair< std::string, std::string > > Attributes;
  */
 class Group : public SVGElement {
 public:
+    /**
+     * @brief Constructs a Group object.
+     */
     Group();
 
+    /**
+     * @brief Constructs a Group object.
+     *
+     * @param attributes The attributes of the group.
+     */
     Group(Attributes attributes);
 
+    /**
+     * @brief Destructs a Group object.
+     */
     ~Group();
 
     /**

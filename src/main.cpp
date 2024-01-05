@@ -17,14 +17,46 @@ void OnPaint(HDC hdc, const std::string& filePath, Viewer& viewer) {
     if (!parser) {
         parser = Parser::getInstance(filePath);
     }
-    graphics.RotateTransform(viewer.rotate_angle);
-    graphics.ScaleTransform(viewer.zoom_factor, viewer.zoom_factor);
-    graphics.TranslateTransform(viewer.offset_x, viewer.offset_y);
+    Vector2Df viewport = parser->getViewPort();
+    std::pair< Vector2Df, Vector2Df > viewbox = parser->getViewBox();
+    if (viewport.x == 0 && viewport.y == 0) {
+        viewport.x = viewer.window_size.x;
+        viewport.y = viewer.window_size.y;
+    }
+    graphics.SetClip(Gdiplus::Rect(0, 0, viewport.x, viewport.y));
+    if ((viewport.x != viewbox.second.x || viewport.y != viewbox.second.y) &&
+        viewbox.second.x != 0 && viewbox.second.y != 0) {
+        float scale_x = viewport.x / viewbox.second.x;
+        float scale_y = viewport.y / viewbox.second.y;
+        float scale = std::min(scale_x, scale_y);
+        scale = roundf(scale * 100) / 100;
+        graphics.ScaleTransform(scale, scale);
+        float offset_x = 0.0f;
+        float offset_y = 0.0f;
+        if (viewport.x > viewbox.second.x) {
+            offset_x = (viewport.x - viewbox.second.x * scale) / 2 / scale;
+        }
+        if (viewport.y > viewbox.second.y) {
+            offset_y = (viewport.y - viewbox.second.y * scale) / 2 / scale;
+        }
+        graphics.TranslateTransform(offset_x, offset_y);
+    }
+    graphics.TranslateTransform(-viewbox.first.x, -viewbox.first.y);
+
     graphics.SetSmoothingMode(Gdiplus::SmoothingModeAntiAlias8x8);
     graphics.SetTextContrast(100);
     graphics.SetCompositingMode(Gdiplus::CompositingModeSourceOver);
     graphics.SetPixelOffsetMode(Gdiplus::PixelOffsetModeHighQuality);
     graphics.SetInterpolationMode(Gdiplus::InterpolationModeHighQuality);
+
+    Gdiplus::Matrix matrix;
+    Gdiplus::Region region;
+    graphics.GetClip(&region);
+    graphics.RotateTransform(viewer.rotate_angle);
+    graphics.ScaleTransform(viewer.zoom_factor, viewer.zoom_factor);
+    graphics.TranslateTransform(viewer.offset_x, viewer.offset_y);
+    graphics.SetClip(&region);
+
     Renderer* renderer = Renderer::getInstance();
     SVGElement* root = parser->getRoot();
     Group* group = dynamic_cast< Group* >(root);
@@ -58,10 +90,10 @@ INT WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, PSTR, INT iCmdShow) {
                           TEXT("svg-reader-v0.2"),  // window class name
                           TEXT("svg-reader-v0.2"),  // window caption
                           WS_OVERLAPPEDWINDOW,      // window style
-                          CW_USEDEFAULT,            // initial x position
-                          CW_USEDEFAULT,            // initial y position
+                          0,                        // initial x position
+                          0,                        // initial y position
                           1600,                     // initial x size
-                          1200,                     // initial y size
+                          900,                      // initial y size
                           NULL,                     // parent window handle
                           NULL,                     // window menu handle
                           hInstance,                // program instance handle
@@ -92,6 +124,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam,
     switch (message) {
         case WM_PAINT:
             hdc = BeginPaint(hWnd, &ps);
+            viewer->getWindowSize(hWnd);
             OnPaint(hdc, filePath, *viewer);
             EndPaint(hWnd, &ps);
             return 0;
