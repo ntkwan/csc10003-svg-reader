@@ -35,7 +35,7 @@
 build
 svg-reader
 external/samples/gradient
-docs/latex/*
-!docs/latex/refman.pdf
+latex/*
+!latex/refman.pdf
 *.json
 *.jar
