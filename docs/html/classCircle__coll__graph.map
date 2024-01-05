@@ -1,7 +1,0 @@
-<map id="Circle" name="Circle">
-<area shape="rect" id="node1" title="Represents a circle in 2D space." alt="" coords="83,367,142,393"/>
-<area shape="rect" id="node2" href="$classEll.html" title="Represents an ellipse in 2D space." alt="" coords="93,291,132,317"/>
-<area shape="rect" id="node3" href="$classSVGElement.html" title="Represents an element in an SVG file." alt="" coords="144,215,247,241"/>
-<area shape="rect" id="node4" href="$classVector2D.html" title=" " alt="" coords="5,58,145,85"/>
-<area shape="rect" id="node5" href="$classmColor.html" title="Utility class for manipulating RGBA mColors." alt="" coords="171,58,241,85"/>
-</map>

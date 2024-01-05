@@ -1,0 +1,7 @@
+<map id="Group" name="Group">
+<area shape="rect" id="node1" title="A composite class that contains a vector of shape pointers (polymorphic)." alt="" coords="178,291,239,317"/>
+<area shape="rect" id="node2" href="$classSVGElement.html" title="Represents an element in an SVG file." alt="" coords="157,215,260,241"/>
+<area shape="rect" id="node3" href="$classVector2D.html" title=" " alt="" coords="5,58,145,85"/>
+<area shape="rect" id="node4" href="$classGradient.html" title="A class that represents a gradient." alt="" coords="169,58,248,85"/>
+<area shape="rect" id="node5" href="$classmColor.html" title="Utility class for manipulating RGBA mColors." alt="" coords="273,58,342,85"/>
+</map>

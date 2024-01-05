@@ -1,0 +1,8 @@
+<map id="Plyline" name="Plyline">
+<area shape="rect" id="node1" title="Represents a polyline in 2D space." alt="" coords="175,367,242,393"/>
+<area shape="rect" id="node2" href="$classPolyShape.html" title="Abstract base class for polygon and polyline shapes in 2D space." alt="" coords="163,291,254,317"/>
+<area shape="rect" id="node3" href="$classSVGElement.html" title="Represents an element in an SVG file." alt="" coords="157,215,260,241"/>
+<area shape="rect" id="node4" href="$classVector2D.html" title=" " alt="" coords="5,58,145,85"/>
+<area shape="rect" id="node5" href="$classGradient.html" title="A class that represents a gradient." alt="" coords="169,58,248,85"/>
+<area shape="rect" id="node6" href="$classmColor.html" title="Utility class for manipulating RGBA mColors." alt="" coords="273,58,342,85"/>
+</map>

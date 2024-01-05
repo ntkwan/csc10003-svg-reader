@@ -1,0 +1,13 @@
+<map id="SVGElement" name="SVGElement">
+<area shape="rect" id="node1" title="Represents an element in an SVG file." alt="" coords="213,5,315,32"/>
+<area shape="rect" id="node2" href="$classEll.html" title="Represents an ellipse in 2D space." alt="" coords="15,80,54,107"/>
+<area shape="rect" id="node4" href="$classGroup.html" title="A composite class that contains a vector of shape pointers (polymorphic)." alt="" coords="79,80,140,107"/>
+<area shape="rect" id="node5" href="$classLine.html" title="Represents a line in 2D space." alt="" coords="165,80,214,107"/>
+<area shape="rect" id="node6" href="$classPath.html" title="Represents a path element in 2D space." alt="" coords="239,80,289,107"/>
+<area shape="rect" id="node7" href="$classPolyShape.html" title="Abstract base class for polygon and polyline shapes in 2D space." alt="" coords="313,80,404,107"/>
+<area shape="rect" id="node10" href="$classRect.html" title="Represents a rectangle in 2D space." alt="" coords="428,80,479,107"/>
+<area shape="rect" id="node11" href="$classText.html" title="Represents text in 2D space." alt="" coords="503,80,553,107"/>
+<area shape="rect" id="node3" href="$classCircle.html" title="Represents a circle in 2D space." alt="" coords="5,155,64,181"/>
+<area shape="rect" id="node8" href="$classPlygon.html" title="Represents a polygon in 2D space." alt="" coords="280,155,347,181"/>
+<area shape="rect" id="node9" href="$classPlyline.html" title="Represents a polyline in 2D space." alt="" coords="371,155,437,181"/>
+</map>

@@ -1,0 +1,647 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<!-- BEGIN opengraph metadata -->
+<meta property="og:title" content="Doxygen Awesome" />
+<meta property="og:image" content="https://repository-images.githubusercontent.com/348492097/4f16df80-88fb-11eb-9d31-4015ff22c452" />
+<meta property="og:description" content="Custom CSS theme for doxygen html-documentation with lots of customization parameters." />
+<meta property="og:url" content="https://jothepro.github.io/doxygen-awesome-css/" />
+<!-- END opengraph metadata -->
+<!-- BEGIN twitter metadata -->
+<meta name="twitter:image:src" content="https://repository-images.githubusercontent.com/348492097/4f16df80-88fb-11eb-9d31-4015ff22c452" />
+<meta name="twitter:title" content="Doxygen Awesome" />
+<meta name="twitter:description" content="Custom CSS theme for doxygen html-documentation with lots of customization parameters." />
+<!-- END twitter metadata -->
+<title>svg-reader: Viewer Class Reference</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link rel="icon" type="image/svg+xml" href="logo.drawio.svg"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript" src="toggle-alternative-theme.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeFragmentCopyButton.init()
+    DoxygenAwesomeDarkModeToggle.init()
+    DoxygenAwesomeParagraphLink.init()
+    DoxygenAwesomeInteractiveToc.init()
+    DoxygenAwesomeTabs.init()
+</script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="custom-alternative.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- https://tholman.com/github-corners/ -->
+<a href="https://github.com/ntkwan/csc10003-svg-reader" class="github-corner" title="View source on GitHub" target="_blank" rel="noopener noreferrer">
+    <svg viewBox="0 0 250 250" width="40" height="40" style="position: absolute; top: 0; border: 0; right: 0; z-index: 99;" aria-hidden="true">
+    <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">svg-reader
+   &#160;<span id="projectnumber">0.3</span>
+   </div>
+   <div id="projectbrief">Parse and render SVG files, handle user interactions.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('classViewer.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="#pri-static-attribs">Static Private Attributes</a> &#124;
+<a href="classViewer-members.html">List of all members</a>  </div>
+  <div class="headertitle">
+<div class="title">Viewer Class Reference</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Represents a viewer for rendering and interacting with a scene.  
+ <a href="classViewer.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="Viewer_8hpp_source.html">Viewer.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for Viewer:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classViewer__coll__graph.svg" width="199" height="127"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a324e5a6a1532fe5eac3f3b0e4792b2da"><td class="memItemLeft" align="right" valign="top"><a id="a324e5a6a1532fe5eac3f3b0e4792b2da"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classViewer.html#a324e5a6a1532fe5eac3f3b0e4792b2da">~Viewer</a> ()</td></tr>
+<tr class="memdesc:a324e5a6a1532fe5eac3f3b0e4792b2da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor for the <a class="el" href="classViewer.html" title="Represents a viewer for rendering and interacting with a scene.">Viewer</a> class. <br /></td></tr>
+<tr class="separator:a324e5a6a1532fe5eac3f3b0e4792b2da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb15ba2e5d3bab2ba58da0db724b3bd1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classViewer.html#acb15ba2e5d3bab2ba58da0db724b3bd1">handleMouseEvent</a> (UINT message, WPARAM wParam, LPARAM lParam)</td></tr>
+<tr class="memdesc:acb15ba2e5d3bab2ba58da0db724b3bd1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles mouse events, such as wheel, move, left button down, and left button up.  <a href="classViewer.html#acb15ba2e5d3bab2ba58da0db724b3bd1">More...</a><br /></td></tr>
+<tr class="separator:acb15ba2e5d3bab2ba58da0db724b3bd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a643c2fc659f06f4d4bfcefbad22ebd75"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classViewer.html#a643c2fc659f06f4d4bfcefbad22ebd75">handleKeyEvent</a> (WPARAM wParam)</td></tr>
+<tr class="memdesc:a643c2fc659f06f4d4bfcefbad22ebd75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles keyboard events.  <a href="classViewer.html#a643c2fc659f06f4d4bfcefbad22ebd75">More...</a><br /></td></tr>
+<tr class="separator:a643c2fc659f06f4d4bfcefbad22ebd75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8d0481396e20f1a8d4f6691ff0a67c1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classViewer.html#aa8d0481396e20f1a8d4f6691ff0a67c1">getWindowSize</a> (HWND hWnd) const</td></tr>
+<tr class="memdesc:aa8d0481396e20f1a8d4f6691ff0a67c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current window size.  <a href="classViewer.html#aa8d0481396e20f1a8d4f6691ff0a67c1">More...</a><br /></td></tr>
+<tr class="separator:aa8d0481396e20f1a8d4f6691ff0a67c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a8235c9da7e144d7139c91901c0051cd8"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classViewer.html">Viewer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classViewer.html#a8235c9da7e144d7139c91901c0051cd8">getInstance</a> ()</td></tr>
+<tr class="memdesc:a8235c9da7e144d7139c91901c0051cd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the singleton instance of the <a class="el" href="classViewer.html" title="Represents a viewer for rendering and interacting with a scene.">Viewer</a> class.  <a href="classViewer.html#a8235c9da7e144d7139c91901c0051cd8">More...</a><br /></td></tr>
+<tr class="separator:a8235c9da7e144d7139c91901c0051cd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a3e16ebbf5c0ed98dc75fe2c4d46fe0d5"><td class="memItemLeft" align="right" valign="top"><a id="a3e16ebbf5c0ed98dc75fe2c4d46fe0d5"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classViewer.html#a3e16ebbf5c0ed98dc75fe2c4d46fe0d5">offset_x</a></td></tr>
+<tr class="memdesc:a3e16ebbf5c0ed98dc75fe2c4d46fe0d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">X-coordinate offset of the viewer. <br /></td></tr>
+<tr class="separator:a3e16ebbf5c0ed98dc75fe2c4d46fe0d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30b0f57907c82de620339e105f9a3c5b"><td class="memItemLeft" align="right" valign="top"><a id="a30b0f57907c82de620339e105f9a3c5b"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classViewer.html#a30b0f57907c82de620339e105f9a3c5b">offset_y</a></td></tr>
+<tr class="memdesc:a30b0f57907c82de620339e105f9a3c5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Y-coordinate offset of the viewer. <br /></td></tr>
+<tr class="separator:a30b0f57907c82de620339e105f9a3c5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46377febc22fd7f2cc38a73ddb66b8ad"><td class="memItemLeft" align="right" valign="top"><a id="a46377febc22fd7f2cc38a73ddb66b8ad"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classViewer.html#a46377febc22fd7f2cc38a73ddb66b8ad">zoom_factor</a></td></tr>
+<tr class="memdesc:a46377febc22fd7f2cc38a73ddb66b8ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Zoom factor for scaling the view. <br /></td></tr>
+<tr class="separator:a46377febc22fd7f2cc38a73ddb66b8ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82dfd34668f986b72e51ee86d4029fc6"><td class="memItemLeft" align="right" valign="top"><a id="a82dfd34668f986b72e51ee86d4029fc6"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classViewer.html#a82dfd34668f986b72e51ee86d4029fc6">rotate_angle</a></td></tr>
+<tr class="memdesc:a82dfd34668f986b72e51ee86d4029fc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotation angle of the view. <br /></td></tr>
+<tr class="separator:a82dfd34668f986b72e51ee86d4029fc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59a507a835919e78114601d5bd1784e6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classViewer.html#a59a507a835919e78114601d5bd1784e6">needs_repaint</a></td></tr>
+<tr class="separator:a59a507a835919e78114601d5bd1784e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa172f661daf24807148fb697f10e750a"><td class="memItemLeft" align="right" valign="top"><a id="aa172f661daf24807148fb697f10e750a"></a>
+<a class="el" href="classVector2D.html">Vector2Df</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classViewer.html#aa172f661daf24807148fb697f10e750a">window_size</a></td></tr>
+<tr class="memdesc:aa172f661daf24807148fb697f10e750a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Size of the window. <br /></td></tr>
+<tr class="separator:aa172f661daf24807148fb697f10e750a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:aaedebacb31cba87de6e7d448ed8d6586"><td class="memItemLeft" align="right" valign="top"><a id="aaedebacb31cba87de6e7d448ed8d6586"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classViewer.html#aaedebacb31cba87de6e7d448ed8d6586">Viewer</a> ()</td></tr>
+<tr class="memdesc:aaedebacb31cba87de6e7d448ed8d6586"><td class="mdescLeft">&#160;</td><td class="mdescRight">Private constructor for the <a class="el" href="classViewer.html" title="Represents a viewer for rendering and interacting with a scene.">Viewer</a> class. <br /></td></tr>
+<tr class="separator:aaedebacb31cba87de6e7d448ed8d6586"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb8e49e83e5c574411bb9995665fd7eb"><td class="memItemLeft" align="right" valign="top"><a id="abb8e49e83e5c574411bb9995665fd7eb"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classViewer.html#abb8e49e83e5c574411bb9995665fd7eb">Viewer</a> (const <a class="el" href="classViewer.html">Viewer</a> &amp;)=delete</td></tr>
+<tr class="memdesc:abb8e49e83e5c574411bb9995665fd7eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor for the <a class="el" href="classViewer.html" title="Represents a viewer for rendering and interacting with a scene.">Viewer</a> class (deleted to enforce singleton pattern). <br /></td></tr>
+<tr class="separator:abb8e49e83e5c574411bb9995665fd7eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d14cceacd94622e6b9d5d71bfb5b64f"><td class="memItemLeft" align="right" valign="top"><a id="a3d14cceacd94622e6b9d5d71bfb5b64f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classViewer.html#a3d14cceacd94622e6b9d5d71bfb5b64f">operator=</a> (const <a class="el" href="classViewer.html">Viewer</a> &amp;)=delete</td></tr>
+<tr class="memdesc:a3d14cceacd94622e6b9d5d71bfb5b64f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy assignment operator for the <a class="el" href="classViewer.html" title="Represents a viewer for rendering and interacting with a scene.">Viewer</a> class (deleted to enforce singleton pattern). <br /></td></tr>
+<tr class="separator:a3d14cceacd94622e6b9d5d71bfb5b64f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a940c6147b33b273afdff6eef7309d500"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classViewer.html#a940c6147b33b273afdff6eef7309d500">handleMouseWheel</a> (WPARAM wParam)</td></tr>
+<tr class="memdesc:a940c6147b33b273afdff6eef7309d500"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles the mouse wheel event for zooming.  <a href="classViewer.html#a940c6147b33b273afdff6eef7309d500">More...</a><br /></td></tr>
+<tr class="separator:a940c6147b33b273afdff6eef7309d500"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81a24ea13ee1e7e8c83be60672a7a11e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classViewer.html#a81a24ea13ee1e7e8c83be60672a7a11e">handleMouseMove</a> (LPARAM lParam)</td></tr>
+<tr class="memdesc:a81a24ea13ee1e7e8c83be60672a7a11e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles the mouse move event for panning.  <a href="classViewer.html#a81a24ea13ee1e7e8c83be60672a7a11e">More...</a><br /></td></tr>
+<tr class="separator:a81a24ea13ee1e7e8c83be60672a7a11e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b889c5d09c8577ad1580dd610ac5678"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classViewer.html#a2b889c5d09c8577ad1580dd610ac5678">handleLeftButtonDown</a> (LPARAM lParam)</td></tr>
+<tr class="memdesc:a2b889c5d09c8577ad1580dd610ac5678"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles the left button down event for initiating dragging.  <a href="classViewer.html#a2b889c5d09c8577ad1580dd610ac5678">More...</a><br /></td></tr>
+<tr class="separator:a2b889c5d09c8577ad1580dd610ac5678"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0c94514f0897aa84732024855520e28"><td class="memItemLeft" align="right" valign="top"><a id="ae0c94514f0897aa84732024855520e28"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classViewer.html#ae0c94514f0897aa84732024855520e28">handleLeftButtonUp</a> ()</td></tr>
+<tr class="memdesc:ae0c94514f0897aa84732024855520e28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles the left button up event for ending dragging. <br /></td></tr>
+<tr class="separator:ae0c94514f0897aa84732024855520e28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bcd4fdeb5c26092d65fc14474afeb38"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classViewer.html#a8bcd4fdeb5c26092d65fc14474afeb38">handleKeyDown</a> (WPARAM wParam)</td></tr>
+<tr class="memdesc:a8bcd4fdeb5c26092d65fc14474afeb38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles the key down event for rotating.  <a href="classViewer.html#a8bcd4fdeb5c26092d65fc14474afeb38">More...</a><br /></td></tr>
+<tr class="separator:a8bcd4fdeb5c26092d65fc14474afeb38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a452e9dd05638bf3da01d8f51dba009a5"><td class="memItemLeft" align="right" valign="top"><a id="a452e9dd05638bf3da01d8f51dba009a5"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classViewer.html#a452e9dd05638bf3da01d8f51dba009a5">is_dragging</a></td></tr>
+<tr class="memdesc:a452e9dd05638bf3da01d8f51dba009a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Flag indicating whether the mouse is being dragged. <br /></td></tr>
+<tr class="separator:a452e9dd05638bf3da01d8f51dba009a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77bc329e7ae0aecaf60a4de4f8dcc037"><td class="memItemLeft" align="right" valign="top"><a id="a77bc329e7ae0aecaf60a4de4f8dcc037"></a>
+POINT&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classViewer.html#a77bc329e7ae0aecaf60a4de4f8dcc037">last_mouse_pos</a></td></tr>
+<tr class="memdesc:a77bc329e7ae0aecaf60a4de4f8dcc037"><td class="mdescLeft">&#160;</td><td class="mdescRight">Last recorded mouse position. <br /></td></tr>
+<tr class="separator:a77bc329e7ae0aecaf60a4de4f8dcc037"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
+Static Private Attributes</h2></td></tr>
+<tr class="memitem:a53c3dca921442983d13f335d0e8a7e20"><td class="memItemLeft" align="right" valign="top"><a id="a53c3dca921442983d13f335d0e8a7e20"></a>
+static <a class="el" href="classViewer.html">Viewer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classViewer.html#a53c3dca921442983d13f335d0e8a7e20">instance</a> = nullptr</td></tr>
+<tr class="memdesc:a53c3dca921442983d13f335d0e8a7e20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Singleton instance of the <a class="el" href="classViewer.html" title="Represents a viewer for rendering and interacting with a scene.">Viewer</a> class. <br /></td></tr>
+<tr class="separator:a53c3dca921442983d13f335d0e8a7e20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Represents a viewer for rendering and interacting with a scene. </p>
+<p>The viewer supports the following interactions:</p><ul>
+<li>Rotation: Press 'Q' to rotate the view counterclockwise and 'E' to rotate clockwise.</li>
+<li>Zooming: Use the scroll wheel to zoom in and out of the scene.</li>
+<li>Translation: Click and drag the left mouse button to translate the view. </li>
+</ul>
+
+<p class="definition">Definition at line <a class="el" href="Viewer_8hpp_source.html#l00016">16</a> of file <a class="el" href="Viewer_8hpp_source.html">Viewer.hpp</a>.</p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a8235c9da7e144d7139c91901c0051cd8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8235c9da7e144d7139c91901c0051cd8">&#9670;&nbsp;</a></span>getInstance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classViewer.html">Viewer</a> * Viewer::getInstance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gets the singleton instance of the <a class="el" href="classViewer.html" title="Represents a viewer for rendering and interacting with a scene.">Viewer</a> class. </p>
+<dl class="section return"><dt>Returns</dt><dd>The singleton instance of the <a class="el" href="classViewer.html" title="Represents a viewer for rendering and interacting with a scene.">Viewer</a> class. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="Viewer_8cpp_source.html#l00004">4</a> of file <a class="el" href="Viewer_8cpp_source.html">Viewer.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;                            {</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;    <span class="keywordflow">if</span> (!<a class="code" href="classViewer.html#a53c3dca921442983d13f335d0e8a7e20">instance</a>) {</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;        <a class="code" href="classViewer.html#a53c3dca921442983d13f335d0e8a7e20">instance</a> = <span class="keyword">new</span> <a class="code" href="classViewer.html#aaedebacb31cba87de6e7d448ed8d6586">Viewer</a>();</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    }</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classViewer.html#a53c3dca921442983d13f335d0e8a7e20">instance</a>;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;}</div>
+<div class="ttc" id="aclassViewer_html_a53c3dca921442983d13f335d0e8a7e20"><div class="ttname"><a href="classViewer.html#a53c3dca921442983d13f335d0e8a7e20">Viewer::instance</a></div><div class="ttdeci">static Viewer * instance</div><div class="ttdoc">Singleton instance of the Viewer class.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8hpp_source.html#l00063">Viewer.hpp:63</a></div></div>
+<div class="ttc" id="aclassViewer_html_aaedebacb31cba87de6e7d448ed8d6586"><div class="ttname"><a href="classViewer.html#aaedebacb31cba87de6e7d448ed8d6586">Viewer::Viewer</a></div><div class="ttdeci">Viewer()</div><div class="ttdoc">Private constructor for the Viewer class.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8cpp_source.html#l00011">Viewer.cpp:11</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aa8d0481396e20f1a8d4f6691ff0a67c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8d0481396e20f1a8d4f6691ff0a67c1">&#9670;&nbsp;</a></span>getWindowSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Viewer::getWindowSize </td>
+          <td>(</td>
+          <td class="paramtype">HWND&#160;</td>
+          <td class="paramname"><em>hWnd</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the current window size. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hWnd</td><td>The handle to the window. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="Viewer_8cpp_source.html#l00103">103</a> of file <a class="el" href="Viewer_8cpp_source.html">Viewer.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                                          {</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    RECT rect;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    GetClientRect(hWnd, &amp;rect);</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    <a class="code" href="classViewer.html#a53c3dca921442983d13f335d0e8a7e20">instance</a>-&gt;<a class="code" href="classViewer.html#aa172f661daf24807148fb697f10e750a">window_size</a>.<a class="code" href="classVector2D.html#a65e391ec61c185092a02cf6301d0fff7">x</a> = <span class="keyword">static_cast&lt;</span> <span class="keywordtype">float</span> <span class="keyword">&gt;</span>(rect.right - rect.left);</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <a class="code" href="classViewer.html#a53c3dca921442983d13f335d0e8a7e20">instance</a>-&gt;<a class="code" href="classViewer.html#aa172f661daf24807148fb697f10e750a">window_size</a>.<a class="code" href="classVector2D.html#a6a91fccbbd37162d28fa54aeeb88f9d2">y</a> = <span class="keyword">static_cast&lt;</span> <span class="keywordtype">float</span> <span class="keyword">&gt;</span>(rect.bottom - rect.top);</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;}</div>
+<div class="ttc" id="aclassVector2D_html_a65e391ec61c185092a02cf6301d0fff7"><div class="ttname"><a href="classVector2D.html#a65e391ec61c185092a02cf6301d0fff7">Vector2D::x</a></div><div class="ttdeci">T x</div><div class="ttdoc">X coordinate of the vector.</div><div class="ttdef"><b>Definition:</b> <a href="Vector2D_8hpp_source.html#l00045">Vector2D.hpp:45</a></div></div>
+<div class="ttc" id="aclassVector2D_html_a6a91fccbbd37162d28fa54aeeb88f9d2"><div class="ttname"><a href="classVector2D.html#a6a91fccbbd37162d28fa54aeeb88f9d2">Vector2D::y</a></div><div class="ttdeci">T y</div><div class="ttdoc">Y coordinate of the vector.</div><div class="ttdef"><b>Definition:</b> <a href="Vector2D_8hpp_source.html#l00046">Vector2D.hpp:46</a></div></div>
+<div class="ttc" id="aclassViewer_html_aa172f661daf24807148fb697f10e750a"><div class="ttname"><a href="classViewer.html#aa172f661daf24807148fb697f10e750a">Viewer::window_size</a></div><div class="ttdeci">Vector2Df window_size</div><div class="ttdoc">Size of the window.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8hpp_source.html#l00024">Viewer.hpp:24</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a8bcd4fdeb5c26092d65fc14474afeb38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8bcd4fdeb5c26092d65fc14474afeb38">&#9670;&nbsp;</a></span>handleKeyDown()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Viewer::handleKeyDown </td>
+          <td>(</td>
+          <td class="paramtype">WPARAM&#160;</td>
+          <td class="paramname"><em>wParam</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Handles the key down event for rotating. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">wParam</td><td>The WPARAM parameter of the message. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="Viewer_8cpp_source.html#l00090">90</a> of file <a class="el" href="Viewer_8cpp_source.html">Viewer.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                                        {</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordtype">char</span> key = <span class="keyword">static_cast&lt;</span> <span class="keywordtype">char</span> <span class="keyword">&gt;</span>(wParam);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <span class="keywordflow">switch</span> (tolower(key)) {</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <span class="keywordflow">case</span> <span class="charliteral">&#39;q&#39;</span>:</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            <a class="code" href="classViewer.html#a82dfd34668f986b72e51ee86d4029fc6">rotate_angle</a> -= 1.0f;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <span class="keywordflow">case</span> <span class="charliteral">&#39;e&#39;</span>:</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;            <a class="code" href="classViewer.html#a82dfd34668f986b72e51ee86d4029fc6">rotate_angle</a> += 1.0f;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    }</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;}</div>
+<div class="ttc" id="aclassViewer_html_a82dfd34668f986b72e51ee86d4029fc6"><div class="ttname"><a href="classViewer.html#a82dfd34668f986b72e51ee86d4029fc6">Viewer::rotate_angle</a></div><div class="ttdeci">float rotate_angle</div><div class="ttdoc">Rotation angle of the view.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8hpp_source.html#l00021">Viewer.hpp:21</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a643c2fc659f06f4d4bfcefbad22ebd75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a643c2fc659f06f4d4bfcefbad22ebd75">&#9670;&nbsp;</a></span>handleKeyEvent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Viewer::handleKeyEvent </td>
+          <td>(</td>
+          <td class="paramtype">WPARAM&#160;</td>
+          <td class="paramname"><em>wParam</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Handles keyboard events. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">wParam</td><td>The WPARAM parameter of the message. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="Viewer_8cpp_source.html#l00047">47</a> of file <a class="el" href="Viewer_8cpp_source.html">Viewer.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;{ <a class="code" href="classViewer.html#a8bcd4fdeb5c26092d65fc14474afeb38">handleKeyDown</a>(wParam); }</div>
+<div class="ttc" id="aclassViewer_html_a8bcd4fdeb5c26092d65fc14474afeb38"><div class="ttname"><a href="classViewer.html#a8bcd4fdeb5c26092d65fc14474afeb38">Viewer::handleKeyDown</a></div><div class="ttdeci">void handleKeyDown(WPARAM wParam)</div><div class="ttdoc">Handles the key down event for rotating.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8cpp_source.html#l00090">Viewer.cpp:90</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a2b889c5d09c8577ad1580dd610ac5678"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b889c5d09c8577ad1580dd610ac5678">&#9670;&nbsp;</a></span>handleLeftButtonDown()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Viewer::handleLeftButtonDown </td>
+          <td>(</td>
+          <td class="paramtype">LPARAM&#160;</td>
+          <td class="paramname"><em>lParam</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Handles the left button down event for initiating dragging. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lParam</td><td>The LPARAM parameter of the message. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="Viewer_8cpp_source.html#l00074">74</a> of file <a class="el" href="Viewer_8cpp_source.html">Viewer.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                                               {</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <a class="code" href="classViewer.html#a452e9dd05638bf3da01d8f51dba009a5">is_dragging</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <a class="code" href="classViewer.html#a77bc329e7ae0aecaf60a4de4f8dcc037">last_mouse_pos</a>.x = <span class="keyword">static_cast&lt;</span> <span class="keywordtype">int</span> <span class="keyword">&gt;</span>(LOWORD(lParam));</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <a class="code" href="classViewer.html#a77bc329e7ae0aecaf60a4de4f8dcc037">last_mouse_pos</a>.y = <span class="keyword">static_cast&lt;</span> <span class="keywordtype">int</span> <span class="keyword">&gt;</span>(HIWORD(lParam));</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    SetCapture(GetActiveWindow());</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;}</div>
+<div class="ttc" id="aclassViewer_html_a452e9dd05638bf3da01d8f51dba009a5"><div class="ttname"><a href="classViewer.html#a452e9dd05638bf3da01d8f51dba009a5">Viewer::is_dragging</a></div><div class="ttdeci">bool is_dragging</div><div class="ttdoc">Flag indicating whether the mouse is being dragged.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8hpp_source.html#l00082">Viewer.hpp:82</a></div></div>
+<div class="ttc" id="aclassViewer_html_a77bc329e7ae0aecaf60a4de4f8dcc037"><div class="ttname"><a href="classViewer.html#a77bc329e7ae0aecaf60a4de4f8dcc037">Viewer::last_mouse_pos</a></div><div class="ttdeci">POINT last_mouse_pos</div><div class="ttdoc">Last recorded mouse position.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8hpp_source.html#l00083">Viewer.hpp:83</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="acb15ba2e5d3bab2ba58da0db724b3bd1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb15ba2e5d3bab2ba58da0db724b3bd1">&#9670;&nbsp;</a></span>handleMouseEvent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Viewer::handleMouseEvent </td>
+          <td>(</td>
+          <td class="paramtype">UINT&#160;</td>
+          <td class="paramname"><em>message</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">WPARAM&#160;</td>
+          <td class="paramname"><em>wParam</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">LPARAM&#160;</td>
+          <td class="paramname"><em>lParam</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Handles mouse events, such as wheel, move, left button down, and left button up. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">message</td><td>The Windows message identifier. </td></tr>
+    <tr><td class="paramname">wParam</td><td>The WPARAM parameter of the message. </td></tr>
+    <tr><td class="paramname">lParam</td><td>The LPARAM parameter of the message. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="Viewer_8cpp_source.html#l00026">26</a> of file <a class="el" href="Viewer_8cpp_source.html">Viewer.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;                                                                        {</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordflow">switch</span> (message) {</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keywordflow">case</span> WM_MOUSEWHEEL:</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            <a class="code" href="classViewer.html#a940c6147b33b273afdff6eef7309d500">handleMouseWheel</a>(wParam);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="keywordflow">case</span> WM_MOUSEMOVE:</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            <span class="keywordflow">if</span> (wParam &amp; MK_LBUTTON) {</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                <a class="code" href="classViewer.html#a81a24ea13ee1e7e8c83be60672a7a11e">handleMouseMove</a>(lParam);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            }</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keywordflow">case</span> WM_LBUTTONDOWN:</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            <a class="code" href="classViewer.html#a2b889c5d09c8577ad1580dd610ac5678">handleLeftButtonDown</a>(lParam);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <span class="keywordflow">case</span> WM_LBUTTONUP:</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            <a class="code" href="classViewer.html#ae0c94514f0897aa84732024855520e28">handleLeftButtonUp</a>();</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    }</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;}</div>
+<div class="ttc" id="aclassViewer_html_a2b889c5d09c8577ad1580dd610ac5678"><div class="ttname"><a href="classViewer.html#a2b889c5d09c8577ad1580dd610ac5678">Viewer::handleLeftButtonDown</a></div><div class="ttdeci">void handleLeftButtonDown(LPARAM lParam)</div><div class="ttdoc">Handles the left button down event for initiating dragging.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8cpp_source.html#l00074">Viewer.cpp:74</a></div></div>
+<div class="ttc" id="aclassViewer_html_a81a24ea13ee1e7e8c83be60672a7a11e"><div class="ttname"><a href="classViewer.html#a81a24ea13ee1e7e8c83be60672a7a11e">Viewer::handleMouseMove</a></div><div class="ttdeci">void handleMouseMove(LPARAM lParam)</div><div class="ttdoc">Handles the mouse move event for panning.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8cpp_source.html#l00059">Viewer.cpp:59</a></div></div>
+<div class="ttc" id="aclassViewer_html_a940c6147b33b273afdff6eef7309d500"><div class="ttname"><a href="classViewer.html#a940c6147b33b273afdff6eef7309d500">Viewer::handleMouseWheel</a></div><div class="ttdeci">void handleMouseWheel(WPARAM wParam)</div><div class="ttdoc">Handles the mouse wheel event for zooming.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8cpp_source.html#l00049">Viewer.cpp:49</a></div></div>
+<div class="ttc" id="aclassViewer_html_ae0c94514f0897aa84732024855520e28"><div class="ttname"><a href="classViewer.html#ae0c94514f0897aa84732024855520e28">Viewer::handleLeftButtonUp</a></div><div class="ttdeci">void handleLeftButtonUp()</div><div class="ttdoc">Handles the left button up event for ending dragging.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8cpp_source.html#l00081">Viewer.cpp:81</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a81a24ea13ee1e7e8c83be60672a7a11e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81a24ea13ee1e7e8c83be60672a7a11e">&#9670;&nbsp;</a></span>handleMouseMove()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Viewer::handleMouseMove </td>
+          <td>(</td>
+          <td class="paramtype">LPARAM&#160;</td>
+          <td class="paramname"><em>lParam</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Handles the mouse move event for panning. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">lParam</td><td>The LPARAM parameter of the message. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="Viewer_8cpp_source.html#l00059">59</a> of file <a class="el" href="Viewer_8cpp_source.html">Viewer.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                                          {</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="classViewer.html#a452e9dd05638bf3da01d8f51dba009a5">is_dragging</a>) {</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keywordtype">int</span> x = <span class="keyword">static_cast&lt;</span> <span class="keywordtype">int</span> <span class="keyword">&gt;</span>(LOWORD(lParam));</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <span class="keywordtype">int</span> y = <span class="keyword">static_cast&lt;</span> <span class="keywordtype">int</span> <span class="keyword">&gt;</span>(HIWORD(lParam));</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keywordflow">if</span> (x != <a class="code" href="classViewer.html#a77bc329e7ae0aecaf60a4de4f8dcc037">last_mouse_pos</a>.x || y != <a class="code" href="classViewer.html#a77bc329e7ae0aecaf60a4de4f8dcc037">last_mouse_pos</a>.y) {</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            <a class="code" href="classViewer.html#a3e16ebbf5c0ed98dc75fe2c4d46fe0d5">offset_x</a> += (x - <a class="code" href="classViewer.html#a77bc329e7ae0aecaf60a4de4f8dcc037">last_mouse_pos</a>.x) * <a class="code" href="classViewer.html#a46377febc22fd7f2cc38a73ddb66b8ad">zoom_factor</a>;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            <a class="code" href="classViewer.html#a30b0f57907c82de620339e105f9a3c5b">offset_y</a> += (y - <a class="code" href="classViewer.html#a77bc329e7ae0aecaf60a4de4f8dcc037">last_mouse_pos</a>.y) * <a class="code" href="classViewer.html#a46377febc22fd7f2cc38a73ddb66b8ad">zoom_factor</a>;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            <a class="code" href="classViewer.html#a77bc329e7ae0aecaf60a4de4f8dcc037">last_mouse_pos</a>.x = x;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            <a class="code" href="classViewer.html#a77bc329e7ae0aecaf60a4de4f8dcc037">last_mouse_pos</a>.y = y;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            <a class="code" href="classViewer.html#a59a507a835919e78114601d5bd1784e6">needs_repaint</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        }</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    }</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;}</div>
+<div class="ttc" id="aclassViewer_html_a30b0f57907c82de620339e105f9a3c5b"><div class="ttname"><a href="classViewer.html#a30b0f57907c82de620339e105f9a3c5b">Viewer::offset_y</a></div><div class="ttdeci">float offset_y</div><div class="ttdoc">Y-coordinate offset of the viewer.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8hpp_source.html#l00019">Viewer.hpp:19</a></div></div>
+<div class="ttc" id="aclassViewer_html_a3e16ebbf5c0ed98dc75fe2c4d46fe0d5"><div class="ttname"><a href="classViewer.html#a3e16ebbf5c0ed98dc75fe2c4d46fe0d5">Viewer::offset_x</a></div><div class="ttdeci">float offset_x</div><div class="ttdoc">X-coordinate offset of the viewer.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8hpp_source.html#l00018">Viewer.hpp:18</a></div></div>
+<div class="ttc" id="aclassViewer_html_a46377febc22fd7f2cc38a73ddb66b8ad"><div class="ttname"><a href="classViewer.html#a46377febc22fd7f2cc38a73ddb66b8ad">Viewer::zoom_factor</a></div><div class="ttdeci">float zoom_factor</div><div class="ttdoc">Zoom factor for scaling the view.</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8hpp_source.html#l00020">Viewer.hpp:20</a></div></div>
+<div class="ttc" id="aclassViewer_html_a59a507a835919e78114601d5bd1784e6"><div class="ttname"><a href="classViewer.html#a59a507a835919e78114601d5bd1784e6">Viewer::needs_repaint</a></div><div class="ttdeci">bool needs_repaint</div><div class="ttdef"><b>Definition:</b> <a href="Viewer_8hpp_source.html#l00022">Viewer.hpp:22</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a940c6147b33b273afdff6eef7309d500"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a940c6147b33b273afdff6eef7309d500">&#9670;&nbsp;</a></span>handleMouseWheel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Viewer::handleMouseWheel </td>
+          <td>(</td>
+          <td class="paramtype">WPARAM&#160;</td>
+          <td class="paramname"><em>wParam</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Handles the mouse wheel event for zooming. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">wParam</td><td>The WPARAM parameter of the message. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="Viewer_8cpp_source.html#l00049">49</a> of file <a class="el" href="Viewer_8cpp_source.html">Viewer.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                                           {</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">if</span> (GET_WHEEL_DELTA_WPARAM(wParam) &gt; 0) {</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <a class="code" href="classViewer.html#a46377febc22fd7f2cc38a73ddb66b8ad">zoom_factor</a> *= 1.1f;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        <a class="code" href="classViewer.html#a59a507a835919e78114601d5bd1784e6">needs_repaint</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <a class="code" href="classViewer.html#a46377febc22fd7f2cc38a73ddb66b8ad">zoom_factor</a> /= 1.1f;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <a class="code" href="classViewer.html#a59a507a835919e78114601d5bd1784e6">needs_repaint</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    }</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a59a507a835919e78114601d5bd1784e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59a507a835919e78114601d5bd1784e6">&#9670;&nbsp;</a></span>needs_repaint</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Viewer::needs_repaint</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Flag indicating whether the view needs to be repainted </p>
+
+<p class="definition">Definition at line <a class="el" href="Viewer_8hpp_source.html#l00022">22</a> of file <a class="el" href="Viewer_8hpp_source.html">Viewer.hpp</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
+<li>src/<a class="el" href="Viewer_8hpp_source.html">Viewer.hpp</a></li>
+<li>src/<a class="el" href="Viewer_8cpp_source.html">Viewer.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div id="nav-path" class="navpath">
+    <address>
+        Copyright © 2023-2023 the csc10003-svg-reader developers @ FIT-HCMUS.
+    </address>
+</div>
+</body>
+</html>

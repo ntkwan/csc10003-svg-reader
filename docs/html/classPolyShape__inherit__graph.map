@@ -1,7 +1,0 @@
-<map id="PolyShape" name="PolyShape">
-<area shape="rect" id="node1" title="Abstract base class for polygon and polyline shapes in 2D space." alt="" coords="84,80,175,107"/>
-<area shape="rect" id="node3" href="$classPlygon.html" title="Represents a polygon in 2D space." alt="" coords="5,155,72,181"/>
-<area shape="rect" id="node4" href="$classPlyline.html" title="Represents a polyline in 2D space." alt="" coords="96,155,163,181"/>
-<area shape="rect" id="node5" href="$classRect.html" title="Represents a rectangle in 2D space." alt="" coords="187,155,237,181"/>
-<area shape="rect" id="node2" href="$classSVGElement.html" title="Represents an element in an SVG file." alt="" coords="78,5,181,32"/>
-</map>
