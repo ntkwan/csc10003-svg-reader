@@ -1,0 +1,5 @@
+<map id="Gradient" name="Gradient">
+<area shape="rect" id="node1" title="A class that represents a gradient." alt="" coords="96,5,175,32"/>
+<area shape="rect" id="node2" href="$classLinearGradient.html" title="A class that represents a linear gradient." alt="" coords="5,80,124,107"/>
+<area shape="rect" id="node3" href="$classRadialGradient.html" title="A class that represents a radial gradient." alt="" coords="148,80,267,107"/>
+</map>

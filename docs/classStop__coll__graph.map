@@ -1,0 +1,4 @@
+<map id="Stop" name="Stop">
+<area shape="rect" id="node1" title="A class that represents a stop." alt="" coords="15,200,65,227"/>
+<area shape="rect" id="node2" href="$classmColor.html" title="Utility class for manipulating RGBA mColors." alt="" coords="5,58,75,85"/>
+</map>
