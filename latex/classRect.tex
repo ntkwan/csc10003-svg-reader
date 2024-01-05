@@ -1,0 +1,319 @@
+\hypertarget{classRect}{}\doxysection{Rect Class Reference}
+\label{classRect}\index{Rect@{Rect}}
+
+
+Represents a rectangle in 2D space.  
+
+
+
+
+{\ttfamily \#include $<$Rect.\+hpp$>$}
+
+
+
+Inheritance diagram for Rect\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=157pt]{classRect__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Rect\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classRect__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classRect_ad52d66e844d848d0e95f744b697e7beb}{Rect}} (float \mbox{\hyperlink{classRect_a800053c390ccb818add47e627e535a5e}{width}}, float \mbox{\hyperlink{classRect_a31428cce67b56b6daf168131c7dbe1e8}{height}}, \mbox{\hyperlink{classVector2D}{Vector2\+Df}} \mbox{\hyperlink{classSVGElement_acf9b9906b6d0cba8bb5c0b38b032e40f}{position}}, \mbox{\hyperlink{classVector2D}{Vector2\+Df}} \mbox{\hyperlink{classRect_a7857e3568d2a2a35bf0c6b28028005b5}{radius}}, const \mbox{\hyperlink{classmColor}{m\+Color}} \&\mbox{\hyperlink{classSVGElement_a6d3a39e763d3273715ea11f8959f81b1}{fill}}, const \mbox{\hyperlink{classmColor}{m\+Color}} \&\mbox{\hyperlink{classSVGElement_aab937dcb566cd83d94d00d69b4083f13}{stroke}}, float \mbox{\hyperlink{classSVGElement_a88449b487a890e3765ae20e96ee95c06}{stroke\+\_\+width}})
+\begin{DoxyCompactList}\small\item\em Constructs a \mbox{\hyperlink{classRect}{Rect}} object. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classRect_a4f6ba1c3eef4054847a89da472f392cd}{get\+Class}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the type of the shape. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRect_ae11a39d12f7a766f773e662b0830848d}{set\+Width}} (float \mbox{\hyperlink{classRect_a800053c390ccb818add47e627e535a5e}{width}})
+\begin{DoxyCompactList}\small\item\em Sets the width of the rectangle. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{classRect_a9c1dd853ea5df8e7c96a11bba72cc67a}{get\+Width}} () const
+\begin{DoxyCompactList}\small\item\em Gets the width of the rectangle. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRect_a964a6107f787f612798bda5c0423fb5b}{set\+Height}} (float \mbox{\hyperlink{classRect_a31428cce67b56b6daf168131c7dbe1e8}{height}})
+\begin{DoxyCompactList}\small\item\em Sets the height of the rectangle. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{classRect_a418fffe5bb9368f4e158b63e13faba16}{get\+Height}} () const
+\begin{DoxyCompactList}\small\item\em Gets the height of the rectangle. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRect_a28b51c4f99cfa0208a2a5cef350c2a5e}{set\+Radius}} (const \mbox{\hyperlink{classVector2D}{Vector2\+Df}} \&\mbox{\hyperlink{classRect_a7857e3568d2a2a35bf0c6b28028005b5}{radius}})
+\begin{DoxyCompactList}\small\item\em Sets the radii of the rectangle. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classVector2D}{Vector2\+Df}} \mbox{\hyperlink{classRect_a31ca84cc8755233b5e61d22189f637b0}{get\+Radius}} () const
+\begin{DoxyCompactList}\small\item\em Gets the radii of the rectangle. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRect_a66351fe7a171c2b3ed5f4bdf8d6661ba}{print\+Data}} () const override
+\begin{DoxyCompactList}\small\item\em Prints the data of the rectangle. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classRect_a800053c390ccb818add47e627e535a5e}\label{classRect_a800053c390ccb818add47e627e535a5e}} 
+float \mbox{\hyperlink{classRect_a800053c390ccb818add47e627e535a5e}{width}}
+\begin{DoxyCompactList}\small\item\em Width of the rectangle. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classRect_a31428cce67b56b6daf168131c7dbe1e8}\label{classRect_a31428cce67b56b6daf168131c7dbe1e8}} 
+float \mbox{\hyperlink{classRect_a31428cce67b56b6daf168131c7dbe1e8}{height}}
+\begin{DoxyCompactList}\small\item\em Height of the rectangle. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classRect_a7857e3568d2a2a35bf0c6b28028005b5}\label{classRect_a7857e3568d2a2a35bf0c6b28028005b5}} 
+\mbox{\hyperlink{classVector2D}{Vector2\+Df}} \mbox{\hyperlink{classRect_a7857e3568d2a2a35bf0c6b28028005b5}{radius}}
+\begin{DoxyCompactList}\small\item\em Radii of the rectangle in the x and y directions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Represents a rectangle in 2D space. 
+
+The \mbox{\hyperlink{classRect}{Rect}} class is derived from the \mbox{\hyperlink{classSVGElement}{SVGElement}} class and defines a rectangle with a specified width, height, position, fill color, stroke color, and stroke thickness. 
+
+Definition at line 13 of file Rect.\+hpp.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classRect_ad52d66e844d848d0e95f744b697e7beb}\label{classRect_ad52d66e844d848d0e95f744b697e7beb}} 
+\index{Rect@{Rect}!Rect@{Rect}}
+\index{Rect@{Rect}!Rect@{Rect}}
+\doxysubsubsection{\texorpdfstring{Rect()}{Rect()}}
+{\footnotesize\ttfamily Rect\+::\+Rect (\begin{DoxyParamCaption}\item[{float}]{width,  }\item[{float}]{height,  }\item[{\mbox{\hyperlink{classVector2D}{Vector2\+Df}}}]{position,  }\item[{\mbox{\hyperlink{classVector2D}{Vector2\+Df}}}]{radius,  }\item[{const \mbox{\hyperlink{classmColor}{m\+Color}} \&}]{fill,  }\item[{const \mbox{\hyperlink{classmColor}{m\+Color}} \&}]{stroke,  }\item[{float}]{stroke\+\_\+width }\end{DoxyParamCaption})}
+
+
+
+Constructs a \mbox{\hyperlink{classRect}{Rect}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em width} & The width of the rectangle. \\
+\hline
+{\em height} & The height of the rectangle. \\
+\hline
+{\em position} & The position of the rectangle. \\
+\hline
+{\em radius} & The radii of the rectangle in the x and y directions. \\
+\hline
+{\em fill} & Fill color of the rectangle. \\
+\hline
+{\em stroke} & Outline color of the rectangle. \\
+\hline
+{\em stroke\+\_\+width} & Thickness of the rectangle outline. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 3 of file Rect.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{5     : \mbox{\hyperlink{classSVGElement_ad30205005009d2ba4820d3ce372e81ea}{SVGElement}}(\mbox{\hyperlink{classSVGElement_a6d3a39e763d3273715ea11f8959f81b1}{fill}}, \mbox{\hyperlink{classSVGElement_aab937dcb566cd83d94d00d69b4083f13}{stroke}}, \mbox{\hyperlink{classSVGElement_a88449b487a890e3765ae20e96ee95c06}{stroke\_width}}, \mbox{\hyperlink{classSVGElement_acf9b9906b6d0cba8bb5c0b38b032e40f}{position}}), \mbox{\hyperlink{classRect_a800053c390ccb818add47e627e535a5e}{width}}(\mbox{\hyperlink{classRect_a800053c390ccb818add47e627e535a5e}{width}}),}
+\DoxyCodeLine{6       \mbox{\hyperlink{classRect_a31428cce67b56b6daf168131c7dbe1e8}{height}}(\mbox{\hyperlink{classRect_a31428cce67b56b6daf168131c7dbe1e8}{height}}), \mbox{\hyperlink{classRect_a7857e3568d2a2a35bf0c6b28028005b5}{radius}}(\mbox{\hyperlink{classRect_a7857e3568d2a2a35bf0c6b28028005b5}{radius}}) \{\}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classRect_a4f6ba1c3eef4054847a89da472f392cd}\label{classRect_a4f6ba1c3eef4054847a89da472f392cd}} 
+\index{Rect@{Rect}!getClass@{getClass}}
+\index{getClass@{getClass}!Rect@{Rect}}
+\doxysubsubsection{\texorpdfstring{getClass()}{getClass()}}
+{\footnotesize\ttfamily std\+::string Rect\+::get\+Class (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Gets the type of the shape. 
+
+\begin{DoxyReturn}{Returns}
+The string \char`\"{}\+Rect\char`\"{}. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classSVGElement_adc98ebac66965dd303283cbf7ff28f38}{SVGElement}}.
+
+
+
+Definition at line 8 of file Rect.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{8 \{ \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}Rect"{}}; \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classRect_a418fffe5bb9368f4e158b63e13faba16}\label{classRect_a418fffe5bb9368f4e158b63e13faba16}} 
+\index{Rect@{Rect}!getHeight@{getHeight}}
+\index{getHeight@{getHeight}!Rect@{Rect}}
+\doxysubsubsection{\texorpdfstring{getHeight()}{getHeight()}}
+{\footnotesize\ttfamily float Rect\+::get\+Height (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the height of the rectangle. 
+
+\begin{DoxyReturn}{Returns}
+The height of the rectangle. 
+\end{DoxyReturn}
+
+
+Definition at line 16 of file Rect.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{16 \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classRect_a31428cce67b56b6daf168131c7dbe1e8}{height}}; \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classRect_a31ca84cc8755233b5e61d22189f637b0}\label{classRect_a31ca84cc8755233b5e61d22189f637b0}} 
+\index{Rect@{Rect}!getRadius@{getRadius}}
+\index{getRadius@{getRadius}!Rect@{Rect}}
+\doxysubsubsection{\texorpdfstring{getRadius()}{getRadius()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classVector2D}{Vector2\+Df}} Rect\+::get\+Radius (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the radii of the rectangle. 
+
+\begin{DoxyReturn}{Returns}
+The radii of the rectangle. 
+\end{DoxyReturn}
+
+
+Definition at line 20 of file Rect.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{20 \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classRect_a7857e3568d2a2a35bf0c6b28028005b5}{radius}}; \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classRect_a9c1dd853ea5df8e7c96a11bba72cc67a}\label{classRect_a9c1dd853ea5df8e7c96a11bba72cc67a}} 
+\index{Rect@{Rect}!getWidth@{getWidth}}
+\index{getWidth@{getWidth}!Rect@{Rect}}
+\doxysubsubsection{\texorpdfstring{getWidth()}{getWidth()}}
+{\footnotesize\ttfamily float Rect\+::get\+Width (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the width of the rectangle. 
+
+\begin{DoxyReturn}{Returns}
+The width of the rectangle. 
+\end{DoxyReturn}
+
+
+Definition at line 12 of file Rect.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{12 \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classRect_a800053c390ccb818add47e627e535a5e}{width}}; \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classRect_a66351fe7a171c2b3ed5f4bdf8d6661ba}\label{classRect_a66351fe7a171c2b3ed5f4bdf8d6661ba}} 
+\index{Rect@{Rect}!printData@{printData}}
+\index{printData@{printData}!Rect@{Rect}}
+\doxysubsubsection{\texorpdfstring{printData()}{printData()}}
+{\footnotesize\ttfamily void Rect\+::print\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Prints the data of the rectangle. 
+
+\begin{DoxyNote}{Note}
+This function is used for debugging purposes. 
+\end{DoxyNote}
+
+
+Reimplemented from \mbox{\hyperlink{classSVGElement_ad4bcd981ae7431161013811024b452e1}{SVGElement}}.
+
+
+
+Definition at line 22 of file Rect.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{22                            \{}
+\DoxyCodeLine{23     \mbox{\hyperlink{classSVGElement_ad4bcd981ae7431161013811024b452e1}{SVGElement::printData}}();}
+\DoxyCodeLine{24     std::cout << \textcolor{stringliteral}{"{}Width: "{}} << \mbox{\hyperlink{classRect_a9c1dd853ea5df8e7c96a11bba72cc67a}{getWidth}}() << std::endl;}
+\DoxyCodeLine{25     std::cout << \textcolor{stringliteral}{"{}Height: "{}} << \mbox{\hyperlink{classRect_a418fffe5bb9368f4e158b63e13faba16}{getHeight}}() << std::endl;}
+\DoxyCodeLine{26     std::cout << \textcolor{stringliteral}{"{}Radius: "{}} << \mbox{\hyperlink{classRect_a31ca84cc8755233b5e61d22189f637b0}{getRadius}}().\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} << \textcolor{stringliteral}{"{} "{}} << \mbox{\hyperlink{classRect_a31ca84cc8755233b5e61d22189f637b0}{getRadius}}().\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}}}
+\DoxyCodeLine{27               << std::endl;}
+\DoxyCodeLine{28 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classRect_a964a6107f787f612798bda5c0423fb5b}\label{classRect_a964a6107f787f612798bda5c0423fb5b}} 
+\index{Rect@{Rect}!setHeight@{setHeight}}
+\index{setHeight@{setHeight}!Rect@{Rect}}
+\doxysubsubsection{\texorpdfstring{setHeight()}{setHeight()}}
+{\footnotesize\ttfamily void Rect\+::set\+Height (\begin{DoxyParamCaption}\item[{float}]{height }\end{DoxyParamCaption})}
+
+
+
+Sets the height of the rectangle. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em height} & The new height of the rectangle. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 14 of file Rect.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{14 \{ this-\/>\mbox{\hyperlink{classRect_a31428cce67b56b6daf168131c7dbe1e8}{height}} = \mbox{\hyperlink{classRect_a31428cce67b56b6daf168131c7dbe1e8}{height}}; \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classRect_a28b51c4f99cfa0208a2a5cef350c2a5e}\label{classRect_a28b51c4f99cfa0208a2a5cef350c2a5e}} 
+\index{Rect@{Rect}!setRadius@{setRadius}}
+\index{setRadius@{setRadius}!Rect@{Rect}}
+\doxysubsubsection{\texorpdfstring{setRadius()}{setRadius()}}
+{\footnotesize\ttfamily void Rect\+::set\+Radius (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classVector2D}{Vector2\+Df}} \&}]{radius }\end{DoxyParamCaption})}
+
+
+
+Sets the radii of the rectangle. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em radius} & The new radii of the rectangle. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 18 of file Rect.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{18 \{ this-\/>radius = \mbox{\hyperlink{classRect_a7857e3568d2a2a35bf0c6b28028005b5}{radius}}; \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classRect_ae11a39d12f7a766f773e662b0830848d}\label{classRect_ae11a39d12f7a766f773e662b0830848d}} 
+\index{Rect@{Rect}!setWidth@{setWidth}}
+\index{setWidth@{setWidth}!Rect@{Rect}}
+\doxysubsubsection{\texorpdfstring{setWidth()}{setWidth()}}
+{\footnotesize\ttfamily void Rect\+::set\+Width (\begin{DoxyParamCaption}\item[{float}]{width }\end{DoxyParamCaption})}
+
+
+
+Sets the width of the rectangle. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em width} & The new width of the rectangle. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 10 of file Rect.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{10 \{ this-\/>\mbox{\hyperlink{classRect_a800053c390ccb818add47e627e535a5e}{width}} = \mbox{\hyperlink{classRect_a800053c390ccb818add47e627e535a5e}{width}}; \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/graphics/Rect.\+hpp\item 
+src/graphics/Rect.\+cpp\end{DoxyCompactItemize}

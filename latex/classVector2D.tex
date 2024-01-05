@@ -1,0 +1,119 @@
+\hypertarget{classVector2D}{}\doxysection{Vector2D$<$ T $>$ Class Template Reference}
+\label{classVector2D}\index{Vector2D$<$ T $>$@{Vector2D$<$ T $>$}}
+
+
+Utility template class for manipulating 2-\/dimensional vectors.  
+
+
+
+
+{\ttfamily \#include $<$Vector2\+D.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classVector2D_a96580267fed7cd6686cbbf8e11048023}{Vector2D}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classVector2D_a4f1bca1b63cd8b1323c85c9a5c597df4}{Vector2D}} (T X, T Y)
+\begin{DoxyCompactList}\small\item\em Construct the vector from its coordinates. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename U $>$ }\\\mbox{\hyperlink{classVector2D_af9cb4a6f06903844162f4c9d80d16b85}{Vector2D}} (const \mbox{\hyperlink{classVector2D}{Vector2D}}$<$ U $>$ \&vector)
+\begin{DoxyCompactList}\small\item\em Construct the vector from another type of vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classVector2D_a65e391ec61c185092a02cf6301d0fff7}\label{classVector2D_a65e391ec61c185092a02cf6301d0fff7}} 
+T \mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}}
+\begin{DoxyCompactList}\small\item\em X coordinate of the vector. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}\label{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}} 
+T \mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}}
+\begin{DoxyCompactList}\small\item\em Y coordinate of the vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename T$>$\newline
+class Vector2\+D$<$ T $>$}
+
+Utility template class for manipulating 2-\/dimensional vectors. 
+
+\mbox{\hyperlink{classVector2D}{Vector2D}} is a simple class that defines a mathematical vector with two coordinates (x and y). It can be used to represent anything that has two dimensions\+: a size, a point, a velocity, etc.
+
+The template parameter T is the type of the coordinates. It can be any type that supports arithmetic operations (+, -\/, /, $\ast$) and comparisons (==, !=), for example int or float. 
+
+Definition at line 17 of file Vector2\+D.\+hpp.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classVector2D_a96580267fed7cd6686cbbf8e11048023}\label{classVector2D_a96580267fed7cd6686cbbf8e11048023}} 
+\index{Vector2D$<$ T $>$@{Vector2D$<$ T $>$}!Vector2D@{Vector2D}}
+\index{Vector2D@{Vector2D}!Vector2D$<$ T $>$@{Vector2D$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Vector2D()}{Vector2D()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classVector2D}{Vector2D}}$<$ T $>$\+::\mbox{\hyperlink{classVector2D}{Vector2D}}\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default constructor. 
+
+Creates a Vector2(0, 0). 
+
+Definition at line 197 of file Vector2\+D.\+hpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{197 : \mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}}(0), \mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}}(0) \{\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classVector2D_a4f1bca1b63cd8b1323c85c9a5c597df4}\label{classVector2D_a4f1bca1b63cd8b1323c85c9a5c597df4}} 
+\index{Vector2D$<$ T $>$@{Vector2D$<$ T $>$}!Vector2D@{Vector2D}}
+\index{Vector2D@{Vector2D}!Vector2D$<$ T $>$@{Vector2D$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Vector2D()}{Vector2D()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+\mbox{\hyperlink{classVector2D}{Vector2D}}$<$ T $>$\+::\mbox{\hyperlink{classVector2D}{Vector2D}} (\begin{DoxyParamCaption}\item[{T}]{X,  }\item[{T}]{Y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct the vector from its coordinates. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em X} & X coordinate \\
+\hline
+{\em Y} & Y coordinate \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 200 of file Vector2\+D.\+hpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{200 : \mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}}(X), \mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}}(Y) \{\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classVector2D_af9cb4a6f06903844162f4c9d80d16b85}\label{classVector2D_af9cb4a6f06903844162f4c9d80d16b85}} 
+\index{Vector2D$<$ T $>$@{Vector2D$<$ T $>$}!Vector2D@{Vector2D}}
+\index{Vector2D@{Vector2D}!Vector2D$<$ T $>$@{Vector2D$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Vector2D()}{Vector2D()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+template$<$typename U $>$ \\
+\mbox{\hyperlink{classVector2D}{Vector2D}}$<$ T $>$\+::\mbox{\hyperlink{classVector2D}{Vector2D}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classVector2D}{Vector2D}}$<$ U $>$ \&}]{vector }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Construct the vector from another type of vector. 
+
+This constructor doesn\textquotesingle{}t replace the copy constructor, it\textquotesingle{}s called only when U != T. A call to this constructor will fail to compile if U is not convertible to T. 
+
+Definition at line 204 of file Vector2\+D.\+hpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{205     : \mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}}(\textcolor{keyword}{static\_cast<} T \textcolor{keyword}{>}(vector.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}})), \mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}}(\textcolor{keyword}{static\_cast<} T \textcolor{keyword}{>}(vector.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}})) \{\}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/graphics/Vector2\+D.\+hpp\end{DoxyCompactItemize}

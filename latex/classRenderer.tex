@@ -1,0 +1,1116 @@
+\hypertarget{classRenderer}{}\doxysection{Renderer Class Reference}
+\label{classRenderer}\index{Renderer@{Renderer}}
+
+
+Singleton class responsible for rendering shapes using GDI+.  
+
+
+
+
+{\ttfamily \#include $<$Renderer.\+hpp$>$}
+
+
+
+Collaboration diagram for Renderer\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=204pt]{classRenderer__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classRenderer_a8c6e15f666cb188a936004add75e6c6b}\label{classRenderer_a8c6e15f666cb188a936004add75e6c6b}} 
+\mbox{\hyperlink{classRenderer_a8c6e15f666cb188a936004add75e6c6b}{Renderer}} (const \mbox{\hyperlink{classRenderer}{Renderer}} \&)=delete
+\begin{DoxyCompactList}\small\item\em Deleted copy constructor to enforce the singleton pattern. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classRenderer_aa42607899757d0a1c5e8fe0aa4cb5a7f}\label{classRenderer_aa42607899757d0a1c5e8fe0aa4cb5a7f}} 
+void \mbox{\hyperlink{classRenderer_aa42607899757d0a1c5e8fe0aa4cb5a7f}{operator=}} (const \mbox{\hyperlink{classRenderer}{Renderer}} \&)=delete
+\begin{DoxyCompactList}\small\item\em Deleted copy assignment operator to enforce the singleton pattern. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRenderer_a1fac47f9b1c4c3fb1151f2b6ecb282f6}{draw}} (Gdiplus\+::\+Graphics \&graphics, \mbox{\hyperlink{classGroup}{Group}} $\ast$group) const
+\begin{DoxyCompactList}\small\item\em Draws a shape using Gdiplus\+::\+Graphics based on its type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classRenderer}{Renderer}} $\ast$ \mbox{\hyperlink{classRenderer_ac1bf10ff8b4f967f0d416a26d482abd6}{get\+Instance}} ()
+\begin{DoxyCompactList}\small\item\em Gets the singleton instance of the \mbox{\hyperlink{classRenderer}{Renderer}} class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classRenderer_a8d159bc1ea8f4152339d6c5eead27e45}{apply\+Transform}} (std\+::vector$<$ std\+::string $>$ transform\+\_\+order, Gdiplus\+::\+Graphics \&graphics) const
+\begin{DoxyCompactList}\small\item\em Utility function to apply a series of transformations to the graphics context. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRenderer_ab68c9e02c7eadf1f18286c9ecf0d90ca}{draw\+Line}} (Gdiplus\+::\+Graphics \&graphics, \mbox{\hyperlink{classLine}{Line}} $\ast$line) const
+\begin{DoxyCompactList}\small\item\em Draws a line shape using Gdiplus\+::\+Graphics. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRenderer_abf163a7895594e0a4ee5662805b1b572}{draw\+Rectangle}} (Gdiplus\+::\+Graphics \&graphics, \mbox{\hyperlink{classRect}{Rect}} $\ast$rectangle) const
+\begin{DoxyCompactList}\small\item\em Draws a rectangle shape using Gdiplus\+::\+Graphics. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRenderer_a9b5ca422ec7f1328d854cc4bff269858}{draw\+Circle}} (Gdiplus\+::\+Graphics \&graphics, \mbox{\hyperlink{classCircle}{Circle}} $\ast$circle) const
+\begin{DoxyCompactList}\small\item\em Draws a circle shape using Gdiplus\+::\+Graphics. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRenderer_af4d92e92abb79e4431f7331f792194d9}{draw\+Ellipse}} (Gdiplus\+::\+Graphics \&graphics, \mbox{\hyperlink{classEll}{Ell}} $\ast$ellipse) const
+\begin{DoxyCompactList}\small\item\em Draws an ellipse shape using Gdiplus\+::\+Graphics. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRenderer_a27b883787b8f38afd04924edc97b5a04}{draw\+Polygon}} (Gdiplus\+::\+Graphics \&graphics, \mbox{\hyperlink{classPlygon}{Plygon}} $\ast$polygon) const
+\begin{DoxyCompactList}\small\item\em Draws a polygon shape using Gdiplus\+::\+Graphics. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRenderer_a87ce996c3ed0f963de9ef6c293ee3aec}{draw\+Text}} (Gdiplus\+::\+Graphics \&graphics, \mbox{\hyperlink{classText}{Text}} $\ast$text) const
+\begin{DoxyCompactList}\small\item\em Draws text using Gdiplus\+::\+Graphics. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRenderer_a4e73148b7da0f585084520d12c514344}{draw\+Polyline}} (Gdiplus\+::\+Graphics \&graphics, \mbox{\hyperlink{classPlyline}{Plyline}} $\ast$polyline) const
+\begin{DoxyCompactList}\small\item\em Draws a polyline shape using Gdiplus\+::\+Graphics. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRenderer_a6cbcbb11e386c26eacef0b97342fee77}{draw\+Path}} (Gdiplus\+::\+Graphics \&graphics, \mbox{\hyperlink{classPath}{Path}} $\ast$path) const
+\begin{DoxyCompactList}\small\item\em Draws a path shape using Gdiplus\+::\+Graphics. \end{DoxyCompactList}\item 
+Gdiplus\+::\+Brush $\ast$ \mbox{\hyperlink{classRenderer_a7539832835d19ee365dcbabf490d642c}{get\+Brush}} (\mbox{\hyperlink{classSVGElement}{SVGElement}} $\ast$shape, Gdiplus\+::\+RectF bound) const
+\begin{DoxyCompactList}\small\item\em Gets the Gdiplus\+::brush object for the shape fill. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRenderer_a33a87db2173a7509be2d60fcffff9058}{apply\+Transforms\+On\+Brush}} (std\+::vector$<$ std\+::string $>$ transform\+\_\+order, Gdiplus\+::\+Linear\+Gradient\+Brush $\ast$\&brush) const
+\begin{DoxyCompactList}\small\item\em Utility function to apply a series of transformations to the brush object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRenderer_a578e046986da5ec2585ce106562c3de3}{apply\+Transforms\+On\+Brush}} (std\+::vector$<$ std\+::string $>$ transform\+\_\+order, Gdiplus\+::\+Path\+Gradient\+Brush $\ast$\&brush) const
+\begin{DoxyCompactList}\small\item\em Utility function to apply a series of transformations to the brush object. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classRenderer_a7ebf46f54dab9905f79b80f7fddb76a6}\label{classRenderer_a7ebf46f54dab9905f79b80f7fddb76a6}} 
+\mbox{\hyperlink{classRenderer_a7ebf46f54dab9905f79b80f7fddb76a6}{Renderer}} ()
+\begin{DoxyCompactList}\small\item\em Private constructor for the \mbox{\hyperlink{classRenderer}{Renderer}} class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classRenderer_a7431a2f9b03f35752e034410ffebfbe1}\label{classRenderer_a7431a2f9b03f35752e034410ffebfbe1}} 
+static \mbox{\hyperlink{classRenderer}{Renderer}} $\ast$ \mbox{\hyperlink{classRenderer_a7431a2f9b03f35752e034410ffebfbe1}{instance}} = nullptr
+\begin{DoxyCompactList}\small\item\em Singleton instance of the \mbox{\hyperlink{classRenderer}{Renderer}} class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Singleton class responsible for rendering shapes using GDI+. 
+
+The \mbox{\hyperlink{classRenderer}{Renderer}} class provides a singleton instance for drawing SVGElement-\/based shapes using Gdiplus\+::\+Graphics. It supports various shapes such as lines, rectangles, circles, ellipses, text, polygons, polylines, and paths. The shapes are drawn in a polymorphic manner using the draw function, which takes a Gdiplus\+::\+Graphics context and an \mbox{\hyperlink{classSVGElement}{SVGElement}}. The draw function dynamically determines the type of the shape and invokes the corresponding draw method to render the shape with all necessary details. The detailed information for each shape is obtained from an SVG file and processed through the draw function in a polymorphic way. 
+
+Definition at line 24 of file Renderer.\+hpp.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classRenderer_a8d159bc1ea8f4152339d6c5eead27e45}\label{classRenderer_a8d159bc1ea8f4152339d6c5eead27e45}} 
+\index{Renderer@{Renderer}!applyTransform@{applyTransform}}
+\index{applyTransform@{applyTransform}!Renderer@{Renderer}}
+\doxysubsubsection{\texorpdfstring{applyTransform()}{applyTransform()}}
+{\footnotesize\ttfamily void Renderer\+::apply\+Transform (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::string $>$}]{transform\+\_\+order,  }\item[{Gdiplus\+::\+Graphics \&}]{graphics }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Utility function to apply a series of transformations to the graphics context. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em transform\+\_\+order} & The order in which transformations should be applied. \\
+\hline
+{\em graphics} & The Gdiplus\+::\+Graphics context to apply transformations to. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 50 of file Renderer.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{51                                                                \{}
+\DoxyCodeLine{52     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} type : transform\_order) \{}
+\DoxyCodeLine{53         \textcolor{keywordflow}{if} (type.find(\textcolor{stringliteral}{"{}translate"{}}) != std::string::npos) \{}
+\DoxyCodeLine{54             \textcolor{keywordtype}{float} trans\_x = getTranslate(type).first,}
+\DoxyCodeLine{55                   trans\_y = getTranslate(type).second;}
+\DoxyCodeLine{56             graphics.TranslateTransform(trans\_x, trans\_y);}
+\DoxyCodeLine{57         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (type.find(\textcolor{stringliteral}{"{}rotate"{}}) != std::string::npos) \{}
+\DoxyCodeLine{58             \textcolor{keywordtype}{float} degree = getRotate(type);}
+\DoxyCodeLine{59             graphics.RotateTransform(degree);}
+\DoxyCodeLine{60         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (type.find(\textcolor{stringliteral}{"{}scale"{}}) != std::string::npos) \{}
+\DoxyCodeLine{61             \textcolor{keywordflow}{if} (type.find(\textcolor{stringliteral}{"{},"{}}) != std::string::npos) \{}
+\DoxyCodeLine{62                 \textcolor{keywordtype}{float} scale\_x = getScaleXY(type).first,}
+\DoxyCodeLine{63                       scale\_y = getScaleXY(type).second;}
+\DoxyCodeLine{64                 graphics.ScaleTransform(scale\_x, scale\_y);}
+\DoxyCodeLine{65             \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{66                 \textcolor{keywordtype}{float} scale = getScale(type);}
+\DoxyCodeLine{67                 graphics.ScaleTransform(scale, scale);}
+\DoxyCodeLine{68             \}}
+\DoxyCodeLine{69         \}}
+\DoxyCodeLine{70     \}}
+\DoxyCodeLine{71 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classRenderer_a33a87db2173a7509be2d60fcffff9058}\label{classRenderer_a33a87db2173a7509be2d60fcffff9058}} 
+\index{Renderer@{Renderer}!applyTransformsOnBrush@{applyTransformsOnBrush}}
+\index{applyTransformsOnBrush@{applyTransformsOnBrush}!Renderer@{Renderer}}
+\doxysubsubsection{\texorpdfstring{applyTransformsOnBrush()}{applyTransformsOnBrush()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Renderer\+::apply\+Transforms\+On\+Brush (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::string $>$}]{transform\+\_\+order,  }\item[{Gdiplus\+::\+Linear\+Gradient\+Brush $\ast$\&}]{brush }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Utility function to apply a series of transformations to the brush object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em transform\+\_\+order} & The order in which transformations should be applied. \\
+\hline
+{\em brush} & The Gdiplus\+::\+Linear\+Gradient\+Brush object for the shape fill. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 673 of file Renderer.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{675                                               \{}
+\DoxyCodeLine{676     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} type : transform\_order) \{}
+\DoxyCodeLine{677         \textcolor{keywordflow}{if} (type.find(\textcolor{stringliteral}{"{}translate"{}}) != std::string::npos) \{}
+\DoxyCodeLine{678             \textcolor{keywordtype}{float} trans\_x = getTranslate(type).first,}
+\DoxyCodeLine{679                   trans\_y = getTranslate(type).second;}
+\DoxyCodeLine{680             brush-\/>TranslateTransform(trans\_x, trans\_y);}
+\DoxyCodeLine{681         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (type.find(\textcolor{stringliteral}{"{}rotate"{}}) != std::string::npos) \{}
+\DoxyCodeLine{682             \textcolor{keywordtype}{float} degree = getRotate(type);}
+\DoxyCodeLine{683             brush-\/>RotateTranform(degree);}
+\DoxyCodeLine{684         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (type.find(\textcolor{stringliteral}{"{}scale"{}}) != std::string::npos) \{}
+\DoxyCodeLine{685             \textcolor{keywordflow}{if} (type.find(\textcolor{stringliteral}{"{},"{}}) != std::string::npos) \{}
+\DoxyCodeLine{686                 \textcolor{keywordtype}{float} scale\_x = getScaleXY(type).first,}
+\DoxyCodeLine{687                       scale\_y = getScaleXY(type).second;}
+\DoxyCodeLine{688                 brush-\/>ScaleTransform(scale\_x, scale\_y);}
+\DoxyCodeLine{689             \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{690                 \textcolor{keywordtype}{float} scale = getScale(type);}
+\DoxyCodeLine{691                 brush-\/>ScaleTransform(scale, scale);}
+\DoxyCodeLine{692             \}}
+\DoxyCodeLine{693         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (type.find(\textcolor{stringliteral}{"{}matrix"{}}) != std::string::npos) \{}
+\DoxyCodeLine{694             \textcolor{keywordtype}{float} a = 0, b = 0, c = 0, d = 0, e = 0, f = 0;}
+\DoxyCodeLine{695             \textcolor{keywordflow}{if} (type.find(\textcolor{stringliteral}{"{},"{}}) != std::string::npos) \{}
+\DoxyCodeLine{696                 type.erase(std::remove(type.begin(), type.end(), \textcolor{charliteral}{','}),}
+\DoxyCodeLine{697                            type.end());}
+\DoxyCodeLine{698             \}}
+\DoxyCodeLine{699             sscanf(type.c\_str(), \textcolor{stringliteral}{"{}matrix(\%f \%f \%f \%f \%f \%f)"{}}, \&a, \&b, \&c, \&d,}
+\DoxyCodeLine{700                    \&e, \&f);}
+\DoxyCodeLine{701             Gdiplus::Matrix matrix(a, b, c, d, e, f);}
+\DoxyCodeLine{702             brush-\/>SetTransform(\&matrix);}
+\DoxyCodeLine{703         \}}
+\DoxyCodeLine{704     \}}
+\DoxyCodeLine{705 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classRenderer_a578e046986da5ec2585ce106562c3de3}\label{classRenderer_a578e046986da5ec2585ce106562c3de3}} 
+\index{Renderer@{Renderer}!applyTransformsOnBrush@{applyTransformsOnBrush}}
+\index{applyTransformsOnBrush@{applyTransformsOnBrush}!Renderer@{Renderer}}
+\doxysubsubsection{\texorpdfstring{applyTransformsOnBrush()}{applyTransformsOnBrush()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Renderer\+::apply\+Transforms\+On\+Brush (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::string $>$}]{transform\+\_\+order,  }\item[{Gdiplus\+::\+Path\+Gradient\+Brush $\ast$\&}]{brush }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Utility function to apply a series of transformations to the brush object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em transform\+\_\+order} & The order in which transformations should be applied. \\
+\hline
+{\em brush} & The Gdiplus\+::\+Path\+Gradient\+Brush object for the shape fill. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 707 of file Renderer.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{709                                             \{}
+\DoxyCodeLine{710     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} type : transform\_order) \{}
+\DoxyCodeLine{711         \textcolor{keywordflow}{if} (type.find(\textcolor{stringliteral}{"{}translate"{}}) != std::string::npos) \{}
+\DoxyCodeLine{712             \textcolor{keywordtype}{float} trans\_x = getTranslate(type).first,}
+\DoxyCodeLine{713                   trans\_y = getTranslate(type).second;}
+\DoxyCodeLine{714             brush-\/>TranslateTransform(trans\_x, trans\_y);}
+\DoxyCodeLine{715         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (type.find(\textcolor{stringliteral}{"{}rotate"{}}) != std::string::npos) \{}
+\DoxyCodeLine{716             \textcolor{keywordtype}{float} degree = getRotate(type);}
+\DoxyCodeLine{717             brush-\/>RotateTransform(degree);}
+\DoxyCodeLine{718         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (type.find(\textcolor{stringliteral}{"{}scale"{}}) != std::string::npos) \{}
+\DoxyCodeLine{719             \textcolor{keywordflow}{if} (type.find(\textcolor{stringliteral}{"{},"{}}) != std::string::npos) \{}
+\DoxyCodeLine{720                 \textcolor{keywordtype}{float} scale\_x = getScaleXY(type).first,}
+\DoxyCodeLine{721                       scale\_y = getScaleXY(type).second;}
+\DoxyCodeLine{722                 brush-\/>ScaleTransform(scale\_x, scale\_y);}
+\DoxyCodeLine{723             \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{724                 \textcolor{keywordtype}{float} scale = getScale(type);}
+\DoxyCodeLine{725                 brush-\/>ScaleTransform(scale, scale);}
+\DoxyCodeLine{726             \}}
+\DoxyCodeLine{727         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (type.find(\textcolor{stringliteral}{"{}matrix"{}}) != std::string::npos) \{}
+\DoxyCodeLine{728             \textcolor{keywordtype}{float} a = 0, b = 0, c = 0, d = 0, e = 0, f = 0;}
+\DoxyCodeLine{729             \textcolor{keywordflow}{if} (type.find(\textcolor{stringliteral}{"{},"{}}) != std::string::npos) \{}
+\DoxyCodeLine{730                 type.erase(std::remove(type.begin(), type.end(), \textcolor{charliteral}{','}),}
+\DoxyCodeLine{731                            type.end());}
+\DoxyCodeLine{732             \}}
+\DoxyCodeLine{733             sscanf(type.c\_str(), \textcolor{stringliteral}{"{}matrix(\%f \%f \%f \%f \%f \%f)"{}}, \&a, \&b, \&c, \&d,}
+\DoxyCodeLine{734                    \&e, \&f);}
+\DoxyCodeLine{735             Gdiplus::Matrix matrix(a, b, c, d, e, f);}
+\DoxyCodeLine{736             brush-\/>SetTransform(\&matrix);}
+\DoxyCodeLine{737         \}}
+\DoxyCodeLine{738     \}}
+\DoxyCodeLine{739 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classRenderer_a1fac47f9b1c4c3fb1151f2b6ecb282f6}\label{classRenderer_a1fac47f9b1c4c3fb1151f2b6ecb282f6}} 
+\index{Renderer@{Renderer}!draw@{draw}}
+\index{draw@{draw}!Renderer@{Renderer}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily void Renderer\+::draw (\begin{DoxyParamCaption}\item[{Gdiplus\+::\+Graphics \&}]{graphics,  }\item[{\mbox{\hyperlink{classGroup}{Group}} $\ast$}]{group }\end{DoxyParamCaption}) const}
+
+
+
+Draws a shape using Gdiplus\+::\+Graphics based on its type. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em graphics} & The Gdiplus\+::\+Graphics context for drawing. \\
+\hline
+{\em shape} & The \mbox{\hyperlink{classSVGElement}{SVGElement}} representing the shape to be drawn. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 73 of file Renderer.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{73                                                                  \{}
+\DoxyCodeLine{74     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} shape : group-\/>\mbox{\hyperlink{classGroup_a310fa83ccb20841373c11b6b4ac1d336}{getElements}}()) \{}
+\DoxyCodeLine{75         Gdiplus::Matrix original;}
+\DoxyCodeLine{76         graphics.GetTransform(\&original);}
+\DoxyCodeLine{77         \mbox{\hyperlink{classRenderer_a8d159bc1ea8f4152339d6c5eead27e45}{applyTransform}}(shape-\/>getTransforms(), graphics);}
+\DoxyCodeLine{78         \textcolor{keywordflow}{if} (shape-\/>getClass() == \textcolor{stringliteral}{"{}Group"{}}) \{}
+\DoxyCodeLine{79             \mbox{\hyperlink{classGroup}{Group}}* group = \textcolor{keyword}{dynamic\_cast<} \mbox{\hyperlink{classGroup}{Group}}* \textcolor{keyword}{>}(shape);}
+\DoxyCodeLine{80             \mbox{\hyperlink{classRenderer_a1fac47f9b1c4c3fb1151f2b6ecb282f6}{draw}}(graphics, group);}
+\DoxyCodeLine{81         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (shape-\/>getClass() == \textcolor{stringliteral}{"{}Polyline"{}}) \{}
+\DoxyCodeLine{82             \mbox{\hyperlink{classPlyline}{Plyline}}* polyline = \textcolor{keyword}{dynamic\_cast<} \mbox{\hyperlink{classPlyline}{Plyline}}* \textcolor{keyword}{>}(shape);}
+\DoxyCodeLine{83             \mbox{\hyperlink{classRenderer_a4e73148b7da0f585084520d12c514344}{drawPolyline}}(graphics, polyline);}
+\DoxyCodeLine{84         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (shape-\/>getClass() == \textcolor{stringliteral}{"{}Text"{}}) \{}
+\DoxyCodeLine{85             \mbox{\hyperlink{classText}{Text}}* text = \textcolor{keyword}{dynamic\_cast<} \mbox{\hyperlink{classText}{Text}}* \textcolor{keyword}{>}(shape);}
+\DoxyCodeLine{86             \mbox{\hyperlink{classRenderer_a87ce996c3ed0f963de9ef6c293ee3aec}{drawText}}(graphics, text);}
+\DoxyCodeLine{87         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (shape-\/>getClass() == \textcolor{stringliteral}{"{}Rect"{}}) \{}
+\DoxyCodeLine{88             \mbox{\hyperlink{classRect}{Rect}}* rectangle = \textcolor{keyword}{dynamic\_cast<} \mbox{\hyperlink{classRect}{Rect}}* \textcolor{keyword}{>}(shape);}
+\DoxyCodeLine{89             \mbox{\hyperlink{classRenderer_abf163a7895594e0a4ee5662805b1b572}{drawRectangle}}(graphics, rectangle);}
+\DoxyCodeLine{90         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (shape-\/>getClass() == \textcolor{stringliteral}{"{}Circle"{}}) \{}
+\DoxyCodeLine{91             \mbox{\hyperlink{classCircle}{Circle}}* circle = \textcolor{keyword}{dynamic\_cast<} \mbox{\hyperlink{classCircle}{Circle}}* \textcolor{keyword}{>}(shape);}
+\DoxyCodeLine{92             \mbox{\hyperlink{classRenderer_a9b5ca422ec7f1328d854cc4bff269858}{drawCircle}}(graphics, circle);}
+\DoxyCodeLine{93         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (shape-\/>getClass() == \textcolor{stringliteral}{"{}Ellipse"{}}) \{}
+\DoxyCodeLine{94             \mbox{\hyperlink{classEll}{Ell}}* ellipse = \textcolor{keyword}{dynamic\_cast<} \mbox{\hyperlink{classEll}{Ell}}* \textcolor{keyword}{>}(shape);}
+\DoxyCodeLine{95             \mbox{\hyperlink{classRenderer_af4d92e92abb79e4431f7331f792194d9}{drawEllipse}}(graphics, ellipse);}
+\DoxyCodeLine{96         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (shape-\/>getClass() == \textcolor{stringliteral}{"{}Line"{}}) \{}
+\DoxyCodeLine{97             \mbox{\hyperlink{classLine}{Line}}* line = \textcolor{keyword}{dynamic\_cast<} \mbox{\hyperlink{classLine}{Line}}* \textcolor{keyword}{>}(shape);}
+\DoxyCodeLine{98             \mbox{\hyperlink{classRenderer_ab68c9e02c7eadf1f18286c9ecf0d90ca}{drawLine}}(graphics, line);}
+\DoxyCodeLine{99         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (shape-\/>getClass() == \textcolor{stringliteral}{"{}Polygon"{}}) \{}
+\DoxyCodeLine{100             \mbox{\hyperlink{classPlygon}{Plygon}}* polygon = \textcolor{keyword}{dynamic\_cast<} \mbox{\hyperlink{classPlygon}{Plygon}}* \textcolor{keyword}{>}(shape);}
+\DoxyCodeLine{101             \mbox{\hyperlink{classRenderer_a27b883787b8f38afd04924edc97b5a04}{drawPolygon}}(graphics, polygon);}
+\DoxyCodeLine{102         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (shape-\/>getClass() == \textcolor{stringliteral}{"{}Path"{}}) \{}
+\DoxyCodeLine{103             \mbox{\hyperlink{classPath}{Path}}* path = \textcolor{keyword}{dynamic\_cast<} \mbox{\hyperlink{classPath}{Path}}* \textcolor{keyword}{>}(shape);}
+\DoxyCodeLine{104             \mbox{\hyperlink{classRenderer_a6cbcbb11e386c26eacef0b97342fee77}{drawPath}}(graphics, path);}
+\DoxyCodeLine{105         \}}
+\DoxyCodeLine{106         graphics.SetTransform(\&original);}
+\DoxyCodeLine{107     \}}
+\DoxyCodeLine{108 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classRenderer_a9b5ca422ec7f1328d854cc4bff269858}\label{classRenderer_a9b5ca422ec7f1328d854cc4bff269858}} 
+\index{Renderer@{Renderer}!drawCircle@{drawCircle}}
+\index{drawCircle@{drawCircle}!Renderer@{Renderer}}
+\doxysubsubsection{\texorpdfstring{drawCircle()}{drawCircle()}}
+{\footnotesize\ttfamily void Renderer\+::draw\+Circle (\begin{DoxyParamCaption}\item[{Gdiplus\+::\+Graphics \&}]{graphics,  }\item[{\mbox{\hyperlink{classCircle}{Circle}} $\ast$}]{circle }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Draws a circle shape using Gdiplus\+::\+Graphics. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em graphics} & The Gdiplus\+::\+Graphics context for drawing. \\
+\hline
+{\em circle} & The \mbox{\hyperlink{classCircle}{Circle}} object representing the circle to be drawn. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 165 of file Renderer.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{165                                                                          \{}
+\DoxyCodeLine{166     \mbox{\hyperlink{classmColor}{mColor}} outline\_color = circle-\/>\mbox{\hyperlink{classSVGElement_a9a243b2b8464d57df28f3f3e8c52511e}{getOutlineColor}}();}
+\DoxyCodeLine{167     Gdiplus::Pen circle\_outline(}
+\DoxyCodeLine{168         Gdiplus::Color(outline\_color.\mbox{\hyperlink{classmColor_ac086aa72806b8ce55fed3df9ba976f6c}{a}}, outline\_color.\mbox{\hyperlink{classmColor_a427453d377b30c62f7d25f47120959d6}{r}}, outline\_color.\mbox{\hyperlink{classmColor_a0cd1254821d108bb8c5be8ec5536f8ec}{g}},}
+\DoxyCodeLine{169                        outline\_color.\mbox{\hyperlink{classmColor_ad56f2424fa451364becdc4d1c4df657c}{b}}),}
+\DoxyCodeLine{170         circle-\/>\mbox{\hyperlink{classSVGElement_a2e4b1a48bfbc34a6a9f17bfd4b89eb51}{getOutlineThickness}}());}
+\DoxyCodeLine{171     \mbox{\hyperlink{classVector2D}{Vector2Df}} min\_bound = circle-\/>\mbox{\hyperlink{classEll_ab79368df57ee08382916fc52b69afb85}{getMinBound}}();}
+\DoxyCodeLine{172     \mbox{\hyperlink{classVector2D}{Vector2Df}} max\_bound = circle-\/>\mbox{\hyperlink{classEll_a8a8dd2acc8c7be5580dd8e549d247525}{getMaxBound}}();}
+\DoxyCodeLine{173     Gdiplus::RectF bound(min\_bound.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}}, min\_bound.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}}, max\_bound.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} -\/ min\_bound.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}},}
+\DoxyCodeLine{174                          max\_bound.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}} -\/ min\_bound.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}});}
+\DoxyCodeLine{175     Gdiplus::Brush* circle\_fill = \mbox{\hyperlink{classRenderer_a7539832835d19ee365dcbabf490d642c}{getBrush}}(circle, bound);}
+\DoxyCodeLine{176     \textcolor{keywordflow}{if} (Gdiplus::PathGradientBrush* brush =}
+\DoxyCodeLine{177             \textcolor{keyword}{dynamic\_cast<} Gdiplus::PathGradientBrush* \textcolor{keyword}{>}(circle\_fill)) \{}
+\DoxyCodeLine{178         \mbox{\hyperlink{classmColor}{mColor}} color = circle-\/>\mbox{\hyperlink{classSVGElement_a9b64e7697c24a6972aacb01b89c0e542}{getGradient}}()-\/>\mbox{\hyperlink{classGradient_a1125c4e5294389bb6698bf4fcb4f928d}{getStops}}().back().getColor();}
+\DoxyCodeLine{179         Gdiplus::SolidBrush corner\_fill(}
+\DoxyCodeLine{180             Gdiplus::Color(color.\mbox{\hyperlink{classmColor_ac086aa72806b8ce55fed3df9ba976f6c}{a}}, color.\mbox{\hyperlink{classmColor_a427453d377b30c62f7d25f47120959d6}{r}}, color.\mbox{\hyperlink{classmColor_a0cd1254821d108bb8c5be8ec5536f8ec}{g}}, color.\mbox{\hyperlink{classmColor_ad56f2424fa451364becdc4d1c4df657c}{b}}));}
+\DoxyCodeLine{181         graphics.FillEllipse(}
+\DoxyCodeLine{182             \&corner\_fill, circle-\/>\mbox{\hyperlink{classSVGElement_a4e1ed8bb29fd4dbeb35471315976b3a2}{getPosition}}().\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} -\/ circle-\/>\mbox{\hyperlink{classEll_a00d607a5238705b552ec61b4409b76c1}{getRadius}}().\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}},}
+\DoxyCodeLine{183             circle-\/>\mbox{\hyperlink{classSVGElement_a4e1ed8bb29fd4dbeb35471315976b3a2}{getPosition}}().\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}} -\/ circle-\/>\mbox{\hyperlink{classEll_a00d607a5238705b552ec61b4409b76c1}{getRadius}}().\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}},}
+\DoxyCodeLine{184             circle-\/>\mbox{\hyperlink{classEll_a00d607a5238705b552ec61b4409b76c1}{getRadius}}().\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} * 2, circle-\/>\mbox{\hyperlink{classEll_a00d607a5238705b552ec61b4409b76c1}{getRadius}}().\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}} * 2);}
+\DoxyCodeLine{185     \}}
+\DoxyCodeLine{186     graphics.FillEllipse(circle\_fill,}
+\DoxyCodeLine{187                          circle-\/>\mbox{\hyperlink{classSVGElement_a4e1ed8bb29fd4dbeb35471315976b3a2}{getPosition}}().\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} -\/ circle-\/>\mbox{\hyperlink{classEll_a00d607a5238705b552ec61b4409b76c1}{getRadius}}().\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}},}
+\DoxyCodeLine{188                          circle-\/>\mbox{\hyperlink{classSVGElement_a4e1ed8bb29fd4dbeb35471315976b3a2}{getPosition}}().\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}} -\/ circle-\/>\mbox{\hyperlink{classEll_a00d607a5238705b552ec61b4409b76c1}{getRadius}}().\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}},}
+\DoxyCodeLine{189                          circle-\/>\mbox{\hyperlink{classEll_a00d607a5238705b552ec61b4409b76c1}{getRadius}}().\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} * 2, circle-\/>\mbox{\hyperlink{classEll_a00d607a5238705b552ec61b4409b76c1}{getRadius}}().\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}} * 2);}
+\DoxyCodeLine{190     graphics.DrawEllipse(\&circle\_outline,}
+\DoxyCodeLine{191                          circle-\/>\mbox{\hyperlink{classSVGElement_a4e1ed8bb29fd4dbeb35471315976b3a2}{getPosition}}().\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} -\/ circle-\/>\mbox{\hyperlink{classEll_a00d607a5238705b552ec61b4409b76c1}{getRadius}}().\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}},}
+\DoxyCodeLine{192                          circle-\/>\mbox{\hyperlink{classSVGElement_a4e1ed8bb29fd4dbeb35471315976b3a2}{getPosition}}().\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}} -\/ circle-\/>\mbox{\hyperlink{classEll_a00d607a5238705b552ec61b4409b76c1}{getRadius}}().\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}},}
+\DoxyCodeLine{193                          circle-\/>\mbox{\hyperlink{classEll_a00d607a5238705b552ec61b4409b76c1}{getRadius}}().\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} * 2, circle-\/>\mbox{\hyperlink{classEll_a00d607a5238705b552ec61b4409b76c1}{getRadius}}().\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} * 2);}
+\DoxyCodeLine{194     \textcolor{keyword}{delete} circle\_fill;}
+\DoxyCodeLine{195 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classRenderer_af4d92e92abb79e4431f7331f792194d9}\label{classRenderer_af4d92e92abb79e4431f7331f792194d9}} 
+\index{Renderer@{Renderer}!drawEllipse@{drawEllipse}}
+\index{drawEllipse@{drawEllipse}!Renderer@{Renderer}}
+\doxysubsubsection{\texorpdfstring{drawEllipse()}{drawEllipse()}}
+{\footnotesize\ttfamily void Renderer\+::draw\+Ellipse (\begin{DoxyParamCaption}\item[{Gdiplus\+::\+Graphics \&}]{graphics,  }\item[{\mbox{\hyperlink{classEll}{Ell}} $\ast$}]{ellipse }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Draws an ellipse shape using Gdiplus\+::\+Graphics. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em graphics} & The Gdiplus\+::\+Graphics context for drawing. \\
+\hline
+{\em ellipse} & The \mbox{\hyperlink{classEll}{Ell}} object representing the ellipse to be drawn. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 197 of file Renderer.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{197                                                                         \{}
+\DoxyCodeLine{198     \mbox{\hyperlink{classmColor}{mColor}} outline\_color = ellipse-\/>\mbox{\hyperlink{classSVGElement_a9a243b2b8464d57df28f3f3e8c52511e}{getOutlineColor}}();}
+\DoxyCodeLine{199     Gdiplus::Pen ellipse\_outline(}
+\DoxyCodeLine{200         Gdiplus::Color(outline\_color.\mbox{\hyperlink{classmColor_ac086aa72806b8ce55fed3df9ba976f6c}{a}}, outline\_color.\mbox{\hyperlink{classmColor_a427453d377b30c62f7d25f47120959d6}{r}}, outline\_color.\mbox{\hyperlink{classmColor_a0cd1254821d108bb8c5be8ec5536f8ec}{g}},}
+\DoxyCodeLine{201                        outline\_color.\mbox{\hyperlink{classmColor_ad56f2424fa451364becdc4d1c4df657c}{b}}),}
+\DoxyCodeLine{202         ellipse-\/>\mbox{\hyperlink{classSVGElement_a2e4b1a48bfbc34a6a9f17bfd4b89eb51}{getOutlineThickness}}());}
+\DoxyCodeLine{203     \mbox{\hyperlink{classVector2D}{Vector2Df}} min\_bound = ellipse-\/>\mbox{\hyperlink{classEll_ab79368df57ee08382916fc52b69afb85}{getMinBound}}();}
+\DoxyCodeLine{204     \mbox{\hyperlink{classVector2D}{Vector2Df}} max\_bound = ellipse-\/>\mbox{\hyperlink{classEll_a8a8dd2acc8c7be5580dd8e549d247525}{getMaxBound}}();}
+\DoxyCodeLine{205     Gdiplus::RectF bound(min\_bound.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}}, min\_bound.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}}, max\_bound.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} -\/ min\_bound.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}},}
+\DoxyCodeLine{206                          max\_bound.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}} -\/ min\_bound.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}});}
+\DoxyCodeLine{207     Gdiplus::Brush* ellipse\_fill = \mbox{\hyperlink{classRenderer_a7539832835d19ee365dcbabf490d642c}{getBrush}}(ellipse, bound);}
+\DoxyCodeLine{208     \textcolor{keywordflow}{if} (Gdiplus::PathGradientBrush* brush =}
+\DoxyCodeLine{209             \textcolor{keyword}{dynamic\_cast<} Gdiplus::PathGradientBrush* \textcolor{keyword}{>}(ellipse\_fill)) \{}
+\DoxyCodeLine{210         \mbox{\hyperlink{classmColor}{mColor}} color = ellipse-\/>\mbox{\hyperlink{classSVGElement_a9b64e7697c24a6972aacb01b89c0e542}{getGradient}}()-\/>\mbox{\hyperlink{classGradient_a1125c4e5294389bb6698bf4fcb4f928d}{getStops}}().back().getColor();}
+\DoxyCodeLine{211         Gdiplus::SolidBrush corner\_fill(}
+\DoxyCodeLine{212             Gdiplus::Color(color.\mbox{\hyperlink{classmColor_ac086aa72806b8ce55fed3df9ba976f6c}{a}}, color.\mbox{\hyperlink{classmColor_a427453d377b30c62f7d25f47120959d6}{r}}, color.\mbox{\hyperlink{classmColor_a0cd1254821d108bb8c5be8ec5536f8ec}{g}}, color.\mbox{\hyperlink{classmColor_ad56f2424fa451364becdc4d1c4df657c}{b}}));}
+\DoxyCodeLine{213         graphics.FillEllipse(}
+\DoxyCodeLine{214             \&corner\_fill, ellipse-\/>\mbox{\hyperlink{classSVGElement_a4e1ed8bb29fd4dbeb35471315976b3a2}{getPosition}}().\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} -\/ ellipse-\/>\mbox{\hyperlink{classEll_a00d607a5238705b552ec61b4409b76c1}{getRadius}}().\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}},}
+\DoxyCodeLine{215             ellipse-\/>\mbox{\hyperlink{classSVGElement_a4e1ed8bb29fd4dbeb35471315976b3a2}{getPosition}}().\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}} -\/ ellipse-\/>\mbox{\hyperlink{classEll_a00d607a5238705b552ec61b4409b76c1}{getRadius}}().\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}},}
+\DoxyCodeLine{216             ellipse-\/>\mbox{\hyperlink{classEll_a00d607a5238705b552ec61b4409b76c1}{getRadius}}().\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} * 2, ellipse-\/>\mbox{\hyperlink{classEll_a00d607a5238705b552ec61b4409b76c1}{getRadius}}().\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}} * 2);}
+\DoxyCodeLine{217     \}}
+\DoxyCodeLine{218     graphics.FillEllipse(}
+\DoxyCodeLine{219         ellipse\_fill, ellipse-\/>\mbox{\hyperlink{classSVGElement_a4e1ed8bb29fd4dbeb35471315976b3a2}{getPosition}}().\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} -\/ ellipse-\/>\mbox{\hyperlink{classEll_a00d607a5238705b552ec61b4409b76c1}{getRadius}}().\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}},}
+\DoxyCodeLine{220         ellipse-\/>\mbox{\hyperlink{classSVGElement_a4e1ed8bb29fd4dbeb35471315976b3a2}{getPosition}}().\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}} -\/ ellipse-\/>\mbox{\hyperlink{classEll_a00d607a5238705b552ec61b4409b76c1}{getRadius}}().\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}},}
+\DoxyCodeLine{221         ellipse-\/>\mbox{\hyperlink{classEll_a00d607a5238705b552ec61b4409b76c1}{getRadius}}().\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} * 2, ellipse-\/>\mbox{\hyperlink{classEll_a00d607a5238705b552ec61b4409b76c1}{getRadius}}().\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}} * 2);}
+\DoxyCodeLine{222     graphics.DrawEllipse(}
+\DoxyCodeLine{223         \&ellipse\_outline, ellipse-\/>\mbox{\hyperlink{classSVGElement_a4e1ed8bb29fd4dbeb35471315976b3a2}{getPosition}}().\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} -\/ ellipse-\/>\mbox{\hyperlink{classEll_a00d607a5238705b552ec61b4409b76c1}{getRadius}}().\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}},}
+\DoxyCodeLine{224         ellipse-\/>\mbox{\hyperlink{classSVGElement_a4e1ed8bb29fd4dbeb35471315976b3a2}{getPosition}}().\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}} -\/ ellipse-\/>\mbox{\hyperlink{classEll_a00d607a5238705b552ec61b4409b76c1}{getRadius}}().\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}},}
+\DoxyCodeLine{225         ellipse-\/>\mbox{\hyperlink{classEll_a00d607a5238705b552ec61b4409b76c1}{getRadius}}().\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} * 2, ellipse-\/>\mbox{\hyperlink{classEll_a00d607a5238705b552ec61b4409b76c1}{getRadius}}().\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}} * 2);}
+\DoxyCodeLine{226     \textcolor{keyword}{delete} ellipse\_fill;}
+\DoxyCodeLine{227 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classRenderer_ab68c9e02c7eadf1f18286c9ecf0d90ca}\label{classRenderer_ab68c9e02c7eadf1f18286c9ecf0d90ca}} 
+\index{Renderer@{Renderer}!drawLine@{drawLine}}
+\index{drawLine@{drawLine}!Renderer@{Renderer}}
+\doxysubsubsection{\texorpdfstring{drawLine()}{drawLine()}}
+{\footnotesize\ttfamily void Renderer\+::draw\+Line (\begin{DoxyParamCaption}\item[{Gdiplus\+::\+Graphics \&}]{graphics,  }\item[{\mbox{\hyperlink{classLine}{Line}} $\ast$}]{line }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Draws a line shape using Gdiplus\+::\+Graphics. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em graphics} & The Gdiplus\+::\+Graphics context for drawing. \\
+\hline
+{\em line} & The \mbox{\hyperlink{classLine}{Line}} object representing the line to be drawn. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 110 of file Renderer.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{110                                                                    \{}
+\DoxyCodeLine{111     \mbox{\hyperlink{classmColor}{mColor}} color = line-\/>\mbox{\hyperlink{classSVGElement_a9a243b2b8464d57df28f3f3e8c52511e}{getOutlineColor}}();}
+\DoxyCodeLine{112     Gdiplus::Pen linePen(Gdiplus::Color(color.\mbox{\hyperlink{classmColor_ac086aa72806b8ce55fed3df9ba976f6c}{a}}, color.\mbox{\hyperlink{classmColor_a427453d377b30c62f7d25f47120959d6}{r}}, color.\mbox{\hyperlink{classmColor_a0cd1254821d108bb8c5be8ec5536f8ec}{g}}, color.\mbox{\hyperlink{classmColor_ad56f2424fa451364becdc4d1c4df657c}{b}}),}
+\DoxyCodeLine{113                          line-\/>\mbox{\hyperlink{classSVGElement_a2e4b1a48bfbc34a6a9f17bfd4b89eb51}{getOutlineThickness}}());}
+\DoxyCodeLine{114     Gdiplus::PointF startPoint(line-\/>\mbox{\hyperlink{classSVGElement_a4e1ed8bb29fd4dbeb35471315976b3a2}{getPosition}}().\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}}, line-\/>\mbox{\hyperlink{classSVGElement_a4e1ed8bb29fd4dbeb35471315976b3a2}{getPosition}}().\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}});}
+\DoxyCodeLine{115     Gdiplus::PointF endPoint(line-\/>\mbox{\hyperlink{classLine_adb348ce7ddf4b500c3593b7126aa4451}{getDirection}}().\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}}, line-\/>\mbox{\hyperlink{classLine_adb348ce7ddf4b500c3593b7126aa4451}{getDirection}}().\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}});}
+\DoxyCodeLine{116     graphics.DrawLine(\&linePen, startPoint, endPoint);}
+\DoxyCodeLine{117 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classRenderer_a6cbcbb11e386c26eacef0b97342fee77}\label{classRenderer_a6cbcbb11e386c26eacef0b97342fee77}} 
+\index{Renderer@{Renderer}!drawPath@{drawPath}}
+\index{drawPath@{drawPath}!Renderer@{Renderer}}
+\doxysubsubsection{\texorpdfstring{drawPath()}{drawPath()}}
+{\footnotesize\ttfamily void Renderer\+::draw\+Path (\begin{DoxyParamCaption}\item[{Gdiplus\+::\+Graphics \&}]{graphics,  }\item[{\mbox{\hyperlink{classPath}{Path}} $\ast$}]{path }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Draws a path shape using Gdiplus\+::\+Graphics. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em graphics} & The Gdiplus\+::\+Graphics context for drawing. \\
+\hline
+{\em path} & The \mbox{\hyperlink{classPath}{Path}} object representing the path to be drawn. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 365 of file Renderer.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{365                                                                    \{}
+\DoxyCodeLine{366     \mbox{\hyperlink{classmColor}{mColor}} outline\_color = path-\/>\mbox{\hyperlink{classSVGElement_a9a243b2b8464d57df28f3f3e8c52511e}{getOutlineColor}}();}
+\DoxyCodeLine{367     Gdiplus::Pen path\_outline(Gdiplus::Color(outline\_color.\mbox{\hyperlink{classmColor_ac086aa72806b8ce55fed3df9ba976f6c}{a}}, outline\_color.\mbox{\hyperlink{classmColor_a427453d377b30c62f7d25f47120959d6}{r}},}
+\DoxyCodeLine{368                                              outline\_color.\mbox{\hyperlink{classmColor_a0cd1254821d108bb8c5be8ec5536f8ec}{g}}, outline\_color.\mbox{\hyperlink{classmColor_ad56f2424fa451364becdc4d1c4df657c}{b}}),}
+\DoxyCodeLine{369                               path-\/>\mbox{\hyperlink{classSVGElement_a2e4b1a48bfbc34a6a9f17bfd4b89eb51}{getOutlineThickness}}());}
+\DoxyCodeLine{370 }
+\DoxyCodeLine{371     Gdiplus::FillMode fill\_mode;}
+\DoxyCodeLine{372     \textcolor{keywordflow}{if} (path-\/>\mbox{\hyperlink{classPath_a9395325e65f86fd2a4be2dc24408753a}{getFillRule}}() == \textcolor{stringliteral}{"{}evenodd"{}}) \{}
+\DoxyCodeLine{373         fill\_mode = Gdiplus::FillModeAlternate;}
+\DoxyCodeLine{374     \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (path-\/>\mbox{\hyperlink{classPath_a9395325e65f86fd2a4be2dc24408753a}{getFillRule}}() == \textcolor{stringliteral}{"{}nonzero"{}}) \{}
+\DoxyCodeLine{375         fill\_mode = Gdiplus::FillModeWinding;}
+\DoxyCodeLine{376     \}}
+\DoxyCodeLine{377     Gdiplus::GraphicsPath gdi\_path(fill\_mode);}
+\DoxyCodeLine{378 }
+\DoxyCodeLine{379     \textcolor{keyword}{const} std::vector< PathPoint >\& points = path-\/>\mbox{\hyperlink{classPath_a9d701e9231022249523970101bbc749c}{getPoints}}();}
+\DoxyCodeLine{380     \textcolor{keywordtype}{int} n = points.size();}
+\DoxyCodeLine{381     \mbox{\hyperlink{classVector2D}{Vector2Df}} first\_point\{0, 0\}, cur\_point\{0, 0\};}
+\DoxyCodeLine{382 }
+\DoxyCodeLine{383     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < n; ++i) \{}
+\DoxyCodeLine{384         \textcolor{keywordflow}{if} (points[i].tc == \textcolor{charliteral}{'m'}) \{}
+\DoxyCodeLine{385             first\_point = points[i].point;}
+\DoxyCodeLine{386             gdi\_path.StartFigure();}
+\DoxyCodeLine{387             cur\_point = first\_point;}
+\DoxyCodeLine{388         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (points[i].tc == \textcolor{charliteral}{'l'} || points[i].tc == \textcolor{charliteral}{'h'} ||}
+\DoxyCodeLine{389                    points[i].tc == \textcolor{charliteral}{'v'}) \{}
+\DoxyCodeLine{390             gdi\_path.AddLine(cur\_point.x, cur\_point.y, points[i].point.x,}
+\DoxyCodeLine{391                              points[i].point.y);}
+\DoxyCodeLine{392             cur\_point = points[i].point;}
+\DoxyCodeLine{393         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (points[i].tc == \textcolor{charliteral}{'c'}) \{}
+\DoxyCodeLine{394             \textcolor{keywordflow}{if} (i + 2 < n) \{}
+\DoxyCodeLine{395                 \mbox{\hyperlink{classVector2D}{Vector2Df}} control\_point1 = points[i].point;}
+\DoxyCodeLine{396                 \mbox{\hyperlink{classVector2D}{Vector2Df}} control\_point2 = points[i + 1].point;}
+\DoxyCodeLine{397                 \mbox{\hyperlink{classVector2D}{Vector2Df}} control\_point3 = points[i + 2].point;}
+\DoxyCodeLine{398                 gdi\_path.AddBezier(cur\_point.x, cur\_point.y, control\_point1.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}},}
+\DoxyCodeLine{399                                    control\_point1.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}}, control\_point2.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}},}
+\DoxyCodeLine{400                                    control\_point2.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}}, control\_point3.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}},}
+\DoxyCodeLine{401                                    control\_point3.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}});}
+\DoxyCodeLine{402                 i += 2;}
+\DoxyCodeLine{403                 cur\_point = control\_point3;}
+\DoxyCodeLine{404             \}}
+\DoxyCodeLine{405         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (points[i].tc == \textcolor{charliteral}{'z'}) \{}
+\DoxyCodeLine{406             gdi\_path.CloseFigure();}
+\DoxyCodeLine{407             cur\_point = first\_point;}
+\DoxyCodeLine{408         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (points[i].tc == \textcolor{charliteral}{'s'}) \{}
+\DoxyCodeLine{409             \textcolor{keywordflow}{if} (i + 1 < n) \{}
+\DoxyCodeLine{410                 \mbox{\hyperlink{classVector2D}{Vector2Df}} auto\_control\_point;}
+\DoxyCodeLine{411                 \textcolor{keywordflow}{if} (i > 0 \&\&}
+\DoxyCodeLine{412                     (points[i -\/ 1].tc == \textcolor{charliteral}{'c'} || points[i -\/ 1].tc == \textcolor{charliteral}{'s'})) \{}
+\DoxyCodeLine{413                     auto\_control\_point.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} =}
+\DoxyCodeLine{414                         cur\_point.x * 2 -\/ points[i -\/ 2].point.x;}
+\DoxyCodeLine{415                     auto\_control\_point.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}} =}
+\DoxyCodeLine{416                         cur\_point.y * 2 -\/ points[i -\/ 2].point.y;}
+\DoxyCodeLine{417                 \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{418                     auto\_control\_point = cur\_point;}
+\DoxyCodeLine{419                 \}}
+\DoxyCodeLine{420                 \mbox{\hyperlink{classVector2D}{Vector2Df}} control\_point2 = points[i].point;}
+\DoxyCodeLine{421                 \mbox{\hyperlink{classVector2D}{Vector2Df}} control\_point3 = points[i + 1].point;}
+\DoxyCodeLine{422                 gdi\_path.AddBezier(cur\_point.x, cur\_point.y,}
+\DoxyCodeLine{423                                    auto\_control\_point.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}}, auto\_control\_point.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}},}
+\DoxyCodeLine{424                                    control\_point2.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}}, control\_point2.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}},}
+\DoxyCodeLine{425                                    control\_point3.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}}, control\_point3.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}});}
+\DoxyCodeLine{426                 i += 1;}
+\DoxyCodeLine{427                 cur\_point = control\_point3;}
+\DoxyCodeLine{428             \}}
+\DoxyCodeLine{429         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (points[i].tc == \textcolor{charliteral}{'q'}) \{}
+\DoxyCodeLine{430             \textcolor{keywordflow}{if} (i + 1 < n) \{}
+\DoxyCodeLine{431                 \mbox{\hyperlink{classVector2D}{Vector2Df}} control\_point = points[i].point;}
+\DoxyCodeLine{432                 \mbox{\hyperlink{classVector2D}{Vector2Df}} end\_point = points[i + 1].point;}
+\DoxyCodeLine{433 }
+\DoxyCodeLine{434                 Gdiplus::PointF q\_points[3];}
+\DoxyCodeLine{435                 q\_points[0] = Gdiplus::PointF\{cur\_point.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}}, cur\_point.y\};}
+\DoxyCodeLine{436                 q\_points[1] = Gdiplus::PointF\{control\_point.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}}, control\_point.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}}\};}
+\DoxyCodeLine{437                 q\_points[2] = Gdiplus::PointF\{end\_point.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}}, end\_point.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}}\};}
+\DoxyCodeLine{438                 gdi\_path.AddCurve(q\_points, 3);}
+\DoxyCodeLine{439                 cur\_point = points[i + 1].point;}
+\DoxyCodeLine{440                 i += 1;}
+\DoxyCodeLine{441             \}}
+\DoxyCodeLine{442         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (points[i].tc == \textcolor{charliteral}{'t'}) \{}
+\DoxyCodeLine{443             \mbox{\hyperlink{classVector2D}{Vector2Df}} auto\_control\_point;}
+\DoxyCodeLine{444             \textcolor{keywordflow}{if} (i > 0 \&\& (points[i -\/ 1].tc == \textcolor{charliteral}{'q'} || points[i -\/ 1].tc == \textcolor{charliteral}{'t'})) \{}
+\DoxyCodeLine{445                 auto\_control\_point.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} = cur\_point.x * 2 -\/ points[i -\/ 2].point.x;}
+\DoxyCodeLine{446                 auto\_control\_point.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}} = cur\_point.y * 2 -\/ points[i -\/ 2].point.y;}
+\DoxyCodeLine{447             \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{448                 auto\_control\_point = cur\_point;}
+\DoxyCodeLine{449             \}}
+\DoxyCodeLine{450             \mbox{\hyperlink{classVector2D}{Vector2Df}} end\_point = points[i].point;}
+\DoxyCodeLine{451             Gdiplus::PointF t\_points[3];}
+\DoxyCodeLine{452             t\_points[0] = Gdiplus::PointF\{cur\_point.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}}, cur\_point.y\};}
+\DoxyCodeLine{453             t\_points[1] =}
+\DoxyCodeLine{454                 Gdiplus::PointF\{auto\_control\_point.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}}, auto\_control\_point.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}}\};}
+\DoxyCodeLine{455             t\_points[2] = Gdiplus::PointF\{end\_point.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}}, end\_point.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}}\};}
+\DoxyCodeLine{456             gdi\_path.AddCurve(t\_points, 3);}
+\DoxyCodeLine{457             cur\_point = points[i].point;}
+\DoxyCodeLine{458         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (points[i].tc == \textcolor{charliteral}{'a'}) \{}
+\DoxyCodeLine{459             \textcolor{keywordtype}{float} rx = points[i].radius.x;}
+\DoxyCodeLine{460             \textcolor{keywordtype}{float} ry = points[i].radius.y;}
+\DoxyCodeLine{461             \textcolor{keywordflow}{if} (rx == 0 || ry == 0) \{}
+\DoxyCodeLine{462                 gdi\_path.AddLine(cur\_point.x, cur\_point.y, points[i].point.x,}
+\DoxyCodeLine{463                                  points[i].point.y);}
+\DoxyCodeLine{464                 cur\_point = points[i].point;}
+\DoxyCodeLine{465                 \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{466             \}}
+\DoxyCodeLine{467             \textcolor{keywordflow}{if} (rx < 0) \{}
+\DoxyCodeLine{468                 rx = std::fabs(rx);}
+\DoxyCodeLine{469             \}}
+\DoxyCodeLine{470             \textcolor{keywordflow}{if} (ry < 0) \{}
+\DoxyCodeLine{471                 ry = std::fabs(ry);}
+\DoxyCodeLine{472             \}}
+\DoxyCodeLine{473 }
+\DoxyCodeLine{474             \textcolor{keywordtype}{float} x\_axis\_rotation = points[i].x\_axis\_rotation;}
+\DoxyCodeLine{475             \textcolor{keywordtype}{bool} large\_arc\_flag = points[i].large\_arc\_flag;}
+\DoxyCodeLine{476             \textcolor{keywordtype}{bool} sweep\_flag = points[i].sweep\_flag;}
+\DoxyCodeLine{477             \mbox{\hyperlink{classVector2D}{Vector2Df}} end\_point\{points[i].point.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}}, points[i].point.y\};}
+\DoxyCodeLine{478 }
+\DoxyCodeLine{479             \textcolor{keywordtype}{float} angle = x\_axis\_rotation * acos(-\/1) / 180.0;}
+\DoxyCodeLine{480             \textcolor{keywordtype}{float} cosAngle = cos(angle);}
+\DoxyCodeLine{481             \textcolor{keywordtype}{float} sinAngle = sin(angle);}
+\DoxyCodeLine{482 }
+\DoxyCodeLine{483             \mbox{\hyperlink{classVector2D}{Vector2Df}} point1;}
+\DoxyCodeLine{484             \textcolor{keywordtype}{float} X = (cur\_point.x -\/ end\_point.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}}) / 2.0;}
+\DoxyCodeLine{485             \textcolor{keywordtype}{float} Y = (cur\_point.y -\/ end\_point.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}}) / 2.0;}
+\DoxyCodeLine{486             point1.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} = (cosAngle * cosAngle + sinAngle * sinAngle) * X;}
+\DoxyCodeLine{487             point1.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}} = (cosAngle * cosAngle + sinAngle * sinAngle) * Y;}
+\DoxyCodeLine{488 }
+\DoxyCodeLine{489             \textcolor{keywordtype}{float} radii\_check = (point1.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} * point1.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}}) / (rx * rx) +}
+\DoxyCodeLine{490                                 (point1.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}} * point1.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}}) / (ry * ry);}
+\DoxyCodeLine{491             \textcolor{keywordflow}{if} (radii\_check > 1.0) \{}
+\DoxyCodeLine{492                 rx = std::sqrt(radii\_check) * rx;}
+\DoxyCodeLine{493                 ry = std::sqrt(radii\_check) * ry;}
+\DoxyCodeLine{494             \}}
+\DoxyCodeLine{495 }
+\DoxyCodeLine{496             \textcolor{keywordtype}{float} sign = (large\_arc\_flag == sweep\_flag ? -\/1.0 : 1.0);}
+\DoxyCodeLine{497             \mbox{\hyperlink{classVector2D}{Vector2Df}} point2;}
+\DoxyCodeLine{498             \textcolor{keywordtype}{float} numo = (rx * rx) * (ry * ry) -\/}
+\DoxyCodeLine{499                          (rx * rx) * (point1.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}} * point1.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}}) -\/}
+\DoxyCodeLine{500                          (ry * ry) * (point1.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} * point1.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}});}
+\DoxyCodeLine{501             \textcolor{keywordtype}{float} deno = (rx * rx) * (point1.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}} * point1.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}}) +}
+\DoxyCodeLine{502                          (ry * ry) * (point1.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} * point1.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}});}
+\DoxyCodeLine{503 }
+\DoxyCodeLine{504             \textcolor{keywordflow}{if} (numo < 0) \{}
+\DoxyCodeLine{505                 numo = std::fabs(numo);}
+\DoxyCodeLine{506             \}}
+\DoxyCodeLine{507 }
+\DoxyCodeLine{508             point2.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} = sign * std::sqrt(numo / deno) * ((rx * point1.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}}) / ry);}
+\DoxyCodeLine{509             point2.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}} = sign * std::sqrt(numo / deno) * ((-\/ry * point1.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}}) / rx);}
+\DoxyCodeLine{510 }
+\DoxyCodeLine{511             \mbox{\hyperlink{classVector2D}{Vector2Df}} center;}
+\DoxyCodeLine{512             X = (cur\_point.x + end\_point.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}}) / 2.0;}
+\DoxyCodeLine{513             Y = (cur\_point.y + end\_point.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}}) / 2.0;}
+\DoxyCodeLine{514             center.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} =}
+\DoxyCodeLine{515                 (cosAngle * cosAngle + sinAngle * sinAngle) * point2.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} + X;}
+\DoxyCodeLine{516             center.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}} =}
+\DoxyCodeLine{517                 (cosAngle * cosAngle + sinAngle * sinAngle) * point2.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}} + Y;}
+\DoxyCodeLine{518 }
+\DoxyCodeLine{519             \textcolor{keywordtype}{float} start\_angle =}
+\DoxyCodeLine{520                 atan2((point1.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}} -\/ point2.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}}) / ry, (point1.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} -\/ point2.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}}) / rx);}
+\DoxyCodeLine{521             \textcolor{keywordtype}{float} end\_angle =}
+\DoxyCodeLine{522                 atan2((-\/point1.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}} -\/ point2.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}}) / ry, (-\/point1.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} -\/ point2.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}}) / rx);}
+\DoxyCodeLine{523 }
+\DoxyCodeLine{524             \textcolor{keywordtype}{float} delta\_angle = end\_angle -\/ start\_angle;}
+\DoxyCodeLine{525 }
+\DoxyCodeLine{526             \textcolor{keywordflow}{if} (sweep\_flag \&\& delta\_angle < 0) \{}
+\DoxyCodeLine{527                 delta\_angle += 2.0 * acos(-\/1);}
+\DoxyCodeLine{528             \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (!sweep\_flag \&\& delta\_angle > 0) \{}
+\DoxyCodeLine{529                 delta\_angle -\/= 2.0 * acos(-\/1);}
+\DoxyCodeLine{530             \}}
+\DoxyCodeLine{531 }
+\DoxyCodeLine{532             \textcolor{keywordtype}{float} start\_angle\_degree =}
+\DoxyCodeLine{533                 std::fmod((start\_angle * 180.0) / acos(-\/1), 360);}
+\DoxyCodeLine{534             \textcolor{keywordtype}{float} delta\_angle\_degree =}
+\DoxyCodeLine{535                 std::fmod((delta\_angle * 180.0) / acos(-\/1), 360);}
+\DoxyCodeLine{536 }
+\DoxyCodeLine{537             gdi\_path.AddArc(center.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} -\/ rx, center.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}} -\/ ry, 2.0 * rx, 2.0 * ry,}
+\DoxyCodeLine{538                             start\_angle\_degree, delta\_angle\_degree);}
+\DoxyCodeLine{539 }
+\DoxyCodeLine{540             cur\_point = end\_point;}
+\DoxyCodeLine{541         \}}
+\DoxyCodeLine{542     \}}
+\DoxyCodeLine{543 }
+\DoxyCodeLine{544     Gdiplus::RectF bound;}
+\DoxyCodeLine{545     gdi\_path.GetBounds(\&bound);}
+\DoxyCodeLine{546     Gdiplus::Brush* path\_fill = \mbox{\hyperlink{classRenderer_a7539832835d19ee365dcbabf490d642c}{getBrush}}(path, bound);}
+\DoxyCodeLine{547     Gdiplus::Region region(\&gdi\_path);}
+\DoxyCodeLine{548     \textcolor{keywordflow}{if} (Gdiplus::PathGradientBrush* brush =}
+\DoxyCodeLine{549             \textcolor{keyword}{dynamic\_cast<} Gdiplus::PathGradientBrush* \textcolor{keyword}{>}(path\_fill)) \{}
+\DoxyCodeLine{550         \mbox{\hyperlink{classmColor}{mColor}} color = path-\/>\mbox{\hyperlink{classSVGElement_a9b64e7697c24a6972aacb01b89c0e542}{getGradient}}()-\/>\mbox{\hyperlink{classGradient_a1125c4e5294389bb6698bf4fcb4f928d}{getStops}}().back().getColor();}
+\DoxyCodeLine{551         Gdiplus::SolidBrush corner\_fill(}
+\DoxyCodeLine{552             Gdiplus::Color(color.\mbox{\hyperlink{classmColor_ac086aa72806b8ce55fed3df9ba976f6c}{a}}, color.\mbox{\hyperlink{classmColor_a427453d377b30c62f7d25f47120959d6}{r}}, color.\mbox{\hyperlink{classmColor_a0cd1254821d108bb8c5be8ec5536f8ec}{g}}, color.\mbox{\hyperlink{classmColor_ad56f2424fa451364becdc4d1c4df657c}{b}}));}
+\DoxyCodeLine{553         \textcolor{keywordflow}{if} (path-\/>\mbox{\hyperlink{classSVGElement_a9b64e7697c24a6972aacb01b89c0e542}{getGradient}}()-\/>\mbox{\hyperlink{classGradient_a54cc5770c2dce46f1d56bcfb63285173}{getUnits}}() == \textcolor{stringliteral}{"{}userSpaceOnUse"{}}) \{}
+\DoxyCodeLine{554             \textcolor{keywordtype}{float} cx = path-\/>\mbox{\hyperlink{classSVGElement_a9b64e7697c24a6972aacb01b89c0e542}{getGradient}}()-\/>\mbox{\hyperlink{classGradient_aced479d6a10d2aa53e6d363e1df5dc08}{getPoints}}().first.x;}
+\DoxyCodeLine{555             \textcolor{keywordtype}{float} cy = path-\/>\mbox{\hyperlink{classSVGElement_a9b64e7697c24a6972aacb01b89c0e542}{getGradient}}()-\/>\mbox{\hyperlink{classGradient_aced479d6a10d2aa53e6d363e1df5dc08}{getPoints}}().first.y;}
+\DoxyCodeLine{556             \textcolor{keywordtype}{float} r = \textcolor{keyword}{dynamic\_cast<} \mbox{\hyperlink{classRadialGradient}{RadialGradient}}* \textcolor{keyword}{>}(path-\/>\mbox{\hyperlink{classSVGElement_a9b64e7697c24a6972aacb01b89c0e542}{getGradient}}())}
+\DoxyCodeLine{557                           -\/>getRadius()}
+\DoxyCodeLine{558                           .x;}
+\DoxyCodeLine{559             Gdiplus::GraphicsPath fill\_path(fill\_mode);}
+\DoxyCodeLine{560             fill\_path.AddEllipse(cx -\/ r, cy -\/ r, 2 * r, 2 * r);}
+\DoxyCodeLine{561             \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} type : path-\/>\mbox{\hyperlink{classSVGElement_a9b64e7697c24a6972aacb01b89c0e542}{getGradient}}()-\/>\mbox{\hyperlink{classGradient_adf0e8b360f2b8e6edc1059002f85b1c1}{getTransforms}}()) \{}
+\DoxyCodeLine{562                 \textcolor{keywordflow}{if} (type.find(\textcolor{stringliteral}{"{}matrix"{}}) != std::string::npos) \{}
+\DoxyCodeLine{563                     \textcolor{keywordtype}{float} a = 0, b = 0, c = 0, d = 0, e = 0, f = 0;}
+\DoxyCodeLine{564                     \textcolor{keywordflow}{if} (type.find(\textcolor{stringliteral}{"{},"{}}) != std::string::npos) \{}
+\DoxyCodeLine{565                         type.erase(std::remove(type.begin(), type.end(), \textcolor{charliteral}{','}),}
+\DoxyCodeLine{566                                    type.end());}
+\DoxyCodeLine{567                     \}}
+\DoxyCodeLine{568                     sscanf(type.c\_str(), \textcolor{stringliteral}{"{}matrix(\%f \%f \%f \%f \%f \%f)"{}}, \&a, \&b,}
+\DoxyCodeLine{569                            \&c, \&d, \&e, \&f);}
+\DoxyCodeLine{570                     Gdiplus::Matrix matrix(a, b, c, d, e, f);}
+\DoxyCodeLine{571                     fill\_path.Transform(\&matrix);}
+\DoxyCodeLine{572                 \}}
+\DoxyCodeLine{573             \}}
+\DoxyCodeLine{574             region.Exclude(\&fill\_path);}
+\DoxyCodeLine{575         \}}
+\DoxyCodeLine{576         graphics.FillRegion(\&corner\_fill, \&region);}
+\DoxyCodeLine{577     \}}
+\DoxyCodeLine{578     graphics.FillPath(path\_fill, \&gdi\_path);}
+\DoxyCodeLine{579     graphics.DrawPath(\&path\_outline, \&gdi\_path);}
+\DoxyCodeLine{580     \textcolor{keyword}{delete} path\_fill;}
+\DoxyCodeLine{581 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classRenderer_a27b883787b8f38afd04924edc97b5a04}\label{classRenderer_a27b883787b8f38afd04924edc97b5a04}} 
+\index{Renderer@{Renderer}!drawPolygon@{drawPolygon}}
+\index{drawPolygon@{drawPolygon}!Renderer@{Renderer}}
+\doxysubsubsection{\texorpdfstring{drawPolygon()}{drawPolygon()}}
+{\footnotesize\ttfamily void Renderer\+::draw\+Polygon (\begin{DoxyParamCaption}\item[{Gdiplus\+::\+Graphics \&}]{graphics,  }\item[{\mbox{\hyperlink{classPlygon}{Plygon}} $\ast$}]{polygon }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Draws a polygon shape using Gdiplus\+::\+Graphics. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em graphics} & The Gdiplus\+::\+Graphics context for drawing. \\
+\hline
+{\em polygon} & The \mbox{\hyperlink{classPlygon}{Plygon}} object representing the polygon to be drawn. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 229 of file Renderer.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{229                                                                            \{}
+\DoxyCodeLine{230     \mbox{\hyperlink{classmColor}{mColor}} outline\_color = polygon-\/>\mbox{\hyperlink{classSVGElement_a9a243b2b8464d57df28f3f3e8c52511e}{getOutlineColor}}();}
+\DoxyCodeLine{231     Gdiplus::Pen polygon\_outline(}
+\DoxyCodeLine{232         Gdiplus::Color(outline\_color.\mbox{\hyperlink{classmColor_ac086aa72806b8ce55fed3df9ba976f6c}{a}}, outline\_color.\mbox{\hyperlink{classmColor_a427453d377b30c62f7d25f47120959d6}{r}}, outline\_color.\mbox{\hyperlink{classmColor_a0cd1254821d108bb8c5be8ec5536f8ec}{g}},}
+\DoxyCodeLine{233                        outline\_color.\mbox{\hyperlink{classmColor_ad56f2424fa451364becdc4d1c4df657c}{b}}),}
+\DoxyCodeLine{234         polygon-\/>\mbox{\hyperlink{classSVGElement_a2e4b1a48bfbc34a6a9f17bfd4b89eb51}{getOutlineThickness}}());}
+\DoxyCodeLine{235 }
+\DoxyCodeLine{236     Gdiplus::PointF* points = \textcolor{keyword}{new} Gdiplus::PointF[polygon-\/>\mbox{\hyperlink{classPolyShape_a27704ef9fd50c041d1d233e9d99a4fd4}{getPoints}}().size()];}
+\DoxyCodeLine{237     \textcolor{keywordtype}{int} idx = 0;}
+\DoxyCodeLine{238     \textcolor{keyword}{const} std::vector< Vector2Df >\& vertices = polygon-\/>\mbox{\hyperlink{classPolyShape_a27704ef9fd50c041d1d233e9d99a4fd4}{getPoints}}();}
+\DoxyCodeLine{239     \textcolor{keywordflow}{for} (\textcolor{keyword}{const} \mbox{\hyperlink{classVector2D}{Vector2Df}} vertex : vertices) \{}
+\DoxyCodeLine{240         points[idx++] = Gdiplus::PointF(vertex.x, vertex.y);}
+\DoxyCodeLine{241     \}}
+\DoxyCodeLine{242 }
+\DoxyCodeLine{243     Gdiplus::FillMode fill\_mode;}
+\DoxyCodeLine{244     \textcolor{keywordflow}{if} (polygon-\/>\mbox{\hyperlink{classPolyShape_acac99a28e69ee5020eed782175a5a355}{getFillRule}}() == \textcolor{stringliteral}{"{}evenodd"{}}) \{}
+\DoxyCodeLine{245         fill\_mode = Gdiplus::FillModeAlternate;}
+\DoxyCodeLine{246     \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (polygon-\/>\mbox{\hyperlink{classPolyShape_acac99a28e69ee5020eed782175a5a355}{getFillRule}}() == \textcolor{stringliteral}{"{}nonzero"{}}) \{}
+\DoxyCodeLine{247         fill\_mode = Gdiplus::FillModeWinding;}
+\DoxyCodeLine{248     \}}
+\DoxyCodeLine{249     \mbox{\hyperlink{classVector2D}{Vector2Df}} min\_bound = polygon-\/>\mbox{\hyperlink{classPolyShape_a0ad83e0129196572f99302830e0c9049}{getMinBound}}();}
+\DoxyCodeLine{250     \mbox{\hyperlink{classVector2D}{Vector2Df}} max\_bound = polygon-\/>\mbox{\hyperlink{classPolyShape_a6ddda72dc27d7aade0ed444a52d7689f}{getMaxBound}}();}
+\DoxyCodeLine{251     Gdiplus::RectF bound(min\_bound.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}}, min\_bound.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}}, max\_bound.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} -\/ min\_bound.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}},}
+\DoxyCodeLine{252                          max\_bound.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}} -\/ min\_bound.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}});}
+\DoxyCodeLine{253     Gdiplus::Brush* polygon\_fill = \mbox{\hyperlink{classRenderer_a7539832835d19ee365dcbabf490d642c}{getBrush}}(polygon, bound);}
+\DoxyCodeLine{254     \textcolor{keywordflow}{if} (Gdiplus::PathGradientBrush* brush =}
+\DoxyCodeLine{255             \textcolor{keyword}{dynamic\_cast<} Gdiplus::PathGradientBrush* \textcolor{keyword}{>}(polygon\_fill)) \{}
+\DoxyCodeLine{256         \mbox{\hyperlink{classmColor}{mColor}} color = polygon-\/>\mbox{\hyperlink{classSVGElement_a9b64e7697c24a6972aacb01b89c0e542}{getGradient}}()-\/>\mbox{\hyperlink{classGradient_a1125c4e5294389bb6698bf4fcb4f928d}{getStops}}().back().getColor();}
+\DoxyCodeLine{257         Gdiplus::SolidBrush corner\_fill(}
+\DoxyCodeLine{258             Gdiplus::Color(color.\mbox{\hyperlink{classmColor_ac086aa72806b8ce55fed3df9ba976f6c}{a}}, color.\mbox{\hyperlink{classmColor_a427453d377b30c62f7d25f47120959d6}{r}}, color.\mbox{\hyperlink{classmColor_a0cd1254821d108bb8c5be8ec5536f8ec}{g}}, color.\mbox{\hyperlink{classmColor_ad56f2424fa451364becdc4d1c4df657c}{b}}));}
+\DoxyCodeLine{259         graphics.FillPolygon(\&corner\_fill, points, idx, fill\_mode);}
+\DoxyCodeLine{260     \}}
+\DoxyCodeLine{261     graphics.FillPolygon(polygon\_fill, points, idx, fill\_mode);}
+\DoxyCodeLine{262     graphics.DrawPolygon(\&polygon\_outline, points, idx);}
+\DoxyCodeLine{263     \textcolor{keyword}{delete}[] points;}
+\DoxyCodeLine{264     \textcolor{keyword}{delete} polygon\_fill;}
+\DoxyCodeLine{265 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classRenderer_a4e73148b7da0f585084520d12c514344}\label{classRenderer_a4e73148b7da0f585084520d12c514344}} 
+\index{Renderer@{Renderer}!drawPolyline@{drawPolyline}}
+\index{drawPolyline@{drawPolyline}!Renderer@{Renderer}}
+\doxysubsubsection{\texorpdfstring{drawPolyline()}{drawPolyline()}}
+{\footnotesize\ttfamily void Renderer\+::draw\+Polyline (\begin{DoxyParamCaption}\item[{Gdiplus\+::\+Graphics \&}]{graphics,  }\item[{\mbox{\hyperlink{classPlyline}{Plyline}} $\ast$}]{polyline }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Draws a polyline shape using Gdiplus\+::\+Graphics. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em graphics} & The Gdiplus\+::\+Graphics context for drawing. \\
+\hline
+{\em polyline} & The \mbox{\hyperlink{classPlyline}{Plyline}} object representing the polyline to be drawn. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 322 of file Renderer.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{323                                                      \{}
+\DoxyCodeLine{324     \mbox{\hyperlink{classmColor}{mColor}} outline\_color = polyline-\/>\mbox{\hyperlink{classSVGElement_a9a243b2b8464d57df28f3f3e8c52511e}{getOutlineColor}}();}
+\DoxyCodeLine{325     Gdiplus::Pen polyline\_outline(}
+\DoxyCodeLine{326         Gdiplus::Color(outline\_color.\mbox{\hyperlink{classmColor_ac086aa72806b8ce55fed3df9ba976f6c}{a}}, outline\_color.\mbox{\hyperlink{classmColor_a427453d377b30c62f7d25f47120959d6}{r}}, outline\_color.\mbox{\hyperlink{classmColor_a0cd1254821d108bb8c5be8ec5536f8ec}{g}},}
+\DoxyCodeLine{327                        outline\_color.\mbox{\hyperlink{classmColor_ad56f2424fa451364becdc4d1c4df657c}{b}}),}
+\DoxyCodeLine{328         polyline-\/>\mbox{\hyperlink{classSVGElement_a2e4b1a48bfbc34a6a9f17bfd4b89eb51}{getOutlineThickness}}());}
+\DoxyCodeLine{329 }
+\DoxyCodeLine{330     Gdiplus::FillMode fill\_mode;}
+\DoxyCodeLine{331     \textcolor{keywordflow}{if} (polyline-\/>\mbox{\hyperlink{classPolyShape_acac99a28e69ee5020eed782175a5a355}{getFillRule}}() == \textcolor{stringliteral}{"{}evenodd"{}}) \{}
+\DoxyCodeLine{332         fill\_mode = Gdiplus::FillModeAlternate;}
+\DoxyCodeLine{333     \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (polyline-\/>\mbox{\hyperlink{classPolyShape_acac99a28e69ee5020eed782175a5a355}{getFillRule}}() == \textcolor{stringliteral}{"{}nonzero"{}}) \{}
+\DoxyCodeLine{334         fill\_mode = Gdiplus::FillModeWinding;}
+\DoxyCodeLine{335     \}}
+\DoxyCodeLine{336     Gdiplus::GraphicsPath path(fill\_mode);}
+\DoxyCodeLine{337     \textcolor{keyword}{const} std::vector< Vector2Df >\& points = polyline-\/>\mbox{\hyperlink{classPolyShape_a27704ef9fd50c041d1d233e9d99a4fd4}{getPoints}}();}
+\DoxyCodeLine{338     \textcolor{keywordflow}{if} (points.size() < 2) \{}
+\DoxyCodeLine{339         \textcolor{keywordflow}{return};}
+\DoxyCodeLine{340     \}}
+\DoxyCodeLine{341 }
+\DoxyCodeLine{342     path.StartFigure();}
+\DoxyCodeLine{343     path.AddLine(points[0].x, points[0].y, points[1].x, points[1].y);}
+\DoxyCodeLine{344     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 2; i < points.size(); ++i) \{}
+\DoxyCodeLine{345         path.AddLine(points[i -\/ 1].x, points[i -\/ 1].y, points[i].x,}
+\DoxyCodeLine{346                      points[i].y);}
+\DoxyCodeLine{347     \}}
+\DoxyCodeLine{348     \mbox{\hyperlink{classVector2D}{Vector2Df}} min\_bound = polyline-\/>\mbox{\hyperlink{classPolyShape_a0ad83e0129196572f99302830e0c9049}{getMinBound}}();}
+\DoxyCodeLine{349     \mbox{\hyperlink{classVector2D}{Vector2Df}} max\_bound = polyline-\/>\mbox{\hyperlink{classPolyShape_a6ddda72dc27d7aade0ed444a52d7689f}{getMaxBound}}();}
+\DoxyCodeLine{350     Gdiplus::RectF bound(min\_bound.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}}, min\_bound.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}}, max\_bound.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} -\/ min\_bound.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}},}
+\DoxyCodeLine{351                          max\_bound.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}} -\/ min\_bound.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}});}
+\DoxyCodeLine{352     Gdiplus::Brush* polyline\_fill = \mbox{\hyperlink{classRenderer_a7539832835d19ee365dcbabf490d642c}{getBrush}}(polyline, bound);}
+\DoxyCodeLine{353     \textcolor{keywordflow}{if} (Gdiplus::PathGradientBrush* brush =}
+\DoxyCodeLine{354             \textcolor{keyword}{dynamic\_cast<} Gdiplus::PathGradientBrush* \textcolor{keyword}{>}(polyline\_fill)) \{}
+\DoxyCodeLine{355         \mbox{\hyperlink{classmColor}{mColor}} color = polyline-\/>\mbox{\hyperlink{classSVGElement_a9b64e7697c24a6972aacb01b89c0e542}{getGradient}}()-\/>\mbox{\hyperlink{classGradient_a1125c4e5294389bb6698bf4fcb4f928d}{getStops}}().back().getColor();}
+\DoxyCodeLine{356         Gdiplus::SolidBrush corner\_fill(}
+\DoxyCodeLine{357             Gdiplus::Color(color.\mbox{\hyperlink{classmColor_ac086aa72806b8ce55fed3df9ba976f6c}{a}}, color.\mbox{\hyperlink{classmColor_a427453d377b30c62f7d25f47120959d6}{r}}, color.\mbox{\hyperlink{classmColor_a0cd1254821d108bb8c5be8ec5536f8ec}{g}}, color.\mbox{\hyperlink{classmColor_ad56f2424fa451364becdc4d1c4df657c}{b}}));}
+\DoxyCodeLine{358         graphics.FillPath(\&corner\_fill, \&path);}
+\DoxyCodeLine{359     \}}
+\DoxyCodeLine{360     graphics.FillPath(polyline\_fill, \&path);}
+\DoxyCodeLine{361     graphics.DrawPath(\&polyline\_outline, \&path);}
+\DoxyCodeLine{362     \textcolor{keyword}{delete} polyline\_fill;}
+\DoxyCodeLine{363 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classRenderer_abf163a7895594e0a4ee5662805b1b572}\label{classRenderer_abf163a7895594e0a4ee5662805b1b572}} 
+\index{Renderer@{Renderer}!drawRectangle@{drawRectangle}}
+\index{drawRectangle@{drawRectangle}!Renderer@{Renderer}}
+\doxysubsubsection{\texorpdfstring{drawRectangle()}{drawRectangle()}}
+{\footnotesize\ttfamily void Renderer\+::draw\+Rectangle (\begin{DoxyParamCaption}\item[{Gdiplus\+::\+Graphics \&}]{graphics,  }\item[{\mbox{\hyperlink{classRect}{Rect}} $\ast$}]{rectangle }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Draws a rectangle shape using Gdiplus\+::\+Graphics. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em graphics} & The Gdiplus\+::\+Graphics context for drawing. \\
+\hline
+{\em rectangle} & The \mbox{\hyperlink{classRect}{Rect}} object representing the rectangle to be drawn. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 119 of file Renderer.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{120                                                     \{}
+\DoxyCodeLine{121     \textcolor{keywordtype}{float} x = rectangle-\/>\mbox{\hyperlink{classSVGElement_a4e1ed8bb29fd4dbeb35471315976b3a2}{getPosition}}().\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}};}
+\DoxyCodeLine{122     \textcolor{keywordtype}{float} y = rectangle-\/>\mbox{\hyperlink{classSVGElement_a4e1ed8bb29fd4dbeb35471315976b3a2}{getPosition}}().\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}};}
+\DoxyCodeLine{123     \textcolor{keywordtype}{float} width = rectangle-\/>\mbox{\hyperlink{classRect_a9c1dd853ea5df8e7c96a11bba72cc67a}{getWidth}}();}
+\DoxyCodeLine{124     \textcolor{keywordtype}{float} height = rectangle-\/>\mbox{\hyperlink{classRect_a418fffe5bb9368f4e158b63e13faba16}{getHeight}}();}
+\DoxyCodeLine{125     \mbox{\hyperlink{classmColor}{mColor}} outline\_color = rectangle-\/>\mbox{\hyperlink{classSVGElement_a9a243b2b8464d57df28f3f3e8c52511e}{getOutlineColor}}();}
+\DoxyCodeLine{126     Gdiplus::Pen rect\_outline(Gdiplus::Color(outline\_color.\mbox{\hyperlink{classmColor_ac086aa72806b8ce55fed3df9ba976f6c}{a}}, outline\_color.\mbox{\hyperlink{classmColor_a427453d377b30c62f7d25f47120959d6}{r}},}
+\DoxyCodeLine{127                                              outline\_color.\mbox{\hyperlink{classmColor_a0cd1254821d108bb8c5be8ec5536f8ec}{g}}, outline\_color.\mbox{\hyperlink{classmColor_ad56f2424fa451364becdc4d1c4df657c}{b}}),}
+\DoxyCodeLine{128                               rectangle-\/>\mbox{\hyperlink{classSVGElement_a2e4b1a48bfbc34a6a9f17bfd4b89eb51}{getOutlineThickness}}());}
+\DoxyCodeLine{129     Gdiplus::RectF bound(x, y, width, height);}
+\DoxyCodeLine{130     Gdiplus::Brush* rect\_fill = \mbox{\hyperlink{classRenderer_a7539832835d19ee365dcbabf490d642c}{getBrush}}(rectangle, bound);}
+\DoxyCodeLine{131     \textcolor{keywordflow}{if} (rectangle-\/>\mbox{\hyperlink{classRect_a31ca84cc8755233b5e61d22189f637b0}{getRadius}}().\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} != 0 || rectangle-\/>\mbox{\hyperlink{classRect_a31ca84cc8755233b5e61d22189f637b0}{getRadius}}().\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}} != 0) \{}
+\DoxyCodeLine{132         \textcolor{keywordtype}{float} dx = rectangle-\/>\mbox{\hyperlink{classRect_a31ca84cc8755233b5e61d22189f637b0}{getRadius}}().\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} * 2;}
+\DoxyCodeLine{133         \textcolor{keywordtype}{float} dy = rectangle-\/>\mbox{\hyperlink{classRect_a31ca84cc8755233b5e61d22189f637b0}{getRadius}}().\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}} * 2;}
+\DoxyCodeLine{134         Gdiplus::GraphicsPath path;}
+\DoxyCodeLine{135         path.AddArc(x, y, dx, dy, 180, 90);}
+\DoxyCodeLine{136         path.AddArc(x + width -\/ dx, y, dx, dy, 270, 90);}
+\DoxyCodeLine{137         path.AddArc(x + width -\/ dx, y + height -\/ dy, dx, dy, 0, 90);}
+\DoxyCodeLine{138         path.AddArc(x, y + height -\/ dy, dx, dy, 90, 90);}
+\DoxyCodeLine{139         path.CloseFigure();}
+\DoxyCodeLine{140         \textcolor{keywordflow}{if} (Gdiplus::PathGradientBrush* brush =}
+\DoxyCodeLine{141                 \textcolor{keyword}{dynamic\_cast<} Gdiplus::PathGradientBrush* \textcolor{keyword}{>}(rect\_fill)) \{}
+\DoxyCodeLine{142             \mbox{\hyperlink{classmColor}{mColor}} color =}
+\DoxyCodeLine{143                 rectangle-\/>\mbox{\hyperlink{classSVGElement_a9b64e7697c24a6972aacb01b89c0e542}{getGradient}}()-\/>\mbox{\hyperlink{classGradient_a1125c4e5294389bb6698bf4fcb4f928d}{getStops}}().back().getColor();}
+\DoxyCodeLine{144             Gdiplus::SolidBrush corner\_fill(}
+\DoxyCodeLine{145                 Gdiplus::Color(color.\mbox{\hyperlink{classmColor_ac086aa72806b8ce55fed3df9ba976f6c}{a}}, color.\mbox{\hyperlink{classmColor_a427453d377b30c62f7d25f47120959d6}{r}}, color.\mbox{\hyperlink{classmColor_a0cd1254821d108bb8c5be8ec5536f8ec}{g}}, color.\mbox{\hyperlink{classmColor_ad56f2424fa451364becdc4d1c4df657c}{b}}));}
+\DoxyCodeLine{146             graphics.FillPath(\&corner\_fill, \&path);}
+\DoxyCodeLine{147         \}}
+\DoxyCodeLine{148         graphics.FillPath(rect\_fill, \&path);}
+\DoxyCodeLine{149         graphics.DrawPath(\&rect\_outline, \&path);}
+\DoxyCodeLine{150     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{151         \textcolor{keywordflow}{if} (Gdiplus::PathGradientBrush* brush =}
+\DoxyCodeLine{152                 \textcolor{keyword}{dynamic\_cast<} Gdiplus::PathGradientBrush* \textcolor{keyword}{>}(rect\_fill)) \{}
+\DoxyCodeLine{153             \mbox{\hyperlink{classmColor}{mColor}} color =}
+\DoxyCodeLine{154                 rectangle-\/>\mbox{\hyperlink{classSVGElement_a9b64e7697c24a6972aacb01b89c0e542}{getGradient}}()-\/>\mbox{\hyperlink{classGradient_a1125c4e5294389bb6698bf4fcb4f928d}{getStops}}().back().getColor();}
+\DoxyCodeLine{155             Gdiplus::SolidBrush corner\_fill(}
+\DoxyCodeLine{156                 Gdiplus::Color(color.\mbox{\hyperlink{classmColor_ac086aa72806b8ce55fed3df9ba976f6c}{a}}, color.\mbox{\hyperlink{classmColor_a427453d377b30c62f7d25f47120959d6}{r}}, color.\mbox{\hyperlink{classmColor_a0cd1254821d108bb8c5be8ec5536f8ec}{g}}, color.\mbox{\hyperlink{classmColor_ad56f2424fa451364becdc4d1c4df657c}{b}}));}
+\DoxyCodeLine{157             graphics.FillRectangle(\&corner\_fill, x, y, width, height);}
+\DoxyCodeLine{158         \}}
+\DoxyCodeLine{159         graphics.FillRectangle(rect\_fill, x, y, width, height);}
+\DoxyCodeLine{160         graphics.DrawRectangle(\&rect\_outline, x, y, width, height);}
+\DoxyCodeLine{161     \}}
+\DoxyCodeLine{162     \textcolor{keyword}{delete} rect\_fill;}
+\DoxyCodeLine{163 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classRenderer_a87ce996c3ed0f963de9ef6c293ee3aec}\label{classRenderer_a87ce996c3ed0f963de9ef6c293ee3aec}} 
+\index{Renderer@{Renderer}!drawText@{drawText}}
+\index{drawText@{drawText}!Renderer@{Renderer}}
+\doxysubsubsection{\texorpdfstring{drawText()}{drawText()}}
+{\footnotesize\ttfamily void Renderer\+::draw\+Text (\begin{DoxyParamCaption}\item[{Gdiplus\+::\+Graphics \&}]{graphics,  }\item[{\mbox{\hyperlink{classText}{Text}} $\ast$}]{text }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Draws text using Gdiplus\+::\+Graphics. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em graphics} & The Gdiplus\+::\+Graphics context for drawing. \\
+\hline
+{\em text} & The \mbox{\hyperlink{classText}{Text}} object representing the text to be drawn. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 267 of file Renderer.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{267                                                                    \{}
+\DoxyCodeLine{268     \mbox{\hyperlink{classmColor}{mColor}} outline\_color = text-\/>\mbox{\hyperlink{classSVGElement_a9a243b2b8464d57df28f3f3e8c52511e}{getOutlineColor}}();}
+\DoxyCodeLine{269     graphics.SetTextRenderingHint(Gdiplus::TextRenderingHintAntiAliasGridFit);}
+\DoxyCodeLine{270 }
+\DoxyCodeLine{271     Gdiplus::Pen text\_outline(Gdiplus::Color(outline\_color.\mbox{\hyperlink{classmColor_ac086aa72806b8ce55fed3df9ba976f6c}{a}}, outline\_color.\mbox{\hyperlink{classmColor_a427453d377b30c62f7d25f47120959d6}{r}},}
+\DoxyCodeLine{272                                              outline\_color.\mbox{\hyperlink{classmColor_a0cd1254821d108bb8c5be8ec5536f8ec}{g}}, outline\_color.\mbox{\hyperlink{classmColor_ad56f2424fa451364becdc4d1c4df657c}{b}}),}
+\DoxyCodeLine{273                               text-\/>\mbox{\hyperlink{classSVGElement_a2e4b1a48bfbc34a6a9f17bfd4b89eb51}{getOutlineThickness}}());}
+\DoxyCodeLine{274 }
+\DoxyCodeLine{275     Gdiplus::FontFamily font\_family(L\textcolor{stringliteral}{"{}Times New Roman"{}});}
+\DoxyCodeLine{276 }
+\DoxyCodeLine{277     Gdiplus::PointF position(text-\/>\mbox{\hyperlink{classSVGElement_a4e1ed8bb29fd4dbeb35471315976b3a2}{getPosition}}().\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}}, text-\/>\mbox{\hyperlink{classSVGElement_a4e1ed8bb29fd4dbeb35471315976b3a2}{getPosition}}().\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}});}
+\DoxyCodeLine{278     Gdiplus::GraphicsPath path;}
+\DoxyCodeLine{279 }
+\DoxyCodeLine{280     std::wstring\_convert< std::codecvt\_utf8\_utf16< wchar\_t > > converter;}
+\DoxyCodeLine{281     std::wstring wide\_content = converter.from\_bytes(text-\/>\mbox{\hyperlink{classText_ac593599637e5e7f0f929c59b440f1b94}{getContent}}());}
+\DoxyCodeLine{282     Gdiplus::StringFormat string\_format;}
+\DoxyCodeLine{283     \textcolor{keywordflow}{if} (text-\/>\mbox{\hyperlink{classText_a445117756f52b37ae8bce225e254bea6}{getAnchor}}() == \textcolor{stringliteral}{"{}middle"{}}) \{}
+\DoxyCodeLine{284         string\_format.SetAlignment(Gdiplus::StringAlignmentCenter);}
+\DoxyCodeLine{285         position.X += 7;}
+\DoxyCodeLine{286     \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (text-\/>\mbox{\hyperlink{classText_a445117756f52b37ae8bce225e254bea6}{getAnchor}}() == \textcolor{stringliteral}{"{}end"{}}) \{}
+\DoxyCodeLine{287         string\_format.SetAlignment(Gdiplus::StringAlignmentFar);}
+\DoxyCodeLine{288         position.X += 14;}
+\DoxyCodeLine{289     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{290         string\_format.SetAlignment(Gdiplus::StringAlignmentNear);}
+\DoxyCodeLine{291     \}}
+\DoxyCodeLine{292     Gdiplus::FontStyle font\_style = Gdiplus::FontStyleRegular;}
+\DoxyCodeLine{293     \textcolor{keywordflow}{if} (text-\/>\mbox{\hyperlink{classText_a86fd1927b692d6691c8dd3901b6f6e48}{getFontStyle}}() == \textcolor{stringliteral}{"{}italic"{}} || text-\/>\mbox{\hyperlink{classText_a86fd1927b692d6691c8dd3901b6f6e48}{getFontStyle}}() == \textcolor{stringliteral}{"{}oblique"{}}) \{}
+\DoxyCodeLine{294         font\_style = Gdiplus::FontStyleItalic;}
+\DoxyCodeLine{295         position.Y -\/= 1;}
+\DoxyCodeLine{296     \}}
+\DoxyCodeLine{297 }
+\DoxyCodeLine{298     path.AddString(wide\_content.c\_str(), wide\_content.size(), \&font\_family,}
+\DoxyCodeLine{299                    font\_style, text-\/>\mbox{\hyperlink{classText_a6e799a9b0ba6f88e704eea12599d3d5c}{getFontSize}}(), position, \&string\_format);}
+\DoxyCodeLine{300     Gdiplus::RectF bound;}
+\DoxyCodeLine{301     path.GetBounds(\&bound);}
+\DoxyCodeLine{302     Gdiplus::Brush* text\_fill = \mbox{\hyperlink{classRenderer_a7539832835d19ee365dcbabf490d642c}{getBrush}}(text, bound);}
+\DoxyCodeLine{303     \textcolor{keywordflow}{if} (Gdiplus::PathGradientBrush* brush =}
+\DoxyCodeLine{304             \textcolor{keyword}{dynamic\_cast<} Gdiplus::PathGradientBrush* \textcolor{keyword}{>}(text\_fill)) \{}
+\DoxyCodeLine{305         \mbox{\hyperlink{classmColor}{mColor}} color = text-\/>\mbox{\hyperlink{classSVGElement_a9b64e7697c24a6972aacb01b89c0e542}{getGradient}}()-\/>\mbox{\hyperlink{classGradient_a1125c4e5294389bb6698bf4fcb4f928d}{getStops}}().back().getColor();}
+\DoxyCodeLine{306         Gdiplus::SolidBrush corner\_fill(}
+\DoxyCodeLine{307             Gdiplus::Color(color.\mbox{\hyperlink{classmColor_ac086aa72806b8ce55fed3df9ba976f6c}{a}}, color.\mbox{\hyperlink{classmColor_a427453d377b30c62f7d25f47120959d6}{r}}, color.\mbox{\hyperlink{classmColor_a0cd1254821d108bb8c5be8ec5536f8ec}{g}}, color.\mbox{\hyperlink{classmColor_ad56f2424fa451364becdc4d1c4df657c}{b}}));}
+\DoxyCodeLine{308         graphics.FillPath(\&corner\_fill, \&path);}
+\DoxyCodeLine{309     \}}
+\DoxyCodeLine{310     graphics.FillPath(text\_fill, \&path);}
+\DoxyCodeLine{311     \textcolor{keywordflow}{if} (text-\/>\mbox{\hyperlink{classSVGElement_a9a243b2b8464d57df28f3f3e8c52511e}{getOutlineColor}}().\mbox{\hyperlink{classmColor_ac086aa72806b8ce55fed3df9ba976f6c}{a}} != 0 \&\&}
+\DoxyCodeLine{312         text-\/>\mbox{\hyperlink{classSVGElement_a9a243b2b8464d57df28f3f3e8c52511e}{getOutlineColor}}().\mbox{\hyperlink{classmColor_ac086aa72806b8ce55fed3df9ba976f6c}{a}} == text-\/>\mbox{\hyperlink{classSVGElement_abb012cad5d6e9ee7a413f46042f99429}{getFillColor}}().\mbox{\hyperlink{classmColor_ac086aa72806b8ce55fed3df9ba976f6c}{a}}) \{}
+\DoxyCodeLine{313         text\_outline.SetColor(Gdiplus::Color(255, 255, 255, 255));}
+\DoxyCodeLine{314         graphics.DrawPath(\&text\_outline, \&path);}
+\DoxyCodeLine{315         text\_outline.SetColor(Gdiplus::Color(outline\_color.\mbox{\hyperlink{classmColor_ac086aa72806b8ce55fed3df9ba976f6c}{a}}, outline\_color.\mbox{\hyperlink{classmColor_a427453d377b30c62f7d25f47120959d6}{r}},}
+\DoxyCodeLine{316                                              outline\_color.\mbox{\hyperlink{classmColor_a0cd1254821d108bb8c5be8ec5536f8ec}{g}}, outline\_color.\mbox{\hyperlink{classmColor_ad56f2424fa451364becdc4d1c4df657c}{b}}));}
+\DoxyCodeLine{317     \}}
+\DoxyCodeLine{318     graphics.DrawPath(\&text\_outline, \&path);}
+\DoxyCodeLine{319     \textcolor{keyword}{delete} text\_fill;}
+\DoxyCodeLine{320 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classRenderer_a7539832835d19ee365dcbabf490d642c}\label{classRenderer_a7539832835d19ee365dcbabf490d642c}} 
+\index{Renderer@{Renderer}!getBrush@{getBrush}}
+\index{getBrush@{getBrush}!Renderer@{Renderer}}
+\doxysubsubsection{\texorpdfstring{getBrush()}{getBrush()}}
+{\footnotesize\ttfamily Gdiplus\+::\+Brush $\ast$ Renderer\+::get\+Brush (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classSVGElement}{SVGElement}} $\ast$}]{shape,  }\item[{Gdiplus\+::\+RectF}]{bound }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Gets the Gdiplus\+::brush object for the shape fill. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em shape} & The \mbox{\hyperlink{classSVGElement}{SVGElement}} representing the shape. \\
+\hline
+{\em bound} & The bounding box of the shape. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The Gdiplus\+::brush object for the shape fill. 
+\end{DoxyReturn}
+
+
+Definition at line 583 of file Renderer.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{584                                                              \{}
+\DoxyCodeLine{585     \mbox{\hyperlink{classGradient}{Gradient}}* gradient = shape-\/>\mbox{\hyperlink{classSVGElement_a9b64e7697c24a6972aacb01b89c0e542}{getGradient}}();}
+\DoxyCodeLine{586     \textcolor{keywordflow}{if} (gradient != NULL) \{}
+\DoxyCodeLine{587         std::pair< Vector2Df, Vector2Df > points = gradient-\/>\mbox{\hyperlink{classGradient_aced479d6a10d2aa53e6d363e1df5dc08}{getPoints}}();}
+\DoxyCodeLine{588         std::vector< Stop > stops = gradient-\/>\mbox{\hyperlink{classGradient_a1125c4e5294389bb6698bf4fcb4f928d}{getStops}}();}
+\DoxyCodeLine{589         \textcolor{keywordtype}{int} stop\_size = stops.size() + 2;}
+\DoxyCodeLine{590         Gdiplus::Color* colors = \textcolor{keyword}{new} Gdiplus::Color[stop\_size];}
+\DoxyCodeLine{591         \textcolor{keywordtype}{float}* offsets = \textcolor{keyword}{new} \textcolor{keywordtype}{float}[stop\_size];}
+\DoxyCodeLine{592         \textcolor{keywordflow}{if} (gradient-\/>\mbox{\hyperlink{classGradient_adb86ee7c9171cb7294d1bb8956e97891}{getClass}}() == \textcolor{stringliteral}{"{}LinearGradient"{}}) \{}
+\DoxyCodeLine{593             \textcolor{keywordflow}{if} (gradient-\/>\mbox{\hyperlink{classGradient_a54cc5770c2dce46f1d56bcfb63285173}{getUnits}}() == \textcolor{stringliteral}{"{}objectBoundingBox"{}}) \{}
+\DoxyCodeLine{594                 points.first.x = bound.X;}
+\DoxyCodeLine{595                 points.first.y = bound.Y;}
+\DoxyCodeLine{596                 points.second.x = bound.X + bound.Width;}
+\DoxyCodeLine{597                 points.second.y = bound.Y + bound.Height;}
+\DoxyCodeLine{598             \}}
+\DoxyCodeLine{599             offsets[0] = 0;}
+\DoxyCodeLine{600             offsets[stop\_size -\/ 1] = 1;}
+\DoxyCodeLine{601             colors[0] =}
+\DoxyCodeLine{602                 Gdiplus::Color(stops[0].getColor().a, stops[0].getColor().r,}
+\DoxyCodeLine{603                                stops[0].getColor().g, stops[0].getColor().b);}
+\DoxyCodeLine{604             colors[stop\_size -\/ 1] =}
+\DoxyCodeLine{605                 Gdiplus::Color(stops[stop\_size -\/ 3].getColor().a,}
+\DoxyCodeLine{606                                stops[stop\_size -\/ 3].getColor().r,}
+\DoxyCodeLine{607                                stops[stop\_size -\/ 3].getColor().g,}
+\DoxyCodeLine{608                                stops[stop\_size -\/ 3].getColor().b);}
+\DoxyCodeLine{609             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 1; i < stop\_size -\/ 1; ++i) \{}
+\DoxyCodeLine{610                 colors[i] = Gdiplus::Color(}
+\DoxyCodeLine{611                     stops[i -\/ 1].getColor().a, stops[i -\/ 1].getColor().r,}
+\DoxyCodeLine{612                     stops[i -\/ 1].getColor().g, stops[i -\/ 1].getColor().b);}
+\DoxyCodeLine{613                 offsets[i] = stops[i -\/ 1].getOffset();}
+\DoxyCodeLine{614             \}}
+\DoxyCodeLine{615             Gdiplus::LinearGradientBrush* fill =}
+\DoxyCodeLine{616                 \textcolor{keyword}{new} Gdiplus::LinearGradientBrush(}
+\DoxyCodeLine{617                     Gdiplus::PointF(points.first.x, points.first.y),}
+\DoxyCodeLine{618                     Gdiplus::PointF(points.second.x, points.second.y),}
+\DoxyCodeLine{619                     colors[0], colors[stop\_size -\/ 1]);}
+\DoxyCodeLine{620             fill-\/>SetWrapMode(Gdiplus::WrapModeTileFlipX);}
+\DoxyCodeLine{621             fill-\/>SetInterpolationColors(colors, offsets, stop\_size);}
+\DoxyCodeLine{622             \mbox{\hyperlink{classRenderer_a33a87db2173a7509be2d60fcffff9058}{applyTransformsOnBrush}}(gradient-\/>\mbox{\hyperlink{classGradient_adf0e8b360f2b8e6edc1059002f85b1c1}{getTransforms}}(), fill);}
+\DoxyCodeLine{623             \textcolor{keyword}{delete}[] colors;}
+\DoxyCodeLine{624             \textcolor{keyword}{delete}[] offsets;}
+\DoxyCodeLine{625             \textcolor{keywordflow}{return} fill;}
+\DoxyCodeLine{626         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (gradient-\/>\mbox{\hyperlink{classGradient_adb86ee7c9171cb7294d1bb8956e97891}{getClass}}() == \textcolor{stringliteral}{"{}RadialGradient"{}}) \{}
+\DoxyCodeLine{627             \mbox{\hyperlink{classRadialGradient}{RadialGradient}}* radial\_gradient =}
+\DoxyCodeLine{628                 \textcolor{keyword}{dynamic\_cast<} \mbox{\hyperlink{classRadialGradient}{RadialGradient}}* \textcolor{keyword}{>}(gradient);}
+\DoxyCodeLine{629             \mbox{\hyperlink{classVector2D}{Vector2Df}} radius = radial\_gradient-\/>\mbox{\hyperlink{classRadialGradient_acfa8223581f3caf2db33c310cfa48d1d}{getRadius}}();}
+\DoxyCodeLine{630             \textcolor{keywordflow}{if} (gradient-\/>\mbox{\hyperlink{classGradient_a54cc5770c2dce46f1d56bcfb63285173}{getUnits}}() == \textcolor{stringliteral}{"{}userSpaceOnUse"{}}) \{}
+\DoxyCodeLine{631                 bound.X = points.first.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} -\/ radius.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}};}
+\DoxyCodeLine{632                 bound.Y = points.first.y -\/ radius.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}};}
+\DoxyCodeLine{633                 bound.Width = radius.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} * 2;}
+\DoxyCodeLine{634                 bound.Height = radius.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} * 2;}
+\DoxyCodeLine{635             \}}
+\DoxyCodeLine{636             Gdiplus::GraphicsPath path;}
+\DoxyCodeLine{637             path.AddEllipse(bound);}
+\DoxyCodeLine{638             Gdiplus::PathGradientBrush* fill =}
+\DoxyCodeLine{639                 \textcolor{keyword}{new} Gdiplus::PathGradientBrush(\&path);}
+\DoxyCodeLine{640             offsets[0] = 0;}
+\DoxyCodeLine{641             offsets[stop\_size -\/ 1] = 1;}
+\DoxyCodeLine{642             colors[0] = Gdiplus::Color(stops[stop\_size -\/ 3].getColor().a,}
+\DoxyCodeLine{643                                        stops[stop\_size -\/ 3].getColor().r,}
+\DoxyCodeLine{644                                        stops[stop\_size -\/ 3].getColor().g,}
+\DoxyCodeLine{645                                        stops[stop\_size -\/ 3].getColor().b);}
+\DoxyCodeLine{646             colors[stop\_size -\/ 1] =}
+\DoxyCodeLine{647                 Gdiplus::Color(stops[0].getColor().a, stops[0].getColor().r,}
+\DoxyCodeLine{648                                stops[0].getColor().g, stops[0].getColor().b);}
+\DoxyCodeLine{649 }
+\DoxyCodeLine{650             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 1; i < stop\_size -\/ 1; ++i) \{}
+\DoxyCodeLine{651                 colors[i] =}
+\DoxyCodeLine{652                     Gdiplus::Color(stops[stop\_size -\/ 2 -\/ i].getColor().a,}
+\DoxyCodeLine{653                                    stops[stop\_size -\/ 2 -\/ i].getColor().r,}
+\DoxyCodeLine{654                                    stops[stop\_size -\/ 2 -\/ i].getColor().g,}
+\DoxyCodeLine{655                                    stops[stop\_size -\/ 2 -\/ i].getColor().b);}
+\DoxyCodeLine{656                 offsets[i] = 1 -\/ stops[stop\_size -\/ 2 -\/ i].getOffset();}
+\DoxyCodeLine{657             \}}
+\DoxyCodeLine{658             fill-\/>SetInterpolationColors(colors, offsets, stop\_size);}
+\DoxyCodeLine{659             \mbox{\hyperlink{classRenderer_a33a87db2173a7509be2d60fcffff9058}{applyTransformsOnBrush}}(gradient-\/>\mbox{\hyperlink{classGradient_adf0e8b360f2b8e6edc1059002f85b1c1}{getTransforms}}(), fill);}
+\DoxyCodeLine{660             \textcolor{keyword}{delete}[] colors;}
+\DoxyCodeLine{661             \textcolor{keyword}{delete}[] offsets;}
+\DoxyCodeLine{662             \textcolor{keywordflow}{return} fill;}
+\DoxyCodeLine{663         \}}
+\DoxyCodeLine{664     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{665         \mbox{\hyperlink{classmColor}{mColor}} color = shape-\/>\mbox{\hyperlink{classSVGElement_abb012cad5d6e9ee7a413f46042f99429}{getFillColor}}();}
+\DoxyCodeLine{666         Gdiplus::SolidBrush* fill = \textcolor{keyword}{new} Gdiplus::SolidBrush(}
+\DoxyCodeLine{667             Gdiplus::Color(color.\mbox{\hyperlink{classmColor_ac086aa72806b8ce55fed3df9ba976f6c}{a}}, color.\mbox{\hyperlink{classmColor_a427453d377b30c62f7d25f47120959d6}{r}}, color.\mbox{\hyperlink{classmColor_a0cd1254821d108bb8c5be8ec5536f8ec}{g}}, color.\mbox{\hyperlink{classmColor_ad56f2424fa451364becdc4d1c4df657c}{b}}));}
+\DoxyCodeLine{668         \textcolor{keywordflow}{return} fill;}
+\DoxyCodeLine{669     \}}
+\DoxyCodeLine{670     \textcolor{keywordflow}{return} \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{671 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classRenderer_ac1bf10ff8b4f967f0d416a26d482abd6}\label{classRenderer_ac1bf10ff8b4f967f0d416a26d482abd6}} 
+\index{Renderer@{Renderer}!getInstance@{getInstance}}
+\index{getInstance@{getInstance}!Renderer@{Renderer}}
+\doxysubsubsection{\texorpdfstring{getInstance()}{getInstance()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classRenderer}{Renderer}} $\ast$ Renderer\+::get\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the singleton instance of the \mbox{\hyperlink{classRenderer}{Renderer}} class. 
+
+\begin{DoxyReturn}{Returns}
+The singleton instance of the \mbox{\hyperlink{classRenderer}{Renderer}} class. 
+\end{DoxyReturn}
+
+
+Definition at line 11 of file Renderer.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{11                                 \{}
+\DoxyCodeLine{12     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classRenderer_a7431a2f9b03f35752e034410ffebfbe1}{instance}} == \textcolor{keyword}{nullptr}) \{}
+\DoxyCodeLine{13         \mbox{\hyperlink{classRenderer_a7431a2f9b03f35752e034410ffebfbe1}{instance}} = \textcolor{keyword}{new} \mbox{\hyperlink{classRenderer_a7ebf46f54dab9905f79b80f7fddb76a6}{Renderer}}();}
+\DoxyCodeLine{14     \}}
+\DoxyCodeLine{15     \textcolor{keywordflow}{return} \mbox{\hyperlink{classRenderer_a7431a2f9b03f35752e034410ffebfbe1}{instance}};}
+\DoxyCodeLine{16 \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/Renderer.\+hpp\item 
+src/Renderer.\+cpp\end{DoxyCompactItemize}

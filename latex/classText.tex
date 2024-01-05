@@ -1,0 +1,335 @@
+\hypertarget{classText}{}\doxysection{Text Class Reference}
+\label{classText}\index{Text@{Text}}
+
+
+Represents text in 2D space.  
+
+
+
+
+{\ttfamily \#include $<$Text.\+hpp$>$}
+
+
+
+Inheritance diagram for Text\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=157pt]{classText__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Text\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classText__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classText_a92c5df61031c3a9af813f9cc6978f34a}{Text}} (\mbox{\hyperlink{classVector2D}{Vector2\+Df}} pos, std\+::string text, float \mbox{\hyperlink{classText_a71158226b190f16477820e45b549133f}{font\+\_\+size}}, const \mbox{\hyperlink{classmColor}{m\+Color}} \&\mbox{\hyperlink{classSVGElement_a6d3a39e763d3273715ea11f8959f81b1}{fill}}, const \mbox{\hyperlink{classmColor}{m\+Color}} \&\mbox{\hyperlink{classSVGElement_aab937dcb566cd83d94d00d69b4083f13}{stroke}}, float \mbox{\hyperlink{classSVGElement_a88449b487a890e3765ae20e96ee95c06}{stroke\+\_\+width}})
+\begin{DoxyCompactList}\small\item\em Constructs a \mbox{\hyperlink{classText}{Text}} object. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classText_a405fac6f66711e0063e18e9e211e3a62}{get\+Class}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the type of the shape. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classText_a12e8ae19a8e677eb6f1c2dc2716dcab0}{set\+Content}} (std\+::string \mbox{\hyperlink{classText_a9336f13d0d4a26d41c2fd2e103ac5dde}{content}})
+\begin{DoxyCompactList}\small\item\em Sets the string of the text. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classText_ac593599637e5e7f0f929c59b440f1b94}{get\+Content}} () const
+\begin{DoxyCompactList}\small\item\em Gets the string of the text. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classText_a6a04680d93c625645278b1d1111420bb}{set\+Font\+Size}} (float \mbox{\hyperlink{classText_a71158226b190f16477820e45b549133f}{font\+\_\+size}})
+\begin{DoxyCompactList}\small\item\em Sets the font size of the text. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{classText_a6e799a9b0ba6f88e704eea12599d3d5c}{get\+Font\+Size}} () const
+\begin{DoxyCompactList}\small\item\em Gets the font size of the text. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classText_aa503905beb9dddf11c9c579424d0a84f}{set\+Anchor}} (std\+::string \mbox{\hyperlink{classText_a33f5c94508241a960c139923c284491e}{anchor}})
+\begin{DoxyCompactList}\small\item\em Sets the anchor of the text. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classText_a445117756f52b37ae8bce225e254bea6}{get\+Anchor}} () const
+\begin{DoxyCompactList}\small\item\em Gets the anchor of the text. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classText_a4f24f78f8a962e758b70c5d9fd85b7cb}{set\+Font\+Style}} (std\+::string \mbox{\hyperlink{classText_a12ee81ccf865a414867d4101c8dbbdb2}{style}})
+\begin{DoxyCompactList}\small\item\em Sets the style of the text. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classText_a86fd1927b692d6691c8dd3901b6f6e48}{get\+Font\+Style}} () const
+\begin{DoxyCompactList}\small\item\em Gets the style of the text. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classText_a40e38d59ba9b34df9900375409f6f03f}\label{classText_a40e38d59ba9b34df9900375409f6f03f}} 
+void \mbox{\hyperlink{classText_a40e38d59ba9b34df9900375409f6f03f}{print\+Data}} () const override
+\begin{DoxyCompactList}\small\item\em Prints the data of the text. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classText_a9336f13d0d4a26d41c2fd2e103ac5dde}\label{classText_a9336f13d0d4a26d41c2fd2e103ac5dde}} 
+std\+::string \mbox{\hyperlink{classText_a9336f13d0d4a26d41c2fd2e103ac5dde}{content}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classText}{Text}} element. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classText_a71158226b190f16477820e45b549133f}\label{classText_a71158226b190f16477820e45b549133f}} 
+float \mbox{\hyperlink{classText_a71158226b190f16477820e45b549133f}{font\+\_\+size}}
+\begin{DoxyCompactList}\small\item\em Font size of the text. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classText_a33f5c94508241a960c139923c284491e}\label{classText_a33f5c94508241a960c139923c284491e}} 
+std\+::string \mbox{\hyperlink{classText_a33f5c94508241a960c139923c284491e}{anchor}}
+\begin{DoxyCompactList}\small\item\em Anchor of the text. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classText_a12ee81ccf865a414867d4101c8dbbdb2}\label{classText_a12ee81ccf865a414867d4101c8dbbdb2}} 
+std\+::string \mbox{\hyperlink{classText_a12ee81ccf865a414867d4101c8dbbdb2}{style}}
+\begin{DoxyCompactList}\small\item\em Style of the text. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Represents text in 2D space. 
+
+The \mbox{\hyperlink{classText}{Text}} class is derived from the \mbox{\hyperlink{classSVGElement}{SVGElement}} class and defines a text element with a specified position, string, fill color, and font size. 
+
+Definition at line 12 of file Text.\+hpp.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classText_a92c5df61031c3a9af813f9cc6978f34a}\label{classText_a92c5df61031c3a9af813f9cc6978f34a}} 
+\index{Text@{Text}!Text@{Text}}
+\index{Text@{Text}!Text@{Text}}
+\doxysubsubsection{\texorpdfstring{Text()}{Text()}}
+{\footnotesize\ttfamily Text\+::\+Text (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classVector2D}{Vector2\+Df}}}]{pos,  }\item[{std\+::string}]{text,  }\item[{float}]{font\+\_\+size,  }\item[{const \mbox{\hyperlink{classmColor}{m\+Color}} \&}]{fill,  }\item[{const \mbox{\hyperlink{classmColor}{m\+Color}} \&}]{stroke,  }\item[{float}]{stroke\+\_\+width }\end{DoxyParamCaption})}
+
+
+
+Constructs a \mbox{\hyperlink{classText}{Text}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & The position of the text. \\
+\hline
+{\em text} & The string of the text. \\
+\hline
+{\em fill} & The fill color of the text \\
+\hline
+{\em font\+\_\+size} & The font size of the text (default is 1). \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 3 of file Text.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{5     : \mbox{\hyperlink{classSVGElement_ad30205005009d2ba4820d3ce372e81ea}{SVGElement}}(\mbox{\hyperlink{classSVGElement_a6d3a39e763d3273715ea11f8959f81b1}{fill}}, \mbox{\hyperlink{classSVGElement_aab937dcb566cd83d94d00d69b4083f13}{stroke}}, \mbox{\hyperlink{classSVGElement_a88449b487a890e3765ae20e96ee95c06}{stroke\_width}}, pos), \mbox{\hyperlink{classText_a9336f13d0d4a26d41c2fd2e103ac5dde}{content}}(text),}
+\DoxyCodeLine{6       \mbox{\hyperlink{classText_a71158226b190f16477820e45b549133f}{font\_size}}(\mbox{\hyperlink{classText_a71158226b190f16477820e45b549133f}{font\_size}}) \{\}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classText_a445117756f52b37ae8bce225e254bea6}\label{classText_a445117756f52b37ae8bce225e254bea6}} 
+\index{Text@{Text}!getAnchor@{getAnchor}}
+\index{getAnchor@{getAnchor}!Text@{Text}}
+\doxysubsubsection{\texorpdfstring{getAnchor()}{getAnchor()}}
+{\footnotesize\ttfamily std\+::string Text\+::get\+Anchor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the anchor of the text. 
+
+\begin{DoxyReturn}{Returns}
+The anchor of the text. 
+\end{DoxyReturn}
+
+
+Definition at line 20 of file Text.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{20 \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classText_a33f5c94508241a960c139923c284491e}{anchor}}; \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classText_a405fac6f66711e0063e18e9e211e3a62}\label{classText_a405fac6f66711e0063e18e9e211e3a62}} 
+\index{Text@{Text}!getClass@{getClass}}
+\index{getClass@{getClass}!Text@{Text}}
+\doxysubsubsection{\texorpdfstring{getClass()}{getClass()}}
+{\footnotesize\ttfamily std\+::string Text\+::get\+Class (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Gets the type of the shape. 
+
+\begin{DoxyReturn}{Returns}
+The string \char`\"{}\+Text\char`\"{}. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classSVGElement_adc98ebac66965dd303283cbf7ff28f38}{SVGElement}}.
+
+
+
+Definition at line 8 of file Text.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{8 \{ \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}Text"{}}; \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classText_ac593599637e5e7f0f929c59b440f1b94}\label{classText_ac593599637e5e7f0f929c59b440f1b94}} 
+\index{Text@{Text}!getContent@{getContent}}
+\index{getContent@{getContent}!Text@{Text}}
+\doxysubsubsection{\texorpdfstring{getContent()}{getContent()}}
+{\footnotesize\ttfamily std\+::string Text\+::get\+Content (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the string of the text. 
+
+\begin{DoxyReturn}{Returns}
+The string of the text. 
+\end{DoxyReturn}
+
+
+Definition at line 16 of file Text.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{16 \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classText_a9336f13d0d4a26d41c2fd2e103ac5dde}{content}}; \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classText_a6e799a9b0ba6f88e704eea12599d3d5c}\label{classText_a6e799a9b0ba6f88e704eea12599d3d5c}} 
+\index{Text@{Text}!getFontSize@{getFontSize}}
+\index{getFontSize@{getFontSize}!Text@{Text}}
+\doxysubsubsection{\texorpdfstring{getFontSize()}{getFontSize()}}
+{\footnotesize\ttfamily float Text\+::get\+Font\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the font size of the text. 
+
+\begin{DoxyReturn}{Returns}
+The font size of the text. 
+\end{DoxyReturn}
+
+
+Definition at line 12 of file Text.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{12 \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classText_a71158226b190f16477820e45b549133f}{font\_size}}; \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classText_a86fd1927b692d6691c8dd3901b6f6e48}\label{classText_a86fd1927b692d6691c8dd3901b6f6e48}} 
+\index{Text@{Text}!getFontStyle@{getFontStyle}}
+\index{getFontStyle@{getFontStyle}!Text@{Text}}
+\doxysubsubsection{\texorpdfstring{getFontStyle()}{getFontStyle()}}
+{\footnotesize\ttfamily std\+::string Text\+::get\+Font\+Style (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the style of the text. 
+
+\begin{DoxyReturn}{Returns}
+The style of the text. 
+\end{DoxyReturn}
+
+
+Definition at line 24 of file Text.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{24 \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classText_a12ee81ccf865a414867d4101c8dbbdb2}{style}}; \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classText_aa503905beb9dddf11c9c579424d0a84f}\label{classText_aa503905beb9dddf11c9c579424d0a84f}} 
+\index{Text@{Text}!setAnchor@{setAnchor}}
+\index{setAnchor@{setAnchor}!Text@{Text}}
+\doxysubsubsection{\texorpdfstring{setAnchor()}{setAnchor()}}
+{\footnotesize\ttfamily void Text\+::set\+Anchor (\begin{DoxyParamCaption}\item[{std\+::string}]{anchor }\end{DoxyParamCaption})}
+
+
+
+Sets the anchor of the text. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em anchor} & The new anchor of the text. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 18 of file Text.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{18 \{ this-\/>\mbox{\hyperlink{classText_a33f5c94508241a960c139923c284491e}{anchor}} = \mbox{\hyperlink{classText_a33f5c94508241a960c139923c284491e}{anchor}}; \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classText_a12e8ae19a8e677eb6f1c2dc2716dcab0}\label{classText_a12e8ae19a8e677eb6f1c2dc2716dcab0}} 
+\index{Text@{Text}!setContent@{setContent}}
+\index{setContent@{setContent}!Text@{Text}}
+\doxysubsubsection{\texorpdfstring{setContent()}{setContent()}}
+{\footnotesize\ttfamily void Text\+::set\+Content (\begin{DoxyParamCaption}\item[{std\+::string}]{content }\end{DoxyParamCaption})}
+
+
+
+Sets the string of the text. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em content} & The new string of the text. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 14 of file Text.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{14 \{ this-\/>\mbox{\hyperlink{classText_a9336f13d0d4a26d41c2fd2e103ac5dde}{content}} = \mbox{\hyperlink{classText_a9336f13d0d4a26d41c2fd2e103ac5dde}{content}}; \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classText_a6a04680d93c625645278b1d1111420bb}\label{classText_a6a04680d93c625645278b1d1111420bb}} 
+\index{Text@{Text}!setFontSize@{setFontSize}}
+\index{setFontSize@{setFontSize}!Text@{Text}}
+\doxysubsubsection{\texorpdfstring{setFontSize()}{setFontSize()}}
+{\footnotesize\ttfamily void Text\+::set\+Font\+Size (\begin{DoxyParamCaption}\item[{float}]{font\+\_\+size }\end{DoxyParamCaption})}
+
+
+
+Sets the font size of the text. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em font\+\_\+size} & The new font size of the text. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 10 of file Text.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{10 \{ this-\/>\mbox{\hyperlink{classText_a71158226b190f16477820e45b549133f}{font\_size}} = \mbox{\hyperlink{classText_a71158226b190f16477820e45b549133f}{font\_size}}; \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classText_a4f24f78f8a962e758b70c5d9fd85b7cb}\label{classText_a4f24f78f8a962e758b70c5d9fd85b7cb}} 
+\index{Text@{Text}!setFontStyle@{setFontStyle}}
+\index{setFontStyle@{setFontStyle}!Text@{Text}}
+\doxysubsubsection{\texorpdfstring{setFontStyle()}{setFontStyle()}}
+{\footnotesize\ttfamily void Text\+::set\+Font\+Style (\begin{DoxyParamCaption}\item[{std\+::string}]{style }\end{DoxyParamCaption})}
+
+
+
+Sets the style of the text. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em style} & The new style of the text. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 22 of file Text.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{22 \{ this-\/>\mbox{\hyperlink{classText_a12ee81ccf865a414867d4101c8dbbdb2}{style}} = font\_style; \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/graphics/Text.\+hpp\item 
+src/graphics/Text.\+cpp\end{DoxyCompactItemize}

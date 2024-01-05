@@ -1,0 +1,329 @@
+\hypertarget{classPolyShape}{}\doxysection{Poly\+Shape Class Reference}
+\label{classPolyShape}\index{PolyShape@{PolyShape}}
+
+
+Abstract base class for polygon and polyline shapes in 2D space.  
+
+
+
+
+{\ttfamily \#include $<$Poly\+Shape.\+hpp$>$}
+
+
+
+Inheritance diagram for Poly\+Shape\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=198pt]{classPolyShape__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Poly\+Shape\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classPolyShape__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classPolyShape_afc263d5407ca7ea50e30d641d779b73b}{get\+Class}} () const =0
+\begin{DoxyCompactList}\small\item\em Gets the type of the shape. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classPolyShape_a3a5e4952aff469f241ee1c9b92833f55}{add\+Point}} (const \mbox{\hyperlink{classVector2D}{Vector2\+Df}} \&point)
+\begin{DoxyCompactList}\small\item\em Adds a vertex to the shape. \end{DoxyCompactList}\item 
+const std\+::vector$<$ \mbox{\hyperlink{classVector2D}{Vector2\+Df}} $>$ \& \mbox{\hyperlink{classPolyShape_a27704ef9fd50c041d1d233e9d99a4fd4}{get\+Points}} () const
+\begin{DoxyCompactList}\small\item\em Gets the total number of vertices representing the shape. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classPolyShape_a0c918fe8d9df68573a1c0d6e18bc6c9a}{set\+Fill\+Rule}} (std\+::string \mbox{\hyperlink{classPolyShape_abd758b76bbc30e790602b1f37a814fe1}{fill\+\_\+rule}})
+\begin{DoxyCompactList}\small\item\em Sets the fill rule of the polyshape. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classPolyShape_acac99a28e69ee5020eed782175a5a355}{get\+Fill\+Rule}} () const
+\begin{DoxyCompactList}\small\item\em Gets the fill rule of the polyshape. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classVector2D}{Vector2\+Df}} \mbox{\hyperlink{classPolyShape_a0ad83e0129196572f99302830e0c9049}{get\+Min\+Bound}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the minimum bounding box of the shape. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classVector2D}{Vector2\+Df}} \mbox{\hyperlink{classPolyShape_a6ddda72dc27d7aade0ed444a52d7689f}{get\+Max\+Bound}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the maximum bounding box of the shape. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classPolyShape_a40a83ac567156de6da65adb1a4380c7c}{print\+Data}} () const override
+\begin{DoxyCompactList}\small\item\em Prints the data of the shape. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classPolyShape_a6fd054647bea080272ed79bbea7080ac}{Poly\+Shape}} (const \mbox{\hyperlink{classmColor}{m\+Color}} \&\mbox{\hyperlink{classSVGElement_a6d3a39e763d3273715ea11f8959f81b1}{fill}}, const \mbox{\hyperlink{classmColor}{m\+Color}} \&\mbox{\hyperlink{classSVGElement_aab937dcb566cd83d94d00d69b4083f13}{stroke}}, float \mbox{\hyperlink{classSVGElement_a88449b487a890e3765ae20e96ee95c06}{stroke\+\_\+width}})
+\begin{DoxyCompactList}\small\item\em Constructs a \mbox{\hyperlink{classPolyShape}{Poly\+Shape}} object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classPolyShape_acbd1d536ad25e34b160e849a0fc12697}\label{classPolyShape_acbd1d536ad25e34b160e849a0fc12697}} 
+std\+::vector$<$ \mbox{\hyperlink{classVector2D}{Vector2\+Df}} $>$ \mbox{\hyperlink{classPolyShape_acbd1d536ad25e34b160e849a0fc12697}{points}}
+\begin{DoxyCompactList}\small\item\em Vertices of the polyshape. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classPolyShape_abd758b76bbc30e790602b1f37a814fe1}\label{classPolyShape_abd758b76bbc30e790602b1f37a814fe1}} 
+std\+::string \mbox{\hyperlink{classPolyShape_abd758b76bbc30e790602b1f37a814fe1}{fill\+\_\+rule}}
+\begin{DoxyCompactList}\small\item\em Fill rule of the polyshape. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Abstract base class for polygon and polyline shapes in 2D space. 
+
+The \mbox{\hyperlink{classPolyShape}{Poly\+Shape}} class is derived from the \mbox{\hyperlink{classSVGElement}{SVGElement}} class and defines a common interface for polyline and polygon shapes. 
+
+Definition at line 12 of file Poly\+Shape.\+hpp.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classPolyShape_a6fd054647bea080272ed79bbea7080ac}\label{classPolyShape_a6fd054647bea080272ed79bbea7080ac}} 
+\index{PolyShape@{PolyShape}!PolyShape@{PolyShape}}
+\index{PolyShape@{PolyShape}!PolyShape@{PolyShape}}
+\doxysubsubsection{\texorpdfstring{PolyShape()}{PolyShape()}}
+{\footnotesize\ttfamily Poly\+Shape\+::\+Poly\+Shape (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classmColor}{m\+Color}} \&}]{fill,  }\item[{const \mbox{\hyperlink{classmColor}{m\+Color}} \&}]{stroke,  }\item[{float}]{stroke\+\_\+width }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Constructs a \mbox{\hyperlink{classPolyShape}{Poly\+Shape}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fill} & Fill color of the polyshape (default is sf\+::\+Color\+::\+Transparent). \\
+\hline
+{\em stroke} & Outline color of the polyshape (default is sf\+::\+Color\+::\+White). \\
+\hline
+{\em stroke\+\_\+width} & Thickness of the polyshape outline (default is 0). \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 3 of file Poly\+Shape.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{5     : \mbox{\hyperlink{classSVGElement_ad30205005009d2ba4820d3ce372e81ea}{SVGElement}}(\mbox{\hyperlink{classSVGElement_a6d3a39e763d3273715ea11f8959f81b1}{fill}}, \mbox{\hyperlink{classSVGElement_aab937dcb566cd83d94d00d69b4083f13}{stroke}}, \mbox{\hyperlink{classSVGElement_a88449b487a890e3765ae20e96ee95c06}{stroke\_width}}) \{\}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classPolyShape_a3a5e4952aff469f241ee1c9b92833f55}\label{classPolyShape_a3a5e4952aff469f241ee1c9b92833f55}} 
+\index{PolyShape@{PolyShape}!addPoint@{addPoint}}
+\index{addPoint@{addPoint}!PolyShape@{PolyShape}}
+\doxysubsubsection{\texorpdfstring{addPoint()}{addPoint()}}
+{\footnotesize\ttfamily void Poly\+Shape\+::add\+Point (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classVector2D}{Vector2\+Df}} \&}]{point }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Adds a vertex to the shape. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em point} & The position of the vertex to be added. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 7 of file Poly\+Shape.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{7 \{ \mbox{\hyperlink{classPolyShape_acbd1d536ad25e34b160e849a0fc12697}{points}}.push\_back(point); \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classPolyShape_afc263d5407ca7ea50e30d641d779b73b}\label{classPolyShape_afc263d5407ca7ea50e30d641d779b73b}} 
+\index{PolyShape@{PolyShape}!getClass@{getClass}}
+\index{getClass@{getClass}!PolyShape@{PolyShape}}
+\doxysubsubsection{\texorpdfstring{getClass()}{getClass()}}
+{\footnotesize\ttfamily std\+::string Poly\+Shape\+::get\+Class (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Gets the type of the shape. 
+
+\begin{DoxyNote}{Note}
+This function is pure virtual and must be implemented by derived classes. 
+\end{DoxyNote}
+
+
+Implements \mbox{\hyperlink{classSVGElement_adc98ebac66965dd303283cbf7ff28f38}{SVGElement}}.
+
+
+
+Implemented in \mbox{\hyperlink{classPlyline_a5b9d86c75604d329037cd47e8ba3d5b9}{Plyline}}, and \mbox{\hyperlink{classPlygon_aab00a0d0230ea320271e96c326c6b919}{Plygon}}.
+
+\mbox{\Hypertarget{classPolyShape_acac99a28e69ee5020eed782175a5a355}\label{classPolyShape_acac99a28e69ee5020eed782175a5a355}} 
+\index{PolyShape@{PolyShape}!getFillRule@{getFillRule}}
+\index{getFillRule@{getFillRule}!PolyShape@{PolyShape}}
+\doxysubsubsection{\texorpdfstring{getFillRule()}{getFillRule()}}
+{\footnotesize\ttfamily std\+::string Poly\+Shape\+::get\+Fill\+Rule (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the fill rule of the polyshape. 
+
+\begin{DoxyReturn}{Returns}
+The fill rule of the polyshape. 
+\end{DoxyReturn}
+
+
+Definition at line 15 of file Poly\+Shape.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{15 \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classPolyShape_abd758b76bbc30e790602b1f37a814fe1}{fill\_rule}}; \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classPolyShape_a6ddda72dc27d7aade0ed444a52d7689f}\label{classPolyShape_a6ddda72dc27d7aade0ed444a52d7689f}} 
+\index{PolyShape@{PolyShape}!getMaxBound@{getMaxBound}}
+\index{getMaxBound@{getMaxBound}!PolyShape@{PolyShape}}
+\doxysubsubsection{\texorpdfstring{getMaxBound()}{getMaxBound()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classVector2D}{Vector2\+Df}} Poly\+Shape\+::get\+Max\+Bound (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Gets the maximum bounding box of the shape. 
+
+\begin{DoxyReturn}{Returns}
+The maximum bounding box of the shape. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classSVGElement_a03ac231161d1d5062951fa3fca33a39b}{SVGElement}}.
+
+
+
+Definition at line 27 of file Poly\+Shape.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{27                                        \{}
+\DoxyCodeLine{28     \textcolor{keywordtype}{float} max\_x = \mbox{\hyperlink{classPolyShape_acbd1d536ad25e34b160e849a0fc12697}{points}}[0].x;}
+\DoxyCodeLine{29     \textcolor{keywordtype}{float} max\_y = \mbox{\hyperlink{classPolyShape_acbd1d536ad25e34b160e849a0fc12697}{points}}[0].y;}
+\DoxyCodeLine{30     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}\& point : \mbox{\hyperlink{classPolyShape_acbd1d536ad25e34b160e849a0fc12697}{points}}) \{}
+\DoxyCodeLine{31         max\_x = std::max(max\_x, point.x);}
+\DoxyCodeLine{32         max\_y = std::max(max\_y, point.y);}
+\DoxyCodeLine{33     \}}
+\DoxyCodeLine{34     \textcolor{keywordflow}{return} \mbox{\hyperlink{classVector2D}{Vector2Df}}(max\_x, max\_y);}
+\DoxyCodeLine{35 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classPolyShape_a0ad83e0129196572f99302830e0c9049}\label{classPolyShape_a0ad83e0129196572f99302830e0c9049}} 
+\index{PolyShape@{PolyShape}!getMinBound@{getMinBound}}
+\index{getMinBound@{getMinBound}!PolyShape@{PolyShape}}
+\doxysubsubsection{\texorpdfstring{getMinBound()}{getMinBound()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classVector2D}{Vector2\+Df}} Poly\+Shape\+::get\+Min\+Bound (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Gets the minimum bounding box of the shape. 
+
+\begin{DoxyReturn}{Returns}
+The minimum bounding box of the shape. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classSVGElement_a0cce88c48233f4da470daad2edab0d06}{SVGElement}}.
+
+
+
+Definition at line 17 of file Poly\+Shape.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{17                                        \{}
+\DoxyCodeLine{18     \textcolor{keywordtype}{float} min\_x = \mbox{\hyperlink{classPolyShape_acbd1d536ad25e34b160e849a0fc12697}{points}}[0].x;}
+\DoxyCodeLine{19     \textcolor{keywordtype}{float} min\_y = \mbox{\hyperlink{classPolyShape_acbd1d536ad25e34b160e849a0fc12697}{points}}[0].y;}
+\DoxyCodeLine{20     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}\& point : \mbox{\hyperlink{classPolyShape_acbd1d536ad25e34b160e849a0fc12697}{points}}) \{}
+\DoxyCodeLine{21         min\_x = std::min(min\_x, point.x);}
+\DoxyCodeLine{22         min\_y = std::min(min\_y, point.y);}
+\DoxyCodeLine{23     \}}
+\DoxyCodeLine{24     \textcolor{keywordflow}{return} \mbox{\hyperlink{classVector2D}{Vector2Df}}(min\_x, min\_y);}
+\DoxyCodeLine{25 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classPolyShape_a27704ef9fd50c041d1d233e9d99a4fd4}\label{classPolyShape_a27704ef9fd50c041d1d233e9d99a4fd4}} 
+\index{PolyShape@{PolyShape}!getPoints@{getPoints}}
+\index{getPoints@{getPoints}!PolyShape@{PolyShape}}
+\doxysubsubsection{\texorpdfstring{getPoints()}{getPoints()}}
+{\footnotesize\ttfamily const std\+::vector$<$ \mbox{\hyperlink{classVector2D}{Vector2\+Df}} $>$ \& Poly\+Shape\+::get\+Points (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the total number of vertices representing the shape. 
+
+\begin{DoxyReturn}{Returns}
+The number of vertices representing the shape. 
+\end{DoxyReturn}
+
+
+Definition at line 9 of file Poly\+Shape.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{9 \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classPolyShape_acbd1d536ad25e34b160e849a0fc12697}{points}}; \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classPolyShape_a40a83ac567156de6da65adb1a4380c7c}\label{classPolyShape_a40a83ac567156de6da65adb1a4380c7c}} 
+\index{PolyShape@{PolyShape}!printData@{printData}}
+\index{printData@{printData}!PolyShape@{PolyShape}}
+\doxysubsubsection{\texorpdfstring{printData()}{printData()}}
+{\footnotesize\ttfamily void Poly\+Shape\+::print\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Prints the data of the shape. 
+
+\begin{DoxyNote}{Note}
+This function is used for debugging purposes. 
+\end{DoxyNote}
+
+
+Reimplemented from \mbox{\hyperlink{classSVGElement_ad4bcd981ae7431161013811024b452e1}{SVGElement}}.
+
+
+
+Definition at line 37 of file Poly\+Shape.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{37                                 \{}
+\DoxyCodeLine{38     \mbox{\hyperlink{classSVGElement_ad4bcd981ae7431161013811024b452e1}{SVGElement::printData}}();}
+\DoxyCodeLine{39     std::cout << \textcolor{stringliteral}{"{}Points: "{}};}
+\DoxyCodeLine{40     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto}\& point : \mbox{\hyperlink{classPolyShape_a27704ef9fd50c041d1d233e9d99a4fd4}{getPoints}}()) \{}
+\DoxyCodeLine{41         std::cout << point.x << \textcolor{stringliteral}{"{},"{}} << point.y << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{42     \}}
+\DoxyCodeLine{43     std::cout << std::endl;}
+\DoxyCodeLine{44 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classPolyShape_a0c918fe8d9df68573a1c0d6e18bc6c9a}\label{classPolyShape_a0c918fe8d9df68573a1c0d6e18bc6c9a}} 
+\index{PolyShape@{PolyShape}!setFillRule@{setFillRule}}
+\index{setFillRule@{setFillRule}!PolyShape@{PolyShape}}
+\doxysubsubsection{\texorpdfstring{setFillRule()}{setFillRule()}}
+{\footnotesize\ttfamily void Poly\+Shape\+::set\+Fill\+Rule (\begin{DoxyParamCaption}\item[{std\+::string}]{fill\+\_\+rule }\end{DoxyParamCaption})}
+
+
+
+Sets the fill rule of the polyshape. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fill\+\_\+rule} & The new fill rule of the polyshape. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 11 of file Poly\+Shape.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{11                                                \{}
+\DoxyCodeLine{12     this-\/>\mbox{\hyperlink{classPolyShape_abd758b76bbc30e790602b1f37a814fe1}{fill\_rule}} = \mbox{\hyperlink{classPolyShape_abd758b76bbc30e790602b1f37a814fe1}{fill\_rule}};}
+\DoxyCodeLine{13 \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/graphics/Poly\+Shape.\+hpp\item 
+src/graphics/Poly\+Shape.\+cpp\end{DoxyCompactItemize}

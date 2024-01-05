@@ -1,0 +1,118 @@
+\hypertarget{classCircle}{}\doxysection{Circle Class Reference}
+\label{classCircle}\index{Circle@{Circle}}
+
+
+Represents a circle in 2D space.  
+
+
+
+
+{\ttfamily \#include $<$Circle.\+hpp$>$}
+
+
+
+Inheritance diagram for Circle\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=157pt]{classCircle__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Circle\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classCircle__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classCircle_a5d018c51bfa1fa3d1081e3deef5eddc0}{Circle}} (float \mbox{\hyperlink{classEll_af57a48abe0e2bc8806e73dfa7762388f}{radius}}, const \mbox{\hyperlink{classVector2D}{Vector2\+Df}} \&center, \mbox{\hyperlink{classmColor}{m\+Color}} \mbox{\hyperlink{classSVGElement_a6d3a39e763d3273715ea11f8959f81b1}{fill}}, \mbox{\hyperlink{classmColor}{m\+Color}} \mbox{\hyperlink{classSVGElement_aab937dcb566cd83d94d00d69b4083f13}{stroke}}, float \mbox{\hyperlink{classSVGElement_a88449b487a890e3765ae20e96ee95c06}{stroke\+\_\+width}})
+\begin{DoxyCompactList}\small\item\em Constructs a \mbox{\hyperlink{classCircle}{Circle}} object. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classCircle_a09523e46318092d42a5969a1da5613bb}{get\+Class}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the type of the shape. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Represents a circle in 2D space. 
+
+The \mbox{\hyperlink{classCircle}{Circle}} class is derived from the Ellipse class and defines a circle with a specified radius, center, fill color, stroke color, and stroke thickness. 
+
+Definition at line 13 of file Circle.\+hpp.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classCircle_a5d018c51bfa1fa3d1081e3deef5eddc0}\label{classCircle_a5d018c51bfa1fa3d1081e3deef5eddc0}} 
+\index{Circle@{Circle}!Circle@{Circle}}
+\index{Circle@{Circle}!Circle@{Circle}}
+\doxysubsubsection{\texorpdfstring{Circle()}{Circle()}}
+{\footnotesize\ttfamily Circle\+::\+Circle (\begin{DoxyParamCaption}\item[{float}]{radius,  }\item[{const \mbox{\hyperlink{classVector2D}{Vector2\+Df}} \&}]{center,  }\item[{\mbox{\hyperlink{classmColor}{m\+Color}}}]{fill,  }\item[{\mbox{\hyperlink{classmColor}{m\+Color}}}]{stroke,  }\item[{float}]{stroke\+\_\+width }\end{DoxyParamCaption})}
+
+
+
+Constructs a \mbox{\hyperlink{classCircle}{Circle}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em radius} & The radius of the circle. \\
+\hline
+{\em center} & The center of the circle. \\
+\hline
+{\em fill} & Fill color of the circle. \\
+\hline
+{\em stroke} & Outline color of the circle. \\
+\hline
+{\em stroke\+\_\+width} & Thickness of the circle outline. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 3 of file Circle.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{5     : \mbox{\hyperlink{classEll_a4a9956ca82cb9f957e993fa0c0faced6}{Ell}}(\mbox{\hyperlink{classVector2D}{Vector2Df}}(\mbox{\hyperlink{classEll_af57a48abe0e2bc8806e73dfa7762388f}{radius}}, \mbox{\hyperlink{classEll_af57a48abe0e2bc8806e73dfa7762388f}{radius}}), center, \mbox{\hyperlink{classSVGElement_a6d3a39e763d3273715ea11f8959f81b1}{fill}}, \mbox{\hyperlink{classSVGElement_aab937dcb566cd83d94d00d69b4083f13}{stroke}}, \mbox{\hyperlink{classSVGElement_a88449b487a890e3765ae20e96ee95c06}{stroke\_width}}) \{\}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classCircle_a09523e46318092d42a5969a1da5613bb}\label{classCircle_a09523e46318092d42a5969a1da5613bb}} 
+\index{Circle@{Circle}!getClass@{getClass}}
+\index{getClass@{getClass}!Circle@{Circle}}
+\doxysubsubsection{\texorpdfstring{getClass()}{getClass()}}
+{\footnotesize\ttfamily std\+::string Circle\+::get\+Class (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Gets the type of the shape. 
+
+\begin{DoxyReturn}{Returns}
+The string \char`\"{}\+Circle\char`\"{}. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classSVGElement_adc98ebac66965dd303283cbf7ff28f38}{SVGElement}}.
+
+
+
+Definition at line 7 of file Circle.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{7 \{ \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}Circle"{}}; \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/graphics/Circle.\+hpp\item 
+src/graphics/Circle.\+cpp\end{DoxyCompactItemize}

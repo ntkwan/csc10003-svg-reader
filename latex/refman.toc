@@ -1,0 +1,243 @@
+\@ifundefined {etoctocstyle}{\let \etoc@startlocaltoc \@gobble \let \etoc@settocdepth \@gobble \let \etoc@depthtag \@gobble \let \etoc@setlocaltop \@gobble }{}
+\contentsline {chapter}{\numberline {1}Hierarchical Index}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Class Hierarchy}{1}{section.1.1}%
+\contentsline {chapter}{\numberline {2}Class Index}{3}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Class List}{3}{section.2.1}%
+\contentsline {chapter}{\numberline {3}Class Documentation}{5}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Circle Class Reference}{5}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Detailed Description}{6}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Constructor \& Destructor Documentation}{6}{subsection.3.1.2}%
+\contentsline {subsubsection}{\numberline {3.1.2.1}Circle()}{7}{subsubsection.3.1.2.1}%
+\contentsline {subsection}{\numberline {3.1.3}Member Function Documentation}{7}{subsection.3.1.3}%
+\contentsline {subsubsection}{\numberline {3.1.3.1}getClass()}{7}{subsubsection.3.1.3.1}%
+\contentsline {section}{\numberline {3.2}Ell Class Reference}{8}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Detailed Description}{9}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Constructor \& Destructor Documentation}{9}{subsection.3.2.2}%
+\contentsline {subsubsection}{\numberline {3.2.2.1}Ell()}{9}{subsubsection.3.2.2.1}%
+\contentsline {subsection}{\numberline {3.2.3}Member Function Documentation}{10}{subsection.3.2.3}%
+\contentsline {subsubsection}{\numberline {3.2.3.1}getClass()}{10}{subsubsection.3.2.3.1}%
+\contentsline {subsubsection}{\numberline {3.2.3.2}getMaxBound()}{10}{subsubsection.3.2.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.3.3}getMinBound()}{11}{subsubsection.3.2.3.3}%
+\contentsline {subsubsection}{\numberline {3.2.3.4}getRadius()}{11}{subsubsection.3.2.3.4}%
+\contentsline {subsubsection}{\numberline {3.2.3.5}printData()}{11}{subsubsection.3.2.3.5}%
+\contentsline {subsubsection}{\numberline {3.2.3.6}setRadius()}{11}{subsubsection.3.2.3.6}%
+\contentsline {section}{\numberline {3.3}Gradient Class Reference}{12}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Detailed Description}{13}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Constructor \& Destructor Documentation}{13}{subsection.3.3.2}%
+\contentsline {subsubsection}{\numberline {3.3.2.1}Gradient()}{13}{subsubsection.3.3.2.1}%
+\contentsline {subsection}{\numberline {3.3.3}Member Function Documentation}{13}{subsection.3.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.3.1}addStop()}{14}{subsubsection.3.3.3.1}%
+\contentsline {subsubsection}{\numberline {3.3.3.2}getClass()}{14}{subsubsection.3.3.3.2}%
+\contentsline {subsubsection}{\numberline {3.3.3.3}getPoints()}{14}{subsubsection.3.3.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.3.4}getStops()}{15}{subsubsection.3.3.3.4}%
+\contentsline {subsubsection}{\numberline {3.3.3.5}getTransforms()}{15}{subsubsection.3.3.3.5}%
+\contentsline {subsubsection}{\numberline {3.3.3.6}getUnits()}{15}{subsubsection.3.3.3.6}%
+\contentsline {subsubsection}{\numberline {3.3.3.7}setTransforms()}{16}{subsubsection.3.3.3.7}%
+\contentsline {subsubsection}{\numberline {3.3.3.8}setUnits()}{16}{subsubsection.3.3.3.8}%
+\contentsline {section}{\numberline {3.4}Group Class Reference}{16}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Detailed Description}{18}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Constructor \& Destructor Documentation}{18}{subsection.3.4.2}%
+\contentsline {subsubsection}{\numberline {3.4.2.1}Group()}{18}{subsubsection.3.4.2.1}%
+\contentsline {subsection}{\numberline {3.4.3}Member Function Documentation}{18}{subsection.3.4.3}%
+\contentsline {subsubsection}{\numberline {3.4.3.1}addElement()}{18}{subsubsection.3.4.3.1}%
+\contentsline {subsubsection}{\numberline {3.4.3.2}getAttributes()}{19}{subsubsection.3.4.3.2}%
+\contentsline {subsubsection}{\numberline {3.4.3.3}getClass()}{19}{subsubsection.3.4.3.3}%
+\contentsline {subsubsection}{\numberline {3.4.3.4}getElements()}{19}{subsubsection.3.4.3.4}%
+\contentsline {subsubsection}{\numberline {3.4.3.5}printData()}{20}{subsubsection.3.4.3.5}%
+\contentsline {section}{\numberline {3.5}Line Class Reference}{20}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Detailed Description}{21}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}Constructor \& Destructor Documentation}{22}{subsection.3.5.2}%
+\contentsline {subsubsection}{\numberline {3.5.2.1}Line()}{22}{subsubsection.3.5.2.1}%
+\contentsline {subsection}{\numberline {3.5.3}Member Function Documentation}{22}{subsection.3.5.3}%
+\contentsline {subsubsection}{\numberline {3.5.3.1}getClass()}{22}{subsubsection.3.5.3.1}%
+\contentsline {subsubsection}{\numberline {3.5.3.2}getDirection()}{23}{subsubsection.3.5.3.2}%
+\contentsline {subsubsection}{\numberline {3.5.3.3}getLength()}{23}{subsubsection.3.5.3.3}%
+\contentsline {subsubsection}{\numberline {3.5.3.4}setDirection()}{23}{subsubsection.3.5.3.4}%
+\contentsline {section}{\numberline {3.6}Linear\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Gradient Class Reference}{24}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}Detailed Description}{24}{subsection.3.6.1}%
+\contentsline {subsection}{\numberline {3.6.2}Constructor \& Destructor Documentation}{25}{subsection.3.6.2}%
+\contentsline {subsubsection}{\numberline {3.6.2.1}LinearGradient()}{25}{subsubsection.3.6.2.1}%
+\contentsline {subsection}{\numberline {3.6.3}Member Function Documentation}{25}{subsection.3.6.3}%
+\contentsline {subsubsection}{\numberline {3.6.3.1}getClass()}{25}{subsubsection.3.6.3.1}%
+\contentsline {section}{\numberline {3.7}m\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Color Class Reference}{26}{section.3.7}%
+\contentsline {subsection}{\numberline {3.7.1}Detailed Description}{27}{subsection.3.7.1}%
+\contentsline {subsection}{\numberline {3.7.2}Constructor \& Destructor Documentation}{27}{subsection.3.7.2}%
+\contentsline {subsubsection}{\numberline {3.7.2.1}mColor()\hspace {0.1cm}{\footnotesize \ttfamily [1/3]}}{27}{subsubsection.3.7.2.1}%
+\contentsline {subsubsection}{\numberline {3.7.2.2}mColor()\hspace {0.1cm}{\footnotesize \ttfamily [2/3]}}{27}{subsubsection.3.7.2.2}%
+\contentsline {subsubsection}{\numberline {3.7.2.3}mColor()\hspace {0.1cm}{\footnotesize \ttfamily [3/3]}}{28}{subsubsection.3.7.2.3}%
+\contentsline {subsection}{\numberline {3.7.3}Friends And Related Function Documentation}{28}{subsection.3.7.3}%
+\contentsline {subsubsection}{\numberline {3.7.3.1}operator$<$$<$}{28}{subsubsection.3.7.3.1}%
+\contentsline {section}{\numberline {3.8}Parser Class Reference}{29}{section.3.8}%
+\contentsline {subsection}{\numberline {3.8.1}Detailed Description}{31}{subsection.3.8.1}%
+\contentsline {subsection}{\numberline {3.8.2}Constructor \& Destructor Documentation}{31}{subsection.3.8.2}%
+\contentsline {subsubsection}{\numberline {3.8.2.1}Parser()}{31}{subsubsection.3.8.2.1}%
+\contentsline {subsection}{\numberline {3.8.3}Member Function Documentation}{32}{subsection.3.8.3}%
+\contentsline {subsubsection}{\numberline {3.8.3.1}getAttribute()}{32}{subsubsection.3.8.3.1}%
+\contentsline {subsubsection}{\numberline {3.8.3.2}getFloatAttribute()}{32}{subsubsection.3.8.3.2}%
+\contentsline {subsubsection}{\numberline {3.8.3.3}GetGradients()}{34}{subsubsection.3.8.3.3}%
+\contentsline {subsubsection}{\numberline {3.8.3.4}getGradientStops()}{35}{subsubsection.3.8.3.4}%
+\contentsline {subsubsection}{\numberline {3.8.3.5}getInstance()}{36}{subsubsection.3.8.3.5}%
+\contentsline {subsubsection}{\numberline {3.8.3.6}getRoot()}{36}{subsubsection.3.8.3.6}%
+\contentsline {subsubsection}{\numberline {3.8.3.7}getTransformOrder()}{36}{subsubsection.3.8.3.7}%
+\contentsline {subsubsection}{\numberline {3.8.3.8}getViewBox()}{37}{subsubsection.3.8.3.8}%
+\contentsline {subsubsection}{\numberline {3.8.3.9}getViewPort()}{37}{subsubsection.3.8.3.9}%
+\contentsline {subsubsection}{\numberline {3.8.3.10}parseCircle()}{38}{subsubsection.3.8.3.10}%
+\contentsline {subsubsection}{\numberline {3.8.3.11}parseColor()}{38}{subsubsection.3.8.3.11}%
+\contentsline {subsubsection}{\numberline {3.8.3.12}parseElements()}{39}{subsubsection.3.8.3.12}%
+\contentsline {subsubsection}{\numberline {3.8.3.13}parseEllipse()}{41}{subsubsection.3.8.3.13}%
+\contentsline {subsubsection}{\numberline {3.8.3.14}parseGradient()}{41}{subsubsection.3.8.3.14}%
+\contentsline {subsubsection}{\numberline {3.8.3.15}parseLine()}{42}{subsubsection.3.8.3.15}%
+\contentsline {subsubsection}{\numberline {3.8.3.16}parsePath()}{42}{subsubsection.3.8.3.16}%
+\contentsline {subsubsection}{\numberline {3.8.3.17}parsePathPoints()}{43}{subsubsection.3.8.3.17}%
+\contentsline {subsubsection}{\numberline {3.8.3.18}parsePoints()}{45}{subsubsection.3.8.3.18}%
+\contentsline {subsubsection}{\numberline {3.8.3.19}parsePolygon()}{46}{subsubsection.3.8.3.19}%
+\contentsline {subsubsection}{\numberline {3.8.3.20}parsePolyline()}{46}{subsubsection.3.8.3.20}%
+\contentsline {subsubsection}{\numberline {3.8.3.21}parseRect()}{47}{subsubsection.3.8.3.21}%
+\contentsline {subsubsection}{\numberline {3.8.3.22}parseShape()}{47}{subsubsection.3.8.3.22}%
+\contentsline {subsubsection}{\numberline {3.8.3.23}parseText()}{48}{subsubsection.3.8.3.23}%
+\contentsline {subsubsection}{\numberline {3.8.3.24}printShapesData()}{49}{subsubsection.3.8.3.24}%
+\contentsline {subsection}{\numberline {3.8.4}Member Data Documentation}{49}{subsection.3.8.4}%
+\contentsline {subsubsection}{\numberline {3.8.4.1}gradients}{49}{subsubsection.3.8.4.1}%
+\contentsline {section}{\numberline {3.9}Path Class Reference}{50}{section.3.9}%
+\contentsline {subsection}{\numberline {3.9.1}Detailed Description}{51}{subsection.3.9.1}%
+\contentsline {subsection}{\numberline {3.9.2}Constructor \& Destructor Documentation}{51}{subsection.3.9.2}%
+\contentsline {subsubsection}{\numberline {3.9.2.1}Path()}{51}{subsubsection.3.9.2.1}%
+\contentsline {subsection}{\numberline {3.9.3}Member Function Documentation}{52}{subsection.3.9.3}%
+\contentsline {subsubsection}{\numberline {3.9.3.1}addPoint()}{52}{subsubsection.3.9.3.1}%
+\contentsline {subsubsection}{\numberline {3.9.3.2}getClass()}{52}{subsubsection.3.9.3.2}%
+\contentsline {subsubsection}{\numberline {3.9.3.3}getFillRule()}{53}{subsubsection.3.9.3.3}%
+\contentsline {subsubsection}{\numberline {3.9.3.4}getPoints()}{53}{subsubsection.3.9.3.4}%
+\contentsline {subsubsection}{\numberline {3.9.3.5}printData()}{53}{subsubsection.3.9.3.5}%
+\contentsline {subsubsection}{\numberline {3.9.3.6}setFillRule()}{53}{subsubsection.3.9.3.6}%
+\contentsline {section}{\numberline {3.10}Path\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Point Struct Reference}{54}{section.3.10}%
+\contentsline {subsection}{\numberline {3.10.1}Detailed Description}{55}{subsection.3.10.1}%
+\contentsline {section}{\numberline {3.11}Plygon Class Reference}{55}{section.3.11}%
+\contentsline {subsection}{\numberline {3.11.1}Detailed Description}{56}{subsection.3.11.1}%
+\contentsline {subsection}{\numberline {3.11.2}Constructor \& Destructor Documentation}{56}{subsection.3.11.2}%
+\contentsline {subsubsection}{\numberline {3.11.2.1}Plygon()}{57}{subsubsection.3.11.2.1}%
+\contentsline {subsection}{\numberline {3.11.3}Member Function Documentation}{57}{subsection.3.11.3}%
+\contentsline {subsubsection}{\numberline {3.11.3.1}getClass()}{57}{subsubsection.3.11.3.1}%
+\contentsline {section}{\numberline {3.12}Plyline Class Reference}{58}{section.3.12}%
+\contentsline {subsection}{\numberline {3.12.1}Detailed Description}{59}{subsection.3.12.1}%
+\contentsline {subsection}{\numberline {3.12.2}Constructor \& Destructor Documentation}{59}{subsection.3.12.2}%
+\contentsline {subsubsection}{\numberline {3.12.2.1}Plyline()}{59}{subsubsection.3.12.2.1}%
+\contentsline {subsection}{\numberline {3.12.3}Member Function Documentation}{59}{subsection.3.12.3}%
+\contentsline {subsubsection}{\numberline {3.12.3.1}getClass()}{59}{subsubsection.3.12.3.1}%
+\contentsline {section}{\numberline {3.13}Poly\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Shape Class Reference}{60}{section.3.13}%
+\contentsline {subsection}{\numberline {3.13.1}Detailed Description}{62}{subsection.3.13.1}%
+\contentsline {subsection}{\numberline {3.13.2}Constructor \& Destructor Documentation}{62}{subsection.3.13.2}%
+\contentsline {subsubsection}{\numberline {3.13.2.1}PolyShape()}{62}{subsubsection.3.13.2.1}%
+\contentsline {subsection}{\numberline {3.13.3}Member Function Documentation}{62}{subsection.3.13.3}%
+\contentsline {subsubsection}{\numberline {3.13.3.1}addPoint()}{62}{subsubsection.3.13.3.1}%
+\contentsline {subsubsection}{\numberline {3.13.3.2}getClass()}{63}{subsubsection.3.13.3.2}%
+\contentsline {subsubsection}{\numberline {3.13.3.3}getFillRule()}{63}{subsubsection.3.13.3.3}%
+\contentsline {subsubsection}{\numberline {3.13.3.4}getMaxBound()}{63}{subsubsection.3.13.3.4}%
+\contentsline {subsubsection}{\numberline {3.13.3.5}getMinBound()}{64}{subsubsection.3.13.3.5}%
+\contentsline {subsubsection}{\numberline {3.13.3.6}getPoints()}{64}{subsubsection.3.13.3.6}%
+\contentsline {subsubsection}{\numberline {3.13.3.7}printData()}{64}{subsubsection.3.13.3.7}%
+\contentsline {subsubsection}{\numberline {3.13.3.8}setFillRule()}{64}{subsubsection.3.13.3.8}%
+\contentsline {section}{\numberline {3.14}Radial\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Gradient Class Reference}{65}{section.3.14}%
+\contentsline {subsection}{\numberline {3.14.1}Detailed Description}{66}{subsection.3.14.1}%
+\contentsline {subsection}{\numberline {3.14.2}Constructor \& Destructor Documentation}{66}{subsection.3.14.2}%
+\contentsline {subsubsection}{\numberline {3.14.2.1}RadialGradient()}{66}{subsubsection.3.14.2.1}%
+\contentsline {subsection}{\numberline {3.14.3}Member Function Documentation}{67}{subsection.3.14.3}%
+\contentsline {subsubsection}{\numberline {3.14.3.1}getClass()}{67}{subsubsection.3.14.3.1}%
+\contentsline {subsubsection}{\numberline {3.14.3.2}getRadius()}{67}{subsubsection.3.14.3.2}%
+\contentsline {section}{\numberline {3.15}Rect Class Reference}{68}{section.3.15}%
+\contentsline {subsection}{\numberline {3.15.1}Detailed Description}{69}{subsection.3.15.1}%
+\contentsline {subsection}{\numberline {3.15.2}Constructor \& Destructor Documentation}{69}{subsection.3.15.2}%
+\contentsline {subsubsection}{\numberline {3.15.2.1}Rect()}{69}{subsubsection.3.15.2.1}%
+\contentsline {subsection}{\numberline {3.15.3}Member Function Documentation}{70}{subsection.3.15.3}%
+\contentsline {subsubsection}{\numberline {3.15.3.1}getClass()}{70}{subsubsection.3.15.3.1}%
+\contentsline {subsubsection}{\numberline {3.15.3.2}getHeight()}{70}{subsubsection.3.15.3.2}%
+\contentsline {subsubsection}{\numberline {3.15.3.3}getRadius()}{71}{subsubsection.3.15.3.3}%
+\contentsline {subsubsection}{\numberline {3.15.3.4}getWidth()}{71}{subsubsection.3.15.3.4}%
+\contentsline {subsubsection}{\numberline {3.15.3.5}printData()}{71}{subsubsection.3.15.3.5}%
+\contentsline {subsubsection}{\numberline {3.15.3.6}setHeight()}{71}{subsubsection.3.15.3.6}%
+\contentsline {subsubsection}{\numberline {3.15.3.7}setRadius()}{72}{subsubsection.3.15.3.7}%
+\contentsline {subsubsection}{\numberline {3.15.3.8}setWidth()}{72}{subsubsection.3.15.3.8}%
+\contentsline {section}{\numberline {3.16}Renderer Class Reference}{72}{section.3.16}%
+\contentsline {subsection}{\numberline {3.16.1}Detailed Description}{74}{subsection.3.16.1}%
+\contentsline {subsection}{\numberline {3.16.2}Member Function Documentation}{74}{subsection.3.16.2}%
+\contentsline {subsubsection}{\numberline {3.16.2.1}applyTransform()}{74}{subsubsection.3.16.2.1}%
+\contentsline {subsubsection}{\numberline {3.16.2.2}applyTransformsOnBrush()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{75}{subsubsection.3.16.2.2}%
+\contentsline {subsubsection}{\numberline {3.16.2.3}applyTransformsOnBrush()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{75}{subsubsection.3.16.2.3}%
+\contentsline {subsubsection}{\numberline {3.16.2.4}draw()}{76}{subsubsection.3.16.2.4}%
+\contentsline {subsubsection}{\numberline {3.16.2.5}drawCircle()}{77}{subsubsection.3.16.2.5}%
+\contentsline {subsubsection}{\numberline {3.16.2.6}drawEllipse()}{78}{subsubsection.3.16.2.6}%
+\contentsline {subsubsection}{\numberline {3.16.2.7}drawLine()}{78}{subsubsection.3.16.2.7}%
+\contentsline {subsubsection}{\numberline {3.16.2.8}drawPath()}{79}{subsubsection.3.16.2.8}%
+\contentsline {subsubsection}{\numberline {3.16.2.9}drawPolygon()}{82}{subsubsection.3.16.2.9}%
+\contentsline {subsubsection}{\numberline {3.16.2.10}drawPolyline()}{82}{subsubsection.3.16.2.10}%
+\contentsline {subsubsection}{\numberline {3.16.2.11}drawRectangle()}{84}{subsubsection.3.16.2.11}%
+\contentsline {subsubsection}{\numberline {3.16.2.12}drawText()}{85}{subsubsection.3.16.2.12}%
+\contentsline {subsubsection}{\numberline {3.16.2.13}getBrush()}{86}{subsubsection.3.16.2.13}%
+\contentsline {subsubsection}{\numberline {3.16.2.14}getInstance()}{87}{subsubsection.3.16.2.14}%
+\contentsline {section}{\numberline {3.17}Stop Class Reference}{88}{section.3.17}%
+\contentsline {subsection}{\numberline {3.17.1}Detailed Description}{89}{subsection.3.17.1}%
+\contentsline {subsection}{\numberline {3.17.2}Constructor \& Destructor Documentation}{89}{subsection.3.17.2}%
+\contentsline {subsubsection}{\numberline {3.17.2.1}Stop()}{89}{subsubsection.3.17.2.1}%
+\contentsline {subsection}{\numberline {3.17.3}Member Function Documentation}{89}{subsection.3.17.3}%
+\contentsline {subsubsection}{\numberline {3.17.3.1}getColor()}{89}{subsubsection.3.17.3.1}%
+\contentsline {subsubsection}{\numberline {3.17.3.2}getOffset()}{90}{subsubsection.3.17.3.2}%
+\contentsline {section}{\numberline {3.18}SVGElement Class Reference}{90}{section.3.18}%
+\contentsline {subsection}{\numberline {3.18.1}Detailed Description}{93}{subsection.3.18.1}%
+\contentsline {subsection}{\numberline {3.18.2}Constructor \& Destructor Documentation}{93}{subsection.3.18.2}%
+\contentsline {subsubsection}{\numberline {3.18.2.1}SVGElement()\hspace {0.1cm}{\footnotesize \ttfamily [1/3]}}{93}{subsubsection.3.18.2.1}%
+\contentsline {subsubsection}{\numberline {3.18.2.2}SVGElement()\hspace {0.1cm}{\footnotesize \ttfamily [2/3]}}{93}{subsubsection.3.18.2.2}%
+\contentsline {subsubsection}{\numberline {3.18.2.3}SVGElement()\hspace {0.1cm}{\footnotesize \ttfamily [3/3]}}{94}{subsubsection.3.18.2.3}%
+\contentsline {subsection}{\numberline {3.18.3}Member Function Documentation}{94}{subsection.3.18.3}%
+\contentsline {subsubsection}{\numberline {3.18.3.1}addElement()}{94}{subsubsection.3.18.3.1}%
+\contentsline {subsubsection}{\numberline {3.18.3.2}getClass()}{95}{subsubsection.3.18.3.2}%
+\contentsline {subsubsection}{\numberline {3.18.3.3}getFillColor()}{95}{subsubsection.3.18.3.3}%
+\contentsline {subsubsection}{\numberline {3.18.3.4}getGradient()}{96}{subsubsection.3.18.3.4}%
+\contentsline {subsubsection}{\numberline {3.18.3.5}getMaxBound()}{96}{subsubsection.3.18.3.5}%
+\contentsline {subsubsection}{\numberline {3.18.3.6}getMinBound()}{96}{subsubsection.3.18.3.6}%
+\contentsline {subsubsection}{\numberline {3.18.3.7}getOutlineColor()}{97}{subsubsection.3.18.3.7}%
+\contentsline {subsubsection}{\numberline {3.18.3.8}getOutlineThickness()}{97}{subsubsection.3.18.3.8}%
+\contentsline {subsubsection}{\numberline {3.18.3.9}getParent()}{97}{subsubsection.3.18.3.9}%
+\contentsline {subsubsection}{\numberline {3.18.3.10}getPosition()}{98}{subsubsection.3.18.3.10}%
+\contentsline {subsubsection}{\numberline {3.18.3.11}getTransforms()}{98}{subsubsection.3.18.3.11}%
+\contentsline {subsubsection}{\numberline {3.18.3.12}printData()}{99}{subsubsection.3.18.3.12}%
+\contentsline {subsubsection}{\numberline {3.18.3.13}setFillColor()}{99}{subsubsection.3.18.3.13}%
+\contentsline {subsubsection}{\numberline {3.18.3.14}setGradient()}{99}{subsubsection.3.18.3.14}%
+\contentsline {subsubsection}{\numberline {3.18.3.15}setOutlineColor()}{100}{subsubsection.3.18.3.15}%
+\contentsline {subsubsection}{\numberline {3.18.3.16}setOutlineThickness()}{100}{subsubsection.3.18.3.16}%
+\contentsline {subsubsection}{\numberline {3.18.3.17}setParent()}{101}{subsubsection.3.18.3.17}%
+\contentsline {subsubsection}{\numberline {3.18.3.18}setPosition()\hspace {0.1cm}{\footnotesize \ttfamily [1/2]}}{101}{subsubsection.3.18.3.18}%
+\contentsline {subsubsection}{\numberline {3.18.3.19}setPosition()\hspace {0.1cm}{\footnotesize \ttfamily [2/2]}}{102}{subsubsection.3.18.3.19}%
+\contentsline {subsubsection}{\numberline {3.18.3.20}setTransforms()}{102}{subsubsection.3.18.3.20}%
+\contentsline {section}{\numberline {3.19}Text Class Reference}{103}{section.3.19}%
+\contentsline {subsection}{\numberline {3.19.1}Detailed Description}{104}{subsection.3.19.1}%
+\contentsline {subsection}{\numberline {3.19.2}Constructor \& Destructor Documentation}{104}{subsection.3.19.2}%
+\contentsline {subsubsection}{\numberline {3.19.2.1}Text()}{105}{subsubsection.3.19.2.1}%
+\contentsline {subsection}{\numberline {3.19.3}Member Function Documentation}{105}{subsection.3.19.3}%
+\contentsline {subsubsection}{\numberline {3.19.3.1}getAnchor()}{105}{subsubsection.3.19.3.1}%
+\contentsline {subsubsection}{\numberline {3.19.3.2}getClass()}{105}{subsubsection.3.19.3.2}%
+\contentsline {subsubsection}{\numberline {3.19.3.3}getContent()}{106}{subsubsection.3.19.3.3}%
+\contentsline {subsubsection}{\numberline {3.19.3.4}getFontSize()}{106}{subsubsection.3.19.3.4}%
+\contentsline {subsubsection}{\numberline {3.19.3.5}getFontStyle()}{106}{subsubsection.3.19.3.5}%
+\contentsline {subsubsection}{\numberline {3.19.3.6}setAnchor()}{106}{subsubsection.3.19.3.6}%
+\contentsline {subsubsection}{\numberline {3.19.3.7}setContent()}{107}{subsubsection.3.19.3.7}%
+\contentsline {subsubsection}{\numberline {3.19.3.8}setFontSize()}{107}{subsubsection.3.19.3.8}%
+\contentsline {subsubsection}{\numberline {3.19.3.9}setFontStyle()}{107}{subsubsection.3.19.3.9}%
+\contentsline {section}{\numberline {3.20}Vector2D$<$ T $>$ Class Template Reference}{108}{section.3.20}%
+\contentsline {subsection}{\numberline {3.20.1}Detailed Description}{108}{subsection.3.20.1}%
+\contentsline {subsection}{\numberline {3.20.2}Constructor \& Destructor Documentation}{109}{subsection.3.20.2}%
+\contentsline {subsubsection}{\numberline {3.20.2.1}Vector2D()\hspace {0.1cm}{\footnotesize \ttfamily [1/3]}}{109}{subsubsection.3.20.2.1}%
+\contentsline {subsubsection}{\numberline {3.20.2.2}Vector2D()\hspace {0.1cm}{\footnotesize \ttfamily [2/3]}}{109}{subsubsection.3.20.2.2}%
+\contentsline {subsubsection}{\numberline {3.20.2.3}Vector2D()\hspace {0.1cm}{\footnotesize \ttfamily [3/3]}}{109}{subsubsection.3.20.2.3}%
+\contentsline {section}{\numberline {3.21}Viewer Class Reference}{110}{section.3.21}%
+\contentsline {subsection}{\numberline {3.21.1}Detailed Description}{111}{subsection.3.21.1}%
+\contentsline {subsection}{\numberline {3.21.2}Member Function Documentation}{111}{subsection.3.21.2}%
+\contentsline {subsubsection}{\numberline {3.21.2.1}getInstance()}{112}{subsubsection.3.21.2.1}%
+\contentsline {subsubsection}{\numberline {3.21.2.2}getWindowSize()}{112}{subsubsection.3.21.2.2}%
+\contentsline {subsubsection}{\numberline {3.21.2.3}handleKeyDown()}{112}{subsubsection.3.21.2.3}%
+\contentsline {subsubsection}{\numberline {3.21.2.4}handleKeyEvent()}{113}{subsubsection.3.21.2.4}%
+\contentsline {subsubsection}{\numberline {3.21.2.5}handleLeftButtonDown()}{113}{subsubsection.3.21.2.5}%
+\contentsline {subsubsection}{\numberline {3.21.2.6}handleMouseEvent()}{113}{subsubsection.3.21.2.6}%
+\contentsline {subsubsection}{\numberline {3.21.2.7}handleMouseMove()}{114}{subsubsection.3.21.2.7}%
+\contentsline {subsubsection}{\numberline {3.21.2.8}handleMouseWheel()}{115}{subsubsection.3.21.2.8}%
+\contentsline {subsection}{\numberline {3.21.3}Member Data Documentation}{115}{subsection.3.21.3}%
+\contentsline {subsubsection}{\numberline {3.21.3.1}needs\_repaint}{115}{subsubsection.3.21.3.1}%
+\contentsline {chapter}{Index}{117}{section*.95}%

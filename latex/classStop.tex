@@ -1,0 +1,130 @@
+\hypertarget{classStop}{}\doxysection{Stop Class Reference}
+\label{classStop}\index{Stop@{Stop}}
+
+
+A class that represents a stop.  
+
+
+
+
+{\ttfamily \#include $<$Stop.\+hpp$>$}
+
+
+
+Collaboration diagram for Stop\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=208pt]{classStop__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classStop_a3ad6054f4ecb97b3fc68595b744f8d54}{Stop}} (const \mbox{\hyperlink{classmColor}{m\+Color}} \&\mbox{\hyperlink{classStop_afb57d3535781a9e40efff24c43520a21}{color}}, float \mbox{\hyperlink{classStop_a2b6aaf0f14507df64c6bbd99043ad44b}{offset}})
+\begin{DoxyCompactList}\small\item\em Constructs a \mbox{\hyperlink{classStop}{Stop}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmColor}{m\+Color}} \mbox{\hyperlink{classStop_a0ee1f3e4c4298b8712cef19f24e07dff}{get\+Color}} () const
+\begin{DoxyCompactList}\small\item\em Gets the color of the stop. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{classStop_a60a63002485122f30a80e80220d99748}{get\+Offset}} () const
+\begin{DoxyCompactList}\small\item\em Gets the offset of the stop. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classStop_afb57d3535781a9e40efff24c43520a21}\label{classStop_afb57d3535781a9e40efff24c43520a21}} 
+\mbox{\hyperlink{classmColor}{m\+Color}} \mbox{\hyperlink{classStop_afb57d3535781a9e40efff24c43520a21}{color}}
+\begin{DoxyCompactList}\small\item\em The color of the stop. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classStop_a2b6aaf0f14507df64c6bbd99043ad44b}\label{classStop_a2b6aaf0f14507df64c6bbd99043ad44b}} 
+float \mbox{\hyperlink{classStop_a2b6aaf0f14507df64c6bbd99043ad44b}{offset}}
+\begin{DoxyCompactList}\small\item\em The offset of the stop. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class that represents a stop. 
+
+The \mbox{\hyperlink{classStop}{Stop}} class represents a stop. It contains a color and an offset. 
+
+Definition at line 11 of file Stop.\+hpp.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classStop_a3ad6054f4ecb97b3fc68595b744f8d54}\label{classStop_a3ad6054f4ecb97b3fc68595b744f8d54}} 
+\index{Stop@{Stop}!Stop@{Stop}}
+\index{Stop@{Stop}!Stop@{Stop}}
+\doxysubsubsection{\texorpdfstring{Stop()}{Stop()}}
+{\footnotesize\ttfamily Stop\+::\+Stop (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classmColor}{m\+Color}} \&}]{color,  }\item[{float}]{offset }\end{DoxyParamCaption})}
+
+
+
+Constructs a \mbox{\hyperlink{classStop}{Stop}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em color} & The color of the stop. \\
+\hline
+{\em offset} & The offset of the stop. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 3 of file Stop.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{3 : \mbox{\hyperlink{classStop_afb57d3535781a9e40efff24c43520a21}{color}}(\mbox{\hyperlink{classStop_afb57d3535781a9e40efff24c43520a21}{color}}), \mbox{\hyperlink{classStop_a2b6aaf0f14507df64c6bbd99043ad44b}{offset}}(\mbox{\hyperlink{classStop_a2b6aaf0f14507df64c6bbd99043ad44b}{offset}}) \{\}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classStop_a0ee1f3e4c4298b8712cef19f24e07dff}\label{classStop_a0ee1f3e4c4298b8712cef19f24e07dff}} 
+\index{Stop@{Stop}!getColor@{getColor}}
+\index{getColor@{getColor}!Stop@{Stop}}
+\doxysubsubsection{\texorpdfstring{getColor()}{getColor()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmColor}{m\+Color}} Stop\+::get\+Color (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the color of the stop. 
+
+\begin{DoxyReturn}{Returns}
+The color of the stop. 
+\end{DoxyReturn}
+
+
+Definition at line 5 of file Stop.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{5 \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classStop_afb57d3535781a9e40efff24c43520a21}{color}}; \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classStop_a60a63002485122f30a80e80220d99748}\label{classStop_a60a63002485122f30a80e80220d99748}} 
+\index{Stop@{Stop}!getOffset@{getOffset}}
+\index{getOffset@{getOffset}!Stop@{Stop}}
+\doxysubsubsection{\texorpdfstring{getOffset()}{getOffset()}}
+{\footnotesize\ttfamily float Stop\+::get\+Offset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the offset of the stop. 
+
+\begin{DoxyReturn}{Returns}
+The offset of the stop. 
+\end{DoxyReturn}
+
+
+Definition at line 7 of file Stop.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{7 \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classStop_a2b6aaf0f14507df64c6bbd99043ad44b}{offset}}; \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/graphics/Stop.\+hpp\item 
+src/graphics/Stop.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,1439 @@
+\hypertarget{classParser}{}\doxysection{Parser Class Reference}
+\label{classParser}\index{Parser@{Parser}}
+
+
+To manipulate and parse an SVG file.  
+
+
+
+
+{\ttfamily \#include $<$Parser.\+hpp$>$}
+
+
+
+Collaboration diagram for Parser\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classParser__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classParser_a48044a8caa14a251cb4dad9fb363658e}\label{classParser_a48044a8caa14a251cb4dad9fb363658e}} 
+\mbox{\hyperlink{classParser_a48044a8caa14a251cb4dad9fb363658e}{Parser}} (const \mbox{\hyperlink{classParser}{Parser}} \&)=delete
+\begin{DoxyCompactList}\small\item\em Deleted copy constructor to enforce the singleton pattern. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classParser_a3e658b5917a93a3ef648050d060e3a93}\label{classParser_a3e658b5917a93a3ef648050d060e3a93}} 
+\mbox{\hyperlink{classParser_a3e658b5917a93a3ef648050d060e3a93}{$\sim$\+Parser}} ()
+\begin{DoxyCompactList}\small\item\em Destructor for the \mbox{\hyperlink{classParser}{Parser}} class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classGroup}{Group}} $\ast$ \mbox{\hyperlink{classParser_a59ed4455eaec306cde11939785c4e71a}{get\+Root}} ()
+\begin{DoxyCompactList}\small\item\em Gets the root of the tree of SVGElements. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classParser_a3d8927f2e26abf6a63bd850c154b23c6}{print\+Shapes\+Data}} ()
+\begin{DoxyCompactList}\small\item\em Prints the data of the shapes. \end{DoxyCompactList}\item 
+std\+::pair$<$ \mbox{\hyperlink{classVector2D}{Vector2\+Df}}, \mbox{\hyperlink{classVector2D}{Vector2\+Df}} $>$ \mbox{\hyperlink{classParser_a4efa2342d694eff2ab6ba1d150c7bb69}{get\+View\+Box}} () const
+\begin{DoxyCompactList}\small\item\em Gets the viewbox of the SVG file. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classVector2D}{Vector2\+Df}} \mbox{\hyperlink{classParser_a009fbe10a1b9b58a65be44634335a062}{get\+View\+Port}} () const
+\begin{DoxyCompactList}\small\item\em Gets the viewport of the SVG file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classParser}{Parser}} $\ast$ \mbox{\hyperlink{classParser_a06952fa44f19fdb573c1355ac26454c5}{get\+Instance}} (const std\+::string \&file\+\_\+name)
+\begin{DoxyCompactList}\small\item\em Gets the singleton instance of the \mbox{\hyperlink{classParser}{Parser}} class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classParser_a350fc3e35535c5891cd9e36e79ee546a}{Parser}} (const std\+::string \&file\+\_\+name)
+\begin{DoxyCompactList}\small\item\em Construct a new \mbox{\hyperlink{classParser}{Parser}} object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classSVGElement}{SVGElement}} $\ast$ \mbox{\hyperlink{classParser_aaf9f19591ff93f0c0c2fd68955e4a4af}{parse\+Elements}} (std\+::string file\+\_\+name)
+\begin{DoxyCompactList}\small\item\em Parses the SVG file and creates a tree of SVGElements. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classParser_a63329a7accdf332feb3fba1bcc4deec6}{get\+Attribute}} (rapidxml\+::xml\+\_\+node$<$$>$ $\ast$node, std\+::string name)
+\begin{DoxyCompactList}\small\item\em Gets the attributes of a node. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{classParser_ab2b1df7c69830fafcbe36de5199dcd30}{get\+Float\+Attribute}} (rapidxml\+::xml\+\_\+node$<$$>$ $\ast$node, std\+::string name)
+\begin{DoxyCompactList}\small\item\em Gets the floating point attributes of a node. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{classStop}{Stop}} $>$ \mbox{\hyperlink{classParser_aca2ed5f466436a9e9f78618bb1e356fd}{get\+Gradient\+Stops}} (rapidxml\+::xml\+\_\+node$<$$>$ $\ast$node)
+\begin{DoxyCompactList}\small\item\em Gets the gradient stops of a node. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classParser_ac00eac6bf37c45c9160fa47700d2466f}{Get\+Gradients}} (rapidxml\+::xml\+\_\+node$<$$>$ $\ast$node)
+\begin{DoxyCompactList}\small\item\em Gets the gradients of a node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classGradient}{Gradient}} $\ast$ \mbox{\hyperlink{classParser_ac1e519500fce1b4192362ed1aa5ccbc3}{parse\+Gradient}} (std\+::string id)
+\begin{DoxyCompactList}\small\item\em Gets the gradient of a node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classmColor}{m\+Color}} \mbox{\hyperlink{classParser_a18d5a9aa35bd124023a060940486e183}{parse\+Color}} (rapidxml\+::xml\+\_\+node$<$$>$ $\ast$node, std\+::string color, std\+::string \&id)
+\begin{DoxyCompactList}\small\item\em Gets the color attributes of a node. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{classVector2D}{Vector2\+Df}} $>$ \mbox{\hyperlink{classParser_af408a2ef7b27ceed0547093d73e6b2eb}{parse\+Points}} (rapidxml\+::xml\+\_\+node$<$$>$ $\ast$node)
+\begin{DoxyCompactList}\small\item\em Gets the points of the element. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{structPathPoint}{Path\+Point}} $>$ \mbox{\hyperlink{classParser_aecea54d6bc1ff225a6ac450ccbb560c3}{parse\+Path\+Points}} (rapidxml\+::xml\+\_\+node$<$$>$ $\ast$node)
+\begin{DoxyCompactList}\small\item\em Gets the points of the path element. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classParser_a99df58e649089762bf434502173716d6}{get\+Transform\+Order}} (rapidxml\+::xml\+\_\+node$<$$>$ $\ast$node)
+\begin{DoxyCompactList}\small\item\em Gets the transform order of the element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classLine}{Line}} $\ast$ \mbox{\hyperlink{classParser_a95e84ae219109769fae08702381acf78}{parse\+Line}} (rapidxml\+::xml\+\_\+node$<$$>$ $\ast$node, const \mbox{\hyperlink{classmColor}{m\+Color}} \&stroke\+\_\+color, float stroke\+\_\+width)
+\begin{DoxyCompactList}\small\item\em Parses the line element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classRect}{Rect}} $\ast$ \mbox{\hyperlink{classParser_a20352ab58a59e61f6da1b4d20861907d}{parse\+Rect}} (rapidxml\+::xml\+\_\+node$<$$>$ $\ast$node, const \mbox{\hyperlink{classmColor}{m\+Color}} \&fill\+\_\+color, const \mbox{\hyperlink{classmColor}{m\+Color}} \&stroke\+\_\+color, float stroke\+\_\+width)
+\begin{DoxyCompactList}\small\item\em Parses the rect element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classPlyline}{Plyline}} $\ast$ \mbox{\hyperlink{classParser_a03766f0f9f6ebdead0474973d3ac50aa}{parse\+Polyline}} (rapidxml\+::xml\+\_\+node$<$$>$ $\ast$node, const \mbox{\hyperlink{classmColor}{m\+Color}} \&fill\+\_\+color, const \mbox{\hyperlink{classmColor}{m\+Color}} \&stroke\+\_\+color, float stroke\+\_\+width)
+\begin{DoxyCompactList}\small\item\em Parses the polyline element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classPlygon}{Plygon}} $\ast$ \mbox{\hyperlink{classParser_a7afd52c648dc5983e596edfa7eb6bbb5}{parse\+Polygon}} (rapidxml\+::xml\+\_\+node$<$$>$ $\ast$node, const \mbox{\hyperlink{classmColor}{m\+Color}} \&fill\+\_\+color, const \mbox{\hyperlink{classmColor}{m\+Color}} \&stroke\+\_\+color, float stroke\+\_\+width)
+\begin{DoxyCompactList}\small\item\em Parses the polygon element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classCircle}{Circle}} $\ast$ \mbox{\hyperlink{classParser_ab7776f740b7d63c388a086c8b8ecccd0}{parse\+Circle}} (rapidxml\+::xml\+\_\+node$<$$>$ $\ast$node, const \mbox{\hyperlink{classmColor}{m\+Color}} \&fill\+\_\+color, const \mbox{\hyperlink{classmColor}{m\+Color}} \&stroke\+\_\+color, float stroke\+\_\+width)
+\begin{DoxyCompactList}\small\item\em Parses the circle element. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classEll}{Ell}} $\ast$ \mbox{\hyperlink{classParser_a0af0085ee5e20739bdf23a5b685642b6}{parse\+Ellipse}} (rapidxml\+::xml\+\_\+node$<$$>$ $\ast$node, const \mbox{\hyperlink{classmColor}{m\+Color}} \&fill\+\_\+color, const \mbox{\hyperlink{classmColor}{m\+Color}} \&stroke\+\_\+color, float stroke\+\_\+width)
+\begin{DoxyCompactList}\small\item\em Parses the ellipse element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classPath}{Path}} $\ast$ \mbox{\hyperlink{classParser_a6f80728e7a771d2653baf1b453b655d9}{parse\+Path}} (rapidxml\+::xml\+\_\+node$<$$>$ $\ast$node, const \mbox{\hyperlink{classmColor}{m\+Color}} \&fill\+\_\+color, const \mbox{\hyperlink{classmColor}{m\+Color}} \&stroke\+\_\+color, float stroke\+\_\+width)
+\begin{DoxyCompactList}\small\item\em Parses the path element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classText}{Text}} $\ast$ \mbox{\hyperlink{classParser_a539bda46a2832a22741105c9299c12cb}{parse\+Text}} (rapidxml\+::xml\+\_\+node$<$$>$ $\ast$node, const \mbox{\hyperlink{classmColor}{m\+Color}} \&fill\+\_\+color, const \mbox{\hyperlink{classmColor}{m\+Color}} \&stroke\+\_\+color, float stroke\+\_\+width)
+\begin{DoxyCompactList}\small\item\em Parses the text element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classSVGElement}{SVGElement}} $\ast$ \mbox{\hyperlink{classParser_abfd09c5dd46fb0dc9bcd9106857dbf5e}{parse\+Shape}} (rapidxml\+::xml\+\_\+node$<$$>$ $\ast$node)
+\begin{DoxyCompactList}\small\item\em Parses the group of elements. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classParser_a13a5e2fdac62670c1584de1edbba77f2}\label{classParser_a13a5e2fdac62670c1584de1edbba77f2}} 
+\mbox{\hyperlink{classSVGElement}{SVGElement}} $\ast$ \mbox{\hyperlink{classParser_a13a5e2fdac62670c1584de1edbba77f2}{root}}
+\begin{DoxyCompactList}\small\item\em The root of the SVG file. \end{DoxyCompactList}\item 
+std\+::map$<$ std\+::string, \mbox{\hyperlink{classGradient}{Gradient}} $\ast$ $>$ \mbox{\hyperlink{classParser_a7f085da78317baf2cc61e6e92b4b29c8}{gradients}}
+\item 
+\mbox{\Hypertarget{classParser_a7eb24f4915ba9b7a652ca204c1edb2c7}\label{classParser_a7eb24f4915ba9b7a652ca204c1edb2c7}} 
+std\+::pair$<$ \mbox{\hyperlink{classVector2D}{Vector2\+Df}}, \mbox{\hyperlink{classVector2D}{Vector2\+Df}} $>$ \mbox{\hyperlink{classParser_a7eb24f4915ba9b7a652ca204c1edb2c7}{viewbox}}
+\begin{DoxyCompactList}\small\item\em The viewbox of the SVG file. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classParser_a2872aff3bfb15fdb1df2dcdce2bd632a}\label{classParser_a2872aff3bfb15fdb1df2dcdce2bd632a}} 
+\mbox{\hyperlink{classVector2D}{Vector2\+Df}} \mbox{\hyperlink{classParser_a2872aff3bfb15fdb1df2dcdce2bd632a}{viewport}}
+\begin{DoxyCompactList}\small\item\em The viewport of the SVG file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classParser_ae3a28c02c18171f4e83fae54b9f21a90}\label{classParser_ae3a28c02c18171f4e83fae54b9f21a90}} 
+static \mbox{\hyperlink{classParser}{Parser}} $\ast$ \mbox{\hyperlink{classParser_ae3a28c02c18171f4e83fae54b9f21a90}{instance}} = nullptr
+\begin{DoxyCompactList}\small\item\em The instance of the \mbox{\hyperlink{classParser}{Parser}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+To manipulate and parse an SVG file. 
+
+The \mbox{\hyperlink{classParser}{Parser}} class is a singleton class that is used to parse an SVG file and create a tree of SVGElements. 
+
+Definition at line 24 of file Parser.\+hpp.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classParser_a350fc3e35535c5891cd9e36e79ee546a}\label{classParser_a350fc3e35535c5891cd9e36e79ee546a}} 
+\index{Parser@{Parser}!Parser@{Parser}}
+\index{Parser@{Parser}!Parser@{Parser}}
+\doxysubsubsection{\texorpdfstring{Parser()}{Parser()}}
+{\footnotesize\ttfamily Parser\+::\+Parser (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{file\+\_\+name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Construct a new \mbox{\hyperlink{classParser}{Parser}} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+\_\+name} & The name of the file to be parsed. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 165 of file Parser.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{165                                          \{}
+\DoxyCodeLine{166     \mbox{\hyperlink{classParser_a13a5e2fdac62670c1584de1edbba77f2}{root}} = \mbox{\hyperlink{classParser_aaf9f19591ff93f0c0c2fd68955e4a4af}{parseElements}}(file\_name);}
+\DoxyCodeLine{167 \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classParser_a63329a7accdf332feb3fba1bcc4deec6}\label{classParser_a63329a7accdf332feb3fba1bcc4deec6}} 
+\index{Parser@{Parser}!getAttribute@{getAttribute}}
+\index{getAttribute@{getAttribute}!Parser@{Parser}}
+\doxysubsubsection{\texorpdfstring{getAttribute()}{getAttribute()}}
+{\footnotesize\ttfamily std\+::string Parser\+::get\+Attribute (\begin{DoxyParamCaption}\item[{rapidxml\+::xml\+\_\+node$<$$>$ $\ast$}]{node,  }\item[{std\+::string}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Gets the attributes of a node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & The node to be parsed. \\
+\hline
+{\em name} & The name of tag to be parsed.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The attributes of the node. 
+\end{DoxyReturn}
+
+
+Definition at line 296 of file Parser.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{296                                                                        \{}
+\DoxyCodeLine{297     \textcolor{keywordflow}{if} (name == \textcolor{stringliteral}{"{}text"{}}) \textcolor{keywordflow}{return} removeExtraSpaces(node-\/>value());}
+\DoxyCodeLine{298     std::string result;}
+\DoxyCodeLine{299     \textcolor{keywordflow}{if} (node-\/>first\_attribute(name.c\_str()) == NULL) \{}
+\DoxyCodeLine{300         \textcolor{keywordflow}{if} (name == \textcolor{stringliteral}{"{}fill"{}} || name == \textcolor{stringliteral}{"{}stop-\/color"{}})}
+\DoxyCodeLine{301             result = \textcolor{stringliteral}{"{}black"{}};}
+\DoxyCodeLine{302         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (name == \textcolor{stringliteral}{"{}stroke"{}} || name == \textcolor{stringliteral}{"{}transform"{}} || name == \textcolor{stringliteral}{"{}rotate"{}} ||}
+\DoxyCodeLine{303                  name == \textcolor{stringliteral}{"{}font-\/style"{}})}
+\DoxyCodeLine{304             result = \textcolor{stringliteral}{"{}none"{}};}
+\DoxyCodeLine{305         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (name == \textcolor{stringliteral}{"{}text-\/anchor"{}})}
+\DoxyCodeLine{306             result = \textcolor{stringliteral}{"{}start"{}};}
+\DoxyCodeLine{307         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (name == \textcolor{stringliteral}{"{}fill-\/rule"{}})}
+\DoxyCodeLine{308             result = \textcolor{stringliteral}{"{}nonzero"{}};}
+\DoxyCodeLine{309         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (name == \textcolor{stringliteral}{"{}gradientUnits"{}})}
+\DoxyCodeLine{310             result = \textcolor{stringliteral}{"{}objectBoundingBox"{}};}
+\DoxyCodeLine{311     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{312         result = node-\/>first\_attribute(name.c\_str())-\/>value();}
+\DoxyCodeLine{313     \}}
+\DoxyCodeLine{314     \textcolor{keywordflow}{return} result;}
+\DoxyCodeLine{315 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classParser_ab2b1df7c69830fafcbe36de5199dcd30}\label{classParser_ab2b1df7c69830fafcbe36de5199dcd30}} 
+\index{Parser@{Parser}!getFloatAttribute@{getFloatAttribute}}
+\index{getFloatAttribute@{getFloatAttribute}!Parser@{Parser}}
+\doxysubsubsection{\texorpdfstring{getFloatAttribute()}{getFloatAttribute()}}
+{\footnotesize\ttfamily float Parser\+::get\+Float\+Attribute (\begin{DoxyParamCaption}\item[{rapidxml\+::xml\+\_\+node$<$$>$ $\ast$}]{node,  }\item[{std\+::string}]{name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Gets the floating point attributes of a node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & The node to be parsed. \\
+\hline
+{\em name} & The name of tag to be parsed.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The floating point attributes of the node. 
+\end{DoxyReturn}
+
+
+Definition at line 317 of file Parser.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{317                                                                         \{}
+\DoxyCodeLine{318     \textcolor{keywordtype}{float} result;}
+\DoxyCodeLine{319     \textcolor{keywordflow}{if} (node-\/>first\_attribute(name.c\_str()) == NULL) \{}
+\DoxyCodeLine{320         \textcolor{keywordflow}{if} (std::string(node-\/>name()).find(\textcolor{stringliteral}{"{}Gradient"{}}) != std::string::npos) \{}
+\DoxyCodeLine{321             \textcolor{keywordflow}{if} (name == \textcolor{stringliteral}{"{}x1"{}} || name == \textcolor{stringliteral}{"{}y1"{}} || name == \textcolor{stringliteral}{"{}fr"{}})}
+\DoxyCodeLine{322                 result = 0;}
+\DoxyCodeLine{323             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (name == \textcolor{stringliteral}{"{}cx"{}} || name == \textcolor{stringliteral}{"{}cy"{}})}
+\DoxyCodeLine{324                 result = name == \textcolor{stringliteral}{"{}cx"{}} ? 0.5 * this-\/>\mbox{\hyperlink{classParser_a7eb24f4915ba9b7a652ca204c1edb2c7}{viewbox}}.second.x}
+\DoxyCodeLine{325                                       : 0.5 * this-\/>\mbox{\hyperlink{classParser_a7eb24f4915ba9b7a652ca204c1edb2c7}{viewbox}}.second.y;}
+\DoxyCodeLine{326             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (name == \textcolor{stringliteral}{"{}r"{}}) \{}
+\DoxyCodeLine{327                 result = sqrt((pow(this-\/>\mbox{\hyperlink{classParser_a7eb24f4915ba9b7a652ca204c1edb2c7}{viewbox}}.second.x, 2) +}
+\DoxyCodeLine{328                                pow(this-\/>\mbox{\hyperlink{classParser_a7eb24f4915ba9b7a652ca204c1edb2c7}{viewbox}}.second.y, 2)) /}
+\DoxyCodeLine{329                               2) /}
+\DoxyCodeLine{330                          2;}
+\DoxyCodeLine{331             \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (name == \textcolor{stringliteral}{"{}fx"{}} || name == \textcolor{stringliteral}{"{}fy"{}})}
+\DoxyCodeLine{332                 result = name == \textcolor{stringliteral}{"{}fx"{}} ? \mbox{\hyperlink{classParser_ab2b1df7c69830fafcbe36de5199dcd30}{getFloatAttribute}}(node, \textcolor{stringliteral}{"{}cx"{}})}
+\DoxyCodeLine{333                                       : \mbox{\hyperlink{classParser_ab2b1df7c69830fafcbe36de5199dcd30}{getFloatAttribute}}(node, \textcolor{stringliteral}{"{}cy"{}});}
+\DoxyCodeLine{334             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{335                 result = name == \textcolor{stringliteral}{"{}x2"{}} ? this-\/>\mbox{\hyperlink{classParser_a7eb24f4915ba9b7a652ca204c1edb2c7}{viewbox}}.second.x}
+\DoxyCodeLine{336                                       : this-\/>\mbox{\hyperlink{classParser_a7eb24f4915ba9b7a652ca204c1edb2c7}{viewbox}}.second.y;}
+\DoxyCodeLine{337         \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{338             \textcolor{keywordflow}{if} (name == \textcolor{stringliteral}{"{}stroke-\/width"{}} || name == \textcolor{stringliteral}{"{}stroke-\/opacity"{}} ||}
+\DoxyCodeLine{339                 name == \textcolor{stringliteral}{"{}fill-\/opacity"{}} || name == \textcolor{stringliteral}{"{}opacity"{}} ||}
+\DoxyCodeLine{340                 name == \textcolor{stringliteral}{"{}stop-\/opacity"{}})}
+\DoxyCodeLine{341                 result = 1;}
+\DoxyCodeLine{342             \textcolor{keywordflow}{else}}
+\DoxyCodeLine{343                 result = 0;}
+\DoxyCodeLine{344         \}}
+\DoxyCodeLine{345     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{346         \textcolor{keywordflow}{if} (name == \textcolor{stringliteral}{"{}width"{}} || name == \textcolor{stringliteral}{"{}height"{}}) \{}
+\DoxyCodeLine{347             std::string value = node-\/>first\_attribute(name.c\_str())-\/>value();}
+\DoxyCodeLine{348             \textcolor{keywordflow}{if} (value.find(\textcolor{stringliteral}{"{}\%"{}}) != std::string::npos) \{}
+\DoxyCodeLine{349                 result = std::stof(value.substr(0, value.find(\textcolor{stringliteral}{"{}\%"{}}))) *}
+\DoxyCodeLine{350                          this-\/>\mbox{\hyperlink{classParser_a7eb24f4915ba9b7a652ca204c1edb2c7}{viewbox}}.second.x / 100;}
+\DoxyCodeLine{351             \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (value.find(\textcolor{stringliteral}{"{}pt"{}}) != std::string::npos) \{}
+\DoxyCodeLine{352                 result = std::stof(value.substr(0, value.find(\textcolor{stringliteral}{"{}pt"{}}))) * 1.33;}
+\DoxyCodeLine{353             \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{354                 result = std::stof(value);}
+\DoxyCodeLine{355             \}}
+\DoxyCodeLine{356         \} \textcolor{keywordflow}{else}}
+\DoxyCodeLine{357             result = std::stof(node-\/>first\_attribute(name.c\_str())-\/>value());}
+\DoxyCodeLine{358     \}}
+\DoxyCodeLine{359     \textcolor{keywordflow}{return} result;}
+\DoxyCodeLine{360 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classParser_ac00eac6bf37c45c9160fa47700d2466f}\label{classParser_ac00eac6bf37c45c9160fa47700d2466f}} 
+\index{Parser@{Parser}!GetGradients@{GetGradients}}
+\index{GetGradients@{GetGradients}!Parser@{Parser}}
+\doxysubsubsection{\texorpdfstring{GetGradients()}{GetGradients()}}
+{\footnotesize\ttfamily void Parser\+::\+Get\+Gradients (\begin{DoxyParamCaption}\item[{rapidxml\+::xml\+\_\+node$<$$>$ $\ast$}]{node }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Gets the gradients of a node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & The node to be parsed. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 428 of file Parser.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{428                                                   \{}
+\DoxyCodeLine{429     rapidxml::xml\_node<> *gradient\_node = node-\/>first\_node();}
+\DoxyCodeLine{430     \textcolor{keywordflow}{while} (gradient\_node) \{}
+\DoxyCodeLine{431         \textcolor{keywordflow}{if} (std::string(gradient\_node-\/>name()).find(\textcolor{stringliteral}{"{}Gradient"{}}) !=}
+\DoxyCodeLine{432             std::string::npos) \{}
+\DoxyCodeLine{433             \mbox{\hyperlink{classGradient}{Gradient}} *gradient;}
+\DoxyCodeLine{434             std::string \textcolor{keywordtype}{id} = \mbox{\hyperlink{classParser_a63329a7accdf332feb3fba1bcc4deec6}{getAttribute}}(gradient\_node, \textcolor{stringliteral}{"{}id"{}});}
+\DoxyCodeLine{435             std::string units = \mbox{\hyperlink{classParser_a63329a7accdf332feb3fba1bcc4deec6}{getAttribute}}(gradient\_node, \textcolor{stringliteral}{"{}gradientUnits"{}});}
+\DoxyCodeLine{436             std::vector< Stop > stops = \mbox{\hyperlink{classParser_aca2ed5f466436a9e9f78618bb1e356fd}{getGradientStops}}(gradient\_node);}
+\DoxyCodeLine{437             std::string href = \mbox{\hyperlink{classParser_a63329a7accdf332feb3fba1bcc4deec6}{getAttribute}}(gradient\_node, \textcolor{stringliteral}{"{}xlink:href"{}});}
+\DoxyCodeLine{438             \textcolor{keywordtype}{int} pos = href.find(\textcolor{stringliteral}{"{}\#"{}});}
+\DoxyCodeLine{439             \textcolor{keywordflow}{if} (pos != std::string::npos) \{}
+\DoxyCodeLine{440                 href = href.substr(pos + 1);}
+\DoxyCodeLine{441             \}}
+\DoxyCodeLine{442             \textcolor{keywordflow}{if} (std::string(gradient\_node-\/>name()).find(\textcolor{stringliteral}{"{}linear"{}}) !=}
+\DoxyCodeLine{443                 std::string::npos) \{}
+\DoxyCodeLine{444                 \textcolor{keywordtype}{float} x1 = \mbox{\hyperlink{classParser_ab2b1df7c69830fafcbe36de5199dcd30}{getFloatAttribute}}(gradient\_node, \textcolor{stringliteral}{"{}x1"{}});}
+\DoxyCodeLine{445                 \textcolor{keywordtype}{float} y1 = \mbox{\hyperlink{classParser_ab2b1df7c69830fafcbe36de5199dcd30}{getFloatAttribute}}(gradient\_node, \textcolor{stringliteral}{"{}y1"{}});}
+\DoxyCodeLine{446                 \textcolor{keywordtype}{float} x2 = \mbox{\hyperlink{classParser_ab2b1df7c69830fafcbe36de5199dcd30}{getFloatAttribute}}(gradient\_node, \textcolor{stringliteral}{"{}x2"{}});}
+\DoxyCodeLine{447                 \textcolor{keywordtype}{float} y2 = \mbox{\hyperlink{classParser_ab2b1df7c69830fafcbe36de5199dcd30}{getFloatAttribute}}(gradient\_node, \textcolor{stringliteral}{"{}y2"{}});}
+\DoxyCodeLine{448                 std::pair< Vector2Df, Vector2Df > points = \{\{x1, y1\}, \{x2, y2\}\};}
+\DoxyCodeLine{449                 gradient = \textcolor{keyword}{new} \mbox{\hyperlink{classLinearGradient}{LinearGradient}}(stops, points, units);}
+\DoxyCodeLine{450                 \textcolor{keywordflow}{if} (this-\/>\mbox{\hyperlink{classParser_a7f085da78317baf2cc61e6e92b4b29c8}{gradients}}.find(\textcolor{keywordtype}{id}) == this-\/>gradients.end())}
+\DoxyCodeLine{451                     this-\/>\mbox{\hyperlink{classParser_a7f085da78317baf2cc61e6e92b4b29c8}{gradients}}[id] = gradient;}
+\DoxyCodeLine{452             \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (std::string(gradient\_node-\/>name()).find(\textcolor{stringliteral}{"{}radial"{}}) !=}
+\DoxyCodeLine{453                        std::string::npos) \{}
+\DoxyCodeLine{454                 \textcolor{keywordtype}{float} cx = \mbox{\hyperlink{classParser_ab2b1df7c69830fafcbe36de5199dcd30}{getFloatAttribute}}(gradient\_node, \textcolor{stringliteral}{"{}cx"{}});}
+\DoxyCodeLine{455                 \textcolor{keywordtype}{float} cy = \mbox{\hyperlink{classParser_ab2b1df7c69830fafcbe36de5199dcd30}{getFloatAttribute}}(gradient\_node, \textcolor{stringliteral}{"{}cy"{}});}
+\DoxyCodeLine{456                 \textcolor{keywordtype}{float} fx = \mbox{\hyperlink{classParser_ab2b1df7c69830fafcbe36de5199dcd30}{getFloatAttribute}}(gradient\_node, \textcolor{stringliteral}{"{}fx"{}});}
+\DoxyCodeLine{457                 \textcolor{keywordtype}{float} fy = \mbox{\hyperlink{classParser_ab2b1df7c69830fafcbe36de5199dcd30}{getFloatAttribute}}(gradient\_node, \textcolor{stringliteral}{"{}fy"{}});}
+\DoxyCodeLine{458                 \textcolor{keywordtype}{float} r = \mbox{\hyperlink{classParser_ab2b1df7c69830fafcbe36de5199dcd30}{getFloatAttribute}}(gradient\_node, \textcolor{stringliteral}{"{}r"{}});}
+\DoxyCodeLine{459                 \textcolor{keywordtype}{float} fr = \mbox{\hyperlink{classParser_ab2b1df7c69830fafcbe36de5199dcd30}{getFloatAttribute}}(gradient\_node, \textcolor{stringliteral}{"{}fr"{}});}
+\DoxyCodeLine{460                 std::pair< Vector2Df, Vector2Df > points = \{\{cx, cy\}, \{fx, fy\}\};}
+\DoxyCodeLine{461                 \mbox{\hyperlink{classVector2D}{Vector2Df}} radius(r, fr);}
+\DoxyCodeLine{462                 gradient = \textcolor{keyword}{new} \mbox{\hyperlink{classRadialGradient}{RadialGradient}}(stops, points, radius, units);}
+\DoxyCodeLine{463                 \textcolor{keywordflow}{if} (this-\/>\mbox{\hyperlink{classParser_a7f085da78317baf2cc61e6e92b4b29c8}{gradients}}.find(\textcolor{keywordtype}{id}) == this-\/>gradients.end())}
+\DoxyCodeLine{464                     this-\/>\mbox{\hyperlink{classParser_a7f085da78317baf2cc61e6e92b4b29c8}{gradients}}[id] = gradient;}
+\DoxyCodeLine{465             \}}
+\DoxyCodeLine{466             \textcolor{keywordflow}{if} (href != \textcolor{stringliteral}{"{}"{}}) \{}
+\DoxyCodeLine{467                 \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} stop : \mbox{\hyperlink{classParser_ac1e519500fce1b4192362ed1aa5ccbc3}{parseGradient}}(href)-\/>getStops()) \{}
+\DoxyCodeLine{468                     gradient-\/>\mbox{\hyperlink{classGradient_a44218bd3fb347f4c269f1f2795fb77d5}{addStop}}(stop);}
+\DoxyCodeLine{469                 \}}
+\DoxyCodeLine{470             \}}
+\DoxyCodeLine{471             \textcolor{keywordflow}{if} (gradient != NULL)}
+\DoxyCodeLine{472                 gradient-\/>\mbox{\hyperlink{classGradient_ae2afa93bd9b6759f5fe625065301d3d9}{setTransforms}}(\mbox{\hyperlink{classParser_a99df58e649089762bf434502173716d6}{getTransformOrder}}(gradient\_node));}
+\DoxyCodeLine{473         \}}
+\DoxyCodeLine{474         gradient\_node = gradient\_node-\/>next\_sibling();}
+\DoxyCodeLine{475     \}}
+\DoxyCodeLine{476 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classParser_aca2ed5f466436a9e9f78618bb1e356fd}\label{classParser_aca2ed5f466436a9e9f78618bb1e356fd}} 
+\index{Parser@{Parser}!getGradientStops@{getGradientStops}}
+\index{getGradientStops@{getGradientStops}!Parser@{Parser}}
+\doxysubsubsection{\texorpdfstring{getGradientStops()}{getGradientStops()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{classStop}{Stop}} $>$ Parser\+::get\+Gradient\+Stops (\begin{DoxyParamCaption}\item[{rapidxml\+::xml\+\_\+node$<$$>$ $\ast$}]{node }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Gets the gradient stops of a node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & The node to be parsed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The gradient stops of the node. 
+\end{DoxyReturn}
+
+
+Definition at line 412 of file Parser.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{412                                                                    \{}
+\DoxyCodeLine{413     std::vector< Stop > stops;}
+\DoxyCodeLine{414     rapidxml::xml\_node<> *stop\_node = node-\/>first\_node();}
+\DoxyCodeLine{415     \textcolor{keywordflow}{while} (stop\_node) \{}
+\DoxyCodeLine{416         \textcolor{keywordflow}{if} (std::string(stop\_node-\/>name()) == \textcolor{stringliteral}{"{}stop"{}}) \{}
+\DoxyCodeLine{417             std::string \textcolor{keywordtype}{id} = \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{418             \mbox{\hyperlink{classmColor}{mColor}} color = \mbox{\hyperlink{classParser_a18d5a9aa35bd124023a060940486e183}{parseColor}}(stop\_node, \textcolor{stringliteral}{"{}stop-\/color"{}}, \textcolor{keywordtype}{id});}
+\DoxyCodeLine{419             \textcolor{keywordtype}{float} offset = \mbox{\hyperlink{classParser_ab2b1df7c69830fafcbe36de5199dcd30}{getFloatAttribute}}(stop\_node, \textcolor{stringliteral}{"{}offset"{}});}
+\DoxyCodeLine{420             \textcolor{keywordflow}{if} (offset > 1) offset /= 100;}
+\DoxyCodeLine{421             stops.push\_back(\mbox{\hyperlink{classStop}{Stop}}(color, offset));}
+\DoxyCodeLine{422         \}}
+\DoxyCodeLine{423         stop\_node = stop\_node-\/>next\_sibling();}
+\DoxyCodeLine{424     \}}
+\DoxyCodeLine{425     \textcolor{keywordflow}{return} stops;}
+\DoxyCodeLine{426 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classParser_a06952fa44f19fdb573c1355ac26454c5}\label{classParser_a06952fa44f19fdb573c1355ac26454c5}} 
+\index{Parser@{Parser}!getInstance@{getInstance}}
+\index{getInstance@{getInstance}!Parser@{Parser}}
+\doxysubsubsection{\texorpdfstring{getInstance()}{getInstance()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classParser}{Parser}} $\ast$ Parser\+::get\+Instance (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{file\+\_\+name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the singleton instance of the \mbox{\hyperlink{classParser}{Parser}} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+\_\+name} & The name of the file to be parsed.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The singleton instance of the \mbox{\hyperlink{classParser}{Parser}} class. 
+\end{DoxyReturn}
+
+
+Definition at line 158 of file Parser.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{158                                                       \{}
+\DoxyCodeLine{159     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classParser_ae3a28c02c18171f4e83fae54b9f21a90}{instance}} == \textcolor{keyword}{nullptr}) \{}
+\DoxyCodeLine{160         \mbox{\hyperlink{classParser_ae3a28c02c18171f4e83fae54b9f21a90}{instance}} = \textcolor{keyword}{new} \mbox{\hyperlink{classParser_a48044a8caa14a251cb4dad9fb363658e}{Parser}}(file\_name);}
+\DoxyCodeLine{161     \}}
+\DoxyCodeLine{162     \textcolor{keywordflow}{return} \mbox{\hyperlink{classParser_ae3a28c02c18171f4e83fae54b9f21a90}{instance}};}
+\DoxyCodeLine{163 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classParser_a59ed4455eaec306cde11939785c4e71a}\label{classParser_a59ed4455eaec306cde11939785c4e71a}} 
+\index{Parser@{Parser}!getRoot@{getRoot}}
+\index{getRoot@{getRoot}!Parser@{Parser}}
+\doxysubsubsection{\texorpdfstring{getRoot()}{getRoot()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classGroup}{Group}} $\ast$ Parser\+::get\+Root (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Gets the root of the tree of SVGElements. 
+
+\begin{DoxyReturn}{Returns}
+The root of the tree of SVGElements. 
+\end{DoxyReturn}
+
+
+Definition at line 169 of file Parser.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{169 \{ \textcolor{keywordflow}{return} \textcolor{keyword}{dynamic\_cast<} \mbox{\hyperlink{classGroup}{Group}} * \textcolor{keyword}{>}(\mbox{\hyperlink{classParser_a13a5e2fdac62670c1584de1edbba77f2}{root}}); \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classParser_a99df58e649089762bf434502173716d6}\label{classParser_a99df58e649089762bf434502173716d6}} 
+\index{Parser@{Parser}!getTransformOrder@{getTransformOrder}}
+\index{getTransformOrder@{getTransformOrder}!Parser@{Parser}}
+\doxysubsubsection{\texorpdfstring{getTransformOrder()}{getTransformOrder()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::string $>$ Parser\+::get\+Transform\+Order (\begin{DoxyParamCaption}\item[{rapidxml\+::xml\+\_\+node$<$$>$ $\ast$}]{node }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Gets the transform order of the element. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & The node to be parsed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The transform order of the element 
+\end{DoxyReturn}
+
+
+Definition at line 637 of file Parser.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{638                               \{}
+\DoxyCodeLine{639     std::string transform\_tag;}
+\DoxyCodeLine{640     \textcolor{keywordflow}{if} (std::string(node-\/>name()).find(\textcolor{stringliteral}{"{}Gradient"{}}) != std::string::npos)}
+\DoxyCodeLine{641         transform\_tag = \mbox{\hyperlink{classParser_a63329a7accdf332feb3fba1bcc4deec6}{getAttribute}}(node, \textcolor{stringliteral}{"{}gradientTransform"{}});}
+\DoxyCodeLine{642     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{643         transform\_tag = \mbox{\hyperlink{classParser_a63329a7accdf332feb3fba1bcc4deec6}{getAttribute}}(node, \textcolor{stringliteral}{"{}transform"{}});}
+\DoxyCodeLine{644     std::vector< std::string > order;}
+\DoxyCodeLine{645     std::stringstream ss(transform\_tag);}
+\DoxyCodeLine{646     std::string type;}
+\DoxyCodeLine{647     \textcolor{keywordflow}{while} (ss >> type) \{}
+\DoxyCodeLine{648         \textcolor{keywordflow}{if} (type.find(\textcolor{stringliteral}{"{}translate"{}}) != std::string::npos ||}
+\DoxyCodeLine{649             type.find(\textcolor{stringliteral}{"{}scale"{}}) != std::string::npos ||}
+\DoxyCodeLine{650             type.find(\textcolor{stringliteral}{"{}rotate"{}}) != std::string::npos ||}
+\DoxyCodeLine{651             type.find(\textcolor{stringliteral}{"{}matrix"{}}) != std::string::npos) \{}
+\DoxyCodeLine{652             \textcolor{keywordflow}{while} (type.find(\textcolor{stringliteral}{"{})"{}}) == std::string::npos) \{}
+\DoxyCodeLine{653                 std::string temp;}
+\DoxyCodeLine{654                 ss >> temp;}
+\DoxyCodeLine{655                 type += \textcolor{stringliteral}{"{} "{}} + temp;}
+\DoxyCodeLine{656             \}}
+\DoxyCodeLine{657             std::string temp = type.substr(0, type.find(\textcolor{stringliteral}{"{}("{}}) + 1);}
+\DoxyCodeLine{658             temp.erase(std::remove(temp.begin(), temp.end(), \textcolor{charliteral}{' '}), temp.end());}
+\DoxyCodeLine{659             type.erase(0, type.find(\textcolor{stringliteral}{"{}("{}}) + 1);}
+\DoxyCodeLine{660             type = temp + type;}
+\DoxyCodeLine{661             order.push\_back(type);}
+\DoxyCodeLine{662         \}}
+\DoxyCodeLine{663     \}}
+\DoxyCodeLine{664     \textcolor{keywordflow}{return} order;}
+\DoxyCodeLine{665 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classParser_a4efa2342d694eff2ab6ba1d150c7bb69}\label{classParser_a4efa2342d694eff2ab6ba1d150c7bb69}} 
+\index{Parser@{Parser}!getViewBox@{getViewBox}}
+\index{getViewBox@{getViewBox}!Parser@{Parser}}
+\doxysubsubsection{\texorpdfstring{getViewBox()}{getViewBox()}}
+{\footnotesize\ttfamily std\+::pair$<$ \mbox{\hyperlink{classVector2D}{Vector2\+Df}}, \mbox{\hyperlink{classVector2D}{Vector2\+Df}} $>$ Parser\+::get\+View\+Box (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the viewbox of the SVG file. 
+
+\begin{DoxyReturn}{Returns}
+The viewbox of the SVG file. 
+\end{DoxyReturn}
+
+
+Definition at line 830 of file Parser.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{830 \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classParser_a7eb24f4915ba9b7a652ca204c1edb2c7}{viewbox}}; \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classParser_a009fbe10a1b9b58a65be44634335a062}\label{classParser_a009fbe10a1b9b58a65be44634335a062}} 
+\index{Parser@{Parser}!getViewPort@{getViewPort}}
+\index{getViewPort@{getViewPort}!Parser@{Parser}}
+\doxysubsubsection{\texorpdfstring{getViewPort()}{getViewPort()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classVector2D}{Vector2\+Df}} Parser\+::get\+View\+Port (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the viewport of the SVG file. 
+
+\begin{DoxyReturn}{Returns}
+The viewport of the SVG file. 
+\end{DoxyReturn}
+
+
+Definition at line 832 of file Parser.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{832 \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classParser_a2872aff3bfb15fdb1df2dcdce2bd632a}{viewport}}; \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classParser_ab7776f740b7d63c388a086c8b8ecccd0}\label{classParser_ab7776f740b7d63c388a086c8b8ecccd0}} 
+\index{Parser@{Parser}!parseCircle@{parseCircle}}
+\index{parseCircle@{parseCircle}!Parser@{Parser}}
+\doxysubsubsection{\texorpdfstring{parseCircle()}{parseCircle()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classCircle}{Circle}} $\ast$ Parser\+::parse\+Circle (\begin{DoxyParamCaption}\item[{rapidxml\+::xml\+\_\+node$<$$>$ $\ast$}]{node,  }\item[{const \mbox{\hyperlink{classmColor}{m\+Color}} \&}]{fill\+\_\+color,  }\item[{const \mbox{\hyperlink{classmColor}{m\+Color}} \&}]{stroke\+\_\+color,  }\item[{float}]{stroke\+\_\+width }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Parses the circle element. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & The node to be parsed. \\
+\hline
+{\em fill\+\_\+color} & The color of the fill \\
+\hline
+{\em stroke\+\_\+color} & The color of the stroke \\
+\hline
+{\em stroke\+\_\+width} & The width of the stroke \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The circle element 
+\end{DoxyReturn}
+
+
+Definition at line 732 of file Parser.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{734                                                                             \{}
+\DoxyCodeLine{735     \textcolor{keywordtype}{float} cx = \mbox{\hyperlink{classParser_ab2b1df7c69830fafcbe36de5199dcd30}{getFloatAttribute}}(node, \textcolor{stringliteral}{"{}cx"{}});}
+\DoxyCodeLine{736     \textcolor{keywordtype}{float} cy = \mbox{\hyperlink{classParser_ab2b1df7c69830fafcbe36de5199dcd30}{getFloatAttribute}}(node, \textcolor{stringliteral}{"{}cy"{}});}
+\DoxyCodeLine{737     \textcolor{keywordtype}{float} radius = \mbox{\hyperlink{classParser_ab2b1df7c69830fafcbe36de5199dcd30}{getFloatAttribute}}(node, \textcolor{stringliteral}{"{}r"{}});}
+\DoxyCodeLine{738     \mbox{\hyperlink{classCircle}{Circle}} *shape = \textcolor{keyword}{new} \mbox{\hyperlink{classCircle}{Circle}}(radius, \mbox{\hyperlink{classVector2D}{Vector2Df}}(cx, cy), fill\_color,}
+\DoxyCodeLine{739                                stroke\_color, stroke\_width);}
+\DoxyCodeLine{740     \textcolor{keywordflow}{return} shape;}
+\DoxyCodeLine{741 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classParser_a18d5a9aa35bd124023a060940486e183}\label{classParser_a18d5a9aa35bd124023a060940486e183}} 
+\index{Parser@{Parser}!parseColor@{parseColor}}
+\index{parseColor@{parseColor}!Parser@{Parser}}
+\doxysubsubsection{\texorpdfstring{parseColor()}{parseColor()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmColor}{m\+Color}} Parser\+::parse\+Color (\begin{DoxyParamCaption}\item[{rapidxml\+::xml\+\_\+node$<$$>$ $\ast$}]{node,  }\item[{std\+::string}]{color,  }\item[{std\+::string \&}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Gets the color attributes of a node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & The node to be parsed. \\
+\hline
+{\em color} & The name of the color tag to be parsed. \\
+\hline
+{\em id} & The id to check if the color is a reference. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The color attributes of the node. 
+\end{DoxyReturn}
+
+
+Definition at line 362 of file Parser.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{363                                          \{}
+\DoxyCodeLine{364     std::string color = \mbox{\hyperlink{classParser_a63329a7accdf332feb3fba1bcc4deec6}{getAttribute}}(node, name);}
+\DoxyCodeLine{365     color.erase(std::remove(color.begin(), color.end(), \textcolor{charliteral}{' '}), color.end());}
+\DoxyCodeLine{366     \textcolor{keywordflow}{if} (color.find(\textcolor{stringliteral}{"{}url"{}}) == std::string::npos) \{}
+\DoxyCodeLine{367         \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} \&c : color) c = tolower(c);}
+\DoxyCodeLine{368     \}}
+\DoxyCodeLine{369     \textcolor{keywordflow}{if} (color == \textcolor{stringliteral}{"{}none"{}})}
+\DoxyCodeLine{370         \textcolor{keywordflow}{return} \mbox{\hyperlink{classmColor_ac4f0afaa513bbe9e68c16156136d4ada}{mColor::Transparent}};}
+\DoxyCodeLine{371     \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{372         \mbox{\hyperlink{classmColor}{mColor}} result;}
+\DoxyCodeLine{373         \textcolor{keywordflow}{if} (color.find(\textcolor{stringliteral}{"{}url"{}}) != std::string::npos) \{}
+\DoxyCodeLine{374             \textcolor{keywordflow}{if} (color.find(\textcolor{stringliteral}{"{}'"{}}) != std::string::npos) \{}
+\DoxyCodeLine{375                 \textcolor{keywordtype}{id} = color.substr(color.find(\textcolor{stringliteral}{"{}'"{}}) + 1);}
+\DoxyCodeLine{376                 \textcolor{keywordtype}{id}.erase(\textcolor{keywordtype}{id}.find(\textcolor{stringliteral}{"{}'"{}}));}
+\DoxyCodeLine{377                 \textcolor{keywordtype}{id}.erase(\textcolor{keywordtype}{id}.find(\textcolor{stringliteral}{"{}\#"{}}), 1);}
+\DoxyCodeLine{378             \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{379                 \textcolor{keywordtype}{id} = color.substr(color.find(\textcolor{stringliteral}{"{}\#"{}}) + 1);}
+\DoxyCodeLine{380                 \textcolor{keywordtype}{id}.erase(\textcolor{keywordtype}{id}.find(\textcolor{stringliteral}{"{})"{}}));}
+\DoxyCodeLine{381             \}}
+\DoxyCodeLine{382             result = \mbox{\hyperlink{classmColor_ac4f0afaa513bbe9e68c16156136d4ada}{mColor::Transparent}};}
+\DoxyCodeLine{383         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (color.find(\textcolor{stringliteral}{"{}\#"{}}) != std::string::npos) \{}
+\DoxyCodeLine{384             result = getHexColor(color);}
+\DoxyCodeLine{385         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (color.find(\textcolor{stringliteral}{"{}rgb"{}}) != std::string::npos) \{}
+\DoxyCodeLine{386             result = getRgbColor(color);}
+\DoxyCodeLine{387         \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{388             \textcolor{keyword}{auto} color\_code = color\_map.find(color);}
+\DoxyCodeLine{389             \textcolor{keywordflow}{if} (color\_code == color\_map.end()) \{}
+\DoxyCodeLine{390                 std::cout << \textcolor{stringliteral}{"{}Color "{}} << color << \textcolor{stringliteral}{"{} not found"{}} << std::endl;}
+\DoxyCodeLine{391                 exit(-\/1);}
+\DoxyCodeLine{392             \}}
+\DoxyCodeLine{393             result = color\_code-\/>second;}
+\DoxyCodeLine{394         \}}
+\DoxyCodeLine{395         \textcolor{keywordflow}{if} (name == \textcolor{stringliteral}{"{}stop-\/color"{}})}
+\DoxyCodeLine{396             result.\mbox{\hyperlink{classmColor_ac086aa72806b8ce55fed3df9ba976f6c}{a}} = result.\mbox{\hyperlink{classmColor_ac086aa72806b8ce55fed3df9ba976f6c}{a}} * \mbox{\hyperlink{classParser_ab2b1df7c69830fafcbe36de5199dcd30}{getFloatAttribute}}(node, \textcolor{stringliteral}{"{}stop-\/opacity"{}});}
+\DoxyCodeLine{397         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{398             result.\mbox{\hyperlink{classmColor_ac086aa72806b8ce55fed3df9ba976f6c}{a}} = result.\mbox{\hyperlink{classmColor_ac086aa72806b8ce55fed3df9ba976f6c}{a}} * \mbox{\hyperlink{classParser_ab2b1df7c69830fafcbe36de5199dcd30}{getFloatAttribute}}(node, name + \textcolor{stringliteral}{"{}-\/opacity"{}}) *}
+\DoxyCodeLine{399                        \mbox{\hyperlink{classParser_ab2b1df7c69830fafcbe36de5199dcd30}{getFloatAttribute}}(node, \textcolor{stringliteral}{"{}opacity"{}});}
+\DoxyCodeLine{400         \textcolor{keywordflow}{return} result;}
+\DoxyCodeLine{401     \}}
+\DoxyCodeLine{402 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classParser_aaf9f19591ff93f0c0c2fd68955e4a4af}\label{classParser_aaf9f19591ff93f0c0c2fd68955e4a4af}} 
+\index{Parser@{Parser}!parseElements@{parseElements}}
+\index{parseElements@{parseElements}!Parser@{Parser}}
+\doxysubsubsection{\texorpdfstring{parseElements()}{parseElements()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classSVGElement}{SVGElement}} $\ast$ Parser\+::parse\+Elements (\begin{DoxyParamCaption}\item[{std\+::string}]{file\+\_\+name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Parses the SVG file and creates a tree of SVGElements. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+\_\+name} & The name of the file to be parsed.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The root of the tree of SVGElements. 
+\end{DoxyReturn}
+
+
+Definition at line 181 of file Parser.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{181                                                      \{}
+\DoxyCodeLine{182     rapidxml::xml\_document<> doc;}
+\DoxyCodeLine{183     std::ifstream file(file\_name);}
+\DoxyCodeLine{184     std::vector< char > buffer((std::istreambuf\_iterator< char >(file)),}
+\DoxyCodeLine{185                                std::istreambuf\_iterator< char >());}
+\DoxyCodeLine{186     buffer.push\_back(\textcolor{charliteral}{'\(\backslash\)0'});}
+\DoxyCodeLine{187     doc.parse< 0 >(\&buffer[0]);}
+\DoxyCodeLine{188 }
+\DoxyCodeLine{189     rapidxml::xml\_node<> *svg = doc.first\_node();}
+\DoxyCodeLine{190     \mbox{\hyperlink{classParser_a2872aff3bfb15fdb1df2dcdce2bd632a}{viewport}}.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} = \mbox{\hyperlink{classParser_ab2b1df7c69830fafcbe36de5199dcd30}{getFloatAttribute}}(svg, \textcolor{stringliteral}{"{}width"{}});}
+\DoxyCodeLine{191     \mbox{\hyperlink{classParser_a2872aff3bfb15fdb1df2dcdce2bd632a}{viewport}}.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}} = \mbox{\hyperlink{classParser_ab2b1df7c69830fafcbe36de5199dcd30}{getFloatAttribute}}(svg, \textcolor{stringliteral}{"{}height"{}});}
+\DoxyCodeLine{192     std::string \mbox{\hyperlink{classParser_a7eb24f4915ba9b7a652ca204c1edb2c7}{viewbox}} = \mbox{\hyperlink{classParser_a63329a7accdf332feb3fba1bcc4deec6}{getAttribute}}(svg, \textcolor{stringliteral}{"{}viewBox"{}});}
+\DoxyCodeLine{193     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classParser_a7eb24f4915ba9b7a652ca204c1edb2c7}{viewbox}} != \textcolor{stringliteral}{"{}"{}}) \{}
+\DoxyCodeLine{194         std::stringstream ss(\mbox{\hyperlink{classParser_a7eb24f4915ba9b7a652ca204c1edb2c7}{viewbox}});}
+\DoxyCodeLine{195         ss >> this-\/>viewbox.first.x >> this-\/>viewbox.first.y >>}
+\DoxyCodeLine{196             this-\/>viewbox.second.x >> this-\/>viewbox.second.y;}
+\DoxyCodeLine{197     \}}
+\DoxyCodeLine{198     rapidxml::xml\_node<> *node = svg-\/>first\_node();}
+\DoxyCodeLine{199     rapidxml::xml\_node<> *prev = NULL;}
+\DoxyCodeLine{200 }
+\DoxyCodeLine{201     \mbox{\hyperlink{classSVGElement}{SVGElement}} *\mbox{\hyperlink{classParser_a13a5e2fdac62670c1584de1edbba77f2}{root}} = \textcolor{keyword}{new} \mbox{\hyperlink{classGroup}{Group}}();}
+\DoxyCodeLine{202     \mbox{\hyperlink{classSVGElement}{SVGElement}} *current = \mbox{\hyperlink{classParser_a13a5e2fdac62670c1584de1edbba77f2}{root}};}
+\DoxyCodeLine{203 }
+\DoxyCodeLine{204     \textcolor{keywordflow}{while} (node) \{}
+\DoxyCodeLine{205         \textcolor{keywordflow}{if} (std::string(node-\/>name()) == \textcolor{stringliteral}{"{}defs"{}}) \{}
+\DoxyCodeLine{206             \mbox{\hyperlink{classParser_ac00eac6bf37c45c9160fa47700d2466f}{GetGradients}}(node);}
+\DoxyCodeLine{207             prev = node;}
+\DoxyCodeLine{208             node = node-\/>next\_sibling();}
+\DoxyCodeLine{209         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (std::string(node-\/>name()) == \textcolor{stringliteral}{"{}g"{}}) \{}
+\DoxyCodeLine{210             \mbox{\hyperlink{classGroup}{Group}} *group = \textcolor{keyword}{dynamic\_cast<} \mbox{\hyperlink{classGroup}{Group}} * \textcolor{keyword}{>}(current);}
+\DoxyCodeLine{211             \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} group\_attribute : group-\/>\mbox{\hyperlink{classGroup_a317fcd42fd61b83c0d932bd1eb2c753f}{getAttributes}}()) \{}
+\DoxyCodeLine{212                 \textcolor{keywordtype}{bool} found = \textcolor{keyword}{false};}
+\DoxyCodeLine{213                 \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} attribute = node-\/>first\_attribute(); attribute;}
+\DoxyCodeLine{214                      attribute = attribute-\/>next\_attribute()) \{}
+\DoxyCodeLine{215                     \textcolor{keywordflow}{if} (std::string(attribute-\/>name()) ==}
+\DoxyCodeLine{216                         group\_attribute.first) \{}
+\DoxyCodeLine{217                         \textcolor{keywordflow}{if} (group\_attribute.first == \textcolor{stringliteral}{"{}opacity"{}}) \{}
+\DoxyCodeLine{218                             std::string opacity = std::to\_string(}
+\DoxyCodeLine{219                                 std::stof(attribute-\/>value()) *}
+\DoxyCodeLine{220                                 std::stof(group\_attribute.second));}
+\DoxyCodeLine{221                             \textcolor{keywordtype}{char} *value = doc.allocate\_string(opacity.c\_str());}
+\DoxyCodeLine{222                             attribute-\/>value(value);}
+\DoxyCodeLine{223                         \}}
+\DoxyCodeLine{224                         found = \textcolor{keyword}{true};}
+\DoxyCodeLine{225                         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{226                     \}}
+\DoxyCodeLine{227                 \}}
+\DoxyCodeLine{228                 \textcolor{keywordflow}{if} (!found \&\& group\_attribute.first != \textcolor{stringliteral}{"{}transform"{}}) \{}
+\DoxyCodeLine{229                     \textcolor{keywordtype}{char} *name =}
+\DoxyCodeLine{230                         doc.allocate\_string(group\_attribute.first.c\_str());}
+\DoxyCodeLine{231                     \textcolor{keywordtype}{char} *value =}
+\DoxyCodeLine{232                         doc.allocate\_string(group\_attribute.second.c\_str());}
+\DoxyCodeLine{233                     rapidxml::xml\_attribute<> *new\_attribute =}
+\DoxyCodeLine{234                         doc.allocate\_attribute(name, value);}
+\DoxyCodeLine{235                     node-\/>append\_attribute(new\_attribute);}
+\DoxyCodeLine{236                 \}}
+\DoxyCodeLine{237             \}}
+\DoxyCodeLine{238             \mbox{\hyperlink{classGroup}{Group}} *new\_group = \textcolor{keyword}{new} \mbox{\hyperlink{classGroup}{Group}}(xmlToString(node-\/>first\_attribute()));}
+\DoxyCodeLine{239             new\_group-\/>\mbox{\hyperlink{classSVGElement_a00fef2ebc5df4838b3f9bd7111b117c5}{setTransforms}}(\mbox{\hyperlink{classParser_a99df58e649089762bf434502173716d6}{getTransformOrder}}(node));}
+\DoxyCodeLine{240             current-\/>\mbox{\hyperlink{classSVGElement_af699f9aa795572c2873e520849579881}{addElement}}(new\_group);}
+\DoxyCodeLine{241             current = new\_group;}
+\DoxyCodeLine{242             prev = node;}
+\DoxyCodeLine{243             node = node-\/>first\_node();}
+\DoxyCodeLine{244         \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{245             \mbox{\hyperlink{classGroup}{Group}} *group = \textcolor{keyword}{dynamic\_cast<} \mbox{\hyperlink{classGroup}{Group}} * \textcolor{keyword}{>}(current);}
+\DoxyCodeLine{246             \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} group\_attribute : group-\/>\mbox{\hyperlink{classGroup_a317fcd42fd61b83c0d932bd1eb2c753f}{getAttributes}}()) \{}
+\DoxyCodeLine{247                 \textcolor{keywordtype}{bool} found = \textcolor{keyword}{false};}
+\DoxyCodeLine{248                 \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} attribute = node-\/>first\_attribute(); attribute;}
+\DoxyCodeLine{249                      attribute = attribute-\/>next\_attribute()) \{}
+\DoxyCodeLine{250                     \textcolor{keywordflow}{if} (std::string(attribute-\/>name()) ==}
+\DoxyCodeLine{251                         group\_attribute.first) \{}
+\DoxyCodeLine{252                         \textcolor{keywordflow}{if} (group\_attribute.first == \textcolor{stringliteral}{"{}opacity"{}}) \{}
+\DoxyCodeLine{253                             std::string opacity = std::to\_string(}
+\DoxyCodeLine{254                                 std::stof(attribute-\/>value()) *}
+\DoxyCodeLine{255                                 std::stof(group\_attribute.second));}
+\DoxyCodeLine{256                             \textcolor{keywordtype}{char} *value = doc.allocate\_string(opacity.c\_str());}
+\DoxyCodeLine{257                             attribute-\/>value(value);}
+\DoxyCodeLine{258                         \}}
+\DoxyCodeLine{259                         found = \textcolor{keyword}{true};}
+\DoxyCodeLine{260                         \textcolor{keywordflow}{break};}
+\DoxyCodeLine{261                     \}}
+\DoxyCodeLine{262                 \}}
+\DoxyCodeLine{263                 \textcolor{keywordflow}{if} (!found \&\& group\_attribute.first != \textcolor{stringliteral}{"{}transform"{}}) \{}
+\DoxyCodeLine{264                     \textcolor{keywordtype}{char} *name =}
+\DoxyCodeLine{265                         doc.allocate\_string(group\_attribute.first.c\_str());}
+\DoxyCodeLine{266                     \textcolor{keywordtype}{char} *value =}
+\DoxyCodeLine{267                         doc.allocate\_string(group\_attribute.second.c\_str());}
+\DoxyCodeLine{268                     rapidxml::xml\_attribute<> *new\_attribute =}
+\DoxyCodeLine{269                         doc.allocate\_attribute(name, value);}
+\DoxyCodeLine{270                     node-\/>append\_attribute(new\_attribute);}
+\DoxyCodeLine{271                 \}}
+\DoxyCodeLine{272             \}}
+\DoxyCodeLine{273             \mbox{\hyperlink{classSVGElement}{SVGElement}} *shape = \mbox{\hyperlink{classParser_abfd09c5dd46fb0dc9bcd9106857dbf5e}{parseShape}}(node);}
+\DoxyCodeLine{274             \textcolor{keywordflow}{if} (shape != NULL) current-\/>\mbox{\hyperlink{classSVGElement_af699f9aa795572c2873e520849579881}{addElement}}(shape);}
+\DoxyCodeLine{275             prev = node;}
+\DoxyCodeLine{276             node = node-\/>next\_sibling();}
+\DoxyCodeLine{277         \}}
+\DoxyCodeLine{278         \textcolor{keywordflow}{if} (node == NULL \&\& current != \mbox{\hyperlink{classParser_a13a5e2fdac62670c1584de1edbba77f2}{root}}) \{}
+\DoxyCodeLine{279             \textcolor{keywordflow}{while} (prev-\/>parent()-\/>next\_sibling() == NULL) \{}
+\DoxyCodeLine{280                 current = current-\/>\mbox{\hyperlink{classSVGElement_a1b075314d4cda4fa895688979fe462fd}{getParent}}();}
+\DoxyCodeLine{281                 prev = prev-\/>\mbox{\hyperlink{classSVGElement_adee748c3014de1c1ebd20411a52e824a}{parent}}();}
+\DoxyCodeLine{282                 \textcolor{keywordflow}{if} (prev == svg) \{}
+\DoxyCodeLine{283                     \textcolor{keywordflow}{break};}
+\DoxyCodeLine{284                 \}}
+\DoxyCodeLine{285             \}}
+\DoxyCodeLine{286             \textcolor{keywordflow}{if} (prev == svg) \{}
+\DoxyCodeLine{287                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{288             \}}
+\DoxyCodeLine{289             current = current-\/>\mbox{\hyperlink{classSVGElement_a1b075314d4cda4fa895688979fe462fd}{getParent}}();}
+\DoxyCodeLine{290             node = prev-\/>\mbox{\hyperlink{classSVGElement_adee748c3014de1c1ebd20411a52e824a}{parent}}()-\/>next\_sibling();}
+\DoxyCodeLine{291         \}}
+\DoxyCodeLine{292     \}}
+\DoxyCodeLine{293     \textcolor{keywordflow}{return} \mbox{\hyperlink{classParser_a13a5e2fdac62670c1584de1edbba77f2}{root}};}
+\DoxyCodeLine{294 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classParser_a0af0085ee5e20739bdf23a5b685642b6}\label{classParser_a0af0085ee5e20739bdf23a5b685642b6}} 
+\index{Parser@{Parser}!parseEllipse@{parseEllipse}}
+\index{parseEllipse@{parseEllipse}!Parser@{Parser}}
+\doxysubsubsection{\texorpdfstring{parseEllipse()}{parseEllipse()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classEll}{Ell}} $\ast$ Parser\+::parse\+Ellipse (\begin{DoxyParamCaption}\item[{rapidxml\+::xml\+\_\+node$<$$>$ $\ast$}]{node,  }\item[{const \mbox{\hyperlink{classmColor}{m\+Color}} \&}]{fill\+\_\+color,  }\item[{const \mbox{\hyperlink{classmColor}{m\+Color}} \&}]{stroke\+\_\+color,  }\item[{float}]{stroke\+\_\+width }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Parses the ellipse element. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & The node to be parsed. \\
+\hline
+{\em fill\+\_\+color} & The color of the fill \\
+\hline
+{\em stroke\+\_\+color} & The color of the stroke \\
+\hline
+{\em stroke\+\_\+width} & The width of the stroke \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The ellipse element 
+\end{DoxyReturn}
+
+
+Definition at line 743 of file Parser.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{744                                                                           \{}
+\DoxyCodeLine{745     \textcolor{keywordtype}{float} radius\_x = \mbox{\hyperlink{classParser_ab2b1df7c69830fafcbe36de5199dcd30}{getFloatAttribute}}(node, \textcolor{stringliteral}{"{}rx"{}});}
+\DoxyCodeLine{746     \textcolor{keywordtype}{float} radius\_y = \mbox{\hyperlink{classParser_ab2b1df7c69830fafcbe36de5199dcd30}{getFloatAttribute}}(node, \textcolor{stringliteral}{"{}ry"{}});}
+\DoxyCodeLine{747     \textcolor{keywordtype}{float} cx = \mbox{\hyperlink{classParser_ab2b1df7c69830fafcbe36de5199dcd30}{getFloatAttribute}}(node, \textcolor{stringliteral}{"{}cx"{}});}
+\DoxyCodeLine{748     \textcolor{keywordtype}{float} cy = \mbox{\hyperlink{classParser_ab2b1df7c69830fafcbe36de5199dcd30}{getFloatAttribute}}(node, \textcolor{stringliteral}{"{}cy"{}});}
+\DoxyCodeLine{749     \mbox{\hyperlink{classEll}{Ell}} *shape = \textcolor{keyword}{new} \mbox{\hyperlink{classEll}{Ell}}(\mbox{\hyperlink{classVector2D}{Vector2Df}}(radius\_x, radius\_y), \mbox{\hyperlink{classVector2D}{Vector2Df}}(cx, cy),}
+\DoxyCodeLine{750                          fill\_color, stroke\_color, stroke\_width);}
+\DoxyCodeLine{751     \textcolor{keywordflow}{return} shape;}
+\DoxyCodeLine{752 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classParser_ac1e519500fce1b4192362ed1aa5ccbc3}\label{classParser_ac1e519500fce1b4192362ed1aa5ccbc3}} 
+\index{Parser@{Parser}!parseGradient@{parseGradient}}
+\index{parseGradient@{parseGradient}!Parser@{Parser}}
+\doxysubsubsection{\texorpdfstring{parseGradient()}{parseGradient()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classGradient}{Gradient}} $\ast$ Parser\+::parse\+Gradient (\begin{DoxyParamCaption}\item[{std\+::string}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Gets the gradient of a node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The id of the gradient to be parsed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The gradient of the node. 
+\end{DoxyReturn}
+
+
+Definition at line 404 of file Parser.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{404                                             \{}
+\DoxyCodeLine{405     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classParser_a7f085da78317baf2cc61e6e92b4b29c8}{gradients}}.find(\textcolor{keywordtype}{id}) == \mbox{\hyperlink{classParser_a7f085da78317baf2cc61e6e92b4b29c8}{gradients}}.end()) \{}
+\DoxyCodeLine{406         std::cout << \textcolor{stringliteral}{"{}Gradient "{}} << \textcolor{keywordtype}{id} << \textcolor{stringliteral}{"{} not found"{}} << std::endl;}
+\DoxyCodeLine{407         exit(-\/1);}
+\DoxyCodeLine{408     \}}
+\DoxyCodeLine{409     \textcolor{keywordflow}{return} \mbox{\hyperlink{classParser_a7f085da78317baf2cc61e6e92b4b29c8}{gradients}}.at(\textcolor{keywordtype}{id});}
+\DoxyCodeLine{410 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classParser_a95e84ae219109769fae08702381acf78}\label{classParser_a95e84ae219109769fae08702381acf78}} 
+\index{Parser@{Parser}!parseLine@{parseLine}}
+\index{parseLine@{parseLine}!Parser@{Parser}}
+\doxysubsubsection{\texorpdfstring{parseLine()}{parseLine()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classLine}{Line}} $\ast$ Parser\+::parse\+Line (\begin{DoxyParamCaption}\item[{rapidxml\+::xml\+\_\+node$<$$>$ $\ast$}]{node,  }\item[{const \mbox{\hyperlink{classmColor}{m\+Color}} \&}]{stroke\+\_\+color,  }\item[{float}]{stroke\+\_\+width }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Parses the line element. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & The node to be parsed. \\
+\hline
+{\em stroke\+\_\+color} & The color of the stroke \\
+\hline
+{\em stroke\+\_\+width} & The width of the stroke \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The line element 
+\end{DoxyReturn}
+
+
+Definition at line 710 of file Parser.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{711                                             \{}
+\DoxyCodeLine{712     \mbox{\hyperlink{classLine}{Line}} *shape = \textcolor{keyword}{new} \mbox{\hyperlink{classLine}{Line}}(}
+\DoxyCodeLine{713         \mbox{\hyperlink{classVector2D}{Vector2Df}}(\mbox{\hyperlink{classParser_ab2b1df7c69830fafcbe36de5199dcd30}{getFloatAttribute}}(node, \textcolor{stringliteral}{"{}x1"{}}), \mbox{\hyperlink{classParser_ab2b1df7c69830fafcbe36de5199dcd30}{getFloatAttribute}}(node, \textcolor{stringliteral}{"{}y1"{}})),}
+\DoxyCodeLine{714         \mbox{\hyperlink{classVector2D}{Vector2Df}}(\mbox{\hyperlink{classParser_ab2b1df7c69830fafcbe36de5199dcd30}{getFloatAttribute}}(node, \textcolor{stringliteral}{"{}x2"{}}), \mbox{\hyperlink{classParser_ab2b1df7c69830fafcbe36de5199dcd30}{getFloatAttribute}}(node, \textcolor{stringliteral}{"{}y2"{}})),}
+\DoxyCodeLine{715         stroke\_color, stroke\_width);}
+\DoxyCodeLine{716     \textcolor{keywordflow}{return} shape;}
+\DoxyCodeLine{717 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classParser_a6f80728e7a771d2653baf1b453b655d9}\label{classParser_a6f80728e7a771d2653baf1b453b655d9}} 
+\index{Parser@{Parser}!parsePath@{parsePath}}
+\index{parsePath@{parsePath}!Parser@{Parser}}
+\doxysubsubsection{\texorpdfstring{parsePath()}{parsePath()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classPath}{Path}} $\ast$ Parser\+::parse\+Path (\begin{DoxyParamCaption}\item[{rapidxml\+::xml\+\_\+node$<$$>$ $\ast$}]{node,  }\item[{const \mbox{\hyperlink{classmColor}{m\+Color}} \&}]{fill\+\_\+color,  }\item[{const \mbox{\hyperlink{classmColor}{m\+Color}} \&}]{stroke\+\_\+color,  }\item[{float}]{stroke\+\_\+width }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Parses the path element. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & The node to be parsed. \\
+\hline
+{\em fill\+\_\+color} & The color of the fill \\
+\hline
+{\em stroke\+\_\+color} & The color of the stroke \\
+\hline
+{\em stroke\+\_\+width} & The width of the stroke \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The path element 
+\end{DoxyReturn}
+
+
+Definition at line 807 of file Parser.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{808                                                                         \{}
+\DoxyCodeLine{809     \mbox{\hyperlink{classPath}{Path}} *shape = \textcolor{keyword}{new} \mbox{\hyperlink{classPath}{Path}}(fill\_color, stroke\_color, stroke\_width);}
+\DoxyCodeLine{810     std::vector< PathPoint > points = \mbox{\hyperlink{classParser_aecea54d6bc1ff225a6ac450ccbb560c3}{parsePathPoints}}(node);}
+\DoxyCodeLine{811     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} point : points) \{}
+\DoxyCodeLine{812         shape-\/>\mbox{\hyperlink{classPath_ad4273c2a1b288fe43dd86375afc16f66}{addPoint}}(point);}
+\DoxyCodeLine{813     \}}
+\DoxyCodeLine{814     std::string fill\_rule = \mbox{\hyperlink{classParser_a63329a7accdf332feb3fba1bcc4deec6}{getAttribute}}(node, \textcolor{stringliteral}{"{}fill-\/rule"{}});}
+\DoxyCodeLine{815     fill\_rule.erase(std::remove(fill\_rule.begin(), fill\_rule.end(), \textcolor{charliteral}{' '}),}
+\DoxyCodeLine{816                     fill\_rule.end());}
+\DoxyCodeLine{817     shape-\/>\mbox{\hyperlink{classPath_ad2ba583a2dd567c3295ea62817b541e9}{setFillRule}}(fill\_rule);}
+\DoxyCodeLine{818     \textcolor{keywordflow}{return} shape;}
+\DoxyCodeLine{819 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classParser_aecea54d6bc1ff225a6ac450ccbb560c3}\label{classParser_aecea54d6bc1ff225a6ac450ccbb560c3}} 
+\index{Parser@{Parser}!parsePathPoints@{parsePathPoints}}
+\index{parsePathPoints@{parsePathPoints}!Parser@{Parser}}
+\doxysubsubsection{\texorpdfstring{parsePathPoints()}{parsePathPoints()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{structPathPoint}{Path\+Point}} $>$ Parser\+::parse\+Path\+Points (\begin{DoxyParamCaption}\item[{rapidxml\+::xml\+\_\+node$<$$>$ $\ast$}]{node }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Gets the points of the path element. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & The node to be parsed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The points of the path element 
+\end{DoxyReturn}
+
+
+Definition at line 494 of file Parser.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{494                                                                        \{}
+\DoxyCodeLine{495     std::vector< PathPoint > points;}
+\DoxyCodeLine{496     std::string path\_string = \mbox{\hyperlink{classParser_a63329a7accdf332feb3fba1bcc4deec6}{getAttribute}}(node, \textcolor{stringliteral}{"{}d"{}});}
+\DoxyCodeLine{497 }
+\DoxyCodeLine{498     formatSvgPathString(path\_string);}
+\DoxyCodeLine{499 }
+\DoxyCodeLine{500     std::stringstream ss(path\_string);}
+\DoxyCodeLine{501     std::string element;}
+\DoxyCodeLine{502     \mbox{\hyperlink{structPathPoint}{PathPoint}} pPoint\{\{0, 0\}, \textcolor{charliteral}{'M'}\};}
+\DoxyCodeLine{503     \textcolor{keywordflow}{while} (ss >> element) \{}
+\DoxyCodeLine{504         \textcolor{keywordflow}{if} (std::isalpha(element[0])) \{}
+\DoxyCodeLine{505             pPoint.tc = element[0];}
+\DoxyCodeLine{506             \textcolor{keywordflow}{if} (tolower(pPoint.tc) == \textcolor{charliteral}{'m'} || tolower(pPoint.tc) == \textcolor{charliteral}{'l'} ||}
+\DoxyCodeLine{507                 tolower(pPoint.tc) == \textcolor{charliteral}{'c'} || tolower(pPoint.tc) == \textcolor{charliteral}{'s'} ||}
+\DoxyCodeLine{508                 tolower(pPoint.tc) == \textcolor{charliteral}{'q'} || tolower(pPoint.tc) == \textcolor{charliteral}{'t'})}
+\DoxyCodeLine{509                 ss >> pPoint.point.x >> pPoint.point.y;}
+\DoxyCodeLine{510             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (tolower(pPoint.tc) == \textcolor{charliteral}{'h'}) \{}
+\DoxyCodeLine{511                 ss >> pPoint.point.x;}
+\DoxyCodeLine{512                 pPoint.point.y = 0;}
+\DoxyCodeLine{513             \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (tolower(pPoint.tc) == \textcolor{charliteral}{'v'}) \{}
+\DoxyCodeLine{514                 ss >> pPoint.point.y;}
+\DoxyCodeLine{515                 pPoint.point.x = 0;}
+\DoxyCodeLine{516             \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (tolower(pPoint.tc) == \textcolor{charliteral}{'a'}) \{}
+\DoxyCodeLine{517                 ss >> pPoint.radius.x >> pPoint.radius.y;}
+\DoxyCodeLine{518                 ss >> pPoint.x\_axis\_rotation;}
+\DoxyCodeLine{519                 ss >> pPoint.large\_arc\_flag >> pPoint.sweep\_flag;}
+\DoxyCodeLine{520                 ss >> pPoint.point.x >> pPoint.point.y;}
+\DoxyCodeLine{521             \}}
+\DoxyCodeLine{522         \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{523             \textcolor{keywordflow}{if} (tolower(pPoint.tc) == \textcolor{charliteral}{'m'} || tolower(pPoint.tc) == \textcolor{charliteral}{'l'} ||}
+\DoxyCodeLine{524                 tolower(pPoint.tc) == \textcolor{charliteral}{'c'} || tolower(pPoint.tc) == \textcolor{charliteral}{'s'} ||}
+\DoxyCodeLine{525                 tolower(pPoint.tc) == \textcolor{charliteral}{'q'} || tolower(pPoint.tc) == \textcolor{charliteral}{'t'}) \{}
+\DoxyCodeLine{526                 \textcolor{keywordflow}{if} (tolower(pPoint.tc) == \textcolor{charliteral}{'m'}) pPoint.tc = \textcolor{charliteral}{'L'};}
+\DoxyCodeLine{527                 pPoint.point.x = std::stof(element);}
+\DoxyCodeLine{528                 ss >> pPoint.point.y;}
+\DoxyCodeLine{529             \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (tolower(pPoint.tc) == \textcolor{charliteral}{'h'}) \{}
+\DoxyCodeLine{530                 pPoint.point.x = std::stof(element);}
+\DoxyCodeLine{531                 pPoint.point.y = 0;}
+\DoxyCodeLine{532             \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (tolower(pPoint.tc) == \textcolor{charliteral}{'v'}) \{}
+\DoxyCodeLine{533                 pPoint.point.y = std::stof(element);}
+\DoxyCodeLine{534                 pPoint.point.x = 0;}
+\DoxyCodeLine{535             \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (tolower(pPoint.tc) == \textcolor{charliteral}{'a'}) \{}
+\DoxyCodeLine{536                 pPoint.radius.x = std::stof(element);}
+\DoxyCodeLine{537                 ss >> pPoint.radius.y;}
+\DoxyCodeLine{538                 ss >> pPoint.x\_axis\_rotation;}
+\DoxyCodeLine{539                 ss >> pPoint.large\_arc\_flag >> pPoint.sweep\_flag;}
+\DoxyCodeLine{540                 ss >> pPoint.point.x >> pPoint.point.y;}
+\DoxyCodeLine{541             \}}
+\DoxyCodeLine{542         \}}
+\DoxyCodeLine{543         points.push\_back(pPoint);}
+\DoxyCodeLine{544     \}}
+\DoxyCodeLine{545 }
+\DoxyCodeLine{546     std::vector< PathPoint > handle\_points;}
+\DoxyCodeLine{547 }
+\DoxyCodeLine{548     \mbox{\hyperlink{classVector2D}{Vector2Df}} first\_point\{0, 0\}, cur\_point\{0, 0\};}
+\DoxyCodeLine{549     \textcolor{keywordtype}{int} n = points.size();}
+\DoxyCodeLine{550     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < n; i++) \{}
+\DoxyCodeLine{551         \textcolor{keywordflow}{if} (tolower(points[i].tc) == \textcolor{charliteral}{'m'}) \{}
+\DoxyCodeLine{552             first\_point = points[i].point;}
+\DoxyCodeLine{553             \textcolor{keywordflow}{if} (points[i].tc == \textcolor{charliteral}{'m'}) \{}
+\DoxyCodeLine{554                 first\_point.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} = cur\_point.x + points[i].point.x;}
+\DoxyCodeLine{555                 first\_point.y = cur\_point.y + points[i].point.y;}
+\DoxyCodeLine{556             \}}
+\DoxyCodeLine{557             cur\_point = first\_point;}
+\DoxyCodeLine{558             handle\_points.push\_back(\{first\_point, \textcolor{charliteral}{'m'}\});}
+\DoxyCodeLine{559         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (tolower(points[i].tc) == \textcolor{charliteral}{'l'} ||}
+\DoxyCodeLine{560                    tolower(points[i].tc) == \textcolor{charliteral}{'t'}) \{}
+\DoxyCodeLine{561             \mbox{\hyperlink{classVector2D}{Vector2Df}} end\_point\{cur\_point.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} + points[i].point.x,}
+\DoxyCodeLine{562                                 cur\_point.y + points[i].point.y\};}
+\DoxyCodeLine{563             \textcolor{keywordflow}{if} (points[i].tc == \textcolor{charliteral}{'L'} || points[i].tc == \textcolor{charliteral}{'T'})}
+\DoxyCodeLine{564                 end\_point = points[i].point;}
+\DoxyCodeLine{565             cur\_point = end\_point;}
+\DoxyCodeLine{566             \textcolor{keywordtype}{char} TC = tolower(points[i].tc);}
+\DoxyCodeLine{567             handle\_points.push\_back(\{end\_point, TC\});}
+\DoxyCodeLine{568         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (tolower(points[i].tc) == \textcolor{charliteral}{'h'}) \{}
+\DoxyCodeLine{569             \mbox{\hyperlink{classVector2D}{Vector2Df}} end\_point\{cur\_point.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} + points[i].point.x, cur\_point.y\};}
+\DoxyCodeLine{570             \textcolor{keywordflow}{if} (points[i].tc == \textcolor{charliteral}{'H'})}
+\DoxyCodeLine{571                 end\_point = \mbox{\hyperlink{classVector2D}{Vector2Df}}\{points[i].point.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}}, cur\_point.y\};}
+\DoxyCodeLine{572             cur\_point = end\_point;}
+\DoxyCodeLine{573             handle\_points.push\_back(\{end\_point, \textcolor{charliteral}{'h'}\});}
+\DoxyCodeLine{574         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (tolower(points[i].tc) == \textcolor{charliteral}{'v'}) \{}
+\DoxyCodeLine{575             \mbox{\hyperlink{classVector2D}{Vector2Df}} end\_point\{cur\_point.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}}, cur\_point.y + points[i].point.y\};}
+\DoxyCodeLine{576             \textcolor{keywordflow}{if} (points[i].tc == \textcolor{charliteral}{'V'})}
+\DoxyCodeLine{577                 end\_point = \mbox{\hyperlink{classVector2D}{Vector2Df}}\{cur\_point.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}}, points[i].point.y\};}
+\DoxyCodeLine{578             cur\_point = end\_point;}
+\DoxyCodeLine{579             handle\_points.push\_back(\{end\_point, \textcolor{charliteral}{'v'}\});}
+\DoxyCodeLine{580         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (tolower(points[i].tc) == \textcolor{charliteral}{'c'}) \{}
+\DoxyCodeLine{581             \textcolor{keywordflow}{if} (i + 2 < n) \{}
+\DoxyCodeLine{582                 \mbox{\hyperlink{classVector2D}{Vector2Df}} control\_point1 =}
+\DoxyCodeLine{583                     \mbox{\hyperlink{classVector2D}{Vector2Df}}\{cur\_point.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} + points[i].point.x,}
+\DoxyCodeLine{584                               cur\_point.y + points[i].point.y\};}
+\DoxyCodeLine{585                 \mbox{\hyperlink{classVector2D}{Vector2Df}} control\_point2 =}
+\DoxyCodeLine{586                     \mbox{\hyperlink{classVector2D}{Vector2Df}}\{cur\_point.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} + points[i + 1].point.x,}
+\DoxyCodeLine{587                               cur\_point.y + points[i + 1].point.y\};}
+\DoxyCodeLine{588                 \mbox{\hyperlink{classVector2D}{Vector2Df}} control\_point3 =}
+\DoxyCodeLine{589                     \mbox{\hyperlink{classVector2D}{Vector2Df}}\{cur\_point.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} + points[i + 2].point.x,}
+\DoxyCodeLine{590                               cur\_point.y + points[i + 2].point.y\};}
+\DoxyCodeLine{591                 \textcolor{keywordflow}{if} (points[i].tc == \textcolor{charliteral}{'C'}) \{}
+\DoxyCodeLine{592                     control\_point1 = points[i].point;}
+\DoxyCodeLine{593                     control\_point2 = points[i + 1].point;}
+\DoxyCodeLine{594                     control\_point3 = points[i + 2].point;}
+\DoxyCodeLine{595                 \}}
+\DoxyCodeLine{596                 i += 2;}
+\DoxyCodeLine{597                 cur\_point = control\_point3;}
+\DoxyCodeLine{598                 handle\_points.push\_back(\{control\_point1, \textcolor{charliteral}{'c'}\});}
+\DoxyCodeLine{599                 handle\_points.push\_back(\{control\_point2, \textcolor{charliteral}{'c'}\});}
+\DoxyCodeLine{600                 handle\_points.push\_back(\{control\_point3, \textcolor{charliteral}{'c'}\});}
+\DoxyCodeLine{601             \}}
+\DoxyCodeLine{602         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (tolower(points[i].tc) == \textcolor{charliteral}{'z'}) \{}
+\DoxyCodeLine{603             cur\_point = first\_point;}
+\DoxyCodeLine{604             handle\_points.push\_back(\{first\_point, \textcolor{charliteral}{'z'}\});}
+\DoxyCodeLine{605         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (tolower(points[i].tc) == \textcolor{charliteral}{'s'} ||}
+\DoxyCodeLine{606                    tolower(points[i].tc) == \textcolor{charliteral}{'q'}) \{}
+\DoxyCodeLine{607             \textcolor{keywordflow}{if} (i + 1 < n) \{}
+\DoxyCodeLine{608                 \mbox{\hyperlink{classVector2D}{Vector2Df}} control\_point1 =}
+\DoxyCodeLine{609                     \mbox{\hyperlink{classVector2D}{Vector2Df}}\{cur\_point.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} + points[i].point.x,}
+\DoxyCodeLine{610                               cur\_point.y + points[i].point.y\};}
+\DoxyCodeLine{611                 \mbox{\hyperlink{classVector2D}{Vector2Df}} control\_point2 =}
+\DoxyCodeLine{612                     \mbox{\hyperlink{classVector2D}{Vector2Df}}\{cur\_point.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} + points[i + 1].point.x,}
+\DoxyCodeLine{613                               cur\_point.y + points[i + 1].point.y\};}
+\DoxyCodeLine{614                 \textcolor{keywordflow}{if} (points[i].tc == \textcolor{charliteral}{'S'} || points[i].tc == \textcolor{charliteral}{'Q'}) \{}
+\DoxyCodeLine{615                     control\_point1 = points[i].point;}
+\DoxyCodeLine{616                     control\_point2 = points[i + 1].point;}
+\DoxyCodeLine{617                 \}}
+\DoxyCodeLine{618                 i += 1;}
+\DoxyCodeLine{619                 cur\_point = control\_point2;}
+\DoxyCodeLine{620                 \textcolor{keywordtype}{char} TC = tolower(points[i].tc);}
+\DoxyCodeLine{621                 handle\_points.push\_back(\{control\_point1, TC\});}
+\DoxyCodeLine{622                 handle\_points.push\_back(\{control\_point2, TC\});}
+\DoxyCodeLine{623             \}}
+\DoxyCodeLine{624         \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (tolower(points[i].tc) == \textcolor{charliteral}{'a'}) \{}
+\DoxyCodeLine{625             \mbox{\hyperlink{classVector2D}{Vector2Df}} end\_point\{cur\_point.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} + points[i].point.x,}
+\DoxyCodeLine{626                                 cur\_point.y + points[i].point.y\};}
+\DoxyCodeLine{627             \textcolor{keywordflow}{if} (points[i].tc == \textcolor{charliteral}{'A'}) end\_point = points[i].point;}
+\DoxyCodeLine{628             handle\_points.push\_back(}
+\DoxyCodeLine{629                 \{end\_point, \textcolor{charliteral}{'a'}, points[i].radius, points[i].x\_axis\_rotation,}
+\DoxyCodeLine{630                  points[i].large\_arc\_flag, points[i].sweep\_flag\});}
+\DoxyCodeLine{631             cur\_point = end\_point;}
+\DoxyCodeLine{632         \}}
+\DoxyCodeLine{633     \}}
+\DoxyCodeLine{634     \textcolor{keywordflow}{return} handle\_points;}
+\DoxyCodeLine{635 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classParser_af408a2ef7b27ceed0547093d73e6b2eb}\label{classParser_af408a2ef7b27ceed0547093d73e6b2eb}} 
+\index{Parser@{Parser}!parsePoints@{parsePoints}}
+\index{parsePoints@{parsePoints}!Parser@{Parser}}
+\doxysubsubsection{\texorpdfstring{parsePoints()}{parsePoints()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{classVector2D}{Vector2\+Df}} $>$ Parser\+::parse\+Points (\begin{DoxyParamCaption}\item[{rapidxml\+::xml\+\_\+node$<$$>$ $\ast$}]{node }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Gets the points of the element. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & The node to be parsed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The points of the element 
+\end{DoxyReturn}
+
+
+Definition at line 478 of file Parser.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{478                                                                    \{}
+\DoxyCodeLine{479     std::vector< Vector2Df > points;}
+\DoxyCodeLine{480     std::string points\_string = \mbox{\hyperlink{classParser_a63329a7accdf332feb3fba1bcc4deec6}{getAttribute}}(node, \textcolor{stringliteral}{"{}points"{}});}
+\DoxyCodeLine{481 }
+\DoxyCodeLine{482     std::stringstream ss(points\_string);}
+\DoxyCodeLine{483     \textcolor{keywordtype}{float} x, y;}
+\DoxyCodeLine{484 }
+\DoxyCodeLine{485     \textcolor{keywordflow}{while} (ss >> x) \{}
+\DoxyCodeLine{486         \textcolor{keywordflow}{if} (ss.peek() == \textcolor{charliteral}{','}) ss.ignore();}
+\DoxyCodeLine{487         ss >> y;}
+\DoxyCodeLine{488         points.push\_back(\mbox{\hyperlink{classVector2D}{Vector2Df}}(x, y));}
+\DoxyCodeLine{489     \}}
+\DoxyCodeLine{490 }
+\DoxyCodeLine{491     \textcolor{keywordflow}{return} points;}
+\DoxyCodeLine{492 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classParser_a7afd52c648dc5983e596edfa7eb6bbb5}\label{classParser_a7afd52c648dc5983e596edfa7eb6bbb5}} 
+\index{Parser@{Parser}!parsePolygon@{parsePolygon}}
+\index{parsePolygon@{parsePolygon}!Parser@{Parser}}
+\doxysubsubsection{\texorpdfstring{parsePolygon()}{parsePolygon()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classPlygon}{Plygon}} $\ast$ Parser\+::parse\+Polygon (\begin{DoxyParamCaption}\item[{rapidxml\+::xml\+\_\+node$<$$>$ $\ast$}]{node,  }\item[{const \mbox{\hyperlink{classmColor}{m\+Color}} \&}]{fill\+\_\+color,  }\item[{const \mbox{\hyperlink{classmColor}{m\+Color}} \&}]{stroke\+\_\+color,  }\item[{float}]{stroke\+\_\+width }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Parses the polygon element. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & The node to be parsed. \\
+\hline
+{\em fill\+\_\+color} & The color of the fill \\
+\hline
+{\em stroke\+\_\+color} & The color of the stroke \\
+\hline
+{\em stroke\+\_\+width} & The width of the stroke \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The polygon element 
+\end{DoxyReturn}
+
+
+Definition at line 754 of file Parser.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{756                                                                              \{}
+\DoxyCodeLine{757     \mbox{\hyperlink{classPlygon}{Plygon}} *shape = \textcolor{keyword}{new} \mbox{\hyperlink{classPlygon}{Plygon}}(fill\_color, stroke\_color, stroke\_width);}
+\DoxyCodeLine{758     std::vector< Vector2Df > points = \mbox{\hyperlink{classParser_af408a2ef7b27ceed0547093d73e6b2eb}{parsePoints}}(node);}
+\DoxyCodeLine{759     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} point : points) \{}
+\DoxyCodeLine{760         shape-\/>\mbox{\hyperlink{classPolyShape_a3a5e4952aff469f241ee1c9b92833f55}{addPoint}}(point);}
+\DoxyCodeLine{761     \}}
+\DoxyCodeLine{762     std::string fill\_rule = \mbox{\hyperlink{classParser_a63329a7accdf332feb3fba1bcc4deec6}{getAttribute}}(node, \textcolor{stringliteral}{"{}fill-\/rule"{}});}
+\DoxyCodeLine{763     fill\_rule.erase(std::remove(fill\_rule.begin(), fill\_rule.end(), \textcolor{charliteral}{' '}),}
+\DoxyCodeLine{764                     fill\_rule.end());}
+\DoxyCodeLine{765     shape-\/>\mbox{\hyperlink{classPolyShape_a0c918fe8d9df68573a1c0d6e18bc6c9a}{setFillRule}}(fill\_rule);}
+\DoxyCodeLine{766     \textcolor{keywordflow}{return} shape;}
+\DoxyCodeLine{767 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classParser_a03766f0f9f6ebdead0474973d3ac50aa}\label{classParser_a03766f0f9f6ebdead0474973d3ac50aa}} 
+\index{Parser@{Parser}!parsePolyline@{parsePolyline}}
+\index{parsePolyline@{parsePolyline}!Parser@{Parser}}
+\doxysubsubsection{\texorpdfstring{parsePolyline()}{parsePolyline()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classPlyline}{Plyline}} $\ast$ Parser\+::parse\+Polyline (\begin{DoxyParamCaption}\item[{rapidxml\+::xml\+\_\+node$<$$>$ $\ast$}]{node,  }\item[{const \mbox{\hyperlink{classmColor}{m\+Color}} \&}]{fill\+\_\+color,  }\item[{const \mbox{\hyperlink{classmColor}{m\+Color}} \&}]{stroke\+\_\+color,  }\item[{float}]{stroke\+\_\+width }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Parses the polyline element. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & The node to be parsed. \\
+\hline
+{\em fill\+\_\+color} & The color of the fill \\
+\hline
+{\em stroke\+\_\+color} & The color of the stroke \\
+\hline
+{\em stroke\+\_\+width} & The width of the stroke \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The polyline element 
+\end{DoxyReturn}
+
+
+Definition at line 769 of file Parser.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{771                                                                                \{}
+\DoxyCodeLine{772     \mbox{\hyperlink{classPlyline}{Plyline}} *shape = \textcolor{keyword}{new} \mbox{\hyperlink{classPlyline}{Plyline}}(fill\_color, stroke\_color, stroke\_width);}
+\DoxyCodeLine{773     std::vector< Vector2Df > points = \mbox{\hyperlink{classParser_af408a2ef7b27ceed0547093d73e6b2eb}{parsePoints}}(node);}
+\DoxyCodeLine{774     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} point : points) \{}
+\DoxyCodeLine{775         shape-\/>\mbox{\hyperlink{classPolyShape_a3a5e4952aff469f241ee1c9b92833f55}{addPoint}}(point);}
+\DoxyCodeLine{776     \}}
+\DoxyCodeLine{777     std::string fill\_rule = \mbox{\hyperlink{classParser_a63329a7accdf332feb3fba1bcc4deec6}{getAttribute}}(node, \textcolor{stringliteral}{"{}fill-\/rule"{}});}
+\DoxyCodeLine{778     fill\_rule.erase(std::remove(fill\_rule.begin(), fill\_rule.end(), \textcolor{charliteral}{' '}),}
+\DoxyCodeLine{779                     fill\_rule.end());}
+\DoxyCodeLine{780     shape-\/>\mbox{\hyperlink{classPolyShape_a0c918fe8d9df68573a1c0d6e18bc6c9a}{setFillRule}}(fill\_rule);}
+\DoxyCodeLine{781     \textcolor{keywordflow}{return} shape;}
+\DoxyCodeLine{782 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classParser_a20352ab58a59e61f6da1b4d20861907d}\label{classParser_a20352ab58a59e61f6da1b4d20861907d}} 
+\index{Parser@{Parser}!parseRect@{parseRect}}
+\index{parseRect@{parseRect}!Parser@{Parser}}
+\doxysubsubsection{\texorpdfstring{parseRect()}{parseRect()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classRect}{Rect}} $\ast$ Parser\+::parse\+Rect (\begin{DoxyParamCaption}\item[{rapidxml\+::xml\+\_\+node$<$$>$ $\ast$}]{node,  }\item[{const \mbox{\hyperlink{classmColor}{m\+Color}} \&}]{fill\+\_\+color,  }\item[{const \mbox{\hyperlink{classmColor}{m\+Color}} \&}]{stroke\+\_\+color,  }\item[{float}]{stroke\+\_\+width }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Parses the rect element. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & The node to be parsed. \\
+\hline
+{\em fill\+\_\+color} & The color of the fill \\
+\hline
+{\em stroke\+\_\+color} & The color of the stroke \\
+\hline
+{\em stroke\+\_\+width} & The width of the stroke \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The rect element 
+\end{DoxyReturn}
+
+
+Definition at line 719 of file Parser.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{720                                                                         \{}
+\DoxyCodeLine{721     \textcolor{keywordtype}{float} x = \mbox{\hyperlink{classParser_ab2b1df7c69830fafcbe36de5199dcd30}{getFloatAttribute}}(node, \textcolor{stringliteral}{"{}x"{}});}
+\DoxyCodeLine{722     \textcolor{keywordtype}{float} y = \mbox{\hyperlink{classParser_ab2b1df7c69830fafcbe36de5199dcd30}{getFloatAttribute}}(node, \textcolor{stringliteral}{"{}y"{}});}
+\DoxyCodeLine{723     \textcolor{keywordtype}{float} rx = \mbox{\hyperlink{classParser_ab2b1df7c69830fafcbe36de5199dcd30}{getFloatAttribute}}(node, \textcolor{stringliteral}{"{}rx"{}});}
+\DoxyCodeLine{724     \textcolor{keywordtype}{float} ry = \mbox{\hyperlink{classParser_ab2b1df7c69830fafcbe36de5199dcd30}{getFloatAttribute}}(node, \textcolor{stringliteral}{"{}ry"{}});}
+\DoxyCodeLine{725     \mbox{\hyperlink{classRect}{Rect}} *shape =}
+\DoxyCodeLine{726         \textcolor{keyword}{new} \mbox{\hyperlink{classRect}{Rect}}(\mbox{\hyperlink{classParser_ab2b1df7c69830fafcbe36de5199dcd30}{getFloatAttribute}}(node, \textcolor{stringliteral}{"{}width"{}}),}
+\DoxyCodeLine{727                  \mbox{\hyperlink{classParser_ab2b1df7c69830fafcbe36de5199dcd30}{getFloatAttribute}}(node, \textcolor{stringliteral}{"{}height"{}}), \mbox{\hyperlink{classVector2D}{Vector2Df}}(x, y),}
+\DoxyCodeLine{728                  \mbox{\hyperlink{classVector2D}{Vector2Df}}(rx, ry), fill\_color, stroke\_color, stroke\_width);}
+\DoxyCodeLine{729     \textcolor{keywordflow}{return} shape;}
+\DoxyCodeLine{730 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classParser_abfd09c5dd46fb0dc9bcd9106857dbf5e}\label{classParser_abfd09c5dd46fb0dc9bcd9106857dbf5e}} 
+\index{Parser@{Parser}!parseShape@{parseShape}}
+\index{parseShape@{parseShape}!Parser@{Parser}}
+\doxysubsubsection{\texorpdfstring{parseShape()}{parseShape()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classSVGElement}{SVGElement}} $\ast$ Parser\+::parse\+Shape (\begin{DoxyParamCaption}\item[{rapidxml\+::xml\+\_\+node$<$$>$ $\ast$}]{node }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Parses the group of elements. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & The node to be parsed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The group of elements 
+\end{DoxyReturn}
+
+
+Definition at line 667 of file Parser.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{667                                                        \{}
+\DoxyCodeLine{668     \mbox{\hyperlink{classSVGElement}{SVGElement}} *shape = NULL;}
+\DoxyCodeLine{669     std::string type = node-\/>name();}
+\DoxyCodeLine{670     std::string \textcolor{keywordtype}{id} = \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{671     \mbox{\hyperlink{classmColor}{mColor}} stroke\_color = \mbox{\hyperlink{classParser_a18d5a9aa35bd124023a060940486e183}{parseColor}}(node, \textcolor{stringliteral}{"{}stroke"{}}, \textcolor{keywordtype}{id});}
+\DoxyCodeLine{672     \mbox{\hyperlink{classmColor}{mColor}} fill\_color = \mbox{\hyperlink{classParser_a18d5a9aa35bd124023a060940486e183}{parseColor}}(node, \textcolor{stringliteral}{"{}fill"{}}, \textcolor{keywordtype}{id});}
+\DoxyCodeLine{673     \textcolor{keywordtype}{float} stroke\_width = \mbox{\hyperlink{classParser_ab2b1df7c69830fafcbe36de5199dcd30}{getFloatAttribute}}(node, \textcolor{stringliteral}{"{}stroke-\/width"{}});}
+\DoxyCodeLine{674     \textcolor{keywordflow}{if} (type == \textcolor{stringliteral}{"{}line"{}}) \{}
+\DoxyCodeLine{675         shape = \mbox{\hyperlink{classParser_a95e84ae219109769fae08702381acf78}{parseLine}}(node, stroke\_color, stroke\_width);}
+\DoxyCodeLine{676     \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (type == \textcolor{stringliteral}{"{}rect"{}}) \{}
+\DoxyCodeLine{677         shape = \mbox{\hyperlink{classParser_a20352ab58a59e61f6da1b4d20861907d}{parseRect}}(node, fill\_color, stroke\_color, stroke\_width);}
+\DoxyCodeLine{678     \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (type == \textcolor{stringliteral}{"{}circle"{}}) \{}
+\DoxyCodeLine{679         shape = \mbox{\hyperlink{classParser_ab7776f740b7d63c388a086c8b8ecccd0}{parseCircle}}(node, fill\_color, stroke\_color, stroke\_width);}
+\DoxyCodeLine{680     \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (type == \textcolor{stringliteral}{"{}ellipse"{}}) \{}
+\DoxyCodeLine{681         shape = \mbox{\hyperlink{classParser_a0af0085ee5e20739bdf23a5b685642b6}{parseEllipse}}(node, fill\_color, stroke\_color, stroke\_width);}
+\DoxyCodeLine{682     \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (type == \textcolor{stringliteral}{"{}polygon"{}}) \{}
+\DoxyCodeLine{683         shape = \mbox{\hyperlink{classParser_a7afd52c648dc5983e596edfa7eb6bbb5}{parsePolygon}}(node, fill\_color, stroke\_color, stroke\_width);}
+\DoxyCodeLine{684     \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (type == \textcolor{stringliteral}{"{}polyline"{}}) \{}
+\DoxyCodeLine{685         shape = \mbox{\hyperlink{classParser_a03766f0f9f6ebdead0474973d3ac50aa}{parsePolyline}}(node, fill\_color, stroke\_color, stroke\_width);}
+\DoxyCodeLine{686     \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (type == \textcolor{stringliteral}{"{}path"{}}) \{}
+\DoxyCodeLine{687         shape = \mbox{\hyperlink{classParser_a6f80728e7a771d2653baf1b453b655d9}{parsePath}}(node, fill\_color, stroke\_color, stroke\_width);}
+\DoxyCodeLine{688     \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (type == \textcolor{stringliteral}{"{}text"{}}) \{}
+\DoxyCodeLine{689         shape = \mbox{\hyperlink{classParser_a539bda46a2832a22741105c9299c12cb}{parseText}}(node, fill\_color, stroke\_color, stroke\_width);}
+\DoxyCodeLine{690     \}}
+\DoxyCodeLine{691     \textcolor{keywordflow}{if} (shape != NULL) \{}
+\DoxyCodeLine{692         \textcolor{keywordflow}{if} (type == \textcolor{stringliteral}{"{}text"{}}) \{}
+\DoxyCodeLine{693             \textcolor{keywordtype}{float} dx = \mbox{\hyperlink{classParser_ab2b1df7c69830fafcbe36de5199dcd30}{getFloatAttribute}}(node, \textcolor{stringliteral}{"{}dx"{}});}
+\DoxyCodeLine{694             \textcolor{keywordtype}{float} dy = \mbox{\hyperlink{classParser_ab2b1df7c69830fafcbe36de5199dcd30}{getFloatAttribute}}(node, \textcolor{stringliteral}{"{}dy"{}});}
+\DoxyCodeLine{695             std::string transform = \textcolor{stringliteral}{"{}translate("{}} + std::to\_string(dx) + \textcolor{stringliteral}{"{} "{}} +}
+\DoxyCodeLine{696                                     std::to\_string(dy) + \textcolor{stringliteral}{"{})"{}};}
+\DoxyCodeLine{697             std::vector< std::string > transform\_order =}
+\DoxyCodeLine{698                 \mbox{\hyperlink{classParser_a99df58e649089762bf434502173716d6}{getTransformOrder}}(node);}
+\DoxyCodeLine{699             transform\_order.push\_back(transform);}
+\DoxyCodeLine{700             shape-\/>\mbox{\hyperlink{classSVGElement_a00fef2ebc5df4838b3f9bd7111b117c5}{setTransforms}}(transform\_order);}
+\DoxyCodeLine{701         \} \textcolor{keywordflow}{else}}
+\DoxyCodeLine{702             shape-\/>\mbox{\hyperlink{classSVGElement_a00fef2ebc5df4838b3f9bd7111b117c5}{setTransforms}}(\mbox{\hyperlink{classParser_a99df58e649089762bf434502173716d6}{getTransformOrder}}(node));}
+\DoxyCodeLine{703         \textcolor{keywordflow}{if} (\textcolor{keywordtype}{id} != \textcolor{stringliteral}{"{}"{}}) \{}
+\DoxyCodeLine{704             shape-\/>\mbox{\hyperlink{classSVGElement_a312b6aa934488672585c7e9d858300f8}{setGradient}}(\mbox{\hyperlink{classParser_ac1e519500fce1b4192362ed1aa5ccbc3}{parseGradient}}(\textcolor{keywordtype}{id}));}
+\DoxyCodeLine{705         \}}
+\DoxyCodeLine{706     \}}
+\DoxyCodeLine{707     \textcolor{keywordflow}{return} shape;}
+\DoxyCodeLine{708 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classParser_a539bda46a2832a22741105c9299c12cb}\label{classParser_a539bda46a2832a22741105c9299c12cb}} 
+\index{Parser@{Parser}!parseText@{parseText}}
+\index{parseText@{parseText}!Parser@{Parser}}
+\doxysubsubsection{\texorpdfstring{parseText()}{parseText()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classText}{Text}} $\ast$ Parser\+::parse\+Text (\begin{DoxyParamCaption}\item[{rapidxml\+::xml\+\_\+node$<$$>$ $\ast$}]{node,  }\item[{const \mbox{\hyperlink{classmColor}{m\+Color}} \&}]{fill\+\_\+color,  }\item[{const \mbox{\hyperlink{classmColor}{m\+Color}} \&}]{stroke\+\_\+color,  }\item[{float}]{stroke\+\_\+width }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Parses the text element. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & The node to be parsed. \\
+\hline
+{\em fill\+\_\+color} & The color of the fill \\
+\hline
+{\em stroke\+\_\+color} & The color of the stroke \\
+\hline
+{\em stroke\+\_\+width} & The width of the stroke \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The text element 
+\end{DoxyReturn}
+
+
+Definition at line 784 of file Parser.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{785                                                                         \{}
+\DoxyCodeLine{786     \textcolor{keywordtype}{float} x = \mbox{\hyperlink{classParser_ab2b1df7c69830fafcbe36de5199dcd30}{getFloatAttribute}}(node, \textcolor{stringliteral}{"{}x"{}});}
+\DoxyCodeLine{787     \textcolor{keywordtype}{float} y = \mbox{\hyperlink{classParser_ab2b1df7c69830fafcbe36de5199dcd30}{getFloatAttribute}}(node, \textcolor{stringliteral}{"{}y"{}});}
+\DoxyCodeLine{788     \textcolor{keywordtype}{float} font\_size = \mbox{\hyperlink{classParser_ab2b1df7c69830fafcbe36de5199dcd30}{getFloatAttribute}}(node, \textcolor{stringliteral}{"{}font-\/size"{}});}
+\DoxyCodeLine{789     std::string text = \mbox{\hyperlink{classParser_a63329a7accdf332feb3fba1bcc4deec6}{getAttribute}}(node, \textcolor{stringliteral}{"{}text"{}});}
+\DoxyCodeLine{790 }
+\DoxyCodeLine{791     \mbox{\hyperlink{classText}{Text}} *shape =}
+\DoxyCodeLine{792         \textcolor{keyword}{new} \mbox{\hyperlink{classText}{Text}}(\mbox{\hyperlink{classVector2D}{Vector2Df}}(x -\/ (font\_size * 6.6 / 40),}
+\DoxyCodeLine{793                            y -\/ font\_size + (font\_size * 4.4 / 40)),}
+\DoxyCodeLine{794                  text, font\_size, fill\_color, stroke\_color, stroke\_width);}
+\DoxyCodeLine{795 }
+\DoxyCodeLine{796     std::string anchor = \mbox{\hyperlink{classParser_a63329a7accdf332feb3fba1bcc4deec6}{getAttribute}}(node, \textcolor{stringliteral}{"{}text-\/anchor"{}});}
+\DoxyCodeLine{797     anchor.erase(std::remove(anchor.begin(), anchor.end(), \textcolor{charliteral}{' '}), anchor.end());}
+\DoxyCodeLine{798     shape-\/>\mbox{\hyperlink{classText_aa503905beb9dddf11c9c579424d0a84f}{setAnchor}}(anchor);}
+\DoxyCodeLine{799 }
+\DoxyCodeLine{800     std::string style = \mbox{\hyperlink{classParser_a63329a7accdf332feb3fba1bcc4deec6}{getAttribute}}(node, \textcolor{stringliteral}{"{}font-\/style"{}});}
+\DoxyCodeLine{801     style.erase(std::remove(style.begin(), style.end(), \textcolor{charliteral}{' '}), style.end());}
+\DoxyCodeLine{802     shape-\/>\mbox{\hyperlink{classText_a4f24f78f8a962e758b70c5d9fd85b7cb}{setFontStyle}}(style);}
+\DoxyCodeLine{803 }
+\DoxyCodeLine{804     \textcolor{keywordflow}{return} shape;}
+\DoxyCodeLine{805 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classParser_a3d8927f2e26abf6a63bd850c154b23c6}\label{classParser_a3d8927f2e26abf6a63bd850c154b23c6}} 
+\index{Parser@{Parser}!printShapesData@{printShapesData}}
+\index{printShapesData@{printShapesData}!Parser@{Parser}}
+\doxysubsubsection{\texorpdfstring{printShapesData()}{printShapesData()}}
+{\footnotesize\ttfamily void Parser\+::print\+Shapes\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Prints the data of the shapes. 
+
+\begin{DoxyNote}{Note}
+This function is used for debugging. 
+\end{DoxyNote}
+
+
+Definition at line 828 of file Parser.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{828 \{ \mbox{\hyperlink{classParser_a13a5e2fdac62670c1584de1edbba77f2}{root}}-\/>\mbox{\hyperlink{classSVGElement_ad4bcd981ae7431161013811024b452e1}{printData}}(); \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classParser_a7f085da78317baf2cc61e6e92b4b29c8}\label{classParser_a7f085da78317baf2cc61e6e92b4b29c8}} 
+\index{Parser@{Parser}!gradients@{gradients}}
+\index{gradients@{gradients}!Parser@{Parser}}
+\doxysubsubsection{\texorpdfstring{gradients}{gradients}}
+{\footnotesize\ttfamily std\+::map$<$ std\+::string, \mbox{\hyperlink{classGradient}{Gradient}}$\ast$ $>$ Parser\+::gradients\hspace{0.3cm}{\ttfamily [private]}}
+
+The gradients of the SVG file. 
+
+Definition at line 277 of file Parser.\+hpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/Parser.\+hpp\item 
+src/Parser.\+cpp\end{DoxyCompactItemize}

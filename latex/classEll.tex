@@ -1,0 +1,271 @@
+\hypertarget{classEll}{}\doxysection{Ell Class Reference}
+\label{classEll}\index{Ell@{Ell}}
+
+
+Represents an ellipse in 2D space.  
+
+
+
+
+{\ttfamily \#include $<$Ellipse.\+hpp$>$}
+
+
+
+Inheritance diagram for Ell\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=157pt]{classEll__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Ell\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classEll__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classEll_a4a9956ca82cb9f957e993fa0c0faced6}{Ell}} (const \mbox{\hyperlink{classVector2D}{Vector2\+Df}} \&\mbox{\hyperlink{classEll_af57a48abe0e2bc8806e73dfa7762388f}{radius}}, const \mbox{\hyperlink{classVector2D}{Vector2\+Df}} \&center, \mbox{\hyperlink{classmColor}{m\+Color}} \mbox{\hyperlink{classSVGElement_a6d3a39e763d3273715ea11f8959f81b1}{fill}}, \mbox{\hyperlink{classmColor}{m\+Color}} \mbox{\hyperlink{classSVGElement_aab937dcb566cd83d94d00d69b4083f13}{stroke}}, float \mbox{\hyperlink{classSVGElement_a88449b487a890e3765ae20e96ee95c06}{stroke\+\_\+width}})
+\begin{DoxyCompactList}\small\item\em Constructs an Ellipse object. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classEll_a0d0a2a70c06878c5769bd7d092277892}{get\+Class}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the type of the shape. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classEll_a9f67131ba02c02fccf42c52f5f04525e}{set\+Radius}} (const \mbox{\hyperlink{classVector2D}{Vector2\+Df}} \&\mbox{\hyperlink{classEll_af57a48abe0e2bc8806e73dfa7762388f}{radius}})
+\begin{DoxyCompactList}\small\item\em Sets the radius of the ellipse. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classVector2D}{Vector2\+Df}} \mbox{\hyperlink{classEll_a00d607a5238705b552ec61b4409b76c1}{get\+Radius}} () const
+\begin{DoxyCompactList}\small\item\em Gets the radius of the ellipse. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classVector2D}{Vector2\+Df}} \mbox{\hyperlink{classEll_ab79368df57ee08382916fc52b69afb85}{get\+Min\+Bound}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the minimum bounding box of the shape. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classVector2D}{Vector2\+Df}} \mbox{\hyperlink{classEll_a8a8dd2acc8c7be5580dd8e549d247525}{get\+Max\+Bound}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the maximum bounding box of the shape. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classEll_a1d6d60039d2405f2b7aa117206d128fb}{print\+Data}} () const override
+\begin{DoxyCompactList}\small\item\em Prints the data of the shape. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classEll_af57a48abe0e2bc8806e73dfa7762388f}\label{classEll_af57a48abe0e2bc8806e73dfa7762388f}} 
+\mbox{\hyperlink{classVector2D}{Vector2\+Df}} \mbox{\hyperlink{classEll_af57a48abe0e2bc8806e73dfa7762388f}{radius}}
+\begin{DoxyCompactList}\small\item\em Radii of the ellipse in the x and y directions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Represents an ellipse in 2D space. 
+
+The Ellipse class is derived from the \mbox{\hyperlink{classSVGElement}{SVGElement}} class and defines an ellipse with a variable radius in the x and y directions. 
+
+Definition at line 12 of file Ellipse.\+hpp.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classEll_a4a9956ca82cb9f957e993fa0c0faced6}\label{classEll_a4a9956ca82cb9f957e993fa0c0faced6}} 
+\index{Ell@{Ell}!Ell@{Ell}}
+\index{Ell@{Ell}!Ell@{Ell}}
+\doxysubsubsection{\texorpdfstring{Ell()}{Ell()}}
+{\footnotesize\ttfamily Ell\+::\+Ell (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classVector2D}{Vector2\+Df}} \&}]{radius,  }\item[{const \mbox{\hyperlink{classVector2D}{Vector2\+Df}} \&}]{center,  }\item[{\mbox{\hyperlink{classmColor}{m\+Color}}}]{fill,  }\item[{\mbox{\hyperlink{classmColor}{m\+Color}}}]{stroke,  }\item[{float}]{stroke\+\_\+width }\end{DoxyParamCaption})}
+
+
+
+Constructs an Ellipse object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em radius} & The radii of the ellipse in the x and y directions. \\
+\hline
+{\em center} & The center of the ellipse. \\
+\hline
+{\em fill} & Fill color of the ellipse. \\
+\hline
+{\em stroke} & Outline color of the ellipse. \\
+\hline
+{\em stroke\+\_\+width} & Thickness of the ellipse outline. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 5 of file Ellipse.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{7     : \mbox{\hyperlink{classSVGElement_ad30205005009d2ba4820d3ce372e81ea}{SVGElement}}(\mbox{\hyperlink{classSVGElement_a6d3a39e763d3273715ea11f8959f81b1}{fill}}, \mbox{\hyperlink{classSVGElement_aab937dcb566cd83d94d00d69b4083f13}{stroke}}, stroke\_thickness, center), \mbox{\hyperlink{classEll_af57a48abe0e2bc8806e73dfa7762388f}{radius}}(\mbox{\hyperlink{classEll_af57a48abe0e2bc8806e73dfa7762388f}{radius}}) \{\}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classEll_a0d0a2a70c06878c5769bd7d092277892}\label{classEll_a0d0a2a70c06878c5769bd7d092277892}} 
+\index{Ell@{Ell}!getClass@{getClass}}
+\index{getClass@{getClass}!Ell@{Ell}}
+\doxysubsubsection{\texorpdfstring{getClass()}{getClass()}}
+{\footnotesize\ttfamily std\+::string Ell\+::get\+Class (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Gets the type of the shape. 
+
+\begin{DoxyReturn}{Returns}
+The string \char`\"{}\+Ellipse\char`\"{}.
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+This function is used for determining the type of the shape. 
+\end{DoxyNote}
+
+
+Implements \mbox{\hyperlink{classSVGElement_adc98ebac66965dd303283cbf7ff28f38}{SVGElement}}.
+
+
+
+Definition at line 9 of file Ellipse.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{9 \{ \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}Ellipse"{}}; \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classEll_a8a8dd2acc8c7be5580dd8e549d247525}\label{classEll_a8a8dd2acc8c7be5580dd8e549d247525}} 
+\index{Ell@{Ell}!getMaxBound@{getMaxBound}}
+\index{getMaxBound@{getMaxBound}!Ell@{Ell}}
+\doxysubsubsection{\texorpdfstring{getMaxBound()}{getMaxBound()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classVector2D}{Vector2\+Df}} Ell\+::get\+Max\+Bound (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Gets the maximum bounding box of the shape. 
+
+\begin{DoxyReturn}{Returns}
+The maximum bounding box of the shape. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classSVGElement_a03ac231161d1d5062951fa3fca33a39b}{SVGElement}}.
+
+
+
+Definition at line 20 of file Ellipse.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{20                                  \{}
+\DoxyCodeLine{21     \textcolor{keywordflow}{return} \mbox{\hyperlink{classVector2D}{Vector2Df}}(\mbox{\hyperlink{classSVGElement_a4e1ed8bb29fd4dbeb35471315976b3a2}{getPosition}}().x + \mbox{\hyperlink{classEll_a00d607a5238705b552ec61b4409b76c1}{getRadius}}().x,}
+\DoxyCodeLine{22                      \mbox{\hyperlink{classSVGElement_a4e1ed8bb29fd4dbeb35471315976b3a2}{getPosition}}().y + \mbox{\hyperlink{classEll_a00d607a5238705b552ec61b4409b76c1}{getRadius}}().y);}
+\DoxyCodeLine{23 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classEll_ab79368df57ee08382916fc52b69afb85}\label{classEll_ab79368df57ee08382916fc52b69afb85}} 
+\index{Ell@{Ell}!getMinBound@{getMinBound}}
+\index{getMinBound@{getMinBound}!Ell@{Ell}}
+\doxysubsubsection{\texorpdfstring{getMinBound()}{getMinBound()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classVector2D}{Vector2\+Df}} Ell\+::get\+Min\+Bound (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Gets the minimum bounding box of the shape. 
+
+\begin{DoxyReturn}{Returns}
+The minimum bounding box of the shape. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classSVGElement_a0cce88c48233f4da470daad2edab0d06}{SVGElement}}.
+
+
+
+Definition at line 15 of file Ellipse.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{15                                  \{}
+\DoxyCodeLine{16     \textcolor{keywordflow}{return} \mbox{\hyperlink{classVector2D}{Vector2Df}}(\mbox{\hyperlink{classSVGElement_a4e1ed8bb29fd4dbeb35471315976b3a2}{getPosition}}().x -\/ \mbox{\hyperlink{classEll_a00d607a5238705b552ec61b4409b76c1}{getRadius}}().x,}
+\DoxyCodeLine{17                      \mbox{\hyperlink{classSVGElement_a4e1ed8bb29fd4dbeb35471315976b3a2}{getPosition}}().y -\/ \mbox{\hyperlink{classEll_a00d607a5238705b552ec61b4409b76c1}{getRadius}}().y);}
+\DoxyCodeLine{18 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classEll_a00d607a5238705b552ec61b4409b76c1}\label{classEll_a00d607a5238705b552ec61b4409b76c1}} 
+\index{Ell@{Ell}!getRadius@{getRadius}}
+\index{getRadius@{getRadius}!Ell@{Ell}}
+\doxysubsubsection{\texorpdfstring{getRadius()}{getRadius()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classVector2D}{Vector2\+Df}} Ell\+::get\+Radius (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the radius of the ellipse. 
+
+\begin{DoxyReturn}{Returns}
+The radius of the ellipse. 
+\end{DoxyReturn}
+
+
+Definition at line 13 of file Ellipse.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{13 \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classEll_af57a48abe0e2bc8806e73dfa7762388f}{radius}}; \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classEll_a1d6d60039d2405f2b7aa117206d128fb}\label{classEll_a1d6d60039d2405f2b7aa117206d128fb}} 
+\index{Ell@{Ell}!printData@{printData}}
+\index{printData@{printData}!Ell@{Ell}}
+\doxysubsubsection{\texorpdfstring{printData()}{printData()}}
+{\footnotesize\ttfamily void Ell\+::print\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Prints the data of the shape. 
+
+\begin{DoxyNote}{Note}
+This function is used for debugging purposes. 
+\end{DoxyNote}
+
+
+Reimplemented from \mbox{\hyperlink{classSVGElement_ad4bcd981ae7431161013811024b452e1}{SVGElement}}.
+
+
+
+Definition at line 25 of file Ellipse.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{25                           \{}
+\DoxyCodeLine{26     \mbox{\hyperlink{classSVGElement_ad4bcd981ae7431161013811024b452e1}{SVGElement::printData}}();}
+\DoxyCodeLine{27     std::cout << \textcolor{stringliteral}{"{}Radius: "{}} << \mbox{\hyperlink{classEll_a00d607a5238705b552ec61b4409b76c1}{getRadius}}().\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} << \textcolor{stringliteral}{"{} "{}} << \mbox{\hyperlink{classEll_a00d607a5238705b552ec61b4409b76c1}{getRadius}}().\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}}}
+\DoxyCodeLine{28               << std::endl;}
+\DoxyCodeLine{29 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classEll_a9f67131ba02c02fccf42c52f5f04525e}\label{classEll_a9f67131ba02c02fccf42c52f5f04525e}} 
+\index{Ell@{Ell}!setRadius@{setRadius}}
+\index{setRadius@{setRadius}!Ell@{Ell}}
+\doxysubsubsection{\texorpdfstring{setRadius()}{setRadius()}}
+{\footnotesize\ttfamily void Ell\+::set\+Radius (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classVector2D}{Vector2\+Df}} \&}]{radius }\end{DoxyParamCaption})}
+
+
+
+Sets the radius of the ellipse. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em radius} & The new radius of the ellipse. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 11 of file Ellipse.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{11 \{ this-\/>radius = \mbox{\hyperlink{classEll_af57a48abe0e2bc8806e73dfa7762388f}{radius}}; \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/graphics/Ellipse.\+hpp\item 
+src/graphics/Ellipse.\+cpp\end{DoxyCompactItemize}

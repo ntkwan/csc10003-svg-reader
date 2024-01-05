@@ -1,0 +1,392 @@
+\hypertarget{classViewer}{}\doxysection{Viewer Class Reference}
+\label{classViewer}\index{Viewer@{Viewer}}
+
+
+Represents a viewer for rendering and interacting with a scene.  
+
+
+
+
+{\ttfamily \#include $<$Viewer.\+hpp$>$}
+
+
+
+Collaboration diagram for Viewer\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=221pt]{classViewer__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classViewer_a324e5a6a1532fe5eac3f3b0e4792b2da}\label{classViewer_a324e5a6a1532fe5eac3f3b0e4792b2da}} 
+\mbox{\hyperlink{classViewer_a324e5a6a1532fe5eac3f3b0e4792b2da}{$\sim$\+Viewer}} ()
+\begin{DoxyCompactList}\small\item\em Destructor for the \mbox{\hyperlink{classViewer}{Viewer}} class. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classViewer_acb15ba2e5d3bab2ba58da0db724b3bd1}{handle\+Mouse\+Event}} (UINT message, WPARAM w\+Param, LPARAM l\+Param)
+\begin{DoxyCompactList}\small\item\em Handles mouse events, such as wheel, move, left button down, and left button up. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classViewer_a643c2fc659f06f4d4bfcefbad22ebd75}{handle\+Key\+Event}} (WPARAM w\+Param)
+\begin{DoxyCompactList}\small\item\em Handles keyboard events. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classViewer_aa8d0481396e20f1a8d4f6691ff0a67c1}{get\+Window\+Size}} (HWND h\+Wnd) const
+\begin{DoxyCompactList}\small\item\em Get the current window size. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classViewer}{Viewer}} $\ast$ \mbox{\hyperlink{classViewer_a8235c9da7e144d7139c91901c0051cd8}{get\+Instance}} ()
+\begin{DoxyCompactList}\small\item\em Gets the singleton instance of the \mbox{\hyperlink{classViewer}{Viewer}} class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classViewer_a3e16ebbf5c0ed98dc75fe2c4d46fe0d5}\label{classViewer_a3e16ebbf5c0ed98dc75fe2c4d46fe0d5}} 
+float \mbox{\hyperlink{classViewer_a3e16ebbf5c0ed98dc75fe2c4d46fe0d5}{offset\+\_\+x}}
+\begin{DoxyCompactList}\small\item\em X-\/coordinate offset of the viewer. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classViewer_a30b0f57907c82de620339e105f9a3c5b}\label{classViewer_a30b0f57907c82de620339e105f9a3c5b}} 
+float \mbox{\hyperlink{classViewer_a30b0f57907c82de620339e105f9a3c5b}{offset\+\_\+y}}
+\begin{DoxyCompactList}\small\item\em Y-\/coordinate offset of the viewer. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classViewer_a46377febc22fd7f2cc38a73ddb66b8ad}\label{classViewer_a46377febc22fd7f2cc38a73ddb66b8ad}} 
+float \mbox{\hyperlink{classViewer_a46377febc22fd7f2cc38a73ddb66b8ad}{zoom\+\_\+factor}}
+\begin{DoxyCompactList}\small\item\em Zoom factor for scaling the view. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classViewer_a82dfd34668f986b72e51ee86d4029fc6}\label{classViewer_a82dfd34668f986b72e51ee86d4029fc6}} 
+float \mbox{\hyperlink{classViewer_a82dfd34668f986b72e51ee86d4029fc6}{rotate\+\_\+angle}}
+\begin{DoxyCompactList}\small\item\em Rotation angle of the view. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classViewer_a59a507a835919e78114601d5bd1784e6}{needs\+\_\+repaint}}
+\item 
+\mbox{\Hypertarget{classViewer_aa172f661daf24807148fb697f10e750a}\label{classViewer_aa172f661daf24807148fb697f10e750a}} 
+\mbox{\hyperlink{classVector2D}{Vector2\+Df}} \mbox{\hyperlink{classViewer_aa172f661daf24807148fb697f10e750a}{window\+\_\+size}}
+\begin{DoxyCompactList}\small\item\em Size of the window. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classViewer_aaedebacb31cba87de6e7d448ed8d6586}\label{classViewer_aaedebacb31cba87de6e7d448ed8d6586}} 
+\mbox{\hyperlink{classViewer_aaedebacb31cba87de6e7d448ed8d6586}{Viewer}} ()
+\begin{DoxyCompactList}\small\item\em Private constructor for the \mbox{\hyperlink{classViewer}{Viewer}} class. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classViewer_abb8e49e83e5c574411bb9995665fd7eb}\label{classViewer_abb8e49e83e5c574411bb9995665fd7eb}} 
+\mbox{\hyperlink{classViewer_abb8e49e83e5c574411bb9995665fd7eb}{Viewer}} (const \mbox{\hyperlink{classViewer}{Viewer}} \&)=delete
+\begin{DoxyCompactList}\small\item\em Copy constructor for the \mbox{\hyperlink{classViewer}{Viewer}} class (deleted to enforce singleton pattern). \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classViewer_a3d14cceacd94622e6b9d5d71bfb5b64f}\label{classViewer_a3d14cceacd94622e6b9d5d71bfb5b64f}} 
+void \mbox{\hyperlink{classViewer_a3d14cceacd94622e6b9d5d71bfb5b64f}{operator=}} (const \mbox{\hyperlink{classViewer}{Viewer}} \&)=delete
+\begin{DoxyCompactList}\small\item\em Copy assignment operator for the \mbox{\hyperlink{classViewer}{Viewer}} class (deleted to enforce singleton pattern). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classViewer_a940c6147b33b273afdff6eef7309d500}{handle\+Mouse\+Wheel}} (WPARAM w\+Param)
+\begin{DoxyCompactList}\small\item\em Handles the mouse wheel event for zooming. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classViewer_a81a24ea13ee1e7e8c83be60672a7a11e}{handle\+Mouse\+Move}} (LPARAM l\+Param)
+\begin{DoxyCompactList}\small\item\em Handles the mouse move event for panning. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classViewer_a2b889c5d09c8577ad1580dd610ac5678}{handle\+Left\+Button\+Down}} (LPARAM l\+Param)
+\begin{DoxyCompactList}\small\item\em Handles the left button down event for initiating dragging. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classViewer_ae0c94514f0897aa84732024855520e28}\label{classViewer_ae0c94514f0897aa84732024855520e28}} 
+void \mbox{\hyperlink{classViewer_ae0c94514f0897aa84732024855520e28}{handle\+Left\+Button\+Up}} ()
+\begin{DoxyCompactList}\small\item\em Handles the left button up event for ending dragging. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classViewer_a8bcd4fdeb5c26092d65fc14474afeb38}{handle\+Key\+Down}} (WPARAM w\+Param)
+\begin{DoxyCompactList}\small\item\em Handles the key down event for rotating. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classViewer_a452e9dd05638bf3da01d8f51dba009a5}\label{classViewer_a452e9dd05638bf3da01d8f51dba009a5}} 
+bool \mbox{\hyperlink{classViewer_a452e9dd05638bf3da01d8f51dba009a5}{is\+\_\+dragging}}
+\begin{DoxyCompactList}\small\item\em Flag indicating whether the mouse is being dragged. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classViewer_a77bc329e7ae0aecaf60a4de4f8dcc037}\label{classViewer_a77bc329e7ae0aecaf60a4de4f8dcc037}} 
+POINT \mbox{\hyperlink{classViewer_a77bc329e7ae0aecaf60a4de4f8dcc037}{last\+\_\+mouse\+\_\+pos}}
+\begin{DoxyCompactList}\small\item\em Last recorded mouse position. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classViewer_a53c3dca921442983d13f335d0e8a7e20}\label{classViewer_a53c3dca921442983d13f335d0e8a7e20}} 
+static \mbox{\hyperlink{classViewer}{Viewer}} $\ast$ \mbox{\hyperlink{classViewer_a53c3dca921442983d13f335d0e8a7e20}{instance}} = nullptr
+\begin{DoxyCompactList}\small\item\em Singleton instance of the \mbox{\hyperlink{classViewer}{Viewer}} class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a viewer for rendering and interacting with a scene. 
+
+The viewer supports the following interactions\+:
+\begin{DoxyItemize}
+\item Rotation\+: Press \textquotesingle{}Q\textquotesingle{} to rotate the view counterclockwise and \textquotesingle{}E\textquotesingle{} to rotate clockwise.
+\item Zooming\+: Use the scroll wheel to zoom in and out of the scene.
+\item Translation\+: Click and drag the left mouse button to translate the view. 
+\end{DoxyItemize}
+
+Definition at line 16 of file Viewer.\+hpp.
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classViewer_a8235c9da7e144d7139c91901c0051cd8}\label{classViewer_a8235c9da7e144d7139c91901c0051cd8}} 
+\index{Viewer@{Viewer}!getInstance@{getInstance}}
+\index{getInstance@{getInstance}!Viewer@{Viewer}}
+\doxysubsubsection{\texorpdfstring{getInstance()}{getInstance()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classViewer}{Viewer}} $\ast$ Viewer\+::get\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the singleton instance of the \mbox{\hyperlink{classViewer}{Viewer}} class. 
+
+\begin{DoxyReturn}{Returns}
+The singleton instance of the \mbox{\hyperlink{classViewer}{Viewer}} class. 
+\end{DoxyReturn}
+
+
+Definition at line 4 of file Viewer.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{4                             \{}
+\DoxyCodeLine{5     \textcolor{keywordflow}{if} (!\mbox{\hyperlink{classViewer_a53c3dca921442983d13f335d0e8a7e20}{instance}}) \{}
+\DoxyCodeLine{6         \mbox{\hyperlink{classViewer_a53c3dca921442983d13f335d0e8a7e20}{instance}} = \textcolor{keyword}{new} \mbox{\hyperlink{classViewer_aaedebacb31cba87de6e7d448ed8d6586}{Viewer}}();}
+\DoxyCodeLine{7     \}}
+\DoxyCodeLine{8     \textcolor{keywordflow}{return} \mbox{\hyperlink{classViewer_a53c3dca921442983d13f335d0e8a7e20}{instance}};}
+\DoxyCodeLine{9 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classViewer_aa8d0481396e20f1a8d4f6691ff0a67c1}\label{classViewer_aa8d0481396e20f1a8d4f6691ff0a67c1}} 
+\index{Viewer@{Viewer}!getWindowSize@{getWindowSize}}
+\index{getWindowSize@{getWindowSize}!Viewer@{Viewer}}
+\doxysubsubsection{\texorpdfstring{getWindowSize()}{getWindowSize()}}
+{\footnotesize\ttfamily void Viewer\+::get\+Window\+Size (\begin{DoxyParamCaption}\item[{HWND}]{h\+Wnd }\end{DoxyParamCaption}) const}
+
+
+
+Get the current window size. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em h\+Wnd} & The handle to the window. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 103 of file Viewer.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{103                                           \{}
+\DoxyCodeLine{104     RECT rect;}
+\DoxyCodeLine{105     GetClientRect(hWnd, \&rect);}
+\DoxyCodeLine{106     \mbox{\hyperlink{classViewer_a53c3dca921442983d13f335d0e8a7e20}{instance}}-\/>\mbox{\hyperlink{classViewer_aa172f661daf24807148fb697f10e750a}{window\_size}}.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} = \textcolor{keyword}{static\_cast<} \textcolor{keywordtype}{float} \textcolor{keyword}{>}(rect.right -\/ rect.left);}
+\DoxyCodeLine{107     \mbox{\hyperlink{classViewer_a53c3dca921442983d13f335d0e8a7e20}{instance}}-\/>\mbox{\hyperlink{classViewer_aa172f661daf24807148fb697f10e750a}{window\_size}}.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}} = \textcolor{keyword}{static\_cast<} \textcolor{keywordtype}{float} \textcolor{keyword}{>}(rect.bottom -\/ rect.top);}
+\DoxyCodeLine{108 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classViewer_a8bcd4fdeb5c26092d65fc14474afeb38}\label{classViewer_a8bcd4fdeb5c26092d65fc14474afeb38}} 
+\index{Viewer@{Viewer}!handleKeyDown@{handleKeyDown}}
+\index{handleKeyDown@{handleKeyDown}!Viewer@{Viewer}}
+\doxysubsubsection{\texorpdfstring{handleKeyDown()}{handleKeyDown()}}
+{\footnotesize\ttfamily void Viewer\+::handle\+Key\+Down (\begin{DoxyParamCaption}\item[{WPARAM}]{w\+Param }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handles the key down event for rotating. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em w\+Param} & The WPARAM parameter of the message. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 90 of file Viewer.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{90                                         \{}
+\DoxyCodeLine{91     \textcolor{keywordtype}{char} key = \textcolor{keyword}{static\_cast<} \textcolor{keywordtype}{char} \textcolor{keyword}{>}(wParam);}
+\DoxyCodeLine{92     \textcolor{keywordflow}{switch} (tolower(key)) \{}
+\DoxyCodeLine{93         \textcolor{keywordflow}{case} \textcolor{charliteral}{'q'}:}
+\DoxyCodeLine{94             \mbox{\hyperlink{classViewer_a82dfd34668f986b72e51ee86d4029fc6}{rotate\_angle}} -\/= 1.0f;}
+\DoxyCodeLine{95             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{96 }
+\DoxyCodeLine{97         \textcolor{keywordflow}{case} \textcolor{charliteral}{'e'}:}
+\DoxyCodeLine{98             \mbox{\hyperlink{classViewer_a82dfd34668f986b72e51ee86d4029fc6}{rotate\_angle}} += 1.0f;}
+\DoxyCodeLine{99             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{100     \}}
+\DoxyCodeLine{101 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classViewer_a643c2fc659f06f4d4bfcefbad22ebd75}\label{classViewer_a643c2fc659f06f4d4bfcefbad22ebd75}} 
+\index{Viewer@{Viewer}!handleKeyEvent@{handleKeyEvent}}
+\index{handleKeyEvent@{handleKeyEvent}!Viewer@{Viewer}}
+\doxysubsubsection{\texorpdfstring{handleKeyEvent()}{handleKeyEvent()}}
+{\footnotesize\ttfamily void Viewer\+::handle\+Key\+Event (\begin{DoxyParamCaption}\item[{WPARAM}]{w\+Param }\end{DoxyParamCaption})}
+
+
+
+Handles keyboard events. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em w\+Param} & The WPARAM parameter of the message. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 47 of file Viewer.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{47 \{ \mbox{\hyperlink{classViewer_a8bcd4fdeb5c26092d65fc14474afeb38}{handleKeyDown}}(wParam); \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classViewer_a2b889c5d09c8577ad1580dd610ac5678}\label{classViewer_a2b889c5d09c8577ad1580dd610ac5678}} 
+\index{Viewer@{Viewer}!handleLeftButtonDown@{handleLeftButtonDown}}
+\index{handleLeftButtonDown@{handleLeftButtonDown}!Viewer@{Viewer}}
+\doxysubsubsection{\texorpdfstring{handleLeftButtonDown()}{handleLeftButtonDown()}}
+{\footnotesize\ttfamily void Viewer\+::handle\+Left\+Button\+Down (\begin{DoxyParamCaption}\item[{LPARAM}]{l\+Param }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handles the left button down event for initiating dragging. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em l\+Param} & The LPARAM parameter of the message. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 74 of file Viewer.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{74                                                \{}
+\DoxyCodeLine{75     \mbox{\hyperlink{classViewer_a452e9dd05638bf3da01d8f51dba009a5}{is\_dragging}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{76     \mbox{\hyperlink{classViewer_a77bc329e7ae0aecaf60a4de4f8dcc037}{last\_mouse\_pos}}.x = \textcolor{keyword}{static\_cast<} \textcolor{keywordtype}{int} \textcolor{keyword}{>}(LOWORD(lParam));}
+\DoxyCodeLine{77     \mbox{\hyperlink{classViewer_a77bc329e7ae0aecaf60a4de4f8dcc037}{last\_mouse\_pos}}.y = \textcolor{keyword}{static\_cast<} \textcolor{keywordtype}{int} \textcolor{keyword}{>}(HIWORD(lParam));}
+\DoxyCodeLine{78     SetCapture(GetActiveWindow());}
+\DoxyCodeLine{79 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classViewer_acb15ba2e5d3bab2ba58da0db724b3bd1}\label{classViewer_acb15ba2e5d3bab2ba58da0db724b3bd1}} 
+\index{Viewer@{Viewer}!handleMouseEvent@{handleMouseEvent}}
+\index{handleMouseEvent@{handleMouseEvent}!Viewer@{Viewer}}
+\doxysubsubsection{\texorpdfstring{handleMouseEvent()}{handleMouseEvent()}}
+{\footnotesize\ttfamily void Viewer\+::handle\+Mouse\+Event (\begin{DoxyParamCaption}\item[{UINT}]{message,  }\item[{WPARAM}]{w\+Param,  }\item[{LPARAM}]{l\+Param }\end{DoxyParamCaption})}
+
+
+
+Handles mouse events, such as wheel, move, left button down, and left button up. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The Windows message identifier. \\
+\hline
+{\em w\+Param} & The WPARAM parameter of the message. \\
+\hline
+{\em l\+Param} & The LPARAM parameter of the message. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 26 of file Viewer.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{26                                                                         \{}
+\DoxyCodeLine{27     \textcolor{keywordflow}{switch} (message) \{}
+\DoxyCodeLine{28         \textcolor{keywordflow}{case} WM\_MOUSEWHEEL:}
+\DoxyCodeLine{29             \mbox{\hyperlink{classViewer_a940c6147b33b273afdff6eef7309d500}{handleMouseWheel}}(wParam);}
+\DoxyCodeLine{30             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32         \textcolor{keywordflow}{case} WM\_MOUSEMOVE:}
+\DoxyCodeLine{33             \textcolor{keywordflow}{if} (wParam \& MK\_LBUTTON) \{}
+\DoxyCodeLine{34                 \mbox{\hyperlink{classViewer_a81a24ea13ee1e7e8c83be60672a7a11e}{handleMouseMove}}(lParam);}
+\DoxyCodeLine{35             \}}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37         \textcolor{keywordflow}{case} WM\_LBUTTONDOWN:}
+\DoxyCodeLine{38             \mbox{\hyperlink{classViewer_a2b889c5d09c8577ad1580dd610ac5678}{handleLeftButtonDown}}(lParam);}
+\DoxyCodeLine{39             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41         \textcolor{keywordflow}{case} WM\_LBUTTONUP:}
+\DoxyCodeLine{42             \mbox{\hyperlink{classViewer_ae0c94514f0897aa84732024855520e28}{handleLeftButtonUp}}();}
+\DoxyCodeLine{43             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{44     \}}
+\DoxyCodeLine{45 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classViewer_a81a24ea13ee1e7e8c83be60672a7a11e}\label{classViewer_a81a24ea13ee1e7e8c83be60672a7a11e}} 
+\index{Viewer@{Viewer}!handleMouseMove@{handleMouseMove}}
+\index{handleMouseMove@{handleMouseMove}!Viewer@{Viewer}}
+\doxysubsubsection{\texorpdfstring{handleMouseMove()}{handleMouseMove()}}
+{\footnotesize\ttfamily void Viewer\+::handle\+Mouse\+Move (\begin{DoxyParamCaption}\item[{LPARAM}]{l\+Param }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handles the mouse move event for panning. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em l\+Param} & The LPARAM parameter of the message. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 59 of file Viewer.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{59                                           \{}
+\DoxyCodeLine{60     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classViewer_a452e9dd05638bf3da01d8f51dba009a5}{is\_dragging}}) \{}
+\DoxyCodeLine{61         \textcolor{keywordtype}{int} x = \textcolor{keyword}{static\_cast<} \textcolor{keywordtype}{int} \textcolor{keyword}{>}(LOWORD(lParam));}
+\DoxyCodeLine{62         \textcolor{keywordtype}{int} y = \textcolor{keyword}{static\_cast<} \textcolor{keywordtype}{int} \textcolor{keyword}{>}(HIWORD(lParam));}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64         \textcolor{keywordflow}{if} (x != \mbox{\hyperlink{classViewer_a77bc329e7ae0aecaf60a4de4f8dcc037}{last\_mouse\_pos}}.x || y != \mbox{\hyperlink{classViewer_a77bc329e7ae0aecaf60a4de4f8dcc037}{last\_mouse\_pos}}.y) \{}
+\DoxyCodeLine{65             \mbox{\hyperlink{classViewer_a3e16ebbf5c0ed98dc75fe2c4d46fe0d5}{offset\_x}} += (x -\/ \mbox{\hyperlink{classViewer_a77bc329e7ae0aecaf60a4de4f8dcc037}{last\_mouse\_pos}}.x) * \mbox{\hyperlink{classViewer_a46377febc22fd7f2cc38a73ddb66b8ad}{zoom\_factor}};}
+\DoxyCodeLine{66             \mbox{\hyperlink{classViewer_a30b0f57907c82de620339e105f9a3c5b}{offset\_y}} += (y -\/ \mbox{\hyperlink{classViewer_a77bc329e7ae0aecaf60a4de4f8dcc037}{last\_mouse\_pos}}.y) * \mbox{\hyperlink{classViewer_a46377febc22fd7f2cc38a73ddb66b8ad}{zoom\_factor}};}
+\DoxyCodeLine{67             \mbox{\hyperlink{classViewer_a77bc329e7ae0aecaf60a4de4f8dcc037}{last\_mouse\_pos}}.x = x;}
+\DoxyCodeLine{68             \mbox{\hyperlink{classViewer_a77bc329e7ae0aecaf60a4de4f8dcc037}{last\_mouse\_pos}}.y = y;}
+\DoxyCodeLine{69             \mbox{\hyperlink{classViewer_a59a507a835919e78114601d5bd1784e6}{needs\_repaint}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{70         \}}
+\DoxyCodeLine{71     \}}
+\DoxyCodeLine{72 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classViewer_a940c6147b33b273afdff6eef7309d500}\label{classViewer_a940c6147b33b273afdff6eef7309d500}} 
+\index{Viewer@{Viewer}!handleMouseWheel@{handleMouseWheel}}
+\index{handleMouseWheel@{handleMouseWheel}!Viewer@{Viewer}}
+\doxysubsubsection{\texorpdfstring{handleMouseWheel()}{handleMouseWheel()}}
+{\footnotesize\ttfamily void Viewer\+::handle\+Mouse\+Wheel (\begin{DoxyParamCaption}\item[{WPARAM}]{w\+Param }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handles the mouse wheel event for zooming. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em w\+Param} & The WPARAM parameter of the message. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 49 of file Viewer.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{49                                            \{}
+\DoxyCodeLine{50     \textcolor{keywordflow}{if} (GET\_WHEEL\_DELTA\_WPARAM(wParam) > 0) \{}
+\DoxyCodeLine{51         \mbox{\hyperlink{classViewer_a46377febc22fd7f2cc38a73ddb66b8ad}{zoom\_factor}} *= 1.1f;}
+\DoxyCodeLine{52         \mbox{\hyperlink{classViewer_a59a507a835919e78114601d5bd1784e6}{needs\_repaint}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{53     \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{54         \mbox{\hyperlink{classViewer_a46377febc22fd7f2cc38a73ddb66b8ad}{zoom\_factor}} /= 1.1f;}
+\DoxyCodeLine{55         \mbox{\hyperlink{classViewer_a59a507a835919e78114601d5bd1784e6}{needs\_repaint}} = \textcolor{keyword}{true};}
+\DoxyCodeLine{56     \}}
+\DoxyCodeLine{57 \}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{classViewer_a59a507a835919e78114601d5bd1784e6}\label{classViewer_a59a507a835919e78114601d5bd1784e6}} 
+\index{Viewer@{Viewer}!needs\_repaint@{needs\_repaint}}
+\index{needs\_repaint@{needs\_repaint}!Viewer@{Viewer}}
+\doxysubsubsection{\texorpdfstring{needs\_repaint}{needs\_repaint}}
+{\footnotesize\ttfamily bool Viewer\+::needs\+\_\+repaint}
+
+Flag indicating whether the view needs to be repainted 
+
+Definition at line 22 of file Viewer.\+hpp.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/Viewer.\+hpp\item 
+src/Viewer.\+cpp\end{DoxyCompactItemize}

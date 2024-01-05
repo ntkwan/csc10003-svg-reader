@@ -1,0 +1,792 @@
+\hypertarget{classSVGElement}{}\doxysection{SVGElement Class Reference}
+\label{classSVGElement}\index{SVGElement@{SVGElement}}
+
+
+Represents an element in an SVG file.  
+
+
+
+
+{\ttfamily \#include $<$SVGElement.\+hpp$>$}
+
+
+
+Inheritance diagram for SVGElement\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classSVGElement__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for SVGElement\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classSVGElement__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classSVGElement_a5087280fd4bbb637c3cde64e44e974f1}\label{classSVGElement_a5087280fd4bbb637c3cde64e44e974f1}} 
+virtual \mbox{\hyperlink{classSVGElement_a5087280fd4bbb637c3cde64e44e974f1}{$\sim$\+SVGElement}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual constructor. \end{DoxyCompactList}\item 
+virtual std\+::string \mbox{\hyperlink{classSVGElement_adc98ebac66965dd303283cbf7ff28f38}{get\+Class}} () const =0
+\begin{DoxyCompactList}\small\item\em Gets the type of the shape. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSVGElement_abf7eef6d09fedba0d0f50a0f1a4be2fb}{set\+Fill\+Color}} (const \mbox{\hyperlink{classmColor}{m\+Color}} \&color)
+\begin{DoxyCompactList}\small\item\em Sets the fill color of the shape. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSVGElement_ac0cc2f6d2e01d364a695bebaa7db18d2}{set\+Outline\+Color}} (const \mbox{\hyperlink{classmColor}{m\+Color}} \&color)
+\begin{DoxyCompactList}\small\item\em Sets the outline color of the shape. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSVGElement_a88653ebe8b92ec881ab436ea968375a8}{set\+Outline\+Thickness}} (float thickness)
+\begin{DoxyCompactList}\small\item\em Sets the outline thickness of the shape. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSVGElement_a77aefe4b7e9dbf180cc531c969d0116d}{set\+Position}} (float x, float y)
+\begin{DoxyCompactList}\small\item\em Sets the position of the shape. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSVGElement_aec8a2f582f21a559c05d791e017efbd5}{set\+Position}} (const \mbox{\hyperlink{classVector2D}{Vector2\+Df}} \&\mbox{\hyperlink{classSVGElement_acf9b9906b6d0cba8bb5c0b38b032e40f}{position}})
+\begin{DoxyCompactList}\small\item\em Sets the position of the shape. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classmColor}{m\+Color}} \& \mbox{\hyperlink{classSVGElement_abb012cad5d6e9ee7a413f46042f99429}{get\+Fill\+Color}} () const
+\begin{DoxyCompactList}\small\item\em Gets the fill color of the shape. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classmColor}{m\+Color}} \& \mbox{\hyperlink{classSVGElement_a9a243b2b8464d57df28f3f3e8c52511e}{get\+Outline\+Color}} () const
+\begin{DoxyCompactList}\small\item\em Gets the outline color of the shape. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{classSVGElement_a2e4b1a48bfbc34a6a9f17bfd4b89eb51}{get\+Outline\+Thickness}} () const
+\begin{DoxyCompactList}\small\item\em Gets the outline thickness of the shape. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classVector2D}{Vector2\+Df}} \mbox{\hyperlink{classSVGElement_a4e1ed8bb29fd4dbeb35471315976b3a2}{get\+Position}} () const
+\begin{DoxyCompactList}\small\item\em Get the current position of the shape. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classVector2D}{Vector2\+Df}} \mbox{\hyperlink{classSVGElement_a0cce88c48233f4da470daad2edab0d06}{get\+Min\+Bound}} () const
+\begin{DoxyCompactList}\small\item\em Gets the minimum bound of the shape. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classVector2D}{Vector2\+Df}} \mbox{\hyperlink{classSVGElement_a03ac231161d1d5062951fa3fca33a39b}{get\+Max\+Bound}} () const
+\begin{DoxyCompactList}\small\item\em Gets the maximum bound of the shape. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classSVGElement_ad4bcd981ae7431161013811024b452e1}{print\+Data}} () const
+\begin{DoxyCompactList}\small\item\em Prints the data of the shape. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSVGElement_a00fef2ebc5df4838b3f9bd7111b117c5}{set\+Transforms}} (const std\+::vector$<$ std\+::string $>$ \&\mbox{\hyperlink{classSVGElement_aefeee5c1de3e802d9f5f0a54078170e6}{transforms}})
+\begin{DoxyCompactList}\small\item\em Sets the transformations of the shape. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classSVGElement_a5f111964efd20e98eafafb3d168a1e87}{get\+Transforms}} () const
+\begin{DoxyCompactList}\small\item\em Gets the transformations of the shape. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSVGElement_a43b3bf06fae88a1634a189272088d11d}{set\+Parent}} (\mbox{\hyperlink{classSVGElement}{SVGElement}} $\ast$\mbox{\hyperlink{classSVGElement_adee748c3014de1c1ebd20411a52e824a}{parent}})
+\begin{DoxyCompactList}\small\item\em Parent pointer setter to make the composite design pattern. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classSVGElement}{SVGElement}} $\ast$ \mbox{\hyperlink{classSVGElement_a1b075314d4cda4fa895688979fe462fd}{get\+Parent}} () const
+\begin{DoxyCompactList}\small\item\em Parent pointer getter. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classSVGElement_a312b6aa934488672585c7e9d858300f8}{set\+Gradient}} (\mbox{\hyperlink{classGradient}{Gradient}} $\ast$\mbox{\hyperlink{classSVGElement_aab61149df9916892540627a0d7c4480c}{gradient}})
+\begin{DoxyCompactList}\small\item\em Sets the gradient of the shape. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classGradient}{Gradient}} $\ast$ \mbox{\hyperlink{classSVGElement_a9b64e7697c24a6972aacb01b89c0e542}{get\+Gradient}} () const
+\begin{DoxyCompactList}\small\item\em Gets the gradient of the shape. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classSVGElement_af699f9aa795572c2873e520849579881}{add\+Element}} (\mbox{\hyperlink{classSVGElement}{SVGElement}} $\ast$element)
+\begin{DoxyCompactList}\small\item\em Adds a shape to the composite group. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classSVGElement_ad30205005009d2ba4820d3ce372e81ea}{SVGElement}} ()
+\begin{DoxyCompactList}\small\item\em Constructs a Shape object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classSVGElement_a1a43e7717c20d50fd1990b592499fdba}{SVGElement}} (const \mbox{\hyperlink{classmColor}{m\+Color}} \&\mbox{\hyperlink{classSVGElement_a6d3a39e763d3273715ea11f8959f81b1}{fill}}, const \mbox{\hyperlink{classmColor}{m\+Color}} \&\mbox{\hyperlink{classSVGElement_aab937dcb566cd83d94d00d69b4083f13}{stroke}}, float \mbox{\hyperlink{classSVGElement_a88449b487a890e3765ae20e96ee95c06}{stroke\+\_\+width}})
+\begin{DoxyCompactList}\small\item\em Constructs a Shape object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classSVGElement_a6ed48bcc78dd62e3da256ddbd103ccd1}{SVGElement}} (const \mbox{\hyperlink{classmColor}{m\+Color}} \&\mbox{\hyperlink{classSVGElement_a6d3a39e763d3273715ea11f8959f81b1}{fill}}, const \mbox{\hyperlink{classmColor}{m\+Color}} \&\mbox{\hyperlink{classSVGElement_aab937dcb566cd83d94d00d69b4083f13}{stroke}}, float \mbox{\hyperlink{classSVGElement_a88449b487a890e3765ae20e96ee95c06}{stroke\+\_\+width}}, const \mbox{\hyperlink{classVector2D}{Vector2\+Df}} \&\mbox{\hyperlink{classSVGElement_acf9b9906b6d0cba8bb5c0b38b032e40f}{position}})
+\begin{DoxyCompactList}\small\item\em Constructs a Shape object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classSVGElement_adee748c3014de1c1ebd20411a52e824a}\label{classSVGElement_adee748c3014de1c1ebd20411a52e824a}} 
+\mbox{\hyperlink{classSVGElement}{SVGElement}} $\ast$ \mbox{\hyperlink{classSVGElement_adee748c3014de1c1ebd20411a52e824a}{parent}}
+\begin{DoxyCompactList}\small\item\em Pointer to the group that contains the shape. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classSVGElement_a6d3a39e763d3273715ea11f8959f81b1}\label{classSVGElement_a6d3a39e763d3273715ea11f8959f81b1}} 
+\mbox{\hyperlink{classmColor}{m\+Color}} \mbox{\hyperlink{classSVGElement_a6d3a39e763d3273715ea11f8959f81b1}{fill}}
+\begin{DoxyCompactList}\small\item\em Fill color. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classSVGElement_aab937dcb566cd83d94d00d69b4083f13}\label{classSVGElement_aab937dcb566cd83d94d00d69b4083f13}} 
+\mbox{\hyperlink{classmColor}{m\+Color}} \mbox{\hyperlink{classSVGElement_aab937dcb566cd83d94d00d69b4083f13}{stroke}}
+\begin{DoxyCompactList}\small\item\em Outline color. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classSVGElement_a88449b487a890e3765ae20e96ee95c06}\label{classSVGElement_a88449b487a890e3765ae20e96ee95c06}} 
+float \mbox{\hyperlink{classSVGElement_a88449b487a890e3765ae20e96ee95c06}{stroke\+\_\+width}}
+\begin{DoxyCompactList}\small\item\em Thickness of the shape\textquotesingle{}s outline. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classSVGElement_acf9b9906b6d0cba8bb5c0b38b032e40f}\label{classSVGElement_acf9b9906b6d0cba8bb5c0b38b032e40f}} 
+\mbox{\hyperlink{classVector2D}{Vector2\+Df}} \mbox{\hyperlink{classSVGElement_acf9b9906b6d0cba8bb5c0b38b032e40f}{position}}
+\begin{DoxyCompactList}\small\item\em Position of the shape. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classSVGElement_aefeee5c1de3e802d9f5f0a54078170e6}\label{classSVGElement_aefeee5c1de3e802d9f5f0a54078170e6}} 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classSVGElement_aefeee5c1de3e802d9f5f0a54078170e6}{transforms}}
+\begin{DoxyCompactList}\small\item\em List of transformations. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classSVGElement_aab61149df9916892540627a0d7c4480c}\label{classSVGElement_aab61149df9916892540627a0d7c4480c}} 
+\mbox{\hyperlink{classGradient}{Gradient}} $\ast$ \mbox{\hyperlink{classSVGElement_aab61149df9916892540627a0d7c4480c}{gradient}}
+\begin{DoxyCompactList}\small\item\em Pointer to the gradient that contains the shape. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents an element in an SVG file. 
+
+\begin{DoxyNote}{Note}
+This class is abstract and cannot be instantiated. 
+
+This class is applied Abstract Factory design pattern and used as interface for other shapes. 
+
+This class is applied Composite design pattern and used as base class for other shapes. 
+\end{DoxyNote}
+
+
+Definition at line 18 of file SVGElement.\+hpp.
+
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classSVGElement_ad30205005009d2ba4820d3ce372e81ea}\label{classSVGElement_ad30205005009d2ba4820d3ce372e81ea}} 
+\index{SVGElement@{SVGElement}!SVGElement@{SVGElement}}
+\index{SVGElement@{SVGElement}!SVGElement@{SVGElement}}
+\doxysubsubsection{\texorpdfstring{SVGElement()}{SVGElement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily SVGElement\+::\+SVGElement (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Constructs a Shape object. 
+
+\begin{DoxyNote}{Note}
+This constructor is protected because Shape is an abstract class that cannot be instantiated. 
+\end{DoxyNote}
+
+
+Definition at line 5 of file SVGElement.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{6     : \mbox{\hyperlink{classSVGElement_a6d3a39e763d3273715ea11f8959f81b1}{fill}}(\mbox{\hyperlink{classmColor_aa3910d2b82d32c8aa4e50127874a6d03}{mColor::Black}}), \mbox{\hyperlink{classSVGElement_aab937dcb566cd83d94d00d69b4083f13}{stroke}}(\mbox{\hyperlink{classmColor_ac4f0afaa513bbe9e68c16156136d4ada}{mColor::Transparent}}), \mbox{\hyperlink{classSVGElement_a88449b487a890e3765ae20e96ee95c06}{stroke\_width}}(1),}
+\DoxyCodeLine{7       \mbox{\hyperlink{classSVGElement_aab61149df9916892540627a0d7c4480c}{gradient}}(NULL) \{\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classSVGElement_a1a43e7717c20d50fd1990b592499fdba}\label{classSVGElement_a1a43e7717c20d50fd1990b592499fdba}} 
+\index{SVGElement@{SVGElement}!SVGElement@{SVGElement}}
+\index{SVGElement@{SVGElement}!SVGElement@{SVGElement}}
+\doxysubsubsection{\texorpdfstring{SVGElement()}{SVGElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily SVGElement\+::\+SVGElement (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classmColor}{m\+Color}} \&}]{fill,  }\item[{const \mbox{\hyperlink{classmColor}{m\+Color}} \&}]{stroke,  }\item[{float}]{stroke\+\_\+width }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Constructs a Shape object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fill} & The fill color of the shape \\
+\hline
+{\em stroke} & The outline color of the shape \\
+\hline
+{\em stroke\+\_\+width} & The outline thickness of the shape \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+This constructor is protected because Shape is an abstract class that cannot be instantiated. 
+\end{DoxyNote}
+
+
+Definition at line 9 of file SVGElement.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{11     : \mbox{\hyperlink{classSVGElement_a6d3a39e763d3273715ea11f8959f81b1}{fill}}(\mbox{\hyperlink{classSVGElement_a6d3a39e763d3273715ea11f8959f81b1}{fill}}), \mbox{\hyperlink{classSVGElement_aab937dcb566cd83d94d00d69b4083f13}{stroke}}(\mbox{\hyperlink{classSVGElement_aab937dcb566cd83d94d00d69b4083f13}{stroke}}), \mbox{\hyperlink{classSVGElement_a88449b487a890e3765ae20e96ee95c06}{stroke\_width}}(\mbox{\hyperlink{classSVGElement_a88449b487a890e3765ae20e96ee95c06}{stroke\_width}}), \mbox{\hyperlink{classSVGElement_aab61149df9916892540627a0d7c4480c}{gradient}}(NULL) \{\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classSVGElement_a6ed48bcc78dd62e3da256ddbd103ccd1}\label{classSVGElement_a6ed48bcc78dd62e3da256ddbd103ccd1}} 
+\index{SVGElement@{SVGElement}!SVGElement@{SVGElement}}
+\index{SVGElement@{SVGElement}!SVGElement@{SVGElement}}
+\doxysubsubsection{\texorpdfstring{SVGElement()}{SVGElement()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily SVGElement\+::\+SVGElement (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classmColor}{m\+Color}} \&}]{fill,  }\item[{const \mbox{\hyperlink{classmColor}{m\+Color}} \&}]{stroke,  }\item[{float}]{stroke\+\_\+width,  }\item[{const \mbox{\hyperlink{classVector2D}{Vector2\+Df}} \&}]{position }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Constructs a Shape object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fill} & The fill color of the shape \\
+\hline
+{\em stroke} & The outline color of the shape \\
+\hline
+{\em stroke\+\_\+width} & The outline thickness of the shape \\
+\hline
+{\em position} & The position of the shape \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+This constructor is protected because Shape is an abstract class that cannot be instantiated. 
+\end{DoxyNote}
+
+
+Definition at line 13 of file SVGElement.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{15     : \mbox{\hyperlink{classSVGElement_a6d3a39e763d3273715ea11f8959f81b1}{fill}}(\mbox{\hyperlink{classSVGElement_a6d3a39e763d3273715ea11f8959f81b1}{fill}}), \mbox{\hyperlink{classSVGElement_aab937dcb566cd83d94d00d69b4083f13}{stroke}}(\mbox{\hyperlink{classSVGElement_aab937dcb566cd83d94d00d69b4083f13}{stroke}}), \mbox{\hyperlink{classSVGElement_a88449b487a890e3765ae20e96ee95c06}{stroke\_width}}(\mbox{\hyperlink{classSVGElement_a88449b487a890e3765ae20e96ee95c06}{stroke\_width}}),}
+\DoxyCodeLine{16       \mbox{\hyperlink{classSVGElement_acf9b9906b6d0cba8bb5c0b38b032e40f}{position}}(\mbox{\hyperlink{classSVGElement_acf9b9906b6d0cba8bb5c0b38b032e40f}{position}}), \mbox{\hyperlink{classSVGElement_aab61149df9916892540627a0d7c4480c}{gradient}}(NULL) \{\}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classSVGElement_af699f9aa795572c2873e520849579881}\label{classSVGElement_af699f9aa795572c2873e520849579881}} 
+\index{SVGElement@{SVGElement}!addElement@{addElement}}
+\index{addElement@{addElement}!SVGElement@{SVGElement}}
+\doxysubsubsection{\texorpdfstring{addElement()}{addElement()}}
+{\footnotesize\ttfamily void SVGElement\+::add\+Element (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classSVGElement}{SVGElement}} $\ast$}]{element }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Adds a shape to the composite group. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em element} & The shape to be added to the composite group. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+This function is used for composite design pattern 
+
+This function is virtual and can be overridden by derived classes. 
+\end{DoxyNote}
+
+
+Reimplemented in \mbox{\hyperlink{classGroup_af4dafed0506ca5e9ea9e1028b1504919}{Group}}.
+
+
+
+Definition at line 83 of file SVGElement.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{83 \{\}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classSVGElement_adc98ebac66965dd303283cbf7ff28f38}\label{classSVGElement_adc98ebac66965dd303283cbf7ff28f38}} 
+\index{SVGElement@{SVGElement}!getClass@{getClass}}
+\index{getClass@{getClass}!SVGElement@{SVGElement}}
+\doxysubsubsection{\texorpdfstring{getClass()}{getClass()}}
+{\footnotesize\ttfamily virtual std\+::string SVGElement\+::get\+Class (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Gets the type of the shape. 
+
+\begin{DoxyReturn}{Returns}
+The type of the shape
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+This function is used for determining the type of the shape. 
+
+This function is pure virtual and must be implemented by derived classes. 
+\end{DoxyNote}
+
+
+Implemented in \mbox{\hyperlink{classText_a405fac6f66711e0063e18e9e211e3a62}{Text}}, \mbox{\hyperlink{classRect_a4f6ba1c3eef4054847a89da472f392cd}{Rect}}, \mbox{\hyperlink{classPlyline_a5b9d86c75604d329037cd47e8ba3d5b9}{Plyline}}, \mbox{\hyperlink{classPlygon_aab00a0d0230ea320271e96c326c6b919}{Plygon}}, \mbox{\hyperlink{classPath_ac99ffb44f19586a10ee39aa70fd4a260}{Path}}, \mbox{\hyperlink{classLine_a745f295541d412b49dac89423bd957a6}{Line}}, \mbox{\hyperlink{classGroup_a070e010084eaac6131e1bf814d10d234}{Group}}, \mbox{\hyperlink{classEll_a0d0a2a70c06878c5769bd7d092277892}{Ell}}, \mbox{\hyperlink{classCircle_a09523e46318092d42a5969a1da5613bb}{Circle}}, and \mbox{\hyperlink{classPolyShape_afc263d5407ca7ea50e30d641d779b73b}{Poly\+Shape}}.
+
+\mbox{\Hypertarget{classSVGElement_abb012cad5d6e9ee7a413f46042f99429}\label{classSVGElement_abb012cad5d6e9ee7a413f46042f99429}} 
+\index{SVGElement@{SVGElement}!getFillColor@{getFillColor}}
+\index{getFillColor@{getFillColor}!SVGElement@{SVGElement}}
+\doxysubsubsection{\texorpdfstring{getFillColor()}{getFillColor()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classmColor}{m\+Color}} \& SVGElement\+::get\+Fill\+Color (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the fill color of the shape. 
+
+\begin{DoxyReturn}{Returns}
+The fill color of the shape. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+The default fill color is white. 
+\end{DoxyNote}
+
+
+Definition at line 20 of file SVGElement.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{20 \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classSVGElement_a6d3a39e763d3273715ea11f8959f81b1}{fill}}; \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classSVGElement_a9b64e7697c24a6972aacb01b89c0e542}\label{classSVGElement_a9b64e7697c24a6972aacb01b89c0e542}} 
+\index{SVGElement@{SVGElement}!getGradient@{getGradient}}
+\index{getGradient@{getGradient}!SVGElement@{SVGElement}}
+\doxysubsubsection{\texorpdfstring{getGradient()}{getGradient()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classGradient}{Gradient}} $\ast$ SVGElement\+::get\+Gradient (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the gradient of the shape. 
+
+\begin{DoxyReturn}{Returns}
+The gradient of the shape. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+The default gradient of the shape is NULL. 
+\end{DoxyNote}
+
+
+Definition at line 81 of file SVGElement.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{81 \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classSVGElement_aab61149df9916892540627a0d7c4480c}{gradient}}; \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classSVGElement_a03ac231161d1d5062951fa3fca33a39b}\label{classSVGElement_a03ac231161d1d5062951fa3fca33a39b}} 
+\index{SVGElement@{SVGElement}!getMaxBound@{getMaxBound}}
+\index{getMaxBound@{getMaxBound}!SVGElement@{SVGElement}}
+\doxysubsubsection{\texorpdfstring{getMaxBound()}{getMaxBound()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classVector2D}{Vector2\+Df}} SVGElement\+::get\+Max\+Bound (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Gets the maximum bound of the shape. 
+
+\begin{DoxyReturn}{Returns}
+The maximum bound of the shape. 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{classPolyShape_a6ddda72dc27d7aade0ed444a52d7689f}{Poly\+Shape}}, and \mbox{\hyperlink{classEll_a8a8dd2acc8c7be5580dd8e549d247525}{Ell}}.
+
+
+
+Definition at line 45 of file SVGElement.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{45 \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classVector2D}{Vector2Df}}(); \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classSVGElement_a0cce88c48233f4da470daad2edab0d06}\label{classSVGElement_a0cce88c48233f4da470daad2edab0d06}} 
+\index{SVGElement@{SVGElement}!getMinBound@{getMinBound}}
+\index{getMinBound@{getMinBound}!SVGElement@{SVGElement}}
+\doxysubsubsection{\texorpdfstring{getMinBound()}{getMinBound()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classVector2D}{Vector2\+Df}} SVGElement\+::get\+Min\+Bound (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Gets the minimum bound of the shape. 
+
+\begin{DoxyReturn}{Returns}
+The minimum bound of the shape. 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{classPolyShape_a0ad83e0129196572f99302830e0c9049}{Poly\+Shape}}, and \mbox{\hyperlink{classEll_ab79368df57ee08382916fc52b69afb85}{Ell}}.
+
+
+
+Definition at line 43 of file SVGElement.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{43 \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classVector2D}{Vector2Df}}(); \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classSVGElement_a9a243b2b8464d57df28f3f3e8c52511e}\label{classSVGElement_a9a243b2b8464d57df28f3f3e8c52511e}} 
+\index{SVGElement@{SVGElement}!getOutlineColor@{getOutlineColor}}
+\index{getOutlineColor@{getOutlineColor}!SVGElement@{SVGElement}}
+\doxysubsubsection{\texorpdfstring{getOutlineColor()}{getOutlineColor()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classmColor}{m\+Color}} \& SVGElement\+::get\+Outline\+Color (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the outline color of the shape. 
+
+\begin{DoxyReturn}{Returns}
+The outline color of the shape. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+The default outline color is white. 
+\end{DoxyNote}
+
+
+Definition at line 24 of file SVGElement.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{24 \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classSVGElement_aab937dcb566cd83d94d00d69b4083f13}{stroke}}; \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classSVGElement_a2e4b1a48bfbc34a6a9f17bfd4b89eb51}\label{classSVGElement_a2e4b1a48bfbc34a6a9f17bfd4b89eb51}} 
+\index{SVGElement@{SVGElement}!getOutlineThickness@{getOutlineThickness}}
+\index{getOutlineThickness@{getOutlineThickness}!SVGElement@{SVGElement}}
+\doxysubsubsection{\texorpdfstring{getOutlineThickness()}{getOutlineThickness()}}
+{\footnotesize\ttfamily float SVGElement\+::get\+Outline\+Thickness (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the outline thickness of the shape. 
+
+\begin{DoxyReturn}{Returns}
+The outline thickness of the shape. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+The default outline thickness is 0. 
+\end{DoxyNote}
+
+
+Definition at line 30 of file SVGElement.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{30 \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classSVGElement_a88449b487a890e3765ae20e96ee95c06}{stroke\_width}}; \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classSVGElement_a1b075314d4cda4fa895688979fe462fd}\label{classSVGElement_a1b075314d4cda4fa895688979fe462fd}} 
+\index{SVGElement@{SVGElement}!getParent@{getParent}}
+\index{getParent@{getParent}!SVGElement@{SVGElement}}
+\doxysubsubsection{\texorpdfstring{getParent()}{getParent()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classSVGElement}{SVGElement}} $\ast$ SVGElement\+::get\+Parent (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Parent pointer getter. 
+
+\begin{DoxyReturn}{Returns}
+The parent pointer 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+This function is used for composite design pattern 
+\end{DoxyNote}
+
+
+Definition at line 77 of file SVGElement.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{77 \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classSVGElement_adee748c3014de1c1ebd20411a52e824a}{parent}}; \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classSVGElement_a4e1ed8bb29fd4dbeb35471315976b3a2}\label{classSVGElement_a4e1ed8bb29fd4dbeb35471315976b3a2}} 
+\index{SVGElement@{SVGElement}!getPosition@{getPosition}}
+\index{getPosition@{getPosition}!SVGElement@{SVGElement}}
+\doxysubsubsection{\texorpdfstring{getPosition()}{getPosition()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classVector2D}{Vector2\+Df}} SVGElement\+::get\+Position (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Get the current position of the shape. 
+
+\begin{DoxyReturn}{Returns}
+The current position of the shape 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+The default position of the shape is (0, 0). 
+\end{DoxyNote}
+
+
+Definition at line 41 of file SVGElement.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{41 \{ \textcolor{keywordflow}{return} \mbox{\hyperlink{classSVGElement_acf9b9906b6d0cba8bb5c0b38b032e40f}{position}}; \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classSVGElement_a5f111964efd20e98eafafb3d168a1e87}\label{classSVGElement_a5f111964efd20e98eafafb3d168a1e87}} 
+\index{SVGElement@{SVGElement}!getTransforms@{getTransforms}}
+\index{getTransforms@{getTransforms}!SVGElement@{SVGElement}}
+\doxysubsubsection{\texorpdfstring{getTransforms()}{getTransforms()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::string $>$ SVGElement\+::get\+Transforms (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the transformations of the shape. 
+
+\begin{DoxyReturn}{Returns}
+The transformations of the shape. 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+The default transformations of the shape is empty. 
+
+The transformations can be either \char`\"{}translate\char`\"{}, \char`\"{}rotate\char`\"{}, \char`\"{}scale\char`\"{}, 
+\end{DoxyNote}
+
+
+Definition at line 71 of file SVGElement.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{71                                                        \{}
+\DoxyCodeLine{72     \textcolor{keywordflow}{return} \mbox{\hyperlink{classSVGElement_aefeee5c1de3e802d9f5f0a54078170e6}{transforms}};}
+\DoxyCodeLine{73 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classSVGElement_ad4bcd981ae7431161013811024b452e1}\label{classSVGElement_ad4bcd981ae7431161013811024b452e1}} 
+\index{SVGElement@{SVGElement}!printData@{printData}}
+\index{printData@{printData}!SVGElement@{SVGElement}}
+\doxysubsubsection{\texorpdfstring{printData()}{printData()}}
+{\footnotesize\ttfamily void SVGElement\+::print\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Prints the data of the shape. 
+
+\begin{DoxyNote}{Note}
+This function is used for debugging purposes. 
+
+This function is virtual and can be overridden by derived classes. 
+\end{DoxyNote}
+
+
+Reimplemented in \mbox{\hyperlink{classText_a40e38d59ba9b34df9900375409f6f03f}{Text}}, \mbox{\hyperlink{classRect_a66351fe7a171c2b3ed5f4bdf8d6661ba}{Rect}}, \mbox{\hyperlink{classPolyShape_a40a83ac567156de6da65adb1a4380c7c}{Poly\+Shape}}, \mbox{\hyperlink{classPath_a3d2df8f3367db525772586065e16151e}{Path}}, \mbox{\hyperlink{classGroup_a42fa18c4215ad3669db32b78e22303fa}{Group}}, and \mbox{\hyperlink{classEll_a1d6d60039d2405f2b7aa117206d128fb}{Ell}}.
+
+
+
+Definition at line 47 of file SVGElement.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{47                                  \{}
+\DoxyCodeLine{48     std::cout << \textcolor{stringliteral}{"{}Shape: "{}} << \mbox{\hyperlink{classSVGElement_adc98ebac66965dd303283cbf7ff28f38}{getClass}}() << std::endl;}
+\DoxyCodeLine{49     std::cout << \textcolor{stringliteral}{"{}Fill: "{}} << \mbox{\hyperlink{classSVGElement_abb012cad5d6e9ee7a413f46042f99429}{getFillColor}}() << std::endl;}
+\DoxyCodeLine{50     std::cout << \textcolor{stringliteral}{"{}Stroke: "{}} << \mbox{\hyperlink{classSVGElement_a9a243b2b8464d57df28f3f3e8c52511e}{getOutlineColor}}() << std::endl;}
+\DoxyCodeLine{51     std::cout << \textcolor{stringliteral}{"{}Stroke width: "{}} << \mbox{\hyperlink{classSVGElement_a2e4b1a48bfbc34a6a9f17bfd4b89eb51}{getOutlineThickness}}() << std::endl;}
+\DoxyCodeLine{52     std::cout << \textcolor{stringliteral}{"{}Position: "{}} << \mbox{\hyperlink{classSVGElement_a4e1ed8bb29fd4dbeb35471315976b3a2}{getPosition}}().\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} << \textcolor{stringliteral}{"{} "{}} << \mbox{\hyperlink{classSVGElement_a4e1ed8bb29fd4dbeb35471315976b3a2}{getPosition}}().\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}}}
+\DoxyCodeLine{53               << std::endl;}
+\DoxyCodeLine{54     std::cout << \textcolor{stringliteral}{"{}Transforms: "{}};}
+\DoxyCodeLine{55     \textcolor{keywordflow}{for} (\textcolor{keyword}{auto} transform : \mbox{\hyperlink{classSVGElement_aefeee5c1de3e802d9f5f0a54078170e6}{transforms}}) \{}
+\DoxyCodeLine{56         std::cout << transform << \textcolor{stringliteral}{"{} "{}};}
+\DoxyCodeLine{57     \}}
+\DoxyCodeLine{58     std::cout << std::endl;}
+\DoxyCodeLine{59     \textcolor{keywordflow}{if} (\mbox{\hyperlink{classSVGElement_aab61149df9916892540627a0d7c4480c}{gradient}} != NULL)}
+\DoxyCodeLine{60         std::cout << \textcolor{stringliteral}{"{}Gradient: "{}} << \mbox{\hyperlink{classSVGElement_aab61149df9916892540627a0d7c4480c}{gradient}}-\/>\mbox{\hyperlink{classGradient_adb86ee7c9171cb7294d1bb8956e97891}{getClass}}() << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{61                   << \mbox{\hyperlink{classSVGElement_aab61149df9916892540627a0d7c4480c}{gradient}}-\/>\mbox{\hyperlink{classGradient_aced479d6a10d2aa53e6d363e1df5dc08}{getPoints}}().first.x << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{62                   << \mbox{\hyperlink{classSVGElement_aab61149df9916892540627a0d7c4480c}{gradient}}-\/>\mbox{\hyperlink{classGradient_aced479d6a10d2aa53e6d363e1df5dc08}{getPoints}}().first.y << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{63                   << \mbox{\hyperlink{classSVGElement_aab61149df9916892540627a0d7c4480c}{gradient}}-\/>\mbox{\hyperlink{classGradient_aced479d6a10d2aa53e6d363e1df5dc08}{getPoints}}().second.x << \textcolor{stringliteral}{"{} "{}}}
+\DoxyCodeLine{64                   << \mbox{\hyperlink{classSVGElement_aab61149df9916892540627a0d7c4480c}{gradient}}-\/>\mbox{\hyperlink{classGradient_aced479d6a10d2aa53e6d363e1df5dc08}{getPoints}}().second.y << std::endl;}
+\DoxyCodeLine{65 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classSVGElement_abf7eef6d09fedba0d0f50a0f1a4be2fb}\label{classSVGElement_abf7eef6d09fedba0d0f50a0f1a4be2fb}} 
+\index{SVGElement@{SVGElement}!setFillColor@{setFillColor}}
+\index{setFillColor@{setFillColor}!SVGElement@{SVGElement}}
+\doxysubsubsection{\texorpdfstring{setFillColor()}{setFillColor()}}
+{\footnotesize\ttfamily void SVGElement\+::set\+Fill\+Color (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classmColor}{m\+Color}} \&}]{color }\end{DoxyParamCaption})}
+
+
+
+Sets the fill color of the shape. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em color} & The new fill color of the shape. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 18 of file SVGElement.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{18 \{ \mbox{\hyperlink{classSVGElement_a6d3a39e763d3273715ea11f8959f81b1}{fill}} = color; \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classSVGElement_a312b6aa934488672585c7e9d858300f8}\label{classSVGElement_a312b6aa934488672585c7e9d858300f8}} 
+\index{SVGElement@{SVGElement}!setGradient@{setGradient}}
+\index{setGradient@{setGradient}!SVGElement@{SVGElement}}
+\doxysubsubsection{\texorpdfstring{setGradient()}{setGradient()}}
+{\footnotesize\ttfamily void SVGElement\+::set\+Gradient (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classGradient}{Gradient}} $\ast$}]{gradient }\end{DoxyParamCaption})}
+
+
+
+Sets the gradient of the shape. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gradient} & The new gradient of the shape. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+The default gradient of the shape is NULL. 
+\end{DoxyNote}
+
+
+Definition at line 79 of file SVGElement.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{79 \{ this-\/>gradient = \mbox{\hyperlink{classSVGElement_aab61149df9916892540627a0d7c4480c}{gradient}}; \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classSVGElement_ac0cc2f6d2e01d364a695bebaa7db18d2}\label{classSVGElement_ac0cc2f6d2e01d364a695bebaa7db18d2}} 
+\index{SVGElement@{SVGElement}!setOutlineColor@{setOutlineColor}}
+\index{setOutlineColor@{setOutlineColor}!SVGElement@{SVGElement}}
+\doxysubsubsection{\texorpdfstring{setOutlineColor()}{setOutlineColor()}}
+{\footnotesize\ttfamily void SVGElement\+::set\+Outline\+Color (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classmColor}{m\+Color}} \&}]{color }\end{DoxyParamCaption})}
+
+
+
+Sets the outline color of the shape. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em color} & The new outline color of the shape. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 22 of file SVGElement.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{22 \{ \mbox{\hyperlink{classSVGElement_aab937dcb566cd83d94d00d69b4083f13}{stroke}} = color; \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classSVGElement_a88653ebe8b92ec881ab436ea968375a8}\label{classSVGElement_a88653ebe8b92ec881ab436ea968375a8}} 
+\index{SVGElement@{SVGElement}!setOutlineThickness@{setOutlineThickness}}
+\index{setOutlineThickness@{setOutlineThickness}!SVGElement@{SVGElement}}
+\doxysubsubsection{\texorpdfstring{setOutlineThickness()}{setOutlineThickness()}}
+{\footnotesize\ttfamily void SVGElement\+::set\+Outline\+Thickness (\begin{DoxyParamCaption}\item[{float}]{thickness }\end{DoxyParamCaption})}
+
+
+
+Sets the outline thickness of the shape. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em thickness} & The new outline thickness of the shape. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+If the thickness is negative, the outline will be inside the shape. If the thickness is positive, the outline will be outside the shape. If the thickness is zero, no outline will be drawn. 
+
+The default outline thickness is 0. 
+
+The outline thickness cannot be greater than the radius of the shape. 
+\end{DoxyNote}
+
+
+Definition at line 26 of file SVGElement.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{26                                                     \{}
+\DoxyCodeLine{27     \mbox{\hyperlink{classSVGElement_a88449b487a890e3765ae20e96ee95c06}{stroke\_width}} = thickness;}
+\DoxyCodeLine{28 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classSVGElement_a43b3bf06fae88a1634a189272088d11d}\label{classSVGElement_a43b3bf06fae88a1634a189272088d11d}} 
+\index{SVGElement@{SVGElement}!setParent@{setParent}}
+\index{setParent@{setParent}!SVGElement@{SVGElement}}
+\doxysubsubsection{\texorpdfstring{setParent()}{setParent()}}
+{\footnotesize\ttfamily void SVGElement\+::set\+Parent (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classSVGElement}{SVGElement}} $\ast$}]{parent }\end{DoxyParamCaption})}
+
+
+
+Parent pointer setter to make the composite design pattern. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & The parent pointer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+This function is used for composite design pattern 
+\end{DoxyNote}
+
+
+Definition at line 75 of file SVGElement.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{75 \{ this-\/>parent = \mbox{\hyperlink{classSVGElement_adee748c3014de1c1ebd20411a52e824a}{parent}}; \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classSVGElement_aec8a2f582f21a559c05d791e017efbd5}\label{classSVGElement_aec8a2f582f21a559c05d791e017efbd5}} 
+\index{SVGElement@{SVGElement}!setPosition@{setPosition}}
+\index{setPosition@{setPosition}!SVGElement@{SVGElement}}
+\doxysubsubsection{\texorpdfstring{setPosition()}{setPosition()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void SVGElement\+::set\+Position (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classVector2D}{Vector2\+Df}} \&}]{position }\end{DoxyParamCaption})}
+
+
+
+Sets the position of the shape. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & The new position of the shape (Vector2f is a typedef of coordination vector) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+The default position of the shape is (0, 0). 
+
+The position of the shape is relative to its origin. 
+\end{DoxyNote}
+
+
+Definition at line 37 of file SVGElement.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{37                                                       \{}
+\DoxyCodeLine{38     \mbox{\hyperlink{classSVGElement_a77aefe4b7e9dbf180cc531c969d0116d}{setPosition}}(\mbox{\hyperlink{classSVGElement_acf9b9906b6d0cba8bb5c0b38b032e40f}{position}}.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}}, \mbox{\hyperlink{classSVGElement_acf9b9906b6d0cba8bb5c0b38b032e40f}{position}}.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}});}
+\DoxyCodeLine{39 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classSVGElement_a77aefe4b7e9dbf180cc531c969d0116d}\label{classSVGElement_a77aefe4b7e9dbf180cc531c969d0116d}} 
+\index{SVGElement@{SVGElement}!setPosition@{setPosition}}
+\index{setPosition@{setPosition}!SVGElement@{SVGElement}}
+\doxysubsubsection{\texorpdfstring{setPosition()}{setPosition()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void SVGElement\+::set\+Position (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y }\end{DoxyParamCaption})}
+
+
+
+Sets the position of the shape. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The x coordinate of the new position \\
+\hline
+{\em y} & The y coordinate of the new position \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+The default position of the shape is (0, 0). 
+
+The position of the shape is relative to its origin. 
+\end{DoxyNote}
+
+
+Definition at line 32 of file SVGElement.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{32                                              \{}
+\DoxyCodeLine{33     \mbox{\hyperlink{classSVGElement_acf9b9906b6d0cba8bb5c0b38b032e40f}{position}}.\mbox{\hyperlink{classVector2D_a65e391ec61c185092a02cf6301d0fff7}{x}} = x;}
+\DoxyCodeLine{34     \mbox{\hyperlink{classSVGElement_acf9b9906b6d0cba8bb5c0b38b032e40f}{position}}.\mbox{\hyperlink{classVector2D_a6a91fccbbd37162d28fa54aeeb88f9d2}{y}} = y;}
+\DoxyCodeLine{35 \}}
+
+\end{DoxyCode}
+\mbox{\Hypertarget{classSVGElement_a00fef2ebc5df4838b3f9bd7111b117c5}\label{classSVGElement_a00fef2ebc5df4838b3f9bd7111b117c5}} 
+\index{SVGElement@{SVGElement}!setTransforms@{setTransforms}}
+\index{setTransforms@{setTransforms}!SVGElement@{SVGElement}}
+\doxysubsubsection{\texorpdfstring{setTransforms()}{setTransforms()}}
+{\footnotesize\ttfamily void SVGElement\+::set\+Transforms (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{transforms }\end{DoxyParamCaption})}
+
+
+
+Sets the transformations of the shape. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em transforms} & The new transformations of the shape. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+The default transformations of the shape is empty. 
+
+The transformations can be either \char`\"{}translate\char`\"{}, \char`\"{}rotate\char`\"{}, \char`\"{}scale\char`\"{}, 
+\end{DoxyNote}
+
+
+Definition at line 67 of file SVGElement.\+cpp.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{67                                                                        \{}
+\DoxyCodeLine{68     this-\/>\mbox{\hyperlink{classSVGElement_aefeee5c1de3e802d9f5f0a54078170e6}{transforms}} = \mbox{\hyperlink{classSVGElement_aefeee5c1de3e802d9f5f0a54078170e6}{transforms}};}
+\DoxyCodeLine{69 \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/graphics/SVGElement.\+hpp\item 
+src/graphics/SVGElement.\+cpp\end{DoxyCompactItemize}
