@@ -1,7 +1,8 @@
 <map id="Parser" name="Parser">
-<area shape="rect" id="node1" title="To manipulate and parse an SVG file." alt="" coords="64,304,127,331"/>
+<area shape="rect" id="node1" title="To manipulate and parse an SVG file." alt="" coords="180,304,243,331"/>
 <area shape="rect" id="node2" href="$classVector2D.html" title=" " alt="" coords="5,58,145,85"/>
 <area shape="rect" id="node3" href="$classSVGElement.html" title="Represents an element in an SVG file." alt="" coords="160,215,263,241"/>
 <area shape="rect" id="node4" href="$classGradient.html" title="A class that represents a gradient." alt="" coords="171,58,249,85"/>
-<area shape="rect" id="node5" href="$classmColor.html" title="Utility class for manipulating RGBA mColors." alt="" coords="274,58,343,85"/>
+<area shape="rect" id="node5" href="$classColorShape.html" title="Utility class for manipulating RGBA ColorShapes." alt="" coords="274,58,370,85"/>
+<area shape="rect" id="node6" href="$classViewBox.html" title="A ViewBox is a rectangle that defines the area of the SVG canvas that should be visible to the user." alt="" coords="357,215,436,241"/>
 </map>

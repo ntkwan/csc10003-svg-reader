@@ -1,12 +1,12 @@
 var annotated_dup =
 [
     [ "Circle", "classCircle.html", "classCircle" ],
+    [ "ColorShape", "classColorShape.html", "classColorShape" ],
     [ "Ell", "classEll.html", "classEll" ],
     [ "Gradient", "classGradient.html", "classGradient" ],
     [ "Group", "classGroup.html", "classGroup" ],
     [ "Line", "classLine.html", "classLine" ],
     [ "LinearGradient", "classLinearGradient.html", "classLinearGradient" ],
-    [ "mColor", "classmColor.html", "classmColor" ],
     [ "Parser", "classParser.html", "classParser" ],
     [ "Path", "classPath.html", "classPath" ],
     [ "PathPoint", "structPathPoint.html", "structPathPoint" ],
@@ -20,5 +20,6 @@ var annotated_dup =
     [ "SVGElement", "classSVGElement.html", "classSVGElement" ],
     [ "Text", "classText.html", "classText" ],
     [ "Vector2D", "classVector2D.html", "classVector2D" ],
+    [ "ViewBox", "classViewBox.html", "classViewBox" ],
     [ "Viewer", "classViewer.html", "classViewer" ]
 ];

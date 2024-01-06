@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ell_25',['Ell',['../classEll.html',1,'Ell'],['../classEll.html#a4a9956ca82cb9f957e993fa0c0faced6',1,'Ell::Ell()']]]
+  ['ell_26',['Ell',['../classEll.html',1,'Ell'],['../classEll.html#ab18115d5d2ad73b80ffbdf3661908f38',1,'Ell::Ell()']]]
 ];

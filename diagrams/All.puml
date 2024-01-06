@@ -6,6 +6,7 @@
 
 /' Objects '/
 
+
 class Circle {
 	+Circle(float radius, const Vector2Df& center, ColorShape fill, ColorShape stroke, float stroke_width)
 	+getClass() : string {query}
@@ -293,6 +294,20 @@ class Vector2D <template<typename T>> {
 }
 
 
+class ViewBox {
+	+ViewBox()
+	+ViewBox(float X, float Y, float W, float H)
+	+getHeight() : float {query}
+	+getWidth() : float {query}
+	+getX() : float {query}
+	+getY() : float {query}
+	-h : float
+	-w : float
+	-x : float
+	-y : float
+}
+
+
 class Viewer {
 	-Viewer()
 	+~Viewer()
@@ -324,8 +339,6 @@ class PathPoint {
 	+tc : char
 	+x_axis_rotation : float
 }
-
-
 
 
 
@@ -387,16 +400,21 @@ class PathPoint {
 .Parser o-- .SVGElement
 
 
+.Parser *-- .ViewBox
+
+
 .Path *-- .PathPoint
 
-
 .Renderer --> .Renderer : -instance
-
 
 .SVGElement *-- .ColorShape
 
 
 .SVGElement o-- .Gradient
+
+
+.SVGElement o-- .SVGElement
+
 
 .Stop *-- .ColorShape
 

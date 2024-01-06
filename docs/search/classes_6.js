@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['radialgradient_185',['RadialGradient',['../classRadialGradient.html',1,'']]],
-  ['rect_186',['Rect',['../classRect.html',1,'']]],
-  ['renderer_187',['Renderer',['../classRenderer.html',1,'']]]
+  ['stop_198',['Stop',['../classStop.html',1,'']]],
+  ['svgelement_199',['SVGElement',['../classSVGElement.html',1,'']]]
 ];

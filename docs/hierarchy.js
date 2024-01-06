@@ -1,10 +1,10 @@
 var hierarchy =
 [
+    [ "ColorShape", "classColorShape.html", null ],
     [ "Gradient", "classGradient.html", [
       [ "LinearGradient", "classLinearGradient.html", null ],
       [ "RadialGradient", "classRadialGradient.html", null ]
     ] ],
-    [ "mColor", "classmColor.html", null ],
     [ "Parser", "classParser.html", null ],
     [ "PathPoint", "structPathPoint.html", null ],
     [ "Renderer", "classRenderer.html", null ],
@@ -25,5 +25,6 @@ var hierarchy =
     ] ],
     [ "Vector2D< T >", "classVector2D.html", null ],
     [ "Vector2D< float >", "classVector2D.html", null ],
+    [ "ViewBox", "classViewBox.html", null ],
     [ "Viewer", "classViewer.html", null ]
 ];

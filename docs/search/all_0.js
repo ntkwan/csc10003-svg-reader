@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['a_0',['a',['../classmColor.html#ac086aa72806b8ce55fed3df9ba976f6c',1,'mColor']]],
+  ['a_0',['a',['../classColorShape.html#aa6918d31a60b8063746b6df08aa1b63a',1,'ColorShape']]],
   ['addelement_1',['addElement',['../classGroup.html#af4dafed0506ca5e9ea9e1028b1504919',1,'Group::addElement()'],['../classSVGElement.html#af699f9aa795572c2873e520849579881',1,'SVGElement::addElement()']]],
   ['addpoint_2',['addPoint',['../classPath.html#ad4273c2a1b288fe43dd86375afc16f66',1,'Path::addPoint()'],['../classPolyShape.html#a3a5e4952aff469f241ee1c9b92833f55',1,'PolyShape::addPoint()']]],
   ['addstop_3',['addStop',['../classGradient.html#a44218bd3fb347f4c269f1f2795fb77d5',1,'Gradient']]],

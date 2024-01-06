@@ -1,0 +1,82 @@
+@startuml
+
+
+
+
+
+/' Objects '/
+
+class Parser {
+	-Parser(const std::string& file_name)
+	+~Parser()
+	-parseCircle(rapidxml::xml_node<>* node, const ColorShape& fill_color, const ColorShape& stroke_color, float stroke_width) : Circle*
+	-parseColor(rapidxml::xml_node<>* node, std::string color, std::string& id) : ColorShape
+	-parseGradient(std::string id) : Gradient*
+	+getRoot() : Group*
+	-parseLine(rapidxml::xml_node<>* node, const ColorShape& stroke_color, float stroke_width) : Line*
+	+{static} getInstance(const std::string& file_name) : Parser*
+	-parsePath(rapidxml::xml_node<>* node, const ColorShape& fill_color, const ColorShape& stroke_color, float stroke_width) : Path*
+	-parseRect(rapidxml::xml_node<>* node, const ColorShape& fill_color, const ColorShape& stroke_color, float stroke_width) : Rect*
+	-parseElements(std::string file_name) : SVGElement*
+	-parseShape(rapidxml::xml_node<>* node) : SVGElement*
+	-root : SVGElement*
+	-parseText(rapidxml::xml_node<>* node, const ColorShape& fill_color, const ColorShape& stroke_color, float stroke_width) : Text*
+	+getViewPort() : Vector2Df {query}
+	-viewport : Vector2Df
+	+getViewBox() : ViewBox {query}
+	-viewbox : ViewBox
+	-parseEllipse(rapidxml::xml_node<>* node, const ColorShape& fill_color, const ColorShape& stroke_color, float stroke_width) : class Ell*
+	-parsePolygon(rapidxml::xml_node<>* node, const ColorShape& fill_color, const ColorShape& stroke_color, float stroke_width) : class Plygon*
+	-parsePolyline(rapidxml::xml_node<>* node, const ColorShape& fill_color, const ColorShape& stroke_color, float stroke_width) : class Plyline*
+	-getFloatAttribute(rapidxml::xml_node<>* node, std::string name) : float
+	-{static} instance : static Parser*
+	-gradients : std::map<std::string, Gradient*>
+	-getAttribute(rapidxml::xml_node<>* node, std::string name) : std::string
+	-parsePathPoints(rapidxml::xml_node<>* node) : std::vector<PathPoint>
+	-getGradientStops(rapidxml::xml_node<>* node) : std::vector<Stop>
+	-parsePoints(rapidxml::xml_node<>* node) : std::vector<Vector2Df>
+	-getTransformOrder(rapidxml::xml_node<>* node) : std::vector<std::string>
+	-GetGradients(rapidxml::xml_node<>* node) : void
+	+printShapesData() : void
+}
+
+
+class ViewBox {
+	+ViewBox()
+	+ViewBox(float X, float Y, float W, float H)
+	+getHeight() : float {query}
+	+getWidth() : float {query}
+	+getX() : float {query}
+	+getY() : float {query}
+	-h : float
+	-w : float
+	-x : float
+	-y : float
+}
+
+
+
+
+
+/' Inheritance relationships '/
+
+
+
+
+/' Aggregation relationships '/
+
+.Parser o-- .Parser
+
+
+.Parser *-- .ViewBox
+
+
+
+
+
+
+/' Nested objects '/
+
+
+
+@enduml

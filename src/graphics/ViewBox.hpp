@@ -1,6 +1,12 @@
 #ifndef VIEWBOX_HPP_
 #define VIEWBOX_HPP_
 
+/**
+ * @brief A ViewBox is a rectangle that defines the area of the SVG canvas that
+ * should be visible to the user.
+ *
+ * The ViewBox is defined by its X and Y coordinates, its width and its height.
+ */
 class ViewBox {
 public:
     /**

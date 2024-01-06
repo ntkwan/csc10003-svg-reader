@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['operator_3c_3c_363',['operator&lt;&lt;',['../classmColor.html#a1887c93301ffe92701baf17d6af3418e',1,'mColor']]]
+  ['operator_3c_3c_384',['operator&lt;&lt;',['../classColorShape.html#ab1838d64491c21fc854c50b7b1d2fd44',1,'ColorShape']]]
 ];

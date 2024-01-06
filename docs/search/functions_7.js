@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['mcolor_259',['mColor',['../classmColor.html#a9b1702a679c1c5f649787fe15d8b016a',1,'mColor::mColor()'],['../classmColor.html#a4376ef67b23a45be81daeecbfef1b2c3',1,'mColor::mColor(int red, int green, int blue, int alpha=255)'],['../classmColor.html#a8df59e284c6211d66b05fab14d726a5e',1,'mColor::mColor(int color)']]]
+  ['operator_3d_273',['operator=',['../classRenderer.html#aa42607899757d0a1c5e8fe0aa4cb5a7f',1,'Renderer::operator=()'],['../classViewer.html#a3d14cceacd94622e6b9d5d71bfb5b64f',1,'Viewer::operator=()']]]
 ];
