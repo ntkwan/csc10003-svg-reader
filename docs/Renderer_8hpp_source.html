@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<!-- BEGIN opengraph metadata -->
+<meta property="og:title" content="Doxygen Awesome" />
+<meta property="og:image" content="https://repository-images.githubusercontent.com/348492097/4f16df80-88fb-11eb-9d31-4015ff22c452" />
+<meta property="og:description" content="Custom CSS theme for doxygen html-documentation with lots of customization parameters." />
+<meta property="og:url" content="https://jothepro.github.io/doxygen-awesome-css/" />
+<!-- END opengraph metadata -->
+<!-- BEGIN twitter metadata -->
+<meta name="twitter:image:src" content="https://repository-images.githubusercontent.com/348492097/4f16df80-88fb-11eb-9d31-4015ff22c452" />
+<meta name="twitter:title" content="Doxygen Awesome" />
+<meta name="twitter:description" content="Custom CSS theme for doxygen html-documentation with lots of customization parameters." />
+<!-- END twitter metadata -->
+<title>svg-reader: src/Renderer.hpp Source File</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<link rel="icon" type="image/svg+xml" href="logo.drawio.svg"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript" src="toggle-alternative-theme.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeFragmentCopyButton.init()
+    DoxygenAwesomeDarkModeToggle.init()
+    DoxygenAwesomeParagraphLink.init()
+    DoxygenAwesomeInteractiveToc.init()
+    DoxygenAwesomeTabs.init()
+</script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only-darkmode-toggle.css" rel="stylesheet" type="text/css"/>
+<link href="custom-alternative.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- https://tholman.com/github-corners/ -->
+<a href="https://github.com/ntkwan/csc10003-svg-reader" class="github-corner" title="View source on GitHub" target="_blank" rel="noopener noreferrer">
+    <svg viewBox="0 0 250 250" width="40" height="40" style="position: absolute; top: 0; border: 0; right: 0; z-index: 99;" aria-hidden="true">
+    <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">svg-reader
+   &#160;<span id="projectnumber">0.3</span>
+   </div>
+   <div id="projectbrief">Parse and render SVG files, handle user interactions.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Search','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('Renderer_8hpp_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">Renderer.hpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef RENDERER_HPP_</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define RENDERER_HPP_</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// clang-format off</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;winsock2.h&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;objidl.h&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;windows.h&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;gdiplus.h&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">// clang-format on</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;Graphics.hpp&gt;</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="classRenderer.html">   24</a></span>&#160;<span class="keyword">class </span><a class="code" href="classRenderer.html">Renderer</a> {</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keyword">static</span> <a class="code" href="classRenderer.html">Renderer</a>* <a class="code" href="classRenderer.html#ac1bf10ff8b4f967f0d416a26d482abd6">getInstance</a>();</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="classRenderer.html#a8c6e15f666cb188a936004add75e6c6b">   36</a></span>&#160;    <a class="code" href="classRenderer.html#a8c6e15f666cb188a936004add75e6c6b">Renderer</a>(<span class="keyword">const</span> <a class="code" href="classRenderer.html">Renderer</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="classRenderer.html#aa42607899757d0a1c5e8fe0aa4cb5a7f">   41</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRenderer.html#aa42607899757d0a1c5e8fe0aa4cb5a7f">operator=</a>(<span class="keyword">const</span> <a class="code" href="classRenderer.html">Renderer</a>&amp;) = <span class="keyword">delete</span>;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRenderer.html#a1fac47f9b1c4c3fb1151f2b6ecb282f6">draw</a>(Gdiplus::Graphics&amp; graphics, <a class="code" href="classGroup.html">Group</a>* group) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRenderer.html#a8d159bc1ea8f4152339d6c5eead27e45">applyTransform</a>(std::vector&lt; std::string &gt; transform_order,</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                        Gdiplus::Graphics&amp; graphics) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRenderer.html#ab68c9e02c7eadf1f18286c9ecf0d90ca">drawLine</a>(Gdiplus::Graphics&amp; graphics, <a class="code" href="classLine.html">Line</a>* line) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRenderer.html#abf163a7895594e0a4ee5662805b1b572">drawRectangle</a>(Gdiplus::Graphics&amp; graphics, <a class="code" href="classRect.html">Rect</a>* rectangle) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRenderer.html#a9b5ca422ec7f1328d854cc4bff269858">drawCircle</a>(Gdiplus::Graphics&amp; graphics, <a class="code" href="classCircle.html">Circle</a>* circle) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRenderer.html#af4d92e92abb79e4431f7331f792194d9">drawEllipse</a>(Gdiplus::Graphics&amp; graphics, <a class="code" href="classEll.html">Ell</a>* ellipse) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRenderer.html#a27b883787b8f38afd04924edc97b5a04">drawPolygon</a>(Gdiplus::Graphics&amp; graphics, <a class="code" href="classPlygon.html">Plygon</a>* polygon) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRenderer.html#a87ce996c3ed0f963de9ef6c293ee3aec">drawText</a>(Gdiplus::Graphics&amp; graphics, <a class="code" href="classText.html">Text</a>* text) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRenderer.html#a4e73148b7da0f585084520d12c514344">drawPolyline</a>(Gdiplus::Graphics&amp; graphics, <a class="code" href="classPlyline.html">Plyline</a>* polyline) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRenderer.html#a6cbcbb11e386c26eacef0b97342fee77">drawPath</a>(Gdiplus::Graphics&amp; graphics, <a class="code" href="classPath.html">Path</a>* path) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160; </div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    Gdiplus::Brush* <a class="code" href="classRenderer.html#a7539832835d19ee365dcbabf490d642c">getBrush</a>(<a class="code" href="classSVGElement.html">SVGElement</a>* shape, Gdiplus::RectF bound) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRenderer.html#a33a87db2173a7509be2d60fcffff9058">applyTransformsOnBrush</a>(std::vector&lt; std::string &gt; transform_order,</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;                                Gdiplus::LinearGradientBrush*&amp; brush) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160; </div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classRenderer.html#a33a87db2173a7509be2d60fcffff9058">applyTransformsOnBrush</a>(std::vector&lt; std::string &gt; transform_order,</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;                                Gdiplus::PathGradientBrush*&amp; brush) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160; </div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    <a class="code" href="classRenderer.html#a7ebf46f54dab9905f79b80f7fddb76a6">Renderer</a>();</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160; </div>
+<div class="line"><a name="l00165"></a><span class="lineno"><a class="line" href="classRenderer.html#a7431a2f9b03f35752e034410ffebfbe1">  165</a></span>&#160;    <span class="keyword">static</span> <a class="code" href="classRenderer.html">Renderer</a>* <a class="code" href="classRenderer.html#a7431a2f9b03f35752e034410ffebfbe1">instance</a>;  </div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;};</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160; </div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclassCircle_html"><div class="ttname"><a href="classCircle.html">Circle</a></div><div class="ttdoc">Represents a circle in 2D space.</div><div class="ttdef"><b>Definition:</b> <a href="Circle_8hpp_source.html#l00013">Circle.hpp:13</a></div></div>
+<div class="ttc" id="aclassEll_html"><div class="ttname"><a href="classEll.html">Ell</a></div><div class="ttdoc">Represents an ellipse in 2D space.</div><div class="ttdef"><b>Definition:</b> <a href="Ellipse_8hpp_source.html#l00012">Ellipse.hpp:12</a></div></div>
+<div class="ttc" id="aclassGroup_html"><div class="ttname"><a href="classGroup.html">Group</a></div><div class="ttdoc">A composite class that contains a vector of shape pointers (polymorphic).</div><div class="ttdef"><b>Definition:</b> <a href="Group_8hpp_source.html#l00019">Group.hpp:19</a></div></div>
+<div class="ttc" id="aclassLine_html"><div class="ttname"><a href="classLine.html">Line</a></div><div class="ttdoc">Represents a line in 2D space.</div><div class="ttdef"><b>Definition:</b> <a href="Line_8hpp_source.html#l00012">Line.hpp:12</a></div></div>
+<div class="ttc" id="aclassPath_html"><div class="ttname"><a href="classPath.html">Path</a></div><div class="ttdoc">Represents a path element in 2D space.</div><div class="ttdef"><b>Definition:</b> <a href="Path_8hpp_source.html#l00028">Path.hpp:28</a></div></div>
+<div class="ttc" id="aclassPlygon_html"><div class="ttname"><a href="classPlygon.html">Plygon</a></div><div class="ttdoc">Represents a polygon in 2D space.</div><div class="ttdef"><b>Definition:</b> <a href="Polygon_8hpp_source.html#l00012">Polygon.hpp:12</a></div></div>
+<div class="ttc" id="aclassPlyline_html"><div class="ttname"><a href="classPlyline.html">Plyline</a></div><div class="ttdoc">Represents a polyline in 2D space.</div><div class="ttdef"><b>Definition:</b> <a href="Polyline_8hpp_source.html#l00012">Polyline.hpp:12</a></div></div>
+<div class="ttc" id="aclassRect_html"><div class="ttname"><a href="classRect.html">Rect</a></div><div class="ttdoc">Represents a rectangle in 2D space.</div><div class="ttdef"><b>Definition:</b> <a href="Rect_8hpp_source.html#l00013">Rect.hpp:13</a></div></div>
+<div class="ttc" id="aclassRenderer_html"><div class="ttname"><a href="classRenderer.html">Renderer</a></div><div class="ttdoc">Singleton class responsible for rendering shapes using GDI+.</div><div class="ttdef"><b>Definition:</b> <a href="Renderer_8hpp_source.html#l00024">Renderer.hpp:24</a></div></div>
+<div class="ttc" id="aclassRenderer_html_a1fac47f9b1c4c3fb1151f2b6ecb282f6"><div class="ttname"><a href="classRenderer.html#a1fac47f9b1c4c3fb1151f2b6ecb282f6">Renderer::draw</a></div><div class="ttdeci">void draw(Gdiplus::Graphics &amp;graphics, Group *group) const</div><div class="ttdoc">Draws a shape using Gdiplus::Graphics based on its type.</div><div class="ttdef"><b>Definition:</b> <a href="Renderer_8cpp_source.html#l00073">Renderer.cpp:73</a></div></div>
+<div class="ttc" id="aclassRenderer_html_a27b883787b8f38afd04924edc97b5a04"><div class="ttname"><a href="classRenderer.html#a27b883787b8f38afd04924edc97b5a04">Renderer::drawPolygon</a></div><div class="ttdeci">void drawPolygon(Gdiplus::Graphics &amp;graphics, Plygon *polygon) const</div><div class="ttdoc">Draws a polygon shape using Gdiplus::Graphics.</div><div class="ttdef"><b>Definition:</b> <a href="Renderer_8cpp_source.html#l00229">Renderer.cpp:229</a></div></div>
+<div class="ttc" id="aclassRenderer_html_a33a87db2173a7509be2d60fcffff9058"><div class="ttname"><a href="classRenderer.html#a33a87db2173a7509be2d60fcffff9058">Renderer::applyTransformsOnBrush</a></div><div class="ttdeci">void applyTransformsOnBrush(std::vector&lt; std::string &gt; transform_order, Gdiplus::LinearGradientBrush *&amp;brush) const</div><div class="ttdoc">Utility function to apply a series of transformations to the brush object.</div><div class="ttdef"><b>Definition:</b> <a href="Renderer_8cpp_source.html#l00673">Renderer.cpp:673</a></div></div>
+<div class="ttc" id="aclassRenderer_html_a4e73148b7da0f585084520d12c514344"><div class="ttname"><a href="classRenderer.html#a4e73148b7da0f585084520d12c514344">Renderer::drawPolyline</a></div><div class="ttdeci">void drawPolyline(Gdiplus::Graphics &amp;graphics, Plyline *polyline) const</div><div class="ttdoc">Draws a polyline shape using Gdiplus::Graphics.</div><div class="ttdef"><b>Definition:</b> <a href="Renderer_8cpp_source.html#l00322">Renderer.cpp:322</a></div></div>
+<div class="ttc" id="aclassRenderer_html_a6cbcbb11e386c26eacef0b97342fee77"><div class="ttname"><a href="classRenderer.html#a6cbcbb11e386c26eacef0b97342fee77">Renderer::drawPath</a></div><div class="ttdeci">void drawPath(Gdiplus::Graphics &amp;graphics, Path *path) const</div><div class="ttdoc">Draws a path shape using Gdiplus::Graphics.</div><div class="ttdef"><b>Definition:</b> <a href="Renderer_8cpp_source.html#l00365">Renderer.cpp:365</a></div></div>
+<div class="ttc" id="aclassRenderer_html_a7431a2f9b03f35752e034410ffebfbe1"><div class="ttname"><a href="classRenderer.html#a7431a2f9b03f35752e034410ffebfbe1">Renderer::instance</a></div><div class="ttdeci">static Renderer * instance</div><div class="ttdoc">Singleton instance of the Renderer class.</div><div class="ttdef"><b>Definition:</b> <a href="Renderer_8hpp_source.html#l00165">Renderer.hpp:165</a></div></div>
+<div class="ttc" id="aclassRenderer_html_a7539832835d19ee365dcbabf490d642c"><div class="ttname"><a href="classRenderer.html#a7539832835d19ee365dcbabf490d642c">Renderer::getBrush</a></div><div class="ttdeci">Gdiplus::Brush * getBrush(SVGElement *shape, Gdiplus::RectF bound) const</div><div class="ttdoc">Gets the Gdiplus::brush object for the shape fill.</div><div class="ttdef"><b>Definition:</b> <a href="Renderer_8cpp_source.html#l00583">Renderer.cpp:583</a></div></div>
+<div class="ttc" id="aclassRenderer_html_a7ebf46f54dab9905f79b80f7fddb76a6"><div class="ttname"><a href="classRenderer.html#a7ebf46f54dab9905f79b80f7fddb76a6">Renderer::Renderer</a></div><div class="ttdeci">Renderer()</div><div class="ttdoc">Private constructor for the Renderer class.</div><div class="ttdef"><b>Definition:</b> <a href="Renderer_8cpp_source.html#l00009">Renderer.cpp:9</a></div></div>
+<div class="ttc" id="aclassRenderer_html_a87ce996c3ed0f963de9ef6c293ee3aec"><div class="ttname"><a href="classRenderer.html#a87ce996c3ed0f963de9ef6c293ee3aec">Renderer::drawText</a></div><div class="ttdeci">void drawText(Gdiplus::Graphics &amp;graphics, Text *text) const</div><div class="ttdoc">Draws text using Gdiplus::Graphics.</div><div class="ttdef"><b>Definition:</b> <a href="Renderer_8cpp_source.html#l00267">Renderer.cpp:267</a></div></div>
+<div class="ttc" id="aclassRenderer_html_a8c6e15f666cb188a936004add75e6c6b"><div class="ttname"><a href="classRenderer.html#a8c6e15f666cb188a936004add75e6c6b">Renderer::Renderer</a></div><div class="ttdeci">Renderer(const Renderer &amp;)=delete</div><div class="ttdoc">Deleted copy constructor to enforce the singleton pattern.</div></div>
+<div class="ttc" id="aclassRenderer_html_a8d159bc1ea8f4152339d6c5eead27e45"><div class="ttname"><a href="classRenderer.html#a8d159bc1ea8f4152339d6c5eead27e45">Renderer::applyTransform</a></div><div class="ttdeci">void applyTransform(std::vector&lt; std::string &gt; transform_order, Gdiplus::Graphics &amp;graphics) const</div><div class="ttdoc">Utility function to apply a series of transformations to the graphics context.</div><div class="ttdef"><b>Definition:</b> <a href="Renderer_8cpp_source.html#l00050">Renderer.cpp:50</a></div></div>
+<div class="ttc" id="aclassRenderer_html_a9b5ca422ec7f1328d854cc4bff269858"><div class="ttname"><a href="classRenderer.html#a9b5ca422ec7f1328d854cc4bff269858">Renderer::drawCircle</a></div><div class="ttdeci">void drawCircle(Gdiplus::Graphics &amp;graphics, Circle *circle) const</div><div class="ttdoc">Draws a circle shape using Gdiplus::Graphics.</div><div class="ttdef"><b>Definition:</b> <a href="Renderer_8cpp_source.html#l00165">Renderer.cpp:165</a></div></div>
+<div class="ttc" id="aclassRenderer_html_aa42607899757d0a1c5e8fe0aa4cb5a7f"><div class="ttname"><a href="classRenderer.html#aa42607899757d0a1c5e8fe0aa4cb5a7f">Renderer::operator=</a></div><div class="ttdeci">void operator=(const Renderer &amp;)=delete</div><div class="ttdoc">Deleted copy assignment operator to enforce the singleton pattern.</div></div>
+<div class="ttc" id="aclassRenderer_html_ab68c9e02c7eadf1f18286c9ecf0d90ca"><div class="ttname"><a href="classRenderer.html#ab68c9e02c7eadf1f18286c9ecf0d90ca">Renderer::drawLine</a></div><div class="ttdeci">void drawLine(Gdiplus::Graphics &amp;graphics, Line *line) const</div><div class="ttdoc">Draws a line shape using Gdiplus::Graphics.</div><div class="ttdef"><b>Definition:</b> <a href="Renderer_8cpp_source.html#l00110">Renderer.cpp:110</a></div></div>
+<div class="ttc" id="aclassRenderer_html_abf163a7895594e0a4ee5662805b1b572"><div class="ttname"><a href="classRenderer.html#abf163a7895594e0a4ee5662805b1b572">Renderer::drawRectangle</a></div><div class="ttdeci">void drawRectangle(Gdiplus::Graphics &amp;graphics, Rect *rectangle) const</div><div class="ttdoc">Draws a rectangle shape using Gdiplus::Graphics.</div><div class="ttdef"><b>Definition:</b> <a href="Renderer_8cpp_source.html#l00119">Renderer.cpp:119</a></div></div>
+<div class="ttc" id="aclassRenderer_html_ac1bf10ff8b4f967f0d416a26d482abd6"><div class="ttname"><a href="classRenderer.html#ac1bf10ff8b4f967f0d416a26d482abd6">Renderer::getInstance</a></div><div class="ttdeci">static Renderer * getInstance()</div><div class="ttdoc">Gets the singleton instance of the Renderer class.</div><div class="ttdef"><b>Definition:</b> <a href="Renderer_8cpp_source.html#l00011">Renderer.cpp:11</a></div></div>
+<div class="ttc" id="aclassRenderer_html_af4d92e92abb79e4431f7331f792194d9"><div class="ttname"><a href="classRenderer.html#af4d92e92abb79e4431f7331f792194d9">Renderer::drawEllipse</a></div><div class="ttdeci">void drawEllipse(Gdiplus::Graphics &amp;graphics, Ell *ellipse) const</div><div class="ttdoc">Draws an ellipse shape using Gdiplus::Graphics.</div><div class="ttdef"><b>Definition:</b> <a href="Renderer_8cpp_source.html#l00197">Renderer.cpp:197</a></div></div>
+<div class="ttc" id="aclassSVGElement_html"><div class="ttname"><a href="classSVGElement.html">SVGElement</a></div><div class="ttdoc">Represents an element in an SVG file.</div><div class="ttdef"><b>Definition:</b> <a href="SVGElement_8hpp_source.html#l00018">SVGElement.hpp:18</a></div></div>
+<div class="ttc" id="aclassText_html"><div class="ttname"><a href="classText.html">Text</a></div><div class="ttdoc">Represents text in 2D space.</div><div class="ttdef"><b>Definition:</b> <a href="Text_8hpp_source.html#l00012">Text.hpp:12</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<div id="nav-path" class="navpath">
+    <address>
+        Copyright © 2023-2023 the csc10003-svg-reader developers @ FIT-HCMUS.
+    </address>
+</div>
+</body>
+</html>

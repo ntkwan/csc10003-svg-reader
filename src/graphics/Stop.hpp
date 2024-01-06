@@ -1,7 +1,7 @@
 #ifndef STOP_HPP_
 #define STOP_HPP_
 
-#include "Color.hpp"
+#include "ColorShape.hpp"
 
 /**
  * @brief A class that represents a stop.
@@ -16,14 +16,14 @@ public:
      * @param color The color of the stop.
      * @param offset The offset of the stop.
      */
-    Stop(const mColor& color, float offset);
+    Stop(const ColorShape& color, float offset);
 
     /**
      * @brief Gets the color of the stop.
      *
      * @return The color of the stop.
      */
-    mColor getColor() const;
+    ColorShape getColor() const;
 
     /**
      * @brief Gets the offset of the stop.
@@ -33,8 +33,8 @@ public:
     float getOffset() const;
 
 private:
-    mColor color;  ///< The color of the stop.
-    float offset;  ///< The offset of the stop.
+    ColorShape color;  ///< The color of the stop.
+    float offset;      ///< The offset of the stop.
 };
 
 #endif

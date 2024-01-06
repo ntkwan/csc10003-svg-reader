@@ -1,7 +1,7 @@
 #include "Text.hpp"
 
-Text::Text(Vector2Df pos, std::string text, float font_size, const mColor &fill,
-           const mColor &stroke, float stroke_width)
+Text::Text(Vector2Df pos, std::string text, float font_size,
+           const ColorShape &fill, const ColorShape &stroke, float stroke_width)
     : SVGElement(fill, stroke, stroke_width, pos), content(text),
       font_size(font_size) {}
 

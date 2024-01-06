@@ -1,0 +1,415 @@
+@startuml
+
+
+
+
+
+/' Objects '/
+
+class Circle {
+	+Circle(float radius, const Vector2Df& center, ColorShape fill, ColorShape stroke, float stroke_width)
+	+getClass() : string {query}
+}
+
+
+class ColorShape {
+	+ColorShape()
+	+ColorShape(int red, int green, int blue, int alpha)
+	+ColorShape(int color)
+	+a : int
+	+b : int
+	+g : int
+	+r : int
+	+{static} Black : static const ColorShape
+	+{static} Blue : static const ColorShape
+	+{static} Cyan : static const ColorShape
+	+{static} Green : static const ColorShape
+	+{static} Magenta : static const ColorShape
+	+{static} Red : static const ColorShape
+	+{static} Transparent : static const ColorShape
+	+{static} White : static const ColorShape
+	+{static} Yellow : static const ColorShape
+	+operator<<(ostream& os, const ColorShape& color) : std :: ostream&
+}
+
+
+class Ell {
+	+Ell(const Vector2Df& radius, const Vector2Df& center, 
+	ColorShape fill, ColorShape stroke, float stroke_width)
+	+getMaxBound() : Vector2Df {query}
+	+getMinBound() : Vector2Df {query}
+	+getRadius() : Vector2Df {query}
+	-radius : Vector2Df
+	+getClass() : string {query}
+	+printData() : void {query}
+	+setRadius(const Vector2Df& radius) : void
+}
+
+
+abstract class Gradient {
+	+Gradient(vector<Stop> stops, 
+	pair<Vector2Df, Vector2Df> points, string units)
+	+~Gradient()
+	+getPoints() : pair<Vector2Df , Vector2Df> {query}
+	-points : pair<Vector2Df, Vector2Df>
+	+{abstract} getClass() : string {query}
+	+getUnits() : string {query}
+	-units : string
+	+getStops() : vector<Stop> {query}
+	-stops : vector<Stop>
+	+getTransforms() : vector<string> {query}
+	-transforms : vector<string>
+	+addStop(Stop stop) : void
+	+setTransforms(vector<string> transforms) : void
+	+setUnits(string units) : void
+}
+
+
+class Group {
+	+Group()
+	+Group(Attributes attributes)
+	+~Group()
+	-attributes : Attributes
+	+getAttributes() : Attributes {query}
+	+getClass() : string {query}
+	+getElements() : vector<SVGElement*> {query}
+	-shapes : vector<SVGElement*>
+	+addElement(SVGElement* shape) : void
+	+printData() : void {query}
+}
+
+
+class Line {
+	+Line(const Vector2Df& point1, const Vector2Df& point2, 
+	ColorShape stroke, float stroke_width)
+	-direction : Vector2Df
+	+getDirection() : Vector2Df {query}
+	+getLength() : float {query}
+	+getClass() : string {query}
+	+setDirection(const Vector2Df& direction) : void
+}
+
+
+class LinearGradient {
+	+LinearGradient(vector<Stop> stops, 
+	pair<Vector2Df, Vector2Df> points, string units)
+	+getClass() : string {query}
+}
+
+
+class Parser {
+	-Parser(const string& file_name)
+	+~Parser()
+	-parseCircle(xml_node<>* node, const ColorShape& fill_color, const ColorShape& stroke_color, float stroke_width) : Circle*
+	-parseColor(xml_node<>* node, string color, string& id) : ColorShape
+	-parseGradient(string id) : Gradient*
+	+getRoot() : Group*
+	-parseLine(xml_node<>* node, const ColorShape& stroke_color, float stroke_width) : Line*
+	+{static} getInstance(const string& file_name) : Parser*
+	-parsePath(xml_node<>* node, const ColorShape& fill_color, const ColorShape& stroke_color, float stroke_width) : Path*
+	-parseRect(xml_node<>* node, const ColorShape& fill_color, const ColorShape& stroke_color, float stroke_width) : Rect*
+	-parseElements(string file_name) : SVGElement*
+	-parseShape(xml_node<>* node) : SVGElement*
+	-root : SVGElement*
+	-parseText(xml_node<>* node, const ColorShape& fill_color, const ColorShape& stroke_color, float stroke_width) : Text*
+	+getViewPort() : Vector2Df {query}
+	-viewport : Vector2Df
+	-parseEllipse(xml_node<>* node, const ColorShape& fill_color, const ColorShape& stroke_color, float stroke_width) : class Ell*
+	-parsePolygon(xml_node<>* node, const ColorShape& fill_color, const ColorShape& stroke_color, float stroke_width) : class Plygon*
+	-parsePolyline(xml_node<>* node, const ColorShape& fill_color, const ColorShape& stroke_color, float stroke_width) : class Plyline*
+	-getFloatAttribute(xml_node<>* node, string name) : float
+	-{static} instance : static Parser*
+	-gradients : map<string, Gradient*>
+	+getViewBox() : pair<Vector2Df , Vector2Df> {query}
+	-viewbox : pair<Vector2Df, Vector2Df>
+	-getAttribute(xml_node<>* node, string name) : string
+	-parsePathPoints(xml_node<>* node) : vector<PathPoint>
+	-getGradientStops(xml_node<>* node) : vector<Stop>
+	-parsePoints(xml_node<>* node) : vector<Vector2Df>
+	-getTransformOrder(xml_node<>* node) : vector<string>
+	-GetGradients(xml_node<>* node) : void
+	+printShapesData() : void
+}
+
+
+class Path {
+	+Path(const ColorShape& fill, 
+	const ColorShape& stroke, float stroke_width)
+	-fill_rule : string
+	+getClass() : string {query}
+	+getFillRule() : string {query}
+	+getPoints() : vector<PathPoint> {query}
+	-points : vector<PathPoint>
+	+addPoint(PathPoint point) : void
+	+printData() : void {query}
+	+setFillRule(string fill_rule) : void
+}
+
+
+class Plygon {
+	+Plygon(ColorShape fill, ColorShape stroke, float stroke_width)
+	+getClass() : string {query}
+}
+
+
+class Plyline {
+	+Plyline(const ColorShape& fill, const ColorShape& stroke, float stroke_width)
+	+getClass() : string {query}
+}
+
+
+abstract class PolyShape {
+	#PolyShape(const ColorShape& fill, 
+	const ColorShape& stroke, float stroke_width)
+	+getMaxBound() : Vector2Df {query}
+	+getMinBound() : Vector2Df {query}
+	#fill_rule : string
+	+{abstract} getClass() : string {query}
+	+getFillRule() : string {query}
+	#points : vector<Vector2Df>
+	+getPoints() : vector<Vector2Df>& {query}
+	+addPoint(const Vector2Df& point) : void
+	+printData() : void {query}
+	+setFillRule(string fill_rule) : void
+}
+
+
+class RadialGradient {
+	+RadialGradient(vector<Stop> stops, pair<Vector2Df, Vector2Df> points, 
+	Vector2Df radius, string units)
+	+getRadius() : Vector2Df {query}
+	-radius : Vector2Df
+	+getClass() : string {query}
+}
+
+
+class Rect {
+	+Rect(float width, float height, Vector2Df position, Vector2Df radius, 
+	const ColorShape& fill, const ColorShape& stroke, float stroke_width)
+	+getRadius() : Vector2Df {query}
+	-radius : Vector2Df
+	+getHeight() : float {query}
+	+getWidth() : float {query}
+	-height : float
+	-width : float
+	+getClass() : string {query}
+	+printData() : void {query}
+	+setHeight(float height) : void
+	+setRadius(const Vector2Df& radius) : void
+	+setWidth(float width) : void
+}
+
+
+class Renderer {
+	-Renderer()
+	-getBrush(SVGElement* shape, RectF bound) :Brush* {query}
+	+{static} getInstance() : Renderer*
+	-{static} instance : static Renderer*
+	-applyTransform(vector<string> transform_order, Graphics& graphics) : void {query}
+	-applyTransformsOnBrush(vector<string> transform_order, LinearGradientBrush*& brush) : void {query}
+	-applyTransformsOnBrush(vector<string> transform_order, PathGradientBrush*& brush) : void {query}
+	+draw(Graphics& graphics, Group* group) : void {query}
+	-drawCircle(Graphics& graphics, Circle* circle) : void {query}
+	-drawEllipse(Graphics& graphics, Ell* ellipse) : void {query}
+	-drawLine(Graphics& graphics, Line* line) : void {query}
+	-drawPath(Graphics& graphics, Path* path) : void {query}
+	-drawPolygon(Graphics& graphics, Plygon* polygon) : void {query}
+	-drawPolyline(Graphics& graphics, Plyline* polyline) : void {query}
+	-drawRectangle(Graphics& graphics, Rect* rectangle) : void {query}
+	-drawText(Graphics& graphics, Text* text) : void {query}
+}
+
+
+abstract class SVGElement {
+	#SVGElement()
+	#SVGElement(const ColorShape& fill, const ColorShape& stroke, float stroke_width)
+	#SVGElement(const ColorShape& fill, const ColorShape& stroke, float stroke_width, const Vector2Df& position)
+	+~SVGElement()
+	-fill : ColorShape
+	-stroke : ColorShape
+	+getFillColor() : ColorShape& {query}
+	+getOutlineColor() : ColorShape& {query}
+	+getGradient() : Gradient* {query}
+	-gradient : Gradient*
+	+getParent() : SVGElement* {query}
+	#parent : SVGElement*
+	+getMaxBound() : Vector2Df {query}
+	+getMinBound() : Vector2Df {query}
+	+getPosition() : Vector2Df {query}
+	-position : Vector2Df
+	+getOutlineThickness() : float {query}
+	-stroke_width : float
+	+{abstract} getClass() : string {query}
+	+getTransforms() : vector<string> {query}
+	-transforms : vector<string>
+	+addElement(SVGElement* element) : void
+	+printData() : void {query}
+	+setFillColor(const ColorShape& color) : void
+	+setGradient(Gradient* gradient) : void
+	+setOutlineColor(const ColorShape& color) : void
+	+setOutlineThickness(float thickness) : void
+	+setParent(SVGElement* parent) : void
+	+setPosition(float x, float y) : void
+	+setPosition(const Vector2Df& position) : void
+	+setTransforms(const vector<string>& transforms) : void
+}
+
+
+class Stop {
+	+Stop(const ColorShape& color, float offset)
+	-color : ColorShape
+	+getColor() : ColorShape {query}
+	+getOffset() : float {query}
+	-offset : float
+}
+
+
+class Text {
+	+Text(Vector2Df pos, string text, float font_size, const ColorShape& fill, 
+	const ColorShape& stroke, float stroke_width)
+	-font_size : float
+	+getFontSize() : float {query}
+	-anchor : string
+	-content : string
+	+getAnchor() : string {query}
+	+getClass() : string {query}
+	+getContent() : string {query}
+	+getFontStyle() : string {query}
+	-style : string
+	+printData() : void {query}
+	+setAnchor(string anchor) : void
+	+setContent(string content) : void
+	+setFontSize(float font_size) : void
+	+setFontStyle(string style) : void
+}
+
+
+class Vector2D <template<typename T>> {
+	+Vector2D()
+	+Vector2D(T X, T Y)
+	+Vector2D(const Vector2D<U>& vector)
+	+x : T
+	+y : T
+}
+
+
+class Viewer {
+	-Viewer()
+	+~Viewer()
+	-last_mouse_pos : POINT
+	+window_size : Vector2Df
+	+{static} getInstance() : Viewer*
+	-is_dragging : bool
+	+needs_repaint : bool
+	+offset_x : float
+	+offset_y : float
+	+rotate_angle : float
+	+zoom_factor : float
+	-{static} instance : static Viewer*
+	+getWindowSize(HWND hWnd) : void {query}
+	-handleKeyDown(WPARAM wParam) : void
+	+handleKeyEvent(WPARAM wParam) : void
+	-handleLeftButtonDown(LPARAM lParam) : void
+	-handleLeftButtonUp() : void
+	+handleMouseEvent(UINT message, WPARAM wParam, LPARAM lParam) : void
+	-handleMouseMove(LPARAM lParam) : void
+	-handleMouseWheel(WPARAM wParam) : void
+}
+
+
+class PathPoint {
+	+point : Vector2Df
+	+large_arc_flag : bool
+	+sweep_flag : bool
+	+tc : char
+	+x_axis_rotation : float
+}
+
+
+
+
+
+/' Inheritance relationships '/
+
+.Ell <|-- .Circle
+
+
+.Gradient <|-- .LinearGradient
+
+
+.Gradient <|-- .RadialGradient
+
+
+.PolyShape <|-- .Plygon
+
+
+.PolyShape <|-- .Plyline
+
+
+.SVGElement <|-- .Ell
+
+
+.SVGElement <|-- .Group
+
+
+.SVGElement <|-- .Line
+
+
+.SVGElement <|-- .Path
+
+
+.SVGElement <|-- .PolyShape
+
+
+.SVGElement <|-- .Rect
+
+
+.SVGElement <|-- .Text
+
+
+
+
+
+/' Aggregation relationships '/
+
+.Gradient *-- .Stop
+
+
+.Group o-- .SVGElement
+
+
+.Parser o-- .Gradient
+
+
+.Parser --> .Parser : -instance
+
+
+.Parser o-- .SVGElement
+
+
+.Path *-- .PathPoint
+
+
+.Renderer --> .Renderer : -instance
+
+
+.SVGElement *-- .ColorShape
+
+
+.SVGElement o-- .Gradient
+
+.Stop *-- .ColorShape
+
+
+.Viewer --> .Viewer : -instance
+
+
+
+
+
+
+/' Nested objects '/
+
+
+
+@enduml

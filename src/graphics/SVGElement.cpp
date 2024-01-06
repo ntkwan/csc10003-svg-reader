@@ -3,25 +3,25 @@
 #include <iostream>
 
 SVGElement::SVGElement()
-    : fill(mColor::Black), stroke(mColor::Transparent), stroke_width(1),
+    : fill(ColorShape::Black), stroke(ColorShape::Transparent), stroke_width(1),
       gradient(NULL) {}
 
-SVGElement::SVGElement(const mColor& fill, const mColor& stroke,
+SVGElement::SVGElement(const ColorShape& fill, const ColorShape& stroke,
                        float stroke_width)
     : fill(fill), stroke(stroke), stroke_width(stroke_width), gradient(NULL) {}
 
-SVGElement::SVGElement(const mColor& fill, const mColor& stroke,
+SVGElement::SVGElement(const ColorShape& fill, const ColorShape& stroke,
                        float stroke_width, const Vector2Df& position)
     : fill(fill), stroke(stroke), stroke_width(stroke_width),
       position(position), gradient(NULL) {}
 
-void SVGElement::setFillColor(const mColor& color) { fill = color; }
+void SVGElement::setFillColor(const ColorShape& color) { fill = color; }
 
-const mColor& SVGElement::getFillColor() const { return fill; }
+const ColorShape& SVGElement::getFillColor() const { return fill; }
 
-void SVGElement::setOutlineColor(const mColor& color) { stroke = color; }
+void SVGElement::setOutlineColor(const ColorShape& color) { stroke = color; }
 
-const mColor& SVGElement::getOutlineColor() const { return stroke; }
+const ColorShape& SVGElement::getOutlineColor() const { return stroke; }
 
 void SVGElement::setOutlineThickness(float thickness) {
     stroke_width = thickness;

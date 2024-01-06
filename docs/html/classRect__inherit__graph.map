@@ -1,5 +1,0 @@
-<map id="Rect" name="Rect">
-<area shape="rect" id="node1" title="Represents a rectangle in 2D space." alt="" coords="31,155,82,181"/>
-<area shape="rect" id="node2" href="$classPolyShape.html" title="Abstract base class for polygon and polyline shapes in 2D space." alt="" coords="11,80,102,107"/>
-<area shape="rect" id="node3" href="$classSVGElement.html" title="Represents an element in an SVG file." alt="" coords="5,5,108,32"/>
-</map>

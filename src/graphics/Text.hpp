@@ -25,8 +25,8 @@ public:
      * @param fill The fill color of the text
      * @param font_size The font size of the text (default is 1).
      */
-    Text(Vector2Df pos, std::string text, float font_size, const mColor &fill,
-         const mColor &stroke, float stroke_width);
+    Text(Vector2Df pos, std::string text, float font_size,
+         const ColorShape &fill, const ColorShape &stroke, float stroke_width);
 
     /**
      * @brief Gets the type of the shape.

@@ -1,0 +1,50 @@
+@startuml
+
+
+
+
+
+/' Objects '/
+
+class Renderer {
+	-Renderer()
+	-getBrush(SVGElement* shape, Gdiplus::RectF bound) : Gdiplus::Brush* {query}
+	+{static} getInstance() : Renderer*
+	-{static} instance : static Renderer*
+	-applyTransform(std::vector<std::string> transform_order, Gdiplus::Graphics& graphics) : void {query}
+	-applyTransformsOnBrush(std::vector<std::string> transform_order, Gdiplus::LinearGradientBrush*& brush) : void {query}
+	-applyTransformsOnBrush(std::vector<std::string> transform_order, Gdiplus::PathGradientBrush*& brush) : void {query}
+	+draw(Gdiplus::Graphics& graphics, Group* group) : void {query}
+	-drawCircle(Gdiplus::Graphics& graphics, Circle* circle) : void {query}
+	-drawEllipse(Gdiplus::Graphics& graphics, Ell* ellipse) : void {query}
+	-drawLine(Gdiplus::Graphics& graphics, Line* line) : void {query}
+	-drawPath(Gdiplus::Graphics& graphics, Path* path) : void {query}
+	-drawPolygon(Gdiplus::Graphics& graphics, Plygon* polygon) : void {query}
+	-drawPolyline(Gdiplus::Graphics& graphics, Plyline* polyline) : void {query}
+	-drawRectangle(Gdiplus::Graphics& graphics, Rect* rectangle) : void {query}
+	-drawText(Gdiplus::Graphics& graphics, Text* text) : void {query}
+}
+
+
+
+
+
+/' Inheritance relationships '/
+
+
+
+
+/' Aggregation relationships '/
+
+.Renderer --> .Renderer : -instance
+
+
+
+
+
+
+/' Nested objects '/
+
+
+
+@enduml

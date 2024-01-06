@@ -2,8 +2,8 @@
 #define GRAPHICS_HPP_
 
 #include "graphics/Circle.hpp"
-#include "graphics/Color.hpp"
 #include "graphics/Ellipse.hpp"
+#include "graphics/ColorShape.hpp"
 #include "graphics/Group.hpp"
 #include "graphics/Line.hpp"
 #include "graphics/LinearGradient.hpp"

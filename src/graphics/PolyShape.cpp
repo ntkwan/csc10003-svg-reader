@@ -1,6 +1,6 @@
 #include "PolyShape.hpp"
 
-PolyShape::PolyShape(const mColor& fill, const mColor& stroke,
+PolyShape::PolyShape(const ColorShape& fill, const ColorShape& stroke,
                      float stroke_width)
     : SVGElement(fill, stroke, stroke_width) {}
 

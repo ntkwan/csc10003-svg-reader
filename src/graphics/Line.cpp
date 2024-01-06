@@ -2,9 +2,9 @@
 
 #include <cmath>
 
-Line::Line(const Vector2Df& point1, const Vector2Df& point2, mColor stroke,
+Line::Line(const Vector2Df& point1, const Vector2Df& point2, ColorShape stroke,
            float stroke_width)
-    : SVGElement(mColor::Transparent, stroke, stroke_width, point1),
+    : SVGElement(ColorShape::Transparent, stroke, stroke_width, point1),
       direction(point2) {}
 
 std::string Line::getClass() const { return "Line"; }

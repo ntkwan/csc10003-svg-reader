@@ -138,8 +138,8 @@ private:
      * @param id The id to check if the color is a reference.
      * @return The color attributes of the node.
      */
-    mColor parseColor(rapidxml::xml_node<>* node, std::string color,
-                      std::string& id);
+    ColorShape parseColor(rapidxml::xml_node<>* node, std::string color,
+                          std::string& id);
 
     /**
      * @brief Gets the points of the element
@@ -173,7 +173,7 @@ private:
      * @param stroke_width The width of the stroke
      * @return The line element
      */
-    Line* parseLine(rapidxml::xml_node<>* node, const mColor& stroke_color,
+    Line* parseLine(rapidxml::xml_node<>* node, const ColorShape& stroke_color,
                     float stroke_width);
 
     /**
@@ -185,8 +185,8 @@ private:
      * @param stroke_width The width of the stroke
      * @return The rect element
      */
-    Rect* parseRect(rapidxml::xml_node<>* node, const mColor& fill_color,
-                    const mColor& stroke_color, float stroke_width);
+    Rect* parseRect(rapidxml::xml_node<>* node, const ColorShape& fill_color,
+                    const ColorShape& stroke_color, float stroke_width);
 
     /**
      * @brief Parses the polyline element
@@ -198,8 +198,8 @@ private:
      * @return The polyline element
      */
     class Plyline* parsePolyline(rapidxml::xml_node<>* node,
-                                 const mColor& fill_color,
-                                 const mColor& stroke_color,
+                                 const ColorShape& fill_color,
+                                 const ColorShape& stroke_color,
                                  float stroke_width);
 
     /**
@@ -212,8 +212,9 @@ private:
      * @return The polygon element
      */
     class Plygon* parsePolygon(rapidxml::xml_node<>* node,
-                               const mColor& fill_color,
-                               const mColor& stroke_color, float stroke_width);
+                               const ColorShape& fill_color,
+                               const ColorShape& stroke_color,
+                               float stroke_width);
 
     /**
      * @brief Parses the circle element
@@ -224,8 +225,9 @@ private:
      * @param stroke_width The width of the stroke
      * @return The circle element
      */
-    Circle* parseCircle(rapidxml::xml_node<>* node, const mColor& fill_color,
-                        const mColor& stroke_color, float stroke_width);
+    Circle* parseCircle(rapidxml::xml_node<>* node,
+                        const ColorShape& fill_color,
+                        const ColorShape& stroke_color, float stroke_width);
 
     /**
      * @brief Parses the ellipse element
@@ -237,8 +239,8 @@ private:
      * @return The ellipse element
      */
     class Ell* parseEllipse(rapidxml::xml_node<>* node,
-                            const mColor& fill_color,
-                            const mColor& stroke_color, float stroke_width);
+                            const ColorShape& fill_color,
+                            const ColorShape& stroke_color, float stroke_width);
 
     /**
      * @brief Parses the path element
@@ -249,8 +251,8 @@ private:
      * @param stroke_width The width of the stroke
      * @return The path element
      */
-    Path* parsePath(rapidxml::xml_node<>* node, const mColor& fill_color,
-                    const mColor& stroke_color, float stroke_width);
+    Path* parsePath(rapidxml::xml_node<>* node, const ColorShape& fill_color,
+                    const ColorShape& stroke_color, float stroke_width);
 
     /**
      * @brief Parses the text element
@@ -260,8 +262,8 @@ private:
      * @param stroke_width The width of the stroke
      * @return The text element
      */
-    Text* parseText(rapidxml::xml_node<>* node, const mColor& fill_color,
-                    const mColor& stroke_color, float stroke_width);
+    Text* parseText(rapidxml::xml_node<>* node, const ColorShape& fill_color,
+                    const ColorShape& stroke_color, float stroke_width);
 
     /**
      * @brief Parses the group of elements

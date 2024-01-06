@@ -30,9 +30,12 @@
 *.out
 *.app
 *.bat
+*.bak
+
 build
 svg-reader
 external/samples/gradient
-!docs/latex/code_documentation.pdf
+latex/*
+!latex/refman.pdf
 *.json
 *.jar
