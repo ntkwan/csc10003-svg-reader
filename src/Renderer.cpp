@@ -15,6 +15,7 @@ Renderer* Renderer::getInstance() {
     return instance;
 }
 
+// Function to extract translation values from a transform string
 std::pair< float, float > getTranslate(std::string transform_value) {
     float trans_x = 0, trans_y = 0;
     if (transform_value.find(",") != std::string::npos) {
@@ -26,18 +27,21 @@ std::pair< float, float > getTranslate(std::string transform_value) {
     return std::pair< float, float >(trans_x, trans_y);
 }
 
+// Function to extract rotation value from a transform string
 float getRotate(std::string transform_value) {
     float degree = 0;
     sscanf(transform_value.c_str(), "rotate(%f)", &degree);
     return degree;
 }
 
+// Function to extract scale value from a transform string
 float getScale(std::string transform_value) {
     float scale = 0;
     sscanf(transform_value.c_str(), "scale(%f)", &scale);
     return scale;
 }
 
+// Function to extract X and Y scale values from a transform string
 std::pair< float, float > getScaleXY(std::string transform_value) {
     float scale_x = 0, scale_y = 0;
     if (transform_value.find(",") != std::string::npos)
@@ -47,6 +51,7 @@ std::pair< float, float > getScaleXY(std::string transform_value) {
     return std::pair< float, float >(scale_x, scale_y);
 }
 
+// Apply transformations based on the specified order
 void Renderer::applyTransform(std::vector< std::string > transform_order,
                               Gdiplus::Graphics& graphics) const {
     for (auto type : transform_order) {
@@ -70,11 +75,17 @@ void Renderer::applyTransform(std::vector< std::string > transform_order,
     }
 }
 
+// Draw shapes within a group, considering transformations
 void Renderer::draw(Gdiplus::Graphics& graphics, Group* group) const {
     for (auto shape : group->getElements()) {
+        // Store the original transformation matrix
         Gdiplus::Matrix original;
         graphics.GetTransform(&original);
+
+        // Apply the transformations for the current shape
         applyTransform(shape->getTransforms(), graphics);
+
+        // Draw the specific shape based on its class
         if (shape->getClass() == "Group") {
             Group* group = dynamic_cast< Group* >(shape);
             draw(graphics, group);
@@ -107,15 +118,19 @@ void Renderer::draw(Gdiplus::Graphics& graphics, Group* group) const {
     }
 }
 
+// Draw a line on the given graphics context
 void Renderer::drawLine(Gdiplus::Graphics& graphics, Line* line) const {
+    // Extract color and thickness information from the Line object
     ColorShape color = line->getOutlineColor();
     Gdiplus::Pen linePen(Gdiplus::Color(color.a, color.r, color.g, color.b),
                          line->getOutlineThickness());
+    // Extract start and end points from the Line object
     Gdiplus::PointF startPoint(line->getPosition().x, line->getPosition().y);
     Gdiplus::PointF endPoint(line->getDirection().x, line->getDirection().y);
     graphics.DrawLine(&linePen, startPoint, endPoint);
 }
 
+// Draw a rectangle on the given graphics context
 void Renderer::drawRectangle(Gdiplus::Graphics& graphics,
                              Rect* rectangle) const {
     float x = rectangle->getPosition().x;
@@ -124,23 +139,26 @@ void Renderer::drawRectangle(Gdiplus::Graphics& graphics,
     float height = rectangle->getHeight();
     ColorShape outline_color = rectangle->getOutlineColor();
 
+    // Create a pen for the rectangle outline
     Gdiplus::Pen rect_outline(Gdiplus::Color(outline_color.a, outline_color.r,
                                              outline_color.g, outline_color.b),
                               rectangle->getOutlineThickness());
     Gdiplus::RectF bound(x, y, width, height);
     Gdiplus::Brush* rect_fill = getBrush(rectangle, bound);
 
+    // Check if the rectangle has rounded corners
     if (rectangle->getRadius().x != 0 || rectangle->getRadius().y != 0) {
         float dx = rectangle->getRadius().x * 2;
         float dy = rectangle->getRadius().y * 2;
 
+        // Create a GraphicsPath for drawing rounded rectangles
         Gdiplus::GraphicsPath path;
         path.AddArc(x, y, dx, dy, 180, 90);
         path.AddArc(x + width - dx, y, dx, dy, 270, 90);
         path.AddArc(x + width - dx, y + height - dy, dx, dy, 0, 90);
         path.AddArc(x, y + height - dy, dx, dy, 90, 90);
         path.CloseFigure();
-
+        // Fill and draw the rounded rectangle
         if (Gdiplus::PathGradientBrush* brush =
                 dynamic_cast< Gdiplus::PathGradientBrush* >(rect_fill)) {
             ColorShape color =
@@ -153,6 +171,7 @@ void Renderer::drawRectangle(Gdiplus::Graphics& graphics,
         graphics.FillPath(rect_fill, &path);
         graphics.DrawPath(&rect_outline, &path);
     } else {
+        // Fill and draw the regular rectangle
         if (Gdiplus::PathGradientBrush* brush =
                 dynamic_cast< Gdiplus::PathGradientBrush* >(rect_fill)) {
             ColorShape color =
@@ -169,18 +188,22 @@ void Renderer::drawRectangle(Gdiplus::Graphics& graphics,
     delete rect_fill;
 }
 
+// Draw a circle on the given graphics context
 void Renderer::drawCircle(Gdiplus::Graphics& graphics, Circle* circle) const {
     ColorShape outline_color = circle->getOutlineColor();
     Gdiplus::Pen circle_outline(
         Gdiplus::Color(outline_color.a, outline_color.r, outline_color.g,
                        outline_color.b),
         circle->getOutlineThickness());
+
+    // Create a bounding rectangle for the circle
     Vector2Df min_bound = circle->getMinBound();
     Vector2Df max_bound = circle->getMaxBound();
     Gdiplus::RectF bound(min_bound.x, min_bound.y, max_bound.x - min_bound.x,
                          max_bound.y - min_bound.y);
     Gdiplus::Brush* circle_fill = getBrush(circle, bound);
 
+    // Check if the circle has a gradient fill
     if (Gdiplus::PathGradientBrush* brush =
             dynamic_cast< Gdiplus::PathGradientBrush* >(circle_fill)) {
         ColorShape color = circle->getGradient()->getStops().back().getColor();
@@ -204,6 +227,7 @@ void Renderer::drawCircle(Gdiplus::Graphics& graphics, Circle* circle) const {
     delete circle_fill;
 }
 
+// Draw an ellipse on the given graphics context
 void Renderer::drawEllipse(Gdiplus::Graphics& graphics, Ell* ellipse) const {
     ColorShape outline_color = ellipse->getOutlineColor();
 
@@ -212,6 +236,7 @@ void Renderer::drawEllipse(Gdiplus::Graphics& graphics, Ell* ellipse) const {
                        outline_color.b),
         ellipse->getOutlineThickness());
 
+    // Create a bounding rectangle for the ellipse
     Vector2Df min_bound = ellipse->getMinBound();
     Vector2Df max_bound = ellipse->getMaxBound();
     Gdiplus::RectF bound(min_bound.x, min_bound.y, max_bound.x - min_bound.x,
@@ -241,6 +266,7 @@ void Renderer::drawEllipse(Gdiplus::Graphics& graphics, Ell* ellipse) const {
     delete ellipse_fill;
 }
 
+// Draw a polygon on the given graphics context
 void Renderer::drawPolygon(Gdiplus::Graphics& graphics, Plygon* polygon) const {
     ColorShape outline_color = polygon->getOutlineColor();
     Gdiplus::Pen polygon_outline(
@@ -248,6 +274,7 @@ void Renderer::drawPolygon(Gdiplus::Graphics& graphics, Plygon* polygon) const {
                        outline_color.b),
         polygon->getOutlineThickness());
 
+    // Extract vertices and create an array of Gdiplus::PointF
     Gdiplus::PointF* points = new Gdiplus::PointF[polygon->getPoints().size()];
     int idx = 0;
     const std::vector< Vector2Df >& vertices = polygon->getPoints();
@@ -255,6 +282,7 @@ void Renderer::drawPolygon(Gdiplus::Graphics& graphics, Plygon* polygon) const {
         points[idx++] = Gdiplus::PointF(vertex.x, vertex.y);
     }
 
+    // Determine the fill mode based on the polygon's fill rule
     Gdiplus::FillMode fill_mode;
     if (polygon->getFillRule() == "evenodd") {
         fill_mode = Gdiplus::FillModeAlternate;
@@ -262,12 +290,15 @@ void Renderer::drawPolygon(Gdiplus::Graphics& graphics, Plygon* polygon) const {
         fill_mode = Gdiplus::FillModeWinding;
     }
 
+    // Create a bounding rectangle for the polygon
     Vector2Df min_bound = polygon->getMinBound();
     Vector2Df max_bound = polygon->getMaxBound();
     Gdiplus::RectF bound(min_bound.x, min_bound.y, max_bound.x - min_bound.x,
                          max_bound.y - min_bound.y);
+    // Get the fill brush for the polygon
     Gdiplus::Brush* polygon_fill = getBrush(polygon, bound);
 
+    // If the fill brush is a gradient, fill the polygon with a corner color
     if (Gdiplus::PathGradientBrush* brush =
             dynamic_cast< Gdiplus::PathGradientBrush* >(polygon_fill)) {
         ColorShape color = polygon->getGradient()->getStops().back().getColor();
@@ -283,6 +314,7 @@ void Renderer::drawPolygon(Gdiplus::Graphics& graphics, Plygon* polygon) const {
     delete polygon_fill;
 }
 
+// Draw text on the given graphics context
 void Renderer::drawText(Gdiplus::Graphics& graphics, Text* text) const {
     ColorShape outline_color = text->getOutlineColor();
     graphics.SetTextRenderingHint(Gdiplus::TextRenderingHintAntiAliasGridFit);
@@ -291,14 +323,18 @@ void Renderer::drawText(Gdiplus::Graphics& graphics, Text* text) const {
                                              outline_color.g, outline_color.b),
                               text->getOutlineThickness());
 
+    // Set the font family for the text
     Gdiplus::FontFamily font_family(L"Times New Roman");
 
+    // Set the position for the text
     Gdiplus::PointF position(text->getPosition().x, text->getPosition().y);
     Gdiplus::GraphicsPath path;
 
+    // Convert the content to wide string for GDI+
     std::wstring_convert< std::codecvt_utf8_utf16< wchar_t > > converter;
     std::wstring wide_content = converter.from_bytes(text->getContent());
 
+    // Set text alignment based on anchor position
     Gdiplus::StringFormat string_format;
     if (text->getAnchor() == "middle") {
         string_format.SetAlignment(Gdiplus::StringAlignmentCenter);
@@ -310,6 +346,7 @@ void Renderer::drawText(Gdiplus::Graphics& graphics, Text* text) const {
         string_format.SetAlignment(Gdiplus::StringAlignmentNear);
     }
 
+    // Set font style based on text style
     Gdiplus::FontStyle font_style = Gdiplus::FontStyleRegular;
     if (text->getFontStyle() == "italic" || text->getFontStyle() == "oblique") {
         font_style = Gdiplus::FontStyleItalic;
@@ -322,6 +359,7 @@ void Renderer::drawText(Gdiplus::Graphics& graphics, Text* text) const {
     path.GetBounds(&bound);
     Gdiplus::Brush* text_fill = getBrush(text, bound);
 
+    // If the fill brush is a gradient, fill the text with a corner color
     if (Gdiplus::PathGradientBrush* brush =
             dynamic_cast< Gdiplus::PathGradientBrush* >(text_fill)) {
         ColorShape color = text->getGradient()->getStops().back().getColor();
@@ -343,6 +381,7 @@ void Renderer::drawText(Gdiplus::Graphics& graphics, Text* text) const {
     delete text_fill;
 }
 
+// Draw a polyline on the given graphics context
 void Renderer::drawPolyline(Gdiplus::Graphics& graphics,
                             Plyline* polyline) const {
     ColorShape outline_color = polyline->getOutlineColor();
@@ -351,6 +390,7 @@ void Renderer::drawPolyline(Gdiplus::Graphics& graphics,
                        outline_color.b),
         polyline->getOutlineThickness());
 
+    // Determine the fill mode based on the polyline's fill rule
     Gdiplus::FillMode fill_mode;
     if (polyline->getFillRule() == "evenodd") {
         fill_mode = Gdiplus::FillModeAlternate;
@@ -371,12 +411,14 @@ void Renderer::drawPolyline(Gdiplus::Graphics& graphics,
                      points[i].y);
     }
 
+    // Create a bounding rectangle for the polyline
     Vector2Df min_bound = polyline->getMinBound();
     Vector2Df max_bound = polyline->getMaxBound();
     Gdiplus::RectF bound(min_bound.x, min_bound.y, max_bound.x - min_bound.x,
                          max_bound.y - min_bound.y);
     Gdiplus::Brush* polyline_fill = getBrush(polyline, bound);
 
+    // If the fill brush is a gradient, fill the polyline with a corner color
     if (Gdiplus::PathGradientBrush* brush =
             dynamic_cast< Gdiplus::PathGradientBrush* >(polyline_fill)) {
         ColorShape color =
@@ -392,6 +434,7 @@ void Renderer::drawPolyline(Gdiplus::Graphics& graphics,
     delete polyline_fill;
 }
 
+// Draw a path on the given graphics context
 void Renderer::drawPath(Gdiplus::Graphics& graphics, Path* path) const {
     ColorShape outline_color = path->getOutlineColor();
     Gdiplus::Pen path_outline(Gdiplus::Color(outline_color.a, outline_color.r,
@@ -482,11 +525,17 @@ void Renderer::drawPath(Gdiplus::Graphics& graphics, Path* path) const {
                 i += 1;
             }
         } else if (points[i].tc == 't') {
+            // Calculate reflection control point
             Vector2Df auto_control_point;
             if (i > 0 && (points[i - 1].tc == 'q' || points[i - 1].tc == 't')) {
+                // If the previous point is a quadratic bezier or a smooth
+                // quadratic bezier,
+                // calculate the reflection control point using the reflection
+                // formula
                 auto_control_point.x = cur_point.x * 2 - points[i - 2].point.x;
                 auto_control_point.y = cur_point.y * 2 - points[i - 2].point.y;
             } else {
+                // Otherwise, use the current point as the control point
                 auto_control_point = cur_point;
             }
             Vector2Df end_point = points[i].point;
@@ -495,11 +544,13 @@ void Renderer::drawPath(Gdiplus::Graphics& graphics, Path* path) const {
             t_points[1] =
                 Gdiplus::PointF{auto_control_point.x, auto_control_point.y};
             t_points[2] = Gdiplus::PointF{end_point.x, end_point.y};
+            // Add the cubic bezier curve to the path
             gdi_path.AddCurve(t_points, 3);
             cur_point = points[i].point;
         } else if (points[i].tc == 'a') {
             float rx = points[i].radius.x;
             float ry = points[i].radius.y;
+            // If either radius is zero, treat it as a line segment
             if (rx == 0 || ry == 0) {
                 gdi_path.AddLine(cur_point.x, cur_point.y, points[i].point.x,
                                  points[i].point.y);
@@ -517,7 +568,7 @@ void Renderer::drawPath(Gdiplus::Graphics& graphics, Path* path) const {
             bool large_arc_flag = points[i].large_arc_flag;
             bool sweep_flag = points[i].sweep_flag;
             Vector2Df end_point{points[i].point.x, points[i].point.y};
-
+            // Calculate angles and points for the elliptical arc
             float angle = x_axis_rotation * acos(-1) / 180.0;
             float cosAngle = cos(angle);
             float sinAngle = sin(angle);
@@ -527,7 +578,7 @@ void Renderer::drawPath(Gdiplus::Graphics& graphics, Path* path) const {
             float Y = (cur_point.y - end_point.y) / 2.0;
             point1.x = (cosAngle * cosAngle + sinAngle * sinAngle) * X;
             point1.y = (cosAngle * cosAngle + sinAngle * sinAngle) * Y;
-
+            // Correction of out-of-range radii
             float radii_check = (point1.x * point1.x) / (rx * rx) +
                                 (point1.y * point1.y) / (ry * ry);
             if (radii_check > 1.0) {
@@ -575,7 +626,7 @@ void Renderer::drawPath(Gdiplus::Graphics& graphics, Path* path) const {
                 std::fmod((start_angle * 180.0) / acos(-1), 360);
             float delta_angle_degree =
                 std::fmod((delta_angle * 180.0) / acos(-1), 360);
-
+            // Add the elliptical arc to the path
             gdi_path.AddArc(center.x - rx, center.y - ry, 2.0 * rx, 2.0 * ry,
                             start_angle_degree, delta_angle_degree);
 
@@ -627,6 +678,8 @@ void Renderer::drawPath(Gdiplus::Graphics& graphics, Path* path) const {
     delete path_fill;
 }
 
+// Get the Gdiplus::Brush for rendering an SVG element (shape) with a gradient
+// or solid color
 Gdiplus::Brush* Renderer::getBrush(SVGElement* shape,
                                    Gdiplus::RectF bound) const {
     Gradient* gradient = shape->getGradient();
@@ -734,18 +787,22 @@ Gdiplus::Brush* Renderer::getBrush(SVGElement* shape,
     return nullptr;
 }
 
+// Apply transformation matrix operations on a linear gradient brush
 void Renderer::applyTransformsOnBrush(
     std::vector< std::string > transform_order,
     Gdiplus::LinearGradientBrush*& brush) const {
     for (auto type : transform_order) {
         if (type.find("translate") != std::string::npos) {
+            // Apply translation transformation
             float trans_x = getTranslate(type).first,
                   trans_y = getTranslate(type).second;
             brush->TranslateTransform(trans_x, trans_y);
         } else if (type.find("rotate") != std::string::npos) {
+            // Apply rotation transformation
             float degree = getRotate(type);
             brush->RotateTranform(degree);
         } else if (type.find("scale") != std::string::npos) {
+            // Apply scaling transformation
             if (type.find(",") != std::string::npos) {
                 float scale_x = getScaleXY(type).first,
                       scale_y = getScaleXY(type).second;
@@ -755,6 +812,7 @@ void Renderer::applyTransformsOnBrush(
                 brush->ScaleTransform(scale, scale);
             }
         } else if (type.find("matrix") != std::string::npos) {
+            // Apply matrix transformation
             float a = 0, b = 0, c = 0, d = 0, e = 0, f = 0;
             if (type.find(",") != std::string::npos) {
                 type.erase(std::remove(type.begin(), type.end(), ','),
@@ -768,6 +826,7 @@ void Renderer::applyTransformsOnBrush(
     }
 }
 
+// Apply transformation matrix operations on a path gradient brush
 void Renderer::applyTransformsOnBrush(
     std::vector< std::string > transform_order,
     Gdiplus::PathGradientBrush*& brush) const {
