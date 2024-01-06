@@ -10,6 +10,7 @@ class Viewer {
 	-Viewer()
 	+~Viewer()
 	-last_mouse_pos : POINT
+	+window_size : Vector2Df
 	+{static} getInstance() : Viewer*
 	-is_dragging : bool
 	+needs_repaint : bool
@@ -18,6 +19,7 @@ class Viewer {
 	+rotate_angle : float
 	+zoom_factor : float
 	-{static} instance : static Viewer*
+	+getWindowSize(HWND hWnd) : void {query}
 	-handleKeyDown(WPARAM wParam) : void
 	+handleKeyEvent(WPARAM wParam) : void
 	-handleLeftButtonDown(LPARAM lParam) : void

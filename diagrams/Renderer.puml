@@ -8,9 +8,12 @@
 
 class Renderer {
 	-Renderer()
+	-getBrush(SVGElement* shape, Gdiplus::RectF bound) : Gdiplus::Brush* {query}
 	+{static} getInstance() : Renderer*
 	-{static} instance : static Renderer*
 	-applyTransform(std::vector<std::string> transform_order, Gdiplus::Graphics& graphics) : void {query}
+	-applyTransformsOnBrush(std::vector<std::string> transform_order, Gdiplus::LinearGradientBrush*& brush) : void {query}
+	-applyTransformsOnBrush(std::vector<std::string> transform_order, Gdiplus::PathGradientBrush*& brush) : void {query}
 	+draw(Gdiplus::Graphics& graphics, Group* group) : void {query}
 	-drawCircle(Gdiplus::Graphics& graphics, Circle* circle) : void {query}
 	-drawEllipse(Gdiplus::Graphics& graphics, Ell* ellipse) : void {query}

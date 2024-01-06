@@ -6,12 +6,6 @@
 
 /' Objects '/
 
-class Circle {
-	+Circle(float radius, const Vector2Df& center, ColorShape fill, ColorShape stroke, float stroke_width)
-	+getClass() : string {query}
-}
-
-
 class ColorShape {
 	+ColorShape()
 	+ColorShape(int red, int green, int blue, int alpha)
@@ -32,20 +26,6 @@ class ColorShape {
 	+operator<<(ostream& os, const ColorShape& color) : std :: ostream&
 }
 
-
-class Ell {
-	+Ell(const Vector2Df& radius, const Vector2Df& center, 
-	ColorShape fill, ColorShape stroke, float stroke_width)
-	+getMaxBound() : Vector2Df {query}
-	+getMinBound() : Vector2Df {query}
-	+getRadius() : Vector2Df {query}
-	-radius : Vector2Df
-	+getClass() : string {query}
-	+printData() : void {query}
-	+setRadius(const Vector2Df& radius) : void
-}
-
-
 abstract class Gradient {
 	+Gradient(vector<Stop> stops, 
 	pair<Vector2Df, Vector2Df> points, string units)
@@ -63,32 +43,6 @@ abstract class Gradient {
 	+setTransforms(vector<string> transforms) : void
 	+setUnits(string units) : void
 }
-
-
-class Group {
-	+Group()
-	+Group(Attributes attributes)
-	+~Group()
-	-attributes : Attributes
-	+getAttributes() : Attributes {query}
-	+getClass() : string {query}
-	+getElements() : vector<SVGElement*> {query}
-	-shapes : vector<SVGElement*>
-	+addElement(SVGElement* shape) : void
-	+printData() : void {query}
-}
-
-
-class Line {
-	+Line(const Vector2Df& point1, const Vector2Df& point2, 
-	ColorShape stroke, float stroke_width)
-	-direction : Vector2Df
-	+getDirection() : Vector2Df {query}
-	+getLength() : float {query}
-	+getClass() : string {query}
-	+setDirection(const Vector2Df& direction) : void
-}
-
 
 class LinearGradient {
 	+LinearGradient(vector<Stop> stops, 
@@ -131,72 +85,12 @@ class Parser {
 	+printShapesData() : void
 }
 
-
-class Path {
-	+Path(const ColorShape& fill, 
-	const ColorShape& stroke, float stroke_width)
-	-fill_rule : string
-	+getClass() : string {query}
-	+getFillRule() : string {query}
-	+getPoints() : vector<PathPoint> {query}
-	-points : vector<PathPoint>
-	+addPoint(PathPoint point) : void
-	+printData() : void {query}
-	+setFillRule(string fill_rule) : void
-}
-
-
-class Plygon {
-	+Plygon(ColorShape fill, ColorShape stroke, float stroke_width)
-	+getClass() : string {query}
-}
-
-
-class Plyline {
-	+Plyline(const ColorShape& fill, const ColorShape& stroke, float stroke_width)
-	+getClass() : string {query}
-}
-
-
-abstract class PolyShape {
-	#PolyShape(const ColorShape& fill, 
-	const ColorShape& stroke, float stroke_width)
-	+getMaxBound() : Vector2Df {query}
-	+getMinBound() : Vector2Df {query}
-	#fill_rule : string
-	+{abstract} getClass() : string {query}
-	+getFillRule() : string {query}
-	#points : vector<Vector2Df>
-	+getPoints() : vector<Vector2Df>& {query}
-	+addPoint(const Vector2Df& point) : void
-	+printData() : void {query}
-	+setFillRule(string fill_rule) : void
-}
-
-
 class RadialGradient {
 	+RadialGradient(vector<Stop> stops, pair<Vector2Df, Vector2Df> points, 
 	Vector2Df radius, string units)
 	+getRadius() : Vector2Df {query}
 	-radius : Vector2Df
 	+getClass() : string {query}
-}
-
-
-class Rect {
-	+Rect(float width, float height, Vector2Df position, Vector2Df radius, 
-	const ColorShape& fill, const ColorShape& stroke, float stroke_width)
-	+getRadius() : Vector2Df {query}
-	-radius : Vector2Df
-	+getHeight() : float {query}
-	+getWidth() : float {query}
-	-height : float
-	-width : float
-	+getClass() : string {query}
-	+printData() : void {query}
-	+setHeight(float height) : void
-	+setRadius(const Vector2Df& radius) : void
-	+setWidth(float width) : void
 }
 
 abstract class SVGElement {
@@ -242,51 +136,7 @@ class Stop {
 	-offset : float
 }
 
-
-class Text {
-	+Text(Vector2Df pos, string text, float font_size, const ColorShape& fill, 
-	const ColorShape& stroke, float stroke_width)
-	-font_size : float
-	+getFontSize() : float {query}
-	-anchor : string
-	-content : string
-	+getAnchor() : string {query}
-	+getClass() : string {query}
-	+getContent() : string {query}
-	+getFontStyle() : string {query}
-	-style : string
-	+printData() : void {query}
-	+setAnchor(string anchor) : void
-	+setContent(string content) : void
-	+setFontSize(float font_size) : void
-	+setFontStyle(string style) : void
-}
-
-
-class Vector2D <template<typename T>> {
-	+Vector2D()
-	+Vector2D(T X, T Y)
-	+Vector2D(const Vector2D<U>& vector)
-	+x : T
-	+y : T
-}
-
-class PathPoint {
-	+point : Vector2Df
-	+large_arc_flag : bool
-	+sweep_flag : bool
-	+tc : char
-	+x_axis_rotation : float
-}
-
-
-
-
-
 /' Inheritance relationships '/
-
-.Ell <|-- .Circle
-
 
 .Gradient <|-- .LinearGradient
 
@@ -294,43 +144,9 @@ class PathPoint {
 .Gradient <|-- .RadialGradient
 
 
-.PolyShape <|-- .Plygon
-
-
-.PolyShape <|-- .Plyline
-
-
-.SVGElement <|-- .Ell
-
-
-.SVGElement <|-- .Group
-
-
-.SVGElement <|-- .Line
-
-
-.SVGElement <|-- .Path
-
-
-.SVGElement <|-- .PolyShape
-
-
-.SVGElement <|-- .Rect
-
-
-.SVGElement <|-- .Text
-
-
-
-
-
 /' Aggregation relationships '/
 
 .Gradient *-- .Stop
-
-
-.Group o-- .SVGElement
-
 
 .Parser o-- .Gradient
 
@@ -341,17 +157,12 @@ class PathPoint {
 .Parser o-- .SVGElement
 
 
-.Path *-- .PathPoint
-
 .SVGElement *-- .ColorShape
 
 
 .SVGElement o-- .Gradient
 
 .Stop *-- .ColorShape
-
-
-
 
 
 /' Nested objects '/
