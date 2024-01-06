@@ -4,5 +4,5 @@
 <area shape="rect" id="node3" href="$classSVGElement.html" title="Represents an element in an SVG file." alt="" coords="152,215,255,241"/>
 <area shape="rect" id="node4" href="$classVector2D.html" title=" " alt="" coords="5,58,145,85"/>
 <area shape="rect" id="node5" href="$classGradient.html" title="A class that represents a gradient." alt="" coords="169,58,248,85"/>
-<area shape="rect" id="node6" href="$classmColor.html" title="Utility class for manipulating RGBA mColors." alt="" coords="273,58,342,85"/>
+<area shape="rect" id="node6" href="$classColorShape.html" title="Utility class for manipulating RGBA ColorShapes." alt="" coords="273,58,369,85"/>
 </map>

@@ -2,8 +2,8 @@ var dir_560415a5d2bc4999842279f4fc1debef =
 [
     [ "Circle.cpp", "Circle_8cpp_source.html", null ],
     [ "Circle.hpp", "Circle_8hpp_source.html", null ],
-    [ "Color.cpp", "Color_8cpp_source.html", null ],
-    [ "Color.hpp", "Color_8hpp_source.html", null ],
+    [ "ColorShape.cpp", "ColorShape_8cpp_source.html", null ],
+    [ "ColorShape.hpp", "ColorShape_8hpp_source.html", null ],
     [ "Ellipse.cpp", "Ellipse_8cpp_source.html", null ],
     [ "Ellipse.hpp", "Ellipse_8hpp_source.html", null ],
     [ "Gradient.cpp", "Gradient_8cpp_source.html", null ],
@@ -32,5 +32,7 @@ var dir_560415a5d2bc4999842279f4fc1debef =
     [ "SVGElement.hpp", "SVGElement_8hpp_source.html", null ],
     [ "Text.cpp", "Text_8cpp_source.html", null ],
     [ "Text.hpp", "Text_8hpp_source.html", null ],
-    [ "Vector2D.hpp", "Vector2D_8hpp_source.html", null ]
+    [ "Vector2D.hpp", "Vector2D_8hpp_source.html", null ],
+    [ "ViewBox.cpp", "ViewBox_8cpp_source.html", null ],
+    [ "ViewBox.hpp", "ViewBox_8hpp_source.html", null ]
 ];

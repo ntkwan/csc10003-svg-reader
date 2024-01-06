@@ -1,6 +1,6 @@
 var classEll =
 [
-    [ "Ell", "classEll.html#a4a9956ca82cb9f957e993fa0c0faced6", null ],
+    [ "Ell", "classEll.html#ab18115d5d2ad73b80ffbdf3661908f38", null ],
     [ "getClass", "classEll.html#a0d0a2a70c06878c5769bd7d092277892", null ],
     [ "getMaxBound", "classEll.html#a8a8dd2acc8c7be5580dd8e549d247525", null ],
     [ "getMinBound", "classEll.html#ab79368df57ee08382916fc52b69afb85", null ],

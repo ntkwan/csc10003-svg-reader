@@ -1,6 +1,6 @@
 var classText =
 [
-    [ "Text", "classText.html#a92c5df61031c3a9af813f9cc6978f34a", null ],
+    [ "Text", "classText.html#a66964f633003321b9dedb0ea0f0cf4b2", null ],
     [ "getAnchor", "classText.html#a445117756f52b37ae8bce225e254bea6", null ],
     [ "getClass", "classText.html#a405fac6f66711e0063e18e9e211e3a62", null ],
     [ "getContent", "classText.html#ac593599637e5e7f0f929c59b440f1b94", null ],
