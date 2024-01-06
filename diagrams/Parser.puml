@@ -6,30 +6,91 @@
 
 /' Objects '/
 
+abstract class Gradient {
+	+Gradient(std::vector<Stop> stops, std::pair<Vector2Df, Vector2Df> points, std::string units)
+	+~Gradient()
+	+getPoints() : std::pair<Vector2Df , Vector2Df> {query}
+	-points : std::pair<Vector2Df, Vector2Df>
+	+{abstract} getClass() : std::string {query}
+	+getUnits() : std::string {query}
+	-units : std::string
+	+getStops() : std::vector<Stop> {query}
+	-stops : std::vector<Stop>
+	+getTransforms() : std::vector<std::string> {query}
+	-transforms : std::vector<std::string>
+	+addStop(Stop stop) : void
+	+setTransforms(std::vector<std::string> transforms) : void
+	+setUnits(std::string units) : void
+}
+
+
 class Parser {
 	-Parser(const std::string& file_name)
 	+~Parser()
-	-parseCircle(xml_node<>* node, const mColor& fill_color, const mColor& stroke_color, float stroke_width) : Circle*
+	-parseCircle(rapidxml::xml_node<>* node, const ColorShape& fill_color, const ColorShape& stroke_color, float stroke_width) : Circle*
+	-parseColor(rapidxml::xml_node<>* node, std::string color, std::string& id) : ColorShape
+	-parseGradient(std::string id) : Gradient*
 	+getRoot() : Group*
-	-parseLine(xml_node<>* node, const mColor& stroke_color, float stroke_width) : Line*
+	-parseLine(rapidxml::xml_node<>* node, const ColorShape& stroke_color, float stroke_width) : Line*
 	+{static} getInstance(const std::string& file_name) : Parser*
-	-parsePath(xml_node<>* node, const mColor& fill_color, const mColor& stroke_color, float stroke_width) : Path*
-	-parseRect(xml_node<>* node, const mColor& fill_color, const mColor& stroke_color, float stroke_width) : Rect*
+	-parsePath(rapidxml::xml_node<>* node, const ColorShape& fill_color, const ColorShape& stroke_color, float stroke_width) : Path*
+	-parseRect(rapidxml::xml_node<>* node, const ColorShape& fill_color, const ColorShape& stroke_color, float stroke_width) : Rect*
 	-parseElements(std::string file_name) : SVGElement*
-	-parseShape(xml_node<>* node) : SVGElement*
+	-parseShape(rapidxml::xml_node<>* node) : SVGElement*
 	-root : SVGElement*
-	-parseText(xml_node<>* node, const mColor& fill_color, const mColor& stroke_color, float stroke_width) : Text*
-	-parseEllipse(xml_node<>* node, const mColor& fill_color, const mColor& stroke_color, float stroke_width) : class Ell*
-	-parsePolygon(xml_node<>* node, const mColor& fill_color, const mColor& stroke_color, float stroke_width) : class Plygon*
-	-parsePolyline(xml_node<>* node, const mColor& fill_color, const mColor& stroke_color, float stroke_width) : class Plyline*
-	-getFloatAttribute(xml_node<>* node, std::string name) : float
-	-parseColor(xml_node<>* node, std::string color) : mColor
+	-parseText(rapidxml::xml_node<>* node, const ColorShape& fill_color, const ColorShape& stroke_color, float stroke_width) : Text*
+	+getViewPort() : Vector2Df {query}
+	-viewport : Vector2Df
+	-parseEllipse(rapidxml::xml_node<>* node, const ColorShape& fill_color, const ColorShape& stroke_color, float stroke_width) : class Ell*
+	-parsePolygon(rapidxml::xml_node<>* node, const ColorShape& fill_color, const ColorShape& stroke_color, float stroke_width) : class Plygon*
+	-parsePolyline(rapidxml::xml_node<>* node, const ColorShape& fill_color, const ColorShape& stroke_color, float stroke_width) : class Plyline*
+	-getFloatAttribute(rapidxml::xml_node<>* node, std::string name) : float
 	-{static} instance : static Parser*
-	-getAttribute(xml_node<>* node, std::string name) : std::string
-	-parsePathPoints(xml_node<>* node) : std::vector<PathPoint>
-	-parsePoints(xml_node<>* node) : std::vector<Vector2Df>
-	-getTransformOrder(xml_node<>* node) : std::vector<std::string>
+	-gradients : std::map<std::string, Gradient*>
+	+getViewBox() : std::pair<Vector2Df , Vector2Df> {query}
+	-viewbox : std::pair<Vector2Df, Vector2Df>
+	-getAttribute(rapidxml::xml_node<>* node, std::string name) : std::string
+	-parsePathPoints(rapidxml::xml_node<>* node) : std::vector<PathPoint>
+	-getGradientStops(rapidxml::xml_node<>* node) : std::vector<Stop>
+	-parsePoints(rapidxml::xml_node<>* node) : std::vector<Vector2Df>
+	-getTransformOrder(rapidxml::xml_node<>* node) : std::vector<std::string>
+	-GetGradients(rapidxml::xml_node<>* node) : void
 	+printShapesData() : void
+}
+
+
+abstract class SVGElement {
+	#SVGElement()
+	#SVGElement(const ColorShape& fill, const ColorShape& stroke, float stroke_width)
+	#SVGElement(const ColorShape& fill, const ColorShape& stroke, float stroke_width, const Vector2Df& position)
+	+~SVGElement()
+	-fill : ColorShape
+	-stroke : ColorShape
+	+getFillColor() : ColorShape& {query}
+	+getOutlineColor() : ColorShape& {query}
+	+getGradient() : Gradient* {query}
+	-gradient : Gradient*
+	+getParent() : SVGElement* {query}
+	#parent : SVGElement*
+	+getMaxBound() : Vector2Df {query}
+	+getMinBound() : Vector2Df {query}
+	+getPosition() : Vector2Df {query}
+	-position : Vector2Df
+	+getOutlineThickness() : float {query}
+	-stroke_width : float
+	+{abstract} getClass() : std::string {query}
+	+getTransforms() : std::vector<std::string> {query}
+	-transforms : std::vector<std::string>
+	+addElement(SVGElement* element) : void
+	+printData() : void {query}
+	+setFillColor(const ColorShape& color) : void
+	+setGradient(Gradient* gradient) : void
+	+setOutlineColor(const ColorShape& color) : void
+	+setOutlineThickness(float thickness) : void
+	+setParent(SVGElement* parent) : void
+	+setPosition(float x, float y) : void
+	+setPosition(const Vector2Df& position) : void
+	+setTransforms(const std::vector<std::string>& transforms) : void
 }
 
 
@@ -43,12 +104,16 @@ class Parser {
 
 /' Aggregation relationships '/
 
+.Parser o-- .Gradient
+
+
 .Parser --> .Parser : -instance
 
 
+.Parser o-- .SVGElement
 
 
-
+.SVGElement o-- .Gradient
 
 /' Nested objects '/
 

@@ -1,0 +1,97 @@
+@startuml
+
+
+
+
+
+/' Objects '/
+
+class ColorShape {
+	+ColorShape()
+	+ColorShape(int red, int green, int blue, int alpha)
+	+ColorShape(int color)
+	+a : int
+	+b : int
+	+g : int
+	+r : int
+	+{static} Black : static const ColorShape
+	+{static} Blue : static const ColorShape
+	+{static} Cyan : static const ColorShape
+	+{static} Green : static const ColorShape
+	+{static} Magenta : static const ColorShape
+	+{static} Red : static const ColorShape
+	+{static} Transparent : static const ColorShape
+	+{static} White : static const ColorShape
+	+{static} Yellow : static const ColorShape
+	+operator<<(std::ostream& os, const ColorShape& color) : std :: ostream&
+}
+
+
+abstract class SVGElement {
+	#SVGElement()
+	#SVGElement(const ColorShape& fill, const ColorShape& stroke, float stroke_width)
+	#SVGElement(const ColorShape& fill, const ColorShape& stroke, float stroke_width, const Vector2Df& position)
+	+~SVGElement()
+	-fill : ColorShape
+	-stroke : ColorShape
+	+getFillColor() : ColorShape& {query}
+	+getOutlineColor() : ColorShape& {query}
+	+getGradient() : Gradient* {query}
+	-gradient : Gradient*
+	+getParent() : SVGElement* {query}
+	#parent : SVGElement*
+	+getMaxBound() : Vector2Df {query}
+	+getMinBound() : Vector2Df {query}
+	+getPosition() : Vector2Df {query}
+	-position : Vector2Df
+	+getOutlineThickness() : float {query}
+	-stroke_width : float
+	+{abstract} getClass() : std::string {query}
+	+getTransforms() : std::vector<std::string> {query}
+	-transforms : std::vector<std::string>
+	+addElement(SVGElement* element) : void
+	+printData() : void {query}
+	+setFillColor(const ColorShape& color) : void
+	+setGradient(Gradient* gradient) : void
+	+setOutlineColor(const ColorShape& color) : void
+	+setOutlineThickness(float thickness) : void
+	+setParent(SVGElement* parent) : void
+	+setPosition(float x, float y) : void
+	+setPosition(const Vector2Df& position) : void
+	+setTransforms(const std::vector<std::string>& transforms) : void
+}
+
+
+class Stop {
+	+Stop(const ColorShape& color, float offset)
+	-color : ColorShape
+	+getColor() : ColorShape {query}
+	+getOffset() : float {query}
+	-offset : float
+}
+
+
+
+
+
+/' Inheritance relationships '/
+
+
+
+
+/' Aggregation relationships '/
+
+.SVGElement *-- .ColorShape
+
+.Stop *-- .ColorShape
+
+
+
+
+
+
+/' Nested objects '/
+
+
+
+@enduml
