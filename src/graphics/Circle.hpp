@@ -21,8 +21,8 @@ public:
      * @param stroke Outline color of the circle.
      * @param stroke_width Thickness of the circle outline.
      */
-    Circle(float radius, const Vector2Df &center, mColor fill, mColor stroke,
-           float stroke_width);
+    Circle(float radius, const Vector2Df &center, ColorShape fill,
+           ColorShape stroke, float stroke_width);
 
     /**
      * @brief Gets the type of the shape.

@@ -19,7 +19,7 @@ public:
      * @param stroke Outline color of the polygon (default is sf::Color::White).
      * @param stroke_width Thickness of the polygon outline (default is 0).
      */
-    Plygon(mColor fill, mColor stroke, float stroke_width);
+    Plygon(ColorShape fill, ColorShape stroke, float stroke_width);
 
     /**
      * @brief Gets the type of the shape.

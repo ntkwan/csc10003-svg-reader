@@ -20,7 +20,8 @@ public:
      * @param fill The fill color of the polyline (default is
      * sf::Color::Transparent).
      */
-    Plyline(const mColor& fill, const mColor& stroke, float stroke_width);
+    Plyline(const ColorShape& fill, const ColorShape& stroke,
+            float stroke_width);
 
     /**
      * @brief Gets the type of the shape.

@@ -23,8 +23,8 @@ public:
      * @param stroke Outline color of the ellipse.
      * @param stroke_width Thickness of the ellipse outline.
      */
-    Ell(const Vector2Df &radius, const Vector2Df &center, mColor fill,
-        mColor stroke, float stroke_width);
+    Ell(const Vector2Df &radius, const Vector2Df &center, ColorShape fill,
+        ColorShape stroke, float stroke_width);
 
     /**
      * @brief Gets the type of the shape.

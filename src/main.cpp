@@ -14,9 +14,13 @@ Parser* parser = nullptr;
 
 void OnPaint(HDC hdc, const std::string& filePath, Viewer& viewer) {
     Gdiplus::Graphics graphics(hdc);
+
+    // Set up the graphics object for antialiased rendering.
     if (!parser) {
         parser = Parser::getInstance(filePath);
     }
+
+    // Set up Viewbox and Viewport
     Vector2Df viewport = parser->getViewPort();
     std::pair< Vector2Df, Vector2Df > viewbox = parser->getViewBox();
     if (viewport.x == 0 && viewport.y == 0) {
@@ -57,6 +61,7 @@ void OnPaint(HDC hdc, const std::string& filePath, Viewer& viewer) {
     graphics.TranslateTransform(viewer.offset_x, viewer.offset_y);
     graphics.SetClip(&region);
 
+    // Render the SVG file.
     Renderer* renderer = Renderer::getInstance();
     SVGElement* root = parser->getRoot();
     Group* group = dynamic_cast< Group* >(root);
