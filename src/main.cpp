@@ -23,13 +23,19 @@ void OnPaint(HDC hdc, const std::string& filePath, Viewer& viewer) {
         viewport.x = viewer.window_size.x;
         viewport.y = viewer.window_size.y;
     }
+
+    graphics.SetSmoothingMode(Gdiplus::SmoothingModeAntiAlias8x8);
+    graphics.SetTextContrast(100);
+    graphics.SetCompositingMode(Gdiplus::CompositingModeSourceOver);
+    graphics.SetPixelOffsetMode(Gdiplus::PixelOffsetModeHighQuality);
+    graphics.SetInterpolationMode(Gdiplus::InterpolationModeHighQuality);
+
     graphics.SetClip(Gdiplus::Rect(0, 0, viewport.x, viewport.y));
     if ((viewport.x != viewbox.second.x || viewport.y != viewbox.second.y) &&
         viewbox.second.x != 0 && viewbox.second.y != 0) {
         float scale_x = viewport.x / viewbox.second.x;
         float scale_y = viewport.y / viewbox.second.y;
         float scale = std::min(scale_x, scale_y);
-        scale = roundf(scale * 100) / 100;
         graphics.ScaleTransform(scale, scale);
         float offset_x = 0.0f;
         float offset_y = 0.0f;
@@ -42,12 +48,6 @@ void OnPaint(HDC hdc, const std::string& filePath, Viewer& viewer) {
         graphics.TranslateTransform(offset_x, offset_y);
     }
     graphics.TranslateTransform(-viewbox.first.x, -viewbox.first.y);
-
-    graphics.SetSmoothingMode(Gdiplus::SmoothingModeAntiAlias8x8);
-    graphics.SetTextContrast(100);
-    graphics.SetCompositingMode(Gdiplus::CompositingModeSourceOver);
-    graphics.SetPixelOffsetMode(Gdiplus::PixelOffsetModeHighQuality);
-    graphics.SetInterpolationMode(Gdiplus::InterpolationModeHighQuality);
 
     Gdiplus::Matrix matrix;
     Gdiplus::Region region;
