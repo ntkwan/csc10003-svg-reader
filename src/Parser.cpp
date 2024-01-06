@@ -209,8 +209,9 @@ SVGElement *Parser::parseElements(std::string file_name) {
     std::string viewbox = getAttribute(svg, "viewBox");
     if (viewbox != "") {
         std::stringstream ss(viewbox);
-        ss >> this->viewbox.first.x >> this->viewbox.first.y >>
-            this->viewbox.second.x >> this->viewbox.second.y;
+        float x, y, w, h;
+        ss >> x >> y >> w >> h;
+        this->viewbox = ViewBox(x, y, w, h);
     }
     rapidxml::xml_node<> *node = svg->first_node();
     rapidxml::xml_node<> *prev = NULL;
@@ -355,19 +356,19 @@ float Parser::getFloatAttribute(rapidxml::xml_node<> *node, std::string name) {
             if (name == "x1" || name == "y1" || name == "fr")
                 result = 0;
             else if (name == "cx" || name == "cy")
-                result = name == "cx" ? 0.5 * this->viewbox.second.x
-                                      : 0.5 * this->viewbox.second.y;
+                result = name == "cx" ? 0.5 * this->viewbox.getWidth()
+                                      : 0.5 * this->viewbox.getHeight();
             else if (name == "r") {
-                result = sqrt((pow(this->viewbox.second.x, 2) +
-                               pow(this->viewbox.second.y, 2)) /
+                result = sqrt((pow(this->viewbox.getWidth(), 2) +
+                               pow(this->viewbox.getHeight(), 2)) /
                               2) /
                          2;
             } else if (name == "fx" || name == "fy")
                 result = name == "fx" ? getFloatAttribute(node, "cx")
                                       : getFloatAttribute(node, "cy");
             else
-                result = name == "x2" ? this->viewbox.second.x
-                                      : this->viewbox.second.y;
+                result = name == "x2" ? this->viewbox.getWidth()
+                                      : this->viewbox.getHeight();
         } else {
             // Handle default float attribute values for other elements
             if (name == "stroke-width" || name == "stroke-opacity" ||
@@ -383,7 +384,7 @@ float Parser::getFloatAttribute(rapidxml::xml_node<> *node, std::string name) {
             std::string value = node->first_attribute(name.c_str())->value();
             if (value.find("%") != std::string::npos) {
                 result = std::stof(value.substr(0, value.find("%"))) *
-                         this->viewbox.second.x / 100;
+                         this->viewbox.getWidth() / 100;
             } else if (value.find("pt") != std::string::npos) {
                 result = std::stof(value.substr(0, value.find("pt"))) * 1.33;
             } else {
@@ -907,7 +908,7 @@ Parser::~Parser() {
 void Parser::printShapesData() { root->printData(); }
 
 // Get the viewBox of the SVG document
-std::pair< Vector2Df, Vector2Df > Parser::getViewBox() const { return viewbox; }
+ViewBox Parser::getViewBox() const { return viewbox; }
 
 // Get the viewport of the SVG document
 Vector2Df Parser::getViewPort() const { return viewport; }

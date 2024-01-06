@@ -61,7 +61,7 @@ public:
      *
      * @return The viewbox of the SVG file.
      */
-    std::pair< Vector2Df, Vector2Df > getViewBox() const;
+    ViewBox getViewBox() const;
 
     /**
      * @brief Gets the viewport of the SVG file.
@@ -278,8 +278,7 @@ private:
     SVGElement* root;         ///< The root of the SVG file.
     std::map< std::string, Gradient* > gradients;  ///< The gradients of the SVG
                                                    ///< file.
-    std::pair< Vector2Df, Vector2Df >
-        viewbox;         ///< The viewbox of the SVG file.
+    ViewBox viewbox;     ///< The viewbox of the SVG file.
     Vector2Df viewport;  ///< The viewport of the SVG file.
 };
 

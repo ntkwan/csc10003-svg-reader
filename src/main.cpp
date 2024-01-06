@@ -22,7 +22,7 @@ void OnPaint(HDC hdc, const std::string& filePath, Viewer& viewer) {
 
     // Set up Viewbox and Viewport
     Vector2Df viewport = parser->getViewPort();
-    std::pair< Vector2Df, Vector2Df > viewbox = parser->getViewBox();
+    ViewBox viewbox = parser->getViewBox();
     if (viewport.x == 0 && viewport.y == 0) {
         viewport.x = viewer.window_size.x;
         viewport.y = viewer.window_size.y;
@@ -35,23 +35,24 @@ void OnPaint(HDC hdc, const std::string& filePath, Viewer& viewer) {
     graphics.SetInterpolationMode(Gdiplus::InterpolationModeHighQuality);
 
     graphics.SetClip(Gdiplus::Rect(0, 0, viewport.x, viewport.y));
-    if ((viewport.x != viewbox.second.x || viewport.y != viewbox.second.y) &&
-        viewbox.second.x != 0 && viewbox.second.y != 0) {
-        float scale_x = viewport.x / viewbox.second.x;
-        float scale_y = viewport.y / viewbox.second.y;
+    if ((viewport.x != viewbox.getWidth() ||
+         viewport.y != viewbox.getHeight()) &&
+        viewbox.getWidth() != 0 && viewbox.getHeight() != 0) {
+        float scale_x = viewport.x / viewbox.getWidth();
+        float scale_y = viewport.y / viewbox.getHeight();
         float scale = std::min(scale_x, scale_y);
         graphics.ScaleTransform(scale, scale);
         float offset_x = 0.0f;
         float offset_y = 0.0f;
-        if (viewport.x > viewbox.second.x) {
-            offset_x = (viewport.x - viewbox.second.x * scale) / 2 / scale;
+        if (viewport.x > viewbox.getWidth()) {
+            offset_x = (viewport.x - viewbox.getWidth() * scale) / 2 / scale;
         }
-        if (viewport.y > viewbox.second.y) {
-            offset_y = (viewport.y - viewbox.second.y * scale) / 2 / scale;
+        if (viewport.y > viewbox.getHeight()) {
+            offset_y = (viewport.y - viewbox.getHeight() * scale) / 2 / scale;
         }
         graphics.TranslateTransform(offset_x, offset_y);
     }
-    graphics.TranslateTransform(-viewbox.first.x, -viewbox.first.y);
+    graphics.TranslateTransform(-viewbox.getX(), -viewbox.getY());
 
     Gdiplus::Matrix matrix;
     Gdiplus::Region region;
@@ -124,6 +125,18 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam,
     std::string filePath;
     if (__argc > 1) {
         filePath = __argv[1];
+        std::ifstream file(filePath);
+        if (!file.good()) {
+            std::cerr << "Error: File path is invalid or does not exist."
+                      << std::endl;
+            PostQuitMessage(0);
+            return 0;
+        }
+        file.close();
+    } else {
+        std::cerr << "Error: No file path provided." << std::endl;
+        PostQuitMessage(0);
+        return 0;
     }
     Viewer* viewer = Viewer::getInstance();
     switch (message) {
