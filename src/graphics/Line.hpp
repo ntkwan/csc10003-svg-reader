@@ -22,7 +22,7 @@ public:
      * @param stroke The color of the line (default is sf::Color::White).
      * @param stroke_width The thickness of the line (default is 1.0).
      */
-    Line(const Vector2Df& point1, const Vector2Df& point2, mColor stroke,
+    Line(const Vector2Df& point1, const Vector2Df& point2, ColorShape stroke,
          float stroke_width);
 
     /**

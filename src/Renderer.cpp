@@ -108,7 +108,7 @@ void Renderer::draw(Gdiplus::Graphics& graphics, Group* group) const {
 }
 
 void Renderer::drawLine(Gdiplus::Graphics& graphics, Line* line) const {
-    mColor color = line->getOutlineColor();
+    ColorShape color = line->getOutlineColor();
     Gdiplus::Pen linePen(Gdiplus::Color(color.a, color.r, color.g, color.b),
                          line->getOutlineThickness());
     Gdiplus::PointF startPoint(line->getPosition().x, line->getPosition().y);
@@ -122,48 +122,55 @@ void Renderer::drawRectangle(Gdiplus::Graphics& graphics,
     float y = rectangle->getPosition().y;
     float width = rectangle->getWidth();
     float height = rectangle->getHeight();
-    mColor outline_color = rectangle->getOutlineColor();
+    ColorShape outline_color = rectangle->getOutlineColor();
+
     Gdiplus::Pen rect_outline(Gdiplus::Color(outline_color.a, outline_color.r,
                                              outline_color.g, outline_color.b),
                               rectangle->getOutlineThickness());
     Gdiplus::RectF bound(x, y, width, height);
     Gdiplus::Brush* rect_fill = getBrush(rectangle, bound);
+
     if (rectangle->getRadius().x != 0 || rectangle->getRadius().y != 0) {
         float dx = rectangle->getRadius().x * 2;
         float dy = rectangle->getRadius().y * 2;
+
         Gdiplus::GraphicsPath path;
         path.AddArc(x, y, dx, dy, 180, 90);
         path.AddArc(x + width - dx, y, dx, dy, 270, 90);
         path.AddArc(x + width - dx, y + height - dy, dx, dy, 0, 90);
         path.AddArc(x, y + height - dy, dx, dy, 90, 90);
         path.CloseFigure();
+
         if (Gdiplus::PathGradientBrush* brush =
                 dynamic_cast< Gdiplus::PathGradientBrush* >(rect_fill)) {
-            mColor color =
+            ColorShape color =
                 rectangle->getGradient()->getStops().back().getColor();
             Gdiplus::SolidBrush corner_fill(
                 Gdiplus::Color(color.a, color.r, color.g, color.b));
             graphics.FillPath(&corner_fill, &path);
         }
+
         graphics.FillPath(rect_fill, &path);
         graphics.DrawPath(&rect_outline, &path);
     } else {
         if (Gdiplus::PathGradientBrush* brush =
                 dynamic_cast< Gdiplus::PathGradientBrush* >(rect_fill)) {
-            mColor color =
+            ColorShape color =
                 rectangle->getGradient()->getStops().back().getColor();
             Gdiplus::SolidBrush corner_fill(
                 Gdiplus::Color(color.a, color.r, color.g, color.b));
             graphics.FillRectangle(&corner_fill, x, y, width, height);
         }
+
         graphics.FillRectangle(rect_fill, x, y, width, height);
         graphics.DrawRectangle(&rect_outline, x, y, width, height);
     }
+
     delete rect_fill;
 }
 
 void Renderer::drawCircle(Gdiplus::Graphics& graphics, Circle* circle) const {
-    mColor outline_color = circle->getOutlineColor();
+    ColorShape outline_color = circle->getOutlineColor();
     Gdiplus::Pen circle_outline(
         Gdiplus::Color(outline_color.a, outline_color.r, outline_color.g,
                        outline_color.b),
@@ -173,9 +180,10 @@ void Renderer::drawCircle(Gdiplus::Graphics& graphics, Circle* circle) const {
     Gdiplus::RectF bound(min_bound.x, min_bound.y, max_bound.x - min_bound.x,
                          max_bound.y - min_bound.y);
     Gdiplus::Brush* circle_fill = getBrush(circle, bound);
+
     if (Gdiplus::PathGradientBrush* brush =
             dynamic_cast< Gdiplus::PathGradientBrush* >(circle_fill)) {
-        mColor color = circle->getGradient()->getStops().back().getColor();
+        ColorShape color = circle->getGradient()->getStops().back().getColor();
         Gdiplus::SolidBrush corner_fill(
             Gdiplus::Color(color.a, color.r, color.g, color.b));
         graphics.FillEllipse(
@@ -183,6 +191,7 @@ void Renderer::drawCircle(Gdiplus::Graphics& graphics, Circle* circle) const {
             circle->getPosition().y - circle->getRadius().y,
             circle->getRadius().x * 2, circle->getRadius().y * 2);
     }
+
     graphics.FillEllipse(circle_fill,
                          circle->getPosition().x - circle->getRadius().x,
                          circle->getPosition().y - circle->getRadius().y,
@@ -191,23 +200,27 @@ void Renderer::drawCircle(Gdiplus::Graphics& graphics, Circle* circle) const {
                          circle->getPosition().x - circle->getRadius().x,
                          circle->getPosition().y - circle->getRadius().y,
                          circle->getRadius().x * 2, circle->getRadius().x * 2);
+
     delete circle_fill;
 }
 
 void Renderer::drawEllipse(Gdiplus::Graphics& graphics, Ell* ellipse) const {
-    mColor outline_color = ellipse->getOutlineColor();
+    ColorShape outline_color = ellipse->getOutlineColor();
+
     Gdiplus::Pen ellipse_outline(
         Gdiplus::Color(outline_color.a, outline_color.r, outline_color.g,
                        outline_color.b),
         ellipse->getOutlineThickness());
+
     Vector2Df min_bound = ellipse->getMinBound();
     Vector2Df max_bound = ellipse->getMaxBound();
     Gdiplus::RectF bound(min_bound.x, min_bound.y, max_bound.x - min_bound.x,
                          max_bound.y - min_bound.y);
     Gdiplus::Brush* ellipse_fill = getBrush(ellipse, bound);
+
     if (Gdiplus::PathGradientBrush* brush =
             dynamic_cast< Gdiplus::PathGradientBrush* >(ellipse_fill)) {
-        mColor color = ellipse->getGradient()->getStops().back().getColor();
+        ColorShape color = ellipse->getGradient()->getStops().back().getColor();
         Gdiplus::SolidBrush corner_fill(
             Gdiplus::Color(color.a, color.r, color.g, color.b));
         graphics.FillEllipse(
@@ -215,6 +228,7 @@ void Renderer::drawEllipse(Gdiplus::Graphics& graphics, Ell* ellipse) const {
             ellipse->getPosition().y - ellipse->getRadius().y,
             ellipse->getRadius().x * 2, ellipse->getRadius().y * 2);
     }
+
     graphics.FillEllipse(
         ellipse_fill, ellipse->getPosition().x - ellipse->getRadius().x,
         ellipse->getPosition().y - ellipse->getRadius().y,
@@ -223,11 +237,12 @@ void Renderer::drawEllipse(Gdiplus::Graphics& graphics, Ell* ellipse) const {
         &ellipse_outline, ellipse->getPosition().x - ellipse->getRadius().x,
         ellipse->getPosition().y - ellipse->getRadius().y,
         ellipse->getRadius().x * 2, ellipse->getRadius().y * 2);
+
     delete ellipse_fill;
 }
 
 void Renderer::drawPolygon(Gdiplus::Graphics& graphics, Plygon* polygon) const {
-    mColor outline_color = polygon->getOutlineColor();
+    ColorShape outline_color = polygon->getOutlineColor();
     Gdiplus::Pen polygon_outline(
         Gdiplus::Color(outline_color.a, outline_color.r, outline_color.g,
                        outline_color.b),
@@ -246,26 +261,30 @@ void Renderer::drawPolygon(Gdiplus::Graphics& graphics, Plygon* polygon) const {
     } else if (polygon->getFillRule() == "nonzero") {
         fill_mode = Gdiplus::FillModeWinding;
     }
+
     Vector2Df min_bound = polygon->getMinBound();
     Vector2Df max_bound = polygon->getMaxBound();
     Gdiplus::RectF bound(min_bound.x, min_bound.y, max_bound.x - min_bound.x,
                          max_bound.y - min_bound.y);
     Gdiplus::Brush* polygon_fill = getBrush(polygon, bound);
+
     if (Gdiplus::PathGradientBrush* brush =
             dynamic_cast< Gdiplus::PathGradientBrush* >(polygon_fill)) {
-        mColor color = polygon->getGradient()->getStops().back().getColor();
+        ColorShape color = polygon->getGradient()->getStops().back().getColor();
         Gdiplus::SolidBrush corner_fill(
             Gdiplus::Color(color.a, color.r, color.g, color.b));
         graphics.FillPolygon(&corner_fill, points, idx, fill_mode);
     }
+
     graphics.FillPolygon(polygon_fill, points, idx, fill_mode);
     graphics.DrawPolygon(&polygon_outline, points, idx);
+
     delete[] points;
     delete polygon_fill;
 }
 
 void Renderer::drawText(Gdiplus::Graphics& graphics, Text* text) const {
-    mColor outline_color = text->getOutlineColor();
+    ColorShape outline_color = text->getOutlineColor();
     graphics.SetTextRenderingHint(Gdiplus::TextRenderingHintAntiAliasGridFit);
 
     Gdiplus::Pen text_outline(Gdiplus::Color(outline_color.a, outline_color.r,
@@ -279,6 +298,7 @@ void Renderer::drawText(Gdiplus::Graphics& graphics, Text* text) const {
 
     std::wstring_convert< std::codecvt_utf8_utf16< wchar_t > > converter;
     std::wstring wide_content = converter.from_bytes(text->getContent());
+
     Gdiplus::StringFormat string_format;
     if (text->getAnchor() == "middle") {
         string_format.SetAlignment(Gdiplus::StringAlignmentCenter);
@@ -289,6 +309,7 @@ void Renderer::drawText(Gdiplus::Graphics& graphics, Text* text) const {
     } else {
         string_format.SetAlignment(Gdiplus::StringAlignmentNear);
     }
+
     Gdiplus::FontStyle font_style = Gdiplus::FontStyleRegular;
     if (text->getFontStyle() == "italic" || text->getFontStyle() == "oblique") {
         font_style = Gdiplus::FontStyleItalic;
@@ -300,13 +321,15 @@ void Renderer::drawText(Gdiplus::Graphics& graphics, Text* text) const {
     Gdiplus::RectF bound;
     path.GetBounds(&bound);
     Gdiplus::Brush* text_fill = getBrush(text, bound);
+
     if (Gdiplus::PathGradientBrush* brush =
             dynamic_cast< Gdiplus::PathGradientBrush* >(text_fill)) {
-        mColor color = text->getGradient()->getStops().back().getColor();
+        ColorShape color = text->getGradient()->getStops().back().getColor();
         Gdiplus::SolidBrush corner_fill(
             Gdiplus::Color(color.a, color.r, color.g, color.b));
         graphics.FillPath(&corner_fill, &path);
     }
+
     graphics.FillPath(text_fill, &path);
     if (text->getOutlineColor().a != 0 &&
         text->getOutlineColor().a == text->getFillColor().a) {
@@ -316,12 +339,13 @@ void Renderer::drawText(Gdiplus::Graphics& graphics, Text* text) const {
                                              outline_color.g, outline_color.b));
     }
     graphics.DrawPath(&text_outline, &path);
+
     delete text_fill;
 }
 
 void Renderer::drawPolyline(Gdiplus::Graphics& graphics,
                             Plyline* polyline) const {
-    mColor outline_color = polyline->getOutlineColor();
+    ColorShape outline_color = polyline->getOutlineColor();
     Gdiplus::Pen polyline_outline(
         Gdiplus::Color(outline_color.a, outline_color.r, outline_color.g,
                        outline_color.b),
@@ -333,6 +357,7 @@ void Renderer::drawPolyline(Gdiplus::Graphics& graphics,
     } else if (polyline->getFillRule() == "nonzero") {
         fill_mode = Gdiplus::FillModeWinding;
     }
+
     Gdiplus::GraphicsPath path(fill_mode);
     const std::vector< Vector2Df >& points = polyline->getPoints();
     if (points.size() < 2) {
@@ -345,29 +370,35 @@ void Renderer::drawPolyline(Gdiplus::Graphics& graphics,
         path.AddLine(points[i - 1].x, points[i - 1].y, points[i].x,
                      points[i].y);
     }
+
     Vector2Df min_bound = polyline->getMinBound();
     Vector2Df max_bound = polyline->getMaxBound();
     Gdiplus::RectF bound(min_bound.x, min_bound.y, max_bound.x - min_bound.x,
                          max_bound.y - min_bound.y);
     Gdiplus::Brush* polyline_fill = getBrush(polyline, bound);
+
     if (Gdiplus::PathGradientBrush* brush =
             dynamic_cast< Gdiplus::PathGradientBrush* >(polyline_fill)) {
-        mColor color = polyline->getGradient()->getStops().back().getColor();
+        ColorShape color =
+            polyline->getGradient()->getStops().back().getColor();
         Gdiplus::SolidBrush corner_fill(
             Gdiplus::Color(color.a, color.r, color.g, color.b));
         graphics.FillPath(&corner_fill, &path);
     }
+
     graphics.FillPath(polyline_fill, &path);
     graphics.DrawPath(&polyline_outline, &path);
+
     delete polyline_fill;
 }
 
 void Renderer::drawPath(Gdiplus::Graphics& graphics, Path* path) const {
-    mColor outline_color = path->getOutlineColor();
+    ColorShape outline_color = path->getOutlineColor();
     Gdiplus::Pen path_outline(Gdiplus::Color(outline_color.a, outline_color.r,
                                              outline_color.g, outline_color.b),
                               path->getOutlineThickness());
 
+    // Fill the path by rules
     Gdiplus::FillMode fill_mode;
     if (path->getFillRule() == "evenodd") {
         fill_mode = Gdiplus::FillModeAlternate;
@@ -380,17 +411,21 @@ void Renderer::drawPath(Gdiplus::Graphics& graphics, Path* path) const {
     int n = points.size();
     Vector2Df first_point{0, 0}, cur_point{0, 0};
 
+    // Construct the path
     for (int i = 0; i < n; ++i) {
         if (points[i].tc == 'm') {
+            // If the command is m, then start a new figure
             first_point = points[i].point;
             gdi_path.StartFigure();
             cur_point = first_point;
         } else if (points[i].tc == 'l' || points[i].tc == 'h' ||
                    points[i].tc == 'v') {
+            // If the command is l, h, or v, then add a line to the path
             gdi_path.AddLine(cur_point.x, cur_point.y, points[i].point.x,
                              points[i].point.y);
             cur_point = points[i].point;
         } else if (points[i].tc == 'c') {
+            // If the command is c, then add a bezier curve to the path
             if (i + 2 < n) {
                 Vector2Df control_point1 = points[i].point;
                 Vector2Df control_point2 = points[i + 1].point;
@@ -403,10 +438,13 @@ void Renderer::drawPath(Gdiplus::Graphics& graphics, Path* path) const {
                 cur_point = control_point3;
             }
         } else if (points[i].tc == 'z') {
+            // If the command is z, then close the figure
             gdi_path.CloseFigure();
             cur_point = first_point;
         } else if (points[i].tc == 's') {
+            // If the command is s, then add a bezier curve to the path
             if (i + 1 < n) {
+                // Calculate the first control point
                 Vector2Df auto_control_point;
                 if (i > 0 &&
                     (points[i - 1].tc == 'c' || points[i - 1].tc == 's')) {
@@ -417,6 +455,7 @@ void Renderer::drawPath(Gdiplus::Graphics& graphics, Path* path) const {
                 } else {
                     auto_control_point = cur_point;
                 }
+                // Calculate the rest control points
                 Vector2Df control_point2 = points[i].point;
                 Vector2Df control_point3 = points[i + 1].point;
                 gdi_path.AddBezier(cur_point.x, cur_point.y,
@@ -427,10 +466,13 @@ void Renderer::drawPath(Gdiplus::Graphics& graphics, Path* path) const {
                 cur_point = control_point3;
             }
         } else if (points[i].tc == 'q') {
+            // If the command is q, then add a quadratic bezier curve to the
             if (i + 1 < n) {
+                // Calculate the control point and its end point
                 Vector2Df control_point = points[i].point;
                 Vector2Df end_point = points[i + 1].point;
 
+                // Add the curve to the path
                 Gdiplus::PointF q_points[3];
                 q_points[0] = Gdiplus::PointF{cur_point.x, cur_point.y};
                 q_points[1] = Gdiplus::PointF{control_point.x, control_point.y};
@@ -545,11 +587,13 @@ void Renderer::drawPath(Gdiplus::Graphics& graphics, Path* path) const {
     gdi_path.GetBounds(&bound);
     Gdiplus::Brush* path_fill = getBrush(path, bound);
     Gdiplus::Region region(&gdi_path);
+
     if (Gdiplus::PathGradientBrush* brush =
             dynamic_cast< Gdiplus::PathGradientBrush* >(path_fill)) {
-        mColor color = path->getGradient()->getStops().back().getColor();
+        ColorShape color = path->getGradient()->getStops().back().getColor();
         Gdiplus::SolidBrush corner_fill(
             Gdiplus::Color(color.a, color.r, color.g, color.b));
+
         if (path->getGradient()->getUnits() == "userSpaceOnUse") {
             float cx = path->getGradient()->getPoints().first.x;
             float cy = path->getGradient()->getPoints().first.y;
@@ -558,6 +602,7 @@ void Renderer::drawPath(Gdiplus::Graphics& graphics, Path* path) const {
                           .x;
             Gdiplus::GraphicsPath fill_path(fill_mode);
             fill_path.AddEllipse(cx - r, cy - r, 2 * r, 2 * r);
+
             for (auto type : path->getGradient()->getTransforms()) {
                 if (type.find("matrix") != std::string::npos) {
                     float a = 0, b = 0, c = 0, d = 0, e = 0, f = 0;
@@ -575,8 +620,10 @@ void Renderer::drawPath(Gdiplus::Graphics& graphics, Path* path) const {
         }
         graphics.FillRegion(&corner_fill, &region);
     }
+
     graphics.FillPath(path_fill, &gdi_path);
     graphics.DrawPath(&path_outline, &gdi_path);
+
     delete path_fill;
 }
 
@@ -589,13 +636,17 @@ Gdiplus::Brush* Renderer::getBrush(SVGElement* shape,
         int stop_size = stops.size() + 2;
         Gdiplus::Color* colors = new Gdiplus::Color[stop_size];
         float* offsets = new float[stop_size];
+
         if (gradient->getClass() == "LinearGradient") {
+            // Brush linear gradient
             if (gradient->getUnits() == "objectBoundingBox") {
                 points.first.x = bound.X;
                 points.first.y = bound.Y;
                 points.second.x = bound.X + bound.Width;
                 points.second.y = bound.Y + bound.Height;
             }
+
+            // Set the center color
             offsets[0] = 0;
             offsets[stop_size - 1] = 1;
             colors[0] =
@@ -606,12 +657,16 @@ Gdiplus::Brush* Renderer::getBrush(SVGElement* shape,
                                stops[stop_size - 3].getColor().r,
                                stops[stop_size - 3].getColor().g,
                                stops[stop_size - 3].getColor().b);
+
+            // Reverse the order of the stops
             for (size_t i = 1; i < stop_size - 1; ++i) {
                 colors[i] = Gdiplus::Color(
                     stops[i - 1].getColor().a, stops[i - 1].getColor().r,
                     stops[i - 1].getColor().g, stops[i - 1].getColor().b);
                 offsets[i] = stops[i - 1].getOffset();
             }
+
+            // Create the brush of linear gradient
             Gdiplus::LinearGradientBrush* fill =
                 new Gdiplus::LinearGradientBrush(
                     Gdiplus::PointF(points.first.x, points.first.y),
@@ -620,23 +675,30 @@ Gdiplus::Brush* Renderer::getBrush(SVGElement* shape,
             fill->SetWrapMode(Gdiplus::WrapModeTileFlipX);
             fill->SetInterpolationColors(colors, offsets, stop_size);
             applyTransformsOnBrush(gradient->getTransforms(), fill);
+
             delete[] colors;
             delete[] offsets;
             return fill;
         } else if (gradient->getClass() == "RadialGradient") {
+            // Brush radiol gradient
             RadialGradient* radial_gradient =
                 dynamic_cast< RadialGradient* >(gradient);
             Vector2Df radius = radial_gradient->getRadius();
+
+            // If the gradient is in userSpaceOnUse, the radius is the distance
             if (gradient->getUnits() == "userSpaceOnUse") {
                 bound.X = points.first.x - radius.x;
                 bound.Y = points.first.y - radius.x;
                 bound.Width = radius.x * 2;
                 bound.Height = radius.x * 2;
             }
+
             Gdiplus::GraphicsPath path;
             path.AddEllipse(bound);
             Gdiplus::PathGradientBrush* fill =
                 new Gdiplus::PathGradientBrush(&path);
+
+            // Set the center color
             offsets[0] = 0;
             offsets[stop_size - 1] = 1;
             colors[0] = Gdiplus::Color(stops[stop_size - 3].getColor().a,
@@ -647,6 +709,7 @@ Gdiplus::Brush* Renderer::getBrush(SVGElement* shape,
                 Gdiplus::Color(stops[0].getColor().a, stops[0].getColor().r,
                                stops[0].getColor().g, stops[0].getColor().b);
 
+            // Reverse the order of the stops
             for (size_t i = 1; i < stop_size - 1; ++i) {
                 colors[i] =
                     Gdiplus::Color(stops[stop_size - 2 - i].getColor().a,
@@ -655,6 +718,7 @@ Gdiplus::Brush* Renderer::getBrush(SVGElement* shape,
                                    stops[stop_size - 2 - i].getColor().b);
                 offsets[i] = 1 - stops[stop_size - 2 - i].getOffset();
             }
+
             fill->SetInterpolationColors(colors, offsets, stop_size);
             applyTransformsOnBrush(gradient->getTransforms(), fill);
             delete[] colors;
@@ -662,7 +726,7 @@ Gdiplus::Brush* Renderer::getBrush(SVGElement* shape,
             return fill;
         }
     } else {
-        mColor color = shape->getFillColor();
+        ColorShape color = shape->getFillColor();
         Gdiplus::SolidBrush* fill = new Gdiplus::SolidBrush(
             Gdiplus::Color(color.a, color.r, color.g, color.b));
         return fill;

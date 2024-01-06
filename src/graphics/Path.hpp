@@ -8,12 +8,12 @@
  */
 
 struct PathPoint {
-    Vector2Df point;
-    char tc;
-    Vector2Df radius{0, 0};
-    float x_axis_rotation = 0.f;
-    bool large_arc_flag = false;
-    bool sweep_flag = false;
+    Vector2Df point;              ///< Point in 2D space
+    char tc;                      ///< Type of point
+    Vector2Df radius{0, 0};       ///< Radius of the arc
+    float x_axis_rotation = 0.f;  ///< Rotation of the arc
+    bool large_arc_flag = false;  ///< Flag for large arc
+    bool sweep_flag = false;      ///< Flag for sweep
 };
 
 /**
@@ -34,7 +34,7 @@ public:
      * @param stroke Outline color of the path.
      * @param stroke_width Thickness of the path outline.
      */
-    Path(const mColor& fill, const mColor& stroke, float stroke_width);
+    Path(const ColorShape& fill, const ColorShape& stroke, float stroke_width);
 
     /**
      * @brief Gets the type of the shape.

@@ -23,7 +23,8 @@ protected:
      * sf::Color::White).
      * @param stroke_width Thickness of the polyshape outline (default is 0).
      */
-    PolyShape(const mColor &fill, const mColor &stroke, float stroke_width);
+    PolyShape(const ColorShape &fill, const ColorShape &stroke,
+              float stroke_width);
 
 public:
     /**

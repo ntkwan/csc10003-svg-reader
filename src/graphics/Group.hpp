@@ -5,7 +5,8 @@
 
 #include "SVGElement.hpp"
 
-typedef std::vector< std::pair< std::string, std::string > > Attributes;
+typedef std::vector< std::pair< std::string, std::string > >
+    Attributes;  ///< Attributes of the shape
 
 /**
  * @brief A composite class that contains a vector of shape pointers

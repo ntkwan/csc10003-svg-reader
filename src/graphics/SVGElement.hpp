@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include "Color.hpp"
+#include "ColorShape.hpp"
 #include "Gradient.hpp"
 #include "Vector2D.hpp"
 
@@ -38,14 +38,14 @@ public:
      *
      * @param color The new fill color of the shape.
      */
-    void setFillColor(const mColor& color);
+    void setFillColor(const ColorShape& color);
 
     /**
      * @brief Sets the outline color of the shape.
      *
      * @param color The new outline color of the shape.
      */
-    void setOutlineColor(const mColor& color);
+    void setOutlineColor(const ColorShape& color);
 
     /**
      * @brief Sets the outline thickness of the shape.
@@ -82,14 +82,14 @@ public:
      * @return The fill color of the shape.
      * @note The default fill color is white.
      */
-    const mColor& getFillColor() const;
+    const ColorShape& getFillColor() const;
 
     /**
      * @brief Gets the outline color of the shape.
      * @return The outline color of the shape.
      * @note The default outline color is white.
      */
-    const mColor& getOutlineColor() const;
+    const ColorShape& getOutlineColor() const;
 
     /**
      * @brief Gets the outline thickness of the shape.
@@ -202,7 +202,8 @@ protected:
      * @note This constructor is protected because Shape is an abstract class
      * that cannot be instantiated.
      */
-    SVGElement(const mColor& fill, const mColor& stroke, float stroke_width);
+    SVGElement(const ColorShape& fill, const ColorShape& stroke,
+               float stroke_width);
 
     /**
      * @brief Constructs a Shape object
@@ -213,14 +214,14 @@ protected:
      * @note This constructor is protected because Shape is an abstract class
      * that cannot be instantiated.
      */
-    SVGElement(const mColor& fill, const mColor& stroke, float stroke_width,
-               const Vector2Df& position);
+    SVGElement(const ColorShape& fill, const ColorShape& stroke,
+               float stroke_width, const Vector2Df& position);
 
     SVGElement* parent;  ///< Pointer to the group that contains the shape
 
 private:
-    mColor fill;         ///< Fill color
-    mColor stroke;       ///< Outline color
+    ColorShape fill;     ///< Fill color
+    ColorShape stroke;   ///< Outline color
     float stroke_width;  ///< Thickness of the shape's outline
     Vector2Df position;  ///< Position of the shape
     std::vector< std::string > transforms;  ///< List of transformations
