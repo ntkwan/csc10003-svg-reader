@@ -13,5 +13,6 @@
 #include "graphics/RadialGradient.hpp"
 #include "graphics/Rect.hpp"
 #include "graphics/Text.hpp"
+#include "graphics/ViewBox.hpp"
 
 #endif  // GRAPHICS_HPP_
